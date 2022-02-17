@@ -27,7 +27,7 @@ export const containerStyle = css`
 export const mainAreaStyle = css`
   background-color: white;
   cursor: default;
-  width: 100%;
+  width: 75%;
 `
 
 export const modeSelectorStyle = css`
@@ -52,4 +52,8 @@ export const verovioStyle = css`
   g.focused {
     animation: 0.3s linear infinite condemed_blink_effect;
   }
+`
+
+export const panelStyle = css`
+  
 `
