@@ -61,8 +61,8 @@ const MeiViewer = () => {
       </div>
       <div css={panelStyle}>
         <ToggleButtonGroup color="primary" value={mode} exclusive onChange={handleChangeMode}>
-          <ToggleButton value={INSPECTION_MODE}>Inspection</ToggleButton>
-          <ToggleButton value={SELECTION_MODE}>Selection</ToggleButton>
+          <ToggleButton value={INSPECTION_MODE}>🔍</ToggleButton>
+          <ToggleButton value={SELECTION_MODE}>🧺</ToggleButton>
         </ToggleButtonGroup>
       </div>
     </div>
