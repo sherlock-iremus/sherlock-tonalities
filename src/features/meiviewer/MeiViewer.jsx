@@ -17,6 +17,7 @@ const meiUri =
 
 const MeiViewer = () => {
   const [mode, setMode] = useState(INSPECTION_MODE)
+  const [selection, setSelection] = useState([])
 
   useEffect(() => {
     createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
