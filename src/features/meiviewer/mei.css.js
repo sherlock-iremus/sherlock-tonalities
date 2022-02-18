@@ -34,6 +34,7 @@ export const verovioStyle = css`
 
   .hovered {
     fill: ${COLOR_FOCUS};
+    cursor: pointer;
   }
 
   g.selected {

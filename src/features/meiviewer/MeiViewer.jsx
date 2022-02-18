@@ -19,6 +19,8 @@ const MeiViewer = () => {
   const [mode, setMode] = useState(INSPECTION_MODE)
   const [inspectedElement, setInspectedElement] = useState(null)
   const [selection, setSelection] = useState([])
+  const [scoreSelections, setScoreSelections] = useState([])
+
 
   function _setInspectedElement(value) {
     if (inspectedElement) inspectedElement.classList.remove('selected')
@@ -51,6 +53,11 @@ const MeiViewer = () => {
           _setInspectedElement(n.noteNode)
           break
         case SELECTION_MODE:
+          if(!selection.includes(n.noteNode)) setSelection([...selection, n.noteNode])
+          else {
+            setSelection(selection.filter(e => e !== n.noteNode))
+            n.noteNode.classList.remove('selected')
+          }
           break
       }
     }
@@ -60,7 +67,27 @@ const MeiViewer = () => {
     setMode(newMode)
   }
 
-  if (inspectedElement) inspectedElement.classList.add('selected')
+  if (inspectedElement){
+    switch (mode) {
+      case INSPECTION_MODE:
+        inspectedElement.classList.add('selected')
+        break
+      case SELECTION_MODE:
+        inspectedElement.classList.remove('selected')
+        break
+    }
+  }
+
+  if (selection){
+    switch (mode) {
+      case INSPECTION_MODE:
+        selection.map(e => e.classList.remove('selected'))
+        break
+      case SELECTION_MODE:
+        selection.map(e => e.classList.add('selected'))
+        break
+    }
+  }
 
   return (
     <div css={containerStyle}>
@@ -78,7 +105,12 @@ const MeiViewer = () => {
           <ToggleButton value={INSPECTION_MODE}>🔍</ToggleButton>
           <ToggleButton value={SELECTION_MODE}>🧺</ToggleButton>
         </ToggleButtonGroup>
-        <div>{inspectedElement && inspectedElement.id}</div>
+        {inspectedElement && mode === INSPECTION_MODE &&
+          <div>{inspectedElement.id}</div>
+        }
+        {selection && mode === SELECTION_MODE &&
+          <div>{selection.map(e => <div key={e.id}>{e.id}</div>)}</div>
+        }
       </div>
     </div>
   )
