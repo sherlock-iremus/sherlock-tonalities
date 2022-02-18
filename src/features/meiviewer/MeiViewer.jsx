@@ -5,7 +5,7 @@ import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
-import { annotationsPanelStyle, containerStyle, mainAreaStyle, panelStyle, verovioStyle } from './mei.css'
+import { containerStyle, mainAreaStyle, panelStyle, verovioStyle } from './mei.css'
 
 const INSPECTION_MODE = 'INSPECTION_MODE'
 const SELECTION_MODE = 'SELECTION_MODE'
@@ -17,17 +17,22 @@ const meiUri =
 
 const MeiViewer = () => {
   const [mode, setMode] = useState(INSPECTION_MODE)
+  const [inspectedElement, setInspectedElement] = useState(null)
   const [selection, setSelection] = useState([])
+
+  function _setInspectedElement(value) {
+    if (inspectedElement) inspectedElement.classList.remove('selected')
+    setInspectedElement(inspectedElement !== value ? value : null)
+  }
 
   useEffect(() => {
     createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
-  }, [meiUri])
+  }, [])
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
     if (n) {
       n.noteNode.classList.add('hovered')
-      console.log('handleMouseOver', n)
     }
   }
 
@@ -35,18 +40,27 @@ const MeiViewer = () => {
     const n = getNodeNote(e)
     if (n) {
       n.noteNode.classList.remove('hovered')
-      console.log('handleMouseLeave', n)
     }
   }
 
   const handleClick = e => {
     const n = getNodeNote(e)
-    console.log('handleClick', n)
+    if (n) {
+      switch (mode) {
+        case INSPECTION_MODE:
+          _setInspectedElement(n.noteNode)
+          break
+        case SELECTION_MODE:
+          break
+      }
+    }
   }
 
   const handleChangeMode = (event, newMode) => {
     setMode(newMode)
   }
+
+  if (inspectedElement) inspectedElement.classList.add('selected')
 
   return (
     <div css={containerStyle}>
@@ -64,6 +78,7 @@ const MeiViewer = () => {
           <ToggleButton value={INSPECTION_MODE}>🔍</ToggleButton>
           <ToggleButton value={SELECTION_MODE}>🧺</ToggleButton>
         </ToggleButtonGroup>
+        <div>{inspectedElement && inspectedElement.id}</div>
       </div>
     </div>
   )

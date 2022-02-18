@@ -2,15 +2,6 @@ import { css } from '@emotion/react'
 
 export const COLOR_FOCUS = 'turquoise'
 
-export const annotationsPanelStyle = theme => css`
-  background-color: ${theme.palette.background.default};
-  height: 100vh;
-  overflow-y: scroll;
-  position: fixed;
-  right: 0;
-  width: 34%;
-`
-
 export const containerStyle = css`
   display: flex;
 
@@ -54,6 +45,6 @@ export const verovioStyle = css`
   }
 `
 
-export const panelStyle = css`
-  
+export const panelStyle = theme => css`
+  border-left: 1px solid lightgray;
 `
