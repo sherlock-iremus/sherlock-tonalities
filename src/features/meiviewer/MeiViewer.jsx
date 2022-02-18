@@ -22,9 +22,17 @@ const MeiViewer = () => {
   const [scoreSelections, setScoreSelections] = useState([])
 
 
-  function _setInspectedElement(value) {
+  const _setInspectedElement = value => {
     if (inspectedElement) inspectedElement.classList.remove('selected')
     setInspectedElement(inspectedElement !== value ? value : null)
+  }
+
+  const _setSelection = value => {
+    if(!selection.includes(value)) setSelection([...selection, value])
+    else {
+      setSelection(selection.filter(e => e !== value))
+      value.classList.remove('selected')
+    }
   }
 
   useEffect(() => {
@@ -53,11 +61,7 @@ const MeiViewer = () => {
           _setInspectedElement(n.noteNode)
           break
         case SELECTION_MODE:
-          if(!selection.includes(n.noteNode)) setSelection([...selection, n.noteNode])
-          else {
-            setSelection(selection.filter(e => e !== n.noteNode))
-            n.noteNode.classList.remove('selected')
-          }
+          _setSelection(n.noteNode)
           break
       }
     }
@@ -109,7 +113,12 @@ const MeiViewer = () => {
           <div>{inspectedElement.id}</div>
         }
         {selection && mode === SELECTION_MODE &&
-          <div>{selection.map(e => <div key={e.id}>{e.id}</div>)}</div>
+          <div>{selection.map(e =>
+            <div key={e.id} style={{display: 'flex', justifyContent: 'space-between'}}>
+              {e.id}
+              <button onClick={() => _setSelection(e)}>❌</button>
+            </div>)}
+          </div>
         }
       </div>
     </div>

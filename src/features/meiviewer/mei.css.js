@@ -18,7 +18,7 @@ export const containerStyle = css`
 export const mainAreaStyle = css`
   background-color: white;
   cursor: default;
-  width: 75%;
+  width: 70%;
 `
 
 export const modeSelectorStyle = css`
@@ -48,4 +48,5 @@ export const verovioStyle = css`
 
 export const panelStyle = theme => css`
   border-left: 1px solid lightgray;
+  width: 30%
 `
