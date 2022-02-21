@@ -23,23 +23,25 @@ const MeiViewer = () => {
   const [scoreSelections, setScoreSelections] = useState([])
 
 
-  const _setInspectedElement = value => {
+  const _setInspectedElement = element => {
     if (inspectedElement) inspectedElement.classList.remove('selected')
-    setInspectedElement(inspectedElement !== value ? value : null)
+    setInspectedElement(inspectedElement !== element ? element : null)
   }
 
-  const _setSelection = value => {
-    if(!selection.includes(value)) setSelection([...selection, value])
+  const _setSelection = element => {
+    if(!selection.includes(element)) setSelection([...selection, element])
     else {
-      setSelection(selection.filter(e => e !== value))
-      value.classList.remove('selected')
+      setSelection(selection.filter(e => e !== element))
+      element.classList.remove('selected')
     }
   }
 
-  const _setScoreSelections = newSelection => {
+  const createScoreSelections = newSelection => {
     for (const scoreSelection of scoreSelections) if(sameMembers(scoreSelection.selection.map(e => e.id), newSelection.map(e => e.id))) return null
     return setScoreSelections([...scoreSelections, {id: uuid(), selection: newSelection}])
   }
+
+  const removeScoreSelections = selection => setScoreSelections(scoreSelections.filter(e => e !== selection))
 
   useEffect(() => {
     createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
@@ -121,15 +123,24 @@ const MeiViewer = () => {
         {selection && mode === SELECTION_MODE &&
           <div>
             <h1>Sélection d'éléments</h1>
-            <div>{selection.map(e =>
-              <div key={e.id} style={{display: 'flex', justifyContent: 'space-between'}}>
-                {e.id}
-                <button onClick={() => _setSelection(e)}>❌</button>
-              </div>)}
-            </div>
-            {!!selection.length && <button onClick={() => _setScoreSelections(selection)}>Créer une sélection</button>}
+            <ul>{selection.map(e =>
+              <li key={e.id}>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  {e.id}
+                  <button onClick={() => _setSelection(e)}>❌</button>
+                </div>
+              </li>)}
+            </ul>
+            {!!selection.length && <button onClick={() => createScoreSelections(selection)}>Créer une sélection</button>}
             <h1>Sélections créées</h1>
-            {scoreSelections.map(e => <div key={e.id}>{e.id}</div>)}
+            <ul>{scoreSelections.map(e =>
+              <li key={e.id}>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  {e.id}
+                  <button onClick={() => removeScoreSelections(e)}>❌</button>
+                </div>
+              </li>)}
+            </ul>
           </div>
         }
       </div>
