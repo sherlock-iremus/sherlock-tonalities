@@ -29,7 +29,7 @@ const MeiViewer = () => {
   }
 
   const _setSelection = element => {
-    if(!selection.includes(element)) setSelection([...selection, element])
+    if (!selection.includes(element)) setSelection([...selection, element])
     else {
       setSelection(selection.filter(e => e !== element))
       if (element.classList) element.classList.remove('selected')
@@ -37,14 +37,14 @@ const MeiViewer = () => {
   }
 
   const createScoreSelections = newSelection => {
-    for (const scoreSelection of scoreSelections) if(sameMembers(scoreSelection.selection.map(e => e.id), newSelection.map(e => e.id))) return
-    setScoreSelections([...scoreSelections, {id: uuid(), selection: newSelection}])
+    for (const scoreSelection of scoreSelections) if (sameMembers(scoreSelection.selection.map(e => e.id), newSelection.map(e => e.id))) return
+    setScoreSelections([...scoreSelections, { id: uuid(), selection: newSelection }])
     selection.forEach(e => e.classList && e.classList.remove('selected'))
     setSelection([])
   }
 
   const removeScoreSelections = s => {
-    if(selection.includes(s)) setSelection(selection.filter(e => e !== s))
+    if (selection.includes(s)) setSelection(selection.filter(e => e !== s))
     setScoreSelections(scoreSelections.filter(e => e !== s))
   }
 
@@ -84,7 +84,7 @@ const MeiViewer = () => {
     setMode(newMode)
   }
 
-  if (inspectedElement){
+  if (inspectedElement) {
     switch (mode) {
       case INSPECTION_MODE:
         inspectedElement.classList.add('selected')
@@ -95,7 +95,7 @@ const MeiViewer = () => {
     }
   }
 
-  if (selection){
+  if (selection) {
     switch (mode) {
       case INSPECTION_MODE:
         selection.map(e => e.classList && e.classList.remove('selected'))
@@ -123,31 +123,36 @@ const MeiViewer = () => {
           <ToggleButton value={SELECTION_MODE}>🧺</ToggleButton>
         </ToggleButtonGroup>
         {inspectedElement && mode === INSPECTION_MODE &&
-          <div>{inspectedElement.id}</div>
+          <div>
+            <h1>Inspection d'élément</h1>
+            {inspectedElement.id}
+          </div>
         }
         {selection && mode === SELECTION_MODE &&
           <div>
             <h1>Sélection d'éléments</h1>
             <ul>{selection.map(e =>
               <li key={e.id}>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   {e.id}
                   <button onClick={() => _setSelection(e)}>❌</button>
                 </div>
               </li>)}
             </ul>
-            {!!selection.length && <button onClick={() => createScoreSelections(selection)}>Créer une sélection</button>}
-            <h1>Sélections créées</h1>
-            <ul>{scoreSelections.map(e =>
-              <li key={e.id}>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <div onClick={() => _setSelection(e)} style={{cursor: 'pointer'}}>{e.id}</div>
-                  <button onClick={() => removeScoreSelections(e)}>❌</button>
-                </div>
-              </li>)}
-            </ul>
+            {!!selection.length &&
+              <button onClick={() => createScoreSelections(selection)}>Créer une sélection</button>
+            }
           </div>
         }
+        <h1>Sélections créées</h1>
+        <ul>{scoreSelections.map(e =>
+          <li key={e.id}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div onClick={() => mode === SELECTION_MODE && _setSelection(e)} style={{ cursor: 'pointer' }}>{e.id}</div>
+              {mode === SELECTION_MODE && <button onClick={() => removeScoreSelections(e)}>❌</button>}
+            </div>
+          </li>)}
+        </ul>
       </div>
     </div>
   )
