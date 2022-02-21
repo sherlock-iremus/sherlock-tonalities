@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid'
 import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
 import { containerStyle, mainAreaStyle, panelStyle, verovioStyle } from './mei.css'
-import { sameMembers } from './utils';
+import { sameMembers } from './utils'
+import { DriveFileRenameOutline, LocationSearching } from '@mui/icons-material'
 
 const INSPECTION_MODE = 'INSPECTION_MODE'
 const SELECTION_MODE = 'SELECTION_MODE'
@@ -118,10 +119,16 @@ const MeiViewer = () => {
         />
       </div>
       <div css={panelStyle}>
-        <ToggleButtonGroup color="primary" value={mode} exclusive onChange={handleChangeMode}>
-          <ToggleButton value={INSPECTION_MODE}>🔍</ToggleButton>
-          <ToggleButton value={SELECTION_MODE}>🧺</ToggleButton>
-        </ToggleButtonGroup>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <ToggleButtonGroup color='primary' value={mode} exclusive onChange={handleChangeMode} size='small' style={{display: 'flex', justifyContent: 'center', marginTop: '8px'}}>
+            <ToggleButton value={INSPECTION_MODE}>
+              <LocationSearching/> Inspect
+            </ToggleButton>
+            <ToggleButton value={SELECTION_MODE}>
+              <DriveFileRenameOutline/> Select
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </div>
         {inspectedElement && mode === INSPECTION_MODE &&
           <div>
             <h1>Inspection d'élément</h1>
