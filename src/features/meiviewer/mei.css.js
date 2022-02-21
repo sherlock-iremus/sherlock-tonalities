@@ -4,6 +4,7 @@ export const COLOR_FOCUS = 'turquoise'
 
 export const containerStyle = css`
   display: flex;
+  font-family: 'Roboto';
 
   @keyframes condemed_blink_effect {
     0% {
@@ -29,7 +30,7 @@ export const verovioStyle = css`
   min-height: 100vh;
 
   .vrv-ui-toolbar {
-    font-family: monospace;
+    font-family: 'Roboto';
   }
 
   .hovered {

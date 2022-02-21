@@ -119,13 +119,13 @@ const MeiViewer = () => {
         />
       </div>
       <div css={panelStyle}>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <ToggleButtonGroup color='primary' value={mode} exclusive onChange={handleChangeMode} size='small' style={{display: 'flex', justifyContent: 'center', marginTop: '8px'}}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <ToggleButtonGroup color='primary' value={mode} exclusive onChange={handleChangeMode} size='small' style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
             <ToggleButton value={INSPECTION_MODE}>
-              <LocationSearching/> Inspect
+              <LocationSearching /> Inspect
             </ToggleButton>
             <ToggleButton value={SELECTION_MODE}>
-              <DriveFileRenameOutline/> Select
+              <DriveFileRenameOutline /> Select
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
@@ -147,7 +147,9 @@ const MeiViewer = () => {
               </li>)}
             </ul>
             {!!selection.length &&
-              <button onClick={() => createScoreSelections(selection)}>Créer une sélection</button>
+              <div style={{ display: 'flex', justifyContent: 'end' }}>
+                <button onClick={() => createScoreSelections(selection)}>Créer une sélection</button>
+              </div>
             }
           </div>
         }
