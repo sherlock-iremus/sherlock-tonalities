@@ -32,16 +32,21 @@ const MeiViewer = () => {
     if(!selection.includes(element)) setSelection([...selection, element])
     else {
       setSelection(selection.filter(e => e !== element))
-      element.classList.remove('selected')
+      if (element.classList) element.classList.remove('selected')
     }
   }
 
   const createScoreSelections = newSelection => {
-    for (const scoreSelection of scoreSelections) if(sameMembers(scoreSelection.selection.map(e => e.id), newSelection.map(e => e.id))) return null
-    return setScoreSelections([...scoreSelections, {id: uuid(), selection: newSelection}])
+    for (const scoreSelection of scoreSelections) if(sameMembers(scoreSelection.selection.map(e => e.id), newSelection.map(e => e.id))) return
+    setScoreSelections([...scoreSelections, {id: uuid(), selection: newSelection}])
+    selection.forEach(e => e.classList && e.classList.remove('selected'))
+    setSelection([])
   }
 
-  const removeScoreSelections = selection => setScoreSelections(scoreSelections.filter(e => e !== selection))
+  const removeScoreSelections = s => {
+    if(selection.includes(s)) setSelection(selection.filter(e => e !== s))
+    setScoreSelections(scoreSelections.filter(e => e !== s))
+  }
 
   useEffect(() => {
     createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
@@ -93,10 +98,10 @@ const MeiViewer = () => {
   if (selection){
     switch (mode) {
       case INSPECTION_MODE:
-        selection.map(e => e.classList.remove('selected'))
+        selection.map(e => e.classList && e.classList.remove('selected'))
         break
       case SELECTION_MODE:
-        selection.map(e => e.classList.add('selected'))
+        selection.map(e => e.classList && e.classList.add('selected'))
         break
     }
   }
@@ -136,7 +141,7 @@ const MeiViewer = () => {
             <ul>{scoreSelections.map(e =>
               <li key={e.id}>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                  {e.id}
+                  <div onClick={() => _setSelection(e)} style={{cursor: 'pointer'}}>{e.id}</div>
                   <button onClick={() => removeScoreSelections(e)}>❌</button>
                 </div>
               </li>)}
