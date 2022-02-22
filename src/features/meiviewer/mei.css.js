@@ -3,7 +3,6 @@ import { COLOR_FOCUS, COLOR_HOVER } from './constants'
 
 export const containerStyle = css`
   display: flex;
-  font-family: 'Roboto';
 
   @keyframes condemed_blink_effect {
     0% {
@@ -33,7 +32,7 @@ export const verovioStyle = css`
   }
 
   .hovered {
-    fill: ${COLOR_FOCUS};
+    fill: ${COLOR_HOVER};
     cursor: pointer;
   }
 
@@ -47,6 +46,7 @@ export const verovioStyle = css`
 `
 
 export const panelStyle = theme => css`
+  font-family: 'Roboto';
   border-left: 1px solid lightgray;
   width: 30%;
   padding: 8px
@@ -65,4 +65,10 @@ export const rowStyle = theme => css`
 export const flexEndStyle = theme => css`
   display: flex;
   justify-content: end;
+`
+
+export const selectionStyle = theme => css`
+  &:hover {
+    color: ${COLOR_HOVER};
+  }
 `

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
-import { containerStyle, mainAreaStyle, panelStyle, rowStyle, toggleButtonStyle, verovioStyle, flexEndStyle } from './mei.css'
+import { containerStyle, mainAreaStyle, panelStyle, rowStyle, toggleButtonStyle, verovioStyle, flexEndStyle, selectionStyle } from './mei.css'
 import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close } from '@mui/icons-material'
 import { INSPECTION, SELECTION, COLOR_FOCUS, COLOR_HOVER } from './constants'
@@ -170,7 +170,7 @@ const MeiViewer = () => {
               <div css={rowStyle}>
                 <div
                   onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
-                  style={mode === INSPECTION && inspectedElement === e ? { color: COLOR_FOCUS } : {}}
+                  css={mode === INSPECTION && inspectedElement === e ? {...selectionStyle, color: COLOR_FOCUS} : selectionStyle}
                 >
                   {e.id}
                 </div>
