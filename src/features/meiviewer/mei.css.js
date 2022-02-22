@@ -51,3 +51,18 @@ export const panelStyle = theme => css`
   width: 30%;
   padding: 8px
 `
+
+export const toggleButtonStyle = theme => css`
+  display: flex;
+  justify-content: center
+`
+export const rowStyle = theme => css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+`
+
+export const flexEndStyle = theme => css`
+  display: flex;
+  justify-content: end;
+`

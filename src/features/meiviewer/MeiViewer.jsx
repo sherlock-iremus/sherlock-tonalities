@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
-import { containerStyle, mainAreaStyle, panelStyle, verovioStyle } from './mei.css'
+import { containerStyle, mainAreaStyle, panelStyle, rowStyle, toggleButtonStyle, verovioStyle, flexEndStyle } from './mei.css'
 import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close } from '@mui/icons-material'
 import { INSPECTION, SELECTION, COLOR_FOCUS, COLOR_HOVER } from './constants'
@@ -125,7 +125,7 @@ const MeiViewer = () => {
           value={mode}
           exclusive
           onChange={handleChangeMode}
-          style={{ display: 'flex', justifyContent: 'center' }}
+          css={toggleButtonStyle}
           size="small"
         >
           <ToggleButton value={INSPECTION}>
@@ -147,7 +147,7 @@ const MeiViewer = () => {
             <ul>
               {selection.map(e => (
                 <li key={e.id}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div css={rowStyle}>
                     {e.id}
                     <IconButton onClick={() => _setSelection(e)}>
                       <Close />
@@ -156,7 +156,7 @@ const MeiViewer = () => {
                 </li>
               ))}
             </ul>
-            <div style={{ display: 'flex', justifyContent: 'end' }}>
+            <div css={flexEndStyle}>
               <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length} size="small">
                 Créer une sélection
               </Button>
@@ -167,7 +167,7 @@ const MeiViewer = () => {
         <ul>
           {scoreSelections.map(e => (
             <li key={e.id}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div css={rowStyle}>
                 <div
                   onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
                   style={mode === INSPECTION && inspectedElement === e ? { color: COLOR_FOCUS } : {}}
