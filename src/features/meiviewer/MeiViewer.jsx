@@ -34,7 +34,14 @@ const MeiViewer = () => {
   }
 
   const createScoreSelections = newSelection => {
-    for (const scoreSelection of scoreSelections) if (sameMembers(scoreSelection.selection.map(e => e.id), newSelection.map(e => e.id))) return
+    for (const scoreSelection of scoreSelections)
+      if (
+        sameMembers(
+          scoreSelection.selection.map(e => e.id),
+          newSelection.map(e => e.id)
+        )
+      )
+        return
     setScoreSelections([...scoreSelections, { id: uuid(), selection: newSelection }])
     selection.forEach(e => e.classList && e.classList.remove('selected'))
     setSelection([])
@@ -110,11 +117,17 @@ const MeiViewer = () => {
           onClick={handleClick}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseLeave}
-          id='verovio_container'
+          id="verovio_container"
         />
       </div>
       <div css={panelStyle}>
-        <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} style={{ display: 'flex', justifyContent: 'center'}} size='small'>
+        <ToggleButtonGroup
+          value={mode}
+          exclusive
+          onChange={handleChangeMode}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          size="small"
+        >
           <ToggleButton value={INSPECTION}>
             <RemoveRedEye />
           </ToggleButton>
@@ -122,42 +135,53 @@ const MeiViewer = () => {
             <Colorize />
           </ToggleButton>
         </ToggleButtonGroup>
-        {mode === INSPECTION &&
+        {mode === INSPECTION && (
           <div>
             <h4>Inspection d'élément</h4>
             {inspectedElement && inspectedElement.id}
           </div>
-        }
-        {mode === SELECTION &&
+        )}
+        {mode === SELECTION && (
           <div>
             <h4>Sélection d'éléments</h4>
-            <ul>{selection.map(e =>
-              <li key={e.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  {e.id}
-                  <IconButton onClick={() => _setSelection(e)}>
-                    <Close />
-                  </IconButton>
-                </div>
-              </li>)}
+            <ul>
+              {selection.map(e => (
+                <li key={e.id}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    {e.id}
+                    <IconButton onClick={() => _setSelection(e)}>
+                      <Close />
+                    </IconButton>
+                  </div>
+                </li>
+              ))}
             </ul>
             <div style={{ display: 'flex', justifyContent: 'end' }}>
-              <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length} size='small'>Créer une sélection</Button>
+              <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length} size="small">
+                Créer une sélection
+              </Button>
             </div>
           </div>
-        }
+        )}
         <h4>Sélections créées</h4>
-        <ul>{scoreSelections.map(e =>
-          <li key={e.id}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div onClick={() => mode === SELECTION ? _setSelection(e) : _setInspectedElement(e)} style={mode === INSPECTION && inspectedElement === e ? {color: COLOR_FOCUS} : {}}>{e.id}</div>
-              {mode === SELECTION &&
-                <IconButton onClick={() => removeScoreSelections(e)}>
-                  <Close />
-                </IconButton>
-              }
-            </div>
-          </li>)}
+        <ul>
+          {scoreSelections.map(e => (
+            <li key={e.id}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div
+                  onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
+                  style={mode === INSPECTION && inspectedElement === e ? { color: COLOR_FOCUS } : {}}
+                >
+                  {e.id}
+                </div>
+                {mode === SELECTION && (
+                  <IconButton onClick={() => removeScoreSelections(e)}>
+                    <Close />
+                  </IconButton>
+                )}
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
