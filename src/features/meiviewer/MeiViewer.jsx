@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import { useEffect, useState } from 'react'
-import ToggleButton from '@mui/material/ToggleButton'
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
 import { containerStyle, mainAreaStyle, panelStyle, verovioStyle } from './mei.css'
 import { sameMembers } from './utils'
-import { DriveFileRenameOutline, LocationSearching } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, Close } from '@mui/icons-material'
 
 const INSPECTION_MODE = 'INSPECTION_MODE'
 const SELECTION_MODE = 'SELECTION_MODE'
@@ -25,7 +24,7 @@ const MeiViewer = () => {
 
 
   const _setInspectedElement = element => {
-    if (inspectedElement) inspectedElement.classList.remove('selected')
+    if (inspectedElement && inspectedElement.classList) inspectedElement.classList.remove('selected')
     setInspectedElement(inspectedElement !== element ? element : null)
   }
 
@@ -88,10 +87,10 @@ const MeiViewer = () => {
   if (inspectedElement) {
     switch (mode) {
       case INSPECTION_MODE:
-        inspectedElement.classList.add('selected')
+        inspectedElement.classList && inspectedElement.classList.add('selected')
         break
       case SELECTION_MODE:
-        inspectedElement.classList.remove('selected')
+        inspectedElement.classList && inspectedElement.classList.remove('selected')
         break
     }
   }
@@ -120,45 +119,45 @@ const MeiViewer = () => {
       </div>
       <div css={panelStyle}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <ToggleButtonGroup color='primary' value={mode} exclusive onChange={handleChangeMode} size='small' style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
+          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} style={{ display: 'flex', justifyContent: 'center'}}>
             <ToggleButton value={INSPECTION_MODE}>
-              <LocationSearching /> Inspect
+              <RemoveRedEye />
             </ToggleButton>
             <ToggleButton value={SELECTION_MODE}>
-              <DriveFileRenameOutline /> Select
+              <Colorize />
             </ToggleButton>
           </ToggleButtonGroup>
         </div>
-        {inspectedElement && mode === INSPECTION_MODE &&
+        {mode === INSPECTION_MODE &&
           <div>
-            <h1>Inspection d'élément</h1>
-            {inspectedElement.id}
+            <h4>Inspection d'élément</h4>
+            {inspectedElement && inspectedElement.id}
           </div>
         }
         {selection && mode === SELECTION_MODE &&
           <div>
-            <h1>Sélection d'éléments</h1>
+            <h4>Sélection d'éléments</h4>
             <ul>{selection.map(e =>
               <li key={e.id}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {e.id}
-                  <button onClick={() => _setSelection(e)}>❌</button>
+                  <IconButton onClick={() => _setSelection(e)}><Close /></IconButton>
                 </div>
               </li>)}
             </ul>
             {!!selection.length &&
               <div style={{ display: 'flex', justifyContent: 'end' }}>
-                <button onClick={() => createScoreSelections(selection)}>Créer une sélection</button>
+                <Button onClick={() => createScoreSelections(selection)} size='small'>Créer une sélection</Button>
               </div>
             }
           </div>
         }
-        <h1>Sélections créées</h1>
+        <h4>Sélections créées</h4>
         <ul>{scoreSelections.map(e =>
           <li key={e.id}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div onClick={() => mode === SELECTION_MODE && _setSelection(e)} style={{ cursor: 'pointer' }}>{e.id}</div>
-              {mode === SELECTION_MODE && <button onClick={() => removeScoreSelections(e)}>❌</button>}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div onClick={() => mode === SELECTION_MODE ? _setSelection(e) : _setInspectedElement(e)} style={{ cursor: 'pointer' }}>{e.id}</div>
+              {mode === SELECTION_MODE && <IconButton onClick={() => removeScoreSelections(e)}><Close /></IconButton>}
             </div>
           </li>)}
         </ul>

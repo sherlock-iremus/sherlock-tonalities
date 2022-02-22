@@ -49,5 +49,6 @@ export const verovioStyle = css`
 
 export const panelStyle = theme => css`
   border-left: 1px solid lightgray;
-  width: 30%
+  width: 30%;
+  padding: 8px
 `
