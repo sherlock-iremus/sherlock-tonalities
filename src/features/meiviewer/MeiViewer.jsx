@@ -2,12 +2,24 @@
 
 import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
 import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
-import { containerStyle, mainAreaStyle, panelStyle, rowStyle, toggleButtonStyle, verovioStyle, flexEndStyle, selectionStyle } from './mei.css'
+import {
+  containerStyle,
+  mainAreaStyle,
+  panelStyle,
+  rowStyle,
+  toggleButtonStyle,
+  verovioStyle,
+  flexEndStyle,
+  selectionStyle,
+  noDataStyle,
+} from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, Close } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
 import { INSPECTION, SELECTION, COLOR_FOCUS, COLOR_HOVER } from './constants'
+import { Inspector } from './Inspector'
 
 window.verovioCallback = load
 
@@ -121,13 +133,7 @@ const MeiViewer = () => {
         />
       </div>
       <div css={panelStyle}>
-        <ToggleButtonGroup
-          value={mode}
-          exclusive
-          onChange={handleChangeMode}
-          css={toggleButtonStyle}
-          size="small"
-        >
+        <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={toggleButtonStyle} size="small">
           <ToggleButton value={INSPECTION}>
             <RemoveRedEye />
           </ToggleButton>
@@ -138,12 +144,19 @@ const MeiViewer = () => {
         {mode === INSPECTION && (
           <div>
             <h4>Inspection d'élément</h4>
-            {inspectedElement && inspectedElement.id}
+            {inspectedElement ? (
+              <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+                <Inspector inspectedElement={inspectedElement} />
+              </TreeView>
+            ) : (
+              <div css={noDataStyle}>Aucun élément à inspecter, commencez par en sélectionner un</div>
+            )}
           </div>
         )}
         {mode === SELECTION && (
           <div>
             <h4>Sélection d'éléments</h4>
+            {!selection.length && <div css={noDataStyle}>Aucun élément ajouté, commencez par en sélectionner</div>}
             <ul>
               {selection.map(e => (
                 <li key={e.id}>
@@ -164,13 +177,18 @@ const MeiViewer = () => {
           </div>
         )}
         <h4>Sélections créées</h4>
+        {!scoreSelections.length && <div css={noDataStyle}>Aucune sélection créée, commencez par en créer une</div>}
         <ul>
           {scoreSelections.map(e => (
             <li key={e.id}>
               <div css={rowStyle}>
                 <div
                   onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
-                  css={mode === INSPECTION && inspectedElement === e ? {...selectionStyle, color: COLOR_FOCUS} : selectionStyle}
+                  css={
+                    mode === INSPECTION && inspectedElement === e
+                      ? { ...selectionStyle, color: COLOR_FOCUS }
+                      : selectionStyle
+                  }
                 >
                   {e.id}
                 </div>

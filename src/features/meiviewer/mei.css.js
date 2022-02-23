@@ -72,3 +72,9 @@ export const selectionStyle = theme => css`
     color: ${COLOR_HOVER};
   }
 `
+
+export const noDataStyle = theme => css`
+  text-align: center;
+  font-size: x-small;
+  color: grey
+`
