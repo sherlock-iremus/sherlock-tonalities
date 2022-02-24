@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
-import { createVerovio, getNodeNote, drawVerticalities, load } from './verovioHelpers'
+import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle} from './verovioHelpers'
 import {
   containerStyle,
   mainAreaStyle,
@@ -33,7 +33,7 @@ const MeiViewer = () => {
   const [scoreSelections, setScoreSelections] = useState([])
 
   const _setInspectedElement = element => {
-    if (inspectedElement && inspectedElement.classList) inspectedElement.classList.remove('selected')
+    if (inspectedElement) removeStyle(inspectedElement)
     setInspectedElement(inspectedElement !== element ? element : null)
   }
 
@@ -41,7 +41,7 @@ const MeiViewer = () => {
     if (!selection.includes(element)) setSelection([...selection, element])
     else {
       setSelection(selection.filter(e => e !== element))
-      if (element.classList) element.classList.remove('selected')
+      removeStyle(element)
     }
   }
 
@@ -55,7 +55,7 @@ const MeiViewer = () => {
       )
         return
     setScoreSelections([...scoreSelections, { id: uuid(), selection: newSelection }])
-    selection.forEach(e => e.classList && e.classList.remove('selected'))
+    selection.forEach(e => removeStyle(e))
     setSelection([])
   }
 
@@ -97,15 +97,15 @@ const MeiViewer = () => {
     }
   }
 
-  const handleChangeMode = (event, newMode) => setMode(newMode)
+  const handleChangeMode = (event, newMode) => newMode && setMode(newMode)
 
   if (inspectedElement) {
     switch (mode) {
       case INSPECTION:
-        inspectedElement.classList && inspectedElement.classList.add('selected')
+        addStyle(inspectedElement)
         break
       case SELECTION:
-        inspectedElement.classList && inspectedElement.classList.remove('selected')
+        removeStyle(inspectedElement)
         break
     }
   }
@@ -113,10 +113,10 @@ const MeiViewer = () => {
   if (selection) {
     switch (mode) {
       case INSPECTION:
-        selection.map(e => e.classList && e.classList.remove('selected'))
+        selection.forEach(e => removeStyle(e))
         break
       case SELECTION:
-        selection.map(e => e.classList && e.classList.add('selected'))
+        selection.forEach(e => addStyle(e))
         break
     }
   }
@@ -145,7 +145,7 @@ const MeiViewer = () => {
           <div>
             <h4>Inspection d'élément</h4>
             {inspectedElement ? (
-              <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+              <TreeView onNodeSelect={(e, id) => console.log('id de la note particulière à colorer:' + id)} defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
                 <Inspector inspectedElement={inspectedElement} />
               </TreeView>
             ) : (

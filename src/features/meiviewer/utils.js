@@ -1,5 +1,5 @@
-export function sameMembers(arr1, arr2) {
-    const set1 = new Set(arr1)
-    const set2 = new Set(arr2)
-    return arr1.every(item => set2.has(item)) && arr2.every(item => set1.has(item))
+export const sameMembers = (selection, otherSelection) => {
+  const set = new Set(selection)
+  const otherSet = new Set(otherSelection)
+  return selection.every(item => otherSet.has(item)) && otherSelection.every(item => set.has(item))
 }

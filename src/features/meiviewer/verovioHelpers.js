@@ -59,6 +59,12 @@ export const getNodeNote = e => {
   } else return null
 }
 
+export const addStyle = element =>
+  element.classList ? element.classList.add('selected') : element.selection.forEach(e => addStyle(e))
+
+export const removeStyle = element =>
+  element.classList ? element.classList.remove('selected') : element.selection.forEach(e => removeStyle(e))
+
 export const createVerovio = meiUri => {
   const s = document.createElement('script')
   s.type = 'module'

@@ -70,6 +70,7 @@ export const flexEndStyle = theme => css`
 export const selectionStyle = theme => css`
   &:hover {
     color: ${COLOR_HOVER};
+    cursor: pointer
   }
 `
 
