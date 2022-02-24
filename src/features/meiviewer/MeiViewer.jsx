@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
-import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle} from './verovioHelpers'
+import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle, getNodeMeasure} from './verovioHelpers'
 import {
   containerStyle,
   mainAreaStyle,
@@ -71,20 +71,18 @@ const MeiViewer = () => {
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
-    if (n) {
-      n.noteNode.classList.add('hovered')
-    }
+    if (n) n.noteNode.classList.add('hovered')
   }
 
   const handleMouseLeave = e => {
     const n = getNodeNote(e)
-    if (n) {
-      n.noteNode.classList.remove('hovered')
-    }
+    if (n) n.noteNode.classList.remove('hovered')
   }
 
   const handleClick = e => {
     const n = getNodeNote(e)
+    const m = getNodeMeasure(e)
+    if (m) m.classList.add('selected')
     if (n) {
       switch (mode) {
         case INSPECTION:

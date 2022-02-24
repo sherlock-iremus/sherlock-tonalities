@@ -49,17 +49,17 @@ export const panelStyle = theme => css`
   font-family: 'Roboto';
   border-left: 1px solid lightgray;
   width: 30%;
-  padding: 8px
+  padding: 8px;
 `
 
 export const toggleButtonStyle = theme => css`
   display: flex;
-  justify-content: center
+  justify-content: center;
 `
 export const rowStyle = theme => css`
   display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 `
 
 export const flexEndStyle = theme => css`
@@ -70,12 +70,12 @@ export const flexEndStyle = theme => css`
 export const selectionStyle = theme => css`
   &:hover {
     color: ${COLOR_HOVER};
-    cursor: pointer
+    cursor: pointer;
   }
 `
 
 export const noDataStyle = theme => css`
   text-align: center;
   font-size: x-small;
-  color: grey
+  color: grey;
 `

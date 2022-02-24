@@ -59,6 +59,32 @@ export const getNodeNote = e => {
   } else return null
 }
 
+export const getMeasures = e => {
+  if (e.tagName === 'g' || e.tagName === 'svg') {
+    if (e.classList && e.classList.contains('measure')) return e
+    if (e.hasChildNodes()) {
+      const classList = ['measure', 'system', 'page-margin', 'definition-scale']
+      const childNodes = Array.from(e.childNodes)
+      const children = childNodes.filter(child => child.classList && classList.some(c => child.classList.contains(c)))
+      return !children.length ? null
+        : children.length === 1 ? getMeasures(children[0])
+        : children.map(child => getMeasures(child))
+    }
+  }
+  return null
+}
+
+export const getNodeMeasure = e => {
+  let measures = getMeasures(e.target)
+  if (measures) {
+    // temporairement, on ne va garder que la première portée
+    if (Array.isArray(measures[0])) measures = measures[0]
+    const measureCoordinates = measures.map(measure => measure.getBoundingClientRect())
+    const selectedMeasureIndex = measureCoordinates.filter(m => m.x < e.clientX).length - 1
+    return measures[selectedMeasureIndex]
+  }
+}
+
 export const addStyle = element =>
   element.classList ? element.classList.add('selected') : element.selection.forEach(e => addStyle(e))
 
