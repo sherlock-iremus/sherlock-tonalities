@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
-import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle, getNodeMeasure} from './verovioHelpers'
+import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle, getNodeMeasure, getPathNodes} from './verovioHelpers'
 import {
   containerStyle,
   mainAreaStyle,
@@ -29,12 +29,19 @@ const meiUri =
 const MeiViewer = () => {
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
+  const [hoveredMeasure, setHoveredMeasure] = useState(null)
   const [selection, setSelection] = useState([])
   const [scoreSelections, setScoreSelections] = useState([])
 
   const _setInspectedElement = element => {
     if (inspectedElement) removeStyle(inspectedElement)
     setInspectedElement(inspectedElement !== element ? element : null)
+  }
+
+  const _setHoveredMeasure = measure => {
+    if(hoveredMeasure) getPathNodes(hoveredMeasure).forEach(path => path.classList.remove('hovered'))
+    getPathNodes(measure).forEach(path => path.setAttribute('class', 'hovered'))
+    setHoveredMeasure(measure)
   }
 
   const _setSelection = element => {
@@ -71,6 +78,9 @@ const MeiViewer = () => {
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
+    const m = getNodeMeasure(e)
+    if (!m) setHoveredMeasure(null)
+    if (m !== hoveredMeasure) _setHoveredMeasure(m)
     if (n) n.noteNode.classList.add('hovered')
   }
 

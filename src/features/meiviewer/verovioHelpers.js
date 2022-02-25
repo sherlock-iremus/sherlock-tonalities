@@ -30,6 +30,23 @@ export const drawVerticalities = e => {
   }
 }
 
+// WIP
+export const drawMeasureAnchor = measure => {
+  const measureCoordinates = measure.getBoundingClientRect()
+  console.log(measureCoordinates.x, measureCoordinates.y)
+  const icon = makeSvgRect(measureCoordinates.x, measureCoordinates.y, 200, 200, 'blue')
+  icon.innerHTML = "<path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;2&#34; d=&#34;M19 9l-7 7-7-7&#34; />"
+  icon.setAttributeNS(null, "id", "measure");
+  measure.appendChild(icon)
+}
+
+export const getPathNodes = measure => {
+  const measureChildNodes = Array.from(measure.childNodes)
+  const staffNodes = measureChildNodes.filter(child => child.classList && child.classList.contains('staff'))
+  const staffChildNodes = staffNodes.map(staff => Array.from(staff.childNodes)).flat()
+  return staffChildNodes.filter(child => child.tagName === 'path')
+}
+
 export const getNodeNote = e => {
   let mouseNode = null
   let noteNode = null

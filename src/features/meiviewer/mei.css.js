@@ -33,6 +33,7 @@ export const verovioStyle = css`
 
   .hovered {
     fill: ${COLOR_HOVER};
+    stroke: ${COLOR_HOVER};
     cursor: pointer;
   }
 
