@@ -35,8 +35,9 @@ export const drawMeasureAnchor = measure => {
   const measureCoordinates = measure.getBoundingClientRect()
   console.log(measureCoordinates.x, measureCoordinates.y)
   const icon = makeSvgRect(measureCoordinates.x, measureCoordinates.y, 200, 200, 'blue')
-  icon.innerHTML = "<path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;2&#34; d=&#34;M19 9l-7 7-7-7&#34; />"
-  icon.setAttributeNS(null, "id", "measure");
+  icon.innerHTML =
+    '<path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;2&#34; d=&#34;M19 9l-7 7-7-7&#34; />'
+  icon.setAttributeNS(null, 'id', 'measure')
   measure.appendChild(icon)
 }
 
@@ -83,8 +84,10 @@ export const getMeasures = e => {
       const classList = ['measure', 'system', 'page-margin', 'definition-scale']
       const childNodes = Array.from(e.childNodes)
       const children = childNodes.filter(child => child.classList && classList.some(c => child.classList.contains(c)))
-      return !children.length ? null
-        : children.length === 1 ? getMeasures(children[0])
+      return !children.length
+        ? null
+        : children.length === 1
+        ? getMeasures(children[0])
         : children.map(child => getMeasures(child))
     }
   }
@@ -94,7 +97,7 @@ export const getMeasures = e => {
 export const getNodeMeasure = e => {
   let measures = getMeasures(e.target)
   if (measures) {
-    // temporairement, on ne va garder que la première portée
+    // temporairement, on ne garde que le premier système
     if (Array.isArray(measures[0])) measures = measures[0]
     const measureCoordinates = measures.map(measure => measure.getBoundingClientRect())
     const selectedMeasureIndex = measureCoordinates.filter(m => m.x < e.clientX).length - 1

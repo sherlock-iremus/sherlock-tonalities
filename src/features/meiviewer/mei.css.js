@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
-import { COLOR_FOCUS, COLOR_HOVER } from './constants'
+
+export const COLOR_FOCUS = 'turquoise'
+export const COLOR_HOVER = 'grey'
 
 export const containerStyle = css`
   display: flex;

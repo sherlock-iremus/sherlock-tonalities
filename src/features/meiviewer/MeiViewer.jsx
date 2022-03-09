@@ -4,7 +4,16 @@ import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
-import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle, getNodeMeasure, getPathNodes} from './verovioHelpers'
+import {
+  createVerovio,
+  getNodeNote,
+  drawVerticalities,
+  load,
+  addStyle,
+  removeStyle,
+  getNodeMeasure,
+  getPathNodes,
+} from './verovioHelpers'
 import {
   containerStyle,
   mainAreaStyle,
@@ -15,10 +24,12 @@ import {
   flexEndStyle,
   selectionStyle,
   noDataStyle,
+  COLOR_FOCUS,
+  COLOR_HOVER,
 } from './mei.css'
 import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
-import { INSPECTION, SELECTION, COLOR_FOCUS, COLOR_HOVER } from './constants'
+import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
 
 window.verovioCallback = load
@@ -39,7 +50,7 @@ const MeiViewer = () => {
   }
 
   const _setHoveredMeasure = measure => {
-    if(hoveredMeasure) getPathNodes(hoveredMeasure).forEach(path => path.classList.remove('hovered'))
+    if (hoveredMeasure) getPathNodes(hoveredMeasure).forEach(path => path.classList.remove('hovered'))
     getPathNodes(measure).forEach(path => path.setAttribute('class', 'hovered'))
     setHoveredMeasure(measure)
   }
@@ -78,10 +89,13 @@ const MeiViewer = () => {
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
-    const m = getNodeMeasure(e)
-    if (!m) setHoveredMeasure(null)
-    if (m !== hoveredMeasure) _setHoveredMeasure(m)
-    if (n) n.noteNode.classList.add('hovered')
+    if (n) {
+      n.noteNode.classList.add('hovered')
+    } else {
+      const m = getNodeMeasure(e)
+      if (!m) setHoveredMeasure(null)
+      if (m !== hoveredMeasure) _setHoveredMeasure(m)
+    }
   }
 
   const handleMouseLeave = e => {
@@ -153,7 +167,11 @@ const MeiViewer = () => {
           <div>
             <h4>Inspection d'élément</h4>
             {inspectedElement ? (
-              <TreeView onNodeSelect={(e, id) => console.log('id de la note particulière à colorer:' + id)} defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+              <TreeView
+                onNodeSelect={(e, id) => console.log('id de la note particulière à colorer:' + id)}
+                defaultCollapseIcon={<ExpandMore />}
+                defaultExpandIcon={<ChevronRight />}
+              >
                 <Inspector inspectedElement={inspectedElement} />
               </TreeView>
             ) : (
