@@ -1,17 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import { useEffect, useState } from 'react'
-import { Button, IconButton, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Button, IconButton, ToggleButton, ToggleButtonGroup, Chip, CircularProgress } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
-import {
-  createVerovio,
-  getNodeNote,
-  drawVerticalities,
-  load,
-  addStyle,
-  removeStyle,
-} from './verovioHelpers'
+import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle } from './verovioHelpers'
 import {
   containerStyle,
   mainAreaStyle,
@@ -28,6 +21,7 @@ import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
+import { useSparqlQuery } from '../../app/services/sparqlLocal'
 
 window.verovioCallback = load
 
@@ -76,6 +70,8 @@ const MeiViewer = () => {
   useEffect(() => {
     createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
   }, [])
+
+  const sparql = useSparqlQuery('SELECT (COUNT(?s) AS ?triples) WHERE { ?s ?p ?o }')
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
@@ -209,6 +205,16 @@ const MeiViewer = () => {
             </li>
           ))}
         </ul>
+        {sparql.isLoading ? (
+          <CircularProgress />
+        ) : (
+          !sparql.error &&
+          sparql.data.results.bindings.map(binding => (
+            <div key={binding.triples.value} css={toggleButtonStyle}>
+              <Chip label={`Il y a ${binding.triples.value} triplets sur la base locale !`} />
+            </div>
+          ))
+        )}
       </div>
     </div>
   )
