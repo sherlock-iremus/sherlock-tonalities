@@ -41,13 +41,6 @@ export const drawMeasureAnchor = measure => {
   measure.appendChild(icon)
 }
 
-export const getPathNodes = measure => {
-  const measureChildNodes = Array.from(measure.childNodes)
-  const staffNodes = measureChildNodes.filter(child => child.classList && child.classList.contains('staff'))
-  const staffChildNodes = staffNodes.map(staff => Array.from(staff.childNodes)).flat()
-  return staffChildNodes.filter(child => child.tagName === 'path')
-}
-
 export const getNodeNote = e => {
   let mouseNode = null
   let noteNode = null
@@ -75,34 +68,6 @@ export const getNodeNote = e => {
   if (mouseNode && noteNode) {
     return { mouseNode, noteNode }
   } else return null
-}
-
-export const getMeasures = e => {
-  if (e.tagName === 'g' || e.tagName === 'svg') {
-    if (e.classList && e.classList.contains('measure')) return e
-    if (e.hasChildNodes()) {
-      const classList = ['measure', 'system', 'page-margin', 'definition-scale']
-      const childNodes = Array.from(e.childNodes)
-      const children = childNodes.filter(child => child.classList && classList.some(c => child.classList.contains(c)))
-      return !children.length
-        ? null
-        : children.length === 1
-        ? getMeasures(children[0])
-        : children.map(child => getMeasures(child))
-    }
-  }
-  return null
-}
-
-export const getNodeMeasure = e => {
-  let measures = getMeasures(e.target)
-  if (measures) {
-    // temporairement, on ne garde que le premier système
-    if (Array.isArray(measures[0])) measures = measures[0]
-    const measureCoordinates = measures.map(measure => measure.getBoundingClientRect())
-    const selectedMeasureIndex = measureCoordinates.filter(m => m.x < e.clientX).length - 1
-    return measures[selectedMeasureIndex]
-  }
 }
 
 export const addStyle = element =>

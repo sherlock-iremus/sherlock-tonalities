@@ -11,8 +11,6 @@ import {
   load,
   addStyle,
   removeStyle,
-  getNodeMeasure,
-  getPathNodes,
 } from './verovioHelpers'
 import {
   containerStyle,
@@ -25,7 +23,6 @@ import {
   selectionStyle,
   noDataStyle,
   COLOR_FOCUS,
-  COLOR_HOVER,
 } from './mei.css'
 import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
@@ -40,19 +37,12 @@ const meiUri =
 const MeiViewer = () => {
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
-  const [hoveredMeasure, setHoveredMeasure] = useState(null)
   const [selection, setSelection] = useState([])
   const [scoreSelections, setScoreSelections] = useState([])
 
   const _setInspectedElement = element => {
     if (inspectedElement) removeStyle(inspectedElement)
     setInspectedElement(inspectedElement !== element ? element : null)
-  }
-
-  const _setHoveredMeasure = measure => {
-    if (hoveredMeasure) getPathNodes(hoveredMeasure).forEach(path => path.classList.remove('hovered'))
-    getPathNodes(measure).forEach(path => path.setAttribute('class', 'hovered'))
-    setHoveredMeasure(measure)
   }
 
   const _setSelection = element => {
@@ -89,13 +79,7 @@ const MeiViewer = () => {
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
-    if (n) {
-      n.noteNode.classList.add('hovered')
-    } else {
-      const m = getNodeMeasure(e)
-      if (!m) setHoveredMeasure(null)
-      if (m !== hoveredMeasure) _setHoveredMeasure(m)
-    }
+    if (n) n.noteNode.classList.add('hovered')
   }
 
   const handleMouseLeave = e => {
@@ -105,8 +89,6 @@ const MeiViewer = () => {
 
   const handleClick = e => {
     const n = getNodeNote(e)
-    const m = getNodeMeasure(e)
-    if (m) m.classList.add('selected')
     if (n) {
       switch (mode) {
         case INSPECTION:
