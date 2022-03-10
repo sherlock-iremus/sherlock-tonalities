@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 
 export const COLOR_FOCUS = 'turquoise'
 export const COLOR_HOVER = 'grey'
+export const COLOR_SPECIFIC = 'salmon'
 
 export const containerStyle = css`
   display: flex;
@@ -41,6 +42,10 @@ export const verovioStyle = css`
 
   g.selected {
     fill: ${COLOR_FOCUS};
+  }
+
+  g.specific {
+    fill: ${COLOR_SPECIFIC};
   }
 
   g.focused {

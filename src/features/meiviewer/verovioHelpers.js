@@ -41,6 +41,8 @@ export const drawMeasureAnchor = measure => {
   measure.appendChild(icon)
 }
 
+export const drawBeat = beat => beat.forEach(note => document.getElementById(note).classList.add('specific'))
+
 export const getNodeNote = e => {
   let mouseNode = null
   let noteNode = null

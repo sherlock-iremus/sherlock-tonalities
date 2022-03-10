@@ -21,21 +21,25 @@ import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
-import { useSparqlQuery } from '../../app/services/sparqlLocal'
+import { Beat } from './Beat'
+import { useCountTriplesQuery } from '../../app/services/sparqlLocal'
 
 window.verovioCallback = load
 
-const meiUri =
-  'https://raw.githubusercontent.com/guillotel-nothmann/Zarlino_1558/main/meiOldClefsAnalyse/Hellinck_Beati.mei'
+const meiUri = 'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei'
 
 const MeiViewer = () => {
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
   const [selection, setSelection] = useState([])
+  const [isShowingBeat, setIsShowhingBeat] = useState(false)
   const [scoreSelections, setScoreSelections] = useState([])
 
   const _setInspectedElement = element => {
-    if (inspectedElement) removeStyle(inspectedElement)
+    if (inspectedElement) {
+      removeStyle(inspectedElement)
+      setIsShowhingBeat(false)
+    }
     setInspectedElement(inspectedElement !== element ? element : null)
   }
 
@@ -71,7 +75,7 @@ const MeiViewer = () => {
     createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
   }, [])
 
-  const sparql = useSparqlQuery('SELECT (COUNT(?s) AS ?triples) WHERE { ?s ?p ?o }')
+  const sparql = useCountTriplesQuery()
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
@@ -145,13 +149,20 @@ const MeiViewer = () => {
           <div>
             <h4>Inspection d'élément</h4>
             {inspectedElement ? (
-              <TreeView
-                onNodeSelect={(e, id) => console.log('id de la note particulière à colorer:' + id)}
-                defaultCollapseIcon={<ExpandMore />}
-                defaultExpandIcon={<ChevronRight />}
-              >
-                <Inspector inspectedElement={inspectedElement} />
-              </TreeView>
+              <div>
+                <TreeView
+                  defaultCollapseIcon={<ExpandMore />}
+                  defaultExpandIcon={<ChevronRight />}
+                >
+                  <Inspector inspectedElement={inspectedElement} />
+                </TreeView>
+                <div css={flexEndStyle}>
+                  <Button onClick={() => setIsShowhingBeat(!isShowingBeat)} disabled={inspectedElement.selection} size="small">
+                    'Voir la verticalité de la note'
+                  </Button>
+                  {isShowingBeat && <Beat beatId={inspectedElement.id} meiUri={meiUri} />}
+                </div>
+              </div>
             ) : (
               <div css={noDataStyle}>Aucun élément à inspecter, commencez par en sélectionner un</div>
             )}
