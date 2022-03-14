@@ -4,7 +4,16 @@ import { useEffect, useState } from 'react'
 import { Button, IconButton, ToggleButton, ToggleButtonGroup, Chip, CircularProgress } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
-import { createVerovio, getNodeNote, drawVerticalities, load, addStyle, removeStyle } from './verovioHelpers'
+import {
+  createVerovio,
+  getNodeNote,
+  drawVerticalities,
+  load,
+  addInspectionStyle,
+  removeInspectionStyle,
+  addSelectionStyle,
+  removeSelectionStyle,
+} from './verovioHelpers'
 import {
   containerStyle,
   mainAreaStyle,
@@ -13,9 +22,9 @@ import {
   toggleButtonStyle,
   verovioStyle,
   flexEndStyle,
-  selectionStyle,
+  scoreSelectionStyle,
   noDataStyle,
-  COLOR_FOCUS,
+  COLOR_INSPECTED,
 } from './mei.css'
 import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
@@ -37,7 +46,7 @@ const MeiViewer = () => {
 
   const _setInspectedElement = element => {
     if (inspectedElement) {
-      removeStyle(inspectedElement)
+      removeInspectionStyle(inspectedElement)
       setIsShowhingBeat(false)
     }
     setInspectedElement(inspectedElement !== element ? element : null)
@@ -47,7 +56,7 @@ const MeiViewer = () => {
     if (!selection.includes(element)) setSelection([...selection, element])
     else {
       setSelection(selection.filter(e => e !== element))
-      removeStyle(element)
+      removeSelectionStyle(element)
     }
   }
 
@@ -61,7 +70,7 @@ const MeiViewer = () => {
       )
         return
     setScoreSelections([...scoreSelections, { id: uuid(), selection: newSelection }])
-    selection.forEach(e => removeStyle(e))
+    removeSelectionStyle({ selection: selection })
     setSelection([])
   }
 
@@ -79,12 +88,12 @@ const MeiViewer = () => {
 
   const handleMouseOver = e => {
     const n = getNodeNote(e)
-    if (n) n.noteNode.classList.add('hovered')
+    if (n) n.noteNode.classList.add('focused')
   }
 
   const handleMouseLeave = e => {
     const n = getNodeNote(e)
-    if (n) n.noteNode.classList.remove('hovered')
+    if (n) n.noteNode.classList.remove('focused')
   }
 
   const handleClick = e => {
@@ -106,10 +115,10 @@ const MeiViewer = () => {
   if (inspectedElement) {
     switch (mode) {
       case INSPECTION:
-        addStyle(inspectedElement)
+        addInspectionStyle(inspectedElement)
         break
       case SELECTION:
-        removeStyle(inspectedElement)
+        removeInspectionStyle(inspectedElement)
         break
     }
   }
@@ -117,10 +126,10 @@ const MeiViewer = () => {
   if (selection) {
     switch (mode) {
       case INSPECTION:
-        selection.forEach(e => removeStyle(e))
+        removeSelectionStyle({ selection: selection })
         break
       case SELECTION:
-        selection.forEach(e => addStyle(e))
+        addSelectionStyle({ selection: selection })
         break
     }
   }
@@ -150,17 +159,18 @@ const MeiViewer = () => {
             <h4>Inspection d'élément</h4>
             {inspectedElement ? (
               <div>
-                <TreeView
-                  defaultCollapseIcon={<ExpandMore />}
-                  defaultExpandIcon={<ChevronRight />}
-                >
+                <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
                   <Inspector inspectedElement={inspectedElement} />
                 </TreeView>
                 <div css={flexEndStyle}>
-                  <Button onClick={() => setIsShowhingBeat(!isShowingBeat)} disabled={inspectedElement.selection} size="small">
-                    'Voir la verticalité de la note'
+                  <Button
+                    onClick={() => setIsShowhingBeat(!isShowingBeat)}
+                    disabled={inspectedElement.selection}
+                    size="small"
+                  >
+                    Voir la verticalité de la note
                   </Button>
-                  {isShowingBeat && <Beat beatId={inspectedElement.id} meiUri={meiUri} />}
+                  {isShowingBeat && <Beat noteId={inspectedElement.id} meiUri={meiUri} />}
                 </div>
               </div>
             ) : (
@@ -201,8 +211,8 @@ const MeiViewer = () => {
                   onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
                   css={
                     mode === INSPECTION && inspectedElement === e
-                      ? { ...selectionStyle, color: COLOR_FOCUS }
-                      : selectionStyle
+                      ? { ...scoreSelectionStyle, color: COLOR_INSPECTED }
+                      : scoreSelectionStyle
                   }
                 >
                   {e.id}

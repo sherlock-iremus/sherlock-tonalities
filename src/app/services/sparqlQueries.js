@@ -16,3 +16,10 @@ export const getNotesOnFirstBeat = noteId => `
         }
     }
 `
+
+
+/* const [noteId, setNoteId] = useState(null)
+const verticalityData = useGetVerticalityData(noteId, {skip: noteId !== null} )
+
+<Composant onClick={e => setNoteId("note id")} />
+{verticalityData.length > 0 && <div ... /> } */

@@ -18,7 +18,7 @@ export const drawVerticalities = e => {
       if (node.classList.contains('measure')) {
         measure = node
         break
-      } else if (node.classList.contains('note') && node.classList.contains('hovered')) {
+      } else if (node.classList.contains('note') && node.classList.contains('focused')) {
         note = node
       }
     }
@@ -41,7 +41,7 @@ export const drawMeasureAnchor = measure => {
   measure.appendChild(icon)
 }
 
-export const drawBeat = beat => beat.forEach(note => document.getElementById(note).classList.add('specific'))
+export const drawBeat = beat => beat.forEach(note => document.getElementById(note).classList.add('inspected'))
 
 export const getNodeNote = e => {
   let mouseNode = null
@@ -72,11 +72,17 @@ export const getNodeNote = e => {
   } else return null
 }
 
-export const addStyle = element =>
-  element.classList ? element.classList.add('selected') : element.selection.forEach(e => addStyle(e))
+export const addInspectionStyle = element =>
+  element.classList ? element.classList.add('inspected') : element.selection.forEach(e => addInspectionStyle(e))
 
-export const removeStyle = element =>
-  element.classList ? element.classList.remove('selected') : element.selection.forEach(e => removeStyle(e))
+export const removeInspectionStyle = element =>
+  element.classList ? element.classList.remove('inspected') : element.selection.forEach(e => removeInspectionStyle(e))
+
+export const addSelectionStyle = element =>
+  element.classList ? element.classList.add('selected') : element.selection.forEach(e => addSelectionStyle(e))
+
+export const removeSelectionStyle = element =>
+  element.classList ? element.classList.remove('selected') : element.selection.forEach(e => removeSelectionStyle(e))
 
 export const createVerovio = meiUri => {
   const s = document.createElement('script')

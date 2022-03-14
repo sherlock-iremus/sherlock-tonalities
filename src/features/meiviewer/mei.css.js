@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 
-export const COLOR_FOCUS = 'turquoise'
-export const COLOR_HOVER = 'grey'
-export const COLOR_SPECIFIC = 'salmon'
+export const COLOR_FOCUSED = 'grey'
+export const COLOR_SELECTED = 'blue'
+export const COLOR_INSPECTED = 'red'
 
 export const containerStyle = css`
   display: flex;
@@ -34,21 +34,25 @@ export const verovioStyle = css`
     font-family: 'Roboto';
   }
 
-  .hovered {
-    fill: ${COLOR_HOVER};
-    stroke: ${COLOR_HOVER};
+  .focused {
+    fill: ${COLOR_FOCUSED};
+    stroke: ${COLOR_FOCUSED};
     cursor: pointer;
   }
 
-  g.selected {
-    fill: ${COLOR_FOCUS};
+  .selected {
+    fill: ${COLOR_SELECTED};
+    stroke: ${COLOR_SELECTED};
+    cursor: pointer;
   }
 
-  g.specific {
-    fill: ${COLOR_SPECIFIC};
+  .inspected {
+    fill: ${COLOR_INSPECTED};
+    stroke: ${COLOR_INSPECTED};
+    cursor: pointer;
   }
 
-  g.focused {
+  g.focused.old {
     animation: 0.3s linear infinite condemed_blink_effect;
   }
 `
@@ -75,9 +79,9 @@ export const flexEndStyle = theme => css`
   justify-content: end;
 `
 
-export const selectionStyle = theme => css`
+export const scoreSelectionStyle = theme => css`
   &:hover {
-    color: ${COLOR_HOVER};
+    color: ${COLOR_FOCUSED};
     cursor: pointer;
   }
 `
