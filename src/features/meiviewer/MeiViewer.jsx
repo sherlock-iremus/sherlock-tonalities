@@ -114,7 +114,7 @@ const MeiViewer = () => {
 
   const inspectVerticality = () => {
     _setInspectedElement({
-      id: 'mesure',
+      id: verticalityData.data.results.bindings[0].firstBeat.value.slice(meiUri.length- 10),
       selection: verticalityData.data.results.bindings.map(binding =>
         document.getElementById(binding.notesInBeat.value.slice(meiUri.length - 10))
       ),
