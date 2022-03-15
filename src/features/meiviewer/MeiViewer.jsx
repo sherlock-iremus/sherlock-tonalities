@@ -98,10 +98,10 @@ const MeiViewer = () => {
   const handleClick = e => {
     const n = getNodeNote(e)
     if (n) {
+      if (e.ctrlKey) return setRightClickedNoteId(n.noteNode.id)
       switch (mode) {
         case INSPECTION:
-          if (e.ctrlKey) setRightClickedNoteId(n.noteNode.id)
-          else _setInspectedElement(n.noteNode)
+          _setInspectedElement(n.noteNode)
           break
         case SELECTION:
           _setSelection(n.noteNode)
@@ -112,14 +112,14 @@ const MeiViewer = () => {
 
   const handleChangeMode = (event, newMode) => newMode && setMode(newMode)
 
-  const inspectVerticality = () => {
-    _setInspectedElement({
-      id: verticalityData.data.results.bindings[0].firstBeat.value.slice(meiUri.length- 10),
+  const getVerticalityElement = () => {
+    setRightClickedNoteId(null)
+    return {
+      id: verticalityData.data.results.bindings[0].firstBeat.value.slice(meiUri.length - 10),
       selection: verticalityData.data.results.bindings.map(binding =>
         document.getElementById(binding.notesInBeat.value.slice(meiUri.length - 10))
       ),
-    })
-    setRightClickedNoteId(null)
+    }
   }
 
   if (inspectedElement) {
@@ -166,7 +166,7 @@ const MeiViewer = () => {
         </ToggleButtonGroup>
         {mode === INSPECTION && (
           <div>
-            {verticalityData.isSuccess && !verticalityData.isFetching && inspectVerticality()}
+            {verticalityData.isSuccess && !verticalityData.isFetching && _setInspectedElement(getVerticalityElement())}
             <h4>Inspection d'élément</h4>
             {inspectedElement ? (
               <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
@@ -179,6 +179,7 @@ const MeiViewer = () => {
         )}
         {mode === SELECTION && (
           <div>
+            {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
             <h4>Sélection d'éléments</h4>
             {!selection.length && <div css={noDataStyle}>Aucun élément ajouté, commencez par en sélectionner</div>}
             <ul>
