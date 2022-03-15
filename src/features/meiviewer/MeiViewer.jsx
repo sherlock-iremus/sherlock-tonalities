@@ -30,8 +30,8 @@ import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
-import { Beat } from './Beat'
 import { useCountTriplesQuery } from '../../app/services/sparqlLocal'
+import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 
 window.verovioCallback = load
 
@@ -41,14 +41,13 @@ const MeiViewer = () => {
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
   const [selection, setSelection] = useState([])
-  const [isShowingBeat, setIsShowhingBeat] = useState(false)
+  const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
 
+  const verticalityData = useGetNotesOnFirstBeatQuery(rightClickedNoteId, { skip: !rightClickedNoteId })
+
   const _setInspectedElement = element => {
-    if (inspectedElement) {
-      removeInspectionStyle(inspectedElement)
-      setIsShowhingBeat(false)
-    }
+    if (inspectedElement) removeInspectionStyle(inspectedElement)
     setInspectedElement(inspectedElement !== element ? element : null)
   }
 
@@ -101,7 +100,8 @@ const MeiViewer = () => {
     if (n) {
       switch (mode) {
         case INSPECTION:
-          _setInspectedElement(n.noteNode)
+          if (e.ctrlKey) setRightClickedNoteId(n.noteNode.id)
+          else _setInspectedElement(n.noteNode)
           break
         case SELECTION:
           _setSelection(n.noteNode)
@@ -111,6 +111,16 @@ const MeiViewer = () => {
   }
 
   const handleChangeMode = (event, newMode) => newMode && setMode(newMode)
+
+  const inspectVerticality = () => {
+    _setInspectedElement({
+      id: 'mesure',
+      selection: verticalityData.data.results.bindings.map(binding =>
+        document.getElementById(binding.notesInBeat.value.slice(meiUri.length - 10))
+      ),
+    })
+    setRightClickedNoteId(null)
+  }
 
   if (inspectedElement) {
     switch (mode) {
@@ -156,23 +166,12 @@ const MeiViewer = () => {
         </ToggleButtonGroup>
         {mode === INSPECTION && (
           <div>
+            {verticalityData.isSuccess && !verticalityData.isFetching && inspectVerticality()}
             <h4>Inspection d'élément</h4>
             {inspectedElement ? (
-              <div>
-                <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
-                  <Inspector inspectedElement={inspectedElement} />
-                </TreeView>
-                <div css={flexEndStyle}>
-                  <Button
-                    onClick={() => setIsShowhingBeat(!isShowingBeat)}
-                    disabled={inspectedElement.selection}
-                    size="small"
-                  >
-                    Voir la verticalité de la note
-                  </Button>
-                  {isShowingBeat && <Beat noteId={inspectedElement.id} meiUri={meiUri} />}
-                </div>
-              </div>
+              <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+                <Inspector inspectedElement={inspectedElement} />
+              </TreeView>
             ) : (
               <div css={noDataStyle}>Aucun élément à inspecter, commencez par en sélectionner un</div>
             )}
