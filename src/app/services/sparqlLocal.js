@@ -13,10 +13,10 @@ export const sparqlLocalEndpoint = createApi({
       }),
     }),
     getNotesOnFirstBeat: builder.query({
-      query: noteId => ({
+      query: noteIri => ({
         url: "/sparql",
         method: "POST",
-        body: new URLSearchParams({ query: getNotesOnFirstBeat(noteId) }),
+        body: new URLSearchParams({ query: getNotesOnFirstBeat(noteIri) }),
       }),
     })
   }),

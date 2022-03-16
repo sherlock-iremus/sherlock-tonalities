@@ -1,18 +1,17 @@
-export const getNotesOnFirstBeat = noteId => `
+export const getNotesOnFirstBeat = noteIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-
-    SELECT ?notesInBeat ?firstBeat
+    SELECT ?notes ?beat ?selectedNote
     WHERE {
-        ?notesInBeat sherlock:contains_beats ?firstBeat.
-        {
-        SELECT ?firstBeat
+    ?notes sherlock:contains_beats ?beat
+    {
+        SELECT ?beat ?selectedNote
         WHERE {
-            ?selectedNote crm:P1_is_identified_by ?selectedNoteId.
-            FILTER(regex(STR(?selectedNote), "${noteId}$")).
-            ?selectedNote sherlock:contains_beats ?firstBeat
+            BIND (<${noteIri}> AS ?selectedNote)
+            ?selectedNote sherlock:contains_beats ?beat
         }
+        ORDER BY ASC(?beat)
         LIMIT 1
-        }
+    }
     }
 `
