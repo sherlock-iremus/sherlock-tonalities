@@ -30,15 +30,18 @@ export const drawVerticalities = e => {
   }
 }
 
-// WIP
-export const drawMeasureAnchor = measure => {
-  const measureCoordinates = measure.getBoundingClientRect()
-  console.log(measureCoordinates.x, measureCoordinates.y)
-  const icon = makeSvgRect(measureCoordinates.x, measureCoordinates.y, 200, 200, 'blue')
-  icon.innerHTML =
-    '<path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;2&#34; d=&#34;M19 9l-7 7-7-7&#34; />'
-  icon.setAttributeNS(null, 'id', 'measure')
-  measure.appendChild(icon)
+//WIP
+export const drawBeat = note => {
+  const coor = note.getBoundingClientRect()
+  const beat = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+  beat.setAttribute('id', 'beatAnchor')
+  beat.setAttribute('x1', coor.right - 200)
+  beat.setAttribute('y1', coor.bottom + 2000)
+  beat.setAttribute('x2', coor.right - 200)
+  beat.setAttribute('y2', coor.bottom)
+  beat.setAttribute('stroke', 'red')
+  beat.setAttribute('stroke-width', '16')
+  note.append(beat)
 }
 
 export const getNodeNote = e => {

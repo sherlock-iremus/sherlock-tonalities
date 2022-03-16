@@ -13,6 +13,7 @@ import {
   removeInspectionStyle,
   addSelectionStyle,
   removeSelectionStyle,
+  drawBeat,
 } from './verovioHelpers'
 import {
   containerStyle,
@@ -27,7 +28,7 @@ import {
   COLOR_INSPECTED,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight, BeachAccessTwoTone } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
 import { useCountTriplesQuery } from '../../app/services/sparqlLocal'
@@ -35,16 +36,36 @@ import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 
 window.verovioCallback = load
 
-const meiUri = 'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei'
-
-const MeiViewer = () => {
+const MeiViewer = ({
+  meiUri =   'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei',
+  scoreIri = 'http://data-iremus.huma-num.fr/id/e2492d45-b068-4954-8781-9d5653deb8f5',
+}) => {
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
   const [selection, setSelection] = useState([])
   const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
+  const [meiTree, setMeiTree] = useState(null)
 
-  const verticalityData = useGetNotesOnFirstBeatQuery(rightClickedNoteId, { skip: !rightClickedNoteId })
+  const sparql = useCountTriplesQuery()
+  const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
+    skip: !rightClickedNoteId,
+  })
+
+  const fetchMei = async () => {
+    try {
+      let response = await fetch(meiUri)
+      let data = await response.text()
+      const parser = new DOMParser()
+      setMeiTree(parser.parseFromString(data, 'application/xml'))
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  useEffect(() => {
+    createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
+  }, [])
 
   const _setInspectedElement = element => {
     if (inspectedElement) removeInspectionStyle(inspectedElement)
@@ -79,12 +100,6 @@ const MeiViewer = () => {
     setScoreSelections(scoreSelections.filter(e => e !== s))
   }
 
-  useEffect(() => {
-    createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
-  }, [])
-
-  const sparql = useCountTriplesQuery()
-
   const handleMouseOver = e => {
     const n = getNodeNote(e)
     if (n) n.noteNode.classList.add('focused')
@@ -115,14 +130,16 @@ const MeiViewer = () => {
   const getVerticalityElement = () => {
     setRightClickedNoteId(null)
     return {
-      id: verticalityData.data.results.bindings[0].firstBeat.value.slice(meiUri.length - 10),
+      id: verticalityData.data.results.bindings[0].beat.value.slice(scoreIri.length + 1),
+      type: 'beat',
       selection: verticalityData.data.results.bindings.map(binding =>
-        document.getElementById(binding.notesInBeat.value.slice(meiUri.length - 10))
+        document.getElementById(binding.notes.value.slice(scoreIri.length + 1))
       ),
     }
   }
 
   if (inspectedElement) {
+    if (inspectedElement.type === 'beat') drawBeat(inspectedElement.selection[0])
     switch (mode) {
       case INSPECTION:
         addInspectionStyle(inspectedElement)
