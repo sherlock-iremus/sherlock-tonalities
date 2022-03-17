@@ -30,18 +30,34 @@ export const drawVerticalities = e => {
   }
 }
 
-//WIP
+export const noteCoordinates = note => ({
+  x: note.getElementsByTagName('use')[0].x.animVal.value + 140,
+  y: note.getElementsByTagName('use')[0].y.animVal.value,
+})
+
+export const measureCoordinates = measure => ({
+  top: measure.getBBox().y,
+  bottom: measure.getBBox().y + measure.getBBox().height,
+})
+
 export const drawBeat = note => {
-  const coor = note.getBoundingClientRect()
+  const noteCoor = noteCoordinates(note)
+  const measureCoor = measureCoordinates(getMeasure(note))
+
   const beat = document.createElementNS('http://www.w3.org/2000/svg', 'line')
   beat.setAttribute('id', 'beatAnchor')
-  beat.setAttribute('x1', coor.right - 200)
-  beat.setAttribute('y1', coor.bottom + 2000)
-  beat.setAttribute('x2', coor.right - 200)
-  beat.setAttribute('y2', coor.bottom)
+  beat.setAttribute('x1', noteCoor.x)
+  beat.setAttribute('y1', measureCoor.top)
+  beat.setAttribute('x2', noteCoor.x)
+  beat.setAttribute('y2', measureCoor.bottom)
   beat.setAttribute('stroke', 'red')
   beat.setAttribute('stroke-width', '16')
   note.append(beat)
+}
+
+export const getMeasure = node => {
+  if (node.classList.contains('measure')) return node
+  if (node.parentNode) return getMeasure(node.parentNode)
 }
 
 export const getNodeNote = e => {
@@ -73,11 +89,15 @@ export const getNodeNote = e => {
   } else return null
 }
 
-export const addInspectionStyle = element =>
+export const addInspectionStyle = element => {
+  if (element.referenceNote && !document.getElementById('beatAnchor')) drawBeat(element.referenceNote)
   element.classList ? element.classList.add('inspected') : element.selection.forEach(e => addInspectionStyle(e))
+}
 
-export const removeInspectionStyle = element =>
+export const removeInspectionStyle = element => {
+  if (element.referenceNote) document.getElementById('beatAnchor').remove()
   element.classList ? element.classList.remove('inspected') : element.selection.forEach(e => removeInspectionStyle(e))
+}
 
 export const addSelectionStyle = element =>
   element.classList ? element.classList.add('selected') : element.selection.forEach(e => addSelectionStyle(e))

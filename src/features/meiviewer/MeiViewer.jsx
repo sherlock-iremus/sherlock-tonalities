@@ -131,7 +131,7 @@ const MeiViewer = ({
     setRightClickedNoteId(null)
     return {
       id: verticalityData.data.results.bindings[0].beat.value.slice(scoreIri.length + 1),
-      referenceNote: verticalityData.data.results.bindings[0].selectedNote.value.slice(scoreIri.length + 1),
+      referenceNote: document.getElementById(verticalityData.data.results.bindings[0].selectedNote.value.slice(scoreIri.length + 1)),
       selection: verticalityData.data.results.bindings.map(binding =>
         document.getElementById(binding.notes.value.slice(scoreIri.length + 1))
       ),
@@ -139,7 +139,6 @@ const MeiViewer = ({
   }
 
   if (inspectedElement) {
-    if (inspectedElement.referenceNote) drawBeat(document.getElementById(inspectedElement.referenceNote))
     switch (mode) {
       case INSPECTION:
         addInspectionStyle(inspectedElement)

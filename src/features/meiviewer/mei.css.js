@@ -3,6 +3,7 @@ import { css } from '@emotion/react'
 export const COLOR_FOCUSED = 'grey'
 export const COLOR_SELECTED = 'blue'
 export const COLOR_INSPECTED = 'red'
+export const COLOR_INSPECTED_LIGHT = '#ff8080'
 
 export const containerStyle = css`
   display: flex;
