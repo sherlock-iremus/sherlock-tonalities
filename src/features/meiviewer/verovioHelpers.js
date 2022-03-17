@@ -1,3 +1,5 @@
+import { INSPECTION, SELECTION } from "./constants"
+
 const makeSvgRect = (x, y, w, h, fill) => {
   const svgns = 'http://www.w3.org/2000/svg'
   const e = document.createElementNS(svgns, 'rect')
@@ -40,19 +42,21 @@ export const measureCoordinates = measure => ({
   bottom: measure.getBBox().y + measure.getBBox().height,
 })
 
-export const drawBeat = note => {
-  const noteCoor = noteCoordinates(note)
-  const measureCoor = measureCoordinates(getMeasure(note))
+export const drawBeat = (beat, mode) => {
+  const noteCoor = noteCoordinates(beat.referenceNote)
+  const measureCoor = measureCoordinates(getMeasure(beat.referenceNote))
 
-  const beat = document.createElementNS('http://www.w3.org/2000/svg', 'line')
-  beat.setAttribute('id', 'beatAnchor')
-  beat.setAttribute('x1', noteCoor.x)
-  beat.setAttribute('y1', measureCoor.top)
-  beat.setAttribute('x2', noteCoor.x)
-  beat.setAttribute('y2', measureCoor.bottom)
-  beat.setAttribute('stroke', 'red')
-  beat.setAttribute('stroke-width', '16')
-  note.append(beat)
+  const color = mode === 'INSPECTION' ? 'red' : 'blue'
+
+  const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+  anchor.setAttribute('id', beat.id)
+  anchor.setAttribute('x1', noteCoor.x)
+  anchor.setAttribute('y1', measureCoor.top)
+  anchor.setAttribute('x2', noteCoor.x)
+  anchor.setAttribute('y2', measureCoor.bottom)
+  anchor.setAttribute('stroke', color)
+  anchor.setAttribute('stroke-width', '16')
+  beat.referenceNote.append(anchor)
 }
 
 export const getMeasure = node => {
@@ -90,20 +94,24 @@ export const getNodeNote = e => {
 }
 
 export const addInspectionStyle = element => {
-  if (element.referenceNote && !document.getElementById('beatAnchor')) drawBeat(element.referenceNote)
+  if (element.referenceNote && !document.getElementById(element.id)) drawBeat(element, INSPECTION)
   element.classList ? element.classList.add('inspected') : element.selection.forEach(e => addInspectionStyle(e))
 }
 
 export const removeInspectionStyle = element => {
-  if (element.referenceNote) document.getElementById('beatAnchor').remove()
+  if (element.referenceNote) document.getElementById(element.id).remove()
   element.classList ? element.classList.remove('inspected') : element.selection.forEach(e => removeInspectionStyle(e))
 }
 
-export const addSelectionStyle = element =>
+export const addSelectionStyle = element => {
+  if (element.referenceNote && !document.getElementById(element.id)) drawBeat(element, SELECTION)
   element.classList ? element.classList.add('selected') : element.selection.forEach(e => addSelectionStyle(e))
+}
 
-export const removeSelectionStyle = element =>
+export const removeSelectionStyle = element => {
+  if (element.referenceNote) document.getElementById(element.id).remove()
   element.classList ? element.classList.remove('selected') : element.selection.forEach(e => removeSelectionStyle(e))
+}
 
 export const createVerovio = meiUri => {
   const s = document.createElement('script')
