@@ -29,13 +29,13 @@ import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight, BeachAccessTwoTone } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
-import { useCountTriplesQuery } from '../../app/services/sparqlLocal'
+import { useCountTriplesQuery, useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 
 window.verovioCallback = load
 
 const MeiViewer = ({
-  meiUri =   'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei',
+  meiUri = 'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei',
   scoreIri = 'http://data-iremus.huma-num.fr/id/e2492d45-b068-4954-8781-9d5653deb8f5',
 }) => {
   const [mode, setMode] = useState(INSPECTION)
@@ -45,6 +45,10 @@ const MeiViewer = ({
   const [scoreSelections, setScoreSelections] = useState([])
 
   const sparql = useCountTriplesQuery()
+  const noteInfo = useGetNoteInfoQuery(`${scoreIri}_${inspectedElement && inspectedElement.id}`, {
+    skip: !inspectedElement || inspectedElement.referenceNote,
+  })
+
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
   })
@@ -56,6 +60,39 @@ const MeiViewer = ({
   const _setInspectedElement = element => {
     if (inspectedElement) removeInspectionStyle(inspectedElement)
     setInspectedElement(inspectedElement !== element ? element : null)
+  }
+
+  const getNoteLabel = () => {
+    const {
+      data: {
+        results: {
+          bindings: [
+            {
+              pname: { value: pname },
+              oct: { value: oct },
+              accid,
+            },
+          ],
+        },
+      },
+    } = noteInfo
+
+    let alteration = ''
+    if (accid) {
+      switch (accid.value) {
+        case 'f':
+          alteration = '♭'
+          break
+        case 's':
+          alteration = '#'
+          break
+        case 'n':
+          alteration = '♮'
+          break
+      }
+    }
+
+    return pname.toUpperCase() + oct + alteration
   }
 
   const _setSelection = element => {
@@ -117,7 +154,9 @@ const MeiViewer = ({
     setRightClickedNoteId(null)
     return {
       id: verticalityData.data.results.bindings[0].beat.value.slice(scoreIri.length + 1),
-      referenceNote: document.getElementById(verticalityData.data.results.bindings[0].selectedNote.value.slice(scoreIri.length + 1)),
+      referenceNote: document.getElementById(
+        verticalityData.data.results.bindings[0].selectedNote.value.slice(scoreIri.length + 1)
+      ),
       selection: verticalityData.data.results.bindings.map(binding =>
         document.getElementById(binding.notes.value.slice(scoreIri.length + 1))
       ),
@@ -170,9 +209,9 @@ const MeiViewer = ({
           <div>
             {verticalityData.isSuccess && !verticalityData.isFetching && _setInspectedElement(getVerticalityElement())}
             <h4>Inspection d'élément</h4>
-            {inspectedElement ? (
+            {inspectedElement && noteInfo.isSuccess ? (
               <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
-                <Inspector inspectedElement={inspectedElement} />
+                <Inspector inspectedElement={inspectedElement} label={getNoteLabel()} />
               </TreeView>
             ) : (
               <div css={noDataStyle}>Aucun élément à inspecter, commencez par en sélectionner un</div>

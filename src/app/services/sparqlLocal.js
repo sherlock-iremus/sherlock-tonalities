@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { getNotesOnFirstBeat } from "./sparqlQueries";
+import { getNoteInfo, getNotesOnFirstBeat } from "./sparqlQueries";
 
 export const sparqlLocalEndpoint = createApi({
   reducerPath: "sparqlApi",
@@ -18,10 +18,17 @@ export const sparqlLocalEndpoint = createApi({
         method: "POST",
         body: new URLSearchParams({ query: getNotesOnFirstBeat(noteIri) }),
       }),
+    }),
+    getNoteInfo: builder.query({
+      query: noteIri => ({
+        url: "/sparql",
+        method: "POST",
+        body: new URLSearchParams({ query: getNoteInfo(noteIri) }),
+      }),
     })
   }),
 });
 
 export default sparqlLocalEndpoint;
 
-export const { useCountTriplesQuery, useGetNotesOnFirstBeatQuery } = sparqlLocalEndpoint;
+export const { useCountTriplesQuery, useGetNotesOnFirstBeatQuery, useGetNoteInfoQuery } = sparqlLocalEndpoint;
