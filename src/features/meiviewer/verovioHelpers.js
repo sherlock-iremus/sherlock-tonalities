@@ -1,36 +1,4 @@
-import { INSPECTION, SELECTION } from "./constants"
-
-const makeSvgRect = (x, y, w, h, fill) => {
-  const svgns = 'http://www.w3.org/2000/svg'
-  const e = document.createElementNS(svgns, 'rect')
-  e.setAttributeNS(null, 'x', x)
-  e.setAttributeNS(null, 'y', y)
-  e.setAttributeNS(null, 'width', w)
-  e.setAttributeNS(null, 'height', h)
-  e.setAttributeNS(null, 'fill', fill)
-  return e
-}
-
-export const drawVerticalities = e => {
-  let node = e.target
-  let measure = null
-  let note = null
-  while (node) {
-    if (node.classList) {
-      if (node.classList.contains('measure')) {
-        measure = node
-        break
-      } else if (node.classList.contains('note') && node.classList.contains('focused')) {
-        note = node
-      }
-    }
-    node = node.parentNode
-  }
-  if (note && measure) {
-    console.log(note.getBBox(), measure.getBBox())
-    measure.appendChild(makeSvgRect(0, 0, 200, 200, 'blue'))
-  }
-}
+import { INSPECTION, SELECTION } from './constants'
 
 export const noteCoordinates = note => ({
   x: note.getElementsByTagName('use')[0].x.animVal.value + 140,
@@ -59,39 +27,11 @@ export const drawBeat = (beat, mode) => {
   beat.referenceNote.append(anchor)
 }
 
-export const getMeasure = node => {
-  if (node.classList.contains('measure')) return node
-  if (node.parentNode) return getMeasure(node.parentNode)
-}
+export const getMeasure = node =>
+  node.classList && node.classList.contains('measure') ? node : node.parentNode && getMeasure(node.parentNode)
 
-export const getNodeNote = e => {
-  let mouseNode = null
-  let noteNode = null
-
-  switch (e.target.tagName) {
-    case 'tspan':
-    case 'use':
-      let parentNode = e.target.parentNode
-      while (
-        parentNode.classList &&
-        !parentNode.classList.contains('note') &&
-        !parentNode.classList.contains('label')
-      ) {
-        parentNode = parentNode.parentNode
-      }
-      if (parentNode.classList && parentNode.classList.contains('note')) {
-        mouseNode = e.target
-        noteNode = parentNode
-      }
-      break
-    default:
-      break
-  }
-
-  if (mouseNode && noteNode) {
-    return { mouseNode, noteNode }
-  } else return null
-}
+export const getNote = node =>
+  node.classList && node.classList.contains('note') ? node : node.parentNode && getNote(node.parentNode)
 
 export const addInspectionStyle = element => {
   if (element.referenceNote && !document.getElementById(element.id)) drawBeat(element, INSPECTION)

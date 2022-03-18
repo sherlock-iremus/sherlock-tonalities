@@ -6,14 +6,12 @@ import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
 import {
   createVerovio,
-  getNodeNote,
-  drawVerticalities,
   load,
   addInspectionStyle,
   removeInspectionStyle,
   addSelectionStyle,
   removeSelectionStyle,
-  drawBeat,
+  getNote,
 } from './verovioHelpers'
 import {
   containerStyle,
@@ -101,25 +99,25 @@ const MeiViewer = ({
   }
 
   const handleMouseOver = e => {
-    const n = getNodeNote(e)
-    if (n) n.noteNode.classList.add('focused')
+    const n = getNote(e.target)
+    if (n) n.classList.add('focused')
   }
 
   const handleMouseLeave = e => {
-    const n = getNodeNote(e)
-    if (n) n.noteNode.classList.remove('focused')
+    const n = getNote(e.target)
+    if (n) n.classList.remove('focused')
   }
 
   const handleClick = e => {
-    const n = getNodeNote(e)
+    const n = getNote(e.target)
     if (n) {
-      if (e.ctrlKey) return setRightClickedNoteId(n.noteNode.id)
+      if (e.ctrlKey) return setRightClickedNoteId(n.id)
       switch (mode) {
         case INSPECTION:
-          _setInspectedElement(n.noteNode)
+          _setInspectedElement(n)
           break
         case SELECTION:
-          _setSelection(n.noteNode)
+          _setSelection(n)
           break
       }
     }
