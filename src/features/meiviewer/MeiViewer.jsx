@@ -43,23 +43,11 @@ const MeiViewer = ({
   const [selection, setSelection] = useState([])
   const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
-  const [meiTree, setMeiTree] = useState(null)
 
   const sparql = useCountTriplesQuery()
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
   })
-
-  const fetchMei = async () => {
-    try {
-      let response = await fetch(meiUri)
-      let data = await response.text()
-      const parser = new DOMParser()
-      setMeiTree(parser.parseFromString(data, 'application/xml'))
-    } catch (e) {
-      console.error(e)
-    }
-  }
 
   useEffect(() => {
     createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
