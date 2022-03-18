@@ -99,7 +99,7 @@ export const addInspectionStyle = element => {
 }
 
 export const removeInspectionStyle = element => {
-  if (element.referenceNote) document.getElementById(element.id).remove()
+  if (element.referenceNote && document.getElementById(element.id)) document.getElementById(element.id).remove()
   element.classList ? element.classList.remove('inspected') : element.selection.forEach(e => removeInspectionStyle(e))
 }
 
@@ -109,7 +109,7 @@ export const addSelectionStyle = element => {
 }
 
 export const removeSelectionStyle = element => {
-  if (element.referenceNote) document.getElementById(element.id).remove()
+  if (element.referenceNote && document.getElementById(element.id)) document.getElementById(element.id).remove()
   element.classList ? element.classList.remove('selected') : element.selection.forEach(e => removeSelectionStyle(e))
 }
 
