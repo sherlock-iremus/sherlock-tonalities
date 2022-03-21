@@ -36,6 +36,19 @@ export const verovioStyle = css`
     .vrv-ui-btn-view-selector {
       visibility: hidden;
     }
+    .vrv-ui-separator {
+      visibility: hidden;
+    }
+    .vrv-ui-btn-previous {
+      visibility: hidden;
+    }
+    .vrv-ui-btn-next {
+      visibility: hidden;
+    }
+    .vrv-ui-btn-group {
+      display:flex;
+      justify-content: flex-end;
+    }
   }
 
   .vrv-ui-views {
