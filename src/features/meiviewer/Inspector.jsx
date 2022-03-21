@@ -1,6 +1,8 @@
 import { TreeItem } from '@mui/lab'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress, IconButton } from '@mui/material'
 import { useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
+import { rowStyle } from './mei.css'
+import { Close } from '@mui/icons-material'
 
 export const Inspector = props => {
   const noteInfo = useGetNoteInfoQuery(`${props.scoreIri}_${props.inspectedElement.id}`, {
@@ -54,7 +56,13 @@ export const Inspector = props => {
     return <TreeItem nodeId={props.inspectedElement.id} label={props.inspectedElement.id} />
   else if (noteInfo.isSuccess)
     // inspect a note
-    return <TreeItem nodeId={props.inspectedElement.id} label={getNoteLabel()} />
-  
+    return (
+      <TreeItem nodeId={props.inspectedElement.id} label={getNoteLabel()} css={rowStyle}>
+        <IconButton onClick={props.onClickRemove}>
+          <Close />
+        </IconButton>
+      </TreeItem>
+    )
+
   return <CircularProgress />
 }

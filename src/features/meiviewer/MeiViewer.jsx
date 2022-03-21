@@ -26,7 +26,7 @@ import {
   COLOR_INSPECTED,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight, BeachAccessTwoTone } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
 import { useCountTriplesQuery } from '../../app/services/sparqlLocal'
@@ -35,7 +35,7 @@ import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 window.verovioCallback = load
 
 const MeiViewer = ({
-  meiUri = 'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei',
+  meiUrl = 'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei',
   scoreIri = 'http://data-iremus.huma-num.fr/id/e2492d45-b068-4954-8781-9d5653deb8f5',
 }) => {
   const [mode, setMode] = useState(INSPECTION)
@@ -51,7 +51,7 @@ const MeiViewer = ({
   })
 
   useEffect(() => {
-    createVerovio(meiUri) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
+    createVerovio(meiUrl) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
   }, [])
 
   const _setInspectedElement = element => {
@@ -189,14 +189,9 @@ const MeiViewer = ({
             {!selection.length && <div css={noDataStyle}>Aucun élément ajouté, commencez par en sélectionner</div>}
             <ul>
               {selection.map(e => (
-                <li key={e.id}>
-                  <div css={rowStyle}>
-                    {e.id}
-                    <IconButton onClick={() => _setSelection(e)}>
-                      <Close />
-                    </IconButton>
-                  </div>
-                </li>
+                <TreeView>
+                  <Inspector key={e.id} inspectedElement={e} scoreIri={scoreIri} onClickRemove={() =>  _setSelection(e)} />
+                </TreeView>
               ))}
             </ul>
             <div css={flexEndStyle}>
