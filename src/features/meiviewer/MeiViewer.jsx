@@ -29,7 +29,7 @@ import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight, BeachAccessTwoTone } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
-import { useCountTriplesQuery, useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
+import { useCountTriplesQuery } from '../../app/services/sparqlLocal'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 
 window.verovioCallback = load
@@ -45,9 +45,6 @@ const MeiViewer = ({
   const [scoreSelections, setScoreSelections] = useState([])
 
   const sparql = useCountTriplesQuery()
-  const noteInfo = useGetNoteInfoQuery(`${scoreIri}_${inspectedElement && inspectedElement.id}`, {
-    skip: !inspectedElement || inspectedElement.referenceNote,
-  })
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -60,39 +57,6 @@ const MeiViewer = ({
   const _setInspectedElement = element => {
     if (inspectedElement) removeInspectionStyle(inspectedElement)
     setInspectedElement(inspectedElement !== element ? element : null)
-  }
-
-  const getNoteLabel = () => {
-    const {
-      data: {
-        results: {
-          bindings: [
-            {
-              pname: { value: pname },
-              oct: { value: oct },
-              accid,
-            },
-          ],
-        },
-      },
-    } = noteInfo
-
-    let alteration = ''
-    if (accid) {
-      switch (accid.value) {
-        case 'f':
-          alteration = '♭'
-          break
-        case 's':
-          alteration = '#'
-          break
-        case 'n':
-          alteration = '♮'
-          break
-      }
-    }
-
-    return pname.toUpperCase() + oct + alteration
   }
 
   const _setSelection = element => {
@@ -209,9 +173,9 @@ const MeiViewer = ({
           <div>
             {verticalityData.isSuccess && !verticalityData.isFetching && _setInspectedElement(getVerticalityElement())}
             <h4>Inspection d'élément</h4>
-            {inspectedElement && noteInfo.isSuccess ? (
+            {inspectedElement ? (
               <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
-                <Inspector inspectedElement={inspectedElement} label={getNoteLabel()} />
+                <Inspector inspectedElement={inspectedElement} scoreIri={scoreIri} />
               </TreeView>
             ) : (
               <div css={noDataStyle}>Aucun élément à inspecter, commencez par en sélectionner un</div>
