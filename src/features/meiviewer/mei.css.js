@@ -51,10 +51,6 @@ export const verovioStyle = css`
     }
   }
 
-  .vrv-ui-views {
-    overflow-x: hidden !important;
-  }
-
   .focused {
     fill: ${COLOR_FOCUSED};
     stroke: ${COLOR_FOCUSED};
