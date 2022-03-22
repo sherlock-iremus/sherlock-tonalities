@@ -1,7 +1,7 @@
 import { TreeItem } from '@mui/lab'
 import { CircularProgress, IconButton } from '@mui/material'
 import { useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'
 import { Close } from '@mui/icons-material'
 
 const CustomizedTreeItem = styled(TreeItem)`
@@ -52,7 +52,7 @@ export const Inspector = props => {
   }
 
   if (props.inspectedElement.selection)
-    // inspect a selection
+    // element is a selection
     return (
       <TreeItem nodeId={props.inspectedElement.id} label={props.inspectedElement.id}>
         {props.inspectedElement.selection.map(e => (
@@ -61,10 +61,10 @@ export const Inspector = props => {
       </TreeItem>
     )
   else if (props.inspectedElement.referenceNote)
-    // inspect a verticality
+    // element is a verticality
     return <TreeItem nodeId={props.inspectedElement.id} label={props.inspectedElement.id} />
   else if (noteInfo.isSuccess)
-    // inspect a note
+    // element is a note
     return (
       <CustomizedTreeItem
         nodeId={props.inspectedElement.id}

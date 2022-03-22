@@ -89,7 +89,6 @@ export const panelStyle = theme => css`
   font-family: 'Roboto';
   border-left: 1px solid lightgray;
   width: 30%;
-  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: between;
