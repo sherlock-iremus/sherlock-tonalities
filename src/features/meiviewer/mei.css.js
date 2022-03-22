@@ -5,6 +5,21 @@ export const COLOR_SELECTED = 'blue'
 export const COLOR_INSPECTED = 'red'
 export const COLOR_INSPECTED_LIGHT = '#ff8080'
 
+// standard classes
+
+export const centerStyle = theme => css`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+`
+
+export const flexEndStyle = theme => css`
+  display: flex;
+  justify-content: end;
+`
+
+// specific classes
+
 export const containerStyle = css`
   display: flex;
 
@@ -24,10 +39,6 @@ export const mainAreaStyle = css`
   width: 70%;
 `
 
-export const modeSelectorStyle = css`
-  border-bottom: 1px solid black;
-`
-
 export const verovioStyle = css`
   min-height: 100vh;
 
@@ -45,10 +56,6 @@ export const verovioStyle = css`
     .vrv-ui-btn-next {
       visibility: hidden;
     }
-    .vrv-ui-btn-group {
-      display:flex;
-      justify-content: flex-end;
-    }
   }
 
   .vrv-ui-doc-wrapper {
@@ -57,10 +64,6 @@ export const verovioStyle = css`
 
   .vrv-ui-view {
     width: 100% !important;
-  }
-
-  .vrv-ui-views {
-    height: 100% !important;
   }
 
   .focused {
@@ -80,10 +83,6 @@ export const verovioStyle = css`
     stroke: ${COLOR_INSPECTED};
     cursor: pointer;
   }
-
-  g.focused.old {
-    animation: 0.3s linear infinite condemed_blink_effect;
-  }
 `
 
 export const panelStyle = theme => css`
@@ -98,22 +97,6 @@ export const panelStyle = theme => css`
 
 export const topPanelStyle = theme => css`
   height: 50%;
-`
-
-export const toggleButtonStyle = theme => css`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-`
-export const rowStyle = theme => css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
-
-export const flexEndStyle = theme => css`
-  display: flex;
-  justify-content: end;
 `
 
 export const scoreSelectionStyle = theme => css`

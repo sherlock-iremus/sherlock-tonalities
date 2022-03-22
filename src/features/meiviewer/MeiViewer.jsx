@@ -18,13 +18,13 @@ import {
   mainAreaStyle,
   panelStyle,
   rowStyle,
-  toggleButtonStyle,
   verovioStyle,
   flexEndStyle,
   scoreSelectionStyle,
   noDataStyle,
   COLOR_INSPECTED,
   topPanelStyle,
+  centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
@@ -163,7 +163,7 @@ const MeiViewer = ({
       </div>
       <div css={panelStyle}>
         <div css={topPanelStyle}>
-          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={toggleButtonStyle} size="small">
+          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle} size="small">
             <ToggleButton value={INSPECTION}>
               <RemoveRedEye />
             </ToggleButton>
@@ -171,6 +171,7 @@ const MeiViewer = ({
               <Colorize />
             </ToggleButton>
           </ToggleButtonGroup>
+
           {mode === INSPECTION && (
             <div>
               {verticalityData.isSuccess &&
@@ -192,6 +193,7 @@ const MeiViewer = ({
               )}
             </div>
           )}
+
           {mode === SELECTION && (
             <div>
               {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
@@ -203,16 +205,16 @@ const MeiViewer = ({
                   No element was added to the current selection, start by picking elements on the score
                 </div>
               )}
-              {selection.map(e => (
-                <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+              <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+                {selection.map(e => (
                   <Inspector
                     key={e.id}
                     inspectedElement={e}
                     scoreIri={scoreIri}
                     onClickRemove={() => _setSelection(e)}
                   />
-                </TreeView>
-              ))}
+                ))}
+              </TreeView>
               <div css={flexEndStyle}>
                 <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length} size="small">
                   Create selection
@@ -222,42 +224,33 @@ const MeiViewer = ({
           )}
         </div>
 
-        <div className="bottom">
+        <div>
           <Typography variant="button" component="h2">
             Previous selections
           </Typography>
           {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
-          <ul>
+          <TreeView
+            onNodeSelect={(e, node) => (mode === SELECTION ? _setSelection(node) : _setInspectedElement(node))}
+            defaultCollapseIcon={<ExpandMore />}
+            defaultExpandIcon={<ChevronRight />}
+          >
             {scoreSelections.map(e => (
-              <li key={e.id}>
-                <div css={rowStyle}>
-                  <div
-                    onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
-                    css={
-                      mode === INSPECTION && inspectedElement === e
-                        ? { ...scoreSelectionStyle, color: COLOR_INSPECTED }
-                        : scoreSelectionStyle
-                    }
-                  >
-                    {e.id}
-                  </div>
-                  {mode === SELECTION && (
-                    <IconButton onClick={() => removeScoreSelections(e)}>
-                      <Close />
-                    </IconButton>
-                  )}
-                </div>
-              </li>
+              <Inspector
+                key={e.id}
+                inspectedElement={e}
+                scoreIri={scoreIri}
+                onClickRemove={() => removeScoreSelections(e)}
+              />
             ))}
-          </ul>
+          </TreeView>
           {sparql.isSuccess ? (
             sparql.data.results.bindings.map(binding => (
-              <div key={binding.triples.value} css={toggleButtonStyle}>
+              <div key={binding.triples.value} css={centerStyle}>
                 <Chip label={`There are ${binding.triples.value} triples on the local database`} />
               </div>
             ))
           ) : (
-            <div css={toggleButtonStyle}>
+            <div css={centerStyle}>
               <CircularProgress />
             </div>
           )}
