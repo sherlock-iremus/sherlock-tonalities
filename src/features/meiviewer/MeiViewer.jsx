@@ -1,7 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
 import { useEffect, useState } from 'react'
-import { Button, ToggleButton, ToggleButtonGroup, Chip, CircularProgress, Typography } from '@mui/material'
+import {
+  Button,
+  ToggleButton,
+  ToggleButtonGroup,
+  List,
+  ListSubheader,
+  Typography,
+  ListItemButton,
+  ListItemText,
+  ListItem,
+} from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
 import {
@@ -24,7 +34,7 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, ExpandMore, ChevronRight } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, ExpandMore, ChevronRight, Close } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
@@ -219,28 +229,24 @@ const MeiViewer = ({
         </div>
 
         <div>
-          <Typography variant="button" component="h2">
-            Previous selections
-          </Typography>
-          {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
-          <TreeView
-            onNodeSelect={(e, id) =>
-              mode === SELECTION
-                ? _setSelection(scoreSelections.find(e => e.id === id))
-                : _setInspectedElement(scoreSelections.find(e => e.id === id))
-            }
-            defaultCollapseIcon={<ExpandMore />}
-            defaultExpandIcon={<ChevronRight />}
-          >
+          <List subheader={<ListSubheader>Previous selections</ListSubheader>}>
             {scoreSelections.map(e => (
-              <Inspector
+              <ListItem
                 key={e.id}
-                inspectedElement={e}
-                scoreIri={scoreIri}
-                onClickRemove={() => removeScoreSelections(e)}
-              />
+                disablePadding
+                secondaryAction={<Close onClick={() => removeScoreSelections(e)} css={{ cursor: 'pointer' }} />}
+              >
+                <ListItemButton
+                  onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
+                  selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
+                  css={{ cursor: 'default' }}
+                >
+                  <ListItemText primary="Ma séléction" secondary={`${e.selection.length} elements`} />
+                </ListItemButton>
+              </ListItem>
             ))}
-          </TreeView>
+          </List>
+          {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
         </div>
       </div>
     </div>
