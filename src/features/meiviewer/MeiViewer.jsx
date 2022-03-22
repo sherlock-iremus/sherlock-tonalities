@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { useEffect, useState } from 'react'
-import { Button, IconButton, ToggleButton, ToggleButtonGroup, Chip, CircularProgress } from '@mui/material'
+import { Button, IconButton, ToggleButton, ToggleButtonGroup, Chip, CircularProgress, Typography } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
 import {
@@ -24,6 +24,7 @@ import {
   scoreSelectionStyle,
   noDataStyle,
   COLOR_INSPECTED,
+  topPanelStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
 import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
@@ -161,81 +162,106 @@ const MeiViewer = ({
         />
       </div>
       <div css={panelStyle}>
-        <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={toggleButtonStyle} size="small">
-          <ToggleButton value={INSPECTION}>
-            <RemoveRedEye />
-          </ToggleButton>
-          <ToggleButton value={SELECTION}>
-            <Colorize />
-          </ToggleButton>
-        </ToggleButtonGroup>
-        {mode === INSPECTION && (
-          <div>
-            {verticalityData.isSuccess && !verticalityData.isFetching && _setInspectedElement(getVerticalityElement())}
-            <h4>Inspection d'élément</h4>
-            {inspectedElement ? (
-              <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
-                <Inspector inspectedElement={inspectedElement} scoreIri={scoreIri} />
-              </TreeView>
-            ) : (
-              <div css={noDataStyle}>Aucun élément à inspecter, commencez par en sélectionner un</div>
-            )}
-          </div>
-        )}
-        {mode === SELECTION && (
-          <div>
-            {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
-            <h4>Sélection d'éléments</h4>
-            {!selection.length && <div css={noDataStyle}>Aucun élément ajouté, commencez par en sélectionner</div>}
-            <ul>
+        <div css={topPanelStyle}>
+          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={toggleButtonStyle} size="small">
+            <ToggleButton value={INSPECTION}>
+              <RemoveRedEye />
+            </ToggleButton>
+            <ToggleButton value={SELECTION}>
+              <Colorize />
+            </ToggleButton>
+          </ToggleButtonGroup>
+          {mode === INSPECTION && (
+            <div>
+              {verticalityData.isSuccess &&
+                !verticalityData.isFetching &&
+                _setInspectedElement(getVerticalityElement())}
+              <Typography variant="button" component="h2">
+                Inspection
+              </Typography>
+              {inspectedElement ? (
+                <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+                  <Inspector
+                    inspectedElement={inspectedElement}
+                    scoreIri={scoreIri}
+                    onClickRemove={() => _setInspectedElement(inspectedElement)}
+                  />
+                </TreeView>
+              ) : (
+                <div css={noDataStyle}>Nothing to inspect, start by picking an element on the score</div>
+              )}
+            </div>
+          )}
+          {mode === SELECTION && (
+            <div>
+              {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
+              <Typography variant="button" component="h2">
+                Selection
+              </Typography>
+              {!selection.length && (
+                <div css={noDataStyle}>
+                  No element was added to the current selection, start by picking elements on the score
+                </div>
+              )}
               {selection.map(e => (
-                <TreeView>
-                  <Inspector key={e.id} inspectedElement={e} scoreIri={scoreIri} onClickRemove={() =>  _setSelection(e)} />
+                <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
+                  <Inspector
+                    key={e.id}
+                    inspectedElement={e}
+                    scoreIri={scoreIri}
+                    onClickRemove={() => _setSelection(e)}
+                  />
                 </TreeView>
               ))}
-            </ul>
-            <div css={flexEndStyle}>
-              <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length} size="small">
-                Créer une sélection
-              </Button>
-            </div>
-          </div>
-        )}
-        <h4>Sélections créées</h4>
-        {!scoreSelections.length && <div css={noDataStyle}>Aucune sélection créée, commencez par en créer une</div>}
-        <ul>
-          {scoreSelections.map(e => (
-            <li key={e.id}>
-              <div css={rowStyle}>
-                <div
-                  onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
-                  css={
-                    mode === INSPECTION && inspectedElement === e
-                      ? { ...scoreSelectionStyle, color: COLOR_INSPECTED }
-                      : scoreSelectionStyle
-                  }
-                >
-                  {e.id}
-                </div>
-                {mode === SELECTION && (
-                  <IconButton onClick={() => removeScoreSelections(e)}>
-                    <Close />
-                  </IconButton>
-                )}
+              <div css={flexEndStyle}>
+                <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length} size="small">
+                  Create selection
+                </Button>
               </div>
-            </li>
-          ))}
-        </ul>
-        {sparql.isLoading ? (
-          <CircularProgress />
-        ) : (
-          !sparql.error &&
-          sparql.data.results.bindings.map(binding => (
-            <div key={binding.triples.value} css={toggleButtonStyle}>
-              <Chip label={`Il y a ${binding.triples.value} triplets sur la base locale !`} />
             </div>
-          ))
-        )}
+          )}
+        </div>
+
+        <div className="bottom">
+          <Typography variant="button" component="h2">
+            Previous selections
+          </Typography>
+          {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
+          <ul>
+            {scoreSelections.map(e => (
+              <li key={e.id}>
+                <div css={rowStyle}>
+                  <div
+                    onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
+                    css={
+                      mode === INSPECTION && inspectedElement === e
+                        ? { ...scoreSelectionStyle, color: COLOR_INSPECTED }
+                        : scoreSelectionStyle
+                    }
+                  >
+                    {e.id}
+                  </div>
+                  {mode === SELECTION && (
+                    <IconButton onClick={() => removeScoreSelections(e)}>
+                      <Close />
+                    </IconButton>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+          {sparql.isSuccess ? (
+            sparql.data.results.bindings.map(binding => (
+              <div key={binding.triples.value} css={toggleButtonStyle}>
+                <Chip label={`There are ${binding.triples.value} triples on the local database`} />
+              </div>
+            ))
+          ) : (
+            <div css={toggleButtonStyle}>
+              <CircularProgress />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

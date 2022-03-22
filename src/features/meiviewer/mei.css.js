@@ -51,6 +51,18 @@ export const verovioStyle = css`
     }
   }
 
+  .vrv-ui-doc-wrapper {
+    width: 100% !important;
+  }
+
+  .vrv-ui-view {
+    width: 100% !important;
+  }
+
+  .vrv-ui-views {
+    height: 100% !important;
+  }
+
   .focused {
     fill: ${COLOR_FOCUSED};
     stroke: ${COLOR_FOCUSED};
@@ -78,12 +90,20 @@ export const panelStyle = theme => css`
   font-family: 'Roboto';
   border-left: 1px solid lightgray;
   width: 30%;
-  padding: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: between;
+`
+
+export const topPanelStyle = theme => css`
+  height: 50%;
 `
 
 export const toggleButtonStyle = theme => css`
   display: flex;
   justify-content: center;
+  margin-bottom: 16px;
 `
 export const rowStyle = theme => css`
   display: flex;
@@ -105,6 +125,6 @@ export const scoreSelectionStyle = theme => css`
 
 export const noDataStyle = theme => css`
   text-align: center;
-  font-size: x-small;
+  font-size: small;
   color: grey;
 `
