@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { useEffect, useState } from 'react'
-import { Button, IconButton, ToggleButton, ToggleButtonGroup, Chip, CircularProgress, Typography } from '@mui/material'
+import { Button, ToggleButton, ToggleButtonGroup, Chip, CircularProgress, Typography } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
 import {
@@ -17,20 +17,16 @@ import {
   containerStyle,
   mainAreaStyle,
   panelStyle,
-  rowStyle,
   verovioStyle,
   flexEndStyle,
-  scoreSelectionStyle,
   noDataStyle,
-  COLOR_INSPECTED,
   topPanelStyle,
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, Close, ExpandMore, ChevronRight } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, ExpandMore, ChevronRight } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
-import { useCountTriplesQuery } from '../../app/services/sparqlLocal'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 
 window.verovioCallback = load
@@ -44,8 +40,6 @@ const MeiViewer = ({
   const [selection, setSelection] = useState([])
   const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
-
-  const sparql = useCountTriplesQuery()
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -230,7 +224,11 @@ const MeiViewer = ({
           </Typography>
           {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
           <TreeView
-            onNodeSelect={(e, node) => (mode === SELECTION ? _setSelection(node) : _setInspectedElement(node))}
+            onNodeSelect={(e, id) =>
+              mode === SELECTION
+                ? _setSelection(scoreSelections.find(e => e.id === id))
+                : _setInspectedElement(scoreSelections.find(e => e.id === id))
+            }
             defaultCollapseIcon={<ExpandMore />}
             defaultExpandIcon={<ChevronRight />}
           >
@@ -243,17 +241,6 @@ const MeiViewer = ({
               />
             ))}
           </TreeView>
-          {sparql.isSuccess ? (
-            sparql.data.results.bindings.map(binding => (
-              <div key={binding.triples.value} css={centerStyle}>
-                <Chip label={`There are ${binding.triples.value} triples on the local database`} />
-              </div>
-            ))
-          ) : (
-            <div css={centerStyle}>
-              <CircularProgress />
-            </div>
-          )}
         </div>
       </div>
     </div>

@@ -5,13 +5,6 @@ export const sparqlLocalEndpoint = createApi({
   reducerPath: "sparqlApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3030/tonalities" }),
   endpoints: (builder) => ({
-    countTriples: builder.query({
-      query: () => ({
-        url: "/sparql",
-        method: "POST",
-        body: new URLSearchParams({ query: 'SELECT (COUNT(?s) AS ?triples) WHERE { ?s ?p ?o }' }),
-      }),
-    }),
     getNotesOnFirstBeat: builder.query({
       query: noteIri => ({
         url: "/sparql",
@@ -31,4 +24,4 @@ export const sparqlLocalEndpoint = createApi({
 
 export default sparqlLocalEndpoint;
 
-export const { useCountTriplesQuery, useGetNotesOnFirstBeatQuery, useGetNoteInfoQuery } = sparqlLocalEndpoint;
+export const { useGetNotesOnFirstBeatQuery, useGetNoteInfoQuery } = sparqlLocalEndpoint;

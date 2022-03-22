@@ -99,13 +99,6 @@ export const topPanelStyle = theme => css`
   height: 50%;
 `
 
-export const scoreSelectionStyle = theme => css`
-  &:hover {
-    color: ${COLOR_FOCUSED};
-    cursor: pointer;
-  }
-`
-
 export const noDataStyle = theme => css`
   text-align: center;
   font-size: small;
