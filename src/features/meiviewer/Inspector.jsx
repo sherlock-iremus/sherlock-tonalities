@@ -1,8 +1,17 @@
 import { TreeItem } from '@mui/lab'
 import { CircularProgress, IconButton } from '@mui/material'
 import { useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
-import { rowStyle } from './mei.css'
+import { styled } from '@mui/material/styles';
 import { Close } from '@mui/icons-material'
+
+const CustomizedTreeItem = styled(TreeItem)`
+  & .MuiTreeItem-content {
+    cursor: default;
+    flex-direction: row-reverse;
+    & .MuiTreeItem-iconContainer {
+      cursor: pointer;
+  }
+`
 
 export const Inspector = props => {
   const noteInfo = useGetNoteInfoQuery(`${props.scoreIri}_${props.inspectedElement.id}`, {
@@ -57,12 +66,11 @@ export const Inspector = props => {
   else if (noteInfo.isSuccess)
     // inspect a note
     return (
-      <TreeItem nodeId={props.inspectedElement.id} label={getNoteLabel()} css={rowStyle}>
-        <IconButton onClick={props.onClickRemove}>
-          <Close />
-        </IconButton>
-      </TreeItem>
+      <CustomizedTreeItem
+        nodeId={props.inspectedElement.id}
+        label={getNoteLabel()}
+        icon={<Close onClick={props.onClickRemove} />}
+      />
     )
-
   return <CircularProgress />
 }
