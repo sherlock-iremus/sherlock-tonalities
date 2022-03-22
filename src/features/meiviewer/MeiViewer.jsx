@@ -11,6 +11,7 @@ import {
   ListItemButton,
   ListItemText,
   ListItem,
+  ListItemIcon,
 } from '@mui/material'
 import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
@@ -34,10 +35,11 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, ExpandMore, ChevronRight, Close } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, ExpandMore, ChevronRight, Close, Workspaces, Folder } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
+import { ScoreItem } from './ScoreItem'
 
 window.verovioCallback = load
 
@@ -167,7 +169,7 @@ const MeiViewer = ({
       </div>
       <div css={panelStyle}>
         <div css={topPanelStyle}>
-          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle} size="small">
+          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle}>
             <ToggleButton value={INSPECTION}>
               <RemoveRedEye />
             </ToggleButton>
@@ -181,20 +183,14 @@ const MeiViewer = ({
               {verticalityData.isSuccess &&
                 !verticalityData.isFetching &&
                 _setInspectedElement(getVerticalityElement())}
-              <Typography variant="button" component="h2">
-                Inspection
-              </Typography>
-              {inspectedElement ? (
-                <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
-                  <Inspector
-                    inspectedElement={inspectedElement}
-                    scoreIri={scoreIri}
-                    onClickRemove={() => _setInspectedElement(inspectedElement)}
-                  />
-                </TreeView>
-              ) : (
-                <div css={noDataStyle}>Nothing to inspect, start by picking an element on the score</div>
-              )}
+
+              <List subheader={<ListSubheader>Inspection</ListSubheader>}>
+                {inspectedElement ? (
+                  <ScoreItem item={inspectedElement} scoreIri={scoreIri} secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} />} />
+                ) : (
+                  <div css={noDataStyle}>Nothing to inspect, start by picking an element on the score</div>
+                )}
+              </List>
             </div>
           )}
 
@@ -241,7 +237,10 @@ const MeiViewer = ({
                   selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
                   css={{ cursor: 'default' }}
                 >
-                  <ListItemText primary="Ma séléction" secondary={`${e.selection.length} elements`} />
+                  <ListItemIcon>
+                    <Folder />
+                  </ListItemIcon>
+                  <ListItemText primary="My amazing selection" secondary={`${e.selection.length} elements`} />
                 </ListItemButton>
               </ListItem>
             ))}
