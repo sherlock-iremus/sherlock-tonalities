@@ -195,7 +195,7 @@ const MeiViewer = ({
                     secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} />}
                   />
                 ) : (
-                  <div css={noDataStyle}>Nothing to inspect, start by picking an element on the score</div>
+                  <div css={noDataStyle}>Nothing to inspect, start by picking an element on the score or from previous selections</div>
                 )}
               </List>
             </div>
@@ -216,7 +216,7 @@ const MeiViewer = ({
                   ))
                 ) : (
                   <div css={noDataStyle}>
-                    No element was added to the current selection, start by picking elements on the score
+                    No element was added to the current selection, start by picking elements on the score or from previous selections
                   </div>
                 )}
               </List>
