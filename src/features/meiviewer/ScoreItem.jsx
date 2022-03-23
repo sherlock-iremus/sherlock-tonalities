@@ -47,7 +47,7 @@ export const ScoreItem = props => {
     return (
       <div>
         <ListItem disablePadding secondaryAction={props.secondaryAction}>
-          <ListItemButton onClick={() => setIsOpen(!isOpen)}>
+          <ListItemButton onClick={() => setIsOpen(!isOpen)} sx={{ cursor: 'default' }}>
             <ListItemIcon>{props.item.referenceNote ? <QueueMusic /> : <Sell />}</ListItemIcon>
             {isOpen ? <ExpandMore sx={{ pr: 2 }} /> : <ChevronRight sx={{ pr: 2 }} />}
             <ListItemText
@@ -69,7 +69,7 @@ export const ScoreItem = props => {
   else if (noteInfo.isSuccess)
     return (
       <ListItem disablePadding secondaryAction={props.secondaryAction}>
-        <ListItemButton>
+        <ListItemButton sx={{ cursor: 'default' }}>
           <ListItemIcon>
             <MusicNote />
           </ListItemIcon>
@@ -79,7 +79,7 @@ export const ScoreItem = props => {
     )
   return (
     <ListItem disablePadding>
-      <ListItemButton>
+      <ListItemButton sx={{ cursor: 'default' }}>
         <ListItemIcon>
           <Skeleton variant="circular" width={40} height={40} />
         </ListItemIcon>

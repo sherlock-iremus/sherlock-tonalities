@@ -196,7 +196,7 @@ const MeiViewer = ({
                   <ScoreItem
                     item={inspectedElement}
                     scoreIri={scoreIri}
-                    secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} />}
+                    secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />}
                   />
                 ) : (
                   <div css={noDataStyle}>
@@ -217,7 +217,7 @@ const MeiViewer = ({
                       key={e.id}
                       item={e}
                       scoreIri={scoreIri}
-                      secondaryAction={<Close onClick={() => _setSelection(e)} />}
+                      secondaryAction={<Close onClick={() => _setSelection(e)} css={{ cursor: 'pointer' }} />}
                     />
                   ))
                 ) : (
