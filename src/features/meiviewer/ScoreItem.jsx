@@ -1,6 +1,6 @@
 import { ListItem, ListItemButton, ListItemText, ListItemIcon, Collapse, List } from '@mui/material'
 import { useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
-import { MusicNote, ExpandMore, ChevronRight } from '@mui/icons-material'
+import { MusicNote, ExpandMore, ChevronRight, Sell, QueueMusic } from '@mui/icons-material'
 import { useState } from 'react'
 
 export const ScoreItem = props => {
@@ -43,38 +43,46 @@ export const ScoreItem = props => {
   }
 
   if (props.item.selection)
-    // element is a selection
+    // element is a selection or a verticality
     return (
       <div>
         <ListItem disablePadding secondaryAction={props.secondaryAction}>
           <ListItemButton onClick={() => setIsOpen(!isOpen)}>
-            <ListItemIcon>{isOpen ? <ExpandMore /> : <ChevronRight />}</ListItemIcon>
-            <ListItemText primary={props.item.id} />
+            <ListItemIcon>{props.item.referenceNote ? <QueueMusic /> : <Sell />}</ListItemIcon>
+            {isOpen ? <ExpandMore /> : <ChevronRight />}
+            <ListItemText
+              primary={props.item.referenceNote ? 'A verticality' : 'My amazing selection'}
+              secondary={props.item.id}
+            />
           </ListItemButton>
         </ListItem>
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List sx={{ pl: 4 }} dense>
             {props.item.selection.map(item => (
-              <ScoreItem key={item.id} item={item} />
+              <ScoreItem key={item.id} item={item} scoreIri={props.scoreIri} />
             ))}
           </List>
         </Collapse>
       </div>
     )
-  else if (props.item.referenceNote)
-    // element is a verticality
-    return <ListItem />
+  // element is a note
   else if (noteInfo.isSuccess)
-    // element is a note
     return (
       <ListItem disablePadding secondaryAction={props.secondaryAction}>
         <ListItemButton>
           <ListItemIcon>
             <MusicNote />
           </ListItemIcon>
-          <ListItemText primary="test" secondary={props.item.id} />
+          <ListItemText primary={getNoteLabel()} secondary={props.item.id} />
         </ListItemButton>
       </ListItem>
     )
-  return <div />
+  return (
+    <ListItem disablePadding>
+      <ListItemIcon>
+        <MusicNote />
+      </ListItemIcon>
+      <ListItemText primary="..." />
+    </ListItem>
+  )
 }

@@ -35,7 +35,7 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, ExpandMore, ChevronRight, Close, Workspaces, Folder } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, ExpandMore, ChevronRight, Close, Workspaces, Sell } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { Inspector } from './Inspector'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
@@ -238,7 +238,7 @@ const MeiViewer = ({
                   css={{ cursor: 'default' }}
                 >
                   <ListItemIcon>
-                    <Folder />
+                    <Sell />
                   </ListItemIcon>
                   <ListItemText primary="My amazing selection" secondary={`${e.selection.length} elements`} />
                 </ListItemButton>
