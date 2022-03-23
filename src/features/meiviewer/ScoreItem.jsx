@@ -1,4 +1,4 @@
-import { ListItem, ListItemButton, ListItemText, ListItemIcon, Collapse, List } from '@mui/material'
+import { ListItem, ListItemButton, ListItemText, ListItemIcon, Collapse, List, Skeleton } from '@mui/material'
 import { useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
 import { MusicNote, ExpandMore, ChevronRight, Sell, QueueMusic } from '@mui/icons-material'
 import { useState } from 'react'
@@ -79,10 +79,15 @@ export const ScoreItem = props => {
     )
   return (
     <ListItem disablePadding>
-      <ListItemIcon>
-        <MusicNote />
-      </ListItemIcon>
-      <ListItemText primary="..." />
+      <ListItemButton>
+        <ListItemIcon>
+          <Skeleton variant="circular" width={40} height={40} />
+        </ListItemIcon>
+        <ListItemText
+          primary={<Skeleton width="75%" heigth="100%" />}
+          secondary={<Skeleton width="50%" heigth="100%" />}
+        />
+      </ListItemButton>
     </ListItem>
   )
 }
