@@ -196,7 +196,9 @@ const MeiViewer = ({
                   <ScoreItem
                     item={inspectedElement}
                     scoreIri={scoreIri}
-                    secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />}
+                    secondaryAction={
+                      <Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />
+                    }
                   />
                 ) : (
                   <div css={noDataStyle}>
@@ -231,12 +233,6 @@ const MeiViewer = ({
                 <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
                   Create selection
                 </Button>
-                <Snackbar
-                  open={createConfirmation}
-                  autoHideDuration={6000}
-                  message="The selection was successfully created"
-                  onClose={() => setCreateConfirmation(false)}
-                />
               </div>
             </div>
           )}
@@ -269,6 +265,12 @@ const MeiViewer = ({
             autoHideDuration={6000}
             message="The selection was successfully deleted"
             onClose={() => setDeleteConfirmation(false)}
+          />
+          <Snackbar
+            open={createConfirmation}
+            autoHideDuration={6000}
+            message="The selection was successfully created"
+            onClose={() => setCreateConfirmation(false)}
           />
         </div>
       </div>
