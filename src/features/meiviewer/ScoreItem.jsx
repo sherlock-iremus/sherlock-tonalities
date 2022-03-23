@@ -49,7 +49,7 @@ export const ScoreItem = props => {
         <ListItem disablePadding secondaryAction={props.secondaryAction}>
           <ListItemButton onClick={() => setIsOpen(!isOpen)}>
             <ListItemIcon>{props.item.referenceNote ? <QueueMusic /> : <Sell />}</ListItemIcon>
-            {isOpen ? <ExpandMore /> : <ChevronRight />}
+            {isOpen ? <ExpandMore sx={{ pr: 2 }} /> : <ChevronRight sx={{ pr: 2 }} />}
             <ListItemText
               primary={props.item.referenceNote ? 'A verticality' : 'My amazing selection'}
               secondary={props.item.id}
@@ -57,7 +57,7 @@ export const ScoreItem = props => {
           </ListItemButton>
         </ListItem>
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
-          <List sx={{ pl: 4 }} dense>
+          <List sx={{ pl: 4 }} dense disablePadding>
             {props.item.selection.map(item => (
               <ScoreItem key={item.id} item={item} scoreIri={props.scoreIri} />
             ))}
