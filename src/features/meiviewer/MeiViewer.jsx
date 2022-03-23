@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemIcon,
   Snackbar,
+  Tooltip,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -52,7 +53,6 @@ const MeiViewer = ({
   const [scoreSelections, setScoreSelections] = useState([])
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [createConfirmation, setCreateConfirmation] = useState(false)
-
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -173,10 +173,14 @@ const MeiViewer = ({
       <div css={panelStyle}>
         <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle}>
           <ToggleButton value={INSPECTION}>
-            <RemoveRedEye />
+            <Tooltip title="Inspection mode">
+              <RemoveRedEye />
+            </Tooltip>
           </ToggleButton>
           <ToggleButton value={SELECTION}>
-            <Colorize />
+            <Tooltip title="Selection mode">
+              <Colorize />
+            </Tooltip>
           </ToggleButton>
         </ToggleButtonGroup>
 
@@ -195,7 +199,9 @@ const MeiViewer = ({
                     secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} />}
                   />
                 ) : (
-                  <div css={noDataStyle}>Nothing to inspect, start by picking an element on the score or from previous selections</div>
+                  <div css={noDataStyle}>
+                    Nothing to inspect, start by picking an element on the score or from previous selections
+                  </div>
                 )}
               </List>
             </div>
@@ -216,7 +222,8 @@ const MeiViewer = ({
                   ))
                 ) : (
                   <div css={noDataStyle}>
-                    No element was added to the current selection, start by picking elements on the score or from previous selections
+                    No element was added to the current selection, start by picking elements on the score or from
+                    previous selections
                   </div>
                 )}
               </List>
@@ -224,7 +231,12 @@ const MeiViewer = ({
                 <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
                   Create selection
                 </Button>
-                <Snackbar open={createConfirmation} autoHideDuration={6000} message='The selection was successfully created' onClose={() => setCreateConfirmation(false)} />
+                <Snackbar
+                  open={createConfirmation}
+                  autoHideDuration={6000}
+                  message="The selection was successfully created"
+                  onClose={() => setCreateConfirmation(false)}
+                />
               </div>
             </div>
           )}
@@ -252,7 +264,12 @@ const MeiViewer = ({
             ))}
           </List>
           {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
-          <Snackbar open={deleteConfirmation} autoHideDuration={6000} message='The selection was successfully deleted' onClose={() => setDeleteConfirmation(false)} />
+          <Snackbar
+            open={deleteConfirmation}
+            autoHideDuration={6000}
+            message="The selection was successfully deleted"
+            onClose={() => setDeleteConfirmation(false)}
+          />
         </div>
       </div>
     </div>
