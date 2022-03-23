@@ -184,95 +184,89 @@ const MeiViewer = ({
           </ToggleButton>
         </ToggleButtonGroup>
 
-        <div css={topPanelStyle}>
-          {mode === INSPECTION && (
-            <div>
-              {verticalityData.isSuccess &&
-                !verticalityData.isFetching &&
-                _setInspectedElement(getVerticalityElement())}
+        {mode === INSPECTION && (
+          <div css={topPanelStyle}>
+            {verticalityData.isSuccess && !verticalityData.isFetching && _setInspectedElement(getVerticalityElement())}
+            <List subheader={<ListSubheader>Current inspection</ListSubheader>}>
+              {inspectedElement ? (
+                <ScoreItem
+                  item={inspectedElement}
+                  scoreIri={scoreIri}
+                  secondaryAction={
+                    <Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />
+                  }
+                />
+              ) : (
+                <div css={noDataStyle}>
+                  Nothing to inspect, start by picking an element on the score or from previous selections
+                </div>
+              )}
+            </List>
+          </div>
+        )}
 
-              <List subheader={<ListSubheader>Current inspection</ListSubheader>}>
-                {inspectedElement ? (
+        {mode === SELECTION && (
+          <div css={topPanelStyle}>
+            {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
+            <List subheader={<ListSubheader>Current selection</ListSubheader>}>
+              {selection.length ? (
+                selection.map(e => (
                   <ScoreItem
-                    item={inspectedElement}
+                    key={e.id}
+                    item={e}
                     scoreIri={scoreIri}
-                    secondaryAction={
-                      <Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />
-                    }
+                    secondaryAction={<Close onClick={() => _setSelection(e)} css={{ cursor: 'pointer' }} />}
                   />
-                ) : (
-                  <div css={noDataStyle}>
-                    Nothing to inspect, start by picking an element on the score or from previous selections
-                  </div>
-                )}
-              </List>
+                ))
+              ) : (
+                <div css={noDataStyle}>
+                  No element was added to the current selection, start by picking elements on the score or from previous
+                  selections
+                </div>
+              )}
+            </List>
+            <div css={flexEndStyle}>
+              <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
+                Create selection
+              </Button>
             </div>
-          )}
+          </div>
+        )}
 
-          {mode === SELECTION && (
-            <div>
-              {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
-              <List subheader={<ListSubheader>Current selection</ListSubheader>}>
-                {selection.length ? (
-                  selection.map(e => (
-                    <ScoreItem
-                      key={e.id}
-                      item={e}
-                      scoreIri={scoreIri}
-                      secondaryAction={<Close onClick={() => _setSelection(e)} css={{ cursor: 'pointer' }} />}
-                    />
-                  ))
-                ) : (
-                  <div css={noDataStyle}>
-                    No element was added to the current selection, start by picking elements on the score or from
-                    previous selections
-                  </div>
-                )}
-              </List>
-              <div css={flexEndStyle}>
-                <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
-                  Create selection
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div>
-          <List subheader={<ListSubheader>Previous selections</ListSubheader>}>
-            {scoreSelections.map(e => (
-              <ListItem
-                key={e.id}
-                disablePadding
-                secondaryAction={<Close onClick={() => removeScoreSelections(e)} css={{ cursor: 'pointer' }} />}
+        <List subheader={<ListSubheader>Previous selections</ListSubheader>}>
+          {scoreSelections.map(e => (
+            <ListItem
+              key={e.id}
+              disablePadding
+              secondaryAction={<Close onClick={() => removeScoreSelections(e)} css={{ cursor: 'pointer' }} />}
+            >
+              <ListItemButton
+                onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
+                selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
+                css={{ cursor: 'default' }}
               >
-                <ListItemButton
-                  onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
-                  selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
-                  css={{ cursor: 'default' }}
-                >
-                  <ListItemIcon>
-                    <Sell />
-                  </ListItemIcon>
-                  <ListItemText primary="My amazing selection" secondary={`${e.selection.length} elements`} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
-          <Snackbar
-            open={deleteConfirmation}
-            autoHideDuration={6000}
-            message="The selection was successfully deleted"
-            onClose={() => setDeleteConfirmation(false)}
-          />
-          <Snackbar
-            open={createConfirmation}
-            autoHideDuration={6000}
-            message="The selection was successfully created"
-            onClose={() => setCreateConfirmation(false)}
-          />
-        </div>
+                <ListItemIcon>
+                  <Sell />
+                </ListItemIcon>
+                <ListItemText primary="My amazing selection" secondary={`${e.selection.length} elements`} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
+
+        <Snackbar
+          open={deleteConfirmation}
+          autoHideDuration={6000}
+          message="The selection was successfully deleted"
+          onClose={() => setDeleteConfirmation(false)}
+        />
+        <Snackbar
+          open={createConfirmation}
+          autoHideDuration={6000}
+          message="The selection was successfully created"
+          onClose={() => setCreateConfirmation(false)}
+        />
       </div>
     </div>
   )
