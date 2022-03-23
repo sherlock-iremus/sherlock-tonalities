@@ -11,6 +11,7 @@ import {
   ListItemText,
   ListItem,
   ListItemIcon,
+  Snackbar,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -49,6 +50,9 @@ const MeiViewer = ({
   const [selection, setSelection] = useState([])
   const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false)
+  const [createConfirmation, setCreateConfirmation] = useState(false)
+
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -83,12 +87,14 @@ const MeiViewer = ({
     setScoreSelections([...scoreSelections, { id: uuid(), selection: newSelection }])
     removeSelectionStyle({ selection: selection })
     setSelection([])
+    setCreateConfirmation(true)
   }
 
   const removeScoreSelections = s => {
     if (selection.includes(s)) setSelection(selection.filter(e => e !== s))
     if (inspectedElement === s) setInspectedElement(null)
     setScoreSelections(scoreSelections.filter(e => e !== s))
+    setDeleteConfirmation(true)
   }
 
   const handleMouseOver = e => {
@@ -181,7 +187,7 @@ const MeiViewer = ({
                 !verticalityData.isFetching &&
                 _setInspectedElement(getVerticalityElement())}
 
-              <List subheader={<ListSubheader>Inspection</ListSubheader>}>
+              <List subheader={<ListSubheader>Current inspection</ListSubheader>}>
                 {inspectedElement ? (
                   <ScoreItem
                     item={inspectedElement}
@@ -198,7 +204,7 @@ const MeiViewer = ({
           {mode === SELECTION && (
             <div>
               {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
-              <List subheader={<ListSubheader>Selection</ListSubheader>}>
+              <List subheader={<ListSubheader>Current selection</ListSubheader>}>
                 {selection.length ? (
                   selection.map(e => (
                     <ScoreItem
@@ -218,6 +224,7 @@ const MeiViewer = ({
                 <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
                   Create selection
                 </Button>
+                <Snackbar open={createConfirmation} autoHideDuration={6000} message='The selection was successfully created' onClose={() => setCreateConfirmation(false)} />
               </div>
             </div>
           )}
@@ -245,6 +252,7 @@ const MeiViewer = ({
             ))}
           </List>
           {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
+          <Snackbar open={deleteConfirmation} autoHideDuration={6000} message='The selection was successfully deleted' onClose={() => setDeleteConfirmation(false)} />
         </div>
       </div>
     </div>
