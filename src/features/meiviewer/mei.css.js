@@ -10,7 +10,7 @@ export const COLOR_INSPECTED_LIGHT = '#ff8080'
 export const centerStyle = theme => css`
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin: 16px;
 `
 
 export const flexEndStyle = theme => css`
@@ -96,10 +96,12 @@ export const panelStyle = theme => css`
 
 export const topPanelStyle = theme => css`
   height: 50%;
+  overflow-y: scroll;
 `
 
 export const noDataStyle = theme => css`
   text-align: center;
   font-size: small;
   color: grey;
+  margin: 16px;
 `

@@ -7,13 +7,11 @@ import {
   ToggleButtonGroup,
   List,
   ListSubheader,
-  Typography,
   ListItemButton,
   ListItemText,
   ListItem,
   ListItemIcon,
 } from '@mui/material'
-import { TreeView } from '@mui/lab'
 import { v4 as uuid } from 'uuid'
 import {
   createVerovio,
@@ -35,9 +33,8 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, ExpandMore, ChevronRight, Close, Workspaces, Sell } from '@mui/icons-material'
+import { Colorize, RemoveRedEye, Close, Sell } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
-import { Inspector } from './Inspector'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
 
@@ -168,16 +165,16 @@ const MeiViewer = ({
         />
       </div>
       <div css={panelStyle}>
-        <div css={topPanelStyle}>
-          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle}>
-            <ToggleButton value={INSPECTION}>
-              <RemoveRedEye />
-            </ToggleButton>
-            <ToggleButton value={SELECTION}>
-              <Colorize />
-            </ToggleButton>
-          </ToggleButtonGroup>
+        <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle}>
+          <ToggleButton value={INSPECTION}>
+            <RemoveRedEye />
+          </ToggleButton>
+          <ToggleButton value={SELECTION}>
+            <Colorize />
+          </ToggleButton>
+        </ToggleButtonGroup>
 
+        <div css={topPanelStyle}>
           {mode === INSPECTION && (
             <div>
               {verticalityData.isSuccess &&
@@ -186,7 +183,11 @@ const MeiViewer = ({
 
               <List subheader={<ListSubheader>Inspection</ListSubheader>}>
                 {inspectedElement ? (
-                  <ScoreItem item={inspectedElement} scoreIri={scoreIri} secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} />} />
+                  <ScoreItem
+                    item={inspectedElement}
+                    scoreIri={scoreIri}
+                    secondaryAction={<Close onClick={() => _setInspectedElement(inspectedElement)} />}
+                  />
                 ) : (
                   <div css={noDataStyle}>Nothing to inspect, start by picking an element on the score</div>
                 )}
@@ -197,26 +198,24 @@ const MeiViewer = ({
           {mode === SELECTION && (
             <div>
               {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
-              <Typography variant="button" component="h2">
-                Selection
-              </Typography>
-              {!selection.length && (
-                <div css={noDataStyle}>
-                  No element was added to the current selection, start by picking elements on the score
-                </div>
-              )}
-              <TreeView defaultCollapseIcon={<ExpandMore />} defaultExpandIcon={<ChevronRight />}>
-                {selection.map(e => (
-                  <Inspector
-                    key={e.id}
-                    inspectedElement={e}
-                    scoreIri={scoreIri}
-                    onClickRemove={() => _setSelection(e)}
-                  />
-                ))}
-              </TreeView>
+              <List subheader={<ListSubheader>Selection</ListSubheader>}>
+                {selection.length ? (
+                  selection.map(e => (
+                    <ScoreItem
+                      key={e.id}
+                      item={e}
+                      scoreIri={scoreIri}
+                      secondaryAction={<Close onClick={() => _setSelection(e)} />}
+                    />
+                  ))
+                ) : (
+                  <div css={noDataStyle}>
+                    No element was added to the current selection, start by picking elements on the score
+                  </div>
+                )}
+              </List>
               <div css={flexEndStyle}>
-                <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length} size="small">
+                <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
                   Create selection
                 </Button>
               </div>
