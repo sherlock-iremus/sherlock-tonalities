@@ -31,11 +31,10 @@ import {
   verovioStyle,
   flexEndStyle,
   noDataStyle,
-  topPanelStyle,
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Colorize, RemoveRedEye, Close, Sell } from '@mui/icons-material'
+import { AddLocationAlt, FindInPage, Close, Sell } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
@@ -174,86 +173,97 @@ const MeiViewer = ({
         <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle}>
           <ToggleButton value={INSPECTION}>
             <Tooltip title="Inspection mode">
-              <RemoveRedEye />
+              <FindInPage />
             </Tooltip>
           </ToggleButton>
           <ToggleButton value={SELECTION}>
             <Tooltip title="Selection mode">
-              <Colorize />
+              <AddLocationAlt />
             </Tooltip>
           </ToggleButton>
         </ToggleButtonGroup>
 
         {mode === INSPECTION && (
-          <div css={topPanelStyle}>
+          <List
+            subheader={<ListSubheader>Current inspection</ListSubheader>}
+            sx={{
+              overflow: 'auto',
+              height: '40%',
+            }}
+          >
             {verticalityData.isSuccess && !verticalityData.isFetching && _setInspectedElement(getVerticalityElement())}
-            <List subheader={<ListSubheader>Current inspection</ListSubheader>}>
-              {inspectedElement ? (
-                <ScoreItem
-                  item={inspectedElement}
-                  scoreIri={scoreIri}
-                  secondaryAction={
-                    <Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />
-                  }
-                />
-              ) : (
-                <div css={noDataStyle}>
-                  Nothing to inspect, start by picking an element on the score or from previous selections
-                </div>
-              )}
-            </List>
-          </div>
+            {inspectedElement ? (
+              <ScoreItem
+                item={inspectedElement}
+                scoreIri={scoreIri}
+                secondaryAction={
+                  <Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />
+                }
+              />
+            ) : (
+              <div css={noDataStyle}>
+                Nothing to inspect, start by picking an element on the score or from previous selections
+              </div>
+            )}
+          </List>
         )}
 
         {mode === SELECTION && (
-          <div css={topPanelStyle}>
+          <List
+            subheader={<ListSubheader>Current selection</ListSubheader>}
+            sx={{
+              overflow: 'auto',
+              height: '40%',
+            }}
+          >
             {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
-            <List subheader={<ListSubheader>Current selection</ListSubheader>}>
-              {selection.length ? (
-                selection.map(e => (
-                  <ScoreItem
-                    key={e.id}
-                    item={e}
-                    scoreIri={scoreIri}
-                    secondaryAction={<Close onClick={() => _setSelection(e)} css={{ cursor: 'pointer' }} />}
-                  />
-                ))
-              ) : (
-                <div css={noDataStyle}>
-                  No element was added to the current selection, start by picking elements on the score or from previous
-                  selections
-                </div>
-              )}
-            </List>
+            {selection.length ? (
+              selection.map(e => (
+                <ScoreItem
+                  key={e.id}
+                  item={e}
+                  scoreIri={scoreIri}
+                  secondaryAction={<Close onClick={() => _setSelection(e)} css={{ cursor: 'pointer' }} />}
+                />
+              ))
+            ) : (
+              <div css={noDataStyle}>
+                No element was added to the current selection, start by picking elements on the score or from previous
+                selections
+              </div>
+            )}
             <div css={flexEndStyle}>
               <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
                 Create selection
               </Button>
             </div>
-          </div>
+          </List>
         )}
 
         <List subheader={<ListSubheader>Previous selections</ListSubheader>}>
-          {scoreSelections.map(e => (
-            <ListItem
-              key={e.id}
-              disablePadding
-              secondaryAction={<Close onClick={() => removeScoreSelections(e)} css={{ cursor: 'pointer' }} />}
-            >
-              <ListItemButton
-                onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
-                selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
-                css={{ cursor: 'default' }}
+          {scoreSelections.length ? (
+            scoreSelections.map(e => (
+              <ListItem
+                key={e.id}
+                disablePadding
+                secondaryAction={<Close onClick={() => removeScoreSelections(e)} css={{ cursor: 'pointer' }} />}
               >
-                <ListItemIcon>
-                  <Sell />
-                </ListItemIcon>
-                <ListItemText primary="My amazing selection" secondary={`${e.selection.length} elements`} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+                <ListItemButton
+                  onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
+                  selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
+                  css={{ cursor: 'default' }}
+                >
+                  <ListItemIcon>
+                    <Sell />
+                  </ListItemIcon>
+                  <ListItemText primary="My amazing selection" secondary={`${e.selection.length} elements`} />
+                </ListItemButton>
+              </ListItem>
+            ))
+          ) : (
+            <div css={noDataStyle}>There is no created selection, start by creating one</div>
+          )}
         </List>
-        {!scoreSelections.length && <div css={noDataStyle}>There is no created selection, start by creating one</div>}
 
         <Snackbar
           open={deleteConfirmation}

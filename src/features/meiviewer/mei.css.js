@@ -91,12 +91,6 @@ export const panelStyle = theme => css`
   width: 30%;
   display: flex;
   flex-direction: column;
-  justify-content: between;
-`
-
-export const topPanelStyle = theme => css`
-  height: 50%;
-  overflow-y: scroll;
 `
 
 export const noDataStyle = theme => css`
