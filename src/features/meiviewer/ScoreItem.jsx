@@ -51,7 +51,7 @@ export const ScoreItem = props => {
             <ListItemIcon>{props.item.referenceNote ? <QueueMusic /> : <Sell />}</ListItemIcon>
             {isOpen ? <ExpandMore sx={{ pr: 2 }} /> : <ChevronRight sx={{ pr: 2 }} />}
             <ListItemText
-              primary={props.item.referenceNote ? 'A verticality' : 'My amazing selection'}
+              primary={props.item.name ? props.item.name : 'Verticality'}
               secondary={props.item.id}
             />
           </ListItemButton>

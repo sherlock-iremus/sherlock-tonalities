@@ -13,6 +13,8 @@ import {
   ListItemIcon,
   Snackbar,
   Tooltip,
+  TextField,
+  capitalize,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -52,6 +54,7 @@ const MeiViewer = ({
   const [scoreSelections, setScoreSelections] = useState([])
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [createConfirmation, setCreateConfirmation] = useState(false)
+  const [selectionName, setSelectionName] = useState('')
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -83,9 +86,10 @@ const MeiViewer = ({
         )
       )
         return
-    setScoreSelections([...scoreSelections, { id: uuid(), selection: newSelection }])
+    setScoreSelections([...scoreSelections, { id: uuid(), name: selectionName, selection: newSelection }])
     removeSelectionStyle({ selection: selection })
     setSelection([])
+    setSelectionName('')
     setCreateConfirmation(true)
   }
 
@@ -210,13 +214,30 @@ const MeiViewer = ({
 
         {mode === SELECTION && (
           <List
-            subheader={<ListSubheader>Current selection</ListSubheader>}
+            subheader={
+              <ListSubheader>
+                Current selection
+                <div css={flexEndStyle}>
+                  <TextField
+                    required
+                    label="Name"
+                    value={selectionName}
+                    onChange={e => setSelectionName(capitalize(e.target.value))}
+                    size="small"
+                  />
+                  <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length || !selectionName}>
+                    Create selection
+                  </Button>
+                </div>
+              </ListSubheader>
+            }
             sx={{
               overflow: 'auto',
               height: '40%',
             }}
           >
             {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
+
             {selection.length ? (
               selection.map(e => (
                 <ScoreItem
@@ -232,11 +253,6 @@ const MeiViewer = ({
                 selections
               </div>
             )}
-            <div css={flexEndStyle}>
-              <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length}>
-                Create selection
-              </Button>
-            </div>
           </List>
         )}
 
@@ -256,7 +272,7 @@ const MeiViewer = ({
                   <ListItemIcon>
                     <Sell />
                   </ListItemIcon>
-                  <ListItemText primary="My amazing selection" secondary={`${e.selection.length} elements`} />
+                  <ListItemText primary={e.name} secondary={`${e.selection.length} elements`} />
                 </ListItemButton>
               </ListItem>
             ))

@@ -15,7 +15,8 @@ export const centerStyle = theme => css`
 
 export const flexEndStyle = theme => css`
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+  padding-bottom: 16px;
 `
 
 // specific classes
