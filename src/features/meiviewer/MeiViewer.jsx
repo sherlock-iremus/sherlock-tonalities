@@ -73,8 +73,12 @@ const MeiViewer = ({
     setInspectedElement(inspectedElement !== element ? element : null)
   }
 
-  const _setSelection = element => {
-    if (!selection.includes(element)) setSelection([...selection, element])
+  const _setSelection = (element, replacingElement) => {
+    if (replacingElement) {
+      setSelection([...selection.filter(e => e !== element), replacingElement])
+      removeSelectionStyle(element)
+    }
+    else if (!selection.includes(element)) setSelection([...selection, element])
     else {
       setSelection(selection.filter(e => e !== element))
       removeSelectionStyle(element)
@@ -214,7 +218,12 @@ const MeiViewer = ({
                 item={inspectedElement}
                 scoreIri={scoreIri}
                 onNoteSelect={note =>
-                  _setInspectedElement({ ...inspectedElement, selection: [note], noteOnBeat: true })
+                  _setInspectedElement({
+                    ...inspectedElement,
+                    id: inspectedElement.id + note.id,
+                    selection: [note],
+                    noteOnBeat: true,
+                  })
                 }
                 secondaryAction={
                   <IconButton onClick={() => _setInspectedElement(inspectedElement)}>
@@ -266,6 +275,9 @@ const MeiViewer = ({
                   key={e.id}
                   item={e}
                   scoreIri={scoreIri}
+                  onNoteSelect={note =>
+                    _setSelection(e, { ...e, id: e.id + note.id, selection: [note], noteOnBeat: true })
+                  }
                   secondaryAction={
                     <IconButton onClick={() => _setSelection(e)}>
                       <Close />

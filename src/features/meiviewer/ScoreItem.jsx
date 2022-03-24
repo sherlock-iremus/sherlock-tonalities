@@ -59,7 +59,7 @@ export const ScoreItem = props => {
 
     return pname.toUpperCase() + oct + alteration
   }
-  
+
   if (props.labelOnly) return getNoteLabel()
 
   if (props.item.noteOnBeat)
