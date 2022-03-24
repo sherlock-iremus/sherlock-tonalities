@@ -16,6 +16,7 @@ import {
   TextField,
   capitalize,
   Alert,
+  IconButton,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -196,7 +197,7 @@ const MeiViewer = ({
               <ListSubheader>
                 Current inspection
                 {infoDisplay && (
-                  <Alert severity="info" onClose={() => setInfoDisplay(false)}>
+                  <Alert severity="info" onClose={() => setInfoDisplay(false)} sx={{ marginBottom: 2 }}>
                     To select a verticality, Ctrl+click a note
                   </Alert>
                 )}
@@ -212,8 +213,13 @@ const MeiViewer = ({
               <ScoreItem
                 item={inspectedElement}
                 scoreIri={scoreIri}
+                onNoteSelect={note =>
+                  _setInspectedElement({ ...inspectedElement, selection: [note], noteOnBeat: true })
+                }
                 secondaryAction={
-                  <Close onClick={() => _setInspectedElement(inspectedElement)} css={{ cursor: 'pointer' }} />
+                  <IconButton onClick={() => _setInspectedElement(inspectedElement)}>
+                    <Close />
+                  </IconButton>
                 }
               />
             ) : (
@@ -236,7 +242,7 @@ const MeiViewer = ({
                     value={selectionName}
                     onChange={e => setSelectionName(capitalize(e.target.value))}
                     size="small"
-                    sx={{alignSelf: 'center'}}
+                    sx={{ alignSelf: 'center' }}
                   />
                   <Button
                     onClick={() => createScoreSelections(selection)}
@@ -260,7 +266,11 @@ const MeiViewer = ({
                   key={e.id}
                   item={e}
                   scoreIri={scoreIri}
-                  secondaryAction={<Close onClick={() => _setSelection(e)} css={{ cursor: 'pointer' }} />}
+                  secondaryAction={
+                    <IconButton onClick={() => _setSelection(e)}>
+                      <Close />
+                    </IconButton>
+                  }
                 />
               ))
             ) : (
@@ -278,7 +288,11 @@ const MeiViewer = ({
               <ListItem
                 key={e.id}
                 disablePadding
-                secondaryAction={<Close onClick={() => removeScoreSelections(e)} css={{ cursor: 'pointer' }} />}
+                secondaryAction={
+                  <IconButton onClick={() => removeScoreSelections(e)}>
+                    <Close />
+                  </IconButton>
+                }
               >
                 <ListItemButton
                   onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}

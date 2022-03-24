@@ -1,6 +1,24 @@
-import { ListItem, ListItemButton, ListItemText, ListItemIcon, Collapse, List, Skeleton } from '@mui/material'
+import {
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  ListItemIcon,
+  Collapse,
+  List,
+  Skeleton,
+  IconButton,
+  Tooltip,
+} from '@mui/material'
 import { useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
-import { MusicNote, ExpandMore, ChevronRight, Sell, QueueMusic } from '@mui/icons-material'
+import {
+  MusicNote,
+  ExpandMore,
+  ChevronRight,
+  Sell,
+  AlignHorizontalCenter,
+  HighlightAlt,
+  QueueMusic,
+} from '@mui/icons-material'
 import { useState } from 'react'
 
 export const ScoreItem = props => {
@@ -41,6 +59,24 @@ export const ScoreItem = props => {
 
     return pname.toUpperCase() + oct + alteration
   }
+  
+  if (props.labelOnly) return getNoteLabel()
+
+  if (props.item.noteOnBeat)
+    // element is a noteOnBeat
+    return (
+      <ListItem disablePadding secondaryAction={props.secondaryAction}>
+        <ListItemButton sx={{ cursor: 'default' }}>
+          <ListItemIcon>
+            <QueueMusic />
+          </ListItemIcon>
+          <ListItemText
+            primary={<ScoreItem item={props.item.selection[0]} scoreIri={props.scoreIri} labelOnly />}
+            secondary={props.item.id}
+          />
+        </ListItemButton>
+      </ListItem>
+    )
 
   if (props.item.selection)
     // element is a selection or a verticality
@@ -48,18 +84,30 @@ export const ScoreItem = props => {
       <div>
         <ListItem disablePadding secondaryAction={props.secondaryAction}>
           <ListItemButton onClick={() => setIsOpen(!isOpen)} sx={{ cursor: 'default' }}>
-            <ListItemIcon>{props.item.referenceNote ? <QueueMusic /> : <Sell />}</ListItemIcon>
-            {isOpen ? <ExpandMore sx={{ pr: 2 }} /> : <ChevronRight sx={{ pr: 2 }} />}
-            <ListItemText
-              primary={props.item.name ? props.item.name : 'Verticality'}
-              secondary={props.item.id}
-            />
+            <ListItemIcon>{props.item.referenceNote ? <AlignHorizontalCenter /> : <Sell />}</ListItemIcon>
+            <IconButton disableRipple sx={{ cursor: 'default' }}>
+              {isOpen ? <ExpandMore /> : <ChevronRight />}
+            </IconButton>
+            <ListItemText primary={props.item.name ? props.item.name : 'Verticality'} secondary={props.item.id} />
           </ListItemButton>
         </ListItem>
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List sx={{ pl: 4 }} dense disablePadding>
             {props.item.selection.map(item => (
-              <ScoreItem key={item.id} item={item} scoreIri={props.scoreIri} />
+              <ScoreItem
+                key={item.id}
+                item={item}
+                scoreIri={props.scoreIri}
+                secondaryAction={
+                  props.item.referenceNote && (
+                    <IconButton onClick={() => props.onNoteSelect(item)}>
+                      <Tooltip title="Inspect note on beat">
+                        <HighlightAlt />
+                      </Tooltip>
+                    </IconButton>
+                  )
+                }
+              />
             ))}
           </List>
         </Collapse>
