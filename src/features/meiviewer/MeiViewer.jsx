@@ -15,6 +15,7 @@ import {
   Tooltip,
   TextField,
   capitalize,
+  Alert,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -54,6 +55,8 @@ const MeiViewer = ({
   const [scoreSelections, setScoreSelections] = useState([])
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [createConfirmation, setCreateConfirmation] = useState(false)
+  const [showError, setShowError] = useState(false)
+  const [infoDisplay, setInfoDisplay] = useState(true)
   const [selectionName, setSelectionName] = useState('')
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
@@ -85,7 +88,7 @@ const MeiViewer = ({
           newSelection.map(e => e.id)
         )
       )
-        return
+        return setShowError(true)
     setScoreSelections([...scoreSelections, { id: uuid(), name: selectionName, selection: newSelection }])
     removeSelectionStyle({ selection: selection })
     setSelection([])
@@ -189,7 +192,16 @@ const MeiViewer = ({
 
         {mode === INSPECTION && (
           <List
-            subheader={<ListSubheader>Current inspection</ListSubheader>}
+            subheader={
+              <ListSubheader>
+                Current inspection
+                {infoDisplay && (
+                  <Alert severity="info" onClose={() => setInfoDisplay(false)}>
+                    To select a verticality, Ctrl+click a note
+                  </Alert>
+                )}
+              </ListSubheader>
+            }
             sx={{
               overflow: 'auto',
               height: '40%',
@@ -225,7 +237,10 @@ const MeiViewer = ({
                     onChange={e => setSelectionName(capitalize(e.target.value))}
                     size="small"
                   />
-                  <Button onClick={() => createScoreSelections(selection)} disabled={!selection.length || !selectionName}>
+                  <Button
+                    onClick={() => createScoreSelections(selection)}
+                    disabled={!selection.length || !selectionName}
+                  >
                     Create selection
                   </Button>
                 </div>
@@ -281,18 +296,17 @@ const MeiViewer = ({
           )}
         </List>
 
-        <Snackbar
-          open={deleteConfirmation}
-          autoHideDuration={6000}
-          message="The selection was successfully deleted"
-          onClose={() => setDeleteConfirmation(false)}
-        />
-        <Snackbar
-          open={createConfirmation}
-          autoHideDuration={6000}
-          message="The selection was successfully created"
-          onClose={() => setCreateConfirmation(false)}
-        />
+        <Snackbar open={createConfirmation} autoHideDuration={6000} onClose={() => setCreateConfirmation(false)}>
+          <Alert severity="success">The selection was successfully created</Alert>
+        </Snackbar>
+
+        <Snackbar open={deleteConfirmation} autoHideDuration={6000} onClose={() => setDeleteConfirmation(false)}>
+          <Alert severity="success">The selection was successfully deleted</Alert>
+        </Snackbar>
+
+        <Snackbar open={showError} autoHideDuration={6000} onClose={() => setShowError(false)}>
+          <Alert severity="warning">Selection content already exists, please edit or reuse previous selection</Alert>
+        </Snackbar>
       </div>
     </div>
   )
