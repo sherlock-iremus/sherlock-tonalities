@@ -37,7 +37,7 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { AddLocationAlt, FindInPage, Close, Sell } from '@mui/icons-material'
+import { Lyrics, FindInPage, Close, Sell } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
@@ -185,7 +185,7 @@ const MeiViewer = ({
           </ToggleButton>
           <ToggleButton value={SELECTION}>
             <Tooltip title="Selection mode">
-              <AddLocationAlt />
+              <Lyrics />
             </Tooltip>
           </ToggleButton>
         </ToggleButtonGroup>
@@ -236,6 +236,7 @@ const MeiViewer = ({
                     value={selectionName}
                     onChange={e => setSelectionName(capitalize(e.target.value))}
                     size="small"
+                    sx={{alignSelf: 'center'}}
                   />
                   <Button
                     onClick={() => createScoreSelections(selection)}
