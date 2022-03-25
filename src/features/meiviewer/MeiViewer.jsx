@@ -54,10 +54,8 @@ const MeiViewer = ({
   const [selection, setSelection] = useState([])
   const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
-  const [deleteConfirmation, setDeleteConfirmation] = useState(false)
-  const [createConfirmation, setCreateConfirmation] = useState(false)
-  const [updateConfirmation, setUpdateConfirmation] = useState(false)
-  const [showError, setShowError] = useState(false)
+  const [confirmationMessage, setConfirmationMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const [infoDisplay, setInfoDisplay] = useState(true)
   const [selectionName, setSelectionName] = useState('')
   const [isBeingEdited, setIsBeingEdited] = useState(null)
@@ -107,7 +105,7 @@ const MeiViewer = ({
         { id: isBeingEdited.id, name: selectionName, selection: selection },
       ])
       setIsBeingEdited(null)
-      setUpdateConfirmation(true)
+      setConfirmationMessage('The selection was successfully updated')
     } else {
       for (const scoreSelection of scoreSelections)
         if (
@@ -116,9 +114,9 @@ const MeiViewer = ({
             selection.map(e => e.id)
           )
         )
-          return setShowError(true)
+          return setErrorMessage('Selection content already exists, please edit or reuse previous selection')
       setScoreSelections([...scoreSelections, { id: uuid(), name: selectionName, selection: selection }])
-      setCreateConfirmation(true)
+      setConfirmationMessage('The selection was successfully created')
     }
     removeSelectionStyle({ selection: selection })
     setSelection([])
@@ -129,7 +127,7 @@ const MeiViewer = ({
     if (selection.includes(s)) setSelection(selection.filter(e => e !== s))
     if (inspectedElement === s) setInspectedElement(null)
     setScoreSelections(scoreSelections.filter(e => e !== s))
-    setDeleteConfirmation(true)
+    setConfirmationMessage('The selection was successfully deleted')
   }
 
   const handleMouseOver = e => {
@@ -359,20 +357,12 @@ const MeiViewer = ({
           )}
         </List>
 
-        <Snackbar open={createConfirmation} autoHideDuration={6000} onClose={() => setCreateConfirmation(false)}>
-          <Alert severity="success">The selection was successfully created</Alert>
+        <Snackbar open={!!confirmationMessage} autoHideDuration={6000} onClose={() => setConfirmationMessage('')}>
+          <Alert severity="success">{confirmationMessage}</Alert>
         </Snackbar>
 
-        <Snackbar open={updateConfirmation} autoHideDuration={6000} onClose={() => setUpdateConfirmation(false)}>
-          <Alert severity="success">The selection was successfully updated</Alert>
-        </Snackbar>
-
-        <Snackbar open={deleteConfirmation} autoHideDuration={6000} onClose={() => setDeleteConfirmation(false)}>
-          <Alert severity="success">The selection was successfully deleted</Alert>
-        </Snackbar>
-
-        <Snackbar open={showError} autoHideDuration={6000} onClose={() => setShowError(false)}>
-          <Alert severity="warning">Selection content already exists, please edit or reuse previous selection</Alert>
+        <Snackbar open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage('')}>
+          <Alert severity="warning">{errorMessage}</Alert>
         </Snackbar>
       </div>
     </div>
