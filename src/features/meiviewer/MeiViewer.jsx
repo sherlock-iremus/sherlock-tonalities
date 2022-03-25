@@ -38,7 +38,7 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Lyrics, FindInPage, Close, Sell } from '@mui/icons-material'
+import { Lyrics, FindInPage, Close, Sell, Edit } from '@mui/icons-material'
 import { INSPECTION, SELECTION } from './constants'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
@@ -56,9 +56,11 @@ const MeiViewer = ({
   const [scoreSelections, setScoreSelections] = useState([])
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [createConfirmation, setCreateConfirmation] = useState(false)
+  const [updateConfirmation, setUpdateConfirmation] = useState(false)
   const [showError, setShowError] = useState(false)
   const [infoDisplay, setInfoDisplay] = useState(true)
   const [selectionName, setSelectionName] = useState('')
+  const [isBeingEdited, setIsBeingEdited] = useState(null)
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -77,28 +79,50 @@ const MeiViewer = ({
     if (replacingElement) {
       setSelection([...selection.filter(e => e !== element), replacingElement])
       removeSelectionStyle(element)
-    }
-    else if (!selection.includes(element)) setSelection([...selection, element])
+    } else if (!selection.includes(element)) setSelection([...selection, element])
     else {
       setSelection(selection.filter(e => e !== element))
       removeSelectionStyle(element)
     }
   }
 
-  const createScoreSelections = newSelection => {
-    for (const scoreSelection of scoreSelections)
-      if (
-        sameMembers(
-          scoreSelection.selection.map(e => e.id),
-          newSelection.map(e => e.id)
+  const _setIsBeingEdited = element => {
+    if (mode === INSPECTION) setMode(SELECTION)
+    if (element) {
+      // TODO avertir de la suppression du contenu de sélection ?
+      setSelection([...element.selection])
+      setSelectionName(element.name)
+      setIsBeingEdited(element)
+    } else {
+      setSelection([])
+      setSelectionName('')
+      setIsBeingEdited(null)
+    }
+  }
+
+  const createScoreSelection = () => {
+    if (isBeingEdited) {
+      setScoreSelections([
+        ...scoreSelections.filter(e => e !== isBeingEdited),
+        { id: isBeingEdited.id, name: selectionName, selection: selection },
+      ])
+      setIsBeingEdited(null)
+      setUpdateConfirmation(true)
+    } else {
+      for (const scoreSelection of scoreSelections)
+        if (
+          sameMembers(
+            scoreSelection.selection.map(e => e.id),
+            selection.map(e => e.id)
+          )
         )
-      )
-        return setShowError(true)
-    setScoreSelections([...scoreSelections, { id: uuid(), name: selectionName, selection: newSelection }])
+          return setShowError(true)
+      setScoreSelections([...scoreSelections, { id: uuid(), name: selectionName, selection: selection }])
+      setCreateConfirmation(true)
+    }
     removeSelectionStyle({ selection: selection })
     setSelection([])
     setSelectionName('')
-    setCreateConfirmation(true)
   }
 
   const removeScoreSelections = s => {
@@ -244,6 +268,16 @@ const MeiViewer = ({
             subheader={
               <ListSubheader>
                 Current selection
+                {isBeingEdited && (
+                  <Alert
+                    severity="warning"
+                    icon={<Edit />}
+                    onClose={() => _setIsBeingEdited()}
+                    sx={{ marginBottom: 2 }}
+                  >
+                    Currently editing a previous selection
+                  </Alert>
+                )}
                 <div css={flexEndStyle}>
                   <TextField
                     required
@@ -253,11 +287,8 @@ const MeiViewer = ({
                     size="small"
                     sx={{ alignSelf: 'center' }}
                   />
-                  <Button
-                    onClick={() => createScoreSelections(selection)}
-                    disabled={!selection.length || !selectionName}
-                  >
-                    Create selection
+                  <Button onClick={() => createScoreSelection()} disabled={!selection.length || !selectionName}>
+                    {isBeingEdited ? 'Update selection' : 'Create selection'}
                   </Button>
                 </div>
               </ListSubheader>
@@ -301,9 +332,14 @@ const MeiViewer = ({
                 key={e.id}
                 disablePadding
                 secondaryAction={
-                  <IconButton onClick={() => removeScoreSelections(e)}>
-                    <Close />
-                  </IconButton>
+                  <div>
+                    <IconButton onClick={() => _setIsBeingEdited(e)}>
+                      <Edit />
+                    </IconButton>
+                    <IconButton onClick={() => removeScoreSelections(e)}>
+                      <Close />
+                    </IconButton>
+                  </div>
                 }
               >
                 <ListItemButton
@@ -325,6 +361,10 @@ const MeiViewer = ({
 
         <Snackbar open={createConfirmation} autoHideDuration={6000} onClose={() => setCreateConfirmation(false)}>
           <Alert severity="success">The selection was successfully created</Alert>
+        </Snackbar>
+
+        <Snackbar open={updateConfirmation} autoHideDuration={6000} onClose={() => setUpdateConfirmation(false)}>
+          <Alert severity="success">The selection was successfully updated</Alert>
         </Snackbar>
 
         <Snackbar open={deleteConfirmation} autoHideDuration={6000} onClose={() => setDeleteConfirmation(false)}>
