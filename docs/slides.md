@@ -2,6 +2,7 @@
 title: "Une interface pour adresser la partition musicale"
 institute: "Réunion d'avancement *Tonalities*"
 theme: Rochester
+colortheme: crane
 aspectratio: 169
 header-includes: |
  \titlegraphic{\includegraphics[width=2cm]{assets/tonalities.pdf}}
