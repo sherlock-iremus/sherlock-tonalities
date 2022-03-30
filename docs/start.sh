@@ -1,1 +1,1 @@
-pandoc slides.md -o slides.pdf
+pandoc slides.md -t beamer -o slides.pdf
