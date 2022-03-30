@@ -1,0 +1,1 @@
+pandoc slides.md -o slides.pdf
