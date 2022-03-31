@@ -27,6 +27,7 @@ import {
   addSelectionStyle,
   removeSelectionStyle,
   getNote,
+  drawAnnotation,
 } from './verovioHelpers'
 import {
   containerStyle,
@@ -119,6 +120,7 @@ const MeiViewer = ({
       setConfirmationMessage('The selection was successfully created')
     }
     removeSelectionStyle({ selection: selection })
+    drawAnnotation(selection)
     setSelection([])
     setSelectionName('')
   }
