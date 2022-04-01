@@ -18,6 +18,7 @@ import {
   Alert,
   IconButton,
   Collapse,
+  Divider,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -123,7 +124,6 @@ const MeiViewer = ({
       setConfirmationMessage('The selection was successfully created')
     }
     removeSelectionStyle({ selection: selection })
-    drawAnnotation(selection)
     setSelection([])
     setOpenedList(SELECTIONS)
     setSelectionName('')
@@ -149,7 +149,10 @@ const MeiViewer = ({
   const handleClick = e => {
     const n = getNote(e.target)
     if (n) {
-      if (e.ctrlKey) return setRightClickedNoteId(n.id)
+      if (e.ctrlKey || e.altKey) {
+        setInfoDisplay(false)
+        return setRightClickedNoteId(n.id)
+      }
       switch (mode) {
         case INSPECTION:
           _setInspectedElement(n)
@@ -231,7 +234,7 @@ const MeiViewer = ({
                   Current inspection
                   {infoDisplay && (
                     <Alert severity="info" onClose={() => setInfoDisplay(false)} sx={{ marginBottom: 2 }}>
-                      To select a verticality, Ctrl+click a note
+                      To select a verticality, Alt+click a note
                     </Alert>
                   )}
                 </ListSubheader>
@@ -330,11 +333,12 @@ const MeiViewer = ({
             </List>
           )}
         </div>
-        <div css={{ display: 'flex', flexDirection: 'column', justifyContent: 'end' }}>
+        <div css={{ display: 'flex', flexDirection: 'column' }}>
+          <Divider />
           <List
             sx={{
               overflow: 'auto',
-              minHeight: 48
+              minHeight: 48,
             }}
             subheader={
               <ListSubheader
@@ -348,7 +352,7 @@ const MeiViewer = ({
           >
             <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit>
               {treatise.rootClasses.map(concept => (
-                <ListItem key={concept.iri} disablePadding>
+                <ListItem key={concept.iri} disablePadding dense>
                   <ListItemButton>
                     <ListItemText primary={concept.label} secondary={treatise.iri} />
                   </ListItemButton>
@@ -360,7 +364,7 @@ const MeiViewer = ({
           <List
             sx={{
               overflow: 'auto',
-              minHeight: 48
+              minHeight: 48,
             }}
             subheader={
               <ListSubheader
@@ -377,6 +381,7 @@ const MeiViewer = ({
                 scoreSelections.map(e => (
                   <ListItem
                     key={e.id}
+                    dense
                     disablePadding
                     secondaryAction={
                       <div>
