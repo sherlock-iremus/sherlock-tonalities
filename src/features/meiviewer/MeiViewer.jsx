@@ -330,7 +330,7 @@ const MeiViewer = ({
             </List>
           )}
         </div>
-        <div css={{ display: 'flex', flexDirection: 'column' }}>
+        <div css={{ display: 'flex', flexDirection: 'column', justifyContent: 'end' }}>
           <List
             sx={{
               overflow: 'auto',
