@@ -29,7 +29,6 @@ import {
   addSelectionStyle,
   removeSelectionStyle,
   getNote,
-  drawAnnotation,
 } from './verovioHelpers'
 import {
   containerStyle,
@@ -130,8 +129,8 @@ const MeiViewer = ({
   }
 
   const removeScoreSelections = s => {
-    if (selection.includes(s)) setSelection(selection.filter(e => e !== s))
-    if (inspectedElement === s) setInspectedElement(null)
+    if (selection.includes(s)) _setSelection(s)
+    if (inspectedElement === s) _setInspectedElement(s)
     setScoreSelections(scoreSelections.filter(e => e !== s))
     setConfirmationMessage('The selection was successfully deleted')
   }

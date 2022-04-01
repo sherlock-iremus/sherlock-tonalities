@@ -31,28 +31,32 @@ export const getMeasure = node =>
   node.classList && node.classList.contains('measure') ? node : node.parentNode && getMeasure(node.parentNode)
 
 export const getSystem = node =>
-node.classList && node.classList.contains('system') ? node : node.parentNode && getMeasure(node.parentNode)
+  node.classList && node.classList.contains('system') ? node : node.parentNode && getMeasure(node.parentNode)
 
 export const getNote = node =>
   node.classList && node.classList.contains('note') ? node : node.parentNode && getNote(node.parentNode)
 
 export const addInspectionStyle = element => {
   if (element.referenceNote && !document.getElementById(element.id)) drawBeat(element, INSPECTION)
+  if (element.name && !document.getElementById(element.id)) drawSelection(element, INSPECTION)
   element.classList ? element.classList.add('inspected') : element.selection.forEach(e => addInspectionStyle(e))
 }
 
 export const removeInspectionStyle = element => {
   if (element.referenceNote && document.getElementById(element.id)) document.getElementById(element.id).remove()
+  if (element.name && document.getElementById(element.id)) document.getElementById(element.id).remove()
   element.classList ? element.classList.remove('inspected') : element.selection.forEach(e => removeInspectionStyle(e))
 }
 
 export const addSelectionStyle = element => {
   if (element.referenceNote && !document.getElementById(element.id)) drawBeat(element, SELECTION)
+  if (element.name && !document.getElementById(element.id)) drawSelection(element, SELECTION)
   element.classList ? element.classList.add('selected') : element.selection.forEach(e => addSelectionStyle(e))
 }
 
 export const removeSelectionStyle = element => {
   if (element.referenceNote && document.getElementById(element.id)) document.getElementById(element.id).remove()
+  if (element.name && document.getElementById(element.id)) document.getElementById(element.id).remove()
   element.classList ? element.classList.remove('selected') : element.selection.forEach(e => removeSelectionStyle(e))
 }
 
@@ -88,23 +92,34 @@ export const load = mei_uri => {
     })
 }
 
-export const drawAnnotation = selection => {
-  const systemNode = getSystem(selection[0])
-  systemNode.parentNode.insertBefore(drawAnnotationShape(selection.map(s => noteCoordinates(s))), systemNode)
-}
-
-const drawAnnotationShape = points => {
+export const drawSelection = (scoreSelection, mode) => {
   const hullPadding = 200
+  const color = mode === 'INSPECTION' ? 'red' : 'blue'
+  const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+  selectionNode.setAttribute('id', scoreSelection.id)
+  selectionNode.setAttribute('fill', color)
+  selectionNode.setAttribute('fill-opacity', '50%')
 
-  const annotationNode = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-  annotationNode.setAttribute('fill', 'salmon')
-  annotationNode.setAttribute('fill-opacity', '50%')
+  const notes = scoreSelection.selection.filter(s => s.classList)
+  const points = notes.map(s => noteCoordinates(s))
+  console.log(points.length)
+  switch (points.length) {
+    case 1: // circle shape
+      console.log('ici 1')
+      selectionNode.setAttribute('d', roundedHull1(points, hullPadding))
+      break
+    case 2: // capsule shape
+      console.log('ici 2')
+      selectionNode.setAttribute('d', roundedHull2(points, hullPadding))
+      break
+    default: // rounded polygone shape
+      console.log('ici n')
+      selectionNode.setAttribute('d', roundedHullN(points, hullPadding))
+      break
+  }
 
-  if (points.length == 1) annotationNode.setAttribute('d', roundedHull1(points, hullPadding))
-  else if (points.length == 2) annotationNode.setAttribute('d', roundedHull2(points, hullPadding))
-  else annotationNode.setAttribute('d', roundedHullN(points, hullPadding))
-
-  return annotationNode
+  const systemNode = getSystem(scoreSelection.selection[0])
+  systemNode.parentNode.insertBefore(selectionNode, systemNode)
 }
 
 const roundedHull1 = (points, hullPadding) => {
