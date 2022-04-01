@@ -334,6 +334,7 @@ const MeiViewer = ({
           <List
             sx={{
               overflow: 'auto',
+              minHeight: 48
             }}
             subheader={
               <ListSubheader
@@ -345,7 +346,7 @@ const MeiViewer = ({
               </ListSubheader>
             }
           >
-            <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit sx={{ display: 'flex' }}>
+            <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit>
               {treatise.rootClasses.map(concept => (
                 <ListItem key={concept.iri} disablePadding>
                   <ListItemButton>
@@ -359,6 +360,7 @@ const MeiViewer = ({
           <List
             sx={{
               overflow: 'auto',
+              minHeight: 48
             }}
             subheader={
               <ListSubheader
