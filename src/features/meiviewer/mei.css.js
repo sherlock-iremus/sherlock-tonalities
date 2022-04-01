@@ -90,8 +90,8 @@ export const panelStyle = theme => css`
   font-family: 'Roboto';
   border-left: 1px solid lightgray;
   width: 30%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-rows: 50vh;
 `
 
 export const noDataStyle = theme => css`

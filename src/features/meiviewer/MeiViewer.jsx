@@ -17,6 +17,7 @@ import {
   capitalize,
   Alert,
   IconButton,
+  Collapse,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -39,10 +40,11 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Lyrics, FindInPage, Close, Sell, Edit } from '@mui/icons-material'
-import { INSPECTION, SELECTION } from './constants'
+import { Lyrics, FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight } from '@mui/icons-material'
+import { CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
+import treatise from '../../app/treatises/Zarlino_1588.json'
 
 window.verovioCallback = load
 
@@ -60,6 +62,7 @@ const MeiViewer = ({
   const [infoDisplay, setInfoDisplay] = useState(true)
   const [selectionName, setSelectionName] = useState('')
   const [isBeingEdited, setIsBeingEdited] = useState(null)
+  const [openedList, setOpenedList] = useState(null)
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -122,6 +125,7 @@ const MeiViewer = ({
     removeSelectionStyle({ selection: selection })
     drawAnnotation(selection)
     setSelection([])
+    setOpenedList(SELECTIONS)
     setSelectionName('')
   }
 
@@ -206,167 +210,209 @@ const MeiViewer = ({
         />
       </div>
       <div css={panelStyle}>
-        <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle}>
-          <ToggleButton value={INSPECTION}>
-            <Tooltip title="Inspection mode">
-              <FindInPage />
-            </Tooltip>
-          </ToggleButton>
-          <ToggleButton value={SELECTION}>
-            <Tooltip title="Selection mode">
-              <Lyrics />
-            </Tooltip>
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <div css={{ display: 'flex', flexDirection: 'column' }}>
+          <ToggleButtonGroup value={mode} exclusive onChange={handleChangeMode} css={centerStyle}>
+            <ToggleButton value={INSPECTION}>
+              <Tooltip title="Inspection mode">
+                <FindInPage />
+              </Tooltip>
+            </ToggleButton>
+            <ToggleButton value={SELECTION}>
+              <Tooltip title="Selection mode">
+                <Lyrics />
+              </Tooltip>
+            </ToggleButton>
+          </ToggleButtonGroup>
 
-        {mode === INSPECTION && (
-          <List
-            subheader={
-              <ListSubheader>
-                Current inspection
-                {infoDisplay && (
-                  <Alert severity="info" onClose={() => setInfoDisplay(false)} sx={{ marginBottom: 2 }}>
-                    To select a verticality, Ctrl+click a note
-                  </Alert>
-                )}
-              </ListSubheader>
-            }
-            sx={{
-              overflow: 'auto',
-              height: '40%',
-            }}
-          >
-            {verticalityData.isSuccess && !verticalityData.isFetching && _setInspectedElement(getVerticalityElement())}
-            {inspectedElement ? (
-              <ScoreItem
-                item={inspectedElement}
-                scoreIri={scoreIri}
-                onNoteSelect={note =>
-                  _setInspectedElement({
-                    ...inspectedElement,
-                    id: inspectedElement.id + note.id,
-                    selection: [note],
-                    noteOnBeat: true,
-                  })
-                }
-                secondaryAction={
-                  <IconButton onClick={() => _setInspectedElement(inspectedElement)}>
-                    <Close />
-                  </IconButton>
-                }
-              />
-            ) : (
-              <div css={noDataStyle}>
-                Nothing to inspect, start by picking an element on the score or from previous selections
-              </div>
-            )}
-          </List>
-        )}
-
-        {mode === SELECTION && (
-          <List
-            subheader={
-              <ListSubheader>
-                Current selection
-                {isBeingEdited && (
-                  <Alert
-                    severity="warning"
-                    icon={<Edit />}
-                    onClose={() => _setIsBeingEdited()}
-                    sx={{ marginBottom: 2 }}
-                  >
-                    Currently editing a previous selection
-                  </Alert>
-                )}
-                <div css={flexEndStyle}>
-                  <TextField
-                    required
-                    label="Name"
-                    value={selectionName}
-                    onChange={e => setSelectionName(capitalize(e.target.value))}
-                    size="small"
-                    sx={{ alignSelf: 'center' }}
-                  />
-                  <Button onClick={() => createScoreSelection()} disabled={!selection.length || !selectionName}>
-                    {isBeingEdited ? 'Update selection' : 'Create selection'}
-                  </Button>
-                </div>
-              </ListSubheader>
-            }
-            sx={{
-              overflow: 'auto',
-              height: '40%',
-            }}
-          >
-            {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
-
-            {selection.length ? (
-              selection.map(e => (
+          {mode === INSPECTION && (
+            <List
+              subheader={
+                <ListSubheader>
+                  Current inspection
+                  {infoDisplay && (
+                    <Alert severity="info" onClose={() => setInfoDisplay(false)} sx={{ marginBottom: 2 }}>
+                      To select a verticality, Ctrl+click a note
+                    </Alert>
+                  )}
+                </ListSubheader>
+              }
+              sx={{
+                overflow: 'auto',
+              }}
+            >
+              {verticalityData.isSuccess &&
+                !verticalityData.isFetching &&
+                _setInspectedElement(getVerticalityElement())}
+              {inspectedElement ? (
                 <ScoreItem
-                  key={e.id}
-                  item={e}
+                  item={inspectedElement}
                   scoreIri={scoreIri}
                   onNoteSelect={note =>
-                    _setSelection(e, { ...e, id: e.id + note.id, selection: [note], noteOnBeat: true })
+                    _setInspectedElement({
+                      ...inspectedElement,
+                      id: inspectedElement.id + note.id,
+                      selection: [note],
+                      noteOnBeat: true,
+                    })
                   }
                   secondaryAction={
-                    <IconButton onClick={() => _setSelection(e)}>
+                    <IconButton onClick={() => _setInspectedElement(inspectedElement)}>
                       <Close />
                     </IconButton>
                   }
                 />
-              ))
-            ) : (
-              <div css={noDataStyle}>
-                No element was added to the current selection, start by picking elements on the score or from previous
-                selections
-              </div>
-            )}
-          </List>
-        )}
-
-        <List subheader={<ListSubheader>Previous selections</ListSubheader>}>
-          {scoreSelections.length ? (
-            scoreSelections.map(e => (
-              <ListItem
-                key={e.id}
-                disablePadding
-                secondaryAction={
-                  <div>
-                    <IconButton onClick={() => _setIsBeingEdited(e)}>
-                      <Edit />
-                    </IconButton>
-                    <IconButton onClick={() => removeScoreSelections(e)}>
-                      <Close />
-                    </IconButton>
-                  </div>
-                }
-              >
-                <ListItemButton
-                  onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
-                  selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
-                  css={{ cursor: 'default' }}
-                >
-                  <ListItemIcon>
-                    <Sell />
-                  </ListItemIcon>
-                  <ListItemText primary={e.name} secondary={`${e.selection.length} elements`} />
-                </ListItemButton>
-              </ListItem>
-            ))
-          ) : (
-            <div css={noDataStyle}>There is no created selection, start by creating one</div>
+              ) : (
+                <div css={noDataStyle}>
+                  Nothing to inspect, start by picking an element on the score or from previous selections
+                </div>
+              )}
+            </List>
           )}
-        </List>
 
-        <Snackbar open={!!confirmationMessage} autoHideDuration={6000} onClose={() => setConfirmationMessage('')}>
-          <Alert severity="success">{confirmationMessage}</Alert>
-        </Snackbar>
+          {mode === SELECTION && (
+            <List
+              subheader={
+                <ListSubheader>
+                  Current selection
+                  {isBeingEdited && (
+                    <Alert
+                      severity="warning"
+                      icon={<Edit />}
+                      onClose={() => _setIsBeingEdited()}
+                      sx={{ marginBottom: 2 }}
+                    >
+                      Currently editing a previous selection
+                    </Alert>
+                  )}
+                  <div css={flexEndStyle}>
+                    <TextField
+                      required
+                      label="Name"
+                      value={selectionName}
+                      onChange={e => setSelectionName(capitalize(e.target.value))}
+                      size="small"
+                      sx={{ alignSelf: 'center' }}
+                    />
+                    <Button onClick={() => createScoreSelection()} disabled={!selection.length || !selectionName}>
+                      {isBeingEdited ? 'Update selection' : 'Create selection'}
+                    </Button>
+                  </div>
+                </ListSubheader>
+              }
+              sx={{
+                overflow: 'auto',
+              }}
+            >
+              {verticalityData.isSuccess && !verticalityData.isFetching && _setSelection(getVerticalityElement())}
 
-        <Snackbar open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage('')}>
-          <Alert severity="warning">{errorMessage}</Alert>
-        </Snackbar>
+              {selection.length ? (
+                selection.map(e => (
+                  <ScoreItem
+                    key={e.id}
+                    item={e}
+                    scoreIri={scoreIri}
+                    onNoteSelect={note =>
+                      _setSelection(e, { ...e, id: e.id + note.id, selection: [note], noteOnBeat: true })
+                    }
+                    secondaryAction={
+                      <IconButton onClick={() => _setSelection(e)}>
+                        <Close />
+                      </IconButton>
+                    }
+                  />
+                ))
+              ) : (
+                <div css={noDataStyle}>
+                  No element was added to the current selection, start by picking elements on the score or from previous
+                  selections
+                </div>
+              )}
+            </List>
+          )}
+        </div>
+        <div css={{ display: 'flex', flexDirection: 'column' }}>
+          <List
+            sx={{
+              overflow: 'auto',
+            }}
+            subheader={
+              <ListSubheader
+                onClick={() => (openedList === CONCEPTS ? setOpenedList(null) : setOpenedList(CONCEPTS))}
+                sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              >
+                {openedList === CONCEPTS ? <ExpandMore /> : <ChevronRight />}
+                Theorical concepts
+              </ListSubheader>
+            }
+          >
+            <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit sx={{ display: 'flex' }}>
+              {treatise.rootClasses.map(concept => (
+                <ListItem key={concept.iri} disablePadding>
+                  <ListItemButton>
+                    <ListItemText primary={concept.label} secondary={treatise.iri} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </Collapse>
+          </List>
+
+          <List
+            sx={{
+              overflow: 'auto',
+            }}
+            subheader={
+              <ListSubheader
+                onClick={() => (openedList === SELECTIONS ? setOpenedList(null) : setOpenedList(SELECTIONS))}
+                sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              >
+                {openedList === SELECTIONS ? <ExpandMore /> : <ChevronRight />}
+                Previous selections
+              </ListSubheader>
+            }
+          >
+            <Collapse in={openedList === SELECTIONS} timeout="auto" unmountOnExit>
+              {scoreSelections.length ? (
+                scoreSelections.map(e => (
+                  <ListItem
+                    key={e.id}
+                    disablePadding
+                    secondaryAction={
+                      <div>
+                        <IconButton onClick={() => _setIsBeingEdited(e)}>
+                          <Edit />
+                        </IconButton>
+                        <IconButton onClick={() => removeScoreSelections(e)}>
+                          <Close />
+                        </IconButton>
+                      </div>
+                    }
+                  >
+                    <ListItemButton
+                      onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
+                      selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
+                      css={{ cursor: 'default' }}
+                    >
+                      <ListItemIcon>
+                        <Sell />
+                      </ListItemIcon>
+                      <ListItemText primary={e.name} secondary={`${e.selection.length} elements`} />
+                    </ListItemButton>
+                  </ListItem>
+                ))
+              ) : (
+                <div css={noDataStyle}>There is no created selection, start by creating one</div>
+              )}
+            </Collapse>
+          </List>
+        </div>
       </div>
+      <Snackbar open={!!confirmationMessage} autoHideDuration={6000} onClose={() => setConfirmationMessage('')}>
+        <Alert severity="success">{confirmationMessage}</Alert>
+      </Snackbar>
+
+      <Snackbar open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage('')}>
+        <Alert severity="warning">{errorMessage}</Alert>
+      </Snackbar>
     </div>
   )
 }

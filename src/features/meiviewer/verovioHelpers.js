@@ -98,6 +98,7 @@ const drawAnnotationShape = points => {
 
   const annotationNode = document.createElementNS('http://www.w3.org/2000/svg', 'path')
   annotationNode.setAttribute('fill', 'salmon')
+  annotationNode.setAttribute('fill-opacity', '50%')
 
   if (points.length == 1) annotationNode.setAttribute('d', roundedHull1(points, hullPadding))
   else if (points.length == 2) annotationNode.setAttribute('d', roundedHull2(points, hullPadding))
