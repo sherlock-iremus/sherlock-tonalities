@@ -102,18 +102,14 @@ export const drawSelection = (scoreSelection, mode) => {
 
   const notes = scoreSelection.selection.filter(s => s.classList)
   const points = notes.map(s => noteCoordinates(s))
-  console.log(points.length)
   switch (points.length) {
     case 1: // circle shape
-      console.log('ici 1')
       selectionNode.setAttribute('d', roundedHull1(points, hullPadding))
       break
     case 2: // capsule shape
-      console.log('ici 2')
       selectionNode.setAttribute('d', roundedHull2(points, hullPadding))
       break
     default: // rounded polygone shape
-      console.log('ici n')
       selectionNode.setAttribute('d', roundedHullN(points, hullPadding))
       break
   }
