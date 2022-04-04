@@ -342,13 +342,15 @@ const MeiViewer = ({
               minHeight: 48,
             }}
             subheader={
-              <ListSubheader
-                onClick={() => (openedList === CONCEPTS ? setOpenedList(null) : setOpenedList(CONCEPTS))}
-                sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-              >
-                {openedList === CONCEPTS ? <ExpandMore /> : <ChevronRight />}
-                <b>Theorical concepts</b>
-                <SearchBar value={filter} onChange={e => setFilter(e.target.value)} />
+              <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  onClick={() => (openedList === CONCEPTS ? setOpenedList(null) : setOpenedList(CONCEPTS))}
+                  css={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: 'bold' }}
+                >
+                  {openedList === CONCEPTS ? <ExpandMore /> : <ChevronRight />}
+                  Theorical concepts
+                </div>
+                {openedList === CONCEPTS && <SearchBar value={filter} onChange={e => setFilter(e.target.value)} />}
               </ListSubheader>
             }
           >
