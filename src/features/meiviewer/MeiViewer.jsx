@@ -45,6 +45,7 @@ import { CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
 import treatise from '../../app/treatises/Zarlino_1588.json'
+import { SearchBar } from './SearchField'
 
 window.verovioCallback = load
 
@@ -63,6 +64,7 @@ const MeiViewer = ({
   const [selectionName, setSelectionName] = useState('')
   const [isBeingEdited, setIsBeingEdited] = useState(null)
   const [openedList, setOpenedList] = useState(null)
+  const [filter, setFilter] = useState('')
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -346,17 +348,20 @@ const MeiViewer = ({
               >
                 {openedList === CONCEPTS ? <ExpandMore /> : <ChevronRight />}
                 <b>Theorical concepts</b>
+                <SearchBar value={filter} onChange={e => setFilter(e.target.value)} />
               </ListSubheader>
             }
           >
             <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit>
-              {treatise.rootClasses.map(concept => (
-                <ListItem key={concept.iri} disablePadding dense>
-                  <ListItemButton>
-                    <ListItemText primary={concept.label} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
+              {treatise.rootClasses
+                .filter(c => (filter ? c.label.toLowerCase().includes(filter.toLowerCase()) : true))
+                .map(concept => (
+                  <ListItem key={concept.iri} disablePadding dense>
+                    <ListItemButton>
+                      <ListItemText primary={concept.label} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
             </Collapse>
           </List>
 
@@ -412,11 +417,21 @@ const MeiViewer = ({
           </List>
         </div>
       </div>
-      <Snackbar open={!!confirmationMessage} autoHideDuration={6000} onClose={() => setConfirmationMessage('')} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+      <Snackbar
+        open={!!confirmationMessage}
+        autoHideDuration={6000}
+        onClose={() => setConfirmationMessage('')}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
         <Alert severity="success">{confirmationMessage}</Alert>
       </Snackbar>
 
-      <Snackbar open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage('')} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+      <Snackbar
+        open={!!errorMessage}
+        autoHideDuration={6000}
+        onClose={() => setErrorMessage('')}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
         <Alert severity="warning">{errorMessage}</Alert>
       </Snackbar>
     </div>

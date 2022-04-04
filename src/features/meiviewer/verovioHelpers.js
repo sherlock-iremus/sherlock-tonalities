@@ -26,7 +26,8 @@ export const drawBeat = (beat, mode) => {
   anchor.setAttribute('d', roundedHull2(points, padding))
   anchor.setAttribute('fill', color)
   anchor.setAttribute('fill-opacity', '30%')
-  beat.referenceNote.appendChild(anchor)
+
+  getSystem(beat.referenceNote).appendChild(anchor)
 }
 
 export const getMeasure = node =>
