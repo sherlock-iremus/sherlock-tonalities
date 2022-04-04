@@ -230,7 +230,7 @@ const MeiViewer = ({
             <List
               subheader={
                 <ListSubheader>
-                  Current inspection
+                  <b>Current inspection</b>
                   {infoDisplay && (
                     <Alert severity="info" onClose={() => setInfoDisplay(false)} sx={{ marginBottom: 2 }}>
                       To select a verticality, Alt+click a note
@@ -275,7 +275,7 @@ const MeiViewer = ({
             <List
               subheader={
                 <ListSubheader>
-                  Current selection
+                  <b>Current selection</b>
                   {isBeingEdited && (
                     <Alert
                       severity="warning"
@@ -345,7 +345,7 @@ const MeiViewer = ({
                 sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
               >
                 {openedList === CONCEPTS ? <ExpandMore /> : <ChevronRight />}
-                Theorical concepts
+                <b>Theorical concepts</b>
               </ListSubheader>
             }
           >
@@ -353,7 +353,7 @@ const MeiViewer = ({
               {treatise.rootClasses.map(concept => (
                 <ListItem key={concept.iri} disablePadding dense>
                   <ListItemButton>
-                    <ListItemText primary={concept.label} secondary={treatise.iri} />
+                    <ListItemText primary={concept.label} />
                   </ListItemButton>
                 </ListItem>
               ))}
@@ -371,7 +371,7 @@ const MeiViewer = ({
                 sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
               >
                 {openedList === SELECTIONS ? <ExpandMore /> : <ChevronRight />}
-                Previous selections
+                <b>Previous selection</b>
               </ListSubheader>
             }
           >
@@ -412,11 +412,11 @@ const MeiViewer = ({
           </List>
         </div>
       </div>
-      <Snackbar open={!!confirmationMessage} autoHideDuration={6000} onClose={() => setConfirmationMessage('')}>
+      <Snackbar open={!!confirmationMessage} autoHideDuration={6000} onClose={() => setConfirmationMessage('')} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
         <Alert severity="success">{confirmationMessage}</Alert>
       </Snackbar>
 
-      <Snackbar open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage('')}>
+      <Snackbar open={!!errorMessage} autoHideDuration={6000} onClose={() => setErrorMessage('')} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
         <Alert severity="warning">{errorMessage}</Alert>
       </Snackbar>
     </div>

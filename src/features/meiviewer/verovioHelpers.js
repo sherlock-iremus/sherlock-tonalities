@@ -98,7 +98,7 @@ export const drawSelection = (scoreSelection, mode) => {
   const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'path')
   selectionNode.setAttribute('id', scoreSelection.id)
   selectionNode.setAttribute('fill', color)
-  selectionNode.setAttribute('fill-opacity', '50%')
+  selectionNode.setAttribute('fill-opacity', '30%')
 
   const notes = scoreSelection.selection.filter(s => s.classList)
   const points = notes.map(s => noteCoordinates(s))
