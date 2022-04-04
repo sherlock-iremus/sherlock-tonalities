@@ -15,15 +15,17 @@ export const drawBeat = (beat, mode) => {
   const measureCoor = measureCoordinates(getMeasure(beat.referenceNote))
 
   const color = mode === 'INSPECTION' ? 'red' : 'blue'
+  const padding = 300
+  const points = [
+    [noteCoor[0], measureCoor.top],
+    [noteCoor[0], measureCoor.bottom],
+  ]
 
-  const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+  const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'path')
   anchor.setAttribute('id', beat.id)
-  anchor.setAttribute('x1', noteCoor[0])
-  anchor.setAttribute('y1', measureCoor.top)
-  anchor.setAttribute('x2', noteCoor[0])
-  anchor.setAttribute('y2', measureCoor.bottom)
-  anchor.setAttribute('stroke', color)
-  anchor.setAttribute('stroke-width', '16')
+  anchor.setAttribute('d', roundedHull2(points, padding))
+  anchor.setAttribute('fill', color)
+  anchor.setAttribute('fill-opacity', '30%')
   beat.referenceNote.appendChild(anchor)
 }
 
@@ -93,27 +95,20 @@ export const load = mei_uri => {
 }
 
 export const drawSelection = (scoreSelection, mode) => {
-  const hullPadding = 200
+  const hullPadding = 300
   const color = mode === 'INSPECTION' ? 'red' : 'blue'
-  const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+  const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
   selectionNode.setAttribute('id', scoreSelection.id)
-  selectionNode.setAttribute('fill', color)
-  selectionNode.setAttribute('fill-opacity', '30%')
 
   const notes = scoreSelection.selection.filter(s => s.classList)
   const points = notes.map(s => noteCoordinates(s))
-  switch (points.length) {
-    case 1: // circle shape
-      selectionNode.setAttribute('d', roundedHull1(points, hullPadding))
-      break
-    case 2: // capsule shape
-      selectionNode.setAttribute('d', roundedHull2(points, hullPadding))
-      break
-    default: // rounded polygone shape
-      selectionNode.setAttribute('d', roundedHullN(points, hullPadding))
-      break
-  }
-
+  points.forEach(p => {
+    const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    node.setAttribute('fill', color)
+    node.setAttribute('fill-opacity', '30%')
+    node.setAttribute('d', roundedHull1(p, hullPadding))
+    selectionNode.appendChild(node)
+  })
   const systemNode = getSystem(scoreSelection.selection[0])
   systemNode.parentNode.insertBefore(selectionNode, systemNode)
 }
@@ -121,8 +116,8 @@ export const drawSelection = (scoreSelection, mode) => {
 const roundedHull1 = (points, hullPadding) => {
   // Returns the path for a rounded hull around a single point (a circle).
 
-  const p1 = [points[0][0], points[0][1] - hullPadding]
-  const p2 = [points[0][0], parseInt(points[0][1]) + parseInt(hullPadding)]
+  const p1 = [points[0], points[1] - hullPadding]
+  const p2 = [points[0], parseInt(points[1]) + parseInt(hullPadding)]
 
   return (
     'M ' +
