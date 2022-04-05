@@ -46,6 +46,7 @@ import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { SearchBar } from './SearchField'
+import { ConceptItem } from './ConceptItem'
 
 window.verovioCallback = load
 
@@ -358,11 +359,8 @@ const MeiViewer = ({
               {treatise.rootClasses
                 .filter(c => (filter ? c.label.toLowerCase().includes(filter.toLowerCase()) : true))
                 .map(concept => (
-                  <ListItem key={concept.iri} disablePadding dense>
-                    <ListItemButton>
-                      <ListItemText primary={concept.label} />
-                    </ListItemButton>
-                  </ListItem>
+                  <ConceptItem key={concept.iri} disablePadding dense concept={concept}>
+                  </ConceptItem>
                 ))}
             </Collapse>
           </List>
