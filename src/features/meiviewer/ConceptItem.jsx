@@ -6,7 +6,7 @@ export const ConceptItem = props => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div>
-      <ListItem disablePadding>
+      <ListItem disablePadding dense>
         <ListItemButton onClick={() => setIsOpen(!isOpen)} sx={{ cursor: 'default' }}>
           <ListItemIcon>{props.concept.subClasses && (isOpen ? <ExpandMore /> : <ChevronRight />)}</ListItemIcon>
           <ListItemText primary={props.concept.label} />

@@ -66,6 +66,7 @@ const MeiViewer = ({
   const [isBeingEdited, setIsBeingEdited] = useState(null)
   const [openedList, setOpenedList] = useState(null)
   const [filter, setFilter] = useState('')
+  const [filteredTree, setFilteredTree] = useState(treatise)
 
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
@@ -74,6 +75,21 @@ const MeiViewer = ({
   useEffect(() => {
     createVerovio(meiUrl) // github.com/rism-digital/verovio-app-react/blob/master/src/App.js
   }, [])
+
+  const _setFilter = newFilter => {
+    setFilter(newFilter)
+    setFilteredTree(newFilter ? _setFilteredTree(treatise, newFilter) : treatise)
+  }
+
+  const _setFilteredTree = (node, newFilter) => {
+    if (node.rootClasses) return { ...node, rootClasses: node.rootClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
+    else if (node.subClasses) {
+      const filteredNode = { ...node, subClasses: node.subClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
+      if (filteredNode.subClasses.length) return filteredNode
+    }
+    if (node.label && node.label.toLowerCase().includes(newFilter.toLowerCase())) return node
+    return null
+  }
 
   const _setInspectedElement = element => {
     if (inspectedElement) removeInspectionStyle(inspectedElement)
@@ -351,17 +367,14 @@ const MeiViewer = ({
                   {openedList === CONCEPTS ? <ExpandMore /> : <ChevronRight />}
                   Theorical concepts
                 </div>
-                {openedList === CONCEPTS && <SearchBar value={filter} onChange={e => setFilter(e.target.value)} />}
+                {openedList === CONCEPTS && <SearchBar value={filter} onChange={e => _setFilter(e.target.value)} />}
               </ListSubheader>
             }
           >
             <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit>
-              {treatise.rootClasses
-                .filter(c => (filter ? c.label.toLowerCase().includes(filter.toLowerCase()) : true))
-                .map(concept => (
-                  <ConceptItem key={concept.iri} disablePadding dense concept={concept}>
-                  </ConceptItem>
-                ))}
+              {filteredTree.rootClasses && filteredTree.rootClasses.map(concept => (
+                <ConceptItem key={concept.iri} concept={concept} />
+              ))}
             </Collapse>
           </List>
 
