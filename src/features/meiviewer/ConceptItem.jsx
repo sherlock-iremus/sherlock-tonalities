@@ -8,7 +8,7 @@ export const ConceptItem = props => {
     <div>
       <ListItem disablePadding dense>
         <ListItemButton onClick={() => setIsOpen(!isOpen)} sx={{ cursor: 'default' }}>
-          <ListItemIcon>{props.concept.subClasses && (isOpen ? <ExpandMore /> : <ChevronRight />)}</ListItemIcon>
+          {props.concept.subClasses && (isOpen ? <ExpandMore /> : <ChevronRight />)}
           <ListItemText primary={props.concept.label} />
         </ListItemButton>
       </ListItem>

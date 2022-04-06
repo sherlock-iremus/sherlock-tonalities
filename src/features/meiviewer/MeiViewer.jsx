@@ -371,7 +371,7 @@ const MeiViewer = ({
               </ListSubheader>
             }
           >
-            <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit>
+            <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit sx={{pl: 4}}>
               {filteredTree.rootClasses && filteredTree.rootClasses.map(concept => (
                 <ConceptItem key={concept.iri} concept={concept} />
               ))}
