@@ -1,7 +1,7 @@
 // MODES
 export const INSPECTION = 'INSPECTION'
 export const SELECTION = 'SELECTION'
-// export const ANNOTATION = 'ANNOTATION'
+export const ANNOTATION = 'ANNOTATION'
 
 
 // LISTS

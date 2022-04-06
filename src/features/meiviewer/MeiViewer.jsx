@@ -19,6 +19,7 @@ import {
   IconButton,
   Collapse,
   Divider,
+  InputAdornment,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -40,8 +41,8 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Lyrics, FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight } from '@mui/icons-material'
-import { CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
+import { Lyrics, FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight, SpeakerNotes } from '@mui/icons-material'
+import { ANNOTATION, CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
 import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
 import { ScoreItem } from './ScoreItem'
 import treatise from '../../app/treatises/Zarlino_1588.json'
@@ -57,6 +58,7 @@ const MeiViewer = ({
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
   const [selection, setSelection] = useState([])
+  const [currentAnnotation, setCurrentAnnotation] = useState({ concept: null, selection: [] })
   const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
   const [confirmationMessage, setConfirmationMessage] = useState('')
@@ -82,9 +84,13 @@ const MeiViewer = ({
   }
 
   const _setFilteredTree = (node, newFilter) => {
-    if (node.rootClasses) return { ...node, rootClasses: node.rootClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
+    if (node.rootClasses)
+      return { ...node, rootClasses: node.rootClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
     else if (node.subClasses) {
-      const filteredNode = { ...node, subClasses: node.subClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
+      const filteredNode = {
+        ...node,
+        subClasses: node.subClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean),
+      }
       if (filteredNode.subClasses.length) return filteredNode
     }
     if (node.label && node.label.toLowerCase().includes(newFilter.toLowerCase())) return node
@@ -240,6 +246,11 @@ const MeiViewer = ({
             </ToggleButton>
             <ToggleButton value={SELECTION}>
               <Tooltip title="Selection mode">
+                <SpeakerNotes />
+              </Tooltip>
+            </ToggleButton>
+            <ToggleButton value={ANNOTATION}>
+              <Tooltip title="Annotation mode">
                 <Lyrics />
               </Tooltip>
             </ToggleButton>
@@ -350,6 +361,58 @@ const MeiViewer = ({
               )}
             </List>
           )}
+
+          {mode === ANNOTATION && (
+            <List
+              subheader={
+                <ListSubheader>
+                  <b>Current annotation</b>
+                  <div css={flexEndStyle}>
+                    <TextField
+                      required
+                      label="Concept"
+                      value={currentAnnotation.concept ? currentAnnotation.concept.label : ''}
+                      size="small"
+                      sx={{ alignSelf: 'center' }}
+                      InputProps={{
+                        readOnly: true,
+                        endAdornment: (
+                          <InputAdornment>
+                            <IconButton onClick={() => setCurrentAnnotation({ ...currentAnnotation, concept: null })}>
+                              <Close />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <Button>Create annotation</Button>
+                  </div>
+                </ListSubheader>
+              }
+              sx={{
+                overflow: 'auto',
+              }}
+            >
+              {currentAnnotation.selection.length ? (
+                currentAnnotation.selection.map(e => (
+                  <ScoreItem
+                    key={e.id}
+                    item={e}
+                    scoreIri={scoreIri}
+                    secondaryAction={
+                      <IconButton>
+                        <Close />
+                      </IconButton>
+                    }
+                  />
+                ))
+              ) : (
+                <div css={noDataStyle}>
+                  Current annotation is empty, start by selection a concept or a previous selection
+                </div>
+              )}
+            </List>
+          )}
         </div>
         <div css={{ display: 'flex', flexDirection: 'column' }}>
           <Divider />
@@ -371,10 +434,21 @@ const MeiViewer = ({
               </ListSubheader>
             }
           >
-            <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit sx={{pl: 4}}>
-              {filteredTree.rootClasses && filteredTree.rootClasses.map(concept => (
-                <ConceptItem key={concept.iri} concept={concept} />
-              ))}
+            <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit sx={{ pl: 4 }}>
+              {filteredTree.rootClasses &&
+                filteredTree.rootClasses.map(concept => (
+                  <ConceptItem
+                    key={concept.iri}
+                    concept={concept}
+                    setConcept={concept =>
+                      mode === ANNOTATION &&
+                      setCurrentAnnotation({
+                        ...currentAnnotation,
+                        concept: currentAnnotation.concept === concept ? null : concept,
+                      })
+                    }
+                  />
+                ))}
             </Collapse>
           </List>
 
