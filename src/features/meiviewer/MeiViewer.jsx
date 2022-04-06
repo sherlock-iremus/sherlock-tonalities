@@ -377,15 +377,17 @@ const MeiViewer = ({
                       InputProps={{
                         readOnly: true,
                         endAdornment: (
-                          <InputAdornment>
-                            <IconButton onClick={() => setCurrentAnnotation({ ...currentAnnotation, concept: null })}>
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={() => setCurrentAnnotation({ ...currentAnnotation, concept: null })}
+                              disabled={!currentAnnotation.concept}
+                            >
                               <Close />
                             </IconButton>
                           </InputAdornment>
                         ),
                       }}
                     />
-                    <Button>Create annotation</Button>
                   </div>
                 </ListSubheader>
               }
@@ -435,7 +437,7 @@ const MeiViewer = ({
             }
           >
             <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit sx={{ pl: 4 }}>
-              {filteredTree.rootClasses &&
+              {filteredTree.rootClasses.length ? (
                 filteredTree.rootClasses.map(concept => (
                   <ConceptItem
                     key={concept.iri}
@@ -448,7 +450,10 @@ const MeiViewer = ({
                       })
                     }
                   />
-                ))}
+                ))
+              ) : (
+                <div css={noDataStyle}>No matching concept for this filter</div>
+              )}
             </Collapse>
           </List>
 
