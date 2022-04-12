@@ -3,12 +3,12 @@ export const getNotesOnFirstBeat = noteIri => `
     SELECT ?notes ?beat ?selectedNote
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            ?notes sherlock:contains_beats ?beat
+            ?notes sherlock:contains_beat ?beat
             {
                 SELECT ?beat ?selectedNote
                 WHERE {
                     BIND (<${noteIri}> AS ?selectedNote)
-                    ?selectedNote sherlock:contains_beats ?beat
+                    ?selectedNote sherlock:contains_beat ?beat
                 }
                 ORDER BY ASC(?beat)
                 LIMIT 1

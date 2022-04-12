@@ -1,0 +1,18 @@
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+SELECT ?notes ?beat ?selectedNote
+WHERE {
+    GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+        ?notes sherlock:contains_beat ?beat
+        {
+            SELECT ?beat ?selectedNote
+            WHERE {
+                GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+                    BIND (<http://data-iremus.huma-num.fr/id/31bbbea9-98a9-4c3a-9276-734ba9e949e2_d1e1691> AS ?selectedNote)
+                    ?selectedNote sherlock:contains_beat ?beat
+                }
+            }
+            ORDER BY ASC(?beat)
+            LIMIT 1
+        }
+    }
+}
