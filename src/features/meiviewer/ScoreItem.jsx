@@ -9,7 +9,7 @@ import {
   IconButton,
   Tooltip,
 } from '@mui/material'
-import { useGetNoteInfoQuery } from '../../app/services/sparqlLocal'
+import { useGetNoteInfoQuery } from '../../app/services/sparql'
 import {
   MusicNote,
   ExpandMore,
