@@ -190,7 +190,7 @@ const MeiViewer = ({
 
   const getVerticalityElement = () => {
     setRightClickedNoteId(null)
-    return {
+    return verticalityData.data.results.bindings.length ? {
       id: verticalityData.data.results.bindings[0].beat.value.slice(scoreIri.length + 1),
       referenceNote: document.getElementById(
         verticalityData.data.results.bindings[0].selectedNote.value.slice(scoreIri.length + 1)
@@ -198,7 +198,7 @@ const MeiViewer = ({
       selection: verticalityData.data.results.bindings.map(binding =>
         document.getElementById(binding.notes.value.slice(scoreIri.length + 1))
       ),
-    }
+    } : setErrorMessage('Impossible de calculer la verticalité')
   }
 
   if (inspectedElement) {
