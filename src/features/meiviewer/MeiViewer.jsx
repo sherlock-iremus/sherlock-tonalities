@@ -19,7 +19,6 @@ import {
   IconButton,
   Collapse,
   Divider,
-  InputAdornment,
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import {
@@ -41,9 +40,9 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { Lyrics, FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight, SpeakerNotes } from '@mui/icons-material'
-import { ANNOTATION, CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
-import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparqlLocal'
+import { FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight, SpeakerNotes } from '@mui/icons-material'
+import { CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
+import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparql'
 import { ScoreItem } from './ScoreItem'
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { SearchBar } from './SearchField'
@@ -52,13 +51,12 @@ import { ConceptItem } from './ConceptItem'
 window.verovioCallback = load
 
 const MeiViewer = ({
-  meiUrl = 'http://data-iremus.huma-num.fr/files/mei/e2492d45-b068-4954-8781-9d5653deb8f5.mei',
-  scoreIri = 'http://data-iremus.huma-num.fr/id/e2492d45-b068-4954-8781-9d5653deb8f5',
+  meiUrl = 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/31bbbea9-98a9-4c3a-9276-734ba9e949e2.mei',
+  scoreIri = 'http://data-iremus.huma-num.fr/id/31bbbea9-98a9-4c3a-9276-734ba9e949e2',
 }) => {
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
   const [selection, setSelection] = useState([])
-  const [currentAnnotation, setCurrentAnnotation] = useState({ concept: null, selection: [] })
   const [rightClickedNoteId, setRightClickedNoteId] = useState(null)
   const [scoreSelections, setScoreSelections] = useState([])
   const [confirmationMessage, setConfirmationMessage] = useState('')
@@ -249,11 +247,6 @@ const MeiViewer = ({
                 <SpeakerNotes />
               </Tooltip>
             </ToggleButton>
-            <ToggleButton value={ANNOTATION}>
-              <Tooltip title="Annotation mode">
-                <Lyrics />
-              </Tooltip>
-            </ToggleButton>
           </ToggleButtonGroup>
 
           {mode === INSPECTION && (
@@ -361,60 +354,6 @@ const MeiViewer = ({
               )}
             </List>
           )}
-
-          {mode === ANNOTATION && (
-            <List
-              subheader={
-                <ListSubheader>
-                  <b>Current annotation</b>
-                  <div css={flexEndStyle}>
-                    <TextField
-                      required
-                      label="Concept"
-                      value={currentAnnotation.concept ? currentAnnotation.concept.label : ''}
-                      size="small"
-                      sx={{ alignSelf: 'center' }}
-                      InputProps={{
-                        readOnly: true,
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={() => setCurrentAnnotation({ ...currentAnnotation, concept: null })}
-                              disabled={!currentAnnotation.concept}
-                            >
-                              <Close />
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                </ListSubheader>
-              }
-              sx={{
-                overflow: 'auto',
-              }}
-            >
-              {currentAnnotation.selection.length ? (
-                currentAnnotation.selection.map(e => (
-                  <ScoreItem
-                    key={e.id}
-                    item={e}
-                    scoreIri={scoreIri}
-                    secondaryAction={
-                      <IconButton>
-                        <Close />
-                      </IconButton>
-                    }
-                  />
-                ))
-              ) : (
-                <div css={noDataStyle}>
-                  Current annotation is empty, start by selection a concept or a previous selection
-                </div>
-              )}
-            </List>
-          )}
         </div>
         <div css={{ display: 'flex', flexDirection: 'column' }}>
           <Divider />
@@ -438,19 +377,7 @@ const MeiViewer = ({
           >
             <Collapse in={openedList === CONCEPTS} timeout="auto" unmountOnExit sx={{ pl: 4 }}>
               {filteredTree.rootClasses.length ? (
-                filteredTree.rootClasses.map(concept => (
-                  <ConceptItem
-                    key={concept.iri}
-                    concept={concept}
-                    setConcept={concept =>
-                      mode === ANNOTATION &&
-                      setCurrentAnnotation({
-                        ...currentAnnotation,
-                        concept: currentAnnotation.concept === concept ? null : concept,
-                      })
-                    }
-                  />
-                ))
+                filteredTree.rootClasses.map(concept => <ConceptItem key={concept.iri} concept={concept} />)
               ) : (
                 <div css={noDataStyle}>No matching concept for this filter</div>
               )}

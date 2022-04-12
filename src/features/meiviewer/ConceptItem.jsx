@@ -10,7 +10,7 @@ export const ConceptItem = props => {
         {props.concept.subClasses && (
           <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
         )}
-        <ListItemButton sx={{ cursor: 'default' }} onClick={() => props.setConcept(props.concept)}>
+        <ListItemButton>
           <ListItemText primary={props.concept.label} />
         </ListItemButton>
       </ListItem>
@@ -18,7 +18,7 @@ export const ConceptItem = props => {
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List sx={{ pl: 4 }} dense disablePadding>
             {props.concept.subClasses.map(subClass => (
-              <ConceptItem key={subClass.iri} concept={subClass} setConcept={concept => props.setConcept(concept)} />
+              <ConceptItem key={subClass.iri} concept={subClass} />
             ))}
           </List>
         </Collapse>
