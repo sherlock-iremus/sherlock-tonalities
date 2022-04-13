@@ -33,13 +33,13 @@ export const getNoteInfo = noteIri => `
 export const getAnnotations = ([scoreIri, treatiseIri]) => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-    SELECT ?annotation ?annotationName
+    SELECT ?annotation ?concept
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
             ?analysis crm:P16_used_specific_object <${scoreIri}> .
             ?analysis crm:P9_consists_of ?annotation .
-            ?annotation crm:P177_assigned_property_of_type ?annotationName .
-            FILTER (regex(str(?annotationName),"${treatiseIri}")) .
+            ?annotation crm:P141_assigned ?concept .
+            FILTER (regex(str(?concept),"${treatiseIri}")) .
         }
     }
 `

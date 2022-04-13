@@ -464,7 +464,7 @@ const MeiViewer = ({
                         <Lyrics />
                       </ListItemIcon>
                       <ListItemText
-                        primary={binding.annotationName.value.slice(treatise.iri.length)}
+                        primary={binding.concept.value.slice(treatise.iri.length)}
                         secondary={binding.annotation.value}
                       />
                     </ListItemButton>
