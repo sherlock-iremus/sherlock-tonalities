@@ -96,22 +96,23 @@ export const load = mei_uri => {
 }
 
 export const drawSelection = (scoreSelection, mode) => {
-  const hullPadding = 300
-  const color = mode === 'INSPECTION' ? 'red' : 'blue'
-  const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
-  selectionNode.setAttribute('id', scoreSelection.id)
-
   const notes = scoreSelection.selection.filter(s => s.classList)
-  const points = notes.map(s => noteCoordinates(s))
-  points.forEach(p => {
-    const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-    node.setAttribute('fill', color)
-    node.setAttribute('fill-opacity', '30%')
-    node.setAttribute('d', roundedHull1(p, hullPadding))
-    selectionNode.appendChild(node)
-  })
-  const systemNode = getSystem(scoreSelection.selection[0])
-  systemNode.parentNode.insertBefore(selectionNode, systemNode)
+  if (notes.length) {
+    const hullPadding = 300
+    const color = mode === 'INSPECTION' ? 'red' : 'blue'
+    const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+    selectionNode.setAttribute('id', scoreSelection.id)
+    const points = notes.map(s => noteCoordinates(s))
+    points.forEach(p => {
+      const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+      node.setAttribute('fill', color)
+      node.setAttribute('fill-opacity', '30%')
+      node.setAttribute('d', roundedHull1(p, hullPadding))
+      selectionNode.appendChild(node)
+    })
+    const systemNode = getSystem(notes[0])
+    systemNode.parentNode.insertBefore(selectionNode, systemNode)
+  }
 }
 
 const roundedHull1 = (points, hullPadding) => {

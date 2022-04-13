@@ -423,7 +423,10 @@ const MeiViewer = ({
                     <ListItemButton
                       onClick={() => (mode === SELECTION ? _setSelection(e) : _setInspectedElement(e))}
                       onMouseEnter={() => addInspectionStyle(e)}
-                      onMouseLeave={() => removeInspectionStyle(e)}
+                      onMouseLeave={() =>
+                        (mode === SELECTION ? !selection.includes(e) : inspectedElement !== e) &&
+                        removeInspectionStyle(e)
+                      }
                       selected={mode === SELECTION ? selection.includes(e) : inspectedElement === e}
                       css={{ cursor: 'default' }}
                     >
