@@ -40,9 +40,9 @@ import {
   centerStyle,
 } from './mei.css'
 import { sameMembers } from './utils'
-import { FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight, SpeakerNotes } from '@mui/icons-material'
-import { CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
-import { useGetNotesOnFirstBeatQuery } from '../../app/services/sparql'
+import { FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight, SpeakerNotes, Lyrics } from '@mui/icons-material'
+import { ANNOTATIONS, CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
+import { useGetAnnotationsQuery, useGetNotesOnFirstBeatQuery } from '../../app/services/sparql'
 import { ScoreItem } from './ScoreItem'
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { SearchBar } from './SearchField'
@@ -51,8 +51,8 @@ import { ConceptItem } from './ConceptItem'
 window.verovioCallback = load
 
 const MeiViewer = ({
-  meiUrl = 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/31bbbea9-98a9-4c3a-9276-734ba9e949e2.mei',
-  scoreIri = 'http://data-iremus.huma-num.fr/id/31bbbea9-98a9-4c3a-9276-734ba9e949e2',
+  meiUrl = 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/eff6f0a7-cf80-402c-953b-c66161051356.mei',
+  scoreIri = 'http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356',
 }) => {
   const [mode, setMode] = useState(INSPECTION)
   const [inspectedElement, setInspectedElement] = useState(null)
@@ -68,6 +68,7 @@ const MeiViewer = ({
   const [filter, setFilter] = useState('')
   const [filteredTree, setFilteredTree] = useState(treatise)
 
+  const annotations = useGetAnnotationsQuery([scoreIri, treatise.iri])
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
   })
@@ -190,15 +191,17 @@ const MeiViewer = ({
 
   const getVerticalityElement = () => {
     setRightClickedNoteId(null)
-    return verticalityData.data.results.bindings.length ? {
-      id: verticalityData.data.results.bindings[0].beat.value.slice(scoreIri.length + 1),
-      referenceNote: document.getElementById(
-        verticalityData.data.results.bindings[0].selectedNote.value.slice(scoreIri.length + 1)
-      ),
-      selection: verticalityData.data.results.bindings.map(binding =>
-        document.getElementById(binding.notes.value.slice(scoreIri.length + 1))
-      ),
-    } : setErrorMessage('Impossible de calculer la verticalité')
+    return verticalityData.data.results.bindings.length
+      ? {
+          id: verticalityData.data.results.bindings[0].beat.value.slice(scoreIri.length + 1),
+          referenceNote: document.getElementById(
+            verticalityData.data.results.bindings[0].selectedNote.value.slice(scoreIri.length + 1)
+          ),
+          selection: verticalityData.data.results.bindings.map(binding =>
+            document.getElementById(binding.notes.value.slice(scoreIri.length + 1))
+          ),
+        }
+      : setErrorMessage('Impossible de calculer la verticalité')
   }
 
   if (inspectedElement) {
@@ -431,6 +434,42 @@ const MeiViewer = ({
                 ))
               ) : (
                 <div css={noDataStyle}>There is no created selection, start by creating one</div>
+              )}
+            </Collapse>
+          </List>
+
+          <List
+            sx={{
+              overflow: 'auto',
+              minHeight: 48,
+            }}
+            subheader={
+              <ListSubheader
+                onClick={() => (openedList === ANNOTATIONS ? setOpenedList(null) : setOpenedList(ANNOTATIONS))}
+                sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              >
+                {openedList === ANNOTATIONS ? <ExpandMore /> : <ChevronRight />}
+                <b>Created annotations</b>
+              </ListSubheader>
+            }
+          >
+            <Collapse in={openedList === ANNOTATIONS} timeout="auto" unmountOnExit>
+              {annotations.isSuccess && annotations.data.results.bindings.length ? (
+                annotations.data.results.bindings.map(binding => (
+                  <ListItem key={binding.annotation.value} dense disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <Lyrics />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={binding.annotationName.value.slice(treatise.iri.length)}
+                        secondary={binding.annotation.value}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                ))
+              ) : (
+                <div css={noDataStyle}>There is no created annotation for this score</div>
               )}
             </Collapse>
           </List>
