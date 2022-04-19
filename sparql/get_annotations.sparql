@@ -1,13 +1,13 @@
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
 
-SELECT ?rootAnnotation
+SELECT ?root
 WHERE {
     GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
         ?analysis crm:P16_used_specific_object <http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356> .
         ?analysis crm:P9_consists_of ?annotation .
         ?annotation crm:P140_assigned_attribute_to ?group .
-        ?rootAnnotation crm:P141_assigned ?group
+        ?root crm:P141_assigned ?group
     }
 }
-GROUP BY ?rootAnnotation
+GROUP BY ?root

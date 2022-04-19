@@ -40,12 +40,14 @@ export const getNote = node =>
   node.classList && node.classList.contains('note') ? node : node.parentNode && getNote(node.parentNode)
 
 export const addInspectionStyle = element => {
+  if (element.annotation) return
   if (element.referenceNote && !document.getElementById(element.id)) drawBeat(element, INSPECTION)
   if (element.name && !document.getElementById(element.id)) drawSelection(element, INSPECTION)
   element.classList ? element.classList.add('inspected') : element.selection.forEach(e => addInspectionStyle(e))
 }
 
 export const removeInspectionStyle = element => {
+  if (element.annotation) return
   if (element.referenceNote && document.getElementById(element.id)) document.getElementById(element.id).remove()
   if (element.name && document.getElementById(element.id)) document.getElementById(element.id).remove()
   element.classList ? element.classList.remove('inspected') : element.selection.forEach(e => removeInspectionStyle(e))

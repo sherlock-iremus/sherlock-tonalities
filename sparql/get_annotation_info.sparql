@@ -1,0 +1,14 @@
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?annotation ?concept
+WHERE {
+    GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+        VALUES ?annotation {<http://data-iremus.huma-num.fr/id/a0c2cc00-8441-4a5b-a0ec-182574729c51>}
+        ?annotation crm:P141_assigned ?group .
+        ?assignment crm:P140_assigned_attribute_to ?group .
+        ?assignment crm:P177_assigned_property_of_type rdf:type .
+        ?assignment crm:P141_assigned ?concept
+    }
+}

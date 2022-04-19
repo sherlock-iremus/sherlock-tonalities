@@ -68,7 +68,7 @@ const MeiViewer = ({
   const [filter, setFilter] = useState('')
   const [filteredTree, setFilteredTree] = useState(treatise)
 
-  const annotations = useGetAnnotationsQuery([scoreIri, treatise.iri])
+  const annotations = useGetAnnotationsQuery(scoreIri)
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
     skip: !rightClickedNoteId,
   })
@@ -275,6 +275,7 @@ const MeiViewer = ({
                 <ScoreItem
                   item={inspectedElement}
                   scoreIri={scoreIri}
+                  treatiseIri={treatise.iri}
                   onNoteSelect={note =>
                     _setInspectedElement({
                       ...inspectedElement,
@@ -461,14 +462,13 @@ const MeiViewer = ({
             <Collapse in={openedList === ANNOTATIONS} timeout="auto" unmountOnExit>
               {annotations.isSuccess && annotations.data.results.bindings.length ? (
                 annotations.data.results.bindings.map(binding => (
-                  <ListItem key={binding.annotation.value} dense disablePadding>
-                    <ListItemButton>
+                  <ListItem key={binding.root.value} dense disablePadding>
+                    <ListItemButton onClick={() => mode === INSPECTION && _setInspectedElement({ id: binding.root.value, annotation: true })}>
                       <ListItemIcon>
                         <Lyrics />
                       </ListItemIcon>
                       <ListItemText
-                        primary={binding.concept.value.slice(treatise.iri.length)}
-                        secondary={binding.annotation.value}
+                        primary={binding.root.value}
                       />
                     </ListItemButton>
                   </ListItem>

@@ -8,8 +8,9 @@ import {
   Skeleton,
   IconButton,
   Tooltip,
+  Chip,
 } from '@mui/material'
-import { useGetNoteInfoQuery } from '../../app/services/sparql'
+import { useGetNoteInfoQuery, useGetAnnotationInfoQuery } from '../../app/services/sparql'
 import {
   MusicNote,
   ExpandMore,
@@ -18,14 +19,16 @@ import {
   AlignHorizontalCenter,
   HighlightAlt,
   QueueMusic,
+  Lyrics,
 } from '@mui/icons-material'
 import { useState } from 'react'
 
 export const ScoreItem = props => {
   const [isOpen, setIsOpen] = useState(false)
   const noteInfo = useGetNoteInfoQuery(`${props.scoreIri}_${props.item.id}`, {
-    skip: props.item.referenceNote || props.item.selection,
+    skip: props.item.referenceNote || props.item.selection || props.item.annotation,
   })
+  const annotationInfo = useGetAnnotationInfoQuery(props.item.id, { skip: !props.item.annotation })
 
   const getNoteLabel = () => {
     const {
@@ -59,6 +62,23 @@ export const ScoreItem = props => {
 
     return pname.toUpperCase() + oct + alteration
   }
+
+  if (props.item.annotation && annotationInfo.isSuccess)
+    return (
+      <ListItem disablePadding>
+        <ListItemButton>
+          <ListItemIcon>
+            <Lyrics />
+          </ListItemIcon>
+          <ListItemText
+            primary={annotationInfo.data.results.bindings.map(binding => (
+              <Chip key={binding.concept.value} label={binding.concept.value.slice(props.treatiseIri.length)} sx={{ m: 0.3 }}  />
+            ))}
+            secondary={props.item.id}
+          />
+        </ListItemButton>
+      </ListItem>
+    )
 
   if (props.labelOnly) return getNoteLabel()
 
@@ -125,6 +145,8 @@ export const ScoreItem = props => {
         </ListItemButton>
       </ListItem>
     )
+
+  // element is loading
   return (
     <ListItem disablePadding>
       <ListItemButton sx={{ cursor: 'default' }}>
