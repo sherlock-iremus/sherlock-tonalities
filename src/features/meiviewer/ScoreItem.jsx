@@ -10,7 +10,7 @@ import {
   Tooltip,
   Chip,
 } from '@mui/material'
-import { useGetNoteInfoQuery, useGetAnnotationInfoQuery } from '../../app/services/sparql'
+import { useGetNoteInfoQuery, useGetAnnotationInfoQuery, useGetSubAnnotationsQuery } from '../../app/services/sparql'
 import {
   MusicNote,
   ExpandMore,
@@ -22,6 +22,7 @@ import {
   Lyrics,
 } from '@mui/icons-material'
 import { useState } from 'react'
+import { addInspectionStyle } from './verovioHelpers'
 
 export const ScoreItem = props => {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,6 +30,7 @@ export const ScoreItem = props => {
     skip: props.item.referenceNote || props.item.selection || props.item.annotation,
   })
   const annotationInfo = useGetAnnotationInfoQuery(props.item.id, { skip: !props.item.annotation })
+  const subAnnotations = useGetSubAnnotationsQuery(props.item.id, { skip: !props.item.annotation })
 
   const getNoteLabel = () => {
     const {
@@ -63,21 +65,43 @@ export const ScoreItem = props => {
     return pname.toUpperCase() + oct + alteration
   }
 
-  if (props.item.annotation && annotationInfo.isSuccess)
+  if (props.item.annotation && annotationInfo.isSuccess && subAnnotations.isSuccess)
     return (
-      <ListItem disablePadding>
-        <ListItemButton>
-          <ListItemIcon>
-            <Lyrics />
-          </ListItemIcon>
-          <ListItemText
-            primary={annotationInfo.data.results.bindings.map(binding => (
-              <Chip key={binding.concept.value} label={binding.concept.value.slice(props.treatiseIri.length)} sx={{ m: 0.3 }}  />
-            ))}
-            secondary={props.item.id}
-          />
-        </ListItemButton>
-      </ListItem>
+      <div>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <Lyrics />
+            </ListItemIcon>
+            <ListItemText
+              primary={annotationInfo.data.results.bindings.map(binding => (
+                <Chip
+                  key={binding.concept.value}
+                  label={binding.concept.value.slice(props.treatiseIri.length)}
+                  sx={{ m: 0.3 }}
+                />
+              ))}
+              secondary={props.item.id}
+            />
+          </ListItemButton>
+        </ListItem>
+        <List sx={{ pl: 4 }} dense disablePadding>
+          {subAnnotations.data.results.bindings.map(binding => {
+            const id = binding.selection.value.slice(props.scoreIri.length +1)
+            const item = document.getElementById(id)
+            addInspectionStyle(item)
+            return (
+              <ScoreItem
+                key={id}
+                item={item}
+                scoreIri={props.scoreIri}
+                disablePadding
+                secondaryAction={<Chip label={binding.type.value.slice(props.treatiseIri.length)} />}
+              />
+            )
+          })}
+        </List>
+      </div>
     )
 
   if (props.labelOnly) return getNoteLabel()

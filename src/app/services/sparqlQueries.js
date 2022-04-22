@@ -50,14 +50,30 @@ export const getAnnotationInfo = annotationIri => `
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-    SELECT ?annotation ?concept
+    SELECT ?concept
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            VALUES ?annotation {<${annotationIri}>}
-            ?annotation crm:P141_assigned ?group .
+            <${annotationIri}> crm:P141_assigned ?group .
             ?assignment crm:P140_assigned_attribute_to ?group .
             ?assignment crm:P177_assigned_property_of_type rdf:type .
             ?assignment crm:P141_assigned ?concept
         }
     }
-    `
+`
+
+export const getSubAnnotations = annotationIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+    SELECT ?selection ?type
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            <${annotationIri}> crm:P141_assigned ?group .
+            ?assignment crm:P140_assigned_attribute_to ?group .
+            FILTER NOT EXISTS {?assignment crm:P177_assigned_property_of_type rdf:type }
+            ?assignment crm:P141_assigned ?selection .
+            ?assignment crm:P177_assigned_property_of_type ?type
+        }
+    }
+`
