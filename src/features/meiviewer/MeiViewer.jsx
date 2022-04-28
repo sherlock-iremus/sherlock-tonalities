@@ -47,8 +47,6 @@ import { ScoreItem } from './ScoreItem'
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { SearchBar } from './SearchField'
 import { ConceptItem } from './ConceptItem'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentInspection } from '../inspection/currentInspectionSlice'
 
 window.verovioCallback = load
 
@@ -69,10 +67,6 @@ const MeiViewer = ({
   const [openedList, setOpenedList] = useState(null)
   const [filter, setFilter] = useState('')
   const [filteredTree, setFilteredTree] = useState(treatise)
-
-  const currentInspection = useSelector(state => state.currentInspection.value)
-  const dispatch = useDispatch()
-  console.log(currentInspection)
 
   const annotations = useGetAnnotationsQuery(scoreIri)
   const verticalityData = useGetNotesOnFirstBeatQuery(`${scoreIri}_${rightClickedNoteId}`, {
@@ -105,7 +99,6 @@ const MeiViewer = ({
   const _setInspectedElement = element => {
     if (inspectedElement) removeInspectionStyle(inspectedElement)
     setInspectedElement(inspectedElement !== element ? element : null)
-    dispatch(setCurrentInspection({ id: element.id }))
   }
 
   const _setSelection = (element, replacingElement) => {
