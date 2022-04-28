@@ -1,13 +1,16 @@
 /** @jsxImportSource @emotion/react */
 
-import { MusicNote } from '@mui/icons-material'
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { Close, MusicNote } from '@mui/icons-material'
+import { AppBar, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Tab, Tabs, Toolbar, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../app/services/sparql'
+import { setInspectedNoteId } from '../inspection/inspectedEntitySlice'
 
 export const Inspector = props => {
   const isInspectionMode = useSelector(state => state.inspectedEntity.isInspectionMode)
+
+  const dispatch = useDispatch()
 
   const inspectedVerticalityId = useSelector(state => state.inspectedEntity.inspectedVerticalityId)
   const inspectedNoteId = useSelector(state => state.inspectedEntity.inspectedNoteId)
@@ -20,7 +23,17 @@ export const Inspector = props => {
   return (
     <Drawer open={!!inspectedEntity} anchor="right" variant="persistent">
       {isInspectionMode && (
-        <Box sx={{ width: 300 }}>
+        <Box sx={{ width: 400 }}>
+          <AppBar position="sticky">
+            <Toolbar>
+              <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                Inspector
+              </Typography>
+              <IconButton edge="end" color="inherit" onClick={() => dispatch(setInspectedNoteId(inspectedEntity))}>
+                <Close />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
           <List
             subheader={
               <ListSubheader>
@@ -37,7 +50,7 @@ export const Inspector = props => {
                   <ListItemIcon>
                     <MusicNote />
                   </ListItemIcon>
-                  <ListItemText primary={noteLabel} secondary={inspectedEntity.id} />
+                  <ListItemText primary={noteLabel} secondary={inspectedEntity?.id} />
                 </ListItemButton>
               </ListItem>
             )}
