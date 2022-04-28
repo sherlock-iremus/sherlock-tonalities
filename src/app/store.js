@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../features/counter/counterSlice'
-import currentInspectionReducer from '../features/inspection/currentInspectionSlice'
+import inspectedEntityReducer from '../features/inspection/inspectedEntitySlice'
 import sparqlApi from './services/sparql'
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    currentInspection: currentInspectionReducer,
+    inspectedEntity: inspectedEntityReducer,
     sparqlApi: sparqlApi.reducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sparqlApi.middleware),
