@@ -10,10 +10,8 @@ export const Navigator = props => {
 
   return (
     <Drawer open={props.isOpen} anchor="left" variant="persistent">
-      {console.log(props.isOpen)}
       <Box>
-        <AppBar position="sticky" sx={{ bgcolor: pink[500] }}
->
+        <AppBar position="sticky" sx={{ bgcolor: pink[500] }}>
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Navigator
@@ -22,7 +20,12 @@ export const Navigator = props => {
               <Close />
             </IconButton>
           </Toolbar>
-          <Tabs value={selectedTab} onChange={(e, newTab) => setSelectedTab(newTab)} textColor="inherit" indicatorColor="white">
+          <Tabs
+            value={selectedTab}
+            onChange={(e, newTab) => setSelectedTab(newTab)}
+            textColor="inherit"
+            indicatorColor="secondary"
+          >
             <Tab icon={<BubbleChart />} label="Selections" />
             <Tab icon={<Lyrics />} label="Annotations" />
             <Tab icon={<HistoryEdu />} label="Concepts" />

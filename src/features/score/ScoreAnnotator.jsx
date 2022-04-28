@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { Assignment } from '@mui/icons-material'
-import { Avatar, IconButton, SpeedDial, SpeedDialIcon } from '@mui/material'
+import { Avatar, IconButton } from '@mui/material'
 import { pink } from '@mui/material/colors'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -13,7 +13,6 @@ export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const meiUrl = useSelector(state => state.inspectedEntity.meiUrl)
   const scoreIri = useSelector(state => state.inspectedEntity.scoreIri)
-  console.log(isNavigatorOpen)
   return (
     <div>
       <MeiViewer meiUrl={meiUrl} scoreIri={scoreIri} />
