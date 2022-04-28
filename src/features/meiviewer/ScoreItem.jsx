@@ -26,44 +26,11 @@ import { addInspectionStyle } from './verovioHelpers'
 
 export const ScoreItem = props => {
   const [isOpen, setIsOpen] = useState(false)
-  const noteInfo = useGetNoteInfoQuery(`${props.scoreIri}_${props.item.id}`, {
+  const { data: noteLabel } = useGetNoteInfoQuery(`${props.scoreIri}_${props.item.id}`, {
     skip: props.item.referenceNote || props.item.selection || props.item.annotation,
   })
   const annotationInfo = useGetAnnotationInfoQuery(props.item.id, { skip: !props.item.annotation })
   const subAnnotations = useGetSubAnnotationsQuery(props.item.id, { skip: !props.item.annotation })
-
-  const getNoteLabel = () => {
-    const {
-      data: {
-        results: {
-          bindings: [
-            {
-              pname: { value: pname },
-              oct: { value: oct },
-              accid,
-            },
-          ],
-        },
-      },
-    } = noteInfo
-
-    let alteration = ''
-    if (accid) {
-      switch (accid.value) {
-        case 'f':
-          alteration = '♭'
-          break
-        case 's':
-          alteration = '#'
-          break
-        case 'n':
-          alteration = '♮'
-          break
-      }
-    }
-
-    return pname.toUpperCase() + oct + alteration
-  }
 
   if (props.item.annotation && annotationInfo.isSuccess && subAnnotations.isSuccess)
     return (
@@ -87,7 +54,7 @@ export const ScoreItem = props => {
         </ListItem>
         <List sx={{ pl: 4 }} dense disablePadding>
           {subAnnotations.data.results.bindings.map(binding => {
-            const id = binding.selection.value.slice(props.scoreIri.length +1)
+            const id = binding.selection.value.slice(props.scoreIri.length + 1)
             const item = document.getElementById(id)
             addInspectionStyle(item)
             return (
@@ -104,7 +71,7 @@ export const ScoreItem = props => {
       </div>
     )
 
-  if (props.labelOnly) return getNoteLabel()
+  if (props.labelOnly && noteLabel) return noteLabel
 
   if (props.item.noteOnBeat)
     // element is a noteOnBeat
@@ -158,14 +125,14 @@ export const ScoreItem = props => {
       </div>
     )
   // element is a note
-  else if (noteInfo.isSuccess)
+  else if (noteLabel)
     return (
       <ListItem disablePadding secondaryAction={props.secondaryAction}>
         <ListItemButton sx={{ cursor: 'default' }}>
           <ListItemIcon>
             <MusicNote />
           </ListItemIcon>
-          <ListItemText primary={getNoteLabel()} secondary={props.item.id} />
+          <ListItemText primary={noteLabel} secondary={props.item.id} />
         </ListItemButton>
       </ListItem>
     )

@@ -16,6 +16,36 @@ export const sparqlEndpoint = createApi({
         method: 'POST',
         body: new URLSearchParams({ query: getNoteInfo(noteIri) }),
       }),
+      transformResponse: response => {
+        const {
+          results: {
+            bindings: [
+              {
+                pname: { value: pname },
+                oct: { value: oct },
+                accid,
+              },
+            ],
+          },
+        } = response
+
+        let alteration = ''
+        if (accid) {
+          switch (accid.value) {
+            case 'f':
+              alteration = '♭'
+              break
+            case 's':
+              alteration = '#'
+              break
+            case 'n':
+              alteration = '♮'
+              break
+          }
+        }
+
+        return pname.toUpperCase() + oct + alteration
+      },
     }),
     getAnnotations: builder.query({
       query: scoreIri => ({
@@ -40,4 +70,10 @@ export const sparqlEndpoint = createApi({
 
 export default sparqlEndpoint
 
-export const { useGetNotesOnFirstBeatQuery, useGetNoteInfoQuery, useGetAnnotationsQuery, useGetAnnotationInfoQuery, useGetSubAnnotationsQuery } = sparqlEndpoint
+export const {
+  useGetNotesOnFirstBeatQuery,
+  useGetNoteInfoQuery,
+  useGetAnnotationsQuery,
+  useGetAnnotationInfoQuery,
+  useGetSubAnnotationsQuery,
+} = sparqlEndpoint
