@@ -8,6 +8,7 @@ import App from './App'
 import { store } from './app/store'
 import * as serviceWorker from './serviceWorker'
 import MeiViewer from './features/meiviewer/MeiViewer'
+import { ScoreAnnotator } from './features/score/ScoreAnnotator'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/mei" element={<MeiViewer />} />
+          <Route path="/score" element={<ScoreAnnotator />} />
         </Routes>
       </Provider>
     </BrowserRouter>
