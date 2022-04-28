@@ -45,6 +45,10 @@ export const verovioStyle = css`
 
   .vrv-ui-toolbar {
     font-family: 'Roboto';
+    .vrv-ui-btn-group {
+      display: flex;
+      justify-content: center;
+    }
     .vrv-ui-btn-view-selector {
       visibility: hidden;
     }
