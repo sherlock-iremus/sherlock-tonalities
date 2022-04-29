@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { BubbleChart, Close, HistoryEdu, Lyrics } from '@mui/icons-material'
-import { AppBar, Box, Drawer, IconButton, List, ListSubheader, Tab, Tabs, Toolbar, Typography } from '@mui/material'
+import { BubbleChart, Close, HistoryEdu } from '@mui/icons-material'
+import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Typography } from '@mui/material'
 import { purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { ConceptTree } from './ConceptTree'
@@ -29,7 +29,6 @@ export const Navigator = props => {
             centered
           >
             <Tab icon={<BubbleChart />} label="Selections" />
-            <Tab icon={<Lyrics />} label="Annotations" />
             <Tab icon={<HistoryEdu />} label="Concepts" />
           </Tabs>
         </AppBar>

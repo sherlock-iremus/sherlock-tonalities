@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { getAnnotationInfo, getAnnotations, getNoteInfo, getNotesOnFirstBeat, getSubAnnotations } from './sparqlQueries'
+import {
+  getAnnotationInfo,
+  getAnnotations,
+  getConceptAnnotations,
+  getNoteInfo,
+  getNotesOnFirstBeat,
+  getSubAnnotations,
+} from './sparqlQueries'
 
 export const sparqlEndpoint = createApi({
   reducerPath: 'sparqlApi',
@@ -65,6 +72,14 @@ export const sparqlEndpoint = createApi({
         body: new URLSearchParams({ query: getSubAnnotations(annotationIri) }),
       }),
     }),
+    getConceptAnnotations: builder.query({
+      query: conceptIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getConceptAnnotations(conceptIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({ iri: e.entity?.value, label: e.programName?.value })),
+    }),
   }),
 })
 
@@ -76,4 +91,5 @@ export const {
   useGetAnnotationsQuery,
   useGetAnnotationInfoQuery,
   useGetSubAnnotationsQuery,
+  useGetConceptAnnotationsQuery,
 } = sparqlEndpoint

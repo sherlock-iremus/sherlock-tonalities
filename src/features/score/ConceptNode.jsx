@@ -1,18 +1,34 @@
-import { HistoryEdu } from "@mui/icons-material"
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
-import { LoadingNode } from "./LoadingNode"
+import { HistoryEdu, Lyrics } from '@mui/icons-material'
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { useGetConceptAnnotationsQuery } from '../../app/services/sparql'
+import { LoadingNode } from './LoadingNode'
 
 export const ConceptNode = props => {
-  // SPARQL query get annotations
-
-  return props.concept ? (
-        <ListItem disablePadding>
-          <ListItemButton sx={{ cursor: 'default' }}>
-            <ListItemIcon>
-              <HistoryEdu />
-            </ListItemIcon>
-            <ListItemText primary={props.concept.slice(props.treatiseIri.length)} />
-          </ListItemButton>
-        </ListItem>
-  ) : <LoadingNode />
+  const { data: annotations } = useGetConceptAnnotationsQuery(props.concept)
+  return props.concept && annotations ? (
+    <>
+      <ListItem disablePadding>
+        <ListItemButton sx={{ cursor: 'default' }}>
+          <ListItemIcon>
+            <HistoryEdu />
+          </ListItemIcon>
+          <ListItemText primary={props.concept.slice(props.treatiseIri.length)} />
+        </ListItemButton>
+      </ListItem>
+      <List subheader={<ListSubheader>Created annalytical entities</ListSubheader>}>
+        {annotations.map(annotation => (
+          <ListItem key={annotation.iri} disablePadding>
+            <ListItemButton sx={{ cursor: 'default' }}>
+              <ListItemIcon>
+                <Lyrics />
+              </ListItemIcon>
+              <ListItemText primary={annotation.label} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </>
+  ) : (
+    <LoadingNode />
+  )
 }

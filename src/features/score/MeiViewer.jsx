@@ -22,11 +22,10 @@ export const MeiViewer = props => {
     inspectedVerticalityId,
     inspectedPositionnedNoteId,
     inspectedSelectionId,
-    inspectedConceptId,
   } = useSelector(state => state.inspectedEntity)
 
   const inspectedEntity =
-    inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId || inspectedConceptId
+    inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId
 
   const previousEntity = usePrevious(inspectedEntity)
 

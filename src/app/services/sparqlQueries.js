@@ -77,3 +77,17 @@ export const getSubAnnotations = annotationIri => `
         }
     }
 `
+
+export const getConceptAnnotations = conceptIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    SELECT ?entity ?programName
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?annotation crm:P141_assigned <${conceptIri}>.
+            ?annotation crm:P140_assigned_attribute_to ?conceptualEntity.
+            ?entity crm:P141_assigned ?conceptualEntity.
+            ?entity crm:P14_carried_out_by ?infos.
+            ?infos <http://modality-tonality.huma-num.fr/analysisOntology#hasPythonClassName> ?programName.
+        }
+    }
+`
