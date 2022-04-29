@@ -32,7 +32,7 @@ export const Navigator = props => {
             <Tab icon={<HistoryEdu />} label="Concepts" />
           </Tabs>
         </AppBar>
-        {selectedTab === 2 && <ConceptTree treatise={props.treatise} />}
+        {selectedTab === 1 && <ConceptTree treatise={props.treatise} />}
       </Box>
     </Drawer>
   )

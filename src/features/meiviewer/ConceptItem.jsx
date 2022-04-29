@@ -6,7 +6,7 @@ export const ConceptItem = props => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div>
-      <ListItem disablePadding dense>
+      <ListItem disablePadding>
         {props.concept.subClasses && (
           <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
         )}
@@ -16,7 +16,7 @@ export const ConceptItem = props => {
       </ListItem>
       {props.concept.subClasses && (
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
-          <List sx={{ pl: 4 }} dense disablePadding>
+          <List sx={{ pl: 4 }} disablePadding>
             {props.concept.subClasses.map(subClass => (
               <ConceptItem
                 key={subClass.iri}
