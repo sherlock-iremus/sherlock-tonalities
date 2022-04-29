@@ -16,14 +16,18 @@ export const MeiViewer = props => {
 
   const dispatch = useDispatch()
 
-  const isInspectionMode = useSelector(state => state.inspectedEntity.isInspectionMode)
+  const {
+    isInspectionMode,
+    inspectedNoteId,
+    inspectedVerticalityId,
+    inspectedPositionnedNoteId,
+    inspectedSelectionId,
+    inspectedConceptId,
+  } = useSelector(state => state.inspectedEntity)
 
-  const inspectedVerticalityId = useSelector(state => state.inspectedEntity.inspectedVerticalityId)
-  const inspectedNoteId = useSelector(state => state.inspectedEntity.inspectedNoteId)
-  const inspectedPositionnedNoteId = useSelector(state => state.inspectedEntity.inspectedPositionnedNoteId)
-  const inspectedSelectionId = useSelector(state => state.inspectedEntity.inspectedSelectionId)
   const inspectedEntity =
-    inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId
+    inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId || inspectedConceptId
+
   const previousEntity = usePrevious(inspectedEntity)
 
   const styleInspectedEntity = () => {

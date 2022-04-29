@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { Assignment, Info } from '@mui/icons-material'
-import { Avatar, IconButton } from '@mui/material'
+import { Avatar, IconButton, Tooltip } from '@mui/material'
 import { blue, purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -24,26 +24,30 @@ export const ScoreAnnotator = () => {
       <MeiViewer meiUrl={meiUrl} scoreIri={scoreIri} />
 
       {!isInspectorOpen && (
-        <Avatar
-          sx={{ position: 'absolute', top: 56, right: 16, bgcolor: blue[500] }}
-          onClick={() => setIsInspectorOpen(true)}
-        >
-          <IconButton color="inherit">
-            <Info />
-          </IconButton>
-        </Avatar>
+        <Tooltip title="Inspector">
+          <Avatar
+            sx={{ position: 'absolute', top: 56, right: 16, bgcolor: blue[500] }}
+            onClick={() => setIsInspectorOpen(true)}
+          >
+            <IconButton color="inherit">
+              <Info />
+            </IconButton>
+          </Avatar>
+        </Tooltip>
       )}
-      <Inspector isOpen={isInspectorOpen} onClose={() => setIsInspectorOpen(false)} scoreIri={scoreIri} />
+      <Inspector isOpen={isInspectorOpen} onChange={() => setIsInspectorOpen(false)} scoreIri={scoreIri} treatiseIri={treatiseIri} />
 
       {!isNavigatorOpen && (
-        <Avatar
-          sx={{ position: 'absolute', top: 56, left: 16, bgcolor: purple[500] }}
-          onClick={() => setIsNavigatorOpen(true)}
-        >
-          <IconButton color="inherit">
-            <Assignment />
-          </IconButton>
-        </Avatar>
+        <Tooltip title="Navigator">
+          <Avatar
+            sx={{ position: 'absolute', top: 56, left: 16, bgcolor: purple[500] }}
+            onClick={() => setIsNavigatorOpen(true)}
+          >
+            <IconButton color="inherit">
+              <Assignment />
+            </IconButton>
+          </Avatar>
+        </Tooltip>
       )}
       <Navigator isOpen={isNavigatorOpen} onClose={() => setIsNavigatorOpen(false)} treatise={treatise} />
     </>

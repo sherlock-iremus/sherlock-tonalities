@@ -11,7 +11,7 @@ export const ConceptNode = props => {
             <ListItemIcon>
               <HistoryEdu />
             </ListItemIcon>
-            <ListItemText primary={props.concept} />
+            <ListItemText primary={props.concept.slice(props.treatiseIri.length)} />
           </ListItemButton>
         </ListItem>
   ) : <LoadingNode />

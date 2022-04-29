@@ -36,7 +36,7 @@ export const Inspector = props => {
           </AppBar>
           <List sx={{ overflow: 'auto' }}>
             {inspectedNoteId && <NoteNode note={inspectedNoteId} />}
-            {inspectedConceptId && <ConceptNode concept={inspectedConceptId} />}
+            {inspectedConceptId && <ConceptNode concept={inspectedConceptId} treatiseIri={props.treatiseIri} />}
           </List>
         </Box>
       )}
