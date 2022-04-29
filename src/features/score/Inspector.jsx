@@ -50,7 +50,7 @@ export const Inspector = props => {
                   <ListItemIcon>
                     <MusicNote />
                   </ListItemIcon>
-                  <ListItemText primary={noteLabel} secondary={inspectedEntity?.id} />
+                  <ListItemText primary={noteLabel} secondary={inspectedEntity} />
                 </ListItemButton>
               </ListItem>
             )}

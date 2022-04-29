@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectedNoteId } from '../inspection/inspectedEntitySlice'
 import { verovioStyle } from '../meiviewer/mei.css'
-import { createVerovio, getNote, load, styleInspectedEntity } from '../meiviewer/verovioHelpers'
+import { usePrevious } from '../meiviewer/utils'
+import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
 
 window.verovioCallback = load
 
@@ -22,6 +23,7 @@ export const MeiViewer = props => {
   const inspectedSelectionId = useSelector(state => state.inspectedEntity.inspectedSelectionId)
   const inspectedEntity =
     inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId
+  const previousEntity = usePrevious(inspectedEntity)
 
   const styleInspectedEntity = () => {
     if (inspectedNoteId)
@@ -29,12 +31,11 @@ export const MeiViewer = props => {
     // ...
   }
 
-  const unStyleInspectedEntity = () => {
-    if (inspectedNoteId)
-      document.getElementById(inspectedNoteId.slice(props.scoreIri.length + 1)).classList.remove('inspected')
-    // ...
+  const unStylePreviousEntity = () => {
+    document.getElementById(previousEntity.slice(props.scoreIri.length + 1)).classList.remove('inspected')
   }
 
+  if (previousEntity) unStylePreviousEntity()
   if (inspectedEntity) styleInspectedEntity()
 
   const handleMouseOver = e => {
@@ -49,10 +50,7 @@ export const MeiViewer = props => {
 
   const handleClick = e => {
     const n = getNote(e.target)
-    if (n && isInspectionMode) {
-      if (inspectedEntity) unStyleInspectedEntity()
-      dispatch(setInspectedNoteId(props.scoreIri + '_' + n.id))
-    }
+    if (n && isInspectionMode) dispatch(setInspectedNoteId(props.scoreIri + '_' + n.id))
   }
 
   return (
