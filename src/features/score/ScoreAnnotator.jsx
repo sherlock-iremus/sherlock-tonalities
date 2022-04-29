@@ -2,7 +2,7 @@
 
 import { Assignment } from '@mui/icons-material'
 import { Avatar, IconButton } from '@mui/material'
-import { pink } from '@mui/material/colors'
+import { purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Inspector } from './Inspector'
@@ -19,7 +19,7 @@ export const ScoreAnnotator = () => {
       <Inspector scoreIri={scoreIri} />
       {!isNavigatorOpen && (
         <Avatar
-          sx={{ position: 'absolute', top: 56, left: 16, bgcolor: pink[500] }}
+          sx={{ position: 'absolute', top: 56, left: 16, bgcolor: purple[500] }}
           onClick={() => setIsNavigatorOpen(true)}
         >
           <IconButton color="inherit">

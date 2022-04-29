@@ -10,7 +10,7 @@ export const ConceptItem = props => {
         {props.concept.subClasses && (
           <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
         )}
-        <ListItemButton>
+        <ListItemButton onClick={() => props.setInspection(props.concept.iri)}>
           <ListItemText primary={props.concept.label} />
         </ListItemButton>
       </ListItem>
@@ -18,7 +18,11 @@ export const ConceptItem = props => {
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List sx={{ pl: 4 }} dense disablePadding>
             {props.concept.subClasses.map(subClass => (
-              <ConceptItem key={subClass.iri} concept={subClass} />
+              <ConceptItem
+                key={subClass.iri}
+                concept={subClass}
+                setInspection={clickedConcept => props.setInspection(clickedConcept)}
+              />
             ))}
           </List>
         </Collapse>
