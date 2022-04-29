@@ -8,6 +8,7 @@ const initialState = {
   inspectedVerticalityId: null,
   inspectedPositionnedNoteId: null,
   inspectedSelectionId: null,
+  inspectedConceptId: null,
   isInspectionMode: true,
 }
 
@@ -21,10 +22,19 @@ const inspectedEntitySlice = createSlice({
       state.inspectedVerticalityId = null
       state.inspectedPositionnedNoteId= null
       state.inspectedSelectionId = null
+      state.inspectedConceptId = null
+    },
+    setConceptId: (state, action) => {
+      state.inspectedConceptId = (action.payload === state.inspectedConceptId) ? null : action.payload
+      state.inspectedNoteId = null
+      state.inspectedVerticalityId = null
+      state.inspectedPositionnedNoteId= null
+      state.inspectedSelectionId = null
+      state.clickedNoteId = null
     },
   },
 })
 
-export const { setInspectedNoteId } = inspectedEntitySlice.actions
+export const { setInspectedNoteId, setConceptId } = inspectedEntitySlice.actions
 
 export default inspectedEntitySlice.reducer

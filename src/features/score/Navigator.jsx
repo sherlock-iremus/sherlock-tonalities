@@ -17,7 +17,7 @@ export const Navigator = props => {
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Navigator
             </Typography>
-            <IconButton edge="end" color="inherit" onClick={() => props.onClose()}>
+            <IconButton edge="end" color="inherit" onClick={props.onClose}>
               <Close />
             </IconButton>
           </Toolbar>
@@ -33,7 +33,7 @@ export const Navigator = props => {
             <Tab icon={<HistoryEdu />} label="Concepts" />
           </Tabs>
         </AppBar>
-        {selectedTab === 2 && <ConceptTree />}
+        {selectedTab === 2 && <ConceptTree treatise={props.treatise} />}
       </Box>
     </Drawer>
   )

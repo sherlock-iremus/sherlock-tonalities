@@ -1,16 +1,19 @@
 import { List, ListSubheader } from '@mui/material'
 import { useState } from 'react'
-import treatise from '../../app/treatises/Zarlino_1588.json'
+import { useDispatch } from 'react-redux'
+import { setConceptId } from '../inspection/inspectedEntitySlice'
 import { ConceptItem } from '../meiviewer/ConceptItem'
 import { SearchBar } from '../meiviewer/SearchField'
 
 export const ConceptTree = props => {
   const [filter, setFilter] = useState('')
-  const [filteredTree, setFilteredTree] = useState(treatise)
+  const [filteredTree, setFilteredTree] = useState(props.treatise)
+
+  const dispatch = useDispatch()
 
   const _setFilter = newFilter => {
     setFilter(newFilter)
-    setFilteredTree(newFilter ? _setFilteredTree(treatise, newFilter) : treatise)
+    setFilteredTree(newFilter ? _setFilteredTree(props.treatise, newFilter) : props.treatise)
   }
 
   const _setFilteredTree = (node, newFilter) => {
@@ -31,7 +34,6 @@ export const ConceptTree = props => {
     <List
       sx={{
         overflow: 'auto',
-        minHeight: 48,
       }}
       subheader={
         <ListSubheader>
@@ -44,7 +46,7 @@ export const ConceptTree = props => {
           <ConceptItem
             key={concept.iri}
             concept={concept}
-            setInspection={clickedConcept => console.log(clickedConcept)}
+            setInspection={clickedConcept => dispatch(setConceptId(clickedConcept))}
           />
         ))}
     </List>
