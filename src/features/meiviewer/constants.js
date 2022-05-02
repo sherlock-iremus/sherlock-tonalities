@@ -7,4 +7,9 @@ export const CONCEPTS = 'INSPECTION'
 export const SELECTIONS = 'SELECTION'
 export const ANNOTATIONS = 'ANNOTAIONS'
 
-
+// ENTITY TYPES
+export const NOTE = 'NOTE'
+export const VERTICALITY = 'VERTICALITY'
+export const POSITIONNED_NOTE = 'POSITIONNED_NOTE'
+export const CONCEPT = 'CONCEPT'
+export const ANNOTATION = 'ANNOTATION'

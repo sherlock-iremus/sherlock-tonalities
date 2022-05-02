@@ -12,10 +12,11 @@ const initialState = {
   inspectedConceptId: null,
   inspectedAnnotationId: null,
   isInspectionMode: true,
+  inspectedEntity: { id: null, type: null}
 }
 
-const inspectedEntitySlice = createSlice({
-  name: 'inspectedEntity',
+const scoreSlice = createSlice({
+  name: 'score',
   initialState,
   reducers: {
     setInspectedNoteId: (state, action) => {
@@ -50,4 +51,4 @@ const inspectedEntitySlice = createSlice({
 
 export const { setInspectedNoteId, setConceptId, setAnnotationId } = inspectedEntitySlice.actions
 
-export default inspectedEntitySlice.reducer
+export default scoreSlice.reducer
