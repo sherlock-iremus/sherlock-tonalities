@@ -12,8 +12,8 @@ import {
 import { AppBar, Drawer, IconButton, List, Tab, Tabs, Toolbar, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { ConceptNode } from './ConceptNode'
-import { NoteNode } from './NoteNode'
+import { ConceptNode } from './inspector/ConceptEntity'
+import { NoteNode } from './inspector/NoteEntity'
 
 export const Inspector = props => {
   const isInspectionMode = useSelector(state => state.inspectedEntity.isInspectionMode)
@@ -57,7 +57,7 @@ export const Inspector = props => {
               />
             </Tabs>
           </AppBar>
-          <List sx={{ overflow: 'auto' }}>
+          <List>
             {inspectedNoteId && <NoteNode note={inspectedNoteId} />}
             {inspectedConceptId && <ConceptNode concept={inspectedConceptId} treatiseIri={props.treatiseIri} />}
           </List>

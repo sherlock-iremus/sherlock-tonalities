@@ -4,10 +4,12 @@ import { BubbleChart, Close, HistoryEdu } from '@mui/icons-material'
 import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Typography } from '@mui/material'
 import { purple } from '@mui/material/colors'
 import { useState } from 'react'
-import { ConceptTree } from './ConceptTree'
+import { SearchBar } from '../meiviewer/SearchField'
+import { ConceptTree } from './navigator/ConceptTree'
 
 export const Navigator = props => {
   const [selectedTab, setSelectedTab] = useState(0)
+  const [filter, setFilter] = useState('')
 
   return (
     <Drawer open={props.isOpen} anchor="left" variant="persistent">
@@ -17,6 +19,7 @@ export const Navigator = props => {
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Navigator
             </Typography>
+            <SearchBar value={filter} onChange={e => setFilter(e.target.value)} />
             <IconButton edge="end" color="inherit" onClick={props.onClose}>
               <Close />
             </IconButton>
@@ -32,7 +35,7 @@ export const Navigator = props => {
             <Tab icon={<HistoryEdu />} label="Concepts" />
           </Tabs>
         </AppBar>
-        {selectedTab === 1 && <ConceptTree treatise={props.treatise} />}
+        {selectedTab === 1 && <ConceptTree treatise={props.treatise} filter={filter} />}
       </Box>
     </Drawer>
   )
