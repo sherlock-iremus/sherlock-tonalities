@@ -1,10 +1,14 @@
 import { HistoryEdu, Lyrics } from '@mui/icons-material'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { useDispatch } from 'react-redux'
 import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
-import { LoadingNode } from './LoadingEntity'
+import { setAnnotationId } from '../../inspection/inspectedEntitySlice'
+import { LoadingEntity } from './LoadingEntity'
 
-export const ConceptNode = props => {
+export const ConceptEntity = props => {
   const { data: annotations } = useGetConceptAnnotationsQuery(props.concept)
+  const dispatch = useDispatch()
+
   return props.concept && annotations ? (
     <>
       <ListItem disablePadding>
@@ -12,13 +16,13 @@ export const ConceptNode = props => {
           <ListItemIcon>
             <HistoryEdu />
           </ListItemIcon>
-          <ListItemText primary={props.concept.slice(props.treatiseIri.length)} />
+          <ListItemText primary={props.concept.slice(props.treatiseIri.length)} secondary={props.treatiseIri.slice(props.baseUrl.length+3)} />
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Created annalytical entities</ListSubheader>}>
         {annotations.map(annotation => (
           <ListItem key={annotation.iri} disablePadding>
-            <ListItemButton sx={{ cursor: 'default' }}>
+            <ListItemButton onClick={() => dispatch(setAnnotationId(annotation.iri))}>
               <ListItemIcon>
                 <Lyrics />
               </ListItemIcon>
@@ -29,6 +33,6 @@ export const ConceptNode = props => {
       </List>
     </>
   ) : (
-    <LoadingNode />
+    <LoadingEntity />
   )
 }

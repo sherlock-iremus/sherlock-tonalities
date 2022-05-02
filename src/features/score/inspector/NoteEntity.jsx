@@ -1,19 +1,15 @@
-import { MusicNote } from "@mui/icons-material"
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 import { useGetNoteInfoQuery } from "../../../app/services/sparql"
-import { LoadingNode } from "./LoadingEntity"
+import { LoadingEntity } from "./LoadingEntity"
 
-export const NoteNode = props => {
+export const NoteEntity = props => {
   const { data: noteLabel } = useGetNoteInfoQuery(props.note)
 
   return noteLabel ? (
-        <ListItem disablePadding>
+        <ListItem disablePadding secondaryAction={props.secondaryAction}>
           <ListItemButton sx={{ cursor: 'default' }}>
-            <ListItemIcon>
-              <MusicNote />
-            </ListItemIcon>
-            <ListItemText primary={noteLabel} secondary={props.note} />
+            <ListItemText primary={noteLabel} secondary={props.note.slice(props.baseUrl.length)} />
           </ListItemButton>
         </ListItem>
-  ) : <LoadingNode />
+  ) : <LoadingEntity />
 }
