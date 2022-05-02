@@ -9,6 +9,7 @@ import {
   IconButton,
   Tooltip,
   Chip,
+  ListSubheader,
 } from '@mui/material'
 import { useGetNoteInfoQuery, useGetAnnotationInfoQuery, useGetSubAnnotationsQuery } from '../../app/services/sparql'
 import {
@@ -29,46 +30,38 @@ export const ScoreItem = props => {
   const { data: noteLabel } = useGetNoteInfoQuery(`${props.scoreIri}_${props.item.id}`, {
     skip: props.item.referenceNote || props.item.selection || props.item.annotation,
   })
-  const annotationInfo = useGetAnnotationInfoQuery(props.item.id, { skip: !props.item.annotation })
-  const subAnnotations = useGetSubAnnotationsQuery(props.item.id, { skip: !props.item.annotation })
+  const { data: concepts } = useGetAnnotationInfoQuery(props.item.id, { skip: !props.item.annotation })
+  const { data: subAnnotations } = useGetSubAnnotationsQuery(props.item.id, { skip: !props.item.annotation })
 
-  if (props.item.annotation && annotationInfo.isSuccess && subAnnotations.isSuccess)
+  if (props.item.annotation && concepts && subAnnotations)
     return (
-      <div>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <Lyrics />
-            </ListItemIcon>
-            <ListItemText
-              primary={annotationInfo.data.results.bindings.map(binding => (
-                <Chip
-                  key={binding.concept.value}
-                  label={binding.concept.value.slice(props.treatiseIri.length)}
-                  sx={{ m: 0.3 }}
-                />
-              ))}
-              secondary={props.item.id}
-            />
-          </ListItemButton>
-        </ListItem>
-        <List sx={{ pl: 4 }} dense disablePadding>
-          {subAnnotations.data.results.bindings.map(binding => {
-            const id = binding.selection.value.slice(props.scoreIri.length + 1)
-            const item = document.getElementById(id)
-            addInspectionStyle(item)
-            return (
-              <ScoreItem
-                key={id}
-                item={item}
-                scoreIri={props.scoreIri}
-                disablePadding
-                secondaryAction={<Chip label={binding.type.value.slice(props.treatiseIri.length)} />}
-              />
-            )
-          })}
-        </List>
-      </div>
+      <>
+            <ListItem disablePadding>
+                <ListItemButton>
+                    <ListItemText
+                        primary={concepts.map(concept => (
+                            <Chip
+                                key={concept}
+                                label={concept.slice(props.treatiseIri.length)}
+                                sx={{ m: 0.3 }}
+                            />
+                        ))}
+                        secondary={props.item.id}
+                    />
+                </ListItemButton>
+            </ListItem>
+            <List sx={{ pl: 2 }} dense disablePadding subheader={<ListSubheader>Associated selection</ListSubheader>}>
+                {subAnnotations.map(subAnnotation =>
+                    <ScoreItem
+                        disablePadding
+                        key={subAnnotation.entity}
+                        item={{ id: subAnnotation.entity.slice(props.scoreIri.length + 1)}}
+                        scoreIri={props.scoreIri}
+                        secondaryAction={<Chip label={subAnnotation.concept.slice(props.treatiseIri.length)} />}
+                    />
+                )}
+            </List>
+        </>
     )
 
   if (props.labelOnly && noteLabel) return noteLabel

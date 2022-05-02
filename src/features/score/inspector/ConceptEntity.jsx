@@ -1,4 +1,4 @@
-import { HistoryEdu, Lyrics } from '@mui/icons-material'
+import { HistoryEdu } from '@mui/icons-material'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
@@ -23,9 +23,6 @@ export const ConceptEntity = props => {
         {annotations.map(annotation => (
           <ListItem key={annotation.iri} disablePadding>
             <ListItemButton onClick={() => dispatch(setAnnotationId(annotation.iri))}>
-              <ListItemIcon>
-                <Lyrics />
-              </ListItemIcon>
               <ListItemText primary={annotation.label} />
             </ListItemButton>
           </ListItem>
