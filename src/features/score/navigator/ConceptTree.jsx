@@ -1,4 +1,4 @@
-import { List } from '@mui/material'
+import { Button, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setConceptId } from '../../inspection/inspectedEntitySlice'
@@ -6,7 +6,7 @@ import { ConceptItem } from './ConceptItem'
 
 export const ConceptTree = props => {
   const [filteredTree, setFilteredTree] = useState(props.treatise)
-  const { inspectedConceptId } = useSelector(state => state.inspectedEntity)
+  const { inspectedConceptId, baseUrl } = useSelector(state => state.inspectedEntity)
 
   const dispatch = useDispatch()
 
@@ -29,8 +29,13 @@ export const ConceptTree = props => {
   }
 
   return (
-    <List>
-      {filteredTree.rootClasses.length &&
+    <List subheader={
+      <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        {props.treatise.iri.slice(baseUrl.length + 3)}
+        <Button size='small' variant="text" disabled>Change treaty</Button>
+      </ListSubheader >}>
+      {
+        filteredTree.rootClasses.length &&
         filteredTree.rootClasses.map(concept => (
           <ConceptItem
             key={concept.iri}
@@ -38,7 +43,8 @@ export const ConceptTree = props => {
             concept={concept}
             setInspection={clickedConcept => dispatch(setConceptId(clickedConcept))}
           />
-        ))}
+        ))
+      }
     </List>
   )
 }
