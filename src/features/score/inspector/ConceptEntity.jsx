@@ -1,7 +1,7 @@
 import { HistoryEdu, Lyrics } from '@mui/icons-material'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
-import { useGetConceptAnnotationsQuery } from '../../app/services/sparql'
-import { LoadingNode } from './LoadingNode'
+import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
+import { LoadingNode } from './LoadingEntity'
 
 export const ConceptNode = props => {
   const { data: annotations } = useGetConceptAnnotationsQuery(props.concept)
