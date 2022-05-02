@@ -65,12 +65,15 @@ export const sparqlEndpoint = createApi({
         method: 'POST',
         body: new URLSearchParams({ query: getAnnotationInfo(annotationIri) }),
       }),
+      transformResponse: response => response.results?.bindings?.map(e => e.concept?.value)
     }),
     getSubAnnotations: builder.query({
       query: annotationIri => ({
         method: 'POST',
         body: new URLSearchParams({ query: getSubAnnotations(annotationIri) }),
       }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({ entity: e.selection?.value, concept: e.type?.value })),
     }),
     getConceptAnnotations: builder.query({
       query: conceptIri => ({
