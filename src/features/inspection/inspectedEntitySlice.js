@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  baseUrl: 'http://data-iremus.huma-num.fr/id/',
   scoreIri: 'http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356',
   meiUrl: 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/eff6f0a7-cf80-402c-953b-c66161051356.mei',
   clickedNoteId: null,
@@ -9,6 +10,7 @@ const initialState = {
   inspectedPositionnedNoteId: null,
   inspectedSelectionId: null,
   inspectedConceptId: null,
+  inspectedAnnotationId: null,
   isInspectionMode: true,
 }
 
@@ -23,6 +25,7 @@ const inspectedEntitySlice = createSlice({
       state.inspectedPositionnedNoteId= null
       state.inspectedSelectionId = null
       state.inspectedConceptId = null
+      state.inspectedAnnotationId = null
     },
     setConceptId: (state, action) => {
       state.inspectedConceptId = (action.payload === state.inspectedConceptId) ? null : action.payload
@@ -30,11 +33,21 @@ const inspectedEntitySlice = createSlice({
       state.inspectedVerticalityId = null
       state.inspectedPositionnedNoteId= null
       state.inspectedSelectionId = null
+      state.inspectedAnnotationId = null
+      state.clickedNoteId = null
+    },
+    setAnnotationId: (state, action) => {
+      state.inspectedAnnotationId = (action.payload === state.inspectedAnnotationId) ? null : action.payload
+      state.inspectedNoteId = null
+      state.inspectedVerticalityId = null
+      state.inspectedPositionnedNoteId= null
+      state.inspectedSelectionId = null
+      state.inspectedConceptId = null
       state.clickedNoteId = null
     },
   },
 })
 
-export const { setInspectedNoteId, setConceptId } = inspectedEntitySlice.actions
+export const { setInspectedNoteId, setConceptId, setAnnotationId } = inspectedEntitySlice.actions
 
 export default inspectedEntitySlice.reducer
