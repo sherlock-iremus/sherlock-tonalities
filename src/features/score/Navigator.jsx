@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { BubbleChart, Close, HistoryEdu } from '@mui/icons-material'
-import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { SearchBar } from '../meiviewer/SearchField'
@@ -20,9 +20,11 @@ export const Navigator = props => {
               Navigator
             </Typography>
             <SearchBar value={filter} onChange={e => setFilter(e.target.value)} />
-            <IconButton edge="end" color="inherit" onClick={props.onClose}>
-              <Close />
-            </IconButton>
+            <Tooltip title="Close">
+              <IconButton edge="end" color="inherit" onClick={props.onClose}>
+                <Close />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
           <Tabs
             value={selectedTab}

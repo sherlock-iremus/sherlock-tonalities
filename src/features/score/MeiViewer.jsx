@@ -22,13 +22,14 @@ export const MeiViewer = props => {
     inspectedVerticalityId,
     inspectedPositionnedNoteId,
     inspectedSelectionId,
+    inspectedAnnotationId
   } = useSelector(state => state.inspectedEntity)
 
   const inspectedEntity =
-    inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId
+    inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId || inspectedAnnotationId
 
   const previousEntity = usePrevious(inspectedEntity)
-
+  
   const styleInspectedEntity = () => {
     if (inspectedNoteId)
       document.getElementById(inspectedNoteId.slice(props.scoreIri.length + 1)).classList.add('inspected')
@@ -42,15 +43,9 @@ export const MeiViewer = props => {
   if (previousEntity) unStylePreviousEntity()
   if (inspectedEntity) styleInspectedEntity()
 
-  const handleMouseOver = e => {
-    const n = getNote(e.target)
-    if (n) n.classList.add('focused')
-  }
+  const handleMouseOver = e => getNote(e.target)?.classList.add('focused')
 
-  const handleMouseLeave = e => {
-    const n = getNote(e.target)
-    if (n) n.classList.remove('focused')
-  }
+  const handleMouseLeave = e => getNote(e.target)?.classList.remove('focused')
 
   const handleClick = e => {
     const n = getNote(e.target)
