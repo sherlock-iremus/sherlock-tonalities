@@ -1,54 +1,57 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { ANNOTATION, CONCEPT, NOTE } from '../meiviewer/constants'
 
 const initialState = {
   baseUrl: 'http://data-iremus.huma-num.fr/id/',
   scoreIri: 'http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356',
   meiUrl: 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/eff6f0a7-cf80-402c-953b-c66161051356.mei',
-  clickedNoteId: null,
-  inspectedNoteId: null,
-  inspectedVerticalityId: null,
-  inspectedPositionnedNoteId: null,
-  inspectedSelectionId: null,
-  inspectedConceptId: null,
-  inspectedAnnotationId: null,
   isInspectionMode: true,
-  inspectedEntity: { id: null, type: null}
+  inspectedEntity: { id: null, type: null, clickedNoteId: null }
 }
 
 const scoreSlice = createSlice({
   name: 'score',
   initialState,
   reducers: {
-    setInspectedNoteId: (state, action) => {
-      state.clickedNoteId = (action.payload === state.clickedNoteId) ? null : action.payload
-      state.inspectedNoteId = (action.payload === state.inspectedNoteId) ? null : action.payload
-      state.inspectedVerticalityId = null
-      state.inspectedPositionnedNoteId= null
-      state.inspectedSelectionId = null
-      state.inspectedConceptId = null
-      state.inspectedAnnotationId = null
+    setInspectedNote: (state, action) => {
+      if (action.payload === state.inspectedEntity.id) {
+        state.inspectedEntity.id = null
+        state.inspectedEntity.type = null
+        state.inspectedEntity.clickedNoteId = null
+      }
+      else {
+        state.inspectedEntity.type = NOTE
+        state.inspectedEntity.id = action.payload
+        state.inspectedEntity.clickedNoteId = action.payload
+      }
     },
-    setConceptId: (state, action) => {
-      state.inspectedConceptId = (action.payload === state.inspectedConceptId) ? null : action.payload
-      state.inspectedNoteId = null
-      state.inspectedVerticalityId = null
-      state.inspectedPositionnedNoteId= null
-      state.inspectedSelectionId = null
-      state.inspectedAnnotationId = null
-      state.clickedNoteId = null
+    setInspectedConcept: (state, action) => {
+      if (action.payload === state.inspectedEntity.id) {
+        state.inspectedEntity.id = null
+        state.inspectedEntity.type = null
+        state.inspectedEntity.clickedNoteId = null
+      }
+      else {
+        state.inspectedEntity.type = CONCEPT
+        state.inspectedEntity.id = action.payload
+        state.inspectedEntity.clickedNoteId = action.payload
+      }
     },
-    setAnnotationId: (state, action) => {
-      state.inspectedAnnotationId = (action.payload === state.inspectedAnnotationId) ? null : action.payload
-      state.inspectedNoteId = null
-      state.inspectedVerticalityId = null
-      state.inspectedPositionnedNoteId= null
-      state.inspectedSelectionId = null
-      state.inspectedConceptId = null
-      state.clickedNoteId = null
+    setInspectedAnnotation: (state, action) => {
+      if (action.payload === state.inspectedEntity.id) {
+        state.inspectedEntity.id = null
+        state.inspectedEntity.type = null
+        state.inspectedEntity.clickedNoteId = null
+      }
+      else {
+        state.inspectedEntity.type = ANNOTATION
+        state.inspectedEntity.id = action.payload
+        state.inspectedEntity.clickedNoteId = action.payload
+      }
     },
   },
 })
 
-export const { setInspectedNoteId, setConceptId, setAnnotationId } = inspectedEntitySlice.actions
+export const { setInspectedNote, setInspectedConcept, setInspectedAnnotation } = scoreSlice.actions
 
 export default scoreSlice.reducer

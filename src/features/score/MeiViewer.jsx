@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectedNoteId } from '../inspection/inspectedEntitySlice'
+import { NOTE } from '../meiviewer/constants'
 import { verovioStyle } from '../meiviewer/mei.css'
 import { usePrevious } from '../meiviewer/utils'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
+import { setInspectedNote } from '../slice/scoreSlice'
 
 window.verovioCallback = load
 
@@ -18,26 +19,19 @@ export const MeiViewer = props => {
 
   const {
     isInspectionMode,
-    inspectedNoteId,
-    inspectedVerticalityId,
-    inspectedPositionnedNoteId,
-    inspectedSelectionId,
-    inspectedAnnotationId
-  } = useSelector(state => state.inspectedEntity)
-
-  const inspectedEntity =
-    inspectedNoteId || inspectedPositionnedNoteId || inspectedSelectionId || inspectedVerticalityId || inspectedAnnotationId
+    inspectedEntity
+  } = useSelector(state => state.score)
 
   const previousEntity = usePrevious(inspectedEntity)
-  
+
   const styleInspectedEntity = () => {
-    if (inspectedNoteId)
-      document.getElementById(inspectedNoteId.slice(props.scoreIri.length + 1)).classList.add('inspected')
-    // ...
+    if (inspectedEntity.type === NOTE)
+      document.getElementById(inspectedEntity.id.slice(props.scoreIri.length + 1)).classList.add('inspected')
   }
 
   const unStylePreviousEntity = () => {
-    document.getElementById(previousEntity.slice(props.scoreIri.length + 1)).classList.remove('inspected')
+    if (previousEntity.type === NOTE)
+      document.getElementById(previousEntity.id.slice(props.scoreIri.length + 1)).classList.remove('inspected')
   }
 
   if (previousEntity) unStylePreviousEntity()
@@ -48,8 +42,8 @@ export const MeiViewer = props => {
   const handleMouseLeave = e => getNote(e.target)?.classList.remove('focused')
 
   const handleClick = e => {
-    const n = getNote(e.target)
-    if (n && isInspectionMode) dispatch(setInspectedNoteId(props.scoreIri + '_' + n.id))
+    const noteId = getNote(e.target)?.id
+    if (noteId && isInspectionMode) dispatch(setInspectedNote(props.scoreIri + '_' + noteId))
   }
 
   return (

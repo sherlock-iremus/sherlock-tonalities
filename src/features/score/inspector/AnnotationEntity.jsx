@@ -4,8 +4,8 @@ import { LoadingEntity } from "./LoadingEntity"
 import { NoteEntity } from "./NoteEntity"
 
 export const AnnotationEntity = props => {
-    const { data: concepts } = useGetAnnotationInfoQuery(props.annotation)
-    const { data: subAnnotations } = useGetSubAnnotationsQuery(props.annotation)
+    const { data: concepts } = useGetAnnotationInfoQuery(props.annotationIri)
+    const { data: subAnnotations } = useGetSubAnnotationsQuery(props.annotationIri)
 
     return concepts && subAnnotations ? (
         <>
@@ -19,7 +19,7 @@ export const AnnotationEntity = props => {
                                 sx={{ m: 0.3 }}
                             />
                         ))}
-                        secondary={props.annotation.slice(props.baseUrl.length)}
+                        secondary={props.annotationIri.slice(props.baseUrl.length)}
                     />
                 </ListItemButton>
             </ListItem>
@@ -28,7 +28,7 @@ export const AnnotationEntity = props => {
                     <NoteEntity
                         disablePadding
                         key={subAnnotation.entity}
-                        note={subAnnotation.entity}
+                        noteIri={subAnnotation.entity}
                         scoreIri={props.scoreIri}
                         baseUrl={props.baseUrl}
                         secondaryAction={<Chip label={subAnnotation.concept.slice(props.treatiseIri.length)} />}

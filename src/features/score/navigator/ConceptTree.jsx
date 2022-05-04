@@ -1,12 +1,13 @@
 import { Button, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setConceptId } from '../../inspection/inspectedEntitySlice'
+import { CONCEPT } from '../../meiviewer/constants'
+import { setInspectedConcept } from '../../slice/scoreSlice'
 import { ConceptItem } from './ConceptItem'
 
 export const ConceptTree = props => {
   const [filteredTree, setFilteredTree] = useState(props.treatise)
-  const { inspectedConceptId, baseUrl } = useSelector(state => state.inspectedEntity)
+  const { inspectedEntity, baseUrl } = useSelector(state => state.score)
 
   const dispatch = useDispatch()
 
@@ -39,9 +40,9 @@ export const ConceptTree = props => {
         filteredTree.rootClasses.map(concept => (
           <ConceptItem
             key={concept.iri}
-            selectedConcept={inspectedConceptId}
+            selectedConcept={inspectedEntity.type === CONCEPT && inspectedEntity.id}
             concept={concept}
-            setInspection={clickedConcept => dispatch(setConceptId(clickedConcept))}
+            setInspection={clickedConcept => dispatch(setInspectedConcept(clickedConcept))}
           />
         ))
       }

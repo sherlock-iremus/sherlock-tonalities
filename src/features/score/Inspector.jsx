@@ -14,6 +14,7 @@ import {
 import { AppBar, Drawer, IconButton, List, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
+import { ANNOTATION, CONCEPT, NOTE, POSITIONNED_NOTE, VERTICALITY } from '../meiviewer/constants'
 import { AnnotationEntity } from './inspector/AnnotationEntity'
 import { ConceptEntity } from './inspector/ConceptEntity'
 import { NoteEntity } from './inspector/NoteEntity'
@@ -21,25 +22,20 @@ import { NoteEntity } from './inspector/NoteEntity'
 export const Inspector = props => {
   const dispatch = useDispatch()
 
-  const entityTypes = [
-    { label: 'Note', icon: <MusicNote /> },
-    { label: 'Verticality', icon: <AlignHorizontalCenter /> },
-    { label: 'Positionned note', icon: <QueueMusic /> },
-    { label: 'Selection', icon: <BubbleChart /> },
-    { label: 'Theorical concept', icon: <HistoryEdu /> },
-    { label: 'Analytical entity', icon: <Lyrics /> },
-  ]
+  const entityTypes = {
+    NOTE: { label: 'Note', icon: <MusicNote /> },
+    VERTICALITY: { label: 'Verticality', icon: <AlignHorizontalCenter /> },
+    POSITIONNED_NOTE: { label: 'Positionned note', icon: <QueueMusic /> },
+    SELECTION: { label: 'Selection', icon: <BubbleChart /> },
+    CONCEPT: { label: 'Theorical concept', icon: <HistoryEdu /> },
+    ANNOTATION: { label: 'Analytical entity', icon: <Lyrics /> },
+  }
 
   const {
     baseUrl,
     isInspectionMode,
-    inspectedNoteId,
-    inspectedVerticalityId,
-    inspectedPositionnedNoteId,
-    inspectedSelectionId,
-    inspectedConceptId,
-    inspectedAnnotationId
-  } = useSelector(state => state.inspectedEntity)
+    inspectedEntity
+  } = useSelector(state => state.score)
 
   return (
     <Drawer open={props.isOpen} anchor="right" variant="persistent">
@@ -64,8 +60,8 @@ export const Inspector = props => {
               </Tooltip>
               <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1 }}>
                 <Tab
-                  label={(inspectedNoteId && entityTypes[0].label) || (inspectedConceptId && entityTypes[4].label) || (inspectedAnnotationId && entityTypes[5].label)}
-                  icon={(inspectedNoteId && entityTypes[0].icon) || (inspectedConceptId && entityTypes[4].icon) || (inspectedAnnotationId && entityTypes[5].icon)}
+                  label={inspectedEntity.id ? entityTypes[inspectedEntity.type].label : ''}
+                  icon={inspectedEntity.id ? entityTypes[inspectedEntity.type].icon : null}
                 />
               </Tabs>
               <Tooltip title="Go forward">
@@ -76,9 +72,9 @@ export const Inspector = props => {
             </Toolbar>
           </AppBar>
           <List>
-            {inspectedNoteId && <NoteEntity note={inspectedNoteId} baseUrl={baseUrl} />}
-            {inspectedAnnotationId && <AnnotationEntity annotation={inspectedAnnotationId} scoreIri={props.scoreIri} treatiseIri={props.treatiseIri} baseUrl={baseUrl} />}
-            {inspectedConceptId && <ConceptEntity concept={inspectedConceptId} treatiseIri={props.treatiseIri} baseUrl={baseUrl} />}
+            {inspectedEntity.type === NOTE && <NoteEntity noteIri={inspectedEntity.id} baseUrl={baseUrl} />}
+            {inspectedEntity.type === ANNOTATION && <AnnotationEntity annotationIri={inspectedEntity.id} scoreIri={props.scoreIri} treatiseIri={props.treatiseIri} baseUrl={baseUrl} />}
+            {inspectedEntity.type === CONCEPT && <ConceptEntity conceptIri={inspectedEntity.id} treatiseIri={props.treatiseIri} baseUrl={baseUrl} />}
           </List>
         </Box>
       )}
