@@ -13,29 +13,37 @@ import {
 } from '@mui/icons-material'
 import { AppBar, Drawer, IconButton, List, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import { useDispatch, useSelector } from 'react-redux'
-import { ANNOTATION, CONCEPT, NOTE, POSITIONNED_NOTE, VERTICALITY } from '../meiviewer/constants'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { usePrevious } from '../meiviewer/utils'
+import { setInspectedAnnotation, setInspectedConcept, setInspectedNote } from '../slice/scoreSlice'
 import { AnnotationEntity } from './inspector/AnnotationEntity'
 import { ConceptEntity } from './inspector/ConceptEntity'
 import { NoteEntity } from './inspector/NoteEntity'
 
 export const Inspector = props => {
-  const dispatch = useDispatch()
+  const [header, setHeader] = useState({ label: '', icon: null })
 
-  const entityTypes = {
-    NOTE: { label: 'Note', icon: <MusicNote /> },
-    VERTICALITY: { label: 'Verticality', icon: <AlignHorizontalCenter /> },
-    POSITIONNED_NOTE: { label: 'Positionned note', icon: <QueueMusic /> },
-    SELECTION: { label: 'Selection', icon: <BubbleChart /> },
-    CONCEPT: { label: 'Theorical concept', icon: <HistoryEdu /> },
-    ANNOTATION: { label: 'Analytical entity', icon: <Lyrics /> },
+  const { baseUrl, isInspectionMode, inspectedEntity } = useSelector(state => state.score)
+
+  const previousEntity = usePrevious(inspectedEntity)
+
+  const setToPreviousEntity = () => {
+    if (previousEntity.noteIri) setInspectedNote(previousEntity.noteIri)
+    else if (previousEntity.conceptIri) setInspectedConcept(previousEntity.conceptIri)
+    else if (previousEntity.annotationIri) setInspectedAnnotation(previousEntity.annotationIri)
+    else setInspectedNote(previousEntity)
   }
 
-  const {
-    baseUrl,
-    isInspectionMode,
-    inspectedEntity
-  } = useSelector(state => state.score)
+  useEffect(() => {
+    if (inspectedEntity.noteIri) setHeader({ label: 'Note', icon: <MusicNote /> })
+    else if (inspectedEntity.verticalityIri) setHeader({ label: 'Verticality', icon: <AlignHorizontalCenter /> })
+    else if (inspectedEntity.positionnedNoteIri) setHeader({ label: 'Positionned note', icon: <QueueMusic /> })
+    else if (inspectedEntity.selectionIri) setHeader({ label: 'Selection', icon: <BubbleChart /> })
+    else if (inspectedEntity.conceptIri) setHeader({ label: 'Theorical concept', icon: <HistoryEdu /> })
+    else if (inspectedEntity.annotationIri) setHeader({ label: 'Analytical entity', icon: <Lyrics /> })
+    else setHeader({ label: '', icon: null })
+  }, [inspectedEntity])
 
   return (
     <Drawer open={props.isOpen} anchor="right" variant="persistent">
@@ -53,28 +61,39 @@ export const Inspector = props => {
               </Tooltip>
             </Toolbar>
             <Toolbar>
-              <Tooltip title="Go backward">
-                <IconButton edge="start" color='inherit'>
-                  <ArrowBack />
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                onClick={setToPreviousEntity}
+                disabled={!previousEntity?.noteIri && !previousEntity?.conceptIri && !previousEntity?.annotationIri}
+                edge="start"
+                color="inherit"
+              >
+                <ArrowBack />
+              </IconButton>
               <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1 }}>
-                <Tab
-                  label={inspectedEntity.id ? entityTypes[inspectedEntity.type].label : ''}
-                  icon={inspectedEntity.id ? entityTypes[inspectedEntity.type].icon : null}
-                />
+                <Tab label={header.label} icon={header.icon} />
               </Tabs>
-              <Tooltip title="Go forward">
-                <IconButton color='inherit' edge="end">
-                  <ArrowForward />
-                </IconButton>
-              </Tooltip>
+              <IconButton disabled color="inherit" edge="end">
+                <ArrowForward />
+              </IconButton>
             </Toolbar>
           </AppBar>
           <List>
-            {inspectedEntity.type === NOTE && <NoteEntity noteIri={inspectedEntity.id} baseUrl={baseUrl} />}
-            {inspectedEntity.type === ANNOTATION && <AnnotationEntity annotationIri={inspectedEntity.id} scoreIri={props.scoreIri} treatiseIri={props.treatiseIri} baseUrl={baseUrl} />}
-            {inspectedEntity.type === CONCEPT && <ConceptEntity conceptIri={inspectedEntity.id} treatiseIri={props.treatiseIri} baseUrl={baseUrl} />}
+            {inspectedEntity.noteIri && <NoteEntity noteIri={inspectedEntity.noteIri} baseUrl={baseUrl} />}
+            {inspectedEntity.annotationIri && (
+              <AnnotationEntity
+                annotationIri={inspectedEntity.annotationIri}
+                scoreIri={props.scoreIri}
+                treatiseIri={props.treatiseIri}
+                baseUrl={baseUrl}
+              />
+            )}
+            {inspectedEntity.conceptIri && (
+              <ConceptEntity
+                conceptIri={inspectedEntity.conceptIri}
+                treatiseIri={props.treatiseIri}
+                baseUrl={baseUrl}
+              />
+            )}
           </List>
         </Box>
       )}

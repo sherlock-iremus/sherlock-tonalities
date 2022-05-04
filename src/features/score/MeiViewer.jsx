@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NOTE } from '../meiviewer/constants'
 import { verovioStyle } from '../meiviewer/mei.css'
 import { usePrevious } from '../meiviewer/utils'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
@@ -13,25 +12,22 @@ window.verovioCallback = load
 export const MeiViewer = props => {
   useEffect(() => {
     createVerovio(props.meiUrl)
-  }, [])
+  }, [props.meiUrl])
 
   const dispatch = useDispatch()
 
-  const {
-    isInspectionMode,
-    inspectedEntity
-  } = useSelector(state => state.score)
+  const { isInspectionMode, inspectedEntity } = useSelector(state => state.score)
 
   const previousEntity = usePrevious(inspectedEntity)
 
   const styleInspectedEntity = () => {
-    if (inspectedEntity.type === NOTE)
-      document.getElementById(inspectedEntity.id.slice(props.scoreIri.length + 1)).classList.add('inspected')
+    if (inspectedEntity.noteIri)
+      document.getElementById(inspectedEntity.noteIri.slice(props.scoreIri.length + 1)).classList.add('inspected')
   }
 
   const unStylePreviousEntity = () => {
-    if (previousEntity.type === NOTE)
-      document.getElementById(previousEntity.id.slice(props.scoreIri.length + 1)).classList.remove('inspected')
+    if (previousEntity.noteIri)
+      document.getElementById(previousEntity.noteIri.slice(props.scoreIri.length + 1)).classList.remove('inspected')
   }
 
   if (previousEntity) unStylePreviousEntity()
