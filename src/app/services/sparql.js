@@ -4,6 +4,7 @@ import {
   getAnnotations,
   getConceptAnnotations,
   getNoteInfo,
+  getNoteSelections,
   getNotesOnFirstBeat,
   getSubAnnotations,
 } from './sparqlQueries'
@@ -83,6 +84,14 @@ export const sparqlEndpoint = createApi({
       transformResponse: response =>
         response.results?.bindings?.map(e => ({ iri: e.entity?.value, label: e.programName?.value })),
     }),
+    getNoteSelections: builder.query({
+      query: noteIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getNoteSelections(noteIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({ iri: e.selection?.value, created: e.created?.value })),
+    }),
   }),
 })
 
@@ -95,4 +104,5 @@ export const {
   useGetAnnotationInfoQuery,
   useGetSubAnnotationsQuery,
   useGetConceptAnnotationsQuery,
+  useGetNoteSelectionsQuery
 } = sparqlEndpoint
