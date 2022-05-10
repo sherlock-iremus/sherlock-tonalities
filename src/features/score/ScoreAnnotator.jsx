@@ -32,7 +32,12 @@ export const ScoreAnnotator = () => {
           </Avatar>
         </Tooltip>
       )}
-      <Inspector isOpen={isInspectorOpen} onClose={() => setIsInspectorOpen(false)} scoreIri={scoreIri} treatiseIri={treatise.iri} />
+      <Inspector
+        isOpen={isInspectorOpen}
+        onClose={() => setIsInspectorOpen(false)}
+        scoreIri={scoreIri}
+        treatiseIri={treatise.iri}
+      />
 
       {!isNavigatorOpen && (
         <Tooltip title="Navigator">
@@ -46,7 +51,12 @@ export const ScoreAnnotator = () => {
           </Avatar>
         </Tooltip>
       )}
-      <Navigator isOpen={isNavigatorOpen} onClose={() => setIsNavigatorOpen(false)} treatise={treatise} />
+      <Navigator
+        isOpen={isNavigatorOpen}
+        onClose={() => setIsNavigatorOpen(false)}
+        treatise={treatise}
+        scoreIri={scoreIri}
+      />
     </>
   )
 }

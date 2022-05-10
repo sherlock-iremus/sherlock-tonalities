@@ -1,14 +1,14 @@
 export const getNotesOnFirstBeat = noteIri => `
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     SELECT ?notes ?beat ?selectedNote
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            ?notes sherlock:contains_beat ?beat
+            ?notes sherlockmei:contains_beat ?beat
             {
                 SELECT ?beat ?selectedNote
                 WHERE {
                     BIND (<${noteIri}> AS ?selectedNote)
-                    ?selectedNote sherlock:contains_beat ?beat
+                    ?selectedNote sherlockmei:contains_beat ?beat
                 }
                 ORDER BY ASC(?beat)
                 LIMIT 1
@@ -18,21 +18,20 @@ export const getNotesOnFirstBeat = noteIri => `
 `
 
 export const getNoteInfo = noteIri => `
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     SELECT *
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
             VALUES ?note {<${noteIri}>}
-            ?note sherlock:pname ?pname.
-            ?note sherlock:oct ?oct.
-            OPTIONAL {?note sherlock:accid ?accid}
+            ?note sherlockmei:pname ?pname.
+            ?note sherlockmei:oct ?oct.
+            OPTIONAL {?note sherlockmei:accid ?accid}
         }
     }
 `
 
-export const getAnnotations = scoreIri => `
+export const getScoreAnnotations = scoreIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     SELECT ?root
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
@@ -47,9 +46,7 @@ export const getAnnotations = scoreIri => `
 
 export const getAnnotationInfo = annotationIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
     SELECT ?concept
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
@@ -63,7 +60,6 @@ export const getAnnotationInfo = annotationIri => `
 
 export const getSubAnnotations = annotationIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
     SELECT ?selection ?type
@@ -95,7 +91,6 @@ export const getConceptAnnotations = conceptIri => `
 export const getNoteSelections = noteIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterm: <http://purl.org/dc/terms/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     SELECT ?selection ?created
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
@@ -104,4 +99,18 @@ export const getNoteSelections = noteIri => `
             ?selection dcterm:created ?created
         }
     }
+`
+
+export const getScoreSelections = scoreIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    SELECT ?selection ((COUNT(?entity)) AS ?entities)
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?entity sherlockmei:in_score <${scoreIri}>.
+            ?selection crm:P106_is_composed_of ?entity.
+            ?selection crm:P2_has_type <http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b>.
+        }
+    }
+    GROUP BY ?selection
 `

@@ -6,6 +6,7 @@ import { purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { SearchBar } from '../meiviewer/SearchField'
 import { ConceptTree } from './navigator/ConceptTree'
+import { Selections } from './navigator/Selections'
 
 export const Navigator = props => {
   const [selectedTab, setSelectedTab] = useState(0)
@@ -37,6 +38,7 @@ export const Navigator = props => {
             <Tab icon={<HistoryEdu />} label="Concepts" />
           </Tabs>
         </AppBar>
+        {selectedTab === 0 && <Selections scoreIri={props.scoreIri} />}
         {selectedTab === 1 && <ConceptTree treatise={props.treatise} filter={filter} />}
       </Box>
     </Drawer>
