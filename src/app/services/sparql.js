@@ -1,10 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { ANNALYTICAL_ENTITY, NOTE, POSITIONNED_NOTE, SELECTION, VERTICALITY } from '../../features/meiviewer/constants'
 import {
   getAnnotationInfo,
+  getChildSelections,
   getConceptAnnotations,
   getNoteInfo,
   getNoteSelections,
   getNotesOnFirstBeat,
+  getParentSelections,
   getScoreAnnotations,
   getScoreSelections,
   getSubAnnotations,
@@ -101,6 +104,28 @@ export const sparqlEndpoint = createApi({
       transformResponse: response =>
         response.results?.bindings?.map(e => ({ iri: e.selection?.value, entities: e.entities?.value })),
     }),
+    getChildSelections: builder.query({
+      query: selectionIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getChildSelections(selectionIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => {
+          if (e.type.value === NOTE) return { noteIri: e.child.value }
+          if (e.type.value === VERTICALITY) return { verticalityIri: e.child.value }
+          if (e.type.value === POSITIONNED_NOTE) return { positionnedNoteIri: e.child.value }
+          if (e.type.value === SELECTION) return { selectionIri: e.child.value }
+          if (e.type.value === ANNALYTICAL_ENTITY) return { annalyticalEntityIri: e.child.value }
+        }),
+    }),
+    getParentSelections: builder.query({
+      query: selectionIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getParentSelections(selectionIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({ iri: e.parent?.value, type: e.type?.value })),
+    }),
   }),
 })
 
@@ -114,5 +139,7 @@ export const {
   useGetSubAnnotationsQuery,
   useGetConceptAnnotationsQuery,
   useGetNoteSelectionsQuery,
-  useGetScoreSelectionsQuery
+  useGetScoreSelectionsQuery,
+  useGetChildSelectionsQuery,
+  useGetParentSelectionsQuery
 } = sparqlEndpoint

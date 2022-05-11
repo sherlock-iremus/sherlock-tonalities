@@ -91,14 +91,13 @@ export const getConceptAnnotations = conceptIri => `
 export const getNoteSelections = noteIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterm: <http://purl.org/dc/terms/>
-    SELECT ?selection ((COUNT(?entity)) AS ?entities)
+    SELECT ?selection
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
             ?selection crm:P106_is_composed_of <${noteIri}>.
             ?selection crm:P2_has_type <http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b>.
         }
     }
-    GROUP BY ?selection
 `
 
 export const getScoreSelections = scoreIri => `
@@ -113,4 +112,28 @@ export const getScoreSelections = scoreIri => `
         }
     }
     GROUP BY ?selection
+`
+
+export const getChildSelections = selectionIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    SELECT ?child ?type
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            <${selectionIri}> crm:P106_is_composed_of ?child.
+            OPTIONAL {?child crm:P2_has_type ?type}
+            OPTIONAL {?child sherlockmei:element ?type}
+        }
+    }
+`
+
+export const getParentSelections = selectionIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    SELECT ?parent ?type
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?parent crm:P106_is_composed_of <${selectionIri}>.
+            OPTIONAL {?parent crm:P2_has_type ?type}
+        }
+    }
 `
