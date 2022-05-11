@@ -9,12 +9,12 @@ export const Selections = props => {
 
   return (
     <List>
-      {selections?.map((selection, index) => (
+      {selections?.map(selection => (
         <ListItem key={selection.iri} disablePadding secondaryAction={props.secondaryAction}>
           <ListItemButton onClick={() => dispatch(setInspectedSelection(selection.iri))}>
             <ListItemText
-              primary={'Selection ' + (index + 1)}
-              secondary={selection.entities + ' elements'}
+              primary={`Selection with ${selection.entities} elements`}
+              secondary={selection.iri.slice(props.baseUrl.length)}
             />
           </ListItemButton>
         </ListItem>

@@ -14,7 +14,7 @@ import treatise from '../../app/treatises/Zarlino_1588.json'
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
-  const { meiUrl, scoreIri } = useSelector(state => state.score)
+  const { meiUrl, scoreIri, baseUrl } = useSelector(state => state.score)
 
   return (
     <>
@@ -56,6 +56,7 @@ export const ScoreAnnotator = () => {
         onClose={() => setIsNavigatorOpen(false)}
         treatise={treatise}
         scoreIri={scoreIri}
+        baseUrl={baseUrl}
       />
     </>
   )

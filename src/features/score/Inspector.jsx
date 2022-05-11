@@ -1,14 +1,24 @@
 /** @jsxImportSource @emotion/react */
 
-import { AlignHorizontalCenter, ArrowBack, Close, HistoryEdu, Lyrics, MusicNote, QueueMusic } from '@mui/icons-material'
+import {
+  AlignHorizontalCenter,
+  ArrowBack,
+  BubbleChart,
+  Close,
+  HistoryEdu,
+  Lyrics,
+  MusicNote,
+  QueueMusic,
+} from '@mui/icons-material'
 import { AppBar, Drawer, IconButton, List, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { usePrevious } from '../meiviewer/utils'
-import { setInspectedAnnotation, setInspectedConcept, setInspectedNote } from '../slice/scoreSlice'
+import { setInspectedAnnotation, setInspectedConcept, setInspectedNote, setInspectedSelection } from '../slice/scoreSlice'
 import { AnnotationEntity } from './inspector/AnnotationEntity'
 import { ConceptEntity } from './inspector/ConceptEntity'
 import { NoteEntity } from './inspector/NoteEntity'
+import { SelectionEntity } from './inspector/SelectionEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -21,7 +31,7 @@ export const Inspector = props => {
     if (previousEntity.noteIri) dispatch(setInspectedNote(previousEntity.noteIri))
     else if (previousEntity.conceptIri) dispatch(setInspectedConcept(previousEntity.conceptIri))
     else if (previousEntity.annotationIri) dispatch(setInspectedAnnotation(previousEntity.annotationIri))
-    else dispatch(setInspectedNote(previousEntity))
+    else if (previousEntity.selectionIri) dispatch(setInspectedSelection(previousEntity.selectionIri))
   }
 
   return (
@@ -56,6 +66,7 @@ export const Inspector = props => {
                     (inspectedEntity.noteIri && 'Note') ||
                     (inspectedEntity.verticalityIri && 'Verticality') ||
                     (inspectedEntity.positionnedNoteIri && 'Positionned note') ||
+                    (inspectedEntity.selectionIri && 'Selection') ||
                     (inspectedEntity.conceptIri && 'Concept') ||
                     (inspectedEntity.annotationIri && 'Annotation')
                   }
@@ -63,6 +74,7 @@ export const Inspector = props => {
                     (inspectedEntity.noteIri && <MusicNote />) ||
                     (inspectedEntity.verticalityIri && <AlignHorizontalCenter />) ||
                     (inspectedEntity.positionnedNoteIri && <QueueMusic />) ||
+                    (inspectedEntity.selectionIri && <BubbleChart />) ||
                     (inspectedEntity.conceptIri && <HistoryEdu />) ||
                     (inspectedEntity.annotationIri && <Lyrics />)
                   }
@@ -83,6 +95,13 @@ export const Inspector = props => {
             {inspectedEntity.conceptIri && (
               <ConceptEntity
                 conceptIri={inspectedEntity.conceptIri}
+                treatiseIri={props.treatiseIri}
+                baseUrl={baseUrl}
+              />
+            )}
+            {inspectedEntity.selectionIri && (
+              <SelectionEntity
+                selectionIri={inspectedEntity.selectionIri}
                 treatiseIri={props.treatiseIri}
                 baseUrl={baseUrl}
               />

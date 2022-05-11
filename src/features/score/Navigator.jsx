@@ -38,7 +38,7 @@ export const Navigator = props => {
             <Tab icon={<HistoryEdu />} label="Concepts" />
           </Tabs>
         </AppBar>
-        {selectedTab === 0 && <Selections scoreIri={props.scoreIri} />}
+        {selectedTab === 0 && <Selections scoreIri={props.scoreIri} baseUrl={props.baseUrl} />}
         {selectedTab === 1 && <Concepts treatise={props.treatise} filter={filter} />}
       </Box>
     </Drawer>

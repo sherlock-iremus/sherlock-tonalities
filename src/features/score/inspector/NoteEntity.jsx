@@ -1,10 +1,16 @@
 import { List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
-import { useGetNoteInfoQuery, useGetNoteSelectionsQuery } from '../../../app/services/sparql'
+import { useDispatch } from 'react-redux'
+import {
+  useGetNoteInfoQuery,
+  useGetNoteSelectionsQuery,
+} from '../../../app/services/sparql'
+import { setInspectedSelection } from '../../slice/scoreSlice'
 import { LoadingEntity } from './LoadingEntity'
 
 export const NoteEntity = props => {
   const { data: noteLabel } = useGetNoteInfoQuery(props.noteIri)
   const { data: selections } = useGetNoteSelectionsQuery(props.noteIri)
+  const dispatch = useDispatch()
 
   return noteLabel ? (
     <>
@@ -14,10 +20,13 @@ export const NoteEntity = props => {
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Selections</ListSubheader>}>
-        {selections?.map(selection => (
+        {selections?.map((selection, index) => (
           <ListItem key={selection.iri} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={selection.created} secondary={selection.iri} />
+            <ListItemButton onClick={() => dispatch(setInspectedSelection(selection.iri))}>
+              <ListItemText
+                primary={`Selection ${index + 1}`}
+                secondary={selection.iri.slice(props.baseUrl.length)}
+              />
             </ListItemButton>
           </ListItem>
         ))}
