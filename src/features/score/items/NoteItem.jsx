@@ -2,7 +2,7 @@ import { ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
 import { setInspectedNote } from '../../slice/scoreSlice'
-import { LoadingEntity } from '../inspector/LoadingEntity'
+import { LoadingEntity } from '../entities/LoadingEntity'
 
 export const NoteItem = props => {
   const { data: noteLabel } = useGetNoteInfoQuery(props.noteIri)

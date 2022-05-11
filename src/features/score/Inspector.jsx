@@ -15,10 +15,10 @@ import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { usePrevious } from '../meiviewer/utils'
 import { setInspectedAnnotation, setInspectedConcept, setInspectedNote, setInspectedSelection } from '../slice/scoreSlice'
-import { AnnotationEntity } from './inspector/AnnotationEntity'
-import { ConceptEntity } from './inspector/ConceptEntity'
-import { NoteEntity } from './inspector/NoteEntity'
-import { SelectionEntity } from './inspector/SelectionEntity'
+import { AnnotationEntity } from './entities/AnnotationEntity'
+import { ConceptEntity } from './entities/ConceptEntity'
+import { NoteEntity } from './entities/NoteEntity'
+import { SelectionEntity } from './entities/SelectionEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()

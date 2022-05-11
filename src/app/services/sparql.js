@@ -124,7 +124,7 @@ export const sparqlEndpoint = createApi({
         body: new URLSearchParams({ query: getParentSelections(selectionIri) }),
       }),
       transformResponse: response =>
-        response.results?.bindings?.map(e => ({ iri: e.parent?.value, type: e.type?.value })),
+        response.results?.bindings?.map(e => e.parent?.value),
     }),
   }),
 })
