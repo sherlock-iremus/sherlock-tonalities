@@ -5,7 +5,7 @@ import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typograph
 import { purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { SearchBar } from '../meiviewer/SearchField'
-import { ConceptTree } from './navigator/ConceptTree'
+import { Concepts } from './navigator/Concepts'
 import { Selections } from './navigator/Selections'
 
 export const Navigator = props => {
@@ -39,7 +39,7 @@ export const Navigator = props => {
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Selections scoreIri={props.scoreIri} />}
-        {selectedTab === 1 && <ConceptTree treatise={props.treatise} filter={filter} />}
+        {selectedTab === 1 && <Concepts treatise={props.treatise} filter={filter} />}
       </Box>
     </Drawer>
   )

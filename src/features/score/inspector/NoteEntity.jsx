@@ -13,7 +13,7 @@ export const NoteEntity = props => {
           <ListItemText primary={noteLabel} secondary={props.noteIri.slice(props.baseUrl.length)} />
         </ListItemButton>
       </ListItem>
-      <List subheader={<ListSubheader>Attached selections</ListSubheader>}>
+      <List subheader={<ListSubheader>Selections</ListSubheader>}>
         {selections?.map(selection => (
           <ListItem key={selection.iri} disablePadding>
             <ListItemButton>

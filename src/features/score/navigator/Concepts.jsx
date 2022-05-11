@@ -2,9 +2,9 @@ import { Button, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectedConcept } from '../../slice/scoreSlice'
-import { ConceptItem } from './ConceptItem'
+import { Concept } from './Concept'
 
-export const ConceptTree = props => {
+export const Concepts = props => {
   const [filteredTree, setFilteredTree] = useState(props.treatise)
   const { inspectedEntity, baseUrl } = useSelector(state => state.score)
 
@@ -41,7 +41,7 @@ export const ConceptTree = props => {
     >
       {filteredTree.rootClasses.length &&
         filteredTree.rootClasses.map(concept => (
-          <ConceptItem
+          <Concept
             key={concept.iri}
             selectedConcept={inspectedEntity.conceptIri}
             concept={concept}

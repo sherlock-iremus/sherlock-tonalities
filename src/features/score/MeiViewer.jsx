@@ -22,12 +22,12 @@ export const MeiViewer = props => {
 
   const styleInspectedEntity = () => {
     if (inspectedEntity.noteIri)
-      document.getElementById(inspectedEntity.noteIri.slice(props.scoreIri.length + 1)).classList.add('inspected')
+      document.getElementById(inspectedEntity.noteIri.slice(props.scoreIri.length + 1))?.classList.add('inspected')
   }
 
   const unStylePreviousEntity = () => {
     if (previousEntity.noteIri)
-      document.getElementById(previousEntity.noteIri.slice(props.scoreIri.length + 1)).classList.remove('inspected')
+      document.getElementById(previousEntity.noteIri.slice(props.scoreIri.length + 1))?.classList.remove('inspected')
   }
 
   if (previousEntity) unStylePreviousEntity()

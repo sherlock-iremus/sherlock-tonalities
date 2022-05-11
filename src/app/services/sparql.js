@@ -91,7 +91,7 @@ export const sparqlEndpoint = createApi({
         body: new URLSearchParams({ query: getNoteSelections(noteIri) }),
       }),
       transformResponse: response =>
-        response.results?.bindings?.map(e => ({ iri: e.selection?.value, created: e.created?.value })),
+        response.results?.bindings?.map(e => ({ iri: e.selection?.value, entities: e.entities?.value })),
     }),
     getScoreSelections: builder.query({
       query: scoreIri => ({

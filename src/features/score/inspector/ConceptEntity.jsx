@@ -19,7 +19,7 @@ export const ConceptEntity = props => {
           <ListItemText primary={props.conceptIri.slice(props.treatiseIri.length)} secondary={props.treatiseIri.slice(props.baseUrl.length+3)} />
         </ListItemButton>
       </ListItem>
-      <List subheader={<ListSubheader>Created annalytical entities</ListSubheader>}>
+      <List subheader={<ListSubheader>Annalytical entities</ListSubheader>}>
         {annotations.map(annotation => (
           <ListItem key={annotation.iri} disablePadding>
             <ListItemButton onClick={() => dispatch(setInspectedAnnotation(annotation.iri))}>

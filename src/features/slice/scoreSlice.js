@@ -26,6 +26,12 @@ const scoreSlice = createSlice({
           ? initialState.inspectedEntity
           : { ...initialState.inspectedEntity, noteIri: action.payload, clickedNoteIri: action.payload }
     },
+    setInspectedSelection: (state, action) => {
+      state.inspectedEntity =
+        action.payload === state.inspectedEntity.selectionIri
+          ? initialState.inspectedEntity
+          : { ...initialState.inspectedEntity, selectionIri: action.payload }
+    },
     setInspectedConcept: (state, action) => {
       state.inspectedEntity =
         action.payload === state.inspectedEntity.conceptIri
@@ -41,6 +47,6 @@ const scoreSlice = createSlice({
   },
 })
 
-export const { setInspectedNote, setInspectedConcept, setInspectedAnnotation } = scoreSlice.actions
+export const { setInspectedNote, setInspectedConcept, setInspectedAnnotation, setInspectedSelection } = scoreSlice.actions
 
 export default scoreSlice.reducer

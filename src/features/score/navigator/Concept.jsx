@@ -2,7 +2,7 @@ import { ListItem, ListItemButton, ListItemText, Collapse, List, IconButton } fr
 import { ExpandMore, ChevronRight } from '@mui/icons-material'
 import { useState } from 'react'
 
-export const ConceptItem = props => {
+export const Concept = props => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -19,7 +19,7 @@ export const ConceptItem = props => {
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List sx={{ pl: 4 }} disablePadding>
             {props.concept.subClasses.map(subClass => (
-              <ConceptItem
+              <Concept
                 key={subClass.iri}
                 selectedConcept={props.selectedConcept}
                 concept={subClass}

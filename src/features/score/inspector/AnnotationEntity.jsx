@@ -1,7 +1,8 @@
-import { Chip, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
 import { useGetAnnotationInfoQuery, useGetSubAnnotationsQuery } from '../../../app/services/sparql'
+import { ConceptItem } from '../items/ConceptItem'
+import { NoteItem } from '../items/NoteItem'
 import { LoadingEntity } from './LoadingEntity'
-import { NoteEntity } from './NoteEntity'
 
 export const AnnotationEntity = props => {
   const { data: concepts } = useGetAnnotationInfoQuery(props.annotationIri)
@@ -10,10 +11,10 @@ export const AnnotationEntity = props => {
   return concepts && subAnnotations ? (
     <>
       <ListItem disablePadding>
-        <ListItemButton>
+        <ListItemButton sx={{ cursor: 'default' }}>
           <ListItemText
             primary={concepts.map(concept => (
-              <Chip key={concept} label={concept.slice(props.treatiseIri.length)} sx={{ m: 0.3 }} />
+              <ConceptItem key={concept} conceptIri={concept} treatiseIri={props.treatiseIri} />
             ))}
             secondary={props.annotationIri.slice(props.baseUrl.length)}
           />
@@ -21,13 +22,13 @@ export const AnnotationEntity = props => {
       </ListItem>
       <List sx={{ pl: 2 }} dense disablePadding subheader={<ListSubheader>Associated selection</ListSubheader>}>
         {subAnnotations.map(subAnnotation => (
-          <NoteEntity
+          <NoteItem
             disablePadding
             key={subAnnotation.entity}
             noteIri={subAnnotation.entity}
             scoreIri={props.scoreIri}
             baseUrl={props.baseUrl}
-            secondaryAction={<Chip label={subAnnotation.concept.slice(props.treatiseIri.length)} />}
+            secondaryAction={<ConceptItem conceptIri={subAnnotation.concept} treatiseIri={props.treatiseIri} />}
           />
         ))}
       </List>
