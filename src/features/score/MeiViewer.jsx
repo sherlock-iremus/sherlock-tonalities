@@ -22,32 +22,43 @@ export const MeiViewer = props => {
 
   const inspectedEntity = inspectedEntities[currentEntityIndex]
   const previousEntity = inspectedEntities[currentEntityIndex - 1] || inspectedEntities[0]
+  const nextEntity = inspectedEntities[currentEntityIndex + 1] || inspectedEntities[0]
 
   const { data: currentSelection } = useGetChildSelectionsQuery(inspectedEntity.selectionIri, {
     skip: !inspectedEntity.selectionIri,
   })
-
-  const { data: previousSelection } = useGetChildSelectionsQuery(previousEntity?.selectionIri, {
-    skip: !previousEntity?.selectionIri,
+  const { data: previousSelection } = useGetChildSelectionsQuery(previousEntity.selectionIri, {
+    skip: !previousEntity.selectionIri,
+  })
+  const { data: nextSelection } = useGetChildSelectionsQuery(nextEntity.selectionIri, {
+    skip: !nextEntity.selectionIri,
   })
 
-  const styleInspectedEntity = entity => {
+  const styleEntity = entity => {
     if (entity.noteIri)
       document.getElementById(entity.noteIri.slice(props.scoreIri.length + 1))?.classList.add('inspected')
-    if (entity.selectionIri) currentSelection?.map(child => styleInspectedEntity(child))
+    if (entity.selectionIri) currentSelection?.map(child => styleEntity(child))
   }
 
   const unStylePreviousEntity = entity => {
     if (entity.noteIri)
       document.getElementById(entity.noteIri.slice(props.scoreIri.length + 1))?.classList.remove('inspected')
     if (entity.selectionIri) {
-      console.log(previousSelection)
       previousSelection?.map(child => unStylePreviousEntity(child))
     }
   }
 
+  const unStyleNextEntity = entity => {
+    if (entity.noteIri)
+      document.getElementById(entity.noteIri.slice(props.scoreIri.length + 1))?.classList.remove('inspected')
+    if (entity.selectionIri) {
+      nextSelection?.map(child => unStyleNextEntity(child))
+    }
+  }
+
   if (previousEntity) unStylePreviousEntity(previousEntity)
-  if (inspectedEntity) styleInspectedEntity(inspectedEntity)
+  if (nextEntity) unStyleNextEntity(nextEntity)
+  if (inspectedEntity) styleEntity(inspectedEntity)
 
   const handleMouseOver = e => getNote(e.target)?.classList.add('focused')
 

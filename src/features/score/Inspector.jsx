@@ -33,8 +33,7 @@ export const Inspector = props => {
   const dispatch = useDispatch()
 
   const { baseUrl, isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
-  console.log(inspectedEntities)
-  console.log(currentEntityIndex)
+
   const inspectedEntity = inspectedEntities[currentEntityIndex]
   const previousEntity = inspectedEntities[currentEntityIndex - 1] || inspectedEntities[0]
   const nextEntity = inspectedEntities[currentEntityIndex + 1] || inspectedEntities[0]

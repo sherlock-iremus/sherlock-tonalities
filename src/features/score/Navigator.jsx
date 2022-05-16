@@ -20,11 +20,7 @@ export const Navigator = props => {
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Navigator
             </Typography>
-            <SearchBar
-              value={filter}
-              onChange={e => setFilter(e.target.value)}
-              disabled={selectedTab === 0}
-            />
+            <SearchBar value={filter} onChange={e => setFilter(e.target.value)} disabled={selectedTab === 0} />
             <Tooltip title="Close">
               <IconButton edge="end" color="inherit" onClick={props.onClose}>
                 <Close />
