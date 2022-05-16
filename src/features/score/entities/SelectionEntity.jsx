@@ -1,5 +1,16 @@
-import { ChevronLeft, ChevronRight, Close, ExpandLess, ExpandMore, MoveDown, MoveUp } from '@mui/icons-material'
-import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { BubbleChart, Close, ExpandLess, ExpandMore } from '@mui/icons-material'
+import {
+  Collapse,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Tooltip,
+} from '@mui/material'
+import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useGetChildSelectionsQuery, useGetParentSelectionsQuery } from '../../../app/services/sparql'
@@ -17,7 +28,7 @@ export const SelectionEntity = props => {
   return children && parents ? (
     <>
       <Collapse in={isParentListOpen} timeout="auto" unmountOnExit>
-        <List dense disablePadding>
+        <List subheader={<ListSubheader>Parent selections</ListSubheader>} dense disablePadding>
           {parents.map((parentIri, index) => (
             <ListItem key={parentIri} disablePadding>
               <ListItemButton onClick={() => dispatch(setInspectedSelection(parentIri))}>
@@ -30,6 +41,15 @@ export const SelectionEntity = props => {
           ))}
         </List>
       </Collapse>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Tooltip title="Parent selections">
+          <IconButton onClick={() => setIsParentListOpen(!isParentListOpen)}>
+            {isParentListOpen ? <ExpandMore /> : <ExpandLess />}
+          </IconButton>
+        </Tooltip>
+      </Box>
+
       <ListItem
         disablePadding
         secondaryAction={
@@ -37,23 +57,28 @@ export const SelectionEntity = props => {
             <Close />
           </IconButton>
         }
-        sx={{ pl: isParentListOpen ? 4 : 2 }}
       >
-        <IconButton onClick={() => setIsParentListOpen(!isParentListOpen)} disabled={!parents.length}>
-          {isParentListOpen ? <ExpandLess /> : <ChevronLeft />}
-        </IconButton>
-        <IconButton onClick={() => setIsChildTreeOpen(!isChildTreeOpen)}>
-          {isChildTreeOpen ? <ExpandMore /> : <ChevronRight />}
-        </IconButton>
         <ListItemButton sx={{ cursor: 'default' }}>
+          <ListItemIcon>
+            <BubbleChart />
+          </ListItemIcon>
           <ListItemText
             primary={`Selection with ${children.length} elements`}
             secondary={props.selectionIri.slice(props.baseUrl.length)}
           />
         </ListItemButton>
       </ListItem>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Tooltip title="Child selections">
+          <IconButton onClick={() => setIsChildTreeOpen(!isChildTreeOpen)}>
+            {isChildTreeOpen ? <ExpandLess /> : <ExpandMore />}
+          </IconButton>
+        </Tooltip>
+      </Box>
+
       <Collapse in={isChildTreeOpen} timeout="auto" unmountOnExit>
-        <List sx={{ pl: isParentListOpen ? 8 : 4 }} dense disablePadding>
+        <List subheader={<ListSubheader>Child selections</ListSubheader>} dense disablePadding>
           {children.map(child => (
             <Item {...child} key={child.selectionIri || child.noteIri} baseUrl={props.baseUrl} />
           ))}
