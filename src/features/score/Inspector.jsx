@@ -3,6 +3,7 @@
 import {
   AlignHorizontalCenter,
   ArrowBack,
+  ArrowForward,
   BubbleChart,
   Close,
   HistoryEdu,
@@ -14,7 +15,15 @@ import { AppBar, Drawer, IconButton, List, Tab, Tabs, Toolbar, Tooltip, Typograp
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { usePrevious } from '../meiviewer/utils'
-import { setInspectedAnnotation, setInspectedConcept, setInspectedNote, setInspectedSelection } from '../slice/scoreSlice'
+import {
+  setInspectedAnnotation,
+  setInspectedConcept,
+  setInspectedNote,
+  setInspectedSelection,
+  setPreviousInspection,
+  setToNextInspection,
+  setToPreviousInspection,
+} from '../slice/scoreSlice'
 import { AnnotationEntity } from './entities/AnnotationEntity'
 import { ConceptEntity } from './entities/ConceptEntity'
 import { NoteEntity } from './entities/NoteEntity'
@@ -23,16 +32,13 @@ import { SelectionEntity } from './entities/SelectionEntity'
 export const Inspector = props => {
   const dispatch = useDispatch()
 
-  const { baseUrl, isInspectionMode, inspectedEntity } = useSelector(state => state.score)
+  const { baseUrl, isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
+  console.log(inspectedEntities)
+  console.log(currentEntityIndex)
+  const inspectedEntity = inspectedEntities[currentEntityIndex]
+  const previousEntity = inspectedEntities[currentEntityIndex - 1] || inspectedEntities[0]
+  const nextEntity = inspectedEntities[currentEntityIndex + 1] || inspectedEntities[0]
 
-  const previousEntity = usePrevious(inspectedEntity)
-
-  const setToPreviousEntity = () => {
-    if (previousEntity.noteIri) dispatch(setInspectedNote(previousEntity.noteIri))
-    else if (previousEntity.conceptIri) dispatch(setInspectedConcept(previousEntity.conceptIri))
-    else if (previousEntity.annotationIri) dispatch(setInspectedAnnotation(previousEntity.annotationIri))
-    else if (previousEntity.selectionIri) dispatch(setInspectedSelection(previousEntity.selectionIri))
-  }
 
   return (
     <Drawer open={props.isOpen} anchor="right" variant="persistent">
@@ -52,12 +58,21 @@ export const Inspector = props => {
             <Toolbar>
               {previousEntity && (
                 <IconButton
-                  onClick={setToPreviousEntity}
+                  onClick={() => dispatch(setToPreviousInspection())}
                   disabled={!previousEntity.noteIri && !previousEntity.conceptIri && !previousEntity.annotationIri}
                   edge="start"
                   color="inherit"
                 >
                   <ArrowBack />
+                </IconButton>
+              )}
+              {nextEntity && (
+                <IconButton
+                  onClick={() => dispatch(setToNextInspection())}
+                  disabled={!nextEntity.noteIri && !nextEntity.conceptIri && !nextEntity.annotationIri}
+                  color="inherit"
+                >
+                  <ArrowForward />
                 </IconButton>
               )}
               <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1 }}>

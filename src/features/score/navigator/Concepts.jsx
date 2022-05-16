@@ -6,7 +6,8 @@ import { Concept } from './Concept'
 
 export const Concepts = props => {
   const [filteredTree, setFilteredTree] = useState(props.treatise)
-  const { inspectedEntity, baseUrl } = useSelector(state => state.score)
+  const { inspectedEntities, currentEntityIndex, baseUrl } = useSelector(state => state.score)
+  const inspectedEntity = inspectedEntities[currentEntityIndex]
 
   const dispatch = useDispatch()
 
