@@ -1,5 +1,5 @@
-import { Close } from '@mui/icons-material'
-import { IconButton, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { Close, Lyrics } from '@mui/icons-material'
+import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useGetAnnotationInfoQuery, useGetSubAnnotationsQuery } from '../../../app/services/sparql'
 import { setInspectedAnnotation, setInspectedNote } from '../../slice/scoreSlice'
@@ -23,6 +23,9 @@ export const AnnotationEntity = props => {
         }
       >
         <ListItemButton sx={{ cursor: 'default' }}>
+          <ListItemIcon>
+            <Lyrics />
+          </ListItemIcon>
           <ListItemText
             primary={concepts.map(concept => (
               <ConceptItem key={concept} conceptIri={concept} />
