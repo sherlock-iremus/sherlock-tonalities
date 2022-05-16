@@ -51,7 +51,7 @@ export const SearchBar = props => {
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
-      <StyledInputBase placeholder="Search…" value={props.value} onChange={props.onChange} />
+      <StyledInputBase placeholder="Search…" value={props.value} onChange={props.onChange} disabled={props.disabled} />
     </Search>
   )
 }
