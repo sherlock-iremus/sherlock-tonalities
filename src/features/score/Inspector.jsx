@@ -103,21 +103,18 @@ export const Inspector = props => {
               <AnnotationEntity
                 annotationIri={inspectedEntity.annotationIri}
                 scoreIri={props.scoreIri}
-                treatiseIri={props.treatiseIri}
                 baseUrl={baseUrl}
               />
             )}
             {inspectedEntity.conceptIri && (
               <ConceptEntity
                 conceptIri={inspectedEntity.conceptIri}
-                treatiseIri={props.treatiseIri}
                 baseUrl={baseUrl}
               />
             )}
             {inspectedEntity.selectionIri && (
               <SelectionEntity
                 selectionIri={inspectedEntity.selectionIri}
-                treatiseIri={props.treatiseIri}
                 baseUrl={baseUrl}
               />
             )}

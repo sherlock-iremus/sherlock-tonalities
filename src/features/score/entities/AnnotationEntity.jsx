@@ -25,7 +25,7 @@ export const AnnotationEntity = props => {
         <ListItemButton sx={{ cursor: 'default' }}>
           <ListItemText
             primary={concepts.map(concept => (
-              <ConceptItem key={concept} conceptIri={concept} treatiseIri={props.treatiseIri} />
+              <ConceptItem key={concept} conceptIri={concept} />
             ))}
             secondary={props.annotationIri.slice(props.baseUrl.length)}
           />
@@ -39,7 +39,7 @@ export const AnnotationEntity = props => {
             noteIri={subAnnotation.entity}
             scoreIri={props.scoreIri}
             baseUrl={props.baseUrl}
-            secondaryAction={<ConceptItem conceptIri={subAnnotation.concept} treatiseIri={props.treatiseIri} />}
+            secondaryAction={<ConceptItem conceptIri={subAnnotation.concept} />}
           />
         ))}
       </List>

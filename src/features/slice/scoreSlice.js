@@ -4,6 +4,7 @@ const initialState = {
   baseUrl: 'http://data-iremus.huma-num.fr/id/',
   scoreIri: 'http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356',
   meiUrl: 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/eff6f0a7-cf80-402c-953b-c66161051356.mei',
+  treatiseIri: '',
   isInspectionMode: true,
   inspectedEntities: [
     {
@@ -23,6 +24,9 @@ const scoreSlice = createSlice({
   name: 'score',
   initialState,
   reducers: {
+    setTreatise: (state, action) => {
+      state.treatiseIri = action.payload
+    },
     setToPreviousInspection: state => {
       state.currentEntityIndex = --state.currentEntityIndex
     },
@@ -70,7 +74,8 @@ export const {
   setInspectedAnnotation,
   setInspectedSelection,
   setToPreviousInspection,
-  setToNextInspection
+  setToNextInspection,
+  setTreatise
 } = scoreSlice.actions
 
 export default scoreSlice.reducer
