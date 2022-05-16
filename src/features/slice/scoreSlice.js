@@ -34,6 +34,11 @@ const scoreSlice = createSlice({
       state.currentEntityIndex = ++state.currentEntityIndex
     },
     setInspectedNote: (state, action) => {
+      if (state.inspectedEntities.length > state.currentEntityIndex + 1)
+        state.inspectedEntities.splice(
+          state.currentEntityIndex + 1,
+          state.inspectedEntities.length - state.currentEntityIndex
+        )
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex].noteIri
           ? initialState.inspectedEntities[0]
@@ -42,6 +47,11 @@ const scoreSlice = createSlice({
       state.currentEntityIndex = ++state.currentEntityIndex
     },
     setInspectedSelection: (state, action) => {
+      if (state.inspectedEntities.length > state.currentEntityIndex + 1)
+        state.inspectedEntities.splice(
+          state.currentEntityIndex + 1,
+          state.inspectedEntities.length - state.currentEntityIndex
+        )
       state.currentEntityIndex = ++state.currentEntityIndex
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex]?.selectionIri
@@ -50,6 +60,11 @@ const scoreSlice = createSlice({
       )
     },
     setInspectedConcept: (state, action) => {
+      if (state.inspectedEntities.length > state.currentEntityIndex + 1)
+        state.inspectedEntities.splice(
+          state.currentEntityIndex + 1,
+          state.inspectedEntities.length - state.currentEntityIndex
+        )
       state.currentEntityIndex = ++state.currentEntityIndex
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex]?.conceptIri
@@ -58,6 +73,11 @@ const scoreSlice = createSlice({
       )
     },
     setInspectedAnnotation: (state, action) => {
+      if (state.inspectedEntities.length > state.currentEntityIndex + 1)
+        state.inspectedEntities.splice(
+          state.currentEntityIndex + 1,
+          state.inspectedEntities.length - state.currentEntityIndex
+        )
       state.currentEntityIndex = ++state.currentEntityIndex
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex]?.annotationIri
@@ -75,7 +95,7 @@ export const {
   setInspectedSelection,
   setToPreviousInspection,
   setToNextInspection,
-  setTreatise
+  setTreatise,
 } = scoreSlice.actions
 
 export default scoreSlice.reducer
