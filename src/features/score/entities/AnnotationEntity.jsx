@@ -1,8 +1,12 @@
 import { Close, Lyrics } from '@mui/icons-material'
 import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { useGetAnnotationInfoQuery, useGetSubAnnotationsQuery } from '../../../app/services/sparql'
-import { setInspectedAnnotation, setInspectedNote } from '../../slice/scoreSlice'
+import {
+  useGetAnnotationInfoQuery,
+  useGetAnnotationSelectionQuery,
+  useGetSubAnnotationsQuery,
+} from '../../../app/services/sparql'
+import { setInspectedAnnotation, setInspectedNote, setInspectedSelection } from '../../slice/scoreSlice'
 import { ConceptItem } from '../items/ConceptItem'
 import { NoteItem } from '../items/NoteItem'
 import { LoadingEntity } from './LoadingEntity'
@@ -10,9 +14,10 @@ import { LoadingEntity } from './LoadingEntity'
 export const AnnotationEntity = props => {
   const { data: concepts } = useGetAnnotationInfoQuery(props.annotationIri)
   const { data: subAnnotations } = useGetSubAnnotationsQuery(props.annotationIri)
+  const { data: selection } = useGetAnnotationSelectionQuery(props.annotationIri)
   const dispatch = useDispatch()
 
-  return concepts && subAnnotations ? (
+  return concepts && subAnnotations && selection ? (
     <>
       <ListItem
         disablePadding
@@ -34,7 +39,14 @@ export const AnnotationEntity = props => {
           />
         </ListItemButton>
       </ListItem>
-      <List sx={{ pl: 2 }} dense disablePadding subheader={<ListSubheader>Associated selection</ListSubheader>}>
+
+      <ListSubheader>Associated selection</ListSubheader>
+      <ListItem disablePadding>
+        <ListItemButton onClick={() => dispatch(setInspectedSelection(selection))}>
+          <ListItemText primary="Selection" secondary={selection.slice(props.baseUrl.length)} />
+        </ListItemButton>
+      </ListItem>
+      <List sx={{ pl: 2 }} dense disablePadding>
         {subAnnotations.map(subAnnotation => (
           <NoteItem
             disablePadding

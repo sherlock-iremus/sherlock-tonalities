@@ -82,7 +82,7 @@ export const Inspector = props => {
                     (inspectedEntity.positionnedNoteIri && 'Positionned note') ||
                     (inspectedEntity.selectionIri && 'Selection') ||
                     (inspectedEntity.conceptIri && 'Concept') ||
-                    (inspectedEntity.annotationIri && 'Annotation')
+                    (inspectedEntity.annotationIri && 'Annalytical entity')
                   }
                   icon={
                     (inspectedEntity.noteIri && <MusicNote />) ||

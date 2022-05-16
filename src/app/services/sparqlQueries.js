@@ -150,3 +150,13 @@ export const getNoteAnnalyticalEntities = noteIri => `
         }
     }
 `
+
+export const getAnnotationSelection = annotationIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    SELECT ?selection
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            <${annotationIri}> crm:P140_assigned_attribute_to ?selection
+        }
+    }
+`

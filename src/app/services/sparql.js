@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ANNALYTICAL_ENTITY, NOTE, POSITIONNED_NOTE, SELECTION, VERTICALITY } from '../../features/meiviewer/constants'
 import {
   getAnnotationInfo,
+  getAnnotationSelection,
   getChildSelections,
   getConceptAnnotations,
   getNoteAnnalyticalEntities,
@@ -71,7 +72,7 @@ export const sparqlEndpoint = createApi({
         method: 'POST',
         body: new URLSearchParams({ query: getAnnotationInfo(annotationIri) }),
       }),
-      transformResponse: response => response.results?.bindings?.map(e => e.concept?.value)
+      transformResponse: response => response.results?.bindings?.map(e => e.concept?.value),
     }),
     getSubAnnotations: builder.query({
       query: annotationIri => ({
@@ -124,8 +125,7 @@ export const sparqlEndpoint = createApi({
         method: 'POST',
         body: new URLSearchParams({ query: getParentSelections(selectionIri) }),
       }),
-      transformResponse: response =>
-        response.results?.bindings?.map(e => e.parent?.value),
+      transformResponse: response => response.results?.bindings?.map(e => e.parent?.value),
     }),
     getNoteAnnalyticalEntities: builder.query({
       query: noteIri => ({
@@ -134,6 +134,13 @@ export const sparqlEndpoint = createApi({
       }),
       transformResponse: response =>
         response.results?.bindings?.map(e => ({ iri: e.annotation?.value, concept: e.concept?.value })),
+    }),
+    getAnnotationSelection: builder.query({
+      query: annotationIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getAnnotationSelection(annotationIri) }),
+      }),
+      transformResponse: response => response.results?.bindings[0]?.selection?.value,
     }),
   }),
 })
@@ -152,4 +159,5 @@ export const {
   useGetChildSelectionsQuery,
   useGetParentSelectionsQuery,
   useGetNoteAnnalyticalEntitiesQuery,
+  useGetAnnotationSelectionQuery,
 } = sparqlEndpoint
