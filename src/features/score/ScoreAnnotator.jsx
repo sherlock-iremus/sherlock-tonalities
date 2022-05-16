@@ -10,11 +10,13 @@ import { MeiViewer } from './MeiViewer'
 import { Navigator } from './Navigator'
 
 import treatise from '../../app/treatises/Zarlino_1588.json'
+import { useGetTokenQuery } from '../../app/services/sherlockApi'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
   const { meiUrl, scoreIri, baseUrl } = useSelector(state => state.score)
+  const { data: token } = useGetTokenQuery()
 
   return (
     <>
