@@ -1,5 +1,5 @@
-import { Close } from '@mui/icons-material'
-import { IconButton, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { Close, MusicNote } from '@mui/icons-material'
+import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import {
   useGetNoteAnnalyticalEntitiesQuery,
@@ -28,10 +28,13 @@ export const NoteEntity = props => {
         }
       >
         <ListItemButton sx={{ cursor: 'default' }}>
+          <ListItemIcon>
+            <MusicNote />
+          </ListItemIcon>
           <ListItemText primary={noteLabel} secondary={props.noteIri.slice(props.baseUrl.length)} />
         </ListItemButton>
       </ListItem>
-      <List subheader={<ListSubheader>Is in selections</ListSubheader>}>
+      <List subheader={<ListSubheader>Current note is in selections</ListSubheader>}>
         {selections?.map((selection, index) => (
           <ListItem key={selection.iri} disablePadding>
             <ListItemButton onClick={() => dispatch(setInspectedSelection(selection.iri))}>
@@ -40,12 +43,18 @@ export const NoteEntity = props => {
           </ListItem>
         ))}
       </List>
-      <List subheader={<ListSubheader>Is in annalytical entity</ListSubheader>}>
+      <List subheader={<ListSubheader>Current note is in annalytical entity</ListSubheader>}>
         {annalyticalEntities?.map(entity => (
           <ListItem key={entity.iri} disablePadding>
             <ListItemButton onClick={() => dispatch(setInspectedAnnotation(entity.iri))}>
               <ListItemText
-                primary={<>Is<ConceptItem conceptIri={entity.concept} />in annotation entity</>}
+                primary={
+                  <>
+                    Is
+                    <ConceptItem conceptIri={entity.concept} />
+                    in annotation entity
+                  </>
+                }
                 secondary={entity.iri.slice(props.baseUrl.length)}
               />
             </ListItemButton>
