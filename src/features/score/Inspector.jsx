@@ -74,7 +74,7 @@ export const Inspector = props => {
                   <ArrowForward />
                 </IconButton>
               )}
-              <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1 }}>
+              <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1, pr:4 }}>
                 <Tab
                   label={
                     (inspectedEntity.noteIri && 'Note') ||
