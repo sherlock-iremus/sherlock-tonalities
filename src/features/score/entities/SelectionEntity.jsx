@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, ExpandLess, ExpandMore, MoveDown, MoveUp } from '@mui/icons-material'
+import { ChevronLeft, ChevronRight, Close, ExpandLess, ExpandMore, MoveDown, MoveUp } from '@mui/icons-material'
 import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -30,7 +30,15 @@ export const SelectionEntity = props => {
           ))}
         </List>
       </Collapse>
-      <ListItem disablePadding secondaryAction={props.secondaryAction} sx={{ pl: isParentListOpen ? 4 : 2 }}>
+      <ListItem
+        disablePadding
+        secondaryAction={
+          <IconButton onClick={() => dispatch(setInspectedSelection(props.selectionIri))}>
+            <Close />
+          </IconButton>
+        }
+        sx={{ pl: isParentListOpen ? 4 : 2 }}
+      >
         <IconButton onClick={() => setIsParentListOpen(!isParentListOpen)} disabled={!parents.length}>
           {isParentListOpen ? <ExpandLess /> : <ChevronLeft />}
         </IconButton>

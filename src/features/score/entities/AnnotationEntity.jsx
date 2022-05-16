@@ -1,5 +1,8 @@
-import { List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { Close } from '@mui/icons-material'
+import { IconButton, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { useDispatch } from 'react-redux'
 import { useGetAnnotationInfoQuery, useGetSubAnnotationsQuery } from '../../../app/services/sparql'
+import { setInspectedAnnotation, setInspectedNote } from '../../slice/scoreSlice'
 import { ConceptItem } from '../items/ConceptItem'
 import { NoteItem } from '../items/NoteItem'
 import { LoadingEntity } from './LoadingEntity'
@@ -7,10 +10,18 @@ import { LoadingEntity } from './LoadingEntity'
 export const AnnotationEntity = props => {
   const { data: concepts } = useGetAnnotationInfoQuery(props.annotationIri)
   const { data: subAnnotations } = useGetSubAnnotationsQuery(props.annotationIri)
+  const dispatch = useDispatch()
 
   return concepts && subAnnotations ? (
     <>
-      <ListItem disablePadding>
+      <ListItem
+        disablePadding
+        secondaryAction={
+          <IconButton onClick={() => dispatch(setInspectedAnnotation(props.annotationIri))}>
+            <Close />
+          </IconButton>
+        }
+      >
         <ListItemButton sx={{ cursor: 'default' }}>
           <ListItemText
             primary={concepts.map(concept => (
