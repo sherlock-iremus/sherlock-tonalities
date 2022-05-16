@@ -5,7 +5,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT ?concept
 WHERE {
     GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-        VALUES ?annotation {<http://data-iremus.huma-num.fr/id/a0c2cc00-8441-4a5b-a0ec-182574729c51>}
+        VALUES ?annotation {<http://data-iremus.huma-num.fr/id/2a61e869-5c0d-4545-81e0-7748ab649a7a>}
         ?annotation crm:P141_assigned ?group .
         ?assignment crm:P140_assigned_attribute_to ?group .
         ?assignment crm:P177_assigned_property_of_type rdf:type .
