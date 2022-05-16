@@ -137,3 +137,16 @@ export const getParentSelections = selectionIri => `
         }
     }
 `
+
+export const getNoteAnnalyticalEntities = noteIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    SELECT ?annotation ?concept
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?e13 crm:P141_assigned <${noteIri}>.
+            ?e13 crm:P177_assigned_property_of_type ?concept.
+            ?e13 crm:P140_assigned_attribute_to ?entity.
+            ?annotation crm:P141_assigned ?entity 
+        }
+    }
+`

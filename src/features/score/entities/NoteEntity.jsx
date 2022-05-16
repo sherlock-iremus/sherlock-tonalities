@@ -1,13 +1,20 @@
 import { Close } from '@mui/icons-material'
 import { IconButton, List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { useGetNoteInfoQuery, useGetNoteSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedNote, setInspectedSelection } from '../../slice/scoreSlice'
+import {
+  useGetNoteAnnalyticalEntitiesQuery,
+  useGetNoteInfoQuery,
+  useGetNoteSelectionsQuery,
+} from '../../../app/services/sparql'
+import { setInspectedAnnotation, setInspectedNote, setInspectedSelection } from '../../slice/scoreSlice'
+import { ConceptItem } from '../items/ConceptItem'
 import { LoadingEntity } from './LoadingEntity'
 
 export const NoteEntity = props => {
   const { data: noteLabel } = useGetNoteInfoQuery(props.noteIri)
   const { data: selections } = useGetNoteSelectionsQuery(props.noteIri)
+  const { data: annalyticalEntities } = useGetNoteAnnalyticalEntitiesQuery(props.noteIri)
+
   const dispatch = useDispatch()
 
   return noteLabel ? (
@@ -29,6 +36,18 @@ export const NoteEntity = props => {
           <ListItem key={selection.iri} disablePadding>
             <ListItemButton onClick={() => dispatch(setInspectedSelection(selection.iri))}>
               <ListItemText primary={`Selection ${index + 1}`} secondary={selection.iri.slice(props.baseUrl.length)} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <List subheader={<ListSubheader>Is in annalytical entity</ListSubheader>}>
+        {annalyticalEntities?.map(entity => (
+          <ListItem key={entity.iri} disablePadding>
+            <ListItemButton onClick={() => dispatch(setInspectedAnnotation(entity.iri))}>
+              <ListItemText
+                primary={<>Is<ConceptItem conceptIri={entity.concept} />in annotation entity</>}
+                secondary={entity.iri.slice(props.baseUrl.length)}
+              />
             </ListItemButton>
           </ListItem>
         ))}

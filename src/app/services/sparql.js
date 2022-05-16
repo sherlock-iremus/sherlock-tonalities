@@ -4,6 +4,7 @@ import {
   getAnnotationInfo,
   getChildSelections,
   getConceptAnnotations,
+  getNoteAnnalyticalEntities,
   getNoteInfo,
   getNoteSelections,
   getNotesOnFirstBeat,
@@ -126,6 +127,14 @@ export const sparqlEndpoint = createApi({
       transformResponse: response =>
         response.results?.bindings?.map(e => e.parent?.value),
     }),
+    getNoteAnnalyticalEntities: builder.query({
+      query: noteIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getNoteAnnalyticalEntities(noteIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({ iri: e.annotation?.value, concept: e.concept?.value })),
+    }),
   }),
 })
 
@@ -141,5 +150,6 @@ export const {
   useGetNoteSelectionsQuery,
   useGetScoreSelectionsQuery,
   useGetChildSelectionsQuery,
-  useGetParentSelectionsQuery
+  useGetParentSelectionsQuery,
+  useGetNoteAnnalyticalEntitiesQuery,
 } = sparqlEndpoint
