@@ -52,12 +52,12 @@ const scoreSlice = createSlice({
           state.currentEntityIndex + 1,
           state.inspectedEntities.length - state.currentEntityIndex
         )
-      state.currentEntityIndex = ++state.currentEntityIndex
       state.inspectedEntities.push(
-        action.payload === state.inspectedEntities[state.currentEntityIndex]?.selectionIri
+        action.payload === state.inspectedEntities[state.currentEntityIndex].selectionIri
           ? initialState.inspectedEntities[0]
           : { ...initialState.inspectedEntities[0], selectionIri: action.payload }
       )
+      state.currentEntityIndex = ++state.currentEntityIndex
     },
     setInspectedConcept: (state, action) => {
       if (state.inspectedEntities.length > state.currentEntityIndex + 1)
@@ -65,12 +65,12 @@ const scoreSlice = createSlice({
           state.currentEntityIndex + 1,
           state.inspectedEntities.length - state.currentEntityIndex
         )
-      state.currentEntityIndex = ++state.currentEntityIndex
       state.inspectedEntities.push(
-        action.payload === state.inspectedEntities[state.currentEntityIndex]?.conceptIri
+        action.payload === state.inspectedEntities[state.currentEntityIndex].conceptIri
           ? initialState.inspectedEntities[0]
           : { ...initialState.inspectedEntities[0], conceptIri: action.payload }
       )
+      state.currentEntityIndex = ++state.currentEntityIndex
     },
     setInspectedAnnotation: (state, action) => {
       if (state.inspectedEntities.length > state.currentEntityIndex + 1)
@@ -78,12 +78,12 @@ const scoreSlice = createSlice({
           state.currentEntityIndex + 1,
           state.inspectedEntities.length - state.currentEntityIndex
         )
-      state.currentEntityIndex = ++state.currentEntityIndex
       state.inspectedEntities.push(
-        action.payload === state.inspectedEntities[state.currentEntityIndex]?.annotationIri
+        action.payload === state.inspectedEntities[state.currentEntityIndex].annotationIri
           ? initialState.inspectedEntities[0]
           : { ...initialState.inspectedEntities[0], annotationIri: action.payload }
       )
+      state.currentEntityIndex = ++state.currentEntityIndex
     },
   },
 })
