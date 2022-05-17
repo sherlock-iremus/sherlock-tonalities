@@ -14,20 +14,12 @@ import {
 import { AppBar, Drawer, IconButton, List, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { usePrevious } from '../meiviewer/utils'
-import {
-  setInspectedAnnotation,
-  setInspectedConcept,
-  setInspectedNote,
-  setInspectedSelection,
-  setPreviousInspection,
-  setToNextInspection,
-  setToPreviousInspection,
-} from '../slice/scoreSlice'
+import { setToNextInspection, setToPreviousInspection } from '../slice/scoreSlice'
 import { AnnotationEntity } from './entities/AnnotationEntity'
 import { ConceptEntity } from './entities/ConceptEntity'
 import { NoteEntity } from './entities/NoteEntity'
 import { SelectionEntity } from './entities/SelectionEntity'
+import { VerticalityEntity } from './entities/VerticalityEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -37,7 +29,6 @@ export const Inspector = props => {
   const inspectedEntity = inspectedEntities[currentEntityIndex]
   const previousEntity = inspectedEntities[currentEntityIndex - 1] || inspectedEntities[0]
   const nextEntity = inspectedEntities[currentEntityIndex + 1] || inspectedEntities[0]
-
 
   return (
     <Drawer open={props.isOpen} anchor="right" variant="persistent">
@@ -74,7 +65,7 @@ export const Inspector = props => {
                   <ArrowForward />
                 </IconButton>
               )}
-              <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1, pr:4 }}>
+              <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1, pr: 4 }}>
                 <Tab
                   label={
                     (inspectedEntity.noteIri && 'Note') ||
@@ -105,17 +96,12 @@ export const Inspector = props => {
                 baseUrl={baseUrl}
               />
             )}
-            {inspectedEntity.conceptIri && (
-              <ConceptEntity
-                conceptIri={inspectedEntity.conceptIri}
-                baseUrl={baseUrl}
-              />
-            )}
+            {inspectedEntity.conceptIri && <ConceptEntity conceptIri={inspectedEntity.conceptIri} baseUrl={baseUrl} />}
             {inspectedEntity.selectionIri && (
-              <SelectionEntity
-                selectionIri={inspectedEntity.selectionIri}
-                baseUrl={baseUrl}
-              />
+              <SelectionEntity selectionIri={inspectedEntity.selectionIri} baseUrl={baseUrl} />
+            )}
+            {inspectedEntity.verticalityIri && (
+              <VerticalityEntity verticalityIri={inspectedEntity.verticalityIri} baseUrl={baseUrl} />
             )}
           </List>
         </Box>

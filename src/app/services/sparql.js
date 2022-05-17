@@ -9,10 +9,12 @@ import {
   getNoteInfo,
   getNoteSelections,
   getNotesOnFirstBeat,
+  getNoteVerticality,
   getParentSelections,
   getScoreAnnotations,
   getScoreSelections,
   getSubAnnotations,
+  getVerticalityNotes,
 } from './sparqlQueries'
 
 export const sparqlEndpoint = createApi({
@@ -142,6 +144,20 @@ export const sparqlEndpoint = createApi({
       }),
       transformResponse: response => response.results?.bindings[0]?.selection?.value,
     }),
+    getNoteVerticality: builder.query({
+      query: noteIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getNoteVerticality(noteIri) }),
+      }),
+      transformResponse: response => response.results?.bindings[0]?.verticality?.value,
+    }),
+    getVerticalityNotes: builder.query({
+      query: verticalityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getVerticalityNotes(verticalityIri) }),
+      }),
+      transformResponse: response => response.results?.bindings?.map(e => e.note?.value),
+    }),
   }),
 })
 
@@ -160,4 +176,6 @@ export const {
   useGetParentSelectionsQuery,
   useGetNoteAnnalyticalEntitiesQuery,
   useGetAnnotationSelectionQuery,
+  useGetNoteVerticalityQuery,
+  useGetVerticalityNotesQuery,
 } = sparqlEndpoint

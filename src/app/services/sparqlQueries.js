@@ -159,4 +159,27 @@ export const getAnnotationSelection = annotationIri => `
             <${annotationIri}> crm:P140_assigned_attribute_to ?selection
         }
     }
+    LIMIT 1
+`
+
+export const getNoteVerticality = noteIri => `
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    SELECT ?verticality ?selectedNote
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            <${noteIri}> sherlockmei:contains_beat ?verticality
+        }
+    }
+    ORDER BY ASC(?verticality)
+    LIMIT 1
+`
+
+export const getVerticalityNotes = verticalityIri => `
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    SELECT ?note
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?note sherlockmei:contains_beat <${verticalityIri}>
+        }
+    }
 `
