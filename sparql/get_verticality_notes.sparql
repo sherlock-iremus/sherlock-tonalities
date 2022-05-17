@@ -1,0 +1,9 @@
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    SELECT ?positionned_note
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?note sherlockmei:contains_beat <http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356-beat-91-1.5>.
+            ?note sherlockmei:has_beat_anchor ?positionned_note.
+            FILTER regex(?positionned_note, "91-1.5")
+        }
+    }
