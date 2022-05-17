@@ -53,7 +53,7 @@ export const SelectionEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton onClick={() => dispatch(setInspectedSelection(props.selectionIri))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedSelection(props.selectionIri))}>
             <Close />
           </IconButton>
         }

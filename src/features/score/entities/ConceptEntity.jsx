@@ -15,7 +15,7 @@ export const ConceptEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton onClick={() => dispatch(setInspectedConcept(props.conceptIri))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedConcept(props.conceptIri))}>
             <Close />
           </IconButton>
         }

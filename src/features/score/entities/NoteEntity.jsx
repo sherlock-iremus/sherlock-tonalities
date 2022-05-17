@@ -22,7 +22,7 @@ export const NoteEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton onClick={() => dispatch(setInspectedNote(props.noteIri))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedNote(props.noteIri))}>
             <Close />
           </IconButton>
         }
