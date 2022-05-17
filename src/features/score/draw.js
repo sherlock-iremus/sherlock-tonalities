@@ -4,7 +4,7 @@ export const drawSelection = (selection, selectionIri, scoreIri) => {
     const hullPadding = 300
     const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
     selectionNode.setAttribute('id', selectionIri)
-    const points = notes.map(s => noteCoordinates(s))
+    const points = notes.map(s => s && noteCoordinates(s))
     points.forEach(p => {
       const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
       node.setAttribute('fill', 'purple')
