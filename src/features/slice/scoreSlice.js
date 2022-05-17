@@ -46,6 +46,23 @@ const scoreSlice = createSlice({
       )
       state.currentEntityIndex = ++state.currentEntityIndex
     },
+    setInspectedVerticality: (state, action) => {
+      if (state.inspectedEntities.length > state.currentEntityIndex + 1)
+        state.inspectedEntities.splice(
+          state.currentEntityIndex + 1,
+          state.inspectedEntities.length - state.currentEntityIndex
+        )
+      state.inspectedEntities.push(
+        action.payload.verticalityIri === state.inspectedEntities[state.currentEntityIndex].verticalityIri
+          ? initialState.inspectedEntities[0]
+          : {
+              ...initialState.inspectedEntities[0],
+              verticalityIri: action.payload.verticalityIri,
+              clickedNoteIri: action.payload.rightClickedNoteIri,
+            }
+      )
+      state.currentEntityIndex = ++state.currentEntityIndex
+    },
     setInspectedSelection: (state, action) => {
       if (state.inspectedEntities.length > state.currentEntityIndex + 1)
         state.inspectedEntities.splice(
@@ -96,6 +113,7 @@ export const {
   setToPreviousInspection,
   setToNextInspection,
   setTreatise,
+  setInspectedVerticality,
 } = scoreSlice.actions
 
 export default scoreSlice.reducer

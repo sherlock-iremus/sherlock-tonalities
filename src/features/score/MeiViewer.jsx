@@ -1,21 +1,30 @@
 /** @jsxImportSource @emotion/react */
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useGetNoteVerticalityQuery } from '../../app/services/sparql'
 import { verovioStyle } from '../meiviewer/mei.css'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
-import { setInspectedNote } from '../slice/scoreSlice'
+import { setInspectedNote, setInspectedVerticality } from '../slice/scoreSlice'
 import { StyleAnnalyticalEntity } from './style/StyleAnnalyticalEntity'
 import { StyleNote } from './style/StyleNote'
 import { StyleSelection } from './style/StyleSelection'
+import { StyleVerticality } from './style/StyleVerticality'
 
 window.verovioCallback = load
 
 export const MeiViewer = props => {
+  const dispatch = useDispatch()
+  const [rightClickedNoteIri, setRightClickedNoteIri] = useState(null)
+  const { data: verticalityIri } = useGetNoteVerticalityQuery(rightClickedNoteIri, { skip: !rightClickedNoteIri })
+
   useEffect(() => {
     createVerovio(props.meiUrl)
   }, [props.meiUrl])
-  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setInspectedVerticality({ verticalityIri, rightClickedNoteIri }))
+  }, [verticalityIri])
 
   const { isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
   const inspectedEntity = inspectedEntities[currentEntityIndex]
@@ -24,7 +33,10 @@ export const MeiViewer = props => {
   const handleMouseLeave = e => getNote(e.target)?.classList.remove('focused')
   const handleClick = e => {
     const noteId = getNote(e.target)?.id
-    if (noteId && isInspectionMode) dispatch(setInspectedNote(props.scoreIri + '_' + noteId))
+    if (noteId && isInspectionMode) {
+      if (e.ctrlKey || e.altKey) setRightClickedNoteIri(props.scoreIri + '_' + noteId)
+      else dispatch(setInspectedNote(props.scoreIri + '_' + noteId))
+    }
   }
 
   return (
@@ -39,6 +51,7 @@ export const MeiViewer = props => {
       {inspectedEntity.annotationIri && <StyleAnnalyticalEntity annotationIri={inspectedEntity.annotationIri} />}
       {inspectedEntity.selectionIri && <StyleSelection selectionIri={inspectedEntity.selectionIri} />}
       {inspectedEntity.noteIri && <StyleNote noteIri={inspectedEntity.noteIri} />}
+      {inspectedEntity.verticalityIri && <StyleVerticality verticalityIri={inspectedEntity.verticalityIri} />}
     </>
   )
 }
