@@ -14,17 +14,12 @@ import { StyleVerticality } from './style/StyleVerticality'
 window.verovioCallback = load
 
 export const MeiViewer = props => {
-  const dispatch = useDispatch()
+  useEffect(() => createVerovio(props.meiUrl), [props.meiUrl])
+
   const [rightClickedNoteIri, setRightClickedNoteIri] = useState(null)
   const { data: verticalityIri } = useGetNoteVerticalityQuery(rightClickedNoteIri, { skip: !rightClickedNoteIri })
-
-  useEffect(() => {
-    createVerovio(props.meiUrl)
-  }, [props.meiUrl])
-
-  useEffect(() => {
-    dispatch(setInspectedVerticality({ verticalityIri, rightClickedNoteIri }))
-  }, [verticalityIri])
+  const dispatch = useDispatch()
+  useEffect(() => dispatch(setInspectedVerticality({ verticalityIri, rightClickedNoteIri })), [verticalityIri])
 
   const { isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
   const inspectedEntity = inspectedEntities[currentEntityIndex]
@@ -51,7 +46,12 @@ export const MeiViewer = props => {
       {inspectedEntity.annotationIri && <StyleAnnalyticalEntity annotationIri={inspectedEntity.annotationIri} />}
       {inspectedEntity.selectionIri && <StyleSelection selectionIri={inspectedEntity.selectionIri} />}
       {inspectedEntity.noteIri && <StyleNote noteIri={inspectedEntity.noteIri} />}
-      {inspectedEntity.verticalityIri && <StyleVerticality verticalityIri={inspectedEntity.verticalityIri} />}
+      {inspectedEntity.verticalityIri && inspectedEntity.clickedNoteIri && (
+        <StyleVerticality
+          verticalityIri={inspectedEntity.verticalityIri}
+          clickedNoteIri={inspectedEntity.clickedNoteIri}
+        />
+      )}
     </>
   )
 }

@@ -9,7 +9,6 @@ import { LoadingEntity } from './LoadingEntity'
 export const VerticalityEntity = props => {
   const dispatch = useDispatch()
   const { data: notes } = useGetVerticalityNotesQuery(props.verticalityIri)
-  console.log(notes)
   return notes ? (
     <>
       <ListItem
