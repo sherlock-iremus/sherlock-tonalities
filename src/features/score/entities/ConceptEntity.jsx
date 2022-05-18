@@ -34,7 +34,7 @@ export const ConceptEntity = props => {
         {annotations.map((annotation, index) => (
           <ListItem key={annotation.iri} disablePadding>
             <ListItemButton onClick={() => dispatch(setInspectedAnnotation(annotation.iri))}>
-              <ListItemText primary={props.conceptIri.slice(treatiseIri.length) + ' ' + ++index } />
+              <ListItemText primary={props.conceptIri.slice(treatiseIri.length) + ' ' + ++index } secondary={annotation.iri.slice(props.baseUrl.length)} />
             </ListItemButton>
           </ListItem>
         ))}
