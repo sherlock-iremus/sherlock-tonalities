@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { Assignment, Info } from '@mui/icons-material'
-import { Avatar, IconButton, Tooltip } from '@mui/material'
-import { blue, purple } from '@mui/material/colors'
+import { ArrowBack, Assignment, BubbleChart, Home, Info, Lyrics } from '@mui/icons-material'
+import { SpeedDial, SpeedDialAction, SpeedDialIcon, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Inspector } from './Inspector'
@@ -10,14 +9,13 @@ import { MeiViewer } from './MeiViewer'
 import { Navigator } from './Navigator'
 
 import treatise from '../../app/treatises/Zarlino_1588.json'
-import { useGetTokenQuery } from '../../app/services/sherlockApi'
 import { setTreatise } from '../slice/scoreSlice'
+
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
   const { meiUrl, scoreIri, baseUrl } = useSelector(state => state.score)
-  const { data: token } = useGetTokenQuery()
   const dispatch = useDispatch()
   dispatch(setTreatise(treatise.iri))
 
@@ -26,33 +24,25 @@ export const ScoreAnnotator = () => {
       <MeiViewer meiUrl={meiUrl} scoreIri={scoreIri} />
 
       {!isInspectorOpen && (
-        <Tooltip title="Inspector">
-          <Avatar
-            sx={{ position: 'absolute', top: 56, right: 16, bgcolor: blue[500] }}
+        <Tooltip title="Open inspector">
+          <SpeedDial
             onClick={() => setIsInspectorOpen(true)}
-          >
-            <IconButton color="inherit">
-              <Info />
-            </IconButton>
-          </Avatar>
+            ariaLabel="Inspect"
+            sx={{ position: 'absolute', top: 16, right: 16 }}
+            icon={<Info />}
+          />
         </Tooltip>
       )}
-      <Inspector
-        isOpen={isInspectorOpen}
-        onClose={() => setIsInspectorOpen(false)}
-        scoreIri={scoreIri}
-      />
+      <Inspector isOpen={isInspectorOpen} onClose={() => setIsInspectorOpen(false)} scoreIri={scoreIri} />
 
       {!isNavigatorOpen && (
-        <Tooltip title="Navigator">
-          <Avatar
-            sx={{ position: 'absolute', top: 56, left: 16, bgcolor: purple[500] }}
+        <Tooltip title="Open navigator">
+          <SpeedDial
             onClick={() => setIsNavigatorOpen(true)}
-          >
-            <IconButton color="inherit">
-              <Assignment />
-            </IconButton>
-          </Avatar>
+            ariaLabel="Inspect"
+            sx={{ position: 'absolute', top: 16, left: 16, fab: { backgroundColor: purple[500] } }}
+            icon={<Assignment />}
+          />
         </Tooltip>
       )}
       <Navigator
@@ -62,6 +52,21 @@ export const ScoreAnnotator = () => {
         scoreIri={scoreIri}
         baseUrl={baseUrl}
       />
+
+      <Tooltip title="Create">
+        <SpeedDial ariaLabel="New" sx={{ position: 'absolute', bottom: 16, right: 16 }} icon={<SpeedDialIcon />}>
+          <SpeedDialAction icon={<BubbleChart />} tooltipTitle="Create analytical entity" />
+          <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create selection" />
+        </SpeedDial>
+      </Tooltip>
+
+      <Tooltip title="Back to home">
+        <SpeedDial
+          ariaLabel="Home"
+          sx={{ position: 'absolute', bottom: 16, left: 16 }}
+          icon={<SpeedDialIcon icon={<Home />} openIcon={<ArrowBack />} />}
+        />
+      </Tooltip>
     </>
   )
 }
