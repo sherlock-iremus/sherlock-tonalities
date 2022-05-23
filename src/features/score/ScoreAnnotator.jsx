@@ -54,7 +54,7 @@ export const ScoreAnnotator = () => {
         baseUrl={baseUrl}
       />
 
-      <Tooltip title="Create">
+      <Tooltip title="Create new entity">
         <SpeedDial ariaLabel="New" sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500]} }} icon={<SpeedDialIcon />}>
           <SpeedDialAction icon={<BubbleChart />} tooltipTitle="Create analytical entity" />
           <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create selection" />
