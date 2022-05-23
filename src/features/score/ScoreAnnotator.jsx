@@ -7,11 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Inspector } from './Inspector'
 import { MeiViewer } from './MeiViewer'
 import { Navigator } from './Navigator'
-
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { setTreatise } from '../slice/scoreSlice'
 import { green, purple, red } from '@mui/material/colors'
-
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
@@ -34,14 +32,14 @@ export const ScoreAnnotator = () => {
           />
         </Tooltip>
       )}
-      <Inspector isOpen={isInspectorOpen} onClose={() => setIsInspectorOpen(false)} scoreIri={scoreIri} />
+      <Inspector isOpen={isInspectorOpen} onChange={() => setIsInspectorOpen(!isInspectorOpen)} scoreIri={scoreIri} />
 
       {!isNavigatorOpen && (
         <Tooltip title="Open navigator">
           <SpeedDial
             onClick={() => setIsNavigatorOpen(true)}
             ariaLabel="Inspect"
-            sx={{ position: 'absolute', top: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: purple[500]} }}
+            sx={{ position: 'absolute', top: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: purple[500] } }}
             icon={<Assignment />}
           />
         </Tooltip>
@@ -55,16 +53,20 @@ export const ScoreAnnotator = () => {
       />
 
       <Tooltip title="Create new entity">
-        <SpeedDial ariaLabel="New" sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500]} }} icon={<SpeedDialIcon />}>
-          <SpeedDialAction icon={<BubbleChart />} tooltipTitle="Create analytical entity" />
-          <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create selection" />
+        <SpeedDial
+          ariaLabel="New"
+          sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+          icon={<SpeedDialIcon />}
+        >
+          <SpeedDialAction icon={<BubbleChart />} tooltipTitle="Create selection" />
+          <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create analytical entity" />
         </SpeedDial>
       </Tooltip>
 
       <Tooltip title="Back to home">
         <SpeedDial
           ariaLabel="Home"
-          sx={{ position: 'absolute', bottom: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500]} }}
+          sx={{ position: 'absolute', bottom: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500] } }}
           icon={<SpeedDialIcon icon={<Home />} openIcon={<ArrowBack />} />}
         />
       </Tooltip>

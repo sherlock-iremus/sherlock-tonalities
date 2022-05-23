@@ -138,7 +138,7 @@ export const Inspector = props => {
       </Drawer>
       <Snackbar
         open={isShowingPopup && !props.isOpen}
-        autoHideDuration={2000}
+        autoHideDuration={3000}
         onClose={() => setIsShowingPopup(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         sx={{ mt: 10 }}
