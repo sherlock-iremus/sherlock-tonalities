@@ -10,6 +10,7 @@ import { Navigator } from './Navigator'
 
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { setTreatise } from '../slice/scoreSlice'
+import { green, purple, red } from '@mui/material/colors'
 
 
 export const ScoreAnnotator = () => {
@@ -40,7 +41,7 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             onClick={() => setIsNavigatorOpen(true)}
             ariaLabel="Inspect"
-            sx={{ position: 'absolute', top: 16, left: 16, fab: { backgroundColor: purple[500] } }}
+            sx={{ position: 'absolute', top: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: purple[500]} }}
             icon={<Assignment />}
           />
         </Tooltip>
@@ -54,7 +55,7 @@ export const ScoreAnnotator = () => {
       />
 
       <Tooltip title="Create">
-        <SpeedDial ariaLabel="New" sx={{ position: 'absolute', bottom: 16, right: 16 }} icon={<SpeedDialIcon />}>
+        <SpeedDial ariaLabel="New" sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500]} }} icon={<SpeedDialIcon />}>
           <SpeedDialAction icon={<BubbleChart />} tooltipTitle="Create analytical entity" />
           <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create selection" />
         </SpeedDial>
@@ -63,7 +64,7 @@ export const ScoreAnnotator = () => {
       <Tooltip title="Back to home">
         <SpeedDial
           ariaLabel="Home"
-          sx={{ position: 'absolute', bottom: 16, left: 16 }}
+          sx={{ position: 'absolute', bottom: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500]} }}
           icon={<SpeedDialIcon icon={<Home />} openIcon={<ArrowBack />} />}
         />
       </Tooltip>
