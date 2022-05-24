@@ -1,5 +1,17 @@
-import { BubbleChart, Close } from '@mui/icons-material'
-import { AppBar, Drawer, IconButton, List, ListSubheader, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
+import { BubbleChart, Close, Done } from '@mui/icons-material'
+import {
+  AppBar,
+  Drawer,
+  IconButton,
+  List,
+  ListSubheader,
+  SpeedDial,
+  Tab,
+  Tabs,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { red } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,6 +46,13 @@ export const Editor = () => {
             <Item {...item} key={item.selectionIri || item.noteIri} baseUrl={baseUrl} />
           ))}
         </List>
+        <Tooltip title="Validate">
+          <SpeedDial
+            ariaLabel="validate"
+            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+            icon={<Done />}
+          />
+        </Tooltip>
       </Box>
     </Drawer>
   )
