@@ -42,8 +42,8 @@ export const Inspector = props => {
   const { baseUrl, isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
 
   const inspectedEntity = inspectedEntities[currentEntityIndex]
-  const previousEntity = inspectedEntities[currentEntityIndex - 1] || inspectedEntities[0]
-  const nextEntity = inspectedEntities[currentEntityIndex + 1] || inspectedEntities[0]
+  const previousEntity = inspectedEntities[currentEntityIndex - 1] || {}
+  const nextEntity = inspectedEntities[currentEntityIndex + 1] || {}
   useEffect(
     () =>
       (inspectedEntity.noteIri ||
@@ -76,7 +76,13 @@ export const Inspector = props => {
                 {previousEntity && (
                   <IconButton
                     onClick={() => dispatch(setToPreviousInspection())}
-                    disabled={!previousEntity.noteIri && !previousEntity.conceptIri && !previousEntity.annotationIri}
+                    disabled={
+                      !previousEntity.noteIri &&
+                      !previousEntity.verticalityIri &&
+                      !previousEntity.selectionIri &&
+                      !previousEntity.conceptIri &&
+                      !previousEntity.annotationIri
+                    }
                     edge="start"
                     color="inherit"
                   >
@@ -86,7 +92,13 @@ export const Inspector = props => {
                 {nextEntity && (
                   <IconButton
                     onClick={() => dispatch(setToNextInspection())}
-                    disabled={!nextEntity.noteIri && !nextEntity.conceptIri && !nextEntity.annotationIri}
+                    disabled={
+                      !nextEntity.noteIri &&
+                      !nextEntity.verticalityIri &&
+                      !nextEntity.selectionIri &&
+                      !nextEntity.conceptIri &&
+                      !nextEntity.annotationIri
+                    }
                     color="inherit"
                   >
                     <ArrowForward />
