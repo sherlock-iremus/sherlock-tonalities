@@ -1,5 +1,18 @@
-import { AlignHorizontalCenter, Close } from '@mui/icons-material'
-import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { AlignHorizontalCenter, Close, Lyrics, MusicNote, Piano } from '@mui/icons-material'
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+  Tooltip,
+} from '@mui/material'
+import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
 import { useGetVerticalityNotesQuery } from '../../../app/services/sparql'
 import { setInspectedVerticality } from '../../slice/scoreSlice'
@@ -10,7 +23,7 @@ export const VerticalityEntity = props => {
   const dispatch = useDispatch()
   const { data: notes } = useGetVerticalityNotesQuery(props.verticalityIri)
   return notes ? (
-    <>
+    <Box>
       <ListItem
         disablePadding
         secondaryAction={
@@ -31,7 +44,14 @@ export const VerticalityEntity = props => {
           <NoteItem key={note} noteIri={note} baseUrl={props.baseUrl} />
         ))}
       </List>
-    </>
+
+      <Tooltip title="Create analytical entity">
+        <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<SpeedDialIcon />}>
+          <SpeedDialAction tooltipTitle="Annotate with fundamental" icon={<Piano />} />
+          <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create arbitrary analytical entity" />
+        </SpeedDial>
+      </Tooltip>
+    </Box>
   ) : (
     <LoadingEntity />
   )
