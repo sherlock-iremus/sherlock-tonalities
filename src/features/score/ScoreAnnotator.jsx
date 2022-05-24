@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { ArrowBack, Assignment, BubbleChart, Home, Info, Lyrics } from '@mui/icons-material'
+import { Add, ArrowBack, Assignment, Home, Info, Lyrics } from '@mui/icons-material'
 import { SpeedDial, SpeedDialAction, SpeedDialIcon, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -54,19 +54,13 @@ export const ScoreAnnotator = () => {
       />
 
       {!isSelectionMode && (
-        <Tooltip title="Create new entity">
+        <Tooltip title="Create new selection">
           <SpeedDial
-            ariaLabel="New"
+            ariaLabel="New selection"
+            onClick={() => dispatch(setSelectionMode())}
             sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
-            icon={<SpeedDialIcon />}
-          >
-            <SpeedDialAction
-              onClick={() => dispatch(setSelectionMode())}
-              icon={<BubbleChart />}
-              tooltipTitle="Create selection"
-            />
-            <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create analytical entity" />
-          </SpeedDial>
+            icon={<Add />}
+          />
         </Tooltip>
       )}
       <Editor />
