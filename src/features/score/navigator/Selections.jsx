@@ -1,11 +1,13 @@
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedSelection } from '../../slice/scoreSlice'
+import { setInspectedSelection, setSelectedSelection } from '../../slice/scoreSlice'
 
 export const Selections = props => {
   const { data: selections } = useGetScoreSelectionsQuery(props.scoreIri)
-  const { inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
+  const { inspectedEntities, currentEntityIndex, isInspectionMode, isSelectionMode, selectedEntities } = useSelector(
+    state => state.score
+  )
   const { selectionIri: inspectedSelection } = inspectedEntities[currentEntityIndex]
   const dispatch = useDispatch()
 
@@ -13,7 +15,16 @@ export const Selections = props => {
     <List>
       {selections?.map(selection => (
         <ListItem key={selection.iri} disablePadding secondaryAction={props.secondaryAction}>
-          <ListItemButton onClick={() => dispatch(setInspectedSelection(selection.iri))} selected={selection.iri === inspectedSelection}>
+          <ListItemButton
+            onClick={() =>
+              (isInspectionMode && dispatch(setInspectedSelection(selection.iri))) ||
+              (isSelectionMode && dispatch(setSelectedSelection(selection.iri)))
+            }
+            selected={
+              (isInspectionMode && selection.iri === inspectedSelection) ||
+              (isSelectionMode && !!selectedEntities.find(s => s.selectionIri === selection.iri))
+            }
+          >
             <ListItemText
               primary={`Selection with ${selection.entities} elements`}
               secondary={selection.iri.slice(props.baseUrl.length)}

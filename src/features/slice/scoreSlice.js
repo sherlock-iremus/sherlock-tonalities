@@ -39,6 +39,12 @@ const scoreSlice = createSlice({
       const index = state.selectedEntities.findIndex(e => e.noteIri === action.payload)
       index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push({ noteIri: action.payload })
     },
+    setSelectedSelection: (state, action) => {
+      const index = state.selectedEntities.findIndex(e => e.selectionIri === action.payload)
+      index !== -1
+        ? state.selectedEntities.splice(index, 1)
+        : state.selectedEntities.push({ selectionIri: action.payload })
+    },
     setInspectedNote: (state, action) => {
       if (state.inspectedEntities.length > state.currentEntityIndex + 1)
         state.inspectedEntities.splice(
@@ -120,6 +126,7 @@ export const {
   setTreatise,
   setInspectedVerticality,
   setSelectedNote,
+  setSelectedSelection,
   setInspectionMode,
   setSelectionMode,
 } = scoreSlice.actions

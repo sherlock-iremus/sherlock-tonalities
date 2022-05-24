@@ -17,7 +17,7 @@ export const SelectionItem = props => {
   return children ? (
     <>
       <ListItem disablePadding secondaryAction={conceptIri && <ConceptItem conceptIri={conceptIri} />}>
-        <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
+        <IconButton onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <ExpandMore /> : <ChevronRight />}
         </IconButton>
         <ListItemButton onClick={() => dispatch(setInspectedSelection(props.selectionIri))}>
