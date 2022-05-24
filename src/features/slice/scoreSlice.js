@@ -1,3 +1,4 @@
+import { Satellite } from '@mui/icons-material'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -6,18 +7,11 @@ const initialState = {
   meiUrl: 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/eff6f0a7-cf80-402c-953b-c66161051356.mei',
   treatiseIri: '',
   isInspectionMode: true,
-  inspectedEntities: [
-    {
-      clickedNoteIri: null,
-      noteIri: null,
-      verticalityIri: null,
-      positionnedNoteIri: null,
-      selectionIri: null,
-      conceptIri: null,
-      annotationIri: null,
-    },
-  ],
+  isSelectionMode: false,
+  inspectedEntities: [{}],
   currentEntityIndex: 0,
+  selectedEntities: [],
+  focusEntityIndex: -1,
 }
 
 const scoreSlice = createSlice({
@@ -33,6 +27,18 @@ const scoreSlice = createSlice({
     setToNextInspection: state => {
       state.currentEntityIndex = ++state.currentEntityIndex
     },
+    setSelectionMode: state => {
+      state.isInspectionMode = false
+      state.isSelectionMode = true
+    },
+    setInspectionMode: state => {
+      state.isInspectionMode = true
+      state.isSelectionMode = false
+    },
+    setSelectedNote: (state, action) => {
+      const index = state.selectedEntities.findIndex(e => e.noteIri === action.payload)
+      index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push({ noteIri: action.payload })
+    },
     setInspectedNote: (state, action) => {
       if (state.inspectedEntities.length > state.currentEntityIndex + 1)
         state.inspectedEntities.splice(
@@ -41,8 +47,8 @@ const scoreSlice = createSlice({
         )
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex].noteIri
-          ? initialState.inspectedEntities[0]
-          : { ...initialState.inspectedEntities[0], noteIri: action.payload, clickedNoteIri: action.payload }
+          ? {}
+          : { noteIri: action.payload, clickedNoteIri: action.payload }
       )
       state.currentEntityIndex = ++state.currentEntityIndex
     },
@@ -54,9 +60,8 @@ const scoreSlice = createSlice({
         )
       state.inspectedEntities.push(
         action.payload.verticalityIri === state.inspectedEntities[state.currentEntityIndex].verticalityIri
-          ? initialState.inspectedEntities[0]
+          ? {}
           : {
-              ...initialState.inspectedEntities[0],
               verticalityIri: action.payload.verticalityIri,
               clickedNoteIri: action.payload.rightClickedNoteIri,
             }
@@ -71,8 +76,8 @@ const scoreSlice = createSlice({
         )
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex].selectionIri
-          ? initialState.inspectedEntities[0]
-          : { ...initialState.inspectedEntities[0], selectionIri: action.payload }
+          ? {}
+          : { selectionIri: action.payload }
       )
       state.currentEntityIndex = ++state.currentEntityIndex
     },
@@ -84,8 +89,8 @@ const scoreSlice = createSlice({
         )
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex].conceptIri
-          ? initialState.inspectedEntities[0]
-          : { ...initialState.inspectedEntities[0], conceptIri: action.payload }
+          ? {}
+          : { conceptIri: action.payload }
       )
       state.currentEntityIndex = ++state.currentEntityIndex
     },
@@ -97,8 +102,8 @@ const scoreSlice = createSlice({
         )
       state.inspectedEntities.push(
         action.payload === state.inspectedEntities[state.currentEntityIndex].annotationIri
-          ? initialState.inspectedEntities[0]
-          : { ...initialState.inspectedEntities[0], annotationIri: action.payload }
+          ? {}
+          : { annotationIri: action.payload }
       )
       state.currentEntityIndex = ++state.currentEntityIndex
     },
@@ -114,6 +119,9 @@ export const {
   setToNextInspection,
   setTreatise,
   setInspectedVerticality,
+  setSelectedNote,
+  setInspectionMode,
+  setSelectionMode,
 } = scoreSlice.actions
 
 export default scoreSlice.reducer
