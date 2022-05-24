@@ -8,13 +8,14 @@ import { Inspector } from './Inspector'
 import { MeiViewer } from './MeiViewer'
 import { Navigator } from './Navigator'
 import treatise from '../../app/treatises/Zarlino_1588.json'
-import { setTreatise } from '../slice/scoreSlice'
+import { setSelectionMode, setTreatise } from '../slice/scoreSlice'
 import { green, purple, red } from '@mui/material/colors'
+import { Editor } from './Editor'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
-  const { meiUrl, scoreIri, baseUrl } = useSelector(state => state.score)
+  const { meiUrl, scoreIri, baseUrl, isSelectionMode } = useSelector(state => state.score)
   const dispatch = useDispatch()
   dispatch(setTreatise(treatise.iri))
 
@@ -52,16 +53,23 @@ export const ScoreAnnotator = () => {
         baseUrl={baseUrl}
       />
 
-      <Tooltip title="Create new entity">
-        <SpeedDial
-          ariaLabel="New"
-          sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
-          icon={<SpeedDialIcon />}
-        >
-          <SpeedDialAction icon={<BubbleChart />} tooltipTitle="Create selection" />
-          <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create analytical entity" />
-        </SpeedDial>
-      </Tooltip>
+      {!isSelectionMode && (
+        <Tooltip title="Create new entity">
+          <SpeedDial
+            ariaLabel="New"
+            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+            icon={<SpeedDialIcon />}
+          >
+            <SpeedDialAction
+              onClick={() => dispatch(setSelectionMode())}
+              icon={<BubbleChart />}
+              tooltipTitle="Create selection"
+            />
+            <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create analytical entity" />
+          </SpeedDial>
+        </Tooltip>
+      )}
+      <Editor />
 
       <Tooltip title="Back to home">
         <SpeedDial

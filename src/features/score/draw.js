@@ -5,7 +5,7 @@ export const drawSelection = (selection, selectionIri, scoreIri) => {
     const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
     selectionNode.setAttribute('id', selectionIri)
     const points = notes.map(s => s && noteCoords(s))
-    points.forEach(p => {
+    points.length && points.forEach(p => {
       const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
       node.setAttribute('fill', 'red')
       node.setAttribute('fill-opacity', '30%')

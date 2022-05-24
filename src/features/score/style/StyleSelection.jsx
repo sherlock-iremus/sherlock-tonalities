@@ -9,5 +9,5 @@ export const StyleSelection = props => {
   const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
   useEffect(() => children && drawSelection(children, props.selectionIri, scoreIri), [])
   useEffect(() => () => document.getElementById(props.selectionIri)?.remove(), [])
-  return children?.map(child => child.noteIri && <StyleNote key={child.noteIri} noteIri={child.noteIri} />) || null
+  return children?.map(child => child.noteIri && <StyleNote key={child.noteIri} noteIri={child.noteIri} mode="inspected" />) || null
 }

@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteVerticalityQuery } from '../../app/services/sparql'
 import { verovioStyle } from '../meiviewer/mei.css'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
-import { setInspectedNote, setInspectedVerticality } from '../slice/scoreSlice'
+import { setInspectedNote, setInspectedVerticality, setSelectedNote } from '../slice/scoreSlice'
 import { StyleAnnalyticalEntity } from './style/StyleAnnalyticalEntity'
+import { StyleCurrentSelection } from './style/StyleCurrentSelection'
 import { StyleNote } from './style/StyleNote'
 import { StyleSelection } from './style/StyleSelection'
 import { StyleVerticality } from './style/StyleVerticality'
@@ -19,18 +20,25 @@ export const MeiViewer = props => {
   const [rightClickedNoteIri, setRightClickedNoteIri] = useState(null)
   const { data: verticalityIri } = useGetNoteVerticalityQuery(rightClickedNoteIri, { skip: !rightClickedNoteIri })
   const dispatch = useDispatch()
-  useEffect(() => dispatch(setInspectedVerticality({ verticalityIri, rightClickedNoteIri })), [verticalityIri])
+  useEffect(
+    () => isInspectionMode && dispatch(setInspectedVerticality({ verticalityIri, rightClickedNoteIri })),
+    [verticalityIri]
+  )
 
-  const { isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
+  const { isInspectionMode, isSelectionMode, inspectedEntities, currentEntityIndex, selectedEntities } = useSelector(
+    state => state.score
+  )
   const inspectedEntity = inspectedEntities[currentEntityIndex]
 
   const handleMouseOver = e => getNote(e.target)?.classList.add('focused')
   const handleMouseLeave = e => getNote(e.target)?.classList.remove('focused')
   const handleClick = e => {
     const noteId = getNote(e.target)?.id
-    if (noteId && isInspectionMode) {
-      if (e.ctrlKey || e.altKey) setRightClickedNoteIri(props.scoreIri + '_' + noteId)
-      else dispatch(setInspectedNote(props.scoreIri + '_' + noteId))
+    if (noteId) {
+      const noteIri = props.scoreIri + '_' + noteId
+      if (e.ctrlKey || e.altKey) setRightClickedNoteIri(noteIri)
+      else if (isInspectionMode) dispatch(setInspectedNote(noteIri))
+      else if (isSelectionMode) dispatch(setSelectedNote(noteIri))
     }
   }
 
@@ -43,15 +51,20 @@ export const MeiViewer = props => {
         onMouseOut={handleMouseLeave}
         id="verovio_container"
       />
-      {inspectedEntity.annotationIri && <StyleAnnalyticalEntity annotationIri={inspectedEntity.annotationIri} />}
-      {inspectedEntity.selectionIri && <StyleSelection selectionIri={inspectedEntity.selectionIri} />}
-      {inspectedEntity.noteIri && <StyleNote noteIri={inspectedEntity.noteIri} />}
-      {inspectedEntity.verticalityIri && inspectedEntity.clickedNoteIri && (
+      {isInspectionMode && inspectedEntity.annotationIri && (
+        <StyleAnnalyticalEntity annotationIri={inspectedEntity.annotationIri} />
+      )}
+      {isInspectionMode && inspectedEntity.selectionIri && (
+        <StyleSelection selectionIri={inspectedEntity.selectionIri} />
+      )}
+      {isInspectionMode && inspectedEntity.noteIri && <StyleNote noteIri={inspectedEntity.noteIri} mode="inspected" />}
+      {isInspectionMode && inspectedEntity.verticalityIri && inspectedEntity.clickedNoteIri && (
         <StyleVerticality
           verticalityIri={inspectedEntity.verticalityIri}
           clickedNoteIri={inspectedEntity.clickedNoteIri}
         />
       )}
+      {isSelectionMode && selectedEntities.length && <StyleCurrentSelection items={selectedEntities} />}
     </>
   )
 }

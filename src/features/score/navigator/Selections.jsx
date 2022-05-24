@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
 import { setInspectedSelection } from '../../slice/scoreSlice'

@@ -14,5 +14,5 @@ export const StyleVerticality = props => {
   useEffect(() => () => verticalityNode?.remove(), [verticalityNode])
 
   const { data: notes } = useGetVerticalityNotesQuery(props.verticalityIri)
-  return notes?.map(note => <StyleNote key={note} noteIri={note} />) || null
+  return notes?.map(note => <StyleNote key={note} noteIri={note} mode="inspected" />) || null
 }
