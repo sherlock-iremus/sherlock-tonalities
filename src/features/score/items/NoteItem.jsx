@@ -1,4 +1,5 @@
-import { ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { MusicNote } from '@mui/icons-material'
+import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
 import { setInspectedNote } from '../../slice/scoreSlice'
@@ -13,6 +14,9 @@ export const NoteItem = props => {
   return noteLabel ? (
     <ListItem disablePadding secondaryAction={conceptIri && <ConceptItem conceptIri={conceptIri} />}>
       <ListItemButton onClick={() => dispatch(setInspectedNote(props.noteIri))}>
+        <ListItemIcon>
+          <MusicNote />
+        </ListItemIcon>
         <ListItemText primary={noteLabel} secondary={props.noteIri.slice(props.baseUrl.length)} />
       </ListItemButton>
     </ListItem>
