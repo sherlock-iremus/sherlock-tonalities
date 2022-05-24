@@ -1,4 +1,4 @@
-import { BubbleChart, Close, ExpandLess, ExpandMore } from '@mui/icons-material'
+import { BubbleChart, Close, ExpandLess, ExpandMore, Lyrics, Timeline } from '@mui/icons-material'
 import {
   Collapse,
   IconButton,
@@ -8,8 +8,12 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
   Tooltip,
 } from '@mui/material'
+import { red } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -84,6 +88,17 @@ export const SelectionEntity = props => {
           ))}
         </List>
       </Collapse>
+
+      <Tooltip title="Create analytical entity">
+        <SpeedDial
+          ariaLabel="New"
+          sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+          icon={<SpeedDialIcon />}
+        >
+          <SpeedDialAction tooltipTitle="Annotate a cadence" icon={<Timeline />} />
+          <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create arbitrary analytical entity" />
+        </SpeedDial>
+      </Tooltip>
     </>
   ) : (
     <LoadingEntity />
