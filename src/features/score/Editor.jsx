@@ -1,5 +1,5 @@
-import { Close } from '@mui/icons-material'
-import { AppBar, Drawer, IconButton, List, ListSubheader, Toolbar, Tooltip, Typography } from '@mui/material'
+import { BubbleChart, Close } from '@mui/icons-material'
+import { AppBar, Drawer, IconButton, List, ListSubheader, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { red } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,6 +22,11 @@ export const Editor = () => {
                 <Close />
               </IconButton>
             </Tooltip>
+          </Toolbar>
+          <Toolbar>
+            <Tabs value={0} textColor="inherit" indicatorColor="inherit" centered sx={{ flexGrow: 1 }}>
+              <Tab label="New selection" icon={<BubbleChart />} />
+            </Tabs>
           </Toolbar>
         </AppBar>
         <List subheader={<ListSubheader>Current selection</ListSubheader>}>
