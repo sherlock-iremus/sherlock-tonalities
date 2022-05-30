@@ -121,8 +121,7 @@ export const getChildSelections = selectionIri => `
     WHERE {
         GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
             <${selectionIri}> crm:P106_is_composed_of ?child.
-            OPTIONAL {?child crm:P2_has_type ?type}
-            OPTIONAL {?child sherlockmei:element ?type}
+            ?child crm:P2_has_type ?type
         }
     }
 `
