@@ -30,7 +30,6 @@ export const drawPositionnedNote = (positionnedNoteIri, clickedNote) => {
   anchor.setAttribute('y2', measureCoordinates.bottom)
   anchor.setAttribute('stroke', 'red')
   anchor.setAttribute('stroke-width', '30')
-  anchor.setAttribute('style', 'display: block;')
 
   getSystem(clickedNote).appendChild(anchor)
 }

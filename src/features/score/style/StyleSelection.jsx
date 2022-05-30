@@ -8,7 +8,6 @@ export const StyleSelection = props => {
   const { scoreIri } = useSelector(state => state.score)
   const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
   const selectionNode = document.getElementById(props.selectionIri)
-  console.log(document.getElementById("d1e20846"))
   useEffect(() => {
     selectionNode ? (selectionNode.style.display = 'block') : children && drawSelection(children, props.selectionIri, scoreIri)
     return () => selectionNode && (selectionNode.style.display = 'none')
