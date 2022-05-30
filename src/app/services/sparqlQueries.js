@@ -174,12 +174,14 @@ export const getNoteVerticality = noteIri => `
     LIMIT 1
 `
 
-export const getVerticalityNotes = verticalityIri => `
-    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-    SELECT ?note
-    WHERE {
-        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            ?note sherlockmei:contains_beat <${verticalityIri}>
-        }
+export const getVerticalityPositionnedNotes = verticalityIri => `
+PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+SELECT ?positionned_note ?note
+WHERE {
+    GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+        ?note sherlockmei:contains_beat <${verticalityIri}>.
+        ?note sherlockmei:has_beat_anchor ?positionned_note.
+        FILTER regex(str(?positionned_note), "${verticalityIri.slice(-6)}")
     }
+}
 `

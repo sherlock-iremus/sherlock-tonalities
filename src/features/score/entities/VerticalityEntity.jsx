@@ -14,15 +14,17 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
-import { useGetVerticalityNotesQuery } from '../../../app/services/sparql'
+import { useGetVerticalityNotesQuery, useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
 import { setInspectedVerticality } from '../../slice/scoreSlice'
 import { NoteItem } from '../items/NoteItem'
+import { PositionnedNoteItem } from '../items/PositionnedNoteItem'
 import { LoadingEntity } from './LoadingEntity'
 
 export const VerticalityEntity = props => {
   const dispatch = useDispatch()
-  const { data: notes } = useGetVerticalityNotesQuery(props.verticalityIri)
-  return notes ? (
+  const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(props.verticalityIri)
+  positionnedNotes && console.log(positionnedNotes)
+  return positionnedNotes ? (
     <Box>
       <ListItem
         disablePadding
@@ -39,9 +41,14 @@ export const VerticalityEntity = props => {
           <ListItemText primary="Verticality" secondary={props.verticalityIri.slice(props.baseUrl.length)} />
         </ListItemButton>
       </ListItem>
-      <List subheader={<ListSubheader>Notes in verticality</ListSubheader>} dense disablePadding>
-        {notes.map(note => (
-          <NoteItem key={note} noteIri={note} baseUrl={props.baseUrl} />
+      <List subheader={<ListSubheader>Positionned notes in verticality</ListSubheader>} dense disablePadding>
+        {positionnedNotes.map(e => (
+          <PositionnedNoteItem
+            key={e.positionnedNoteIri}
+            positionnedNoteIri={e.positionnedNoteIri}
+            attachedNoteIri={e.attachedNoteIri}
+            baseUrl={props.baseUrl}
+          />
         ))}
       </List>
 

@@ -34,6 +34,7 @@ import { ConceptEntity } from './entities/ConceptEntity'
 import { NoteEntity } from './entities/NoteEntity'
 import { SelectionEntity } from './entities/SelectionEntity'
 import { VerticalityEntity } from './entities/VerticalityEntity'
+import { PositionnedNoteItem } from './items/PositionnedNoteItem'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -132,6 +133,13 @@ export const Inspector = props => {
                 <AnnotationEntity
                   annotationIri={inspectedEntity.annotationIri}
                   scoreIri={props.scoreIri}
+                  baseUrl={baseUrl}
+                />
+              )}
+              {inspectedEntity.positionnedNoteIri && (
+                <PositionnedNoteItem
+                  positionnedNoteIri={inspectedEntity.positionnedNoteIri}
+                  attachedNoteIri={inspectedEntity.attachedNoteIri}
                   baseUrl={baseUrl}
                 />
               )}

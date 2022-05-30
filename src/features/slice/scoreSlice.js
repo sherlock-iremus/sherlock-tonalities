@@ -74,6 +74,19 @@ const scoreSlice = createSlice({
       )
       state.currentEntityIndex = ++state.currentEntityIndex
     },
+    setInspectedPositionnedNote: (state, action) => {
+      if (state.inspectedEntities.length > state.currentEntityIndex + 1)
+        state.inspectedEntities.splice(
+          state.currentEntityIndex + 1,
+          state.inspectedEntities.length - state.currentEntityIndex
+        )
+      state.inspectedEntities.push(
+        action.payload === state.inspectedEntities[state.currentEntityIndex].positionnedNoteIri
+          ? {}
+          : { positionnedNoteIri: action.payload.positionnedNoteIri, attachedNoteIri: action.payload.attachedNoteIri }
+      )
+      state.currentEntityIndex = ++state.currentEntityIndex
+    },
     setInspectedSelection: (state, action) => {
       if (state.inspectedEntities.length > state.currentEntityIndex + 1)
         state.inspectedEntities.splice(
@@ -129,6 +142,7 @@ export const {
   setSelectedSelection,
   setInspectionMode,
   setSelectionMode,
+  setInspectedPositionnedNote,
 } = scoreSlice.actions
 
 export default scoreSlice.reducer

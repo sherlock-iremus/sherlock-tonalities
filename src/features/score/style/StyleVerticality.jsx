@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useGetVerticalityNotesQuery } from '../../../app/services/sparql'
+import { useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
 import { drawVerticality } from '../draw'
 import { StyleNote } from './StyleNote'
 
@@ -13,6 +13,9 @@ export const StyleVerticality = props => {
   const verticalityNode = document.getElementById(props.verticalityIri)
   useEffect(() => () => verticalityNode?.remove(), [verticalityNode])
 
-  const { data: notes } = useGetVerticalityNotesQuery(props.verticalityIri)
-  return notes?.map(note => <StyleNote key={note} noteIri={note} mode="inspected" />) || null
+  const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(props.verticalityIri)
+  return (
+    positionnedNotes?.map(e => <StyleNote key={e.attachedNoteIri} noteIri={e.attachedNoteIri} mode="inspected" />) ||
+    null
+  )
 }
