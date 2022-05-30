@@ -7,7 +7,12 @@ import { drawSelection } from '../draw'
 export const StyleSelection = props => {
   const { scoreIri } = useSelector(state => state.score)
   const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
-  useEffect(() => children && drawSelection(children, props.selectionIri, scoreIri), [])
-  useEffect(() => () => document.getElementById(props.selectionIri)?.remove(), [])
+  const selectionNode = document.getElementById(props.selectionIri)
+  console.log(document.getElementById("d1e20846"))
+  useEffect(() => {
+    selectionNode ? (selectionNode.style.display = 'block') : children && drawSelection(children, props.selectionIri, scoreIri)
+    return () => selectionNode && (selectionNode.style.display = 'none')
+  }, [selectionNode, children])
+
   return children?.map(child => child.noteIri && <StyleNote key={child.noteIri} noteIri={child.noteIri} mode="inspected" />) || null
 }

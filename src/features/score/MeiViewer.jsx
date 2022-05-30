@@ -9,6 +9,7 @@ import { setInspectedNote, setInspectedVerticality, setSelectedNote } from '../s
 import { StyleAnnalyticalEntity } from './style/StyleAnnalyticalEntity'
 import { StyleCurrentSelection } from './style/StyleCurrentSelection'
 import { StyleNote } from './style/StyleNote'
+import { StylePositionnedNote } from './style/StylePositionnedNote'
 import { StyleSelection } from './style/StyleSelection'
 import { StyleVerticality } from './style/StyleVerticality'
 
@@ -51,18 +52,25 @@ export const MeiViewer = props => {
         onMouseOut={handleMouseLeave}
         id="verovio_container"
       />
-      {isInspectionMode && inspectedEntity.annotationIri && (
-        <StyleAnnalyticalEntity annotationIri={inspectedEntity.annotationIri} />
-      )}
-      {isInspectionMode && inspectedEntity.selectionIri && (
-        <StyleSelection selectionIri={inspectedEntity.selectionIri} />
-      )}
       {isInspectionMode && inspectedEntity.noteIri && <StyleNote noteIri={inspectedEntity.noteIri} mode="inspected" />}
       {isInspectionMode && inspectedEntity.verticalityIri && inspectedEntity.clickedNoteIri && (
         <StyleVerticality
           verticalityIri={inspectedEntity.verticalityIri}
           clickedNoteIri={inspectedEntity.clickedNoteIri}
         />
+      )}
+      {isInspectionMode && inspectedEntity.positionnedNoteIri && (
+        <StylePositionnedNote
+          positionnedNoteIri={inspectedEntity.positionnedNoteIri}
+          clickedNoteIri={inspectedEntity.clickedNoteIri}
+          attachedNoteIri={inspectedEntity.attachedNoteIri}
+        />
+      )}
+      {isInspectionMode && inspectedEntity.selectionIri && (
+        <StyleSelection selectionIri={inspectedEntity.selectionIri} />
+      )}
+      {isInspectionMode && inspectedEntity.annotationIri && (
+        <StyleAnnalyticalEntity annotationIri={inspectedEntity.annotationIri} />
       )}
       {isSelectionMode && selectedEntities.length && <StyleCurrentSelection items={selectedEntities} />}
     </>
