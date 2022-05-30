@@ -1,4 +1,4 @@
-import { AlignHorizontalCenter, Close, Lyrics, MusicNote, Piano } from '@mui/icons-material'
+import { AlignHorizontalCenter, Close, Lyrics, Piano } from '@mui/icons-material'
 import {
   IconButton,
   List,
@@ -14,9 +14,8 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
-import { useGetVerticalityNotesQuery, useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
+import { useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
 import { setInspectedVerticality } from '../../slice/scoreSlice'
-import { NoteItem } from '../items/NoteItem'
 import { PositionnedNoteItem } from '../items/PositionnedNoteItem'
 import { LoadingEntity } from './LoadingEntity'
 
@@ -40,7 +39,7 @@ export const VerticalityEntity = props => {
           <ListItemText primary="Verticality" secondary={props.verticalityIri.slice(props.baseUrl.length)} />
         </ListItemButton>
       </ListItem>
-      <List subheader={<ListSubheader>Positionned notes in verticality</ListSubheader>} dense disablePadding>
+      <List subheader={<ListSubheader>Positionned notes on this verticality</ListSubheader>} dense disablePadding>
         {positionnedNotes.map(e => (
           <PositionnedNoteItem
             key={e.positionnedNoteIri}

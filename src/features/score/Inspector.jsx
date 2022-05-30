@@ -80,6 +80,7 @@ export const Inspector = props => {
                     disabled={
                       !previousEntity.noteIri &&
                       !previousEntity.verticalityIri &&
+                      !previousEntity.positionnedNoteIri &&
                       !previousEntity.selectionIri &&
                       !previousEntity.conceptIri &&
                       !previousEntity.annotationIri
@@ -96,6 +97,7 @@ export const Inspector = props => {
                     disabled={
                       !nextEntity.noteIri &&
                       !nextEntity.verticalityIri &&
+                      !nextEntity.positionnedNoteIri &&
                       !nextEntity.selectionIri &&
                       !nextEntity.conceptIri &&
                       !nextEntity.annotationIri
@@ -138,6 +140,7 @@ export const Inspector = props => {
               )}
               {inspectedEntity.positionnedNoteIri && (
                 <PositionnedNoteItem
+                  isEntity
                   positionnedNoteIri={inspectedEntity.positionnedNoteIri}
                   attachedNoteIri={inspectedEntity.attachedNoteIri}
                   baseUrl={baseUrl}

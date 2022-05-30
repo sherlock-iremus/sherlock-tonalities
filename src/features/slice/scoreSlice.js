@@ -81,9 +81,13 @@ const scoreSlice = createSlice({
           state.inspectedEntities.length - state.currentEntityIndex
         )
       state.inspectedEntities.push(
-        action.payload === state.inspectedEntities[state.currentEntityIndex].positionnedNoteIri
+        action.payload.positionnedNoteIri === state.inspectedEntities[state.currentEntityIndex].positionnedNoteIri
           ? {}
-          : { positionnedNoteIri: action.payload.positionnedNoteIri, attachedNoteIri: action.payload.attachedNoteIri }
+          : {
+              positionnedNoteIri: action.payload.positionnedNoteIri,
+              attachedNoteIri: action.payload.attachedNoteIri,
+              clickedNoteIri: state.inspectedEntities[state.currentEntityIndex].clickedNoteIri,
+            }
       )
       state.currentEntityIndex = ++state.currentEntityIndex
     },
