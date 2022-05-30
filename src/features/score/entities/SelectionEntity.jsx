@@ -92,7 +92,7 @@ export const SelectionEntity = props => {
       <Tooltip title="Create analytical entity">
         <SpeedDial
           ariaLabel="New"
-          sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+          sx={{ position: 'fixed', bottom: 16, right: 16 }}
           icon={<SpeedDialIcon />}
         >
           <SpeedDialAction tooltipTitle="Annotate a cadence" icon={<Timeline />} />

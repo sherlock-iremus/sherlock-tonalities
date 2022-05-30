@@ -23,7 +23,6 @@ import { LoadingEntity } from './LoadingEntity'
 export const VerticalityEntity = props => {
   const dispatch = useDispatch()
   const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(props.verticalityIri)
-  positionnedNotes && console.log(positionnedNotes)
   return positionnedNotes ? (
     <Box>
       <ListItem
