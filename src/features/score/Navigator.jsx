@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { BubbleChart, Close, HistoryEdu } from '@mui/icons-material'
+import { BubbleChart, Close, HistoryEdu, Piano } from '@mui/icons-material'
 import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { SearchBar } from '../meiviewer/SearchField'
 import { Concepts } from './navigator/Concepts'
+import { Degrees } from './navigator/Degrees'
 import { Selections } from './navigator/Selections'
 
 export const Navigator = props => {
@@ -36,10 +37,12 @@ export const Navigator = props => {
           >
             <Tab icon={<BubbleChart />} label="Selections" />
             <Tab icon={<HistoryEdu />} label="Concepts" />
+            <Tab icon={<Piano />} label="Degrees" />
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Selections scoreIri={props.scoreIri} baseUrl={props.baseUrl} />}
         {selectedTab === 1 && <Concepts treatise={props.treatise} filter={filter} />}
+        {selectedTab === 2 && <Degrees />}
       </Box>
     </Drawer>
   )

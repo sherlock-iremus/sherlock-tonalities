@@ -20,17 +20,17 @@ export const Selections = props => {
 
   return (
     <>
-      <List subheader={<ListSubheader>Current score</ListSubheader>}>
+      <List subheader={<ListSubheader>Global elements</ListSubheader>}>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
               <AudioFile />
             </ListItemIcon>
-            <ListItemText primary="Score title" secondary={scoreIri.slice(baseUrl.length)} />
+            <ListItemText primary="Current score" secondary={scoreIri.slice(baseUrl.length)} />
           </ListItemButton>
         </ListItem>
       </List>
-      <List subheader={<ListSubheader>Created selections on this score</ListSubheader>}>
+      <List subheader={<ListSubheader>Created selections</ListSubheader>}>
         {selections?.map(selection => (
           <ListItem key={selection.iri} disablePadding secondaryAction={props.secondaryAction}>
             <ListItemButton
