@@ -8,17 +8,18 @@ import { LoadingEntity } from '../entities/LoadingEntity'
 export const PositionnedNoteItem = props => {
   const dispatch = useDispatch()
   const { data: noteLabel } = useGetNoteInfoQuery(props.attachedNoteIri)
-
   return noteLabel ? (
     <ListItem
       disablePadding
       secondaryAction={
-        <IconButton
-          disableRipple
-          onClick={() => dispatch(setInspectedPositionnedNote({ positionnedNoteIri: props.positionnedNoteIri }))}
-        >
-          <Close />
-        </IconButton>
+        props.isEntity && (
+          <IconButton
+            disableRipple
+            onClick={() => dispatch(setInspectedPositionnedNote({ positionnedNoteIri: props.positionnedNoteIri }))}
+          >
+            <Close />
+          </IconButton>
+        )
       }
     >
       <ListItemButton
