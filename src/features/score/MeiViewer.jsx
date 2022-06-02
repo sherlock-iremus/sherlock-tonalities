@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteVerticalityQuery } from '../../app/services/sparql'
 import { verovioStyle } from '../meiviewer/mei.css'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
-import { setInspectedNote, setInspectedVerticality, setSelectedEntity } from '../slice/scoreSlice'
+import { setInspectedEntity, setSelectedEntity } from '../slice/scoreSlice'
 import { StyleAnnalyticalEntity } from './style/StyleAnnalyticalEntity'
 import { StyleCurrentSelection } from './style/StyleCurrentSelection'
 import { StyleNote } from './style/StyleNote'
@@ -22,7 +22,7 @@ export const MeiViewer = props => {
   const { data: verticalityIri } = useGetNoteVerticalityQuery(rightClickedNoteIri, { skip: !rightClickedNoteIri })
   const dispatch = useDispatch()
   useEffect(
-    () => isInspectionMode && dispatch(setInspectedVerticality({ verticalityIri, rightClickedNoteIri })),
+    () => isInspectionMode && dispatch(setInspectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri })),
     [verticalityIri]
   )
 
@@ -38,7 +38,7 @@ export const MeiViewer = props => {
     if (noteId) {
       const noteIri = props.scoreIri + '_' + noteId
       if (e.ctrlKey || e.altKey) setRightClickedNoteIri(noteIri)
-      else if (isInspectionMode) dispatch(setInspectedNote(noteIri))
+      else if (isInspectionMode) dispatch(setInspectedEntity({ noteIri }))
       else if (isSelectionMode) dispatch(setSelectedEntity({ noteIri }))
     }
   }

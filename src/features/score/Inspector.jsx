@@ -153,7 +153,7 @@ export const Inspector = props => {
                 <SelectionEntity selectionIri={inspectedEntity.selectionIri} baseUrl={baseUrl} />
               )}
               {inspectedEntity.verticalityIri && (
-                <VerticalityEntity verticalityIri={inspectedEntity.verticalityIri} baseUrl={baseUrl} />
+                <VerticalityEntity verticalityIri={inspectedEntity.verticalityIri} clickedNoteIri={inspectedEntity.clickedNoteIri} baseUrl={baseUrl} />
               )}
             </List>
           </Box>

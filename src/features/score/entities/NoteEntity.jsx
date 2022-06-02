@@ -6,7 +6,7 @@ import {
   useGetNoteInfoQuery,
   useGetNoteSelectionsQuery,
 } from '../../../app/services/sparql'
-import { setInspectedAnnotation, setInspectedNote, setInspectedSelection } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { ConceptItem } from '../items/ConceptItem'
 import { LoadingEntity } from './LoadingEntity'
 
@@ -22,7 +22,7 @@ export const NoteEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedNote(props.noteIri))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ noteIri: props.noteIri }))}>
             <Close />
           </IconButton>
         }
@@ -37,7 +37,7 @@ export const NoteEntity = props => {
       <List subheader={<ListSubheader>Current note is in selections</ListSubheader>}>
         {selections?.map((selection, index) => (
           <ListItem key={selection.iri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedSelection(selection.iri))}>
+            <ListItemButton onClick={() => dispatch(setInspectedEntity({ selectionIri: selection.iri }))}>
               <ListItemText primary={`Selection ${index + 1}`} secondary={selection.iri.slice(props.baseUrl.length)} />
             </ListItemButton>
           </ListItem>
@@ -46,7 +46,7 @@ export const NoteEntity = props => {
       <List subheader={<ListSubheader>Current note is in annalytical entity</ListSubheader>}>
         {annalyticalEntities?.map(entity => (
           <ListItem key={entity.iri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedAnnotation(entity.iri))}>
+            <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri: entity.iri }))}>
               <ListItemText
                 primary={
                   <>

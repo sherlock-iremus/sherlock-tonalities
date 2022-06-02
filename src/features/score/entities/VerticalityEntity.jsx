@@ -15,7 +15,7 @@ import {
 import { Box } from '@mui/system'
 import { useDispatch } from 'react-redux'
 import { useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
-import { setInspectedVerticality } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { PositionnedNoteItem } from '../items/PositionnedNoteItem'
 import { LoadingEntity } from './LoadingEntity'
 
@@ -27,7 +27,10 @@ export const VerticalityEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedVerticality(props.verticalityIri))}>
+          <IconButton
+            disableRipple
+            onClick={() => dispatch(setInspectedEntity({ verticalityIri: props.verticalityIri }))}
+          >
             <Close />
           </IconButton>
         }
@@ -45,6 +48,7 @@ export const VerticalityEntity = props => {
             key={e.positionnedNoteIri}
             positionnedNoteIri={e.positionnedNoteIri}
             attachedNoteIri={e.attachedNoteIri}
+            clickedNoteIri={props.clickedNoteIri}
             baseUrl={props.baseUrl}
           />
         ))}

@@ -6,7 +6,7 @@ import {
   useGetAnnotationSelectionQuery,
   useGetSubAnnotationsQuery,
 } from '../../../app/services/sparql'
-import { setInspectedAnnotation } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { ConceptItem } from '../items/ConceptItem'
 import { SelectionItem } from '../items/SelectionItem'
 import { LoadingEntity } from './LoadingEntity'
@@ -22,7 +22,10 @@ export const AnnotationEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedAnnotation(props.annotationIri))}>
+          <IconButton
+            disableRipple
+            onClick={() => dispatch(setInspectedEntity({ annotationIri: props.annotationIri }))}
+          >
             <Close />
           </IconButton>
         }
