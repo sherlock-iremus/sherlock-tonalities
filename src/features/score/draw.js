@@ -34,7 +34,7 @@ export const drawPositionnedNote = (positionnedNoteIri, clickedNote) => {
   getSystem(clickedNote).appendChild(anchor)
 }
 
-export const drawVerticality = (verticalityIri, clickedNote) => {
+export const drawVerticality = (verticalityIri, clickedNote, mode) => {
   const noteCoordinates = noteCoords(clickedNote)
   const measureCoordinates = measureCoords(getMeasure(clickedNote))
 
@@ -47,7 +47,7 @@ export const drawVerticality = (verticalityIri, clickedNote) => {
   const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'path')
   anchor.setAttribute('id', verticalityIri)
   anchor.setAttribute('d', capsuleShape(points, padding))
-  anchor.setAttribute('fill', 'red')
+  anchor.setAttribute('fill', mode === 'inspected' && 'red' || mode === 'selected' && 'blue')
   anchor.setAttribute('fill-opacity', '30%')
 
   getSystem(clickedNote).appendChild(anchor)

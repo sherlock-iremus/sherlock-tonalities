@@ -62,10 +62,16 @@ const scoreSlice = createSlice({
         selectionIri: newSelectionIri,
         conceptIri: newConceptIri,
         annotationIri: newAnnotationIri,
-        scoreIri: newScoreIri
+        scoreIri: newScoreIri,
       } = action.payload
       const newEntityIri =
-        newNoteIri || newVerticalityIri || newPositionnedNoteIri || newSelectionIri || newConceptIri || newAnnotationIri || newScoreIri
+        newNoteIri ||
+        newVerticalityIri ||
+        newPositionnedNoteIri ||
+        newSelectionIri ||
+        newConceptIri ||
+        newAnnotationIri ||
+        newScoreIri
       state.inspectedEntities.push(currentEntityIri === newEntityIri ? {} : action.payload)
       state.currentEntityIndex = ++state.currentEntityIndex
     },

@@ -11,12 +11,14 @@ export const StyleVerticality = props => {
   const noteNode = document.getElementById(props.clickedNoteIri.slice(scoreIri.length + 1))
 
   useEffect(() => {
-    verticalityNode ? (verticalityNode.style.display = 'block') : drawVerticality(props.verticalityIri, noteNode)
+    verticalityNode
+      ? (verticalityNode.style.display = 'block')
+      : drawVerticality(props.verticalityIri, noteNode, props.mode)
     return () => verticalityNode && (verticalityNode.style.display = 'none')
   }, [verticalityNode])
 
   return (
-    positionnedNotes?.map(e => <StyleNote key={e.attachedNoteIri} noteIri={e.attachedNoteIri} mode="inspected" />) ||
+    positionnedNotes?.map(e => <StyleNote key={e.attachedNoteIri} noteIri={e.attachedNoteIri} mode={props.mode} />) ||
     null
   )
 }

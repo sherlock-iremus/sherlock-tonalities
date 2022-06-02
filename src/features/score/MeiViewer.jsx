@@ -22,7 +22,9 @@ export const MeiViewer = props => {
   const { data: verticalityIri } = useGetNoteVerticalityQuery(rightClickedNoteIri, { skip: !rightClickedNoteIri })
   const dispatch = useDispatch()
   useEffect(
-    () => isInspectionMode && dispatch(setInspectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri })),
+    () =>
+      (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri }))) ||
+      (isSelectionMode && dispatch(setSelectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri }))),
     [verticalityIri]
   )
 
@@ -57,6 +59,7 @@ export const MeiViewer = props => {
         <StyleVerticality
           verticalityIri={inspectedEntity.verticalityIri}
           clickedNoteIri={inspectedEntity.clickedNoteIri}
+          mode="inspected"
         />
       )}
       {isInspectionMode && inspectedEntity.positionnedNoteIri && (
