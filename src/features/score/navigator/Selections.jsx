@@ -22,7 +22,7 @@ export const Selections = props => {
     <>
       <List subheader={<ListSubheader>Global elements</ListSubheader>}>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={() => dispatch(setInspectedEntity({ scoreIri }))}>
             <ListItemIcon>
               <AudioFile />
             </ListItemIcon>
