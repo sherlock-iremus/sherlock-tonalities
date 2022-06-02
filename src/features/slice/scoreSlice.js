@@ -34,15 +34,16 @@ const scoreSlice = createSlice({
       state.isInspectionMode = true
       state.isSelectionMode = false
     },
-    setSelectedNote: (state, action) => {
-      const index = state.selectedEntities.findIndex(e => e.noteIri === action.payload)
-      index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push({ noteIri: action.payload })
-    },
-    setSelectedSelection: (state, action) => {
-      const index = state.selectedEntities.findIndex(e => e.selectionIri === action.payload)
-      index !== -1
-        ? state.selectedEntities.splice(index, 1)
-        : state.selectedEntities.push({ selectionIri: action.payload })
+    setSelectedEntity: (state, action) => {
+      const index =
+        (action.payload.noteIri && state.selectedEntities.findIndex(e => e.noteIri === action.payload.noteIri)) ||
+        (action.payload.verticalityIri &&
+          state.selectedEntities.findIndex(e => e.verticalityIri === action.payload.verticalityIri)) ||
+        (action.payload.positionnedNoteIri &&
+          state.selectedEntities.findIndex(e => e.positionnedNoteIri === action.payload.positionnedNoteIri)) ||
+        (action.payload.selectionIri &&
+          state.selectedEntities.findIndex(e => e.selectionIri === action.payload.selectionIri))
+      index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push(action.payload)
     },
     setInspectedNote: (state, action) => {
       if (state.inspectedEntities.length > state.currentEntityIndex + 1)
@@ -141,8 +142,7 @@ export const {
   setToNextInspection,
   setTreatise,
   setInspectedVerticality,
-  setSelectedNote,
-  setSelectedSelection,
+  setSelectedEntity,
   setInspectionMode,
   setSelectionMode,
   setInspectedPositionnedNote,

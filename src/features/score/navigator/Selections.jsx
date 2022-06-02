@@ -2,7 +2,7 @@ import { AudioFile } from '@mui/icons-material'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedSelection, setSelectedSelection } from '../../slice/scoreSlice'
+import { setInspectedSelection, setSelectedEntity } from '../../slice/scoreSlice'
 
 export const Selections = props => {
   const { data: selections } = useGetScoreSelectionsQuery(props.scoreIri)
@@ -36,7 +36,7 @@ export const Selections = props => {
             <ListItemButton
               onClick={() =>
                 (isInspectionMode && dispatch(setInspectedSelection(selection.iri))) ||
-                (isSelectionMode && dispatch(setSelectedSelection(selection.iri)))
+                (isSelectionMode && dispatch(setSelectedEntity({ selectionIri: selection.iri })))
               }
               selected={
                 (isInspectionMode && selection.iri === inspectedSelection) ||
