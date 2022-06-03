@@ -1,5 +1,5 @@
 export const drawSelection = (selection, selectionIri, scoreIri) => {
-  const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1)))
+  const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1))).filter(Boolean)
   if (notes.length) {
     const hullPadding = 300
     const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
@@ -16,6 +16,7 @@ export const drawSelection = (selection, selectionIri, scoreIri) => {
     const systemNode = getSystem(notes[0])
     systemNode.parentNode.insertBefore(selectionNode, systemNode)
   }
+  else console.log('Scrollez toute la partition puis re-sélectionnez votre entité')
 }
 
 export const drawPositionnedNote = (positionnedNoteIri, clickedNote) => {
