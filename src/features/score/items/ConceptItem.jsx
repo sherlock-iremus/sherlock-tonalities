@@ -1,6 +1,6 @@
 import { Chip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectedConcept } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 
 export const ConceptItem = props => {
   const dispatch = useDispatch()
@@ -9,7 +9,7 @@ export const ConceptItem = props => {
   return (
     <Chip
       label={props.conceptIri.slice(treatiseIri.length)}
-      onClick={() => dispatch(setInspectedConcept(props.conceptIri))}
+      onClick={() => dispatch(setInspectedEntity({ conceptIri: props.conceptIri }))}
       sx={{ m: 0.3 }}
     />
   )

@@ -1,7 +1,7 @@
 import { Button, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectedConcept } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { Concept } from './Concept'
 
 export const Concepts = props => {
@@ -46,7 +46,7 @@ export const Concepts = props => {
             key={concept.iri}
             selectedConcept={inspectedEntity.conceptIri}
             concept={concept}
-            setInspection={clickedConcept => dispatch(setInspectedConcept(clickedConcept))}
+            setInspection={conceptIri => dispatch(setInspectedEntity({ conceptIri }))}
           />
         ))}
     </List>

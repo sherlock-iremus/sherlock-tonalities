@@ -13,12 +13,11 @@ import {
   SpeedDialIcon,
   Tooltip,
 } from '@mui/material'
-import { red } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useGetChildSelectionsQuery, useGetParentSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedSelection } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { Item } from '../items/Item'
 import { LoadingEntity } from './LoadingEntity'
 
@@ -33,12 +32,12 @@ export const SelectionEntity = props => {
     <>
       <Collapse in={isParentListOpen} timeout="auto" unmountOnExit>
         <List subheader={<ListSubheader>Parent selections</ListSubheader>} dense disablePadding>
-          {parents.map((parentIri, index) => (
-            <ListItem key={parentIri} disablePadding>
-              <ListItemButton onClick={() => dispatch(setInspectedSelection(parentIri))}>
+          {parents.map((selectionIri, index) => (
+            <ListItem key={selectionIri} disablePadding>
+              <ListItemButton onClick={() => dispatch(setInspectedEntity({ selectionIri }))}>
                 <ListItemText
                   primary={`Parent selection ${index + 1}`}
-                  secondary={parentIri.slice(props.baseUrl.length)}
+                  secondary={selectionIri.slice(props.baseUrl.length)}
                 />
               </ListItemButton>
             </ListItem>
@@ -57,7 +56,7 @@ export const SelectionEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedSelection(props.selectionIri))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ selectionIri: props.selectionIri }))}>
             <Close />
           </IconButton>
         }
@@ -90,11 +89,7 @@ export const SelectionEntity = props => {
       </Collapse>
 
       <Tooltip title="Create analytical entity">
-        <SpeedDial
-          ariaLabel="New"
-          sx={{ position: 'fixed', bottom: 16, right: 16 }}
-          icon={<SpeedDialIcon />}
-        >
+        <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<SpeedDialIcon />}>
           <SpeedDialAction tooltipTitle="Annotate a cadence" icon={<Timeline />} />
           <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create arbitrary analytical entity" />
         </SpeedDial>

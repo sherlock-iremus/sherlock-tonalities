@@ -2,7 +2,7 @@ import { Close, HistoryEdu } from '@mui/icons-material'
 import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
-import { setInspectedAnnotation, setInspectedConcept } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from './LoadingEntity'
 
 export const ConceptEntity = props => {
@@ -15,7 +15,7 @@ export const ConceptEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedConcept(props.conceptIri))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ conceptIri: props.conceptIri }))}>
             <Close />
           </IconButton>
         }
@@ -33,8 +33,11 @@ export const ConceptEntity = props => {
       <List subheader={<ListSubheader>Is used in annalytical entities</ListSubheader>}>
         {annotations.map((annotation, index) => (
           <ListItem key={annotation.iri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedAnnotation(annotation.iri))}>
-              <ListItemText primary={props.conceptIri.slice(treatiseIri.length) + ' ' + ++index } secondary={annotation.iri.slice(props.baseUrl.length)} />
+            <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri: annotation.iri }))}>
+              <ListItemText
+                primary={props.conceptIri.slice(treatiseIri.length) + ' ' + ++index}
+                secondary={annotation.iri.slice(props.baseUrl.length)}
+              />
             </ListItemButton>
           </ListItem>
         ))}

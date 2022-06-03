@@ -2,7 +2,7 @@ import { Close, QueueMusic } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
-import { setInspectedPositionnedNote } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 
 export const PositionnedNoteItem = props => {
@@ -15,7 +15,7 @@ export const PositionnedNoteItem = props => {
         props.isEntity && (
           <IconButton
             disableRipple
-            onClick={() => dispatch(setInspectedPositionnedNote({ positionnedNoteIri: props.positionnedNoteIri }))}
+            onClick={() => dispatch(setInspectedEntity({ positionnedNoteIri: props.positionnedNoteIri }))}
           >
             <Close />
           </IconButton>
@@ -26,9 +26,10 @@ export const PositionnedNoteItem = props => {
         onClick={() =>
           !props.isEntity &&
           dispatch(
-            setInspectedPositionnedNote({
+            setInspectedEntity({
               positionnedNoteIri: props.positionnedNoteIri,
               attachedNoteIri: props.attachedNoteIri,
+              clickedNoteIri: props.clickedNoteIri
             })
           )
         }

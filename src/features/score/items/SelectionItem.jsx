@@ -3,7 +3,7 @@ import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, Lis
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useGetChildSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedSelection } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
 import { Item } from './Item'
@@ -17,10 +17,8 @@ export const SelectionItem = props => {
   return children ? (
     <>
       <ListItem disablePadding secondaryAction={conceptIri && <ConceptItem conceptIri={conceptIri} />}>
-        <IconButton onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <ExpandMore /> : <ChevronRight />}
-        </IconButton>
-        <ListItemButton onClick={() => dispatch(setInspectedSelection(props.selectionIri))}>
+        <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
+        <ListItemButton onClick={() => dispatch(setInspectedEntity({ selectionIri: props.selectionIri }))}>
           <ListItemIcon>
             <BubbleChart />
           </ListItemIcon>
@@ -43,5 +41,7 @@ export const SelectionItem = props => {
         </List>
       </Collapse>
     </>
-  ) : <LoadingEntity/>
+  ) : (
+    <LoadingEntity />
+  )
 }

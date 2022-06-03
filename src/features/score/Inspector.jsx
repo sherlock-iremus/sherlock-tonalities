@@ -4,6 +4,7 @@ import {
   AlignHorizontalCenter,
   ArrowBack,
   ArrowForward,
+  AudioFile,
   BubbleChart,
   Close,
   HistoryEdu,
@@ -35,6 +36,7 @@ import { NoteEntity } from './entities/NoteEntity'
 import { SelectionEntity } from './entities/SelectionEntity'
 import { VerticalityEntity } from './entities/VerticalityEntity'
 import { PositionnedNoteItem } from './items/PositionnedNoteItem'
+import { ScoreItem } from './items/ScoreItem'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -42,19 +44,26 @@ export const Inspector = props => {
 
   const { baseUrl, isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
 
-  const inspectedEntity = inspectedEntities[currentEntityIndex]
+  const {
+    noteIri,
+    verticalityIri,
+    positionnedNoteIri,
+    selectionIri,
+    conceptIri,
+    annotationIri,
+    scoreIri,
+    attachedNoteIri,
+    clickedNoteIri,
+  } = inspectedEntities[currentEntityIndex]
+  
   const previousEntity = inspectedEntities[currentEntityIndex - 1] || {}
   const nextEntity = inspectedEntities[currentEntityIndex + 1] || {}
   useEffect(
     () =>
-      (inspectedEntity.noteIri ||
-        inspectedEntity.verticalityIri ||
-        inspectedEntity.conceptIri ||
-        inspectedEntity.selectionIri ||
-        inspectedEntity.annotationIri) &&
+      (noteIri || verticalityIri || conceptIri || selectionIri || annotationIri) &&
       !props.isOpen &&
       setIsShowingPopup(true),
-    [inspectedEntity]
+    [inspectedEntities]
   )
 
   return (
@@ -83,7 +92,8 @@ export const Inspector = props => {
                       !previousEntity.positionnedNoteIri &&
                       !previousEntity.selectionIri &&
                       !previousEntity.conceptIri &&
-                      !previousEntity.annotationIri
+                      !previousEntity.annotationIri &&
+                      !previousEntity.scoreIri
                     }
                     edge="start"
                     color="inherit"
@@ -100,7 +110,8 @@ export const Inspector = props => {
                       !nextEntity.positionnedNoteIri &&
                       !nextEntity.selectionIri &&
                       !nextEntity.conceptIri &&
-                      !nextEntity.annotationIri
+                      !nextEntity.annotationIri &&
+                      !nextEntity.scoreIri
                     }
                     color="inherit"
                   >
@@ -110,51 +121,46 @@ export const Inspector = props => {
                 <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1, pr: 4 }}>
                   <Tab
                     label={
-                      (inspectedEntity.noteIri && 'Note') ||
-                      (inspectedEntity.verticalityIri && 'Verticality') ||
-                      (inspectedEntity.positionnedNoteIri && 'Positionned note') ||
-                      (inspectedEntity.selectionIri && 'Selection') ||
-                      (inspectedEntity.conceptIri && 'Concept') ||
-                      (inspectedEntity.annotationIri && 'Annalytical entity')
+                      (noteIri && 'Note') ||
+                      (verticalityIri && 'Verticality') ||
+                      (positionnedNoteIri && 'Positionned note') ||
+                      (selectionIri && 'Selection') ||
+                      (conceptIri && 'Concept') ||
+                      (annotationIri && 'Annalytical entity') ||
+                      (scoreIri && 'Score')
                     }
                     icon={
-                      (inspectedEntity.noteIri && <MusicNote />) ||
-                      (inspectedEntity.verticalityIri && <AlignHorizontalCenter />) ||
-                      (inspectedEntity.positionnedNoteIri && <QueueMusic />) ||
-                      (inspectedEntity.selectionIri && <BubbleChart />) ||
-                      (inspectedEntity.conceptIri && <HistoryEdu />) ||
-                      (inspectedEntity.annotationIri && <Lyrics />)
+                      (noteIri && <MusicNote />) ||
+                      (verticalityIri && <AlignHorizontalCenter />) ||
+                      (positionnedNoteIri && <QueueMusic />) ||
+                      (selectionIri && <BubbleChart />) ||
+                      (conceptIri && <HistoryEdu />) ||
+                      (annotationIri && <Lyrics />) ||
+                      (scoreIri && <AudioFile />)
                     }
                   />
                 </Tabs>
               </Toolbar>
             </AppBar>
             <List>
-              {inspectedEntity.noteIri && <NoteEntity noteIri={inspectedEntity.noteIri} baseUrl={baseUrl} />}
-              {inspectedEntity.annotationIri && (
-                <AnnotationEntity
-                  annotationIri={inspectedEntity.annotationIri}
-                  scoreIri={props.scoreIri}
-                  baseUrl={baseUrl}
-                />
+              {noteIri && <NoteEntity noteIri={noteIri} baseUrl={baseUrl} />}
+              {annotationIri && (
+                <AnnotationEntity annotationIri={annotationIri} scoreIri={props.scoreIri} baseUrl={baseUrl} />
               )}
-              {inspectedEntity.positionnedNoteIri && (
+              {positionnedNoteIri && (
                 <PositionnedNoteItem
                   isEntity
-                  positionnedNoteIri={inspectedEntity.positionnedNoteIri}
-                  attachedNoteIri={inspectedEntity.attachedNoteIri}
+                  positionnedNoteIri={positionnedNoteIri}
+                  attachedNoteIri={attachedNoteIri}
                   baseUrl={baseUrl}
                 />
               )}
-              {inspectedEntity.conceptIri && (
-                <ConceptEntity conceptIri={inspectedEntity.conceptIri} baseUrl={baseUrl} />
+              {conceptIri && <ConceptEntity conceptIri={conceptIri} baseUrl={baseUrl} />}
+              {selectionIri && <SelectionEntity selectionIri={selectionIri} baseUrl={baseUrl} />}
+              {verticalityIri && (
+                <VerticalityEntity verticalityIri={verticalityIri} clickedNoteIri={clickedNoteIri} baseUrl={baseUrl} />
               )}
-              {inspectedEntity.selectionIri && (
-                <SelectionEntity selectionIri={inspectedEntity.selectionIri} baseUrl={baseUrl} />
-              )}
-              {inspectedEntity.verticalityIri && (
-                <VerticalityEntity verticalityIri={inspectedEntity.verticalityIri} baseUrl={baseUrl} />
-              )}
+              {scoreIri && <ScoreItem />}
             </List>
           </Box>
         )}
@@ -168,11 +174,11 @@ export const Inspector = props => {
       >
         <Alert variant="filled" severity="info" onClose={() => setIsShowingPopup(false)}>
           <Link onClick={props.onChange} underline="hover" color="inherit" sx={{ cursor: 'pointer' }}>
-            {(inspectedEntity.noteIri && 'A note entity has been selected, click to view inspection') ||
-              (inspectedEntity.verticalityIri && 'A verticality has been selected, click to view inspection') ||
-              (inspectedEntity.conceptIri && 'A concept entity has been selected, click to view inspection') ||
-              (inspectedEntity.selectionIri && 'A selection entity has been selected, click to view inspection') ||
-              (inspectedEntity.annotationIri && 'An annalytical entity has been selected, click to view inspection')}
+            {(noteIri && 'A note entity has been selected, click to view inspection') ||
+              (verticalityIri && 'A verticality has been selected, click to view inspection') ||
+              (conceptIri && 'A concept entity has been selected, click to view inspection') ||
+              (selectionIri && 'A selection entity has been selected, click to view inspection') ||
+              (annotationIri && 'An annalytical entity has been selected, click to view inspection')}
           </Link>
         </Alert>
       </Snackbar>
