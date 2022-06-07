@@ -170,7 +170,7 @@ export const Inspector = props => {
         autoHideDuration={3000}
         onClose={() => setIsShowingPopup(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mt: 10 }}
+        sx={{ mr: 8, mt:1 }}
       >
         <Alert variant="filled" severity="info" onClose={() => setIsShowingPopup(false)}>
           <Link onClick={props.onChange} underline="hover" color="inherit" sx={{ cursor: 'pointer' }}>
