@@ -11,10 +11,12 @@ import treatise from '../../app/treatises/Zarlino_1588.json'
 import { setSelectionMode, setTreatise } from '../slice/scoreSlice'
 import { green, purple, red } from '@mui/material/colors'
 import { Editor } from './Editor'
+import { usePostSelectionQuery } from '../../app/services/sherlockApi'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
+  const { data: selection } = usePostSelectionQuery()
   const { meiUrl, scoreIri, baseUrl, isSelectionMode } = useSelector(state => state.score)
   const dispatch = useDispatch()
   dispatch(setTreatise(treatise.iri))
