@@ -1,10 +1,10 @@
 {
   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#",
-  "rootClasses": [
+  "classes": [
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Ambitus",
       "label": "Ambitus",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#A2_A3",
           "label": "A2_A3"
@@ -114,15 +114,15 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Cadence",
       "label": "Cadence",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceStep",
           "label": "CadenceStep",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceA",
               "label": "CadenceA",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceA1",
                   "label": "CadenceA1"
@@ -148,7 +148,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceB",
               "label": "CadenceB",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceB1",
                   "label": "CadenceB1"
@@ -174,7 +174,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceB-",
               "label": "CadenceB-",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceB-1",
                   "label": "CadenceB-1"
@@ -200,7 +200,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceC",
               "label": "CadenceC",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceC1",
                   "label": "CadenceC1"
@@ -226,7 +226,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceD",
               "label": "CadenceD",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceD1",
                   "label": "CadenceD1"
@@ -252,7 +252,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceE",
               "label": "CadenceE",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceE1",
                   "label": "CadenceE1"
@@ -278,7 +278,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceE-",
               "label": "CadenceE-",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceE-2",
                   "label": "CadenceE-2"
@@ -300,7 +300,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceF",
               "label": "CadenceF",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceF1",
                   "label": "CadenceF1"
@@ -326,7 +326,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceG",
               "label": "CadenceG",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CadenceG1",
                   "label": "CadenceG1"
@@ -358,11 +358,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Finalis",
           "label": "Finalis",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisA",
               "label": "FinalisA",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisA1",
                   "label": "FinalisA1"
@@ -388,7 +388,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisB-",
               "label": "FinalisB-",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisB-2",
                   "label": "FinalisB-2"
@@ -410,7 +410,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisC",
               "label": "FinalisC",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisC1",
                   "label": "FinalisC1"
@@ -436,7 +436,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisD",
               "label": "FinalisD",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisD1",
                   "label": "FinalisD1"
@@ -462,7 +462,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisE",
               "label": "FinalisE",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisE2",
                   "label": "FinalisE2"
@@ -484,7 +484,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisF",
               "label": "FinalisF",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisF1",
                   "label": "FinalisF1"
@@ -510,7 +510,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisG",
               "label": "FinalisG",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FinalisG2",
                   "label": "FinalisG2"
@@ -538,7 +538,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PerfectCadence",
           "label": "PerfectCadence",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Cadence3_1",
               "label": "Cadence3_1"
@@ -558,7 +558,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Clef",
       "label": "Clef",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#c_1",
           "label": "c_1"
@@ -600,7 +600,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Ethos",
       "label": "Ethos",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Beauty",
           "label": "Beauty"
@@ -636,7 +636,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Gravitiy",
           "label": "Gravitiy",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#SevereGravity",
               "label": "SevereGravity"
@@ -654,7 +654,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Joy",
           "label": "Joy",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Joyous",
               "label": "Joyous"
@@ -708,7 +708,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Severity",
           "label": "Severity",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PleasantSeverity",
               "label": "PleasantSeverity"
@@ -718,7 +718,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Softness",
           "label": "Softness",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#NaturalSoftness",
               "label": "NaturalSoftness"
@@ -732,7 +732,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Sweetness",
           "label": "Sweetness",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AbundantSweetness",
               "label": "AbundantSweetness"
@@ -756,11 +756,11 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNote",
       "label": "InitialNote",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA",
           "label": "InitialNoteA",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA2",
               "label": "InitialNoteA2"
@@ -782,7 +782,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB",
           "label": "InitialNoteB",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB2",
               "label": "InitialNoteB2"
@@ -804,7 +804,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-",
           "label": "InitialNoteB-",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-2",
               "label": "InitialNoteB-2"
@@ -826,7 +826,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC",
           "label": "InitialNoteC",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC2",
               "label": "InitialNoteC2"
@@ -848,7 +848,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD",
           "label": "InitialNoteD",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD2",
               "label": "InitialNoteD2"
@@ -870,7 +870,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE",
           "label": "InitialNoteE",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE2",
               "label": "InitialNoteE2"
@@ -892,7 +892,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF",
           "label": "InitialNoteF",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF2",
               "label": "InitialNoteF2"
@@ -914,7 +914,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG",
           "label": "InitialNoteG",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG2",
               "label": "InitialNoteG2"
@@ -936,7 +936,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialToneE-",
           "label": "InitialToneE-",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialToneE-2",
               "label": "InitialToneE-2"
@@ -960,15 +960,15 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Interval",
       "label": "Interval",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#IntervalSpecies",
           "label": "IntervalSpecies",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FifthSpecies",
               "label": "FifthSpecies",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FifthSpecies_D_a",
                   "label": "FifthSpecies_D_a"
@@ -978,7 +978,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FourthSpecies",
               "label": "FourthSpecies",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FourthSpecies_a_d",
                   "label": "FourthSpecies_a_d"
@@ -988,7 +988,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#OctaveSpecies",
               "label": "OctaveSpecies",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#OctaveSpeciesA",
                   "label": "OctaveSpeciesA"
@@ -1024,7 +1024,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#MajorThird",
           "label": "MajorThird",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Interval_b1_d2",
               "label": "Interval_b1_d2"
@@ -1058,7 +1058,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#MinorSixth",
           "label": "MinorSixth",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Interval_a1_f2",
               "label": "Interval_a1_f2"
@@ -1076,7 +1076,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#MinorThird",
           "label": "MinorThird",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Interval_a1_c2",
               "label": "Interval_a1_c2"
@@ -1110,7 +1110,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PerfectFifth",
           "label": "PerfectFifth",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Interval_B_f",
               "label": "Interval_B_f"
@@ -1176,7 +1176,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PerfectFourth",
           "label": "PerfectFourth",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Interval_a1_d2",
               "label": "Interval_a1_d2"
@@ -1216,7 +1216,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Key",
       "label": "Key",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#KeyA-",
           "label": "KeyA-"
@@ -1242,19 +1242,19 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#MelodicFormula",
       "label": "MelodicFormula",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#RecitationFormula",
           "label": "RecitationFormula",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Intonation",
               "label": "Intonation",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Intonation_CanonicalHours",
                   "label": "Intonation_CanonicalHours",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Intonation_Vespers",
                       "label": "Intonation_Vespers"
@@ -1264,7 +1264,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Intonation_Mass",
                   "label": "Intonation_Mass",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Intonation_MassGLoriaPatri",
                       "label": "Intonation_MassGLoriaPatri"
@@ -1326,7 +1326,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Repercussio",
           "label": "Repercussio",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Interval_B_f",
               "label": "Interval_B_f"
@@ -1482,19 +1482,19 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Mode",
       "label": "Mode",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AuthenticMode",
           "label": "AuthenticMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthentic",
               "label": "AModeAuthentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticA",
                   "label": "AModeAuthenticA",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicA",
                       "label": "AModeAuthenticMonophonicA"
@@ -1508,7 +1508,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticALowerOctave",
                   "label": "AModeAuthenticALowerOctave",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicALowerOctave",
                       "label": "AModeAuthenticMonophonicALowerOctave"
@@ -1522,7 +1522,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticD",
                   "label": "AModeAuthenticD",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicD",
                       "label": "AModeAuthenticMonophonicD"
@@ -1538,7 +1538,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AuthenticMonophonicMode",
               "label": "AuthenticMonophonicMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicA",
                   "label": "AModeAuthenticMonophonicA"
@@ -1608,7 +1608,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AuthenticPolyphonicMode",
               "label": "AuthenticPolyphonicMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticPolyphonicA",
                   "label": "AModeAuthenticPolyphonicA"
@@ -1678,11 +1678,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthentic",
               "label": "CModeAuthentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticC",
                   "label": "CModeAuthenticC",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicC",
                       "label": "CModeAuthenticMonophonicC"
@@ -1696,7 +1696,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticCUpperOctave",
                   "label": "CModeAuthenticCUpperOctave",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicUpperOctave",
                       "label": "CModeAuthenticMonophonicUpperOctave"
@@ -1710,7 +1710,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticF",
                   "label": "CModeAuthenticF",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicF",
                       "label": "CModeAuthenticMonophonicF"
@@ -1724,7 +1724,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonic",
                   "label": "CModeAuthenticMonophonic",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicC",
                       "label": "CModeAuthenticMonophonicC"
@@ -1740,11 +1740,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthentic",
               "label": "DModeAuthentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticC",
                   "label": "DModeAuthenticC",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicC",
                       "label": "DModeAuthenticMonophonicC"
@@ -1758,7 +1758,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticD",
                   "label": "DModeAuthenticD",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicD",
                       "label": "DModeAuthenticMonophonicD"
@@ -1772,7 +1772,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticE",
                   "label": "DModeAuthenticE",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicE",
                       "label": "DModeAuthenticMonophonicE"
@@ -1782,7 +1782,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticG",
                   "label": "DModeAuthenticG",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicG",
                       "label": "DModeAuthenticMonophonicG"
@@ -1798,11 +1798,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthentic",
               "label": "EModeAuthentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticA",
                   "label": "EModeAuthenticA",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticMonophonicA",
                       "label": "EModeAuthenticMonophonicA"
@@ -1816,7 +1816,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticE",
                   "label": "EModeAuthenticE",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticMonophonicE",
                       "label": "EModeAuthenticMonophonicE"
@@ -1832,11 +1832,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthentic",
               "label": "FModeAuthentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticB-",
                   "label": "FModeAuthenticB-",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticMonophonicBb",
                       "label": "FModeAuthenticMonophonicBb"
@@ -1850,7 +1850,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticF",
                   "label": "FModeAuthenticF",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticMonophonicF",
                       "label": "FModeAuthenticMonophonicF"
@@ -1866,11 +1866,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthentic",
               "label": "GModeAuthentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticC",
                   "label": "GModeAuthenticC",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticMonophonicC",
                       "label": "GModeAuthenticMonophonicC"
@@ -1884,7 +1884,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticG",
                   "label": "GModeAuthenticG",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticMonophonicG",
                       "label": "GModeAuthenticMonophonicG"
@@ -1906,7 +1906,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ImperfectMode",
           "label": "ImperfectMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ImperfectAuthenticMode",
               "label": "ImperfectAuthenticMode"
@@ -1920,7 +1920,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#MixedMode",
           "label": "MixedMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#A_ModeAuthenticWithE_ModeAuthentic",
               "label": "A_ModeAuthenticWithE_ModeAuthentic"
@@ -1928,7 +1928,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#D_ModeAuthenticWithA_Mode_Authentic",
               "label": "D_ModeAuthenticWithA_Mode_Authentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticAWithAModeAuthenticA",
                   "label": "DModeAuthenticAWithAModeAuthenticA"
@@ -1938,7 +1938,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#D_ModePlagalWithA_ModeAuthentic",
               "label": "D_ModePlagalWithA_ModeAuthentic",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#D_ModePlagal_GWithA_ModeAuthentic_D",
                   "label": "D_ModePlagal_GWithA_ModeAuthentic_D"
@@ -1958,11 +1958,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#MonophonicMode",
           "label": "MonophonicMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AuthenticMonophonicMode",
               "label": "AuthenticMonophonicMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicA",
                   "label": "AModeAuthenticMonophonicA"
@@ -2032,7 +2032,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PlagalMonophonicMode",
               "label": "PlagalMonophonicMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalMonophonicA",
                   "label": "AModePlagalMonophonicA"
@@ -2080,7 +2080,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PerfectMode",
           "label": "PerfectMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PerfectAuthenticMode",
               "label": "PerfectAuthenticMode"
@@ -2094,15 +2094,15 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PlagalMode",
           "label": "PlagalMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagal",
               "label": "AModePlagal",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalA",
                   "label": "AModePlagalA",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalMonophonicA",
                       "label": "AModePlagalMonophonicA"
@@ -2116,7 +2116,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalD",
                   "label": "AModePlagalD",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalMonophonicD",
                       "label": "AModePlagalMonophonicD"
@@ -2132,11 +2132,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagal",
               "label": "CModePlagal",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalC",
                   "label": "CModePlagalC",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalMonophonicC",
                       "label": "CModePlagalMonophonicC"
@@ -2150,7 +2150,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalF",
                   "label": "CModePlagalF",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalMonophonicF",
                       "label": "CModePlagalMonophonicF"
@@ -2162,11 +2162,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagal",
               "label": "DModePlagal",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalD",
                   "label": "DModePlagalD",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalMonophonicD",
                       "label": "DModePlagalMonophonicD"
@@ -2180,7 +2180,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalG",
                   "label": "DModePlagalG",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalMonophonicG",
                       "label": "DModePlagalMonophonicG"
@@ -2196,11 +2196,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagal",
               "label": "EModePlagal",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalA",
                   "label": "EModePlagalA",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalMonophonicA",
                       "label": "EModePlagalMonophonicA"
@@ -2214,7 +2214,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalE",
                   "label": "EModePlagalE",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalMonophonicE",
                       "label": "EModePlagalMonophonicE"
@@ -2230,11 +2230,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagal",
               "label": "FModePlagal",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalB-",
                   "label": "FModePlagalB-",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalMonophonicB-",
                       "label": "FModePlagalMonophonicB-"
@@ -2248,7 +2248,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalF",
                   "label": "FModePlagalF",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalMonophonicF",
                       "label": "FModePlagalMonophonicF"
@@ -2264,11 +2264,11 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagal",
               "label": "GModePlagal",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalC",
                   "label": "GModePlagalC",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalMonophonicC",
                       "label": "GModePlagalMonophonicC"
@@ -2282,7 +2282,7 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalG",
                   "label": "GModePlagalG",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalMonophonicG",
                       "label": "GModePlagalMonophonicG"
@@ -2298,7 +2298,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PlagalMonophonicMode",
               "label": "PlagalMonophonicMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalMonophonicA",
                   "label": "AModePlagalMonophonicA"
@@ -2344,7 +2344,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PlagalPolyphonicMode",
               "label": "PlagalPolyphonicMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalPolyphonicA",
                   "label": "AModePlagalPolyphonicA"
@@ -2400,7 +2400,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicMode",
           "label": "PolyphonicMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticPolyphonicA",
               "label": "AModeAuthenticPolyphonicA"
@@ -2510,19 +2510,19 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#SimpleMode",
           "label": "SimpleMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AMode",
               "label": "AMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthentic",
                   "label": "AModeAuthentic",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticA",
                       "label": "AModeAuthenticA",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicA",
                           "label": "AModeAuthenticMonophonicA"
@@ -2536,7 +2536,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticALowerOctave",
                       "label": "AModeAuthenticALowerOctave",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicALowerOctave",
                           "label": "AModeAuthenticMonophonicALowerOctave"
@@ -2550,7 +2550,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticD",
                       "label": "AModeAuthenticD",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicD",
                           "label": "AModeAuthenticMonophonicD"
@@ -2566,11 +2566,11 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagal",
                   "label": "AModePlagal",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalA",
                       "label": "AModePlagalA",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalMonophonicA",
                           "label": "AModePlagalMonophonicA"
@@ -2584,7 +2584,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalD",
                       "label": "AModePlagalD",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalMonophonicD",
                           "label": "AModePlagalMonophonicD"
@@ -2602,15 +2602,15 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CMode",
               "label": "CMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthentic",
                   "label": "CModeAuthentic",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticC",
                       "label": "CModeAuthenticC",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicC",
                           "label": "CModeAuthenticMonophonicC"
@@ -2624,7 +2624,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticCUpperOctave",
                       "label": "CModeAuthenticCUpperOctave",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicUpperOctave",
                           "label": "CModeAuthenticMonophonicUpperOctave"
@@ -2638,7 +2638,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticF",
                       "label": "CModeAuthenticF",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicF",
                           "label": "CModeAuthenticMonophonicF"
@@ -2652,7 +2652,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonic",
                       "label": "CModeAuthenticMonophonic",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicC",
                           "label": "CModeAuthenticMonophonicC"
@@ -2668,11 +2668,11 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagal",
                   "label": "CModePlagal",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalC",
                       "label": "CModePlagalC",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalMonophonicC",
                           "label": "CModePlagalMonophonicC"
@@ -2686,7 +2686,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalF",
                       "label": "CModePlagalF",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalMonophonicF",
                           "label": "CModePlagalMonophonicF"
@@ -2700,15 +2700,15 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DMode",
               "label": "DMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthentic",
                   "label": "DModeAuthentic",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticC",
                       "label": "DModeAuthenticC",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicC",
                           "label": "DModeAuthenticMonophonicC"
@@ -2722,7 +2722,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticD",
                       "label": "DModeAuthenticD",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicD",
                           "label": "DModeAuthenticMonophonicD"
@@ -2736,7 +2736,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticE",
                       "label": "DModeAuthenticE",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicE",
                           "label": "DModeAuthenticMonophonicE"
@@ -2746,7 +2746,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticG",
                       "label": "DModeAuthenticG",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicG",
                           "label": "DModeAuthenticMonophonicG"
@@ -2762,11 +2762,11 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagal",
                   "label": "DModePlagal",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalD",
                       "label": "DModePlagalD",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalMonophonicD",
                           "label": "DModePlagalMonophonicD"
@@ -2780,7 +2780,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalG",
                       "label": "DModePlagalG",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalMonophonicG",
                           "label": "DModePlagalMonophonicG"
@@ -2798,15 +2798,15 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EMode",
               "label": "EMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthentic",
                   "label": "EModeAuthentic",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticA",
                       "label": "EModeAuthenticA",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticMonophonicA",
                           "label": "EModeAuthenticMonophonicA"
@@ -2820,7 +2820,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticE",
                       "label": "EModeAuthenticE",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticMonophonicE",
                           "label": "EModeAuthenticMonophonicE"
@@ -2836,11 +2836,11 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagal",
                   "label": "EModePlagal",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalA",
                       "label": "EModePlagalA",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalMonophonicA",
                           "label": "EModePlagalMonophonicA"
@@ -2854,7 +2854,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalE",
                       "label": "EModePlagalE",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalMonophonicE",
                           "label": "EModePlagalMonophonicE"
@@ -2872,15 +2872,15 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FMode",
               "label": "FMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthentic",
                   "label": "FModeAuthentic",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticB-",
                       "label": "FModeAuthenticB-",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticMonophonicBb",
                           "label": "FModeAuthenticMonophonicBb"
@@ -2894,7 +2894,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticF",
                       "label": "FModeAuthenticF",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticMonophonicF",
                           "label": "FModeAuthenticMonophonicF"
@@ -2910,11 +2910,11 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagal",
                   "label": "FModePlagal",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalB-",
                       "label": "FModePlagalB-",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalMonophonicB-",
                           "label": "FModePlagalMonophonicB-"
@@ -2928,7 +2928,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalF",
                       "label": "FModePlagalF",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalMonophonicF",
                           "label": "FModePlagalMonophonicF"
@@ -2946,15 +2946,15 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GMode",
               "label": "GMode",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthentic",
                   "label": "GModeAuthentic",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticC",
                       "label": "GModeAuthenticC",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticMonophonicC",
                           "label": "GModeAuthenticMonophonicC"
@@ -2968,7 +2968,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticG",
                       "label": "GModeAuthenticG",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticMonophonicG",
                           "label": "GModeAuthenticMonophonicG"
@@ -2984,11 +2984,11 @@
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagal",
                   "label": "GModePlagal",
-                  "subClasses": [
+                  "children": [
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalC",
                       "label": "GModePlagalC",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalMonophonicC",
                           "label": "GModePlagalMonophonicC"
@@ -3002,7 +3002,7 @@
                     {
                       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalG",
                       "label": "GModePlagalG",
-                      "subClasses": [
+                      "children": [
                         {
                           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalMonophonicG",
                           "label": "GModePlagalMonophonicG"
@@ -3022,11 +3022,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#StableMode",
           "label": "StableMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_1",
               "label": "PsalmTone_1",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_1_d",
                   "label": "PsalmTone_1_d"
@@ -3036,7 +3036,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_2",
               "label": "PsalmTone_2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_2_d",
                   "label": "PsalmTone_2_d"
@@ -3046,7 +3046,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_3",
               "label": "PsalmTone_3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_3_e",
                   "label": "PsalmTone_3_e"
@@ -3056,7 +3056,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_4",
               "label": "PsalmTone_4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_4_e",
                   "label": "PsalmTone_4_e"
@@ -3066,7 +3066,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_5",
               "label": "PsalmTone_5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_5_f",
                   "label": "PsalmTone_5_f"
@@ -3076,7 +3076,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_6",
               "label": "PsalmTone_6",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_6_f",
                   "label": "PsalmTone_6_f"
@@ -3086,7 +3086,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_7",
               "label": "PsalmTone_7",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_7_g",
                   "label": "PsalmTone_7_g"
@@ -3096,7 +3096,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_8",
               "label": "PsalmTone_8",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PsalmTone_8_g",
                   "label": "PsalmTone_8_g"
@@ -3108,7 +3108,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#SuperfluousMode",
           "label": "SuperfluousMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#SuperflousAuthenticMode",
               "label": "SuperflousAuthenticMode"
@@ -3122,11 +3122,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#TransposedMode",
           "label": "TransposedMode",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticD",
               "label": "AModeAuthenticD",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticMonophonicD",
                   "label": "AModeAuthenticMonophonicD"
@@ -3140,7 +3140,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalD",
               "label": "AModePlagalD",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalMonophonicD",
                   "label": "AModePlagalMonophonicD"
@@ -3154,7 +3154,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticF",
               "label": "CModeAuthenticF",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticMonophonicF",
                   "label": "CModeAuthenticMonophonicF"
@@ -3168,7 +3168,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalF",
               "label": "CModePlagalF",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalMonophonicF",
                   "label": "CModePlagalMonophonicF"
@@ -3178,7 +3178,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticC",
               "label": "DModeAuthenticC",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicC",
                   "label": "DModeAuthenticMonophonicC"
@@ -3192,7 +3192,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticE",
               "label": "DModeAuthenticE",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicE",
                   "label": "DModeAuthenticMonophonicE"
@@ -3202,7 +3202,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticG",
               "label": "DModeAuthenticG",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticMonophonicG",
                   "label": "DModeAuthenticMonophonicG"
@@ -3216,7 +3216,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalG",
               "label": "DModePlagalG",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalMonophonicG",
                   "label": "DModePlagalMonophonicG"
@@ -3230,7 +3230,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticA",
               "label": "EModeAuthenticA",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticMonophonicA",
                   "label": "EModeAuthenticMonophonicA"
@@ -3244,7 +3244,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalA",
               "label": "EModePlagalA",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalMonophonicA",
                   "label": "EModePlagalMonophonicA"
@@ -3258,7 +3258,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticB-",
               "label": "FModeAuthenticB-",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticMonophonicBb",
                   "label": "FModeAuthenticMonophonicBb"
@@ -3272,7 +3272,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalB-",
               "label": "FModePlagalB-",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalMonophonicB-",
                   "label": "FModePlagalMonophonicB-"
@@ -3286,7 +3286,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticC",
               "label": "GModeAuthenticC",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticMonophonicC",
                   "label": "GModeAuthenticMonophonicC"
@@ -3300,7 +3300,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalC",
               "label": "GModePlagalC",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalMonophonicC",
                   "label": "GModePlagalMonophonicC"
@@ -3322,7 +3322,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#OctaveDivision",
       "label": "OctaveDivision",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ArithmeticDivision",
           "label": "ArithmeticDivision"
@@ -3336,15 +3336,15 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClass",
       "label": "PitchClass",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassA",
           "label": "PitchClassA",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA",
               "label": "InitialNoteA",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA2",
                   "label": "InitialNoteA2"
@@ -3366,7 +3366,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#a2",
               "label": "a2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA2",
                   "label": "InitialNoteA2"
@@ -3376,7 +3376,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#a3",
               "label": "a3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA3",
                   "label": "InitialNoteA3"
@@ -3386,7 +3386,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#a4",
               "label": "a4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA4",
                   "label": "InitialNoteA4"
@@ -3396,7 +3396,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#a5",
               "label": "a5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteA5",
                   "label": "InitialNoteA5"
@@ -3408,7 +3408,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassA-",
           "label": "PitchClassA-",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#a-2",
               "label": "a-2"
@@ -3430,11 +3430,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassB",
           "label": "PitchClassB",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB",
               "label": "InitialNoteB",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB2",
                   "label": "InitialNoteB2"
@@ -3456,7 +3456,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b2",
               "label": "b2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB2",
                   "label": "InitialNoteB2"
@@ -3466,7 +3466,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b3",
               "label": "b3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB3",
                   "label": "InitialNoteB3"
@@ -3476,7 +3476,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b4",
               "label": "b4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB4",
                   "label": "InitialNoteB4"
@@ -3486,7 +3486,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b5",
               "label": "b5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB5",
                   "label": "InitialNoteB5"
@@ -3498,11 +3498,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassB-",
           "label": "PitchClassB-",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-",
               "label": "InitialNoteB-",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-2",
                   "label": "InitialNoteB-2"
@@ -3524,7 +3524,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b-2",
               "label": "b-2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-2",
                   "label": "InitialNoteB-2"
@@ -3534,7 +3534,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b-3",
               "label": "b-3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-3",
                   "label": "InitialNoteB-3"
@@ -3544,7 +3544,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b-4",
               "label": "b-4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-4",
                   "label": "InitialNoteB-4"
@@ -3554,7 +3554,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#b-5",
               "label": "b-5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteB-5",
                   "label": "InitialNoteB-5"
@@ -3566,11 +3566,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassC",
           "label": "PitchClassC",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC",
               "label": "InitialNoteC",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC2",
                   "label": "InitialNoteC2"
@@ -3592,7 +3592,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#c2",
               "label": "c2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC2",
                   "label": "InitialNoteC2"
@@ -3602,7 +3602,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#c3",
               "label": "c3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC3",
                   "label": "InitialNoteC3"
@@ -3612,7 +3612,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#c4",
               "label": "c4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC4",
                   "label": "InitialNoteC4"
@@ -3622,7 +3622,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#c5",
               "label": "c5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteC5",
                   "label": "InitialNoteC5"
@@ -3634,11 +3634,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassD",
           "label": "PitchClassD",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD",
               "label": "InitialNoteD",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD2",
                   "label": "InitialNoteD2"
@@ -3660,7 +3660,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#d2",
               "label": "d2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD2",
                   "label": "InitialNoteD2"
@@ -3670,7 +3670,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#d3",
               "label": "d3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD3",
                   "label": "InitialNoteD3"
@@ -3680,7 +3680,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#d4",
               "label": "d4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD4",
                   "label": "InitialNoteD4"
@@ -3690,7 +3690,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#d5",
               "label": "d5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteD5",
                   "label": "InitialNoteD5"
@@ -3702,11 +3702,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassE",
           "label": "PitchClassE",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE",
               "label": "InitialNoteE",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE2",
                   "label": "InitialNoteE2"
@@ -3728,7 +3728,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#e2",
               "label": "e2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE2",
                   "label": "InitialNoteE2"
@@ -3738,7 +3738,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#e3",
               "label": "e3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE3",
                   "label": "InitialNoteE3"
@@ -3748,7 +3748,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#e4",
               "label": "e4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE4",
                   "label": "InitialNoteE4"
@@ -3758,7 +3758,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#e5",
               "label": "e5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteE5",
                   "label": "InitialNoteE5"
@@ -3770,7 +3770,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassE-",
           "label": "PitchClassE-",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#e-2",
               "label": "e-2"
@@ -3792,11 +3792,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassF",
           "label": "PitchClassF",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF",
               "label": "InitialNoteF",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF2",
                   "label": "InitialNoteF2"
@@ -3818,7 +3818,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#f2",
               "label": "f2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF2",
                   "label": "InitialNoteF2"
@@ -3828,7 +3828,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#f3",
               "label": "f3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF3",
                   "label": "InitialNoteF3"
@@ -3838,7 +3838,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#f4",
               "label": "f4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF4",
                   "label": "InitialNoteF4"
@@ -3848,7 +3848,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#f5",
               "label": "f5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteF5",
                   "label": "InitialNoteF5"
@@ -3860,11 +3860,11 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassG",
           "label": "PitchClassG",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG",
               "label": "InitialNoteG",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG2",
                   "label": "InitialNoteG2"
@@ -3886,7 +3886,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#g2",
               "label": "g2",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG2",
                   "label": "InitialNoteG2"
@@ -3896,7 +3896,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#g3",
               "label": "g3",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG3",
                   "label": "InitialNoteG3"
@@ -3906,7 +3906,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#g4",
               "label": "g4",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG4",
                   "label": "InitialNoteG4"
@@ -3916,7 +3916,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#g5",
               "label": "g5",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#InitialNoteG5",
                   "label": "InitialNoteG5"
@@ -3928,7 +3928,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassC+",
           "label": "PitchClassC+",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#c+2",
               "label": "c+2"
@@ -3950,7 +3950,7 @@
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PitchClassF+",
           "label": "PitchClassF+",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#f+2",
               "label": "f+2"
@@ -3974,7 +3974,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicAModeAuthentic",
       "label": "PolyphonicAModeAuthentic",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModeAuthenticPolyphonicA",
           "label": "AModeAuthenticPolyphonicA"
@@ -3992,7 +3992,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicAModePlagal",
       "label": "PolyphonicAModePlagal",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#AModePlagalPolyphonicA",
           "label": "AModePlagalPolyphonicA"
@@ -4006,7 +4006,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicCModeAuthentic",
       "label": "PolyphonicCModeAuthentic",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModeAuthenticPolyphonicC",
           "label": "CModeAuthenticPolyphonicC"
@@ -4024,7 +4024,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicCModePlagal",
       "label": "PolyphonicCModePlagal",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#CModePlagalPolyphonicC",
           "label": "CModePlagalPolyphonicC"
@@ -4038,7 +4038,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicDModeAuthentic",
       "label": "PolyphonicDModeAuthentic",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModeAuthenticGPolyphonic",
           "label": "DModeAuthenticGPolyphonic"
@@ -4060,7 +4060,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicDModePlagal",
       "label": "PolyphonicDModePlagal",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DModePlagalPolyphonicD",
           "label": "DModePlagalPolyphonicD"
@@ -4074,7 +4074,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicEModeAuthentic",
       "label": "PolyphonicEModeAuthentic",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModeAuthenticPolyphonicA",
           "label": "EModeAuthenticPolyphonicA"
@@ -4088,7 +4088,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicEModePlagal",
       "label": "PolyphonicEModePlagal",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#EModePlagalPolyphonicA",
           "label": "EModePlagalPolyphonicA"
@@ -4102,7 +4102,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicFModeAuthentic",
       "label": "PolyphonicFModeAuthentic",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModeAuthenticPolyphonicBb",
           "label": "FModeAuthenticPolyphonicBb"
@@ -4116,7 +4116,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicFModePlagal",
       "label": "PolyphonicFModePlagal",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#FModePlagalPolyphonicB-",
           "label": "FModePlagalPolyphonicB-"
@@ -4130,7 +4130,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicGModeAuthentic",
       "label": "PolyphonicGModeAuthentic",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModeAuthenticPolyphonicC",
           "label": "GModeAuthenticPolyphonicC"
@@ -4144,7 +4144,7 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#PolyphonicGModePlagal",
       "label": "PolyphonicGModePlagal",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#GModePlagalPolyphonicC",
           "label": "GModePlagalPolyphonicC"
@@ -4158,11 +4158,11 @@
     {
       "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Text",
       "label": "Text",
-      "subClasses": [
+      "children": [
         {
           "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Subject",
           "label": "Subject",
-          "subClasses": [
+          "children": [
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Adulation",
               "label": "Adulation"
@@ -4210,7 +4210,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Lamentation",
               "label": "Lamentation",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Supplicant_lamentation",
                   "label": "Supplicant_lamentation"
@@ -4276,7 +4276,7 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Thoughts",
               "label": "Thoughts",
-              "subClasses": [
+              "children": [
                 {
                   "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#DivineThoughts",
                   "label": "DivineThoughts"
@@ -4310,6 +4310,402 @@
             {
               "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#Weeping",
               "label": "Weeping"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ambitusExceedsInterval",
+      "label": "ambitusExceedsInterval",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ambitusExtensionAboveFifth",
+          "label": "ambitusExtensionAboveFifth",
+          "children": [
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ambitusExceedsIntervalAboveFifth",
+              "label": "ambitusExceedsIntervalAboveFifth"
+            },
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#toleratedAmbitusExtensionAboveFifth",
+              "label": "toleratedAmbitusExtensionAboveFifth"
+            }
+          ]
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ambitusExtensionBelowFinal",
+          "label": "ambitusExtensionBelowFinal",
+          "children": [
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ambitusExceedsIntervalBelowFinal",
+              "label": "ambitusExceedsIntervalBelowFinal"
+            },
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#toleratedAmbitusExtensionBelowFinal",
+              "label": "toleratedAmbitusExtensionBelowFinal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#ambitusSmallerThanInterval",
+      "label": "ambitusSmallerThanInterval",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#highestNoteDoesNotReachScaleDegree",
+          "label": "highestNoteDoesNotReachScaleDegree"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#lowestNoteDoesNotReachScaleDegree",
+          "label": "lowestNoteDoesNotReachScaleDegree"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasAffinityWithMode",
+      "label": "hasAffinityWithMode"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasAmbitus",
+      "label": "hasAmbitus",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasAmbitus",
+          "label": "altusHasAmbitus"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasAmbitus",
+          "label": "bassusHasAmbitus"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasAmbitus",
+          "label": "cantusHasAmbitus"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#quintusHasAmbitus",
+          "label": "quintusHasAmbitus"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAmbitus",
+          "label": "tenorHasAmbitus"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasAntepenultima",
+      "label": "hasAntepenultima",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasAntepenultima",
+          "label": "altusHasAntepenultima"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasAntepenultima",
+          "label": "bassusHasAntepenultima"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasAntepenultima",
+          "label": "cantusHasAntepenultima"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAntepenultima",
+          "label": "tenorHasAntepenultima"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasAssociationToPlanet",
+      "label": "hasAssociationToPlanet"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence",
+      "label": "hasCadence"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasClef",
+      "label": "hasClef",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasClef",
+          "label": "altusHasClef"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasClef",
+          "label": "bassusHasClef"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasClef",
+          "label": "cantusHasClef"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#quintusHasClef",
+          "label": "quintusHasClef"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasClef",
+          "label": "tenorHasClef"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasDenotation",
+      "label": "hasDenotation"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasEthos",
+      "label": "hasEthos"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasFinalis",
+      "label": "hasFinalis",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasFinalis",
+          "label": "altusHasFinalis"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasFinalis",
+          "label": "bassusHasFinalis"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasFinalis",
+          "label": "cantusHasFinalis"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasFinalis",
+          "label": "tenorHasFinalis"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasInitialNote",
+      "label": "hasInitialNote",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasIrregularInitialNote",
+          "label": "hasIrregularInitialNote"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasIrregularCadenceOn",
+      "label": "hasIrregularCadenceOn",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasIrregularCadenceOn",
+          "label": "tenorHasIrregularCadenceOn"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasKey",
+      "label": "hasKey"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasMaximalAmbitus",
+      "label": "hasMaximalAmbitus"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasMediation",
+      "label": "hasMediation"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasNote",
+      "label": "hasNote"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasOctavaSpecies",
+      "label": "hasOctavaSpecies"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasOctaveDivision",
+      "label": "hasOctaveDivision",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasOctaveDivision",
+          "label": "altusHasOctaveDivision"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasOctaveDivision",
+          "label": "bassusHasOctaveDivision"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasOctaveDivision",
+          "label": "cantusHasOctaveDivision"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasOctaveDivision",
+          "label": "tenorHasOctaveDivision"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasOctaveSpecies",
+      "label": "hasOctaveSpecies"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasPenultima",
+      "label": "hasPenultima",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasPenultima",
+          "label": "altusHasPenultima"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasPenultima",
+          "label": "bassusHasPenultima"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasPenultima",
+          "label": "cantusHasPenultima"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasPenultima",
+          "label": "tenorHasPenultima"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasPitch",
+      "label": "hasPitch",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasPitchHigh",
+          "label": "hasPitchHigh"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasPitchLow",
+          "label": "hasPitchLow"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasPitchClass",
+      "label": "hasPitchClass"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasRecitationFormula",
+      "label": "hasRecitationFormula",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasFlexa",
+          "label": "hasFlexa"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasIntonation",
+          "label": "hasIntonation"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasMediant",
+          "label": "hasMediant"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasRecitingTone",
+          "label": "hasRecitingTone"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasTermination",
+          "label": "hasTermination"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasRegularAmbitus",
+      "label": "hasRegularAmbitus"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasRegularCadenceOn",
+      "label": "hasRegularCadenceOn",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasRegularCadenceOn",
+          "label": "tenorHasRegularCadenceOn"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasRepercussio",
+      "label": "hasRepercussio",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasRepercussio",
+          "label": "cantusHasRepercussio"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasRepercussio",
+          "label": "tenorHasRepercussio"
+        }
+      ]
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasTextContentsAssociation",
+      "label": "hasTextContentsAssociation"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isModulatio",
+      "label": "isModulatio"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#modulatioHasClavis",
+      "label": "modulatioHasClavis"
+    },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#transposition",
+      "label": "transposition",
+      "children": [
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasTranspositionByLowerFifth",
+          "label": "hasTranspositionByLowerFifth"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasTranspositionByLowerFourth",
+          "label": "hasTranspositionByLowerFourth"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasTranspositionByUpperFourth",
+          "label": "hasTranspositionByUpperFourth"
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTransposition",
+          "label": "isTransposition",
+          "children": [
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionByLowerFifth",
+              "label": "isTranspositionByLowerFifth"
+            },
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionByLowerFourth",
+              "label": "isTranspositionByLowerFourth"
+            },
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionByLowerMajorSecondOf",
+              "label": "isTranspositionByLowerMajorSecondOf"
+            },
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionByUpperFifth",
+              "label": "isTranspositionByUpperFifth"
+            },
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionByUpperFourth",
+              "label": "isTranspositionByUpperFourth"
+            }
+          ]
+        },
+        {
+          "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionFromTo",
+          "label": "isTranspositionFromTo",
+          "children": [
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionOfModeFromSystemaIrregulareTo",
+              "label": "isTranspositionOfModeFromSystemaIrregulareTo"
+            },
+            {
+              "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#isTranspositionOfModeFromSystemaRegulareTo",
+              "label": "isTranspositionOfModeFromSystemaRegulareTo"
             }
           ]
         }
