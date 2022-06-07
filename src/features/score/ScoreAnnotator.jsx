@@ -58,7 +58,7 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             ariaLabel="New selection"
             onClick={() => dispatch(setSelectionMode())}
-            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+            sx={{ position: 'absolute', top: 84, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
             icon={<Add />}
           />
         </Tooltip>
@@ -68,7 +68,7 @@ export const ScoreAnnotator = () => {
       <Tooltip title="Back to home">
         <SpeedDial
           ariaLabel="Home"
-          sx={{ position: 'absolute', bottom: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500] } }}
+          sx={{ position: 'absolute', top: 84, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500] } }}
           icon={<SpeedDialIcon icon={<Home />} openIcon={<ArrowBack />} />}
         />
       </Tooltip>
