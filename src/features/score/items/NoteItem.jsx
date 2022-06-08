@@ -2,7 +2,7 @@ import { MusicNote } from '@mui/icons-material'
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setHoverEntity, setInspectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
 
@@ -14,7 +14,11 @@ export const NoteItem = props => {
 
   return noteLabel ? (
     <ListItem disablePadding secondaryAction={conceptIri && <ConceptItem conceptIri={conceptIri} />}>
-      <ListItemButton onClick={() => isInspectorMode && dispatch(setInspectedEntity({ noteIri: props.noteIri }))}>
+      <ListItemButton
+        onClick={() => isInspectorMode && dispatch(setInspectedEntity({ noteIri: props.noteIri }))}
+        onMouseEnter={() => dispatch(setHoverEntity({ noteIri: props.noteIri }))}
+        onMouseLeave={() => dispatch(setHoverEntity({ noteIri: props.noteIri }))}
+      >
         <ListItemIcon>
           <MusicNote />
         </ListItemIcon>

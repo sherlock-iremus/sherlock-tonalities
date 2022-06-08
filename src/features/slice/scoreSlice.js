@@ -11,12 +11,18 @@ const initialState = {
   currentEntityIndex: 0,
   selectedEntities: [],
   focusEntityIndex: -1,
+  hoveredEntity: {},
 }
 
 const scoreSlice = createSlice({
   name: 'score',
   initialState,
   reducers: {
+    setHoverEntity: (state, action) => {
+      state.hoveredEntity === action.payload
+        ? (state.hoveredEntity = initialState.hoveredEntity)
+        : (state.hoveredEntity = action.payload)
+    },
     setTreatise: (state, action) => {
       state.treatiseIri = action.payload
     },
@@ -79,6 +85,7 @@ const scoreSlice = createSlice({
 })
 
 export const {
+  setHoverEntity,
   setInspectedEntity,
   setToPreviousInspection,
   setToNextInspection,
