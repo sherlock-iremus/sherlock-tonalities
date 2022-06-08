@@ -5,8 +5,8 @@ import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from './LoadingEntity'
 
-export const ConceptEntity = props => {
-  const { data: annotations } = useGetConceptAnnotationsQuery(props.conceptIri)
+export const ConceptEntity = ({ conceptIri, baseUrl }) => {
+  const { data: annotations } = useGetConceptAnnotationsQuery(conceptIri)
   const dispatch = useDispatch()
   const { treatiseIri } = useSelector(state => state.score)
 
@@ -15,7 +15,7 @@ export const ConceptEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ conceptIri: props.conceptIri }))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ conceptIri }))}>
             <Close />
           </IconButton>
         }
@@ -25,18 +25,18 @@ export const ConceptEntity = props => {
             <HistoryEdu />
           </ListItemIcon>
           <ListItemText
-            primary={props.conceptIri.slice(treatiseIri.length)}
-            secondary={treatiseIri.slice(props.baseUrl.length + 3)}
+            primary={conceptIri.slice(treatiseIri.length)}
+            secondary={treatiseIri.slice(baseUrl.length + 3)}
           />
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Is used in annalytical entities</ListSubheader>}>
-        {annotations.map((annotation, index) => (
-          <ListItem key={annotation.iri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri: annotation.iri }))}>
+        {annotations.map(({ iri: annotationIri}, index) => (
+          <ListItem key={annotationIri} disablePadding>
+            <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
               <ListItemText
-                primary={props.conceptIri.slice(treatiseIri.length) + ' ' + ++index}
-                secondary={annotation.iri.slice(props.baseUrl.length)}
+                primary={`${conceptIri.slice(treatiseIri.length)} ${++index}`}
+                secondary={annotationIri.slice(baseUrl.length)}
               />
             </ListItemButton>
           </ListItem>
