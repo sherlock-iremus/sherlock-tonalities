@@ -6,23 +6,24 @@ import { setHoverEntity, setInspectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
 
-export const NoteItem = props => {
+export const NoteItem = ({ noteIri, concepts }) => {
+  const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { isInspectorMode } = useSelector(state => state.score)
-  const { data: noteLabel } = useGetNoteInfoQuery(props.noteIri)
+  const { data: noteLabel } = useGetNoteInfoQuery(noteIri)
   const dispatch = useDispatch()
-  const conceptIri = props.concepts?.find(e => e.entity === props.noteIri)?.concept
+  const conceptIri = concepts?.find(e => e.entity === noteIri)?.concept
 
   return noteLabel ? (
     <ListItem disablePadding secondaryAction={conceptIri && <ConceptItem conceptIri={conceptIri} />}>
       <ListItemButton
-        onClick={() => isInspectorMode && dispatch(setInspectedEntity({ noteIri: props.noteIri }))}
-        onMouseEnter={() => dispatch(setHoverEntity({ noteIri: props.noteIri }))}
-        onMouseLeave={() => dispatch(setHoverEntity({ noteIri: props.noteIri }))}
+        onClick={() => isInspectorMode && dispatch(setInspectedEntity({ noteIri }))}
+        onMouseEnter={() => dispatch(setHoverEntity({ noteIri }))}
+        onMouseLeave={() => dispatch(setHoverEntity({ noteIri }))}
       >
         <ListItemIcon>
           <MusicNote />
         </ListItemIcon>
-        <ListItemText primary={noteLabel} secondary={props.noteIri.slice(props.baseUrl.length)} />
+        <ListItemText primary={noteLabel} secondary={noteIri.slice(baseUrlLength)} />
       </ListItemButton>
     </ListItem>
   ) : (
