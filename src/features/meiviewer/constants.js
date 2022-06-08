@@ -12,3 +12,8 @@ export const SELECTION = 'http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b
 export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df'
 export const VERTICALITY = 'http://data-iremus.huma-num.fr/id/90a2ae1e-0fbc-4357-ac8a-b4b3f2a06e86'
 export const ANNALYTICAL_ENTITY = 'http://data-iremus.huma-num.fr/id/6d72746a-9f28-4739-8786-c6415d53c56d'
+
+// STYLING MODES
+export const INSPECTED = 'inspected'
+export const SELECTED = 'selected'
+export const FOCUSED = 'focused'
