@@ -11,10 +11,10 @@ import { ConceptItem } from '../items/ConceptItem'
 import { SelectionItem } from '../items/SelectionItem'
 import { LoadingEntity } from './LoadingEntity'
 
-export const AnnotationEntity = props => {
-  const { data: concepts } = useGetAnnotationInfoQuery(props.annotationIri)
-  const { data: subAnnotations } = useGetSubAnnotationsQuery(props.annotationIri)
-  const { data: selectionIri } = useGetAnnotationSelectionQuery(props.annotationIri)
+export const AnnotationEntity = ({ annotationIri, baseUrl }) => {
+  const { data: concepts } = useGetAnnotationInfoQuery(annotationIri)
+  const { data: subAnnotations } = useGetSubAnnotationsQuery(annotationIri)
+  const { data: selectionIri } = useGetAnnotationSelectionQuery(annotationIri)
   const dispatch = useDispatch()
 
   return concepts && subAnnotations && selectionIri ? (
@@ -22,10 +22,7 @@ export const AnnotationEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton
-            disableRipple
-            onClick={() => dispatch(setInspectedEntity({ annotationIri: props.annotationIri }))}
-          >
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
             <Close />
           </IconButton>
         }
@@ -38,13 +35,13 @@ export const AnnotationEntity = props => {
             primary={concepts.map(concept => (
               <ConceptItem key={concept} conceptIri={concept} />
             ))}
-            secondary={props.annotationIri.slice(props.baseUrl.length)}
+            secondary={annotationIri.slice(baseUrl.length)}
           />
         </ListItemButton>
       </ListItem>
 
       <ListSubheader>Associated selection</ListSubheader>
-      <SelectionItem selectionIri={selectionIri} baseUrl={props.baseUrl} concepts={subAnnotations} />
+      <SelectionItem {...{ selectionIri, baseUrl }} concepts={subAnnotations} />
     </>
   ) : (
     <LoadingEntity />
