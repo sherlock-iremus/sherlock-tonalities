@@ -160,7 +160,7 @@ export const Inspector = props => {
               {verticalityIri && (
                 <VerticalityEntity verticalityIri={verticalityIri} clickedNoteIri={clickedNoteIri} baseUrl={baseUrl} />
               )}
-              {scoreIri && <ScoreItem />}
+              {scoreIri && <ScoreItem {...{scoreIri}} />}
             </List>
           </Box>
         )}
