@@ -1,24 +1,25 @@
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
 
 export const Degrees = () => {
   const degrees = [
-    { id: '1', label: 'Tonic', note: 'C' },
-    { id: '2', label: 'Supertonic', note: 'D' },
-    { id: '3', label: 'Mediant', note: 'E' },
-    { id: '4', label: 'Subdominant', note: 'F' },
-    { id: '5', label: 'Dominant', note: 'G' },
-    { id: '6', label: 'Subdominant', note: 'A' },
-    { id: '7', label: 'Subtonic/Leading tone', note: 'B' },
+    { id: '1', label: 'C' },
+    { id: '2', label: 'C♯' },
+    { id: '3', label: 'D' },
+    { id: '4', label: 'E♭' },
+    { id: '5', label: 'E' },
+    { id: '6', label: 'F' },
+    { id: '7', label: 'G' },
+    { id: '8', label: 'G♯' },
+    { id: '9', label: 'A' },
+    { id: '10', label: 'B♭' },
+    { id: '11', label: 'B' },
   ]
 
   return (
     <List subheader={<ListSubheader>Scale degrees on the diatonic scale</ListSubheader>}>
       {degrees.map(degree => (
-        <ListItem key={degree.id} disablePadding secondaryAction={degree.note}>
+        <ListItem key={degree.id} disablePadding>
           <ListItemButton>
-            <ListItemIcon>
-              {degree.id}
-            </ListItemIcon>
             <ListItemText primary={degree.label} />
           </ListItemButton>
         </ListItem>
