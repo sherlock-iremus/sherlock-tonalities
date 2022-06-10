@@ -15,14 +15,14 @@ export const Selections = props => {
     scoreIri,
     baseUrl,
   } = useSelector(state => state.score)
-  const { selectionIri: inspectedSelection } = inspectedEntities[currentEntityIndex]
+  const { selectionIri: inspectedSelection, scoreIri: inspectedScore } = inspectedEntities[currentEntityIndex]
   const dispatch = useDispatch()
 
   return (
     <>
       <List subheader={<ListSubheader>Global elements</ListSubheader>}>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => dispatch(setInspectedEntity({ scoreIri }))}>
+          <ListItemButton onClick={() => dispatch(setInspectedEntity({ scoreIri }))} selected={inspectedScore === scoreIri}>
             <ListItemIcon>
               <AudioFile />
             </ListItemIcon>

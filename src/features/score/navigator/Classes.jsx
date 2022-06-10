@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setInspectedEntity } from '../../slice/scoreSlice'
 import { Concept } from './Concept'
 
-export const Concepts = props => {
+export const Classes = props => {
   const [filteredTree, setFilteredTree] = useState(props.treatise)
   const { inspectedEntities, currentEntityIndex, baseUrl } = useSelector(state => state.score)
   const inspectedEntity = inspectedEntities[currentEntityIndex]
@@ -12,14 +12,14 @@ export const Concepts = props => {
   const dispatch = useDispatch()
 
   const _setFilteredTree = (node, newFilter) => {
-    if (node.rootClasses)
-      return { ...node, rootClasses: node.rootClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
-    else if (node.subClasses) {
+    if (node.classes)
+      return { ...node, classes: node.classes.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
+    else if (node.children) {
       const filteredNode = {
         ...node,
-        subClasses: node.subClasses.map(c => _setFilteredTree(c, newFilter)).filter(Boolean),
+        children: node.children.map(c => _setFilteredTree(c, newFilter)).filter(Boolean),
       }
-      if (filteredNode.subClasses.length) return filteredNode
+      if (filteredNode.children.length) return filteredNode
     }
     if (node.label && node.label.toLowerCase().includes(newFilter.toLowerCase())) return node
     return null
@@ -40,8 +40,8 @@ export const Concepts = props => {
         </ListSubheader>
       }
     >
-      {filteredTree.rootClasses.length &&
-        filteredTree.rootClasses.map(concept => (
+      {filteredTree.classes.length &&
+        filteredTree.classes.map(concept => (
           <Concept
             key={concept.iri}
             selectedConcept={inspectedEntity.conceptIri}

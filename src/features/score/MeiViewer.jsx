@@ -3,15 +3,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteVerticalityQuery } from '../../app/services/sparql'
+import { FOCUSED, INSPECTED, SELECTED } from '../meiviewer/constants'
 import { verovioStyle } from '../meiviewer/mei.css'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
 import { setInspectedEntity, setSelectedEntity } from '../slice/scoreSlice'
-import { StyleAnnalyticalEntity } from './style/StyleAnnalyticalEntity'
-import { StyleCurrentSelection } from './style/StyleCurrentSelection'
-import { StyleNote } from './style/StyleNote'
-import { StylePositionnedNote } from './style/StylePositionnedNote'
-import { StyleSelection } from './style/StyleSelection'
-import { StyleVerticality } from './style/StyleVerticality'
+import { StyleEntities } from './style/StyleEntities'
+import { StyleEntity } from './style/StyleEntity'
 
 window.verovioCallback = load
 
@@ -28,10 +25,8 @@ export const MeiViewer = props => {
     [verticalityIri]
   )
 
-  const { isInspectionMode, isSelectionMode, inspectedEntities, currentEntityIndex, selectedEntities } = useSelector(
-    state => state.score
-  )
-  const inspectedEntity = inspectedEntities[currentEntityIndex]
+  const { isInspectionMode, isSelectionMode, inspectedEntities, currentEntityIndex, selectedEntities, hoveredEntity } =
+    useSelector(state => state.score)
 
   const handleMouseOver = e => getNote(e.target)?.classList.add('focused')
   const handleMouseLeave = e => getNote(e.target)?.classList.remove('focused')
@@ -54,28 +49,9 @@ export const MeiViewer = props => {
         onMouseOut={handleMouseLeave}
         id="verovio_container"
       />
-      {isInspectionMode && inspectedEntity.noteIri && <StyleNote noteIri={inspectedEntity.noteIri} mode="inspected" />}
-      {isInspectionMode && inspectedEntity.verticalityIri && inspectedEntity.clickedNoteIri && (
-        <StyleVerticality
-          verticalityIri={inspectedEntity.verticalityIri}
-          clickedNoteIri={inspectedEntity.clickedNoteIri}
-          mode="inspected"
-        />
-      )}
-      {isInspectionMode && inspectedEntity.positionnedNoteIri && (
-        <StylePositionnedNote
-          positionnedNoteIri={inspectedEntity.positionnedNoteIri}
-          clickedNoteIri={inspectedEntity.clickedNoteIri}
-          attachedNoteIri={inspectedEntity.attachedNoteIri}
-        />
-      )}
-      {isInspectionMode && inspectedEntity.selectionIri && (
-        <StyleSelection selectionIri={inspectedEntity.selectionIri} />
-      )}
-      {isInspectionMode && inspectedEntity.annotationIri && (
-        <StyleAnnalyticalEntity annotationIri={inspectedEntity.annotationIri} />
-      )}
-      {isSelectionMode && selectedEntities.length && <StyleCurrentSelection items={selectedEntities} />}
+      {isInspectionMode && <StyleEntity {...inspectedEntities[currentEntityIndex]} mode={INSPECTED} />}
+      {hoveredEntity && <StyleEntity {...hoveredEntity} mode={FOCUSED} />}
+      {isSelectionMode && selectedEntities.length && <StyleEntities items={selectedEntities} mode={SELECTED} />}
     </>
   )
 }

@@ -11,10 +11,12 @@ import treatise from '../../app/treatises/Zarlino_1588.json'
 import { setSelectionMode, setTreatise } from '../slice/scoreSlice'
 import { green, purple, red } from '@mui/material/colors'
 import { Editor } from './Editor'
+import { usePostSelectionQuery } from '../../app/services/sherlockApi'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
+  const { data: selection } = usePostSelectionQuery()
   const { meiUrl, scoreIri, baseUrl, isSelectionMode } = useSelector(state => state.score)
   const dispatch = useDispatch()
   dispatch(setTreatise(treatise.iri))
@@ -58,7 +60,7 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             ariaLabel="New selection"
             onClick={() => dispatch(setSelectionMode())}
-            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+            sx={{ position: 'absolute', top: 84, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
             icon={<Add />}
           />
         </Tooltip>
@@ -68,7 +70,7 @@ export const ScoreAnnotator = () => {
       <Tooltip title="Back to home">
         <SpeedDial
           ariaLabel="Home"
-          sx={{ position: 'absolute', bottom: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500] } }}
+          sx={{ position: 'absolute', top: 84, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500] } }}
           icon={<SpeedDialIcon icon={<Home />} openIcon={<ArrowBack />} />}
         />
       </Tooltip>

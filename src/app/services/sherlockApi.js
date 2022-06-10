@@ -1,20 +1,20 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const sherlockApi = createApi({
   reducerPath: 'sherlockApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.1.34:5555/sherlock/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://data-iremus.huma-num.fr/sherlock/api/', credentials: 'include' }),
   endpoints: builder => ({
-    getToken: builder.query({
+    postSelection: builder.query({
       query: () => ({
-        url: 'login',
+        url: 'selection',
         method: 'POST',
-        body: new URLSearchParams({ username: 'sherlock', password: 'kcolrehs' }),
+        body: new URLSearchParams({ children: [] }),
       }),
-      transformResponse: response => response.access_token
+      transformResponse: response => console.log(response),
     }),
   }),
 })
 
 export default sherlockApi
 
-export const { useGetTokenQuery } = sherlockApi
+export const { usePostSelectionQuery } = sherlockApi

@@ -10,10 +10,10 @@ import { setInspectedEntity } from '../../slice/scoreSlice'
 import { ConceptItem } from '../items/ConceptItem'
 import { LoadingEntity } from './LoadingEntity'
 
-export const NoteEntity = props => {
-  const { data: noteLabel } = useGetNoteInfoQuery(props.noteIri)
-  const { data: selections } = useGetNoteSelectionsQuery(props.noteIri)
-  const { data: annalyticalEntities } = useGetNoteAnnalyticalEntitiesQuery(props.noteIri)
+export const NoteEntity = ({ noteIri, baseUrl }) => {
+  const { data: noteLabel } = useGetNoteInfoQuery(noteIri)
+  const { data: selections } = useGetNoteSelectionsQuery(noteIri)
+  const { data: annalyticalEntities } = useGetNoteAnnalyticalEntitiesQuery(noteIri)
 
   const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ export const NoteEntity = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ noteIri: props.noteIri }))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ noteIri }))}>
             <Close />
           </IconButton>
         }
@@ -31,31 +31,31 @@ export const NoteEntity = props => {
           <ListItemIcon>
             <MusicNote />
           </ListItemIcon>
-          <ListItemText primary={noteLabel} secondary={props.noteIri.slice(props.baseUrl.length)} />
+          <ListItemText primary={noteLabel} secondary={noteIri.slice(baseUrl.length)} />
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Current note is in selections</ListSubheader>}>
-        {selections?.map((selection, index) => (
-          <ListItem key={selection.iri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedEntity({ selectionIri: selection.iri }))}>
-              <ListItemText primary={`Selection ${index + 1}`} secondary={selection.iri.slice(props.baseUrl.length)} />
+        {selections?.map(({ iri: selectionIri }, index) => (
+          <ListItem key={selectionIri} disablePadding>
+            <ListItemButton onClick={() => dispatch(setInspectedEntity({ selectionIri }))}>
+              <ListItemText primary={`Selection ${index + 1}`} secondary={selectionIri.slice(baseUrl.length)} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <List subheader={<ListSubheader>Current note is in annalytical entity</ListSubheader>}>
-        {annalyticalEntities?.map(entity => (
-          <ListItem key={entity.iri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri: entity.iri }))}>
+        {annalyticalEntities?.map(({ iri: annotationIri, concept: conceptIri }) => (
+          <ListItem key={annotationIri} disablePadding>
+            <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
               <ListItemText
                 primary={
                   <>
                     Is
-                    <ConceptItem conceptIri={entity.concept} />
+                    <ConceptItem {...{conceptIri}} />
                     in annotation entity
                   </>
                 }
-                secondary={entity.iri.slice(props.baseUrl.length)}
+                secondary={annotationIri.slice(baseUrl.length)}
               />
             </ListItemButton>
           </ListItem>

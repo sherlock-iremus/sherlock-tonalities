@@ -19,18 +19,15 @@ import { setInspectedEntity } from '../../slice/scoreSlice'
 import { PositionnedNoteItem } from '../items/PositionnedNoteItem'
 import { LoadingEntity } from './LoadingEntity'
 
-export const VerticalityEntity = props => {
+export const VerticalityEntity = ({ verticalityIri, baseUrl, clickedNoteIri }) => {
   const dispatch = useDispatch()
-  const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(props.verticalityIri)
+  const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(verticalityIri)
   return positionnedNotes ? (
     <Box>
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton
-            disableRipple
-            onClick={() => dispatch(setInspectedEntity({ verticalityIri: props.verticalityIri }))}
-          >
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ verticalityIri }))}>
             <Close />
           </IconButton>
         }
@@ -39,7 +36,7 @@ export const VerticalityEntity = props => {
           <ListItemIcon>
             <AlignHorizontalCenter />
           </ListItemIcon>
-          <ListItemText primary="Verticality" secondary={props.verticalityIri.slice(props.baseUrl.length)} />
+          <ListItemText primary="Verticality" secondary={verticalityIri.slice(baseUrl.length)} />
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Positionned notes on this verticality</ListSubheader>} dense disablePadding>
@@ -48,8 +45,8 @@ export const VerticalityEntity = props => {
             key={e.positionnedNoteIri}
             positionnedNoteIri={e.positionnedNoteIri}
             attachedNoteIri={e.attachedNoteIri}
-            clickedNoteIri={props.clickedNoteIri}
-            baseUrl={props.baseUrl}
+            clickedNoteIri={clickedNoteIri}
+            baseUrl={baseUrl}
           />
         ))}
       </List>

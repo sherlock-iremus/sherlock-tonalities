@@ -70,7 +70,7 @@ export const Inspector = props => {
     <>
       <Drawer open={props.isOpen} anchor="right" variant="persistent">
         {isInspectionMode && (
-          <Box sx={{ width: 400 }}>
+          <Box sx={{ width: 420 }}>
             <AppBar position="sticky">
               <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -160,7 +160,7 @@ export const Inspector = props => {
               {verticalityIri && (
                 <VerticalityEntity verticalityIri={verticalityIri} clickedNoteIri={clickedNoteIri} baseUrl={baseUrl} />
               )}
-              {scoreIri && <ScoreItem />}
+              {scoreIri && <ScoreItem {...{scoreIri}} />}
             </List>
           </Box>
         )}
@@ -170,7 +170,7 @@ export const Inspector = props => {
         autoHideDuration={3000}
         onClose={() => setIsShowingPopup(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mt: 10 }}
+        sx={{ mr: 8, mt:1 }}
       >
         <Alert variant="filled" severity="info" onClose={() => setIsShowingPopup(false)}>
           <Link onClick={props.onChange} underline="hover" color="inherit" sx={{ cursor: 'pointer' }}>

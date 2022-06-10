@@ -3,10 +3,9 @@ import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectedEntity } from '../../slice/scoreSlice'
 
-export const ScoreItem = () => {
+export const ScoreItem = ({ scoreIri }) => {
   const dispatch = useDispatch()
-  const { scoreIri, baseUrl } = useSelector(state => state.score)
-
+  const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   return (
     <ListItem
       disablePadding
@@ -20,7 +19,7 @@ export const ScoreItem = () => {
         <ListItemIcon>
           <AudioFile />
         </ListItemIcon>
-        <ListItemText primary="Score" secondary={scoreIri.slice(baseUrl.length)} />
+        <ListItemText primary="Score" secondary={scoreIri.slice(baseUrlLength)} />
       </ListItemButton>
     </ListItem>
   )
