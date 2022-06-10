@@ -12,6 +12,7 @@ export const StyleEntity = ({
   selectionIri,
   annotationIri,
   clickedNoteIri,
+  attachedNoteIri,
 }) =>
   (noteIri && <StyleNote {...{ noteIri, mode }} />) ||
   (verticalityIri && <StyleVerticality {...{ verticalityIri, clickedNoteIri, mode }} />) ||
