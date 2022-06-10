@@ -43,7 +43,7 @@ export const Editor = () => {
         </AppBar>
         <List subheader={<ListSubheader>Current selection</ListSubheader>}>
           {selectedEntities.map(item => (
-            <Item {...item} key={item.selectionIri || item.noteIri} baseUrl={baseUrl} />
+            <Item {...item} key={item.selectionIri || item.noteIri || item.verticalityIri || item.positionnedNoteIri} baseUrl={baseUrl} />
           ))}
         </List>
         <Tooltip title="Validate">
