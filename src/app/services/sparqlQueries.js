@@ -184,3 +184,13 @@ WHERE {
     }
 }
 `
+
+export const getSelectionAnalyticalEntities = selectionIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    SELECT ?annotation
+    WHERE {
+        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
+            ?annotation crm:P140_assigned_attribute_to <${selectionIri}>.
+        }
+    }
+`
