@@ -17,6 +17,7 @@ import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectionMode } from '../slice/scoreSlice'
 import { Item } from './items/Item'
+import { findKey } from './utils'
 
 export const Editor = () => {
   const dispatch = useDispatch()
@@ -43,7 +44,7 @@ export const Editor = () => {
         </AppBar>
         <List subheader={<ListSubheader>Current selection</ListSubheader>}>
           {selectedEntities.map(item => (
-            <Item {...item} key={item.selectionIri || item.noteIri || item.verticalityIri || item.positionnedNoteIri} baseUrl={baseUrl} />
+            <Item {...item} key={findKey(item)} baseUrl={baseUrl} isEntity />
           ))}
         </List>
         <Tooltip title="Validate">
