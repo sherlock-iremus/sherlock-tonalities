@@ -16,7 +16,6 @@ import { usePostSelectionQuery } from '../../app/services/sherlockApi'
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
-  const { data: selection } = usePostSelectionQuery()
   const { meiUrl, scoreIri, baseUrl, isSelectionMode } = useSelector(state => state.score)
   const dispatch = useDispatch()
   dispatch(setTreatise(treatise.iri))
