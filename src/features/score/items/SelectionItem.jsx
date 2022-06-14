@@ -1,42 +1,59 @@
-import { BubbleChart, ChevronRight, ExpandMore } from '@mui/icons-material'
+import { BubbleChart, ChevronRight, Close, ExpandMore } from '@mui/icons-material'
 import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetChildSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity, setSelectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
+import { findKey } from '../utils'
 import { ConceptItem } from './ConceptItem'
 import { Item } from './Item'
 
-export const SelectionItem = props => {
+export const SelectionItem = ({ selectionIri, isEntity, baseUrl, concepts }) => {
   const [isOpen, setIsOpen] = useState(true)
-  const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
+  const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
+  const { data: children } = useGetChildSelectionsQuery(selectionIri)
   const dispatch = useDispatch()
-  const conceptIri = props.concepts?.find(e => e.entity === props.selectionIri)?.concept
+  const conceptIri = concepts?.find(e => e.entity === selectionIri)?.concept
 
   return children ? (
     <>
-      <ListItem disablePadding secondaryAction={conceptIri && <ConceptItem conceptIri={conceptIri} />}>
+      <ListItem
+        disablePadding
+        secondaryAction={
+          <>
+            {isEntity && (
+              <IconButton
+                onClick={() =>
+                  (isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))) ||
+                  (isSelectionMode && dispatch(setSelectedEntity({ selectionIri })))
+                }
+              >
+                <Close />
+              </IconButton>
+            )}
+            {conceptIri && <ConceptItem conceptIri={conceptIri} />}
+          </>
+        }
+      >
         <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
-        <ListItemButton onClick={() => dispatch(setInspectedEntity({ selectionIri: props.selectionIri }))}>
+        <ListItemButton
+          onClick={() => !isEntity && isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))}
+          sx={isEntity && { cursor: 'default' }}
+        >
           <ListItemIcon>
             <BubbleChart />
           </ListItemIcon>
           <ListItemText
             primary={`Selection with ${children.length} elements`}
-            secondary={props.selectionIri.slice(props.baseUrl.length)}
+            secondary={selectionIri.slice(baseUrl.length)}
           />
         </ListItemButton>
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List sx={{ pl: 2 }} dense disablePadding>
           {children?.map(child => (
-            <Item
-              {...child}
-              key={child.selectionIri || child.noteIri}
-              concepts={props?.concepts}
-              baseUrl={props.baseUrl}
-            />
+            <Item key={findKey(child)} {...child} {...{ concepts, baseUrl }} />
           ))}
         </List>
       </Collapse>

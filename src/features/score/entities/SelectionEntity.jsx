@@ -1,11 +1,8 @@
-import { BubbleChart, Close, ExpandLess, ExpandMore, Lyrics, Timeline } from '@mui/icons-material'
+import { Lyrics, Timeline } from '@mui/icons-material'
 import {
-  Collapse,
-  IconButton,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   ListSubheader,
   SpeedDial,
@@ -13,80 +10,48 @@ import {
   SpeedDialIcon,
   Tooltip,
 } from '@mui/material'
-import { Box } from '@mui/system'
-import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useGetChildSelectionsQuery, useGetParentSelectionsQuery } from '../../../app/services/sparql'
+import { useGetParentSelectionsQuery, useGetSelectionAnalyticalEntitiesQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../slice/scoreSlice'
-import { Item } from '../items/Item'
-import { LoadingEntity } from './LoadingEntity'
+import { SelectionItem } from '../items/SelectionItem'
 
-export const SelectionEntity = props => {
-  const [isChildTreeOpen, setIsChildTreeOpen] = useState(false)
-  const [isParentListOpen, setIsParentListOpen] = useState(false)
-  const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
-  const { data: parents } = useGetParentSelectionsQuery(props.selectionIri)
+export const SelectionEntity = ({ selectionIri, baseUrl }) => {
   const dispatch = useDispatch()
-
-  return children && parents ? (
+  const { data: parents } = useGetParentSelectionsQuery(selectionIri)
+  const { data: annotations } = useGetSelectionAnalyticalEntitiesQuery(selectionIri)
+  return (
     <>
-      <Collapse in={isParentListOpen} timeout="auto" unmountOnExit>
+      <SelectionItem {...{ selectionIri, baseUrl }} isEntity />
+
+      {!!parents?.length && (
         <List subheader={<ListSubheader>Parent selections</ListSubheader>} dense disablePadding>
-          {parents.map((selectionIri, index) => (
-            <ListItem key={selectionIri} disablePadding>
-              <ListItemButton onClick={() => dispatch(setInspectedEntity({ selectionIri }))}>
+          {parents.map((parentIri, index) => (
+            <ListItem key={parentIri} disablePadding>
+              <ListItemButton onClick={() => dispatch(setInspectedEntity({ parentIri }))}>
                 <ListItemText
                   primary={`Parent selection ${index + 1}`}
-                  secondary={selectionIri.slice(props.baseUrl.length)}
+                  secondary={parentIri.slice(baseUrl.length)}
                 />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-      </Collapse>
+      )}
 
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Tooltip title="Parent selections">
-          <IconButton onClick={() => setIsParentListOpen(!isParentListOpen)}>
-            {isParentListOpen ? <ExpandMore /> : <ExpandLess />}
-          </IconButton>
-        </Tooltip>
-      </Box>
-
-      <ListItem
-        disablePadding
-        secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ selectionIri: props.selectionIri }))}>
-            <Close />
-          </IconButton>
-        }
-      >
-        <ListItemButton sx={{ cursor: 'default' }}>
-          <ListItemIcon>
-            <BubbleChart />
-          </ListItemIcon>
-          <ListItemText
-            primary={`Selection with ${children.length} elements`}
-            secondary={props.selectionIri.slice(props.baseUrl.length)}
-          />
-        </ListItemButton>
-      </ListItem>
-
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Tooltip title="Child selections">
-          <IconButton onClick={() => setIsChildTreeOpen(!isChildTreeOpen)}>
-            {isChildTreeOpen ? <ExpandLess /> : <ExpandMore />}
-          </IconButton>
-        </Tooltip>
-      </Box>
-
-      <Collapse in={isChildTreeOpen} timeout="auto" unmountOnExit>
-        <List subheader={<ListSubheader>Child selections</ListSubheader>} dense disablePadding>
-          {children.map(child => (
-            <Item {...child} key={child.selectionIri || child.noteIri} baseUrl={props.baseUrl} />
+      {!!annotations?.length && (
+        <List subheader={<ListSubheader>Analytical entities</ListSubheader>} dense disablePadding>
+          {annotations.map((annotationIri, index) => (
+            <ListItem key={annotationIri} disablePadding>
+              <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
+                <ListItemText
+                  primary={`Analytical entity ${index + 1}`}
+                  secondary={annotationIri.slice(baseUrl.length)}
+                />
+              </ListItemButton>
+            </ListItem>
           ))}
         </List>
-      </Collapse>
+      )}
 
       <Tooltip title="Create analytical entity">
         <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<SpeedDialIcon />}>
@@ -95,7 +60,5 @@ export const SelectionEntity = props => {
         </SpeedDial>
       </Tooltip>
     </>
-  ) : (
-    <LoadingEntity />
   )
 }
