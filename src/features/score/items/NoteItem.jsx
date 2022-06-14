@@ -1,24 +1,40 @@
-import { MusicNote } from '@mui/icons-material'
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { Close, MusicNote } from '@mui/icons-material'
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
-import { setHoverEntity, setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity, setSelectedEntity } from '../../slice/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
 
-export const NoteItem = ({ noteIri, concepts }) => {
+export const NoteItem = ({ noteIri, concepts, isEntity }) => {
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
-  const { isInspectorMode } = useSelector(state => state.score)
+  const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data: noteLabel } = useGetNoteInfoQuery(noteIri)
   const dispatch = useDispatch()
   const conceptIri = concepts?.find(e => e.entity === noteIri)?.concept
 
   return noteLabel ? (
-    <ListItem disablePadding secondaryAction={conceptIri && <ConceptItem conceptIri={conceptIri} />}>
+    <ListItem
+      disablePadding
+      secondaryAction={
+        <>
+          {isEntity && (
+            <IconButton
+              onClick={() =>
+                (isInspectionMode && dispatch(setInspectedEntity({ noteIri }))) ||
+                (isSelectionMode && dispatch(setSelectedEntity({ noteIri })))
+              }
+            >
+              <Close />
+            </IconButton>
+          )}
+          {conceptIri && <ConceptItem conceptIri={conceptIri} />}
+        </>
+      }
+    >
       <ListItemButton
-        onClick={() => isInspectorMode && dispatch(setInspectedEntity({ noteIri }))}
-        onMouseEnter={() => dispatch(setHoverEntity({ noteIri }))}
-        onMouseLeave={() => dispatch(setHoverEntity({ noteIri }))}
+        onClick={() => !isEntity && isInspectionMode && dispatch(setInspectedEntity({ noteIri }))}
+        sx={isEntity && { cursor: 'default' }}
       >
         <ListItemIcon>
           <MusicNote />
