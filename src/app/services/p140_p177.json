@@ -1,0 +1,34 @@
+{
+  "http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd": [
+    {
+      "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
+      "label": "Type de dissonance"
+    }
+  ],
+
+  "http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df": [
+    {
+      "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
+      "label": "Type de dissonance"
+    }
+  ],
+
+  "http://data-iremus.huma-num.fr/id/90a2ae1e-0fbc-4357-ac8a-b4b3f2a06e86": [
+    {
+      "iri": "http://data-iremus.huma-num.fr/id/003559fc-f033-4fc3-9c05-0d5f283123ed",
+      "label": "Identifier une fondamentale"
+    }
+  ],
+
+  "http://data-iremus.huma-num.fr/id/bf9dce29-8123-4e8e-b24d-0c7f134bbc8e": [
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasAmbitus" },
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasAmbitus" },
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasAmbitus" },
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#quintusHasAmbitus" },
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAmbitus" }
+  ],
+
+  "http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b": [
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence" }
+  ]
+}
