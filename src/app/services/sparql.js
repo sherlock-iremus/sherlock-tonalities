@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ANNALYTICAL_ENTITY, NOTE, POSITIONNED_NOTE, SELECTION, VERTICALITY } from '../../features/meiviewer/constants'
+import {
+  ANALYTICAL_ENTITY,
+  NOTE,
+  POSITIONNED_NOTE,
+  SCORE,
+  SELECTION,
+  VERTICALITY,
+} from '../../features/meiviewer/constants'
 import {
   getAnnotationInfo,
   getAnnotationSelection,
@@ -13,6 +20,7 @@ import {
   getParentSelections,
   getScoreAnnotations,
   getScoreSelections,
+  getSelectionAnalyticalEntities,
   getSubAnnotations,
   getVerticalityPositionnedNotes,
 } from './sparqlQueries'
@@ -119,7 +127,8 @@ export const sparqlEndpoint = createApi({
           if (e.type.value === VERTICALITY) return { verticalityIri: e.child.value }
           if (e.type.value === POSITIONNED_NOTE) return { positionnedNoteIri: e.child.value }
           if (e.type.value === SELECTION) return { selectionIri: e.child.value }
-          if (e.type.value === ANNALYTICAL_ENTITY) return { annalyticalEntityIri: e.child.value }
+          if (e.type.value === ANALYTICAL_ENTITY) return { annalyticalEntityIri: e.child.value }
+          if (e.type.value === SCORE) return { scoreIri: e.child.value }
         }),
     }),
     getParentSelections: builder.query({
@@ -156,7 +165,18 @@ export const sparqlEndpoint = createApi({
         method: 'POST',
         body: new URLSearchParams({ query: getVerticalityPositionnedNotes(verticalityIri) }),
       }),
-      transformResponse: response => response.results?.bindings?.map(e => ({ positionnedNoteIri: e.positionned_note?.value, attachedNoteIri: e.note?.value })),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({
+          positionnedNoteIri: e.positionned_note?.value,
+          attachedNoteIri: e.note?.value,
+        })),
+    }),
+    getSelectionAnalyticalEntities: builder.query({
+      query: selectionIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getSelectionAnalyticalEntities(selectionIri) }),
+      }),
+      transformResponse: response => response.results?.bindings?.map(e => e.annotation?.value),
     }),
   }),
 })
@@ -178,4 +198,5 @@ export const {
   useGetAnnotationSelectionQuery,
   useGetNoteVerticalityQuery,
   useGetVerticalityPositionnedNotesQuery,
+  useGetSelectionAnalyticalEntitiesQuery,
 } = sparqlEndpoint
