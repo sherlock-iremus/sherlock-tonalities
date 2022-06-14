@@ -22,4 +22,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 sherlock-tonalities.code-workspace
-src/env.js
+src/env.json
