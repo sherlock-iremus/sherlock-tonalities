@@ -36,7 +36,9 @@ export const SelectionItem = ({ selectionIri, isEntity, baseUrl, concepts }) => 
           </>
         }
       >
-        <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
+        <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <ExpandMore /> : <ChevronRight />}
+        </IconButton>
         <ListItemButton
           onClick={() => !isEntity && isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))}
           sx={isEntity && { cursor: 'default' }}
