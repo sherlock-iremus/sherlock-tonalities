@@ -1,5 +1,5 @@
 {
-  "http://data-iremus.huma-num.fr/sherlock/id/003559fc-f033-4fc3-9c05-0d5f283123ed": [
+  "http://data-iremus.huma-num.fr/id/003559fc-f033-4fc3-9c05-0d5f283123ed": [
     { "iri": "http://data-iremus.huma-num.fr/sherlock/id/e678d98d-5d13-492b-99f1-ce6bb3d76c10", "label": "C" },
     { "iri": "http://data-iremus.huma-num.fr/sherlock/id/2f322b61-a201-43d8-aa18-7588dcdccecd", "label": "C♯" },
     { "iri": "http://data-iremus.huma-num.fr/sherlock/id/a7128ac5-489b-43be-a1a0-c299681fb041", "label": "D" },
