@@ -1,19 +1,29 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import env from '../../env.json'
+
+const headers = process.env.NODE_ENV === 'development' ? { Authorization: `Bearer ${env.token}` } : null
 
 export const sherlockApi = createApi({
   reducerPath: 'sherlockApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://data-iremus.huma-num.fr/sherlock/api/',
+    credentials: 'include',
   }),
   endpoints: builder => ({
     postSelection: builder.query({
       query: children => ({
         url: 'selection',
         method: 'POST',
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJGw6lsaXggUG91bGxldC1QYWfDqHMiLCJuYmYiOjE2NTUxMjIwMDcsInJvbGVzIjpbXSwiaXNzIjoic2hlcmxvY2siLCJvcmNpZCI6IjAwMDAtMDAwMy0wNzQwLTc1MjciLCJleHAiOjE2NTUxMjU2MDcsImlhdCI6MTY1NTEyMjAwNywidXVpZCI6ImU0NzRjZDQzLTcwYzEtNGZhOC05MjNjLTRmZDJlNTYxNTgwNCJ9.q5tqN2wVcxswvZOaUtJh5tPFnRJO7qusk_8psCB4hyY`,
-        },
+        headers,
         body: { children },
+      }),
+    }),
+    postAnnotation: builder.mutation({
+      query: body => ({
+        url: 'e13',
+        method: 'POST',
+        headers,
+        body,
       }),
     }),
   }),
@@ -21,4 +31,4 @@ export const sherlockApi = createApi({
 
 export default sherlockApi
 
-export const { usePostSelectionQuery } = sherlockApi
+export const { usePostSelectionQuery, usePostAnnotationMutation } = sherlockApi
