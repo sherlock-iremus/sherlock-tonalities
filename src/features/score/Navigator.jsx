@@ -6,7 +6,6 @@ import { purple } from '@mui/material/colors'
 import { useState } from 'react'
 import { SearchBar } from '../meiviewer/SearchField'
 import { Classes } from './navigator/Classes'
-import { Degrees } from './navigator/Degrees'
 import { Properties } from './navigator/Properties'
 import { Selections } from './navigator/Selections'
 
@@ -43,13 +42,11 @@ export const Navigator = props => {
             <Tab icon={<BubbleChart />} label="Selections" />
             <Tab icon={<HistoryEdu />} label="Classes" />
             <Tab icon={<Sell />} label="Properties" />
-            <Tab icon={<Piano />} label="Degrees" />
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Selections scoreIri={props.scoreIri} baseUrl={props.baseUrl} />}
         {selectedTab === 1 && <Classes treatise={props.treatise} filter={filter} />}
         {selectedTab === 2 && <Properties treatise={props.treatise} filter={filter} />}
-        {selectedTab === 3 && <Degrees />}
       </Box>
     </Drawer>
   )
