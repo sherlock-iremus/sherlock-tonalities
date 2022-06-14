@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 
 export const COLOR_FOCUSED = 'grey'
-export const COLOR_SELECTED = 'red'
-export const COLOR_INSPECTED = 'blue'
+export const COLOR_SELECTED = 'blue'
+export const COLOR_INSPECTED = 'red'
 
 // standard classes
 

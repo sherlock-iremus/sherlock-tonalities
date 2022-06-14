@@ -1,3 +1,5 @@
+import { COLOR_INSPECTED, COLOR_SELECTED } from '../meiviewer/mei.css'
+
 export const drawSelection = (selection, selectionIri, scoreIri) => {
   const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1))).filter(Boolean)
   if (notes.length) {
@@ -15,8 +17,7 @@ export const drawSelection = (selection, selectionIri, scoreIri) => {
       })
     const systemNode = getSystem(notes[0])
     systemNode.parentNode.insertBefore(selectionNode, systemNode)
-  }
-  else console.log('Scrollez toute la partition puis re-sélectionnez votre entité')
+  } else console.log('Scrollez toute la partition puis re-sélectionnez votre entité')
 }
 
 export const drawPositionnedNote = (positionnedNoteIri, clickedNote) => {
@@ -48,7 +49,7 @@ export const drawVerticality = (verticalityIri, clickedNote, mode) => {
   const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'path')
   anchor.setAttribute('id', verticalityIri)
   anchor.setAttribute('d', capsuleShape(points, padding))
-  anchor.setAttribute('fill', mode === 'inspected' && 'red' || mode === 'selected' && 'blue')
+  anchor.setAttribute('fill', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
   anchor.setAttribute('fill-opacity', '30%')
 
   getSystem(clickedNote).appendChild(anchor)
