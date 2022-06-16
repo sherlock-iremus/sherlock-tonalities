@@ -2,18 +2,19 @@ import { List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mu
 import { useDispatch } from 'react-redux'
 import { useGetNoteAnnalyticalEntitiesQuery, useGetNoteSelectionsQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../slice/scoreSlice'
+import { IncomingAnnotations } from '../annotations/IncomingAnnotations'
 import { ConceptItem } from '../items/ConceptItem'
 import { NoteItem } from '../items/NoteItem'
 
 export const NoteEntity = ({ noteIri, baseUrl }) => {
+  const dispatch = useDispatch()
   const { data: selections } = useGetNoteSelectionsQuery(noteIri)
   const { data: annalyticalEntities } = useGetNoteAnnalyticalEntitiesQuery(noteIri)
-
-  const dispatch = useDispatch()
-
   return (
     <>
       <NoteItem {...{ noteIri }} isEntity />
+      <IncomingAnnotations entityIri={noteIri} />
+
       {!!selections?.length && (
         <List subheader={<ListSubheader>Current note is in selections</ListSubheader>}>
           {selections?.map(({ iri: selectionIri }, index) => (
