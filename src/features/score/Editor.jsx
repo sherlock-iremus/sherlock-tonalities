@@ -25,7 +25,7 @@ export const Editor = () => {
   return (
     <Drawer open={isSelectionMode} anchor="right" variant="persistent">
       <Box sx={{ width: 400 }}>
-        <AppBar position="sticky" sx={{ bgcolor: red[500] }}>
+        <AppBar position="sticky" sx={{ bgcolor: red[700] }}>
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Editor
@@ -37,7 +37,12 @@ export const Editor = () => {
             </Tooltip>
           </Toolbar>
           <Toolbar>
-            <Tabs value={0} textColor="inherit" indicatorColor="inherit" centered sx={{ flexGrow: 1 }}>
+            <Tabs
+              value={0}
+              textColor="inherit"
+              centered
+              sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: red[700] } }}
+            >
               <Tab label="New selection" icon={<BubbleChart />} />
             </Tabs>
           </Toolbar>
@@ -50,7 +55,7 @@ export const Editor = () => {
         <Tooltip title="Validate">
           <SpeedDial
             ariaLabel="validate"
-            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[700] } }}
             icon={<Done />}
           />
         </Tooltip>

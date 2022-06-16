@@ -1,8 +1,9 @@
 import { css } from '@emotion/react'
+import { blue, grey, red } from '@mui/material/colors'
 
-export const COLOR_FOCUSED = 'grey'
-export const COLOR_SELECTED = 'blue'
-export const COLOR_INSPECTED = 'red'
+export const COLOR_FOCUSED = grey[600]
+export const COLOR_SELECTED = red[700]
+export const COLOR_INSPECTED = blue[800]
 
 // standard classes
 

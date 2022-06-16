@@ -9,6 +9,7 @@ import {
   Close,
   ContentCopy,
   HistoryEdu,
+  Launch,
   Lyrics,
   MusicNote,
   QueueMusic,
@@ -27,6 +28,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
+import { blue } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -45,6 +47,10 @@ export const Inspector = props => {
   const [isShowingPopup, setIsShowingPopup] = useState(false)
 
   const { baseUrl, isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
+
+  const copyToClipboard = async value => {
+    await navigator.clipboard.writeText(value)
+  }
 
   const {
     noteIri,
@@ -70,7 +76,7 @@ export const Inspector = props => {
       <Drawer open={props.isOpen} anchor="right" variant="persistent">
         {isInspectionMode && (
           <Box sx={{ width: 400 }}>
-            <AppBar position="sticky">
+            <AppBar position="sticky" sx={{ bgcolor: blue[800] }}>
               <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                   Inspector
@@ -117,7 +123,12 @@ export const Inspector = props => {
                     <ArrowForward />
                   </IconButton>
                 )}
-                <Tabs value={0} textColor="inherit" indicatorColor="primary" centered sx={{ flexGrow: 1, pr: 4 }}>
+                <Tabs
+                  value={0}
+                  textColor="inherit"
+                  centered
+                  sx={{ flexGrow: 1, pr: 4, '& .MuiTabs-indicator': { backgroundColor: blue[800] } }}
+                >
                   <Tab
                     label={
                       (noteIri && 'Note') ||
@@ -139,11 +150,30 @@ export const Inspector = props => {
                     }
                   />
                 </Tabs>
-                <IconButton color="inherit">
-                  <Link target="_blank" to={findKey(inspectedEntities[currentEntityIndex])}>
-                    <ContentCopy />
-                  </Link>
-                </IconButton>
+                <Tooltip title="Copy element IRI">
+                  <>
+                    <IconButton
+                      disabled={!findKey(inspectedEntities[currentEntityIndex])}
+                      onClick={() => navigator.clipboard.writeText(findKey(inspectedEntities[currentEntityIndex]))}
+                      color="inherit"
+                    >
+                      <ContentCopy />
+                    </IconButton>
+                  </>
+                </Tooltip>
+                <Tooltip title="Open element in Sherlock">
+                  <>
+                    <IconButton
+                      disabled={!findKey(inspectedEntities[currentEntityIndex])}
+                      href={findKey(inspectedEntities[currentEntityIndex])}
+                      edge="end"
+                      color="inherit"
+                      target="_blank"
+                    >
+                      <Launch />
+                    </IconButton>
+                  </>
+                </Tooltip>
               </Toolbar>
             </AppBar>
             <List>

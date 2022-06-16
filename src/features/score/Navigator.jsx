@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
-import { BubbleChart, Close, HistoryEdu, Piano, Sell } from '@mui/icons-material'
+import { BubbleChart, Close, HistoryEdu, Sell } from '@mui/icons-material'
 import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
-import { purple } from '@mui/material/colors'
+import { grey } from '@mui/material/colors'
 import { useState } from 'react'
 import { SearchBar } from '../meiviewer/SearchField'
 import { Classes } from './navigator/Classes'
@@ -16,16 +16,12 @@ export const Navigator = props => {
   return (
     <Drawer open={props.isOpen} anchor="left" variant="persistent">
       <Box sx={{ width: 400 }}>
-        <AppBar position="sticky" sx={{ bgcolor: purple[500] }}>
+        <AppBar position="sticky" sx={{ bgcolor: grey[600] }}>
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Navigator
             </Typography>
-            <SearchBar
-              value={filter}
-              onChange={e => setFilter(e.target.value)}
-              disabled={!(selectedTab === 1 || selectedTab === 2)}
-            />
+            {!(selectedTab === 0) && <SearchBar value={filter} onChange={e => setFilter(e.target.value)} />}
             <Tooltip title="Close">
               <IconButton edge="end" color="inherit" onClick={props.onClose}>
                 <Close />
@@ -36,8 +32,8 @@ export const Navigator = props => {
             value={selectedTab}
             onChange={(e, newTab) => setSelectedTab(newTab)}
             textColor="inherit"
-            indicatorColor="secondary"
             centered
+            sx={{ '& .MuiTabs-indicator': { backgroundColor: 'white' } }}
           >
             <Tab icon={<BubbleChart />} label="Selections" />
             <Tab icon={<HistoryEdu />} label="Classes" />

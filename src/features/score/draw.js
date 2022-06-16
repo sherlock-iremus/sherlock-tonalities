@@ -1,6 +1,6 @@
 import { COLOR_INSPECTED, COLOR_SELECTED } from '../meiviewer/mei.css'
 
-export const drawSelection = (selection, selectionIri, scoreIri) => {
+export const drawSelection = (selection, selectionIri, scoreIri, mode) => {
   const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1))).filter(Boolean)
   if (notes.length) {
     const hullPadding = 300
@@ -10,7 +10,7 @@ export const drawSelection = (selection, selectionIri, scoreIri) => {
     points.length &&
       points.forEach(p => {
         const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-        node.setAttribute('fill', 'red')
+        node.setAttribute('fill', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
         node.setAttribute('fill-opacity', '30%')
         node.setAttribute('d', circleShape(p, hullPadding))
         selectionNode.appendChild(node)
@@ -20,7 +20,7 @@ export const drawSelection = (selection, selectionIri, scoreIri) => {
   } else console.log('Scrollez toute la partition puis re-sélectionnez votre entité')
 }
 
-export const drawPositionnedNote = (positionnedNoteIri, clickedNote) => {
+export const drawPositionnedNote = (positionnedNoteIri, clickedNote, mode) => {
   const noteCoordinates = noteCoords(clickedNote)
   const measureCoordinates = measureCoords(getMeasure(clickedNote))
 
@@ -30,7 +30,7 @@ export const drawPositionnedNote = (positionnedNoteIri, clickedNote) => {
   anchor.setAttribute('y1', measureCoordinates.top)
   anchor.setAttribute('x2', noteCoordinates[0])
   anchor.setAttribute('y2', measureCoordinates.bottom)
-  anchor.setAttribute('stroke', 'red')
+  anchor.setAttribute('stroke', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
   anchor.setAttribute('stroke-width', '30')
 
   getSystem(clickedNote).appendChild(anchor)

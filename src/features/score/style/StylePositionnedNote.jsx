@@ -11,7 +11,7 @@ export const StylePositionnedNote = props => {
   useEffect(() => {
     positionnedNoteNode
       ? (positionnedNoteNode.style.display = 'block')
-      : drawPositionnedNote(props.positionnedNoteIri, noteNode)
+      : drawPositionnedNote(props.positionnedNoteIri, noteNode, props.mode)
     return () => positionnedNoteNode && (positionnedNoteNode.style.display = 'none')
   }, [noteNode, positionnedNoteNode])
 

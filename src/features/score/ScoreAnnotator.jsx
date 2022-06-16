@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { Add, ArrowBack, Assignment, Home, Info } from '@mui/icons-material'
-import { SpeedDial, SpeedDialIcon, Tooltip } from '@mui/material'
+import { Add, Assignment, Info } from '@mui/icons-material'
+import { SpeedDial, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Inspector } from './Inspector'
@@ -9,7 +9,7 @@ import { MeiViewer } from './MeiViewer'
 import { Navigator } from './Navigator'
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { setSelectionMode, setTreatise } from '../slice/scoreSlice'
-import { green, purple, red } from '@mui/material/colors'
+import { blue, grey, red } from '@mui/material/colors'
 import { Editor } from './Editor'
 import { AnnotationEditor } from './creator/AnnotationEditor'
 
@@ -29,7 +29,7 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             onClick={() => setIsInspectorOpen(true)}
             ariaLabel="Inspect"
-            sx={{ position: 'absolute', top: 16, right: 16 }}
+            sx={{ position: 'absolute', top: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: blue[800] } }}
             icon={<Info />}
           />
         </Tooltip>
@@ -41,7 +41,7 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             onClick={() => setIsNavigatorOpen(true)}
             ariaLabel="Inspect"
-            sx={{ position: 'absolute', top: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: purple[500] } }}
+            sx={{ position: 'absolute', top: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: grey[600] } }}
             icon={<Assignment />}
           />
         </Tooltip>
@@ -59,20 +59,12 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             ariaLabel="New selection"
             onClick={() => dispatch(setSelectionMode())}
-            sx={{ position: 'absolute', top: 84, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[500] } }}
+            sx={{ position: 'absolute', top: 84, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[700] } }}
             icon={<Add />}
           />
         </Tooltip>
       )}
       <Editor />
-
-      <Tooltip title="Back to home">
-        <SpeedDial
-          ariaLabel="Home"
-          sx={{ position: 'absolute', top: 84, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: green[500] } }}
-          icon={<SpeedDialIcon icon={<Home />} openIcon={<ArrowBack />} />}
-        />
-      </Tooltip>
 
       <AnnotationEditor {...annotationEditor} />
     </>

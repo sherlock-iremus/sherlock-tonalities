@@ -9,7 +9,7 @@ export const StyleSelection = props => {
   const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
   const selectionNode = document.getElementById(props.selectionIri)
   useEffect(() => {
-    selectionNode ? (selectionNode.style.display = 'block') : children && drawSelection(children, props.selectionIri, scoreIri)
+    selectionNode ? (selectionNode.style.display = 'block') : children && drawSelection(children, props.selectionIri, scoreIri, props.mode)
     return () => selectionNode && (selectionNode.style.display = 'none')
   }, [selectionNode, children])
 

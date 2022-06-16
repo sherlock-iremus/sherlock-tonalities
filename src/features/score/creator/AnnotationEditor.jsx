@@ -47,8 +47,8 @@ export const AnnotationEditor = ({ subject, predicat }) => {
         setConfirmationMessage('Annotation was successfully created')
         refetch()
         dispatch(setAnnotationEditor())
-      } catch (error) {
-        setErrorMessage(`An error occured while creating the annotation, ${error}`)
+      } catch {
+        setErrorMessage('An error occured while creating the annotation')
       }
     }
   }
@@ -57,7 +57,7 @@ export const AnnotationEditor = ({ subject, predicat }) => {
     <Drawer open={!!subject} anchor="right" variant="persistent" SlideProps={{ direction: 'up' }}>
       {subject && (
         <Box sx={{ width: 400 }}>
-          <AppBar position="sticky" sx={{ bgcolor: grey[500] }}>
+          <AppBar position="sticky" sx={{ bgcolor: grey[600] }}>
             <Toolbar>
               <Typography variant="h6" sx={{ flexGrow: 1 }}>
                 Annotation editor
@@ -69,7 +69,12 @@ export const AnnotationEditor = ({ subject, predicat }) => {
               </Tooltip>
             </Toolbar>
             <Toolbar>
-              <Tabs value={0} textColor="inherit" indicatorColor="inherit" centered sx={{ flexGrow: 1 }}>
+              <Tabs
+                value={0}
+                textColor="inherit"
+                centered
+                sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: grey[600] } }}
+              >
                 <Tab label={predicat.label || predicat.iri.slice(baseUrl.length)} icon={<AddComment />} />
               </Tabs>
             </Toolbar>
@@ -97,7 +102,7 @@ export const AnnotationEditor = ({ subject, predicat }) => {
                 position: 'absolute',
                 bottom: 16,
                 right: 16,
-                '& .MuiSpeedDial-fab': { backgroundColor: grey[500] },
+                '& .MuiSpeedDial-fab': { backgroundColor: grey[600] },
               }}
               icon={isLoading ? <CircularProgress /> : <Done />}
             />
