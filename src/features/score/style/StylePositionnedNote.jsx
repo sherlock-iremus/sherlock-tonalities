@@ -15,5 +15,5 @@ export const StylePositionnedNote = props => {
     return () => positionnedNoteNode && (positionnedNoteNode.style.display = 'none')
   }, [noteNode, positionnedNoteNode])
 
-  return <StyleNote noteIri={props.attachedNoteIri} mode="inspected" />
+  return <StyleNote noteIri={props.attachedNoteIri} mode={props.mode} />
 }

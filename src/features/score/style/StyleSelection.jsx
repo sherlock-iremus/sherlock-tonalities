@@ -13,5 +13,5 @@ export const StyleSelection = props => {
     return () => selectionNode && (selectionNode.style.display = 'none')
   }, [selectionNode, children])
 
-  return children?.map(child => child.noteIri && <StyleNote key={child.noteIri} noteIri={child.noteIri} mode="inspected" />) || null
+  return children?.map(child => child.noteIri && <StyleNote key={child.noteIri} noteIri={child.noteIri} mode={props.mode} />) || null
 }

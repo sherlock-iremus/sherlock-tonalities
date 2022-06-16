@@ -1,7 +1,7 @@
 import { useGetAnnotationSelectionQuery } from '../../../app/services/sparql'
 import { StyleSelection } from './StyleSelection'
 
-export const StyleAnnalyticalEntity = props => {
-  const { data: selection } = useGetAnnotationSelectionQuery(props.annotationIri)
-  return selection ? <StyleSelection selectionIri={selection} /> : null
+export const StyleAnnalyticalEntity = ({ annotationIri, mode }) => {
+  const { data: selectionIri } = useGetAnnotationSelectionQuery(annotationIri)
+  return selectionIri ? <StyleSelection {...{ selectionIri, mode }} /> : null
 }
