@@ -7,6 +7,7 @@ import {
   AudioFile,
   BubbleChart,
   Close,
+  ContentCopy,
   HistoryEdu,
   Lyrics,
   MusicNote,
@@ -37,6 +38,7 @@ import { SelectionEntity } from './entities/SelectionEntity'
 import { VerticalityEntity } from './entities/VerticalityEntity'
 import { PositionnedNoteItem } from './items/PositionnedNoteItem'
 import { ScoreItem } from './items/ScoreItem'
+import { findKey } from './utils'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -55,14 +57,11 @@ export const Inspector = props => {
     attachedNoteIri,
     clickedNoteIri,
   } = inspectedEntities[currentEntityIndex]
-  
+
   const previousEntity = inspectedEntities[currentEntityIndex - 1] || {}
   const nextEntity = inspectedEntities[currentEntityIndex + 1] || {}
   useEffect(
-    () =>
-      (noteIri || verticalityIri || conceptIri || selectionIri || annotationIri) &&
-      !props.isOpen &&
-      setIsShowingPopup(true),
+    () => findKey(inspectedEntities[currentEntityIndex]) && !props.isOpen && setIsShowingPopup(true),
     [inspectedEntities]
   )
 
@@ -70,7 +69,7 @@ export const Inspector = props => {
     <>
       <Drawer open={props.isOpen} anchor="right" variant="persistent">
         {isInspectionMode && (
-          <Box sx={{ width: 420 }}>
+          <Box sx={{ width: 400 }}>
             <AppBar position="sticky">
               <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -140,6 +139,11 @@ export const Inspector = props => {
                     }
                   />
                 </Tabs>
+                <IconButton color="inherit">
+                  <Link target="_blank" to={findKey(inspectedEntities[currentEntityIndex])}>
+                    <ContentCopy />
+                  </Link>
+                </IconButton>
               </Toolbar>
             </AppBar>
             <List>
@@ -160,7 +164,7 @@ export const Inspector = props => {
               {verticalityIri && (
                 <VerticalityEntity verticalityIri={verticalityIri} clickedNoteIri={clickedNoteIri} baseUrl={baseUrl} />
               )}
-              {scoreIri && <ScoreItem {...{scoreIri}} />}
+              {scoreIri && <ScoreItem {...{ scoreIri }} />}
             </List>
           </Box>
         )}
@@ -170,7 +174,7 @@ export const Inspector = props => {
         autoHideDuration={3000}
         onClose={() => setIsShowingPopup(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        sx={{ mr: 8, mt:1 }}
+        sx={{ mr: 8, mt: 1 }}
       >
         <Alert variant="filled" severity="info" onClose={() => setIsShowingPopup(false)}>
           <Link onClick={props.onChange} underline="hover" color="inherit" sx={{ cursor: 'pointer' }}>

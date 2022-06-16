@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteVerticalityQuery } from '../../app/services/sparql'
-import { FOCUSED, INSPECTED, SELECTED } from '../meiviewer/constants'
+import { INSPECTED, SELECTED } from '../meiviewer/constants'
 import { verovioStyle } from '../meiviewer/mei.css'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
 import { setInspectedEntity, setSelectedEntity } from '../slice/scoreSlice'
@@ -50,7 +50,6 @@ export const MeiViewer = props => {
         id="verovio_container"
       />
       {isInspectionMode && <StyleEntity {...inspectedEntities[currentEntityIndex]} mode={INSPECTED} />}
-      {hoveredEntity && <StyleEntity {...hoveredEntity} mode={FOCUSED} />}
       {isSelectionMode && selectedEntities.length && <StyleEntities items={selectedEntities} mode={SELECTED} />}
     </>
   )

@@ -24,7 +24,7 @@ export const Editor = () => {
   const { selectedEntities, isSelectionMode, baseUrl } = useSelector(state => state.score)
   return (
     <Drawer open={isSelectionMode} anchor="right" variant="persistent">
-      <Box sx={{ width: 420 }}>
+      <Box sx={{ width: 400 }}>
         <AppBar position="sticky" sx={{ bgcolor: red[500] }}>
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
