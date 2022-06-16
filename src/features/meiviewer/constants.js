@@ -13,6 +13,7 @@ export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d
 export const VERTICALITY = 'http://data-iremus.huma-num.fr/id/90a2ae1e-0fbc-4357-ac8a-b4b3f2a06e86'
 export const ANALYTICAL_ENTITY = 'http://data-iremus.huma-num.fr/id/6d72746a-9f28-4739-8786-c6415d53c56d'
 export const SCORE = 'http://data-iremus.huma-num.fr/sherlock/id/bf9dce29-8123-4e8e-b24d-0c7f134bbc8e'
+export const SOFTWARE = 'http://data-iremus.huma-num.fr/id/29b00e39-75da-4945-b6c4-a0ca00f96f68'
 
 // STYLING MODES
 export const INSPECTED = 'inspected'
