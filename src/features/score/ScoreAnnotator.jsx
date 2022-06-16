@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { Add, ArrowBack, Assignment, Home, Info, Lyrics } from '@mui/icons-material'
-import { SpeedDial, SpeedDialAction, SpeedDialIcon, Tooltip } from '@mui/material'
+import { Add, ArrowBack, Assignment, Home, Info } from '@mui/icons-material'
+import { SpeedDial, SpeedDialIcon, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Inspector } from './Inspector'
@@ -11,12 +11,12 @@ import treatise from '../../app/treatises/Zarlino_1588.json'
 import { setSelectionMode, setTreatise } from '../slice/scoreSlice'
 import { green, purple, red } from '@mui/material/colors'
 import { Editor } from './Editor'
-import { usePostSelectionQuery } from '../../app/services/sherlockApi'
+import { AnnotationEditor } from './creator/AnnotationEditor'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
-  const { meiUrl, scoreIri, baseUrl, isSelectionMode } = useSelector(state => state.score)
+  const { meiUrl, scoreIri, baseUrl, isSelectionMode, annotationEditor } = useSelector(state => state.score)
   const dispatch = useDispatch()
   dispatch(setTreatise(treatise.iri))
 
@@ -73,6 +73,8 @@ export const ScoreAnnotator = () => {
           icon={<SpeedDialIcon icon={<Home />} openIcon={<ArrowBack />} />}
         />
       </Tooltip>
+
+      <AnnotationEditor {...annotationEditor} />
     </>
   )
 }

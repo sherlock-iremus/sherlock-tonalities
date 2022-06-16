@@ -12,6 +12,7 @@ const initialState = {
   selectedEntities: [],
   focusEntityIndex: -1,
   hoveredEntity: {},
+  annotationEditor: { subject: null, predicat: null, object: null },
 }
 
 const scoreSlice = createSlice({
@@ -40,6 +41,9 @@ const scoreSlice = createSlice({
       state.isInspectionMode = true
       state.isSelectionMode = false
     },
+    setAnnotationEditor: (state, action) => {
+      state.annotationEditor = state.annotationEditor.subject ? initialState.annotationEditor : action.payload
+    },
     setSelectedEntity: (state, action) => {
       const index =
         (action.payload.noteIri && state.selectedEntities.findIndex(e => e.noteIri === action.payload.noteIri)) ||
@@ -52,34 +56,36 @@ const scoreSlice = createSlice({
       index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push(action.payload)
     },
     setInspectedEntity: (state, action) => {
-      if (state.inspectedEntities.length > state.currentEntityIndex + 1)
-        state.inspectedEntities.splice(
-          state.currentEntityIndex + 1,
-          state.inspectedEntities.length - state.currentEntityIndex
-        )
-      const { noteIri, verticalityIri, positionnedNoteIri, selectionIri, conceptIri, annotationIri, scoreIri } =
-        state.inspectedEntities[state.currentEntityIndex]
-      const currentEntityIri =
-        noteIri || verticalityIri || positionnedNoteIri || selectionIri || conceptIri || annotationIri || scoreIri
-      const {
-        noteIri: newNoteIri,
-        verticalityIri: newVerticalityIri,
-        positionnedNoteIri: newPositionnedNoteIri,
-        selectionIri: newSelectionIri,
-        conceptIri: newConceptIri,
-        annotationIri: newAnnotationIri,
-        scoreIri: newScoreIri,
-      } = action.payload
-      const newEntityIri =
-        newNoteIri ||
-        newVerticalityIri ||
-        newPositionnedNoteIri ||
-        newSelectionIri ||
-        newConceptIri ||
-        newAnnotationIri ||
-        newScoreIri
-      state.inspectedEntities.push(currentEntityIri === newEntityIri ? {} : action.payload)
-      state.currentEntityIndex = ++state.currentEntityIndex
+      if (!state.annotationEditor.subject) {
+        if (state.inspectedEntities.length > state.currentEntityIndex + 1)
+          state.inspectedEntities.splice(
+            state.currentEntityIndex + 1,
+            state.inspectedEntities.length - state.currentEntityIndex
+          )
+        const { noteIri, verticalityIri, positionnedNoteIri, selectionIri, conceptIri, annotationIri, scoreIri } =
+          state.inspectedEntities[state.currentEntityIndex]
+        const currentEntityIri =
+          noteIri || verticalityIri || positionnedNoteIri || selectionIri || conceptIri || annotationIri || scoreIri
+        const {
+          noteIri: newNoteIri,
+          verticalityIri: newVerticalityIri,
+          positionnedNoteIri: newPositionnedNoteIri,
+          selectionIri: newSelectionIri,
+          conceptIri: newConceptIri,
+          annotationIri: newAnnotationIri,
+          scoreIri: newScoreIri,
+        } = action.payload
+        const newEntityIri =
+          newNoteIri ||
+          newVerticalityIri ||
+          newPositionnedNoteIri ||
+          newSelectionIri ||
+          newConceptIri ||
+          newAnnotationIri ||
+          newScoreIri
+        state.inspectedEntities.push(currentEntityIri === newEntityIri ? {} : action.payload)
+        state.currentEntityIndex = ++state.currentEntityIndex
+      }
     },
   },
 })
@@ -93,6 +99,7 @@ export const {
   setSelectedEntity,
   setInspectionMode,
   setSelectionMode,
+  setAnnotationEditor,
 } = scoreSlice.actions
 
 export default scoreSlice.reducer
