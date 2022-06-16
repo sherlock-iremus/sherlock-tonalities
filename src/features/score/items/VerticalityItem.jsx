@@ -8,7 +8,7 @@ import { PositionnedNoteItem } from './PositionnedNoteItem'
 import { ConceptItem } from './ConceptItem'
 import { LoadingEntity } from '../entities/LoadingEntity'
 
-export const VerticalityItem = ({ verticalityIri, baseUrl, clickedNoteIri, isEntity, concepts }) => {
+export const VerticalityItem = ({ verticalityIri, baseUrl, clickedNoteIri, isEntity, concepts, secondaryAction }) => {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(true)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
@@ -18,7 +18,7 @@ export const VerticalityItem = ({ verticalityIri, baseUrl, clickedNoteIri, isEnt
     <>
       <ListItem
         disablePadding
-        secondaryAction={
+        secondaryAction={ secondaryAction ||
           <>
             {isEntity && (
               <IconButton
