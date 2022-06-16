@@ -1,15 +1,15 @@
 {
   "http://data-iremus.huma-num.fr/id/003559fc-f033-4fc3-9c05-0d5f283123ed": [
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/e678d98d-5d13-492b-99f1-ce6bb3d76c10", "label": "C" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/2f322b61-a201-43d8-aa18-7588dcdccecd", "label": "C♯" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/a7128ac5-489b-43be-a1a0-c299681fb041", "label": "D" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/7da8c5a3-b277-47cd-9434-c2518139c7c1", "label": "E♭" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/16d52581-f121-453c-9e9f-3f193a116854", "label": "E" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/09b8aff7-1ff1-4f08-9232-6b59d842459b", "label": "F" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/bc79f8e7-c5ba-47d9-8df0-484fa2c8d2cb", "label": "G" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/4a14582b-2457-42ac-b619-ad5d40c66fa3", "label": "G♯" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/6052e2c5-3035-46c9-8406-606c160c12db", "label": "A" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/dec44fce-de17-446c-ba68-b9c998d3f488", "label": "B♭" },
-    { "iri": "http://data-iremus.huma-num.fr/sherlock/id/74df0ba4-cd98-47dd-979f-a77adbf8031b", "label": "B" }
+    { "iri": "http://data-iremus.huma-num.fr/id/e678d98d-5d13-492b-99f1-ce6bb3d76c10", "label": "C" },
+    { "iri": "http://data-iremus.huma-num.fr/id/2f322b61-a201-43d8-aa18-7588dcdccecd", "label": "C♯" },
+    { "iri": "http://data-iremus.huma-num.fr/id/a7128ac5-489b-43be-a1a0-c299681fb041", "label": "D" },
+    { "iri": "http://data-iremus.huma-num.fr/id/7da8c5a3-b277-47cd-9434-c2518139c7c1", "label": "E♭" },
+    { "iri": "http://data-iremus.huma-num.fr/id/16d52581-f121-453c-9e9f-3f193a116854", "label": "E" },
+    { "iri": "http://data-iremus.huma-num.fr/id/09b8aff7-1ff1-4f08-9232-6b59d842459b", "label": "F" },
+    { "iri": "http://data-iremus.huma-num.fr/id/bc79f8e7-c5ba-47d9-8df0-484fa2c8d2cb", "label": "G" },
+    { "iri": "http://data-iremus.huma-num.fr/id/4a14582b-2457-42ac-b619-ad5d40c66fa3", "label": "G♯" },
+    { "iri": "http://data-iremus.huma-num.fr/id/6052e2c5-3035-46c9-8406-606c160c12db", "label": "A" },
+    { "iri": "http://data-iremus.huma-num.fr/id/dec44fce-de17-446c-ba68-b9c998d3f488", "label": "B♭" },
+    { "iri": "http://data-iremus.huma-num.fr/id/74df0ba4-cd98-47dd-979f-a77adbf8031b", "label": "B" }
   ]
 }
