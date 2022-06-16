@@ -12,11 +12,13 @@ import {
   getAnnotationSelection,
   getChildSelections,
   getConceptAnnotations,
+  getIncommingAnnotations,
   getNoteAnnalyticalEntities,
   getNoteInfo,
   getNoteSelections,
   getNotesOnFirstBeat,
   getNoteVerticality,
+  getOutgoingAnnotations,
   getParentSelections,
   getScoreAnnotations,
   getScoreSelections,
@@ -178,6 +180,34 @@ export const sparqlEndpoint = createApi({
       }),
       transformResponse: response => response.results?.bindings?.map(e => e.annotation?.value),
     }),
+    getIncomingAnnotations: builder.query({
+      query: entityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getIncommingAnnotations(entityIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({
+          annotationIri: e.annotation?.value,
+          date: e.date?.value,
+          contributorIri: e.contributor?.value,
+          subject: e.subject?.value,
+          predicat: e.predicat?.value,
+        })),
+    }),
+    getOutgoingAnnotations: builder.query({
+      query: entityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getOutgoingAnnotations(entityIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({
+          annotationIri: e.annotation?.value,
+          date: e.date?.value,
+          contributorIri: e.contributor?.value,
+          object: e.object?.value,
+          predicat: e.predicat?.value,
+        })),
+    }),
   }),
 })
 
@@ -199,4 +229,6 @@ export const {
   useGetNoteVerticalityQuery,
   useGetVerticalityPositionnedNotesQuery,
   useGetSelectionAnalyticalEntitiesQuery,
+  useGetIncomingAnnotationsQuery,
+  useGetOutgoingAnnotationsQuery,
 } = sparqlEndpoint
