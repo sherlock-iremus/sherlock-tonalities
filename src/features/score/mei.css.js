@@ -5,35 +5,6 @@ export const COLOR_FOCUSED = grey[600]
 export const COLOR_SELECTED = red[700]
 export const COLOR_INSPECTED = blue[800]
 
-// standard classes
-
-export const centerStyle = theme => css`
-  display: flex;
-  justify-content: center;
-  margin: 16px;
-`
-
-export const flexEndStyle = theme => css`
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 16px;
-`
-
-// specific classes
-
-export const containerStyle = css`
-  display: flex;
-
-  @keyframes condemed_blink_effect {
-    0% {
-      fill: aqua;
-    }
-    100% {
-      fill: black;
-    }
-  }
-`
-
 export const mainAreaStyle = css`
   background-color: white;
   cursor: default;
@@ -90,6 +61,22 @@ export const verovioStyle = css`
   }
 `
 
+
+// OLD
+
+export const containerStyle = css`
+  display: flex;
+
+  @keyframes condemed_blink_effect {
+    0% {
+      fill: aqua;
+    }
+    100% {
+      fill: black;
+    }
+  }
+`
+
 export const panelStyle = theme => css`
   font-family: 'Roboto';
   border-left: 1px solid lightgray;
@@ -103,4 +90,16 @@ export const noDataStyle = theme => css`
   font-size: small;
   color: grey;
   margin: 16px;
+`
+
+export const centerStyle = theme => css`
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+`
+
+export const flexEndStyle = theme => css`
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
 `

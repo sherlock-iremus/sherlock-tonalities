@@ -45,11 +45,14 @@ import { findKey } from './utils'
 export const Inspector = props => {
   const dispatch = useDispatch()
   const [isShowingPopup, setIsShowingPopup] = useState(false)
+  const [isCopied, setIsCopied] = useState(false)
 
   const { baseUrl, isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
 
   const copyToClipboard = async value => {
     await navigator.clipboard.writeText(value)
+    setIsCopied(true)
+    setTimeout(() => setIsCopied(false), 2000);
   }
 
   const {
@@ -150,19 +153,19 @@ export const Inspector = props => {
                     }
                   />
                 </Tabs>
-                <Tooltip title="Copy element IRI">
-                  <>
+                <Tooltip title={isCopied ? 'Copied !' : 'Copy element IRI'}>
+                  <span>
                     <IconButton
                       disabled={!findKey(inspectedEntities[currentEntityIndex])}
-                      onClick={() => navigator.clipboard.writeText(findKey(inspectedEntities[currentEntityIndex]))}
+                      onClick={() => copyToClipboard(findKey(inspectedEntities[currentEntityIndex]))}
                       color="inherit"
                     >
                       <ContentCopy />
                     </IconButton>
-                  </>
+                  </span>
                 </Tooltip>
                 <Tooltip title="Open element in Sherlock">
-                  <>
+                  <span>
                     <IconButton
                       disabled={!findKey(inspectedEntities[currentEntityIndex])}
                       href={findKey(inspectedEntities[currentEntityIndex])}
@@ -172,7 +175,7 @@ export const Inspector = props => {
                     >
                       <Launch />
                     </IconButton>
-                  </>
+                  </span>
                 </Tooltip>
               </Toolbar>
             </AppBar>
