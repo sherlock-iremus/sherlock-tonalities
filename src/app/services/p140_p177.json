@@ -16,7 +16,8 @@
   "http://data-iremus.huma-num.fr/id/90a2ae1e-0fbc-4357-ac8a-b4b3f2a06e86": [
     {
       "iri": "http://data-iremus.huma-num.fr/id/003559fc-f033-4fc3-9c05-0d5f283123ed",
-      "label": "Identifier une fondamentale"
+      "label": "Identifier une fondamentale",
+      "icon": "🎹"
     }
   ],
 
