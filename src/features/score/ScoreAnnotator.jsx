@@ -9,9 +9,9 @@ import { MeiViewer } from './MeiViewer'
 import { Navigator } from './Navigator'
 import treatise from '../../app/treatises/Zarlino_1588.json'
 import { setSelectionMode, setTreatise } from '../../app/services/scoreSlice'
-import { blue, grey, red } from '@mui/material/colors'
 import { Editor } from './Editor'
 import { AnnotationEditor } from './creator/AnnotationEditor'
+import { COLOR_INSPECTED, COLOR_NAVIGATE, COLOR_SELECTED } from './mei.css'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
@@ -29,7 +29,12 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             onClick={() => setIsInspectorOpen(true)}
             ariaLabel="Inspect"
-            sx={{ position: 'absolute', top: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: blue[800] } }}
+            sx={{
+              position: 'absolute',
+              top: 16,
+              right: 16,
+              '& .MuiSpeedDial-fab': { backgroundColor: COLOR_INSPECTED },
+            }}
             icon={<Info />}
           />
         </Tooltip>
@@ -41,7 +46,7 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             onClick={() => setIsNavigatorOpen(true)}
             ariaLabel="Inspect"
-            sx={{ position: 'absolute', top: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: grey[600] } }}
+            sx={{ position: 'absolute', top: 16, left: 16, '& .MuiSpeedDial-fab': { backgroundColor: COLOR_NAVIGATE } }}
             icon={<Assignment />}
           />
         </Tooltip>
@@ -59,7 +64,12 @@ export const ScoreAnnotator = () => {
           <SpeedDial
             ariaLabel="New selection"
             onClick={() => dispatch(setSelectionMode())}
-            sx={{ position: 'absolute', top: 84, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[700] } }}
+            sx={{
+              position: 'absolute',
+              top: 84,
+              right: 16,
+              '& .MuiSpeedDial-fab': { backgroundColor: COLOR_SELECTED },
+            }}
             icon={<Add />}
           />
         </Tooltip>

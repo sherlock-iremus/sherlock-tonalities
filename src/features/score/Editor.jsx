@@ -12,11 +12,11 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { red } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectionMode } from '../../app/services/scoreSlice'
 import { Item } from './items/Item'
+import { COLOR_SELECTED } from './mei.css'
 import { findKey } from './utils'
 
 export const Editor = () => {
@@ -25,7 +25,7 @@ export const Editor = () => {
   return (
     <Drawer open={isSelectionMode} anchor="right" variant="persistent">
       <Box sx={{ width: 400 }}>
-        <AppBar position="sticky" sx={{ bgcolor: red[700] }}>
+        <AppBar position="sticky" sx={{ bgcolor: COLOR_SELECTED }}>
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Editor
@@ -41,7 +41,7 @@ export const Editor = () => {
               value={0}
               textColor="inherit"
               centered
-              sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: red[700] } }}
+              sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: COLOR_SELECTED } }}
             >
               <Tab label="New selection" icon={<BubbleChart />} />
             </Tabs>
@@ -55,7 +55,7 @@ export const Editor = () => {
         <Tooltip title="Validate">
           <SpeedDial
             ariaLabel="validate"
-            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: red[700] } }}
+            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: COLOR_SELECTED } }}
             icon={<Done />}
           />
         </Tooltip>

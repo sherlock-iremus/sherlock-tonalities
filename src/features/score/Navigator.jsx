@@ -2,9 +2,9 @@
 
 import { BubbleChart, Close, HistoryEdu, Sell } from '@mui/icons-material'
 import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
-import { grey } from '@mui/material/colors'
 import { useState } from 'react'
 import { SearchBar } from '../meiviewer/SearchField'
+import { COLOR_NAVIGATE } from './mei.css'
 import { Classes } from './navigator/Classes'
 import { Properties } from './navigator/Properties'
 import { Selections } from './navigator/Selections'
@@ -16,7 +16,7 @@ export const Navigator = props => {
   return (
     <Drawer open={props.isOpen} anchor="left" variant="persistent">
       <Box sx={{ width: 400 }}>
-        <AppBar position="sticky" sx={{ bgcolor: grey[600] }}>
+        <AppBar position="sticky" sx={{ bgcolor: COLOR_NAVIGATE }}>
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>
               Navigator

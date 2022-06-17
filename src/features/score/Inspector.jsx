@@ -30,7 +30,6 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { blue } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -43,13 +42,14 @@ import { VerticalityEntity } from './entities/VerticalityEntity'
 import { PositionnedNoteItem } from './items/PositionnedNoteItem'
 import { ScoreItem } from './items/ScoreItem'
 import { findKey } from './utils'
+import { COLOR_INSPECTED } from './mei.css'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
   const [isShowingPopup, setIsShowingPopup] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
 
-  const { baseUrl, isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
+  const { isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
 
   const copyToClipboard = async value => {
     await navigator.clipboard.writeText(value)
@@ -82,7 +82,7 @@ export const Inspector = props => {
       <Drawer open={props.isOpen} anchor="right" variant="persistent">
         {isInspectionMode && (
           <Box sx={{ width: 400 }}>
-            <AppBar position="sticky" sx={{ bgcolor: blue[800] }}>
+            <AppBar position="sticky" sx={{ bgcolor: COLOR_INSPECTED }}>
               <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
                   Inspector
@@ -137,7 +137,7 @@ export const Inspector = props => {
                   value={0}
                   textColor="inherit"
                   centered
-                  sx={{ flexGrow: 1, pr: 4, '& .MuiTabs-indicator': { backgroundColor: blue[800] } }}
+                  sx={{ flexGrow: 1, pr: 4, '& .MuiTabs-indicator': { backgroundColor: COLOR_INSPECTED } }}
                 >
                   <Tab
                     label={

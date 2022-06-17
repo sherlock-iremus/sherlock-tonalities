@@ -15,7 +15,6 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { grey } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { Item } from '../items/Item'
 import options from '../../../app/services/p177_p141.json'
@@ -25,6 +24,7 @@ import { findKey } from '../utils'
 import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../../app/services/sherlockApi'
 import { useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
+import { COLOR_SELECTED } from '../mei.css'
 
 export const AnnotationEditor = ({ subject, predicat }) => {
   const dispatch = useDispatch()
@@ -57,7 +57,7 @@ export const AnnotationEditor = ({ subject, predicat }) => {
     <Drawer open={!!subject} anchor="right" variant="persistent" SlideProps={{ direction: 'up' }}>
       {subject && (
         <Box sx={{ width: 400 }}>
-          <AppBar position="sticky" sx={{ bgcolor: grey[600] }}>
+          <AppBar position="sticky" sx={{ bgcolor: COLOR_SELECTED }}>
             <Toolbar>
               <Typography variant="h6" sx={{ flexGrow: 1 }}>
                 Annotation editor
@@ -73,7 +73,7 @@ export const AnnotationEditor = ({ subject, predicat }) => {
                 value={0}
                 textColor="inherit"
                 centered
-                sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: grey[600] } }}
+                sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: COLOR_SELECTED } }}
               >
                 <Tab label={predicat.label || predicat.iri.slice(baseUrl.length)} icon={<AddComment />} />
               </Tabs>
@@ -102,7 +102,7 @@ export const AnnotationEditor = ({ subject, predicat }) => {
                 position: 'absolute',
                 bottom: 16,
                 right: 16,
-                '& .MuiSpeedDial-fab': { backgroundColor: grey[600] },
+                '& .MuiSpeedDial-fab': { backgroundColor: COLOR_SELECTED },
               }}
               icon={isLoading ? <CircularProgress /> : <Done />}
             />
