@@ -6,7 +6,6 @@ import './index.css'
 import App from './App'
 import { store } from './app/store'
 import * as serviceWorker from './serviceWorker'
-import MeiViewer from './features/meiviewer/MeiViewer'
 import { ScoreAnnotator } from './features/score/ScoreAnnotator'
 
 ReactDOM.render(
@@ -15,7 +14,6 @@ ReactDOM.render(
       <Provider store={store}>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/v1" element={<MeiViewer />} />
           <Route path="/score" element={<ScoreAnnotator />} />
         </Routes>
       </Provider>
