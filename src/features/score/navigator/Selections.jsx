@@ -2,7 +2,7 @@ import { AudioFile } from '@mui/icons-material'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedEntity, setSelectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 
 export const Selections = props => {
   const { data: selections } = useGetScoreSelectionsQuery(props.scoreIri)

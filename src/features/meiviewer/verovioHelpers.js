@@ -1,4 +1,4 @@
-import { INSPECTION, SELECTION } from './constants'
+import { INSPECTION, SELECTION } from '../score/constants'
 
 export const noteCoordinates = note => [
   note.getElementsByTagName('use')[0].x.animVal.value + 140, // x

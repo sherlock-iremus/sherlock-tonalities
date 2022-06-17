@@ -15,7 +15,7 @@ import {
 import { red } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectionMode } from '../slice/scoreSlice'
+import { setInspectionMode } from '../../app/services/scoreSlice'
 import { Item } from './items/Item'
 import { findKey } from './utils'
 

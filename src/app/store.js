@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import scoreSlice from '../features/slice/scoreSlice'
+import scoreSlice from './services/scoreSlice'
 import sherlockApi from './services/sherlockApi'
 import sparqlApi from './services/sparql'
 

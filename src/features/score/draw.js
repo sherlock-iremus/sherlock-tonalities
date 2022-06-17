@@ -1,4 +1,4 @@
-import { COLOR_INSPECTED, COLOR_SELECTED } from '../meiviewer/mei.css'
+import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
 
 export const drawSelection = (selection, selectionIri, scoreIri, mode) => {
   const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1))).filter(Boolean)

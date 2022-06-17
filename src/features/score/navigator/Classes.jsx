@@ -1,7 +1,7 @@
 import { Button, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { Concept } from './Concept'
 
 export const Classes = props => {

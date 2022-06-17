@@ -1,5 +1,5 @@
 import { Avatar, Tooltip } from '@mui/material'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { withDispatch } from './withDispatch'
 
 const stringToColor = string => {

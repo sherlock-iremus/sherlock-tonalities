@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useGetParentSelectionsQuery, useGetSelectionAnalyticalEntitiesQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { SelectionItem } from '../items/SelectionItem'
 
 export const SelectionEntity = ({ selectionIri, baseUrl }) => {

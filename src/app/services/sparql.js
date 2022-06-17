@@ -6,7 +6,7 @@ import {
   SCORE,
   SELECTION,
   VERTICALITY,
-} from '../../features/meiviewer/constants'
+} from '../../features/score/constants'
 import {
   getAnnotationInfo,
   getAnnotationSelection,

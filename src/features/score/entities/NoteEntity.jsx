@@ -1,7 +1,7 @@
 import { List, ListItem, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useGetNoteAnnalyticalEntitiesQuery, useGetNoteSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { IncomingAnnotations } from '../annotations/IncomingAnnotations'
 import { ConceptItem } from '../items/ConceptItem'
 import { NoteItem } from '../items/NoteItem'

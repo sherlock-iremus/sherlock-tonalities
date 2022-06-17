@@ -1,4 +1,4 @@
-import { SELECTION } from "../../features/meiviewer/constants"
+import { SELECTION } from '../../features/score/constants'
 
 export const getNotesOnFirstBeat = noteIri => `
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>

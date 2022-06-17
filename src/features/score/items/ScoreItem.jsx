@@ -1,6 +1,6 @@
 import { Close, AudioFile } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { withDispatch } from './withDispatch'
 
 const baseScoreItem = ({ scoreIri, baseUrlLength, dispatch }) =>

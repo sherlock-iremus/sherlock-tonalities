@@ -6,7 +6,7 @@ import {
   useGetAnnotationSelectionQuery,
   useGetSubAnnotationsQuery,
 } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { ConceptItem } from '../items/ConceptItem'
 import { SelectionItem } from '../items/SelectionItem'
 import { LoadingEntity } from './LoadingEntity'

@@ -1,7 +1,7 @@
 import { List, ListItem, ListItemButton, ListItemText, ListSubheader, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetIncomingAnnotationsQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 
 export const IncomingAnnotations = ({ entityIri }) => {
   const { data: annotations } = useGetIncomingAnnotationsQuery(entityIri)

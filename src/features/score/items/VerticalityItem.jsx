@@ -3,7 +3,7 @@ import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, Lis
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
-import { setInspectedEntity, setSelectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { PositionnedNoteItem } from './PositionnedNoteItem'
 import { ConceptItem } from './ConceptItem'
 import { LoadingEntity } from '../entities/LoadingEntity'

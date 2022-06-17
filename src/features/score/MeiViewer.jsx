@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteVerticalityQuery } from '../../app/services/sparql'
-import { INSPECTED, SELECTED } from '../meiviewer/constants'
-import { verovioStyle } from '../meiviewer/mei.css'
+import { INSPECTED, SELECTED } from './constants'
+import { verovioStyle } from './mei.css'
 import { createVerovio, getNote, load } from '../meiviewer/verovioHelpers'
-import { setInspectedEntity, setSelectedEntity } from '../slice/scoreSlice'
+import { setInspectedEntity, setSelectedEntity } from '../../app/services/scoreSlice'
 import { StyleEntities } from './style/StyleEntities'
 import { StyleEntity } from './style/StyleEntity'
 

@@ -2,7 +2,7 @@ import { Close, QueueMusic } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { withDispatch } from './withDispatch'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 
 const BasePositionnedNoteItem = ({

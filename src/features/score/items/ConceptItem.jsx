@@ -1,6 +1,6 @@
 import { Chip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 
 export const ConceptItem = ({ conceptIri }) => {
   const dispatch = useDispatch()

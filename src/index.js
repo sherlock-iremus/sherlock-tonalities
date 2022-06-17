@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
 import './index.css'
 import App from './App'
 import { store } from './app/store'
@@ -16,7 +15,7 @@ ReactDOM.render(
       <Provider store={store}>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/mei" element={<MeiViewer />} />
+          <Route path="/v1" element={<MeiViewer />} />
           <Route path="/score" element={<ScoreAnnotator />} />
         </Routes>
       </Provider>

@@ -38,10 +38,10 @@ import {
   flexEndStyle,
   noDataStyle,
   centerStyle,
-} from './mei.css'
+} from '../score/mei.css'
 import { sameMembers } from './utils'
 import { FindInPage, Close, Sell, Edit, ExpandMore, ChevronRight, SpeakerNotes, Lyrics } from '@mui/icons-material'
-import { ANNOTATIONS, CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from './constants'
+import { ANNOTATIONS, CONCEPTS, INSPECTION, SELECTION, SELECTIONS } from '../score/constants'
 import { useGetAnnotationsQuery, useGetNotesOnFirstBeatQuery } from '../../app/services/sparql'
 import { ScoreItem } from './ScoreItem'
 import treatise from '../../app/treatises/Zarlino_1588.json'

@@ -2,7 +2,7 @@ import { Close, MusicNote } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
-import { setInspectedEntity, setSelectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
 

@@ -2,7 +2,7 @@ import { Close, HistoryEdu } from '@mui/icons-material'
 import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../slice/scoreSlice'
+import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from './LoadingEntity'
 
 export const ConceptEntity = ({ conceptIri, baseUrl }) => {
