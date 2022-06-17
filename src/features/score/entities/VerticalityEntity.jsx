@@ -8,25 +8,23 @@ import { setAnnotationEditor } from '../../../app/services/scoreSlice'
 import { withDispatch } from '../items/withDispatch'
 import { OutgoingAnnotations } from '../annotations/OutgoingAnnotations'
 
-const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseUrl }) => {
-  return (
-    <Box>
-      <VerticalityItem {...{ verticalityIri, baseUrl, clickedNoteIri }} isEntity />
-      
-      <OutgoingAnnotations {...{ verticalityIri }} />
+const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseUrl }) => (
+  <Box>
+    <VerticalityItem {...{ verticalityIri, baseUrl, clickedNoteIri }} isEntity />
 
-      <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
-        {actions[VERTICALITY].map(action => (
-          <SpeedDialAction
-            key={action.iri}
-            onClick={() => dispatch(setAnnotationEditor({ subject: { verticalityIri }, predicat: action }))}
-            tooltipTitle={action.label || action.iri.slice(baseUrl.length)}
-            icon={<Piano />}
-          />
-        ))}
-      </SpeedDial>
-    </Box>
-  )
-}
+    <OutgoingAnnotations {...{ verticalityIri }} />
+
+    <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
+      {actions[VERTICALITY].map(action => (
+        <SpeedDialAction
+          key={action.iri}
+          onClick={() => dispatch(setAnnotationEditor({ subject: { verticalityIri }, predicat: action }))}
+          tooltipTitle={action.label || action.iri.slice(baseUrl.length)}
+          icon={<Piano />}
+        />
+      ))}
+    </SpeedDial>
+  </Box>
+)
 
 export const VerticalityEntity = withDispatch(BaseVerticalityEntity)

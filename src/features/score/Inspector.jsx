@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import {
+  AccountBox,
   AlignHorizontalCenter,
   ArrowBack,
   ArrowForward,
   AudioFile,
   BubbleChart,
   Close,
+  Comment,
   ContentCopy,
   HistoryEdu,
   Launch,
@@ -33,7 +35,7 @@ import { Box } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToNextInspection, setToPreviousInspection } from '../../app/services/scoreSlice'
-import { AnnotationEntity } from './entities/AnnotationEntity'
+import { AnalyticalEntity } from './entities/AnalyticalEntity'
 import { ConceptEntity } from './entities/ConceptEntity'
 import { NoteEntity } from './entities/NoteEntity'
 import { SelectionEntity } from './entities/SelectionEntity'
@@ -52,8 +54,12 @@ export const Inspector = props => {
   const copyToClipboard = async value => {
     await navigator.clipboard.writeText(value)
     setIsCopied(true)
-    setTimeout(() => setIsCopied(false), 2000);
+    setTimeout(() => setIsCopied(false), 2000)
   }
+
+  const currentEntity = inspectedEntities[currentEntityIndex]
+  const previousEntity = inspectedEntities[currentEntityIndex - 1] || {}
+  const nextEntity = inspectedEntities[currentEntityIndex + 1] || {}
 
   const {
     noteIri,
@@ -63,16 +69,13 @@ export const Inspector = props => {
     conceptIri,
     annotationIri,
     scoreIri,
+    analyticalEntityIri,
+    contributorIri,
     attachedNoteIri,
     clickedNoteIri,
-  } = inspectedEntities[currentEntityIndex]
+  } = currentEntity
 
-  const previousEntity = inspectedEntities[currentEntityIndex - 1] || {}
-  const nextEntity = inspectedEntities[currentEntityIndex + 1] || {}
-  useEffect(
-    () => findKey(inspectedEntities[currentEntityIndex]) && !props.isOpen && setIsShowingPopup(true),
-    [inspectedEntities]
-  )
+  useEffect(() => findKey(currentEntity) && !props.isOpen && setIsShowingPopup(true), [inspectedEntities])
 
   return (
     <>
@@ -101,6 +104,8 @@ export const Inspector = props => {
                       !previousEntity.selectionIri &&
                       !previousEntity.conceptIri &&
                       !previousEntity.annotationIri &&
+                      !previousEntity.analyticalEntityIri &&
+                      !previousEntity.contributorIri &&
                       !previousEntity.scoreIri
                     }
                     edge="start"
@@ -119,6 +124,8 @@ export const Inspector = props => {
                       !nextEntity.selectionIri &&
                       !nextEntity.conceptIri &&
                       !nextEntity.annotationIri &&
+                      !nextEntity.analyticalEntityIri &&
+                      !nextEntity.contributorIri &&
                       !nextEntity.scoreIri
                     }
                     color="inherit"
@@ -139,7 +146,9 @@ export const Inspector = props => {
                       (positionnedNoteIri && 'Positionned note') ||
                       (selectionIri && 'Selection') ||
                       (conceptIri && 'Concept') ||
-                      (annotationIri && 'Annalytical entity') ||
+                      (annotationIri && 'Annotation') ||
+                      (analyticalEntityIri && 'Analytical entity') ||
+                      (contributorIri && 'Contributor') ||
                       (scoreIri && 'Score')
                     }
                     icon={
@@ -148,7 +157,9 @@ export const Inspector = props => {
                       (positionnedNoteIri && <QueueMusic />) ||
                       (selectionIri && <BubbleChart />) ||
                       (conceptIri && <HistoryEdu />) ||
-                      (annotationIri && <Lyrics />) ||
+                      (annotationIri && <Comment />) ||
+                      (analyticalEntityIri && <Lyrics />) ||
+                      (contributorIri && <AccountBox />) ||
                       (scoreIri && <AudioFile />)
                     }
                   />
@@ -156,8 +167,8 @@ export const Inspector = props => {
                 <Tooltip title={isCopied ? 'Copied !' : 'Copy element IRI'}>
                   <span>
                     <IconButton
-                      disabled={!findKey(inspectedEntities[currentEntityIndex])}
-                      onClick={() => copyToClipboard(findKey(inspectedEntities[currentEntityIndex]))}
+                      disabled={!findKey(currentEntity)}
+                      onClick={() => copyToClipboard(findKey(currentEntity))}
                       color="inherit"
                     >
                       <ContentCopy />
@@ -167,8 +178,8 @@ export const Inspector = props => {
                 <Tooltip title="Open element in Sherlock">
                   <span>
                     <IconButton
-                      disabled={!findKey(inspectedEntities[currentEntityIndex])}
-                      href={findKey(inspectedEntities[currentEntityIndex])}
+                      disabled={!findKey(currentEntity)}
+                      href={findKey(currentEntity)}
                       edge="end"
                       color="inherit"
                       target="_blank"
@@ -180,23 +191,12 @@ export const Inspector = props => {
               </Toolbar>
             </AppBar>
             <List>
-              {noteIri && <NoteEntity noteIri={noteIri} baseUrl={baseUrl} />}
-              {annotationIri && (
-                <AnnotationEntity annotationIri={annotationIri} scoreIri={props.scoreIri} baseUrl={baseUrl} />
-              )}
-              {positionnedNoteIri && (
-                <PositionnedNoteItem
-                  isEntity
-                  positionnedNoteIri={positionnedNoteIri}
-                  attachedNoteIri={attachedNoteIri}
-                  baseUrl={baseUrl}
-                />
-              )}
-              {conceptIri && <ConceptEntity conceptIri={conceptIri} baseUrl={baseUrl} />}
-              {selectionIri && <SelectionEntity selectionIri={selectionIri} baseUrl={baseUrl} />}
-              {verticalityIri && (
-                <VerticalityEntity verticalityIri={verticalityIri} clickedNoteIri={clickedNoteIri} baseUrl={baseUrl} />
-              )}
+              {noteIri && <NoteEntity {...{ noteIri }} />}
+              {analyticalEntityIri && <AnalyticalEntity {...{ analyticalEntityIri, scoreIri }} />}
+              {positionnedNoteIri && <PositionnedNoteItem {...{ positionnedNoteIri, attachedNoteIri }} isEntity />}
+              {conceptIri && <ConceptEntity {...{ conceptIri }} />}
+              {selectionIri && <SelectionEntity {...{ selectionIri }} />}
+              {verticalityIri && <VerticalityEntity {...{ verticalityIri, clickedNoteIri }} />}
               {scoreIri && <ScoreItem {...{ scoreIri }} />}
             </List>
           </Box>

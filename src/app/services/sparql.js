@@ -129,7 +129,7 @@ export const sparqlEndpoint = createApi({
           if (e.type.value === VERTICALITY) return { verticalityIri: e.child.value }
           if (e.type.value === POSITIONNED_NOTE) return { positionnedNoteIri: e.child.value }
           if (e.type.value === SELECTION) return { selectionIri: e.child.value }
-          if (e.type.value === ANALYTICAL_ENTITY) return { annalyticalEntityIri: e.child.value }
+          if (e.type.value === ANALYTICAL_ENTITY) return { analyticalEntityIri: e.child.value }
           if (e.type.value === SCORE) return { scoreIri: e.child.value }
         }),
     }),

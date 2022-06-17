@@ -1,6 +1,6 @@
 import { ListItem, ListItemButton, ListItemIcon, ListItemText, Skeleton } from '@mui/material'
 
-export const LoadingEntity = props => (
+export const LoadingEntity = () => (
   <ListItem disablePadding>
     <ListItemButton sx={{ cursor: 'default' }}>
       <ListItemIcon>

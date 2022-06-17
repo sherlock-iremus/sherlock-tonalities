@@ -8,10 +8,11 @@ import { PositionnedNoteItem } from './PositionnedNoteItem'
 import { ConceptItem } from './ConceptItem'
 import { LoadingEntity } from '../entities/LoadingEntity'
 
-export const VerticalityItem = ({ verticalityIri, baseUrl, clickedNoteIri, isEntity, concepts, secondaryAction }) => {
+export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, concepts, secondaryAction }) => {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(true)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
+  const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(verticalityIri)
   const conceptIri = concepts?.find(e => e.entity === verticalityIri)?.concept
   return positionnedNotes ? (
@@ -44,7 +45,7 @@ export const VerticalityItem = ({ verticalityIri, baseUrl, clickedNoteIri, isEnt
           <ListItemIcon>
             <AlignHorizontalCenter />
           </ListItemIcon>
-          <ListItemText primary="Verticality" secondary={verticalityIri.slice(baseUrl.length)} />
+          <ListItemText primary="Verticality" secondary={verticalityIri.slice(baseUrlLength)} />
         </ListItemButton>
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
@@ -55,7 +56,6 @@ export const VerticalityItem = ({ verticalityIri, baseUrl, clickedNoteIri, isEnt
               positionnedNoteIri={e.positionnedNoteIri}
               attachedNoteIri={e.attachedNoteIri}
               clickedNoteIri={clickedNoteIri}
-              baseUrl={baseUrl}
             />
           ))}
         </List>

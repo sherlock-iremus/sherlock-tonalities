@@ -1,7 +1,15 @@
 import { ANALYTICAL_ENTITY, NOTE, POSITIONNED_NOTE, SCORE, SELECTION, VERTICALITY } from './constants'
 
 export const findKey = item =>
-  item && (item.noteIri || item.verticalityIri || item.positionnedNoteIri || item.selectionIri || item.annotationIri)
+  item &&
+  (item.noteIri ||
+    item.verticalityIri ||
+    item.positionnedNoteIri ||
+    item.selectionIri ||
+    item.annotationIri ||
+    item.analyticalEntityIri ||
+    item.contributorIri ||
+    item.scoreIri)
 
 export const findType = ({
   noteIri,

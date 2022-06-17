@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { findKey } from '../../features/score/utils'
 
 const initialState = {
   baseUrl: 'http://data-iremus.huma-num.fr/id/',
@@ -62,28 +63,9 @@ const scoreSlice = createSlice({
             state.currentEntityIndex + 1,
             state.inspectedEntities.length - state.currentEntityIndex
           )
-        const { noteIri, verticalityIri, positionnedNoteIri, selectionIri, conceptIri, annotationIri, scoreIri } =
-          state.inspectedEntities[state.currentEntityIndex]
-        const currentEntityIri =
-          noteIri || verticalityIri || positionnedNoteIri || selectionIri || conceptIri || annotationIri || scoreIri
-        const {
-          noteIri: newNoteIri,
-          verticalityIri: newVerticalityIri,
-          positionnedNoteIri: newPositionnedNoteIri,
-          selectionIri: newSelectionIri,
-          conceptIri: newConceptIri,
-          annotationIri: newAnnotationIri,
-          scoreIri: newScoreIri,
-        } = action.payload
-        const newEntityIri =
-          newNoteIri ||
-          newVerticalityIri ||
-          newPositionnedNoteIri ||
-          newSelectionIri ||
-          newConceptIri ||
-          newAnnotationIri ||
-          newScoreIri
-        state.inspectedEntities.push(currentEntityIri === newEntityIri ? {} : action.payload)
+        const currentEntity = state.inspectedEntities[state.currentEntityIndex]
+        const newEntity = action.payload
+        state.inspectedEntities.push(findKey(currentEntity) === findKey(newEntity) ? {} : action.payload)
         state.currentEntityIndex = ++state.currentEntityIndex
       }
     },

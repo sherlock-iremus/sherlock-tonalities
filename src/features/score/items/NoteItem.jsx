@@ -1,16 +1,15 @@
 import { Close, MusicNote } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useGetNoteInfoQuery } from '../../../app/services/sparql'
 import { setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
+import { withDispatch } from './withDispatch'
 
-export const NoteItem = ({ noteIri, concepts, isEntity }) => {
-  const baseUrlLength = useSelector(state => state.score.baseUrl.length)
+const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data: noteLabel } = useGetNoteInfoQuery(noteIri)
-  const dispatch = useDispatch()
   const conceptIri = concepts?.find(e => e.entity === noteIri)?.concept
 
   return noteLabel ? (
@@ -46,3 +45,5 @@ export const NoteItem = ({ noteIri, concepts, isEntity }) => {
     <LoadingEntity />
   )
 }
+
+export const NoteItem = withDispatch(BaseNoteItem)

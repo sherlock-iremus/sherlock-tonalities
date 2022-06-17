@@ -1,6 +1,5 @@
 import { Close, Lyrics } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
-import { useDispatch } from 'react-redux'
 import {
   useGetAnnotationInfoQuery,
   useGetAnnotationSelectionQuery,
@@ -10,19 +9,18 @@ import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { ConceptItem } from '../items/ConceptItem'
 import { SelectionItem } from '../items/SelectionItem'
 import { LoadingEntity } from './LoadingEntity'
+import { withDispatch } from '../items/withDispatch'
 
-export const AnnotationEntity = ({ annotationIri, baseUrl }) => {
-  const { data: concepts } = useGetAnnotationInfoQuery(annotationIri)
-  const { data: subAnnotations } = useGetSubAnnotationsQuery(annotationIri)
-  const { data: selectionIri } = useGetAnnotationSelectionQuery(annotationIri)
-  const dispatch = useDispatch()
-
+const BaseAnalyticalEntity = ({ analyticalEntityIri, baseUrlLength, dispatch }) => {
+  const { data: concepts } = useGetAnnotationInfoQuery(analyticalEntityIri)
+  const { data: subAnnotations } = useGetSubAnnotationsQuery(analyticalEntityIri)
+  const { data: selectionIri } = useGetAnnotationSelectionQuery(analyticalEntityIri)
   return concepts && subAnnotations && selectionIri ? (
     <>
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
             <Close />
           </IconButton>
         }
@@ -35,15 +33,17 @@ export const AnnotationEntity = ({ annotationIri, baseUrl }) => {
             primary={concepts.map(concept => (
               <ConceptItem key={concept} conceptIri={concept} />
             ))}
-            secondary={annotationIri.slice(baseUrl.length)}
+            secondary={analyticalEntityIri.slice(baseUrlLength)}
           />
         </ListItemButton>
       </ListItem>
 
       <ListSubheader>Associated selection</ListSubheader>
-      <SelectionItem {...{ selectionIri, baseUrl }} concepts={subAnnotations} />
+      <SelectionItem {...{ selectionIri }} concepts={subAnnotations} />
     </>
   ) : (
     <LoadingEntity />
   )
 }
+
+export const AnalyticalEntity = withDispatch(BaseAnalyticalEntity)

@@ -8,12 +8,12 @@ import { LoadingEntity } from '../entities/LoadingEntity'
 import { findKey } from '../utils'
 import { ConceptItem } from './ConceptItem'
 import { Item } from './Item'
+import { withDispatch } from './withDispatch'
 
-export const SelectionItem = ({ selectionIri, isEntity, baseUrl, concepts }) => {
+const BaseSelectionItem = ({ selectionIri, concepts, isEntity, baseUrlLength, dispatch }) => {
   const [isOpen, setIsOpen] = useState(true)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data: children } = useGetChildSelectionsQuery(selectionIri)
-  const dispatch = useDispatch()
   const conceptIri = concepts?.find(e => e.entity === selectionIri)?.concept
 
   return children ? (
@@ -48,14 +48,14 @@ export const SelectionItem = ({ selectionIri, isEntity, baseUrl, concepts }) => 
           </ListItemIcon>
           <ListItemText
             primary={`Selection with ${children.length} elements`}
-            secondary={selectionIri.slice(baseUrl.length)}
+            secondary={selectionIri.slice(baseUrlLength)}
           />
         </ListItemButton>
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List sx={{ pl: 2 }} dense disablePadding>
           {children?.map(child => (
-            <Item key={findKey(child)} {...child} {...{ concepts, baseUrl }} />
+            <Item key={findKey(child)} {...child} {...{ concepts }} />
           ))}
         </List>
       </Collapse>
@@ -64,3 +64,5 @@ export const SelectionItem = ({ selectionIri, isEntity, baseUrl, concepts }) => 
     <LoadingEntity />
   )
 }
+
+export const SelectionItem = withDispatch(BaseSelectionItem)

@@ -1,16 +1,16 @@
 import { Close, HistoryEdu } from '@mui/icons-material'
 import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from './LoadingEntity'
+import { withDispatch } from '../items/withDispatch'
 
-export const ConceptEntity = ({ conceptIri, baseUrl }) => {
-  const { data: annotations } = useGetConceptAnnotationsQuery(conceptIri)
-  const dispatch = useDispatch()
+const BaseConceptEntity = ({ conceptIri, baseUrlLength, dispatch }) => {
+  const { data: analyticalEntities } = useGetConceptAnnotationsQuery(conceptIri)
   const { treatiseIri } = useSelector(state => state.score)
 
-  return annotations ? (
+  return analyticalEntities ? (
     <>
       <ListItem
         disablePadding
@@ -26,17 +26,17 @@ export const ConceptEntity = ({ conceptIri, baseUrl }) => {
           </ListItemIcon>
           <ListItemText
             primary={conceptIri.slice(treatiseIri.length)}
-            secondary={treatiseIri.slice(baseUrl.length + 3)}
+            secondary={treatiseIri.slice(baseUrlLength + 3)}
           />
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Is used in annalytical entities</ListSubheader>}>
-        {annotations.map(({ iri: annotationIri}, index) => (
-          <ListItem key={annotationIri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
+        {analyticalEntities.map(({ iri: analyticalEntityIri}, index) => (
+          <ListItem key={analyticalEntityIri} disablePadding>
+            <ListItemButton onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
               <ListItemText
                 primary={`${conceptIri.slice(treatiseIri.length)} ${++index}`}
-                secondary={annotationIri.slice(baseUrl.length)}
+                secondary={analyticalEntityIri.slice(baseUrlLength)}
               />
             </ListItemButton>
           </ListItem>
@@ -47,3 +47,5 @@ export const ConceptEntity = ({ conceptIri, baseUrl }) => {
     <LoadingEntity />
   )
 }
+
+export const ConceptEntity = withDispatch(BaseConceptEntity)

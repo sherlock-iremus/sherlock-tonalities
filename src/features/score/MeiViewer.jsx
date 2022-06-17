@@ -15,9 +15,10 @@ window.verovioCallback = load
 export const MeiViewer = props => {
   useEffect(() => createVerovio(props.meiUrl), [props.meiUrl])
 
+  const dispatch = useDispatch()
   const [rightClickedNoteIri, setRightClickedNoteIri] = useState(null)
   const { data: verticalityIri } = useGetNoteVerticalityQuery(rightClickedNoteIri, { skip: !rightClickedNoteIri })
-  const dispatch = useDispatch()
+  
   useEffect(
     () =>
       (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri }))) ||
@@ -25,7 +26,7 @@ export const MeiViewer = props => {
     [verticalityIri]
   )
 
-  const { isInspectionMode, isSelectionMode, inspectedEntities, currentEntityIndex, selectedEntities, hoveredEntity } =
+  const { isInspectionMode, isSelectionMode, inspectedEntities, currentEntityIndex, selectedEntities } =
     useSelector(state => state.score)
 
   const handleMouseOver = e => getNote(e.target)?.classList.add('focused')

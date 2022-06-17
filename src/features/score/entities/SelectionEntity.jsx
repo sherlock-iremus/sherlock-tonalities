@@ -10,18 +10,19 @@ import {
   SpeedDialIcon,
   Tooltip,
 } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useGetParentSelectionsQuery, useGetSelectionAnalyticalEntitiesQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { SelectionItem } from '../items/SelectionItem'
 
-export const SelectionEntity = ({ selectionIri, baseUrl }) => {
+export const SelectionEntity = ({ selectionIri }) => {
   const dispatch = useDispatch()
+  const baseUrlLength = useSelector(state => state.score.baseUrlLength)
   const { data: parents } = useGetParentSelectionsQuery(selectionIri)
-  const { data: annotations } = useGetSelectionAnalyticalEntitiesQuery(selectionIri)
+  const { data: analyticalEntities } = useGetSelectionAnalyticalEntitiesQuery(selectionIri)
   return (
     <>
-      <SelectionItem {...{ selectionIri, baseUrl }} isEntity />
+      <SelectionItem {...{ selectionIri }} isEntity />
 
       {!!parents?.length && (
         <List subheader={<ListSubheader>Parent selections</ListSubheader>} dense disablePadding>
@@ -30,7 +31,7 @@ export const SelectionEntity = ({ selectionIri, baseUrl }) => {
               <ListItemButton onClick={() => dispatch(setInspectedEntity({ parentIri }))}>
                 <ListItemText
                   primary={`Parent selection ${index + 1}`}
-                  secondary={parentIri.slice(baseUrl.length)}
+                  secondary={parentIri.slice(baseUrlLength)}
                 />
               </ListItemButton>
             </ListItem>
@@ -38,14 +39,14 @@ export const SelectionEntity = ({ selectionIri, baseUrl }) => {
         </List>
       )}
 
-      {!!annotations?.length && (
+      {!!analyticalEntities?.length && (
         <List subheader={<ListSubheader>Analytical entities</ListSubheader>} dense disablePadding>
-          {annotations.map((annotationIri, index) => (
-            <ListItem key={annotationIri} disablePadding>
-              <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
+          {analyticalEntities.map((analyticalEntityIri, index) => (
+            <ListItem key={analyticalEntityIri} disablePadding>
+              <ListItemButton onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
                 <ListItemText
                   primary={`Analytical entity ${index + 1}`}
-                  secondary={annotationIri.slice(baseUrl.length)}
+                  secondary={analyticalEntityIri.slice(baseUrlLength)}
                 />
               </ListItemButton>
             </ListItem>
