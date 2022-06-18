@@ -16,7 +16,7 @@ import { COLOR_INSPECTED, COLOR_NAVIGATE, COLOR_SELECTED } from './mei.css'
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
-  const { meiUrl, scoreIri, baseUrl, isSelectionMode, annotationEditor } = useSelector(state => state.score)
+  const { meiUrl, scoreIri, isSelectionMode, annotationEditor } = useSelector(state => state.score)
   const dispatch = useDispatch()
   dispatch(setTreatise(treatise.iri))
 
@@ -56,7 +56,6 @@ export const ScoreAnnotator = () => {
         onClose={() => setIsNavigatorOpen(false)}
         treatise={treatise}
         scoreIri={scoreIri}
-        baseUrl={baseUrl}
       />
 
       {!isSelectionMode && (

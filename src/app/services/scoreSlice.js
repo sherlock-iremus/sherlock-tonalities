@@ -3,6 +3,7 @@ import { findKey } from '../../features/score/utils'
 
 const initialState = {
   baseUrl: 'http://data-iremus.huma-num.fr/id/',
+  tonalityBaseUrl: 'http://modality-tonality.huma-num.fr/',
   scoreIri: '',
   scoreTitle: '',
   meiUrl: '',

@@ -22,7 +22,10 @@ export const Selections = props => {
     <>
       <List subheader={<ListSubheader>Global elements</ListSubheader>}>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => dispatch(setInspectedEntity({ scoreIri }))} selected={inspectedScore === scoreIri}>
+          <ListItemButton
+            onClick={() => dispatch(setInspectedEntity({ scoreIri }))}
+            selected={inspectedScore === scoreIri}
+          >
             <ListItemIcon>
               <AudioFile />
             </ListItemIcon>
@@ -32,7 +35,7 @@ export const Selections = props => {
       </List>
       <List subheader={<ListSubheader>Created selections</ListSubheader>}>
         {selections?.map(selection => (
-          <ListItem key={selection.iri} disablePadding secondaryAction={props.secondaryAction}>
+          <ListItem key={selection.iri} disablePadding>
             <ListItemButton
               onClick={() =>
                 (isInspectionMode && dispatch(setInspectedEntity({ selectionIri: selection.iri }))) ||
@@ -45,7 +48,7 @@ export const Selections = props => {
             >
               <ListItemText
                 primary={`Selection with ${selection.entities} elements`}
-                secondary={selection.iri.slice(props.baseUrl.length)}
+                secondary={selection.iri.slice(baseUrl.length)}
               />
             </ListItemButton>
           </ListItem>

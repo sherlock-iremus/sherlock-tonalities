@@ -40,7 +40,7 @@ export const Navigator = props => {
             <Tab icon={<Sell />} label="Properties" />
           </Tabs>
         </AppBar>
-        {selectedTab === 0 && <Selections scoreIri={props.scoreIri} baseUrl={props.baseUrl} />}
+        {selectedTab === 0 && <Selections scoreIri={props.scoreIri} />}
         {selectedTab === 1 && <Classes treatise={props.treatise} filter={filter} />}
         {selectedTab === 2 && <Properties treatise={props.treatise} filter={filter} />}
       </Box>

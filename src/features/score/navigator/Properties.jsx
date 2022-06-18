@@ -6,7 +6,7 @@ import { Concept } from './Concept'
 
 export const Properties = props => {
   const [filteredTree, setFilteredTree] = useState(props.treatise)
-  const { inspectedEntities, currentEntityIndex, baseUrl } = useSelector(state => state.score)
+  const { inspectedEntities, currentEntityIndex, tonalityBaseUrl } = useSelector(state => state.score)
   const inspectedEntity = inspectedEntities[currentEntityIndex]
 
   const dispatch = useDispatch()
@@ -33,7 +33,7 @@ export const Properties = props => {
     <List
       subheader={
         <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {props.treatise.iri.slice(baseUrl.length + 3)}
+          {props.treatise.iri.slice(tonalityBaseUrl)}
           <Button size="small" variant="text" disabled>
             Change treaty
           </Button>
