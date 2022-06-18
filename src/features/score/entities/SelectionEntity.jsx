@@ -17,7 +17,7 @@ import { SelectionItem } from '../items/SelectionItem'
 
 export const SelectionEntity = ({ selectionIri }) => {
   const dispatch = useDispatch()
-  const baseUrlLength = useSelector(state => state.score.baseUrlLength)
+  const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: parents } = useGetParentSelectionsQuery(selectionIri)
   const { data: analyticalEntities } = useGetSelectionAnalyticalEntitiesQuery(selectionIri)
   return (
