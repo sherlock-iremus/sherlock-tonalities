@@ -3,8 +3,9 @@ import { findKey } from '../../features/score/utils'
 
 const initialState = {
   baseUrl: 'http://data-iremus.huma-num.fr/id/',
-  scoreIri: 'http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356',
-  meiUrl: 'http://data-iremus.huma-num.fr/files/modality-tonality/mei/eff6f0a7-cf80-402c-953b-c66161051356.mei',
+  scoreIri: '',
+  scoreTitle: '',
+  meiUrl: '',
   treatiseIri: '',
   isInspectionMode: true,
   isSelectionMode: false,
@@ -20,6 +21,13 @@ const scoreSlice = createSlice({
   name: 'score',
   initialState,
   reducers: {
+    setSelectedScore: (state, action) => {
+      if (state.scoreIri !== action.payload.scoreIri) {
+        state.scoreIri = action.payload.scoreIri
+        state.scoreTitle = action.payload.scoreTitle
+        state.meiUrl = action.payload.meiUrl
+      }
+    },
     setHoverEntity: (state, action) => {
       state.hoveredEntity === action.payload
         ? (state.hoveredEntity = initialState.hoveredEntity)
@@ -72,7 +80,10 @@ const scoreSlice = createSlice({
   },
 })
 
+export default scoreSlice
+
 export const {
+  setSelectedScore,
   setHoverEntity,
   setInspectedEntity,
   setToPreviousInspection,
@@ -83,5 +94,3 @@ export const {
   setSelectionMode,
   setAnnotationEditor,
 } = scoreSlice.actions
-
-export default scoreSlice.reducer

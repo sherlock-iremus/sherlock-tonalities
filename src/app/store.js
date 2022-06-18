@@ -5,7 +5,7 @@ import sparqlApi from './services/sparql'
 
 export const store = configureStore({
   reducer: {
-    score: scoreSlice,
+    score: scoreSlice.reducer,
     sherlockApi: sherlockApi.reducer,
     sparqlApi: sparqlApi.reducer,
   },

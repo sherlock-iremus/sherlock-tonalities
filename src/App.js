@@ -1,8 +1,9 @@
-import { Typography } from '@mui/material'
+import { grey } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './App.css'
+import { ScoreLibrary } from './features/ScoreLibrary'
+import { ReactComponent as PolifoniaLogo } from './images/polifonia.svg'
 
 const App = () => (
   <div className="App">
@@ -12,15 +13,15 @@ const App = () => (
           sx={{
             height: '100vh',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            bgcolor: grey[100],
           }}
         >
-          <Link to="/score">
-            <Typography variant="button">Score annotator</Typography>
-          </Link>
+          <PolifoniaLogo width={'100px'} height={'100px'} />
+          <ScoreLibrary />
         </Box>
-        {/* <Link to="/library">Score & Analysis Library</Link> */}
       </nav>
     </header>
   </div>
