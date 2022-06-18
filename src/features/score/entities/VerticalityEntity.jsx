@@ -20,7 +20,7 @@ const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseU
           key={action.iri}
           onClick={() => dispatch(setAnnotationEditor({ subject: { verticalityIri }, predicat: action }))}
           tooltipTitle={action.label || action.iri.slice(baseUrl.length)}
-          icon={<Piano />}
+          icon={action.icon}
         />
       ))}
     </SpeedDial>

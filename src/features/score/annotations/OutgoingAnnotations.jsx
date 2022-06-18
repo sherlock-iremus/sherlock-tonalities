@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   ListSubheader,
   Typography,
@@ -31,7 +32,7 @@ export const OutgoingAnnotations = props => {
       <>
         <ListSubheader>Annotations</ListSubheader>
         {predicats[findType(props)].map(predicat => (
-          <>
+          <Box key={predicat.iri}>
             <ListItem
               disablePadding
               secondaryAction={!isOpen && <Chip label={annotations.filter(a => a.predicat === predicat.iri).length} />}
@@ -39,10 +40,11 @@ export const OutgoingAnnotations = props => {
               <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
                 {isOpen ? <ExpandMore /> : <ChevronRight />}
               </IconButton>
+              <ListItemIcon>{predicat.icon}</ListItemIcon>
               <ListItemText primary={predicat.label || predicat.iri.slice(baseUrlLength)} />
             </ListItem>
             <Collapse in={isOpen} timeout="auto" unmountOnExit>
-              <List key={predicat.iri} dense disablePadding>
+              <List dense disablePadding>
                 {annotations
                   .filter(a => a.predicat === predicat.iri)
                   .map(({ annotationIri, date, contributorIri, object }) => (
@@ -79,51 +81,9 @@ export const OutgoingAnnotations = props => {
                   ))}
               </List>
             </Collapse>
-          </>
+          </Box>
         ))}
       </>
     )
   )
 }
-
-// WITHOUT GROUPBY PREDICAT
-
-// return (
-//   (!!annotations?.length && (
-//     <List subheader={<ListSubheader>Outgoing annotations</ListSubheader>} dense disablePadding>
-//       {annotations.map(({ annotationIri, date, contributorIri, object, predicat }) => (
-//         <ListItem
-//           key={annotationIri}
-//           disablePadding
-//           secondaryAction={
-//             <Box
-//               sx={{
-//                 display: 'flex',
-//                 flexDirection: 'column',
-//                 alignItems: 'center',
-//               }}
-//             >
-//               <ContributorItem {...{ contributorIri }} />
-//               <Typography variant="caption">{new Date(date).toLocaleDateString('en-GB')}</Typography>
-//             </Box>
-//           }
-//         >
-//           <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
-//             <ListItemText
-//               primary={actions[findType(props)]
-//                 .filter(a => a.iri === predicat)
-//                 .map(a => a.label)}
-//               secondary={options[predicat]
-//                 .filter(a => a.iri === object)
-//                 .map(a => (
-//                   <Chip label={a.label} />
-//                 ))}
-//             />
-//           </ListItemButton>
-//         </ListItem>
-//       ))}
-//     </List>
-//   )) ||
-//   null
-// )
-// }
