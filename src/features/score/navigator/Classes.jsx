@@ -2,18 +2,19 @@ import { Button, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
+import { TretiseLibrary } from '../TreatiseLibrary'
 import { Concept } from './Concept'
 
 export const Classes = props => {
   const [filteredTree, setFilteredTree] = useState(props.treatise)
-  const { inspectedEntities, currentEntityIndex, baseUrl } = useSelector(state => state.score)
+  const [isTreatySelectorOpen, setIsTreatySelectorOpen] = useState(false)
+  const { inspectedEntities, currentEntityIndex, tonalityBaseUrl } = useSelector(state => state.score)
   const inspectedEntity = inspectedEntities[currentEntityIndex]
 
   const dispatch = useDispatch()
 
   const _setFilteredTree = (node, newFilter) => {
-    if (node.classes)
-      return { ...node, classes: node.classes.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
+    if (node.classes) return { ...node, classes: node.classes.map(c => _setFilteredTree(c, newFilter)).filter(Boolean) }
     else if (node.children) {
       const filteredNode = {
         ...node,
@@ -33,10 +34,11 @@ export const Classes = props => {
     <List
       subheader={
         <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {props.treatise.iri.slice(baseUrl.length + 3)}
-          <Button size="small" variant="text" disabled>
+          {props.treatise.iri.slice(tonalityBaseUrl)}
+          <Button size="small" variant="text" onClick={() => setIsTreatySelectorOpen(true)}>
             Change treaty
           </Button>
+          <TretiseLibrary isOpen={isTreatySelectorOpen} onClose={() => setIsTreatySelectorOpen(false)} />
         </ListSubheader>
       }
     >
