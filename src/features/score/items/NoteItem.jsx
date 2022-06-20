@@ -7,7 +7,7 @@ import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
 import { withDispatch } from './withDispatch'
 
-const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch }) => {
+const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch, secondaryAction }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data: noteLabel } = useGetNoteInfoQuery(noteIri)
   const conceptIri = concepts?.find(e => e.entity === noteIri)?.concept
@@ -16,19 +16,21 @@ const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch }) 
     <ListItem
       disablePadding
       secondaryAction={
-        <>
-          {isEntity && (
-            <IconButton
-              onClick={() =>
-                (isInspectionMode && dispatch(setInspectedEntity({ noteIri }))) ||
-                (isSelectionMode && dispatch(setSelectedEntity({ noteIri })))
-              }
-            >
-              <Close />
-            </IconButton>
-          )}
-          {conceptIri && <ConceptItem conceptIri={conceptIri} />}
-        </>
+        secondaryAction || (
+          <>
+            {isEntity && (
+              <IconButton
+                onClick={() =>
+                  (isInspectionMode && dispatch(setInspectedEntity({ noteIri }))) ||
+                  (isSelectionMode && dispatch(setSelectedEntity({ noteIri })))
+                }
+              >
+                <Close />
+              </IconButton>
+            )}
+            {conceptIri && <ConceptItem conceptIri={conceptIri} />}
+          </>
+        )
       }
     >
       <ListItemButton
