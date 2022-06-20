@@ -12,5 +12,23 @@
     { "iri": "http://data-iremus.huma-num.fr/id/6052e2c5-3035-46c9-8406-606c160c12db", "label": "A" },
     { "iri": "http://data-iremus.huma-num.fr/id/dec44fce-de17-446c-ba68-b9c998d3f488", "label": "B♭" },
     { "iri": "http://data-iremus.huma-num.fr/id/74df0ba4-cd98-47dd-979f-a77adbf8031b", "label": "B" }
+  ],
+  "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1": [
+    { "iri": "http://data-iremus.huma-num.fr/id/c9289aed-0ee9-43fa-bb67-699b9346d122", "label": "Passing note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/184b74d9-3452-42f1-963b-40d820021dfc", "label": "Consonant note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/14e52704-1322-4338-92a5-2b866c856d1f", "label": "Neighbor note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/905674f2-40ed-4bf0-8d13-df113ed84513", "label": "Anticipation" },
+    { "iri": "http://data-iremus.huma-num.fr/id/791d8d87-9eb0-43f5-ae34-3f2da8ea40cb", "label": "Suspension" },
+    { "iri": "http://data-iremus.huma-num.fr/id/0bbe0556-1ac9-4ef8-b449-23e834dcc2b2", "label": "Passing note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/c9289aed-0ee9-43fa-bb67-699b9346d122", "label": "Escape note" }
+  ],
+  "http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df": [
+    { "iri": "http://data-iremus.huma-num.fr/id/c9289aed-0ee9-43fa-bb67-699b9346d122", "label": "Passing note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/184b74d9-3452-42f1-963b-40d820021dfc", "label": "Consonant note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/14e52704-1322-4338-92a5-2b866c856d1f", "label": "Neighbor note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/905674f2-40ed-4bf0-8d13-df113ed84513", "label": "Anticipation" },
+    { "iri": "http://data-iremus.huma-num.fr/id/791d8d87-9eb0-43f5-ae34-3f2da8ea40cb", "label": "Suspension" },
+    { "iri": "http://data-iremus.huma-num.fr/id/0bbe0556-1ac9-4ef8-b449-23e834dcc2b2", "label": "Passing note" },
+    { "iri": "http://data-iremus.huma-num.fr/id/c9289aed-0ee9-43fa-bb67-699b9346d122", "label": "Escape note" }
   ]
 }

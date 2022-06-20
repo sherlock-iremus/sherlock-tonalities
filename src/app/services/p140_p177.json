@@ -2,14 +2,16 @@
   "http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd": [
     {
       "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
-      "label": "Type de dissonance"
+      "label": "Type de dissonance",
+      "icon": "𝆔"
     }
   ],
 
   "http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df": [
     {
       "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
-      "label": "Type de dissonance"
+      "label": "Type de dissonance",
+      "icon": "𝆔"
     }
   ],
 
