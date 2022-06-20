@@ -1,6 +1,7 @@
 import { BubbleChart, Close, Done } from '@mui/icons-material'
 import {
   AppBar,
+  CircularProgress,
   Drawer,
   IconButton,
   List,
@@ -13,15 +14,37 @@ import {
   Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectionMode } from '../../app/services/scoreSlice'
-import { Item } from './items/Item'
-import { COLOR_SELECTED } from './mei.css'
-import { findKey } from './utils'
+import { setInspectionMode } from '../../../app/services/scoreSlice'
+import { usePostSelectionMutation } from '../../../app/services/sherlockApi'
+import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
+import { Item } from '../items/Item'
+import { COLOR_SELECTED } from '../mei.css'
+import { findKey } from '../utils'
+import { AlertMessage } from './AlertMessage'
 
-export const Editor = () => {
+export const SelectionEditor = () => {
   const dispatch = useDispatch()
-  const { selectedEntities, isSelectionMode, baseUrl } = useSelector(state => state.score)
+  const { selectedEntities, isSelectionMode, baseUrl, scoreIri } = useSelector(state => state.score)
+  const [confirmationMessage, setConfirmationMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const { refetch } = useGetScoreSelectionsQuery(scoreIri)
+  const [postSelection, { isLoading }] = usePostSelectionMutation()
+
+  const createSelection = async () => {
+    if (selectedEntities.length && !isLoading) {
+      try {
+        await postSelection(selectedEntities.map(findKey)).unwrap()
+        setConfirmationMessage('Annotation was successfully created')
+        refetch()
+        dispatch(setInspectionMode())
+      } catch {
+        setErrorMessage('An error occured while creating the selection')
+      }
+    }
+  }
+
   return (
     <Drawer open={isSelectionMode} anchor="right" variant="persistent">
       <Box sx={{ width: 400 }}>
@@ -54,11 +77,18 @@ export const Editor = () => {
         </List>
         <Tooltip title="Validate">
           <SpeedDial
+            onClick={createSelection}
             ariaLabel="validate"
-            sx={{ position: 'absolute', bottom: 16, right: 16, '& .MuiSpeedDial-fab': { backgroundColor: COLOR_SELECTED } }}
-            icon={<Done />}
+            sx={{
+              position: 'absolute',
+              bottom: 16,
+              right: 16,
+              '& .MuiSpeedDial-fab': { backgroundColor: COLOR_SELECTED },
+            }}
+            icon={isLoading ? <CircularProgress /> : <Done />}
           />
         </Tooltip>
+        <AlertMessage {...{ confirmationMessage, errorMessage }} />
       </Box>
     </Drawer>
   )

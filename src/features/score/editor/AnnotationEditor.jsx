@@ -25,6 +25,7 @@ import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../../app/services/sherlockApi'
 import { useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
+import { AlertMessage } from './AlertMessage'
 
 export const AnnotationEditor = ({ subject, predicat }) => {
   const dispatch = useDispatch()
@@ -108,23 +109,7 @@ export const AnnotationEditor = ({ subject, predicat }) => {
             />
           </Tooltip>
 
-          <Snackbar
-            open={!!confirmationMessage}
-            autoHideDuration={6000}
-            onClose={() => setConfirmationMessage('')}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          >
-            <Alert severity="success">{confirmationMessage}</Alert>
-          </Snackbar>
-
-          <Snackbar
-            open={!!errorMessage}
-            autoHideDuration={6000}
-            onClose={() => setErrorMessage('')}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          >
-            <Alert severity="warning">{errorMessage}</Alert>
-          </Snackbar>
+          <AlertMessage {...{ confirmationMessage, errorMessage }} />
         </Box>
       )}
     </Drawer>

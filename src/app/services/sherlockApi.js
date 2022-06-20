@@ -10,7 +10,7 @@ export const sherlockApi = createApi({
     credentials: 'include',
   }),
   endpoints: builder => ({
-    postSelection: builder.query({
+    postSelection: builder.mutation({
       query: children => ({
         url: 'selection',
         method: 'POST',
@@ -31,4 +31,4 @@ export const sherlockApi = createApi({
 
 export default sherlockApi
 
-export const { usePostSelectionQuery, usePostAnnotationMutation } = sherlockApi
+export const { usePostSelectionMutation, usePostAnnotationMutation } = sherlockApi
