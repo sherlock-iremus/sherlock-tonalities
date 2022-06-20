@@ -7,7 +7,7 @@ const initialState = {
   scoreIri: '',
   scoreTitle: '',
   meiUrl: '',
-  treatiseIri: '',
+  treatiseIri: 'http://modality-tonality.huma-num.fr/Zarlino_1558#',
   isInspectionMode: true,
   isSelectionMode: false,
   inspectedEntities: [{}],
@@ -22,7 +22,7 @@ const scoreSlice = createSlice({
   name: 'score',
   initialState,
   reducers: {
-    setSelectedScore: (state, action) => {
+    setScore: (state, action) => {
       if (state.scoreIri !== action.payload.scoreIri) {
         state.scoreIri = action.payload.scoreIri
         state.scoreTitle = action.payload.scoreTitle
@@ -34,7 +34,7 @@ const scoreSlice = createSlice({
         ? (state.hoveredEntity = initialState.hoveredEntity)
         : (state.hoveredEntity = action.payload)
     },
-    setTreatise: (state, action) => {
+    setTreatiseIri: (state, action) => {
       state.treatiseIri = action.payload
     },
     setToPreviousInspection: state => {
@@ -84,12 +84,12 @@ const scoreSlice = createSlice({
 export default scoreSlice
 
 export const {
-  setSelectedScore,
+  setScore,
   setHoverEntity,
   setInspectedEntity,
   setToPreviousInspection,
   setToNextInspection,
-  setTreatise,
+  setTreatiseIri,
   setSelectedEntity,
   setInspectionMode,
   setSelectionMode,

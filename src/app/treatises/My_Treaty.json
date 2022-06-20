@@ -1,0 +1,5 @@
+{
+  "iri": "http://modality-tonality.huma-num.fr/MyTreaty#",
+  "classes": [{ "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#maClasse", "label": "Ma super classe" }],
+  "properties": [{ "iri": "http://modality-tonality.huma-num.fr/MyTreaty#maProp", "label": "Ma super prop" }]
+}

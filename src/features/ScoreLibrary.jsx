@@ -15,14 +15,16 @@ import {
   Typography,
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedScore } from '../app/services/scoreSlice'
+import { setScore } from '../app/services/scoreSlice'
 import scores from '../app/scores.json'
 import cover from '../images/bg-score.jpg'
-import { Link } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export const ScoreLibrary = () => {
   const dispatch = useDispatch()
-  const { scoreIri: selectedScoreIri } = useSelector(state => state.score)
+  const { scoreIri } = useSelector(state => state.score)
+  const [selectedScore, setSelectedScore] = useState({ scoreIri })
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   return (
     <Card sx={{ maxWidth: 400 }}>
@@ -44,28 +46,27 @@ export const ScoreLibrary = () => {
         </Typography>
       </CardContent>
       <List subheader={<ListSubheader>Available scores</ListSubheader>} dense disablePadding>
-        {scores.map(({ scoreIri, scoreTitle, meiUrl }) => (
-          <ListItem key={scoreIri} disablePadding>
+        {scores.map(score => (
+          <ListItem key={score.scoreIri} disablePadding>
             <ListItemButton
-              onClick={() => dispatch(setSelectedScore({ scoreIri, scoreTitle, meiUrl }))}
-              selected={scoreIri === selectedScoreIri}
+              onClick={() => setSelectedScore(score.scoreIri === selectedScore.scoreIri ? { scoreIri: null } : score)}
+              selected={score.scoreIri === selectedScore.scoreIri}
             >
               <ListItemIcon>
                 <Avatar>
                   <AudioFile />
                 </Avatar>
               </ListItemIcon>
-              <ListItemText primary={scoreTitle} secondary={scoreIri.slice(baseUrlLength)} />
+              <ListItemText primary={score.scoreTitle} secondary={score.scoreIri.slice(baseUrlLength)} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <CardActions>
-        <Link to={selectedScoreIri && '/score'}>
-          <Button size="small" disabled={!selectedScoreIri}>
-            Open score
-          </Button>
-        </Link>
+        <Button size="small" disabled={!selectedScore.scoreIri} onClick={() => dispatch(setScore(selectedScore))}>
+          Open score
+        </Button>
+        {scoreIri && <Navigate to="/score" />}
       </CardActions>
     </Card>
   )

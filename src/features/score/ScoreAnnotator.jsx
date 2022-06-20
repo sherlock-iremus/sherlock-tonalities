@@ -7,21 +7,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Inspector } from './Inspector'
 import { MeiViewer } from './MeiViewer'
 import { Navigator } from './Navigator'
-import treatise from '../../app/treatises/Zarlino_1588.json'
-import { setSelectionMode, setTreatise } from '../../app/services/scoreSlice'
-import { Editor } from './Editor'
-import { AnnotationEditor } from './creator/AnnotationEditor'
+import { setSelectionMode } from '../../app/services/scoreSlice'
+import { SelectionEditor } from './editor/SelectionEditor'
+import { AnnotationEditor } from './editor/AnnotationEditor'
 import { COLOR_INSPECTED, COLOR_NAVIGATE, COLOR_SELECTED } from './mei.css'
+import { Navigate } from 'react-router-dom'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
   const { meiUrl, scoreIri, isSelectionMode, annotationEditor } = useSelector(state => state.score)
   const dispatch = useDispatch()
-  dispatch(setTreatise(treatise.iri))
 
   return (
     <>
+      {!scoreIri && <Navigate to="/" />}
       <MeiViewer meiUrl={meiUrl} scoreIri={scoreIri} />
 
       {!isInspectorOpen && (
@@ -54,7 +54,6 @@ export const ScoreAnnotator = () => {
       <Navigator
         isOpen={isNavigatorOpen}
         onClose={() => setIsNavigatorOpen(false)}
-        treatise={treatise}
         scoreIri={scoreIri}
       />
 
@@ -73,7 +72,7 @@ export const ScoreAnnotator = () => {
           />
         </Tooltip>
       )}
-      <Editor />
+      <SelectionEditor />
 
       <AnnotationEditor {...annotationEditor} />
     </>

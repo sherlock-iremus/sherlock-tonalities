@@ -6,12 +6,15 @@ export const Concept = props => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div>
+    <>
       <ListItem disablePadding>
         {props.concept.children && (
           <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
         )}
-        <ListItemButton onClick={() => props.setInspection(props.concept.iri)} selected={props.selectedConcept === props.concept.iri}>
+        <ListItemButton
+          onClick={() => props.setInspection(props.concept.iri)}
+          selected={props.selectedConcept === props.concept.iri}
+        >
           <ListItemText primary={props.concept.label} />
         </ListItemButton>
       </ListItem>
@@ -29,6 +32,6 @@ export const Concept = props => {
           </List>
         </Collapse>
       )}
-    </div>
+    </>
   )
 }

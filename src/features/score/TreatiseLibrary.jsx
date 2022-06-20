@@ -15,12 +15,17 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { HistoryEdu } from '@mui/icons-material'
 import { treatiseList } from '../../app/treatises/treatises'
+import { setTreatiseIri } from '../../app/services/scoreSlice'
+import { useState } from 'react'
 
 export const TretiseLibrary = ({ isOpen, onClose }) => {
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.tonalityBaseUrl.length)
+  const { treatiseIri } = useSelector(state => state.score)
+  const [selectedTreatise, setSelectedTreatise] = useState(treatiseIri)
+
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <Dialog open={isOpen} onClose={onClose} sx={{ width: 400 }}>
       <DialogContent>
         <Typography gutterBottom variant="h5" component="div">
           Historical treatises
@@ -36,7 +41,10 @@ export const TretiseLibrary = ({ isOpen, onClose }) => {
       <List subheader={<ListSubheader>Available musical treatises</ListSubheader>} dense disablePadding>
         {treatiseList.map(iri => (
           <ListItem key={iri} disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              onClick={() => setSelectedTreatise(selectedTreatise === iri ? '' : iri)}
+              selected={selectedTreatise === iri}
+            >
               <ListItemIcon>
                 <Avatar>
                   <HistoryEdu />
@@ -48,7 +56,16 @@ export const TretiseLibrary = ({ isOpen, onClose }) => {
         ))}
       </List>
       <DialogActions>
-        <Button size="small">Select treaty</Button>
+        <Button
+          onClick={() => {
+            dispatch(setTreatiseIri(selectedTreatise))
+            onClose()
+          }}
+          disabled={!selectedTreatise}
+          size="small"
+        >
+          Select treaty
+        </Button>
       </DialogActions>
     </Dialog>
   )

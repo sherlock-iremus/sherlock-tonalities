@@ -3,6 +3,8 @@
 import { BubbleChart, Close, HistoryEdu, Sell } from '@mui/icons-material'
 import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { getTreatise } from '../../app/treatises/treatises'
 import { SearchBar } from '../meiviewer/SearchField'
 import { COLOR_NAVIGATE } from './mei.css'
 import { Classes } from './navigator/Classes'
@@ -11,7 +13,9 @@ import { Selections } from './navigator/Selections'
 
 export const Navigator = props => {
   const [selectedTab, setSelectedTab] = useState(0)
+  const { treatiseIri } = useSelector(state => state.score)
   const [filter, setFilter] = useState('')
+  const treatise = getTreatise(treatiseIri)
 
   return (
     <Drawer open={props.isOpen} anchor="left" variant="persistent">
@@ -41,8 +45,8 @@ export const Navigator = props => {
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Selections scoreIri={props.scoreIri} />}
-        {selectedTab === 1 && <Classes treatise={props.treatise} filter={filter} />}
-        {selectedTab === 2 && <Properties treatise={props.treatise} filter={filter} />}
+        {selectedTab === 1 && <Classes treatise={treatise} filter={filter} />}
+        {selectedTab === 2 && <Properties treatise={treatise} filter={filter} />}
       </Box>
     </Drawer>
   )

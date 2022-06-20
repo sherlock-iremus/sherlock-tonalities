@@ -28,13 +28,13 @@ export const Classes = props => {
 
   useEffect(() => {
     setFilteredTree(props.filter ? _setFilteredTree(props.treatise, props.filter) : props.treatise)
-  }, [props.filter])
+  }, [props.filter, props.treatise])
 
   return (
     <List
       subheader={
         <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {props.treatise.iri.slice(tonalityBaseUrl)}
+          {props.treatise.iri.slice(tonalityBaseUrl.length)}
           <Button size="small" variant="text" onClick={() => setIsTreatySelectorOpen(true)}>
             Change treaty
           </Button>
