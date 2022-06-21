@@ -1,5 +1,35 @@
 [
   {
+    "scoreIri": "http://data-iremus.huma-num.fr/id/31bbbea9-98a9-4c3a-9276-734ba9e949e2",
+    "scoreTitle": "Praeter rerum seriem",
+    "meiUrl": "http://data-iremus.huma-num.fr/files/modality-tonality/mei/31bbbea9-98a9-4c3a-9276-734ba9e949e2.mei"
+  },
+  {
+    "scoreIri": "http://data-iremus.huma-num.fr/id/54c00b59-11c2-4b23-98be-7a6b73386e8e",
+    "scoreTitle": "Giunto m'à Amor fra belle et crude braccia",
+    "meiUrl": "http://data-iremus.huma-num.fr/files/modality-tonality/mei/54c00b59-11c2-4b23-98be-7a6b73386e8e.mei"
+  },
+  {
+    "scoreIri": "http://data-iremus.huma-num.fr/id/6481d80d-9a45-4cb2-b122-f5086b066356",
+    "scoreTitle": "Inviolata integra et casta es",
+    "meiUrl": "http://data-iremus.huma-num.fr/files/modality-tonality/mei/6481d80d-9a45-4cb2-b122-f5086b066356.mei"
+  },
+  {
+    "scoreIri": "http://data-iremus.huma-num.fr/id/cc9c0c8c-c2f4-4678-81a3-53846186d3e2",
+    "scoreTitle": "Laudate pueri Dominum",
+    "meiUrl": "http://data-iremus.huma-num.fr/files/modality-tonality/mei/cc9c0c8c-c2f4-4678-81a3-53846186d3e2.mei"
+  },
+  {
+    "scoreIri": "http://data-iremus.huma-num.fr/id/d05001bd-9124-4a60-b939-76ae08eb9d45",
+    "scoreTitle": "Veni Sancte Spiritus",
+    "meiUrl": "http://data-iremus.huma-num.fr/files/modality-tonality/mei/d05001bd-9124-4a60-b939-76ae08eb9d45.mei"
+  },
+  {
+    "scoreIri": "http://data-iremus.huma-num.fr/id/db628a6e-cb94-40e5-84a6-3f48b7f990fa",
+    "scoreTitle": "Beati omnes qui timent Dominum",
+    "meiUrl": "http://data-iremus.huma-num.fr/files/modality-tonality/mei/db628a6e-cb94-40e5-84a6-3f48b7f990fa.mei"
+  },
+  {
     "scoreIri": "http://data-iremus.huma-num.fr/id/eff6f0a7-cf80-402c-953b-c66161051356",
     "scoreTitle": "In Convertendo Dominus",
     "meiUrl": "http://data-iremus.huma-num.fr/files/modality-tonality/mei/eff6f0a7-cf80-402c-953b-c66161051356.mei"
