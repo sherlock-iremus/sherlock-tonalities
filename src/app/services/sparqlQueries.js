@@ -119,6 +119,7 @@ export const getChildSelections = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     SELECT ?child ?type
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     WHERE {
         <${selectionIri}> crm:P106_is_composed_of ?child.
         ?child crm:P2_has_type ?type
@@ -129,6 +130,7 @@ export const getParentSelections = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     SELECT ?parent ?type
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     WHERE {
         ?parent crm:P106_is_composed_of <${selectionIri}>.
         OPTIONAL {?parent crm:P2_has_type ?type}
@@ -139,6 +141,7 @@ export const getNoteAnnalyticalEntities = noteIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     SELECT ?annotation ?concept
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     WHERE {
         ?e13 crm:P141_assigned <${noteIri}>.
         ?e13 crm:P177_assigned_property_of_type ?concept.
@@ -151,6 +154,7 @@ export const getAnnotationSelection = annotationIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     SELECT ?selection
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     WHERE {
         <${annotationIri}> crm:P140_assigned_attribute_to ?selection
     }
@@ -161,6 +165,7 @@ export const getNoteVerticality = noteIri => `
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     SELECT ?verticality ?selectedNote
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     WHERE {
         <${noteIri}> sherlockmei:contains_beat ?verticality
     }
@@ -172,6 +177,7 @@ export const getVerticalityPositionnedNotes = verticalityIri => `
 PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
 SELECT ?positionned_note ?note
 FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     ?note sherlockmei:contains_beat <${verticalityIri}>.
     ?note sherlockmei:has_beat_anchor ?positionned_note.
@@ -183,6 +189,7 @@ export const getSelectionAnalyticalEntities = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     SELECT ?annotation
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     WHERE {
         ?annotation crm:P140_assigned_attribute_to <${selectionIri}>.
     }

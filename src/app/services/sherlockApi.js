@@ -11,11 +11,11 @@ export const sherlockApi = createApi({
   }),
   endpoints: builder => ({
     postSelection: builder.mutation({
-      query: children => ({
+      query: body => ({
         url: 'selection',
         method: 'POST',
         headers,
-        body: { children },
+        body,
       }),
     }),
     postAnnotation: builder.mutation({

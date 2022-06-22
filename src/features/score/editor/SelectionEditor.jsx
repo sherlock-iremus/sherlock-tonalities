@@ -35,7 +35,9 @@ export const SelectionEditor = () => {
   const createSelection = async () => {
     if (selectedEntities.length && !isLoading) {
       try {
-        await postSelection(selectedEntities.map(findKey)).unwrap()
+        const children = selectedEntities.map(findKey)
+        const document_contexts = [scoreIri]
+        await postSelection({ children, document_contexts }).unwrap()
         setConfirmationMessage('Annotation was successfully created')
         refetch()
         dispatch(setInspectionMode())
