@@ -27,7 +27,7 @@ export const ScoreLibrary = () => {
   const [selectedScore, setSelectedScore] = useState({ scoreIri })
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   return (
-    <Card sx={{ maxWidth: 600 }}>
+    <Card sx={{ maxWidth: 400, overflow: 'auto' }}>
       <CardMedia component="img" height="140" image={cover} alt="score" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -45,7 +45,12 @@ export const ScoreLibrary = () => {
           playlists.
         </Typography>
       </CardContent>
-      <List subheader={<ListSubheader>Available scores</ListSubheader>} dense disablePadding>
+      <List
+        subheader={<ListSubheader>Available scores</ListSubheader>}
+        dense
+        disablePadding
+        sx={{ maxHeight: 300, overflow: 'auto' }}
+      >
         {scores.map(score => (
           <ListItem key={score.scoreIri} disablePadding>
             <ListItemButton
