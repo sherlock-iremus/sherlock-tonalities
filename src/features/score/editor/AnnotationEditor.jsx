@@ -30,12 +30,15 @@ import { useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
 import { AlertMessage } from './AlertMessage'
 
-export const AnnotationEditor = ({ subject, predicat }) => {
+export const AnnotationEditor = () => {
   const dispatch = useDispatch()
   const [selectedOption, setSelectedOption] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [confirmationMessage, setConfirmationMessage] = useState('')
-  const { baseUrl } = useSelector(state => state.score)
+  const {
+    baseUrl,
+    annotationEditor: { subject, predicat },
+  } = useSelector(state => state.score)
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch } = useGetOutgoingAnnotationsQuery(findKey(subject), { skip: !subject })
 
@@ -98,8 +101,8 @@ export const AnnotationEditor = ({ subject, predicat }) => {
           </ListItem>
 
           <ListSubheader>Subject</ListSubheader>
-          <Item key={findKey(subject)} {...subject} {...{ baseUrl }} />
-          
+          <Item key={findKey(subject)} {...subject} />
+
           <ListSubheader>Value</ListSubheader>
           <ListItem>
             <Select required value={selectedOption} onChange={event => setSelectedOption(event.target.value)}>
