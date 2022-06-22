@@ -1,13 +1,16 @@
-import { AddComment, Close, Done } from '@mui/icons-material'
+import { AddComment, Close, Done, HistoryEdu } from '@mui/icons-material'
 import {
-  Alert,
   AppBar,
   CircularProgress,
   Drawer,
   IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
   MenuItem,
   Select,
-  Snackbar,
   SpeedDial,
   Tab,
   Tabs,
@@ -76,24 +79,37 @@ export const AnnotationEditor = ({ subject, predicat }) => {
                 centered
                 sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: COLOR_SELECTED } }}
               >
-                <Tab label={predicat.label || predicat.iri.slice(baseUrl.length)} icon={<AddComment />} />
+                <Tab label="New annotation" icon={<AddComment />} />
               </Tabs>
             </Toolbar>
           </AppBar>
-          <Item
-            key={findKey(subject)}
-            {...subject}
-            {...{ baseUrl }}
-            secondaryAction={
-              <Select required value={selectedOption} onChange={event => setSelectedOption(event.target.value)}>
-                {options[predicat.iri].map(option => (
-                  <MenuItem key={option.iri} value={option.iri}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            }
-          />
+
+          <ListSubheader>Property</ListSubheader>
+          <ListItem key={predicat.iri} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <HistoryEdu />
+              </ListItemIcon>
+              <ListItemText
+                primary={predicat.label || predicat.iri.slice(baseUrl.length)}
+                secondary={predicat.iri.slice(baseUrl.length)}
+              />
+            </ListItemButton>
+          </ListItem>
+
+          <ListSubheader>Subject</ListSubheader>
+          <Item key={findKey(subject)} {...subject} {...{ baseUrl }} />
+          
+          <ListSubheader>Value</ListSubheader>
+          <ListItem>
+            <Select required value={selectedOption} onChange={event => setSelectedOption(event.target.value)}>
+              {options[predicat.iri].map(option => (
+                <MenuItem key={option.iri} value={option.iri}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </ListItem>
 
           <Tooltip title="Validate">
             <SpeedDial
