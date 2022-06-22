@@ -25,7 +25,7 @@ export const TretiseLibrary = ({ isOpen, onClose }) => {
   const [selectedTreatise, setSelectedTreatise] = useState(treatiseIri)
 
   return (
-    <Dialog open={isOpen} onClose={onClose} sx={{ width: 400 }}>
+    <Dialog open={isOpen} onClose={onClose}>
       <DialogContent>
         <Typography gutterBottom variant="h5" component="div">
           Historical treatises

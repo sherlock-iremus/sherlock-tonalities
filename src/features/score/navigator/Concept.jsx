@@ -26,7 +26,7 @@ export const Concept = props => {
                 key={subClass.iri}
                 selectedConcept={props.selectedConcept}
                 concept={subClass}
-                setInspection={clickedConcept => props.setInspection(clickedConcept)}
+                setInspection={props.setInspection}
               />
             ))}
           </List>
