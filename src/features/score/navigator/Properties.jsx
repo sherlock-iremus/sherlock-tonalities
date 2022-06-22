@@ -48,7 +48,7 @@ export const Properties = props => {
       <ListItem
         disablePadding
         secondaryAction={
-          <Tooltip title="Switch treaty">
+          <Tooltip title="Change treaty">
             <IconButton onClick={() => setIsTreatySelectorOpen(true)}>
               <CompareArrows />
             </IconButton>

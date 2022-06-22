@@ -27,7 +27,7 @@ export const ScoreLibrary = () => {
   const [selectedScore, setSelectedScore] = useState({ scoreIri })
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   return (
-    <Card sx={{ maxWidth: 400, overflow: 'auto' }}>
+    <Card sx={{ maxWidth: 400, maxHeight: 800}}>
       <CardMedia component="img" height="140" image={cover} alt="score" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

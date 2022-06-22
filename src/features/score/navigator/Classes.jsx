@@ -1,4 +1,5 @@
-import { Button, List, ListSubheader } from '@mui/material'
+import { CompareArrows, HistoryEdu } from '@mui/icons-material'
+import { Button, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Tooltip } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
@@ -31,26 +32,39 @@ export const Classes = props => {
   }, [props.filter, props.treatise])
 
   return (
-    <List
-      subheader={
-        <ListSubheader sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {props.treatise.iri.slice(tonalityBaseUrl.length)}
-          <Button size="small" variant="text" onClick={() => setIsTreatySelectorOpen(true)}>
-            Change treaty
-          </Button>
-          <TretiseLibrary isOpen={isTreatySelectorOpen} onClose={() => setIsTreatySelectorOpen(false)} />
-        </ListSubheader>
-      }
-    >
-      {filteredTree.classes.length &&
-        filteredTree.classes.map(concept => (
-          <Concept
-            key={concept.iri}
-            selectedConcept={inspectedEntity.conceptIri}
-            concept={concept}
-            setInspection={conceptIri => dispatch(setInspectedEntity({ conceptIri }))}
+    <>
+      <TretiseLibrary isOpen={isTreatySelectorOpen} onClose={() => setIsTreatySelectorOpen(false)} />
+      <ListItem
+        disablePadding
+        secondaryAction={
+          <Tooltip title="Change treaty">
+            <IconButton onClick={() => setIsTreatySelectorOpen(true)}>
+              <CompareArrows />
+            </IconButton>
+          </Tooltip>
+        }
+      >
+        <ListItemButton>
+          <ListItemIcon>
+            <HistoryEdu />
+          </ListItemIcon>
+          <ListItemText
+            primary={props.treatise.iri.slice(tonalityBaseUrl.length)}
+            secondary={props.treatise.iri.slice(0, tonalityBaseUrl.length)}
           />
-        ))}
-    </List>
+        </ListItemButton>
+      </ListItem>
+      <List subheader={<ListSubheader>Classes</ListSubheader>}>
+        {filteredTree.classes.length &&
+          filteredTree.classes.map(concept => (
+            <Concept
+              key={concept.iri}
+              selectedConcept={inspectedEntity.conceptIri}
+              concept={concept}
+              setInspection={conceptIri => dispatch(setInspectedEntity({ conceptIri }))}
+            />
+          ))}
+      </List>
+    </>
   )
 }
