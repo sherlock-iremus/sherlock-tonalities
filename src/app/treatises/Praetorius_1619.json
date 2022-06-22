@@ -1,44 +1,44 @@
 {
-  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#",
+  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#",
   "classes": [
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Alteration",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Alteration",
       "label": "Alteration",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Flat",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Flat",
           "label": "Flat"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Natural",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Natural",
           "label": "Natural"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Sharp",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Sharp",
           "label": "Sharp"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#SystemAlteration",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#SystemAlteration",
           "label": "SystemAlteration",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#SystemAlteration_a-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#SystemAlteration_a-",
               "label": "SystemAlteration_a-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#SystemAlteration_b-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#SystemAlteration_b-",
               "label": "SystemAlteration_b-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#SystemAlteration_e-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#SystemAlteration_e-",
               "label": "SystemAlteration_e-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#SystemAlteration_c+",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#SystemAlteration_c+",
               "label": "SystemAlteration_c+"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#SystemAlteration_f+",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#SystemAlteration_f+",
               "label": "SystemAlteration_f+"
             }
           ]
@@ -46,107 +46,107 @@
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Ambitus",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Ambitus",
       "label": "Ambitus",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DimishedAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DimishedAmbitus",
           "label": "DimishedAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#ExactAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#ExactAmbitus",
           "label": "ExactAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#ExpandedAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#ExpandedAmbitus",
           "label": "ExpandedAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#RegularAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#RegularAmbitus",
           "label": "RegularAmbitus",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a2_a3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a2_a3",
               "label": "a2_a3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a3_a4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a3_a4",
               "label": "a3_a4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a4_a5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a4_a5",
               "label": "a4_a5"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b-2_b-3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b-2_b-3",
               "label": "b-2_b-3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b-3_b-4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b-3_b-4",
               "label": "b-3_b-4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b4_b5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b4_b5",
               "label": "b4_b5"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c2_c3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c2_c3",
               "label": "c2_c3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c3_c4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c3_c4",
               "label": "c3_c4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c4_c5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c4_c5",
               "label": "c4_c5"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#d2_d3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#d2_d3",
               "label": "d2_d3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#d3_d4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#d3_d4",
               "label": "d3_d4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#d4_d5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#d4_d5",
               "label": "d4_d5"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e2_e3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e2_e3",
               "label": "e2_e3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e3_e4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e3_e4",
               "label": "e3_e4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e4_e5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e4_e5",
               "label": "e4_e5"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f2_f3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f2_f3",
               "label": "f2_f3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f3_f4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f3_f4",
               "label": "f3_f4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f4_f5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f4_f5",
               "label": "f4_f5"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g2_g3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g2_g3",
               "label": "g2_g3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g3_g4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g3_g4",
               "label": "g3_g4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g4_g5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g4_g5",
               "label": "g4_g5"
             }
           ]
@@ -154,113 +154,113 @@
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#ClavisSignatura",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#ClavisSignatura",
       "label": "ClavisSignatura",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c_1",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c_1",
           "label": "c_1"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c_2",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c_2",
           "label": "c_2"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c_3",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c_3",
           "label": "c_3"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c_4",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c_4",
           "label": "c_4"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f_3",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f_3",
           "label": "f_3"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f_4",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f_4",
           "label": "f_4"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f_5",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f_5",
           "label": "f_5"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g_1",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g_1",
           "label": "g_1"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g_2",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g_2",
           "label": "g_2"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DiatonicSystem",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DiatonicSystem",
       "label": "DiatonicSystem",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#RegularSystem",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#RegularSystem",
           "label": "RegularSystem"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#TransposedSystem",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#TransposedSystem",
           "label": "TransposedSystem"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Finalis",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Finalis",
       "label": "Finalis",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Irregularis",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Irregularis",
           "label": "Irregularis"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Regularis",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Regularis",
           "label": "Regularis"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval",
       "label": "Interval",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#IntervalSpecies",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#IntervalSpecies",
           "label": "IntervalSpecies",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpecies",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpecies",
               "label": "OctaveSpecies",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpeciesA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpeciesA",
                   "label": "OctaveSpeciesA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpeciesB",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpeciesB",
                   "label": "OctaveSpeciesB"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpeciesC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpeciesC",
                   "label": "OctaveSpeciesC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpeciesD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpeciesD",
                   "label": "OctaveSpeciesD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpeciesE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpeciesE",
                   "label": "OctaveSpeciesE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpeciesF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpeciesF",
                   "label": "OctaveSpeciesF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveSpeciesG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveSpeciesG",
                   "label": "OctaveSpeciesG"
                 }
               ]
@@ -268,187 +268,187 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#MajorThird",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#MajorThird",
           "label": "MajorThird",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_b1_d2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_b1_d2",
               "label": "Interval_b1_d2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c1_e1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c1_e1",
               "label": "Interval_c1_e1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c2_e2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c2_e2",
               "label": "Interval_c2_e2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d1_fis1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d1_fis1",
               "label": "Interval_d1_fis1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d2_fis2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d2_fis2",
               "label": "Interval_d2_fis2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_a1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_a1",
               "label": "Interval_f1_a1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_h1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_h1",
               "label": "Interval_g1_h1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Repercussio",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Repercussio",
               "label": "Repercussio",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_B_f",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_B_f",
                   "label": "Interval_B_f"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_c2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_c2",
                   "label": "Interval_a1_c2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_d2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_d2",
                   "label": "Interval_a1_d2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_e2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_e2",
                   "label": "Interval_a1_e2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_f2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_f2",
                   "label": "Interval_a1_f2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a_f1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a_f1",
                   "label": "Interval_a_f1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_b1_d2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_b1_d2",
                   "label": "Interval_b1_d2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_b_f1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_b_f1",
                   "label": "Interval_b_f1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c1_e1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c1_e1",
                   "label": "Interval_c1_e1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c1_g1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c1_g1",
                   "label": "Interval_c1_g1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c2_e2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c2_e2",
                   "label": "Interval_c2_e2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c2_g2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c2_g2",
                   "label": "Interval_c2_g2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c_g",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c_g",
                   "label": "Interval_c_g"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d1_a1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d1_a1",
                   "label": "Interval_d1_a1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d1_fis1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d1_fis1",
                   "label": "Interval_d1_fis1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d1_g1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d1_g1",
                   "label": "Interval_d1_g1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d2_a2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d2_a2",
                   "label": "Interval_d2_a2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d2_f2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d2_f2",
                   "label": "Interval_d2_f2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d2_fis2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d2_fis2",
                   "label": "Interval_d2_fis2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d_a",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d_a",
                   "label": "Interval_d_a"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_a1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_a1",
                   "label": "Interval_e1_a1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_c2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_c2",
                   "label": "Interval_e1_c2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_g1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_g1",
                   "label": "Interval_e1_g1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_h1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_h1",
                   "label": "Interval_e1_h1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_a1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_a1",
                   "label": "Interval_f1_a1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_as1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_as1",
                   "label": "Interval_f1_as1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_b1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_b1",
                   "label": "Interval_f1_b1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_c2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_c2",
                   "label": "Interval_f1_c2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f_c1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f_c1",
                   "label": "Interval_f_c1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_b1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_b1",
                   "label": "Interval_g1_b1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_c2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_c2",
                   "label": "Interval_g1_c2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_d2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_d2",
                   "label": "Interval_g1_d2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_h1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_h1",
                   "label": "Interval_g1_h1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g_d1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g_d1",
                   "label": "Interval_g_d1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_h1_e2",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_h1_e2",
                   "label": "Interval_h1_e2"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_h_e1",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_h_e1",
                   "label": "Interval_h_e1"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f_c'",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f_c'",
                   "label": "Interval_f_c'"
                 }
               ]
@@ -456,149 +456,149 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#MinorSixth",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#MinorSixth",
           "label": "MinorSixth",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_f2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_f2",
               "label": "Interval_a1_f2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a_f1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a_f1",
               "label": "Interval_a_f1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_c2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_c2",
               "label": "Interval_e1_c2"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#MinorThird",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#MinorThird",
           "label": "MinorThird",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_c2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_c2",
               "label": "Interval_a1_c2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d2_f2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d2_f2",
               "label": "Interval_d2_f2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_g1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_g1",
               "label": "Interval_e1_g1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_as1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_as1",
               "label": "Interval_f1_as1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_b1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_b1",
               "label": "Interval_g1_b1"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Octave",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Octave",
           "label": "Octave"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PerfectFifth",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PerfectFifth",
           "label": "PerfectFifth",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_B_f",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_B_f",
               "label": "Interval_B_f"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_e2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_e2",
               "label": "Interval_a1_e2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_b_f1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_b_f1",
               "label": "Interval_b_f1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c1_g1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c1_g1",
               "label": "Interval_c1_g1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c2_g2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c2_g2",
               "label": "Interval_c2_g2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_c_g",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_c_g",
               "label": "Interval_c_g"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d1_a1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d1_a1",
               "label": "Interval_d1_a1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d2_a2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d2_a2",
               "label": "Interval_d2_a2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d_a",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d_a",
               "label": "Interval_d_a"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_h1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_h1",
               "label": "Interval_e1_h1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_c2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_c2",
               "label": "Interval_f1_c2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f_c1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f_c1",
               "label": "Interval_f_c1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_d2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_d2",
               "label": "Interval_g1_d2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g_d1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g_d1",
               "label": "Interval_g_d1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f_c'",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f_c'",
               "label": "Interval_f_c'"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PerfectFourth",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PerfectFourth",
           "label": "PerfectFourth",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_a1_d2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_a1_d2",
               "label": "Interval_a1_d2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_d1_g1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_d1_g1",
               "label": "Interval_d1_g1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_e1_a1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_e1_a1",
               "label": "Interval_e1_a1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_f1_b1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_f1_b1",
               "label": "Interval_f1_b1"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_g1_c2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_g1_c2",
               "label": "Interval_g1_c2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_h1_e2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_h1_e2",
               "label": "Interval_h1_e2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Interval_h_e1",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Interval_h_e1",
               "label": "Interval_h_e1"
             }
           ]
@@ -606,53 +606,53 @@
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Mode",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Mode",
       "label": "Mode",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AMode",
           "label": "AMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthentic",
               "label": "AModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicA",
                   "label": "AModeAuthenticPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicD",
                   "label": "AModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicE",
                   "label": "AModeAuthenticPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicG",
                   "label": "AModeAuthenticPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagal",
               "label": "AModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicA",
                   "label": "AModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicD",
                   "label": "AModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicDLowerOctave",
                   "label": "AModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicG",
                   "label": "AModePlagalPolyphonicG"
                 }
               ]
@@ -660,125 +660,125 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AuthenticMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AuthenticMode",
           "label": "AuthenticMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthentic",
               "label": "AModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicA",
                   "label": "AModeAuthenticPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicD",
                   "label": "AModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicE",
                   "label": "AModeAuthenticPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicG",
                   "label": "AModeAuthenticPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthentic",
               "label": "CModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicB-",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicB-",
                   "label": "CModeAuthenticPolyphonicB-"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicC",
                   "label": "CModeAuthenticPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicD",
                   "label": "CModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicF",
                   "label": "CModeAuthenticPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicFLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicFLowerOctave",
                   "label": "CModeAuthenticPolyphonicFLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicG",
                   "label": "CModeAuthenticPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthentic",
               "label": "DModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicC",
                   "label": "DModeAuthenticPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicD",
                   "label": "DModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicG",
                   "label": "DModeAuthenticPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthentic",
               "label": "EModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicA",
                   "label": "EModeAuthenticPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicALowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicALowerOctave",
                   "label": "EModeAuthenticPolyphonicALowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicE",
                   "label": "EModeAuthenticPolyphonicE"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthentic",
               "label": "FModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicB-",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicB-",
                   "label": "FModeAuthenticPolyphonicB-"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicF",
                   "label": "FModeAuthenticPolyphonicF"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthentic",
               "label": "GModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicC",
                   "label": "GModeAuthenticPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicD",
                   "label": "GModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicG",
                   "label": "GModeAuthenticPolyphonicG"
                 }
               ]
@@ -786,155 +786,155 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AuthenticPolyphonicMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AuthenticPolyphonicMode",
           "label": "AuthenticPolyphonicMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicA",
               "label": "AModeAuthenticPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicD",
               "label": "AModeAuthenticPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicE",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicE",
               "label": "AModeAuthenticPolyphonicE"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicG",
               "label": "AModeAuthenticPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicB-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicB-",
               "label": "CModeAuthenticPolyphonicB-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicC",
               "label": "CModeAuthenticPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicD",
               "label": "CModeAuthenticPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicF",
               "label": "CModeAuthenticPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicFLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicFLowerOctave",
               "label": "CModeAuthenticPolyphonicFLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicG",
               "label": "CModeAuthenticPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicC",
               "label": "DModeAuthenticPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicD",
               "label": "DModeAuthenticPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicG",
               "label": "DModeAuthenticPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicA",
               "label": "EModeAuthenticPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicALowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicALowerOctave",
               "label": "EModeAuthenticPolyphonicALowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicE",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicE",
               "label": "EModeAuthenticPolyphonicE"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicB-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicB-",
               "label": "FModeAuthenticPolyphonicB-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicF",
               "label": "FModeAuthenticPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicC",
               "label": "GModeAuthenticPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicD",
               "label": "GModeAuthenticPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicG",
               "label": "GModeAuthenticPolyphonicG"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CMode",
           "label": "CMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthentic",
               "label": "CModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicB-",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicB-",
                   "label": "CModeAuthenticPolyphonicB-"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicC",
                   "label": "CModeAuthenticPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicD",
                   "label": "CModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicF",
                   "label": "CModeAuthenticPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicFLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicFLowerOctave",
                   "label": "CModeAuthenticPolyphonicFLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicG",
                   "label": "CModeAuthenticPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagal",
               "label": "CModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC",
                   "label": "CModePlagalPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC_LowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC_LowerOctave",
                   "label": "CModePlagalPolyphonicC_LowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicD",
                   "label": "CModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicDLowerOctave",
                   "label": "CModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicF",
                   "label": "CModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicG",
                   "label": "CModePlagalPolyphonicG"
                 }
               ]
@@ -942,45 +942,45 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DMode",
           "label": "DMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthentic",
               "label": "DModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicC",
                   "label": "DModeAuthenticPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicD",
                   "label": "DModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicG",
                   "label": "DModeAuthenticPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagal",
               "label": "DModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicD",
                   "label": "DModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicE",
                   "label": "DModePlagalPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicF",
                   "label": "DModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicG",
                   "label": "DModePlagalPolyphonicG"
                 }
               ]
@@ -988,41 +988,41 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EMode",
           "label": "EMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthentic",
               "label": "EModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicA",
                   "label": "EModeAuthenticPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicALowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicALowerOctave",
                   "label": "EModeAuthenticPolyphonicALowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicE",
                   "label": "EModeAuthenticPolyphonicE"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagal",
               "label": "EModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicA",
                   "label": "EModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicE",
                   "label": "EModePlagalPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicEHigherOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicEHigherOctave",
                   "label": "EModePlagalPolyphonicEHigherOctave"
                 }
               ]
@@ -1030,33 +1030,33 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FMode",
           "label": "FMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthentic",
               "label": "FModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicB-",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicB-",
                   "label": "FModeAuthenticPolyphonicB-"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicF",
                   "label": "FModeAuthenticPolyphonicF"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagal",
               "label": "FModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicB-",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicB-",
                   "label": "FModePlagalPolyphonicB-"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicF",
                   "label": "FModePlagalPolyphonicF"
                 }
               ]
@@ -1064,57 +1064,57 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GMode",
           "label": "GMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthentic",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthentic",
               "label": "GModeAuthentic",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicC",
                   "label": "GModeAuthenticPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicD",
                   "label": "GModeAuthenticPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicG",
                   "label": "GModeAuthenticPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagal",
               "label": "GModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicA",
                   "label": "GModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicC",
                   "label": "GModePlagalPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicCLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicCLowerOctave",
                   "label": "GModePlagalPolyphonicCLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicD",
                   "label": "GModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicDLowerOctave",
                   "label": "GModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicF",
                   "label": "GModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicG",
                   "label": "GModePlagalPolyphonicG"
                 }
               ]
@@ -1122,255 +1122,255 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PlagalMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PlagalMode",
           "label": "PlagalMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagal",
               "label": "AModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicA",
                   "label": "AModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicD",
                   "label": "AModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicDLowerOctave",
                   "label": "AModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicG",
                   "label": "AModePlagalPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagal",
               "label": "CModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC",
                   "label": "CModePlagalPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC_LowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC_LowerOctave",
                   "label": "CModePlagalPolyphonicC_LowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicD",
                   "label": "CModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicDLowerOctave",
                   "label": "CModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicF",
                   "label": "CModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicG",
                   "label": "CModePlagalPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagal",
               "label": "DModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicD",
                   "label": "DModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicE",
                   "label": "DModePlagalPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicF",
                   "label": "DModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicG",
                   "label": "DModePlagalPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagal",
               "label": "EModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicA",
                   "label": "EModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicE",
                   "label": "EModePlagalPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicEHigherOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicEHigherOctave",
                   "label": "EModePlagalPolyphonicEHigherOctave"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagal",
               "label": "FModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicB-",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicB-",
                   "label": "FModePlagalPolyphonicB-"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicF",
                   "label": "FModePlagalPolyphonicF"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagal",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagal",
               "label": "GModePlagal",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicA",
                   "label": "GModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicC",
                   "label": "GModePlagalPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicCLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicCLowerOctave",
                   "label": "GModePlagalPolyphonicCLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicD",
                   "label": "GModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicDLowerOctave",
                   "label": "GModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicF",
                   "label": "GModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicG",
                   "label": "GModePlagalPolyphonicG"
                 }
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PlagalPolyphonicMode",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PlagalPolyphonicMode",
               "label": "PlagalPolyphonicMode",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicA",
                   "label": "AModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicD",
                   "label": "AModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicDLowerOctave",
                   "label": "AModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicG",
                   "label": "AModePlagalPolyphonicG"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC",
                   "label": "CModePlagalPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC_LowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC_LowerOctave",
                   "label": "CModePlagalPolyphonicC_LowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicD",
                   "label": "CModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicDLowerOctave",
                   "label": "CModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicF",
                   "label": "CModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicG",
                   "label": "CModePlagalPolyphonicG"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicD",
                   "label": "DModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicE",
                   "label": "DModePlagalPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicF",
                   "label": "DModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicG",
                   "label": "DModePlagalPolyphonicG"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicA",
                   "label": "EModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicE",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicE",
                   "label": "EModePlagalPolyphonicE"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicEHigherOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicEHigherOctave",
                   "label": "EModePlagalPolyphonicEHigherOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicB-",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicB-",
                   "label": "FModePlagalPolyphonicB-"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicF",
                   "label": "FModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicA",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicA",
                   "label": "GModePlagalPolyphonicA"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicC",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicC",
                   "label": "GModePlagalPolyphonicC"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicCLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicCLowerOctave",
                   "label": "GModePlagalPolyphonicCLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicD",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicD",
                   "label": "GModePlagalPolyphonicD"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicDLowerOctave",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicDLowerOctave",
                   "label": "GModePlagalPolyphonicDLowerOctave"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicF",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicF",
                   "label": "GModePlagalPolyphonicF"
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicG",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicG",
                   "label": "GModePlagalPolyphonicG"
                 }
               ]
@@ -1378,163 +1378,163 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PlagalPolyphonicMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PlagalPolyphonicMode",
           "label": "PlagalPolyphonicMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicA",
               "label": "AModePlagalPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicD",
               "label": "AModePlagalPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicDLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicDLowerOctave",
               "label": "AModePlagalPolyphonicDLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicG",
               "label": "AModePlagalPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC",
               "label": "CModePlagalPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC_LowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC_LowerOctave",
               "label": "CModePlagalPolyphonicC_LowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicD",
               "label": "CModePlagalPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicDLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicDLowerOctave",
               "label": "CModePlagalPolyphonicDLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicF",
               "label": "CModePlagalPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicG",
               "label": "CModePlagalPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicD",
               "label": "DModePlagalPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicE",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicE",
               "label": "DModePlagalPolyphonicE"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicF",
               "label": "DModePlagalPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicG",
               "label": "DModePlagalPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicA",
               "label": "EModePlagalPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicE",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicE",
               "label": "EModePlagalPolyphonicE"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicEHigherOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicEHigherOctave",
               "label": "EModePlagalPolyphonicEHigherOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicB-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicB-",
               "label": "FModePlagalPolyphonicB-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicF",
               "label": "FModePlagalPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicA",
               "label": "GModePlagalPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicC",
               "label": "GModePlagalPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicCLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicCLowerOctave",
               "label": "GModePlagalPolyphonicCLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicD",
               "label": "GModePlagalPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicDLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicDLowerOctave",
               "label": "GModePlagalPolyphonicDLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicF",
               "label": "GModePlagalPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicG",
               "label": "GModePlagalPolyphonicG"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicMode",
           "label": "PolyphonicMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicAMode",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicAMode",
               "label": "PolyphonicAMode",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicAModeAuthentic",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicAModeAuthentic",
                   "label": "PolyphonicAModeAuthentic",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicA",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicA",
                       "label": "AModeAuthenticPolyphonicA"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicD",
                       "label": "AModeAuthenticPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicE",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicE",
                       "label": "AModeAuthenticPolyphonicE"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicG",
                       "label": "AModeAuthenticPolyphonicG"
                     }
                   ]
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicAModePlagal",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicAModePlagal",
                   "label": "PolyphonicAModePlagal",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicA",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicA",
                       "label": "AModePlagalPolyphonicA"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicD",
                       "label": "AModePlagalPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicDLowerOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicDLowerOctave",
                       "label": "AModePlagalPolyphonicDLowerOctave"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicG",
                       "label": "AModePlagalPolyphonicG"
                     }
                   ]
@@ -1542,65 +1542,65 @@
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicCMode",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicCMode",
               "label": "PolyphonicCMode",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicCModeAuthentic",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicCModeAuthentic",
                   "label": "PolyphonicCModeAuthentic",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicB-",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicB-",
                       "label": "CModeAuthenticPolyphonicB-"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicC",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicC",
                       "label": "CModeAuthenticPolyphonicC"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicD",
                       "label": "CModeAuthenticPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicF",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicF",
                       "label": "CModeAuthenticPolyphonicF"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicFLowerOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicFLowerOctave",
                       "label": "CModeAuthenticPolyphonicFLowerOctave"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicG",
                       "label": "CModeAuthenticPolyphonicG"
                     }
                   ]
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicCModePlagal",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicCModePlagal",
                   "label": "PolyphonicCModePlagal",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC",
                       "label": "CModePlagalPolyphonicC"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicC_LowerOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicC_LowerOctave",
                       "label": "CModePlagalPolyphonicC_LowerOctave"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicD",
                       "label": "CModePlagalPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicDLowerOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicDLowerOctave",
                       "label": "CModePlagalPolyphonicDLowerOctave"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicF",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicF",
                       "label": "CModePlagalPolyphonicF"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicG",
                       "label": "CModePlagalPolyphonicG"
                     }
                   ]
@@ -1608,45 +1608,45 @@
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicDMode",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicDMode",
               "label": "PolyphonicDMode",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicDModeAuthentic",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicDModeAuthentic",
                   "label": "PolyphonicDModeAuthentic",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicC",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicC",
                       "label": "DModeAuthenticPolyphonicC"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicD",
                       "label": "DModeAuthenticPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicG",
                       "label": "DModeAuthenticPolyphonicG"
                     }
                   ]
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicDModePlagal",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicDModePlagal",
                   "label": "PolyphonicDModePlagal",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicD",
                       "label": "DModePlagalPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicE",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicE",
                       "label": "DModePlagalPolyphonicE"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicF",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicF",
                       "label": "DModePlagalPolyphonicF"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicG",
                       "label": "DModePlagalPolyphonicG"
                     }
                   ]
@@ -1654,41 +1654,41 @@
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicEMode",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicEMode",
               "label": "PolyphonicEMode",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicEModeAuthentic",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicEModeAuthentic",
                   "label": "PolyphonicEModeAuthentic",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicA",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicA",
                       "label": "EModeAuthenticPolyphonicA"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicALowerOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicALowerOctave",
                       "label": "EModeAuthenticPolyphonicALowerOctave"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicE",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicE",
                       "label": "EModeAuthenticPolyphonicE"
                     }
                   ]
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicEModePlagal",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicEModePlagal",
                   "label": "PolyphonicEModePlagal",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicA",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicA",
                       "label": "EModePlagalPolyphonicA"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicE",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicE",
                       "label": "EModePlagalPolyphonicE"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicEHigherOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicEHigherOctave",
                       "label": "EModePlagalPolyphonicEHigherOctave"
                     }
                   ]
@@ -1696,33 +1696,33 @@
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicFMode",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicFMode",
               "label": "PolyphonicFMode",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicFModeAuthentic",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicFModeAuthentic",
                   "label": "PolyphonicFModeAuthentic",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicB-",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicB-",
                       "label": "FModeAuthenticPolyphonicB-"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicF",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicF",
                       "label": "FModeAuthenticPolyphonicF"
                     }
                   ]
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicFModePlagal",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicFModePlagal",
                   "label": "PolyphonicFModePlagal",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicB-",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicB-",
                       "label": "FModePlagalPolyphonicB-"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicF",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicF",
                       "label": "FModePlagalPolyphonicF"
                     }
                   ]
@@ -1730,57 +1730,57 @@
               ]
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicGMode",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicGMode",
               "label": "PolyphonicGMode",
               "children": [
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicGModeAuthentic",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicGModeAuthentic",
                   "label": "PolyphonicGModeAuthentic",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicC",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicC",
                       "label": "GModeAuthenticPolyphonicC"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicD",
                       "label": "GModeAuthenticPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicG",
                       "label": "GModeAuthenticPolyphonicG"
                     }
                   ]
                 },
                 {
-                  "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PolyphonicGModePlagal",
+                  "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PolyphonicGModePlagal",
                   "label": "PolyphonicGModePlagal",
                   "children": [
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicA",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicA",
                       "label": "GModePlagalPolyphonicA"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicC",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicC",
                       "label": "GModePlagalPolyphonicC"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicCLowerOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicCLowerOctave",
                       "label": "GModePlagalPolyphonicCLowerOctave"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicD",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicD",
                       "label": "GModePlagalPolyphonicD"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicDLowerOctave",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicDLowerOctave",
                       "label": "GModePlagalPolyphonicDLowerOctave"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicF",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicF",
                       "label": "GModePlagalPolyphonicF"
                     },
                     {
-                      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicG",
+                      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicG",
                       "label": "GModePlagalPolyphonicG"
                     }
                   ]
@@ -1790,135 +1790,135 @@
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#TransposedMode",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#TransposedMode",
           "label": "TransposedMode",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicD",
               "label": "AModeAuthenticPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicE",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicE",
               "label": "AModeAuthenticPolyphonicE"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModeAuthenticPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModeAuthenticPolyphonicG",
               "label": "AModeAuthenticPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicDLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicDLowerOctave",
               "label": "AModePlagalPolyphonicDLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#AModePlagalPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#AModePlagalPolyphonicG",
               "label": "AModePlagalPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicB-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicB-",
               "label": "CModeAuthenticPolyphonicB-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicD",
               "label": "CModeAuthenticPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicF",
               "label": "CModeAuthenticPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicFLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicFLowerOctave",
               "label": "CModeAuthenticPolyphonicFLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModeAuthenticPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModeAuthenticPolyphonicG",
               "label": "CModeAuthenticPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicD",
               "label": "CModePlagalPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicDLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicDLowerOctave",
               "label": "CModePlagalPolyphonicDLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicF",
               "label": "CModePlagalPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#CModePlagalPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#CModePlagalPolyphonicG",
               "label": "CModePlagalPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicC",
               "label": "DModeAuthenticPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModeAuthenticPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModeAuthenticPolyphonicG",
               "label": "DModeAuthenticPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicE",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicE",
               "label": "DModePlagalPolyphonicE"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicF",
               "label": "DModePlagalPolyphonicF"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DModePlagalPolyphonicG",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DModePlagalPolyphonicG",
               "label": "DModePlagalPolyphonicG"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicA",
               "label": "EModeAuthenticPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModeAuthenticPolyphonicALowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModeAuthenticPolyphonicALowerOctave",
               "label": "EModeAuthenticPolyphonicALowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#EModePlagalPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#EModePlagalPolyphonicA",
               "label": "EModePlagalPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModeAuthenticPolyphonicB-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModeAuthenticPolyphonicB-",
               "label": "FModeAuthenticPolyphonicB-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#FModePlagalPolyphonicB-",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#FModePlagalPolyphonicB-",
               "label": "FModePlagalPolyphonicB-"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicC",
               "label": "GModeAuthenticPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModeAuthenticPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModeAuthenticPolyphonicD",
               "label": "GModeAuthenticPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicA",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicA",
               "label": "GModePlagalPolyphonicA"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicC",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicC",
               "label": "GModePlagalPolyphonicC"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicCLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicCLowerOctave",
               "label": "GModePlagalPolyphonicCLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicD",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicD",
               "label": "GModePlagalPolyphonicD"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicDLowerOctave",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicDLowerOctave",
               "label": "GModePlagalPolyphonicDLowerOctave"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#GModePlagalPolyphonicF",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#GModePlagalPolyphonicF",
               "label": "GModePlagalPolyphonicF"
             }
           ]
@@ -1926,283 +1926,283 @@
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#OctaveDivision",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#OctaveDivision",
       "label": "OctaveDivision",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#ArithmeticDivision",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#ArithmeticDivision",
           "label": "ArithmeticDivision"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#HarmonicDivision",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#HarmonicDivision",
           "label": "HarmonicDivision"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClass",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClass",
       "label": "PitchClass",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassA",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassA",
           "label": "PitchClassA",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a2",
               "label": "a2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a3",
               "label": "a3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a4",
               "label": "a4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a5",
               "label": "a5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassA-",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassA-",
           "label": "PitchClassA-",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a-2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a-2",
               "label": "a-2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a-3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a-3",
               "label": "a-3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a-4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a-4",
               "label": "a-4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#a-5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#a-5",
               "label": "a-5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassB",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassB",
           "label": "PitchClassB",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b2",
               "label": "b2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b3",
               "label": "b3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b4",
               "label": "b4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b5",
               "label": "b5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassB-",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassB-",
           "label": "PitchClassB-",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b-2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b-2",
               "label": "b-2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b-3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b-3",
               "label": "b-3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b-4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b-4",
               "label": "b-4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#b-5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#b-5",
               "label": "b-5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassC",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassC",
           "label": "PitchClassC",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c2",
               "label": "c2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c3",
               "label": "c3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c4",
               "label": "c4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c5",
               "label": "c5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassD",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassD",
           "label": "PitchClassD",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#d2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#d2",
               "label": "d2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#d3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#d3",
               "label": "d3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#d4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#d4",
               "label": "d4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#d5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#d5",
               "label": "d5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassE",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassE",
           "label": "PitchClassE",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e2",
               "label": "e2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e3",
               "label": "e3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e4",
               "label": "e4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e5",
               "label": "e5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassE-",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassE-",
           "label": "PitchClassE-",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e-2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e-2",
               "label": "e-2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e-3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e-3",
               "label": "e-3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e-4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e-4",
               "label": "e-4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#e-5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#e-5",
               "label": "e-5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassF",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassF",
           "label": "PitchClassF",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f2",
               "label": "f2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f3",
               "label": "f3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f4",
               "label": "f4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f5",
               "label": "f5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassG",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassG",
           "label": "PitchClassG",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g2",
               "label": "g2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g3",
               "label": "g3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g4",
               "label": "g4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#g5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#g5",
               "label": "g5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassC+",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassC+",
           "label": "PitchClassC+",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c+2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c+2",
               "label": "c+2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c+3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c+3",
               "label": "c+3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c+4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c+4",
               "label": "c+4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#c+5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#c+5",
               "label": "c+5"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#PitchClassF+",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#PitchClassF+",
           "label": "PitchClassF+",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f+2",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f+2",
               "label": "f+2"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f+3",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f+3",
               "label": "f+3"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f+4",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f+4",
               "label": "f+4"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#f+5",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#f+5",
               "label": "f+5"
             }
           ]
@@ -2210,19 +2210,19 @@
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#Scale",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#Scale",
       "label": "Scale",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#ChromaticScale",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#ChromaticScale",
           "label": "ChromaticScale"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#DiatonicScale",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#DiatonicScale",
           "label": "DiatonicScale"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#MixedScale",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#MixedScale",
           "label": "MixedScale"
         }
       ]
@@ -2230,347 +2230,347 @@
   ],
   "properties": [
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#ambitus",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#ambitus",
       "label": "ambitus",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#altusHasAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#altusHasAmbitus",
           "label": "altusHasAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#bassusHasAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#bassusHasAmbitus",
           "label": "bassusHasAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasAmbitus",
           "label": "cantusHasAmbitus"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cadence",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cadence",
       "label": "cadence",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasCadenceEvent",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasCadenceEvent",
           "label": "hasCadenceEvent"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasClausulaPeregrinaOnNote",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasClausulaPeregrinaOnNote",
           "label": "hasClausulaPeregrinaOnNote",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasClausulaPeregrinaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasClausulaPeregrinaOnNote",
               "label": "cantusHasClausulaPeregrinaOnNote"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasClausulaPeregrinaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasClausulaPeregrinaOnNote",
               "label": "tenorHasClausulaPeregrinaOnNote"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasClausulaPrimariaOnNote",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasClausulaPrimariaOnNote",
           "label": "hasClausulaPrimariaOnNote",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasClausulaPrimariaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasClausulaPrimariaOnNote",
               "label": "cantusHasClausulaPrimariaOnNote"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasClausulaPrimariaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasClausulaPrimariaOnNote",
               "label": "tenorHasClausulaPrimariaOnNote"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasClausulaSecundariaOnNote",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasClausulaSecundariaOnNote",
           "label": "hasClausulaSecundariaOnNote",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasClausulaSecundariaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasClausulaSecundariaOnNote",
               "label": "cantusHasClausulaSecundariaOnNote"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasClausulaSecundariaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasClausulaSecundariaOnNote",
               "label": "tenorHasClausulaSecundariaOnNote"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasClausulaTertiariaOnNote",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasClausulaTertiariaOnNote",
           "label": "hasClausulaTertiariaOnNote",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasClausulaTertiariaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasClausulaTertiariaOnNote",
               "label": "cantusHasClausulaTertiariaOnNote"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasClausulaTertiariaOnNote",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasClausulaTertiariaOnNote",
               "label": "tenorHasClausulaTertiariaOnNote"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasMelodicFormula",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasMelodicFormula",
           "label": "hasMelodicFormula"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#denotation",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#denotation",
       "label": "denotation",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasDenotation",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasDenotation",
           "label": "hasDenotation"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isDenotationOf",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isDenotationOf",
           "label": "isDenotationOf"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasAmbitus",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasAmbitus",
       "label": "hasAmbitus",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#altusHasAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#altusHasAmbitus",
           "label": "altusHasAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#bassusHasAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#bassusHasAmbitus",
           "label": "bassusHasAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasAmbitus",
           "label": "cantusHasAmbitus"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasAmbitus",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasAmbitus",
           "label": "tenorHasAmbitus"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasAssociationToPlanet",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasAssociationToPlanet",
       "label": "hasAssociationToPlanet"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasClavis",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasClavis",
       "label": "hasClavis"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasClef",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasClef",
       "label": "hasClef",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#altusHasClef",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#altusHasClef",
           "label": "altusHasClef"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#bassusHasClef",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#bassusHasClef",
           "label": "bassusHasClef"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasClef",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasClef",
           "label": "cantusHasClef"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasSystemAlteration",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasSystemAlteration",
           "label": "hasSystemAlteration"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#quintusHasClef",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#quintusHasClef",
           "label": "quintusHasClef"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasClef",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasClef",
           "label": "tenorHasClef"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasEthos",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasEthos",
       "label": "hasEthos"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasFinalis",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasFinalis",
       "label": "hasFinalis",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#bassusHasFinalis",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#bassusHasFinalis",
           "label": "bassusHasFinalis"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasFinalis",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasFinalis",
           "label": "cantusHasFinalis"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasOctavaSpecies",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasOctavaSpecies",
       "label": "hasOctavaSpecies"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasOctaveDivision",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasOctaveDivision",
       "label": "hasOctaveDivision",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#altusHasOctaveDivision",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#altusHasOctaveDivision",
           "label": "altusHasOctaveDivision"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#bassusHasOctaveDivision",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#bassusHasOctaveDivision",
           "label": "bassusHasOctaveDivision"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasOctaveDivision",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasOctaveDivision",
           "label": "cantusHasOctaveDivision"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasOctaveDivision",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasOctaveDivision",
           "label": "tenorHasOctaveDivision"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasOctaveSpecies",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasOctaveSpecies",
       "label": "hasOctaveSpecies"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasRepercussio",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasRepercussio",
       "label": "hasRepercussio",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasRepercussio",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasRepercussio",
           "label": "cantusHasRepercussio"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasRepercussio",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasRepercussio",
           "label": "tenorHasRepercussio"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasSignum",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasSignum",
       "label": "hasSignum"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasTrias",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasTrias",
       "label": "hasTrias",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#cantusHasTrias",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#cantusHasTrias",
           "label": "cantusHasTrias"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#tenorHasTrias",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#tenorHasTrias",
           "label": "tenorHasTrias"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isInSystema",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isInSystema",
       "label": "isInSystema"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isIntervallLowestHighestNote",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isIntervallLowestHighestNote",
       "label": "isIntervallLowestHighestNote"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isModus",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isModus",
       "label": "isModus"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isOnModalScaleDegree",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isOnModalScaleDegree",
       "label": "isOnModalScaleDegree"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isSpeciesOfScala",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isSpeciesOfScala",
       "label": "isSpeciesOfScala"
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#modulatio",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#modulatio",
       "label": "modulatio",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isModulatio",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isModulatio",
           "label": "isModulatio"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#modulatioHasClavis",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#modulatioHasClavis",
           "label": "modulatioHasClavis"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#note",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#note",
       "label": "note",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasHighestNote",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasHighestNote",
           "label": "hasHighestNote"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasLowestNote",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasLowestNote",
           "label": "hasLowestNote"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasNote",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasNote",
           "label": "hasNote"
         }
       ]
     },
     {
-      "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#transposition",
+      "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#transposition",
       "label": "transposition",
       "children": [
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasTranspositionPerQuartamInferiorem",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasTranspositionPerQuartamInferiorem",
           "label": "hasTranspositionPerQuartamInferiorem"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#hasTranspositionPerQuintamInferiorem",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#hasTranspositionPerQuintamInferiorem",
           "label": "hasTranspositionPerQuintamInferiorem"
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTransposition",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTransposition",
           "label": "isTransposition",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionByLowerFifth",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionByLowerFifth",
               "label": "isTranspositionByLowerFifth"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionByLowerFourth",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionByLowerFourth",
               "label": "isTranspositionByLowerFourth"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionByLowerMajorSecondOf",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionByLowerMajorSecondOf",
               "label": "isTranspositionByLowerMajorSecondOf"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionByUpperFifth",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionByUpperFifth",
               "label": "isTranspositionByUpperFifth"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionByUpperFourth",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionByUpperFourth",
               "label": "isTranspositionByUpperFourth"
             }
           ]
         },
         {
-          "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionFromTo",
+          "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionFromTo",
           "label": "isTranspositionFromTo",
           "children": [
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionOfModeFromSystemaIrregulareTo",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionOfModeFromSystemaIrregulareTo",
               "label": "isTranspositionOfModeFromSystemaIrregulareTo"
             },
             {
-              "iri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#isTranspositionOfModeFromSystemaRegulareTo",
+              "iri": "http://modality-tonality.huma-num.fr/Praetorius_1619_III#isTranspositionOfModeFromSystemaRegulareTo",
               "label": "isTranspositionOfModeFromSystemaRegulareTo"
             }
           ]
