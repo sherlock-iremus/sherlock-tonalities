@@ -2,11 +2,11 @@ import { AddComment, Piano } from '@mui/icons-material'
 import { SpeedDial, SpeedDialAction } from '@mui/material'
 import { Box } from '@mui/system'
 import { VERTICALITY } from '../constants'
-import actions from '../../../app/services/p140_p177.json'
 import { VerticalityItem } from '../items/VerticalityItem'
 import { setAnnotationEditor } from '../../../app/services/scoreSlice'
 import { withDispatch } from '../items/withDispatch'
 import { OutgoingAnnotations } from '../annotations/OutgoingAnnotations'
+import actions from '../../../app/services/p140_p177.json'
 
 const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseUrl }) => (
   <Box>
