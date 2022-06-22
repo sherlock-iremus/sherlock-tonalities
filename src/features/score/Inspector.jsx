@@ -43,6 +43,7 @@ import { PositionnedNoteItem } from './items/PositionnedNoteItem'
 import { ScoreItem } from './items/ScoreItem'
 import { findKey } from './utils'
 import { COLOR_INSPECTED } from './mei.css'
+import { AnnotationEntity } from './entities/AnnotationEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -137,7 +138,7 @@ export const Inspector = props => {
                   value={0}
                   textColor="inherit"
                   centered
-                  sx={{ flexGrow: 1, pr: 4, '& .MuiTabs-indicator': { backgroundColor: COLOR_INSPECTED } }}
+                  sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: COLOR_INSPECTED } }}
                 >
                   <Tab
                     label={
@@ -197,7 +198,8 @@ export const Inspector = props => {
               {conceptIri && <ConceptEntity {...{ conceptIri }} />}
               {selectionIri && <SelectionEntity {...{ selectionIri }} />}
               {verticalityIri && <VerticalityEntity {...{ verticalityIri, clickedNoteIri }} />}
-              {scoreIri && <ScoreItem {...{ scoreIri }} />}
+              {scoreIri && <ScoreItem />}
+              {annotationIri && <AnnotationEntity {...{ annotationIri }} />}
             </List>
           </Box>
         )}

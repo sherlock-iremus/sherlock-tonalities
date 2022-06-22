@@ -8,6 +8,7 @@ import {
   VERTICALITY,
 } from '../../features/score/constants'
 import {
+  getAnnotation,
   getAnnotationInfo,
   getAnnotationSelection,
   getChildSelections,
@@ -72,12 +73,6 @@ export const sparqlEndpoint = createApi({
 
         return pname.toUpperCase() + oct + alteration
       },
-    }),
-    getAnnotations: builder.query({
-      query: scoreIri => ({
-        method: 'POST',
-        body: new URLSearchParams({ query: getScoreAnnotations(scoreIri) }),
-      }),
     }),
     getAnnotationInfo: builder.query({
       query: annotationIri => ({
@@ -208,6 +203,23 @@ export const sparqlEndpoint = createApi({
           predicat: e.predicat?.value,
         })),
     }),
+    getAnnotation: builder.query({
+      query: annotationIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getAnnotation(annotationIri) }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [element],
+        },
+      }) => ({
+        subject: element.subject?.value,
+        predicat: element.predicat?.value,
+        object: element.object?.type === 'litteral' ? element.object?.value : { conceptIri: element.object?.value },
+        date: element.date?.value,
+        contributorIri: element.contributor?.value,
+      }),
+    }),
   }),
 })
 
@@ -216,7 +228,6 @@ export default sparqlEndpoint
 export const {
   useGetNotesOnFirstBeatQuery,
   useGetNoteInfoQuery,
-  useGetAnnotationsQuery,
   useGetAnnotationInfoQuery,
   useGetSubAnnotationsQuery,
   useGetConceptAnnotationsQuery,
@@ -231,4 +242,5 @@ export const {
   useGetSelectionAnalyticalEntitiesQuery,
   useGetIncomingAnnotationsQuery,
   useGetOutgoingAnnotationsQuery,
+  useGetAnnotationQuery,
 } = sparqlEndpoint

@@ -32,20 +32,6 @@ export const getNoteInfo = noteIri => `
     }
 `
 
-export const getScoreAnnotations = scoreIri => `
-    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    SELECT ?root
-    WHERE {
-        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            ?analysis crm:P16_used_specific_object <${scoreIri}> .
-            ?analysis crm:P9_consists_of ?annotation .
-            ?annotation crm:P140_assigned_attribute_to ?group .
-            ?root crm:P141_assigned ?group .
-        }
-    }
-    GROUP BY ?root
-`
-
 export const getAnnotationInfo = annotationIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -214,15 +200,43 @@ export const getOutgoingAnnotations = entityIri => `
 export const getIncommingAnnotations = entityIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
+    
     SELECT ?annotation ?date ?contributor ?subject ?predicat
+    
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    
     WHERE {
-            ?annotation crm:P141_assigned <${entityIri}>.
-            ?annotation a crm:E13_Attribute_Assignment.
-            ?annotation dcterms:created ?date.
-            ?annotation crm:P140_assigned_attribute_to ?subject.
-            ?annotation crm:P177_assigned_property_of_type ?predicat.
-            ?annotation crm:P14_carried_out_by ?contributor.
+        ?annotation crm:P141_assigned <${entityIri}>.
+        ?annotation a crm:E13_Attribute_Assignment.
+        ?annotation dcterms:created ?date.
+        ?annotation crm:P140_assigned_attribute_to ?subject.
+        ?annotation crm:P177_assigned_property_of_type ?predicat.
+        ?annotation crm:P14_carried_out_by ?contributor.
+    }
+`
+
+export const getAnnotation = annotationIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+
+    SELECT ?subject ?predicat ?object ?date ?contributor
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
+    WHERE {
+        VALUES ?annotation {<${annotationIri}>}
+        ?annotation a crm:E13_Attribute_Assignment.
+        
+        ?annotation crm:P140_assigned_attribute_to ?subject.
+        ?subject crm:P2_has_type ?subjectType.
+
+        ?annotation crm:P141_assigned ?object.
+        OPTIONAL { ?object crm:P2_has_type ?objectType }
+
+        ?annotation crm:P177_assigned_property_of_type ?predicat.
+        ?annotation dcterms:created ?date.
+        ?annotation crm:P14_carried_out_by ?contributor.
     }
 `
