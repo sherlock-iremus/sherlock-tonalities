@@ -111,7 +111,11 @@ export const sparqlEndpoint = createApi({
         body: new URLSearchParams({ query: getScoreSelections(scoreIri) }),
       }),
       transformResponse: response =>
-        response.results?.bindings?.map(e => ({ iri: e.selection?.value, entities: e.entities?.value })),
+        response.results?.bindings?.map(e => ({
+          iri: e.selection?.value,
+          entities: e.entities?.value,
+          contributorIri: e.contributor?.value,
+        })),
     }),
     getChildSelections: builder.query({
       query: selectionIri => ({

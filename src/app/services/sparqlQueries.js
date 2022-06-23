@@ -89,16 +89,23 @@ export const getNoteSelections = noteIri => `
 
 export const getScoreSelections = scoreIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX dcterm: <http://purl.org/dc/terms/>
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-    SELECT ?selection ((COUNT(?entity)) AS ?entities)
+    SELECT ?selection ?entities ?contributor
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     WHERE {
-        ?entity sherlockmei:in_score <${scoreIri}>.
-        ?selection crm:P106_is_composed_of ?entity.
-        ?selection crm:P2_has_type <${SELECTION}>.
+        ?selection dcterm:creator ?contributor
+        {
+            SELECT ?selection ((COUNT(?entity)) AS ?entities)
+            WHERE {
+                ?entity sherlockmei:in_score <${scoreIri}>.
+                ?selection crm:P106_is_composed_of ?entity.
+                ?selection crm:P2_has_type <${SELECTION}>.
+            }
+            GROUP BY ?selection
+        }
     }
-    GROUP BY ?selection
 `
 
 export const getChildSelections = selectionIri => `

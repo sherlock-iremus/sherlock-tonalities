@@ -1,4 +1,4 @@
-import { Add, AudioFile, CompareArrows } from '@mui/icons-material'
+import { Add, AudioFile, CompareArrows, Delete, Edit } from '@mui/icons-material'
 import {
   IconButton,
   List,
@@ -15,9 +15,11 @@ import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
 import { setInspectedEntity, setSelectedEntity, setSelectionMode } from '../../../app/services/scoreSlice'
 import { useNavigate } from 'react-router-dom'
 import { COLOR_NAVIGATE } from '../mei.css'
+import { useGetUserIdQuery } from '../../../app/services/sherlockApi'
 
 export const Selections = props => {
   const { data: selections } = useGetScoreSelectionsQuery(props.scoreIri)
+  const { data: userId } = useGetUserIdQuery()
   const {
     inspectedEntities,
     currentEntityIndex,
@@ -56,7 +58,22 @@ export const Selections = props => {
       </ListItem>
       <List subheader={<ListSubheader>Created selections</ListSubheader>}>
         {selections?.map(selection => (
-          <ListItem key={selection.iri} disablePadding>
+          <ListItem
+            key={selection.iri}
+            disablePadding
+            secondaryAction={
+              selection.contributorIri.slice(baseUrl.length) === userId && (
+                <>
+                  <IconButton>
+                    <Edit />
+                  </IconButton>
+                  <IconButton>
+                    <Delete />
+                  </IconButton>
+                </>
+              )
+            }
+          >
             <ListItemButton
               onClick={() =>
                 (isInspectionMode && dispatch(setInspectedEntity({ selectionIri: selection.iri }))) ||

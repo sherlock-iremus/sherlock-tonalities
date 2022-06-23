@@ -48,7 +48,7 @@ export const SelectionEditor = () => {
   }
 
   return (
-    <Drawer open={isSelectionMode} anchor="right" variant="persistent">
+    <Drawer open={isSelectionMode} anchor="right" variant="persistent" SlideProps={{ direction: 'up' }}>
       <Box sx={{ width: 400 }}>
         <AppBar position="sticky" sx={{ bgcolor: COLOR_SELECTED }}>
           <Toolbar>
