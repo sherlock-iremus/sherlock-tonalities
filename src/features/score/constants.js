@@ -20,3 +20,6 @@ export const ANNOTATION = 'http://data-iremus.huma-num.fr/id/82dbd157-20df-422c-
 export const INSPECTED = 'inspected'
 export const SELECTED = 'selected'
 export const FOCUSED = 'focused'
+
+// API RETURN VALUES
+export const DISCONNECTED = "<a href='/oauth/login/orcid'> Please connect</a>"

@@ -1,7 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import env from '../../env.json'
-
-const headers = process.env.NODE_ENV === 'development' ? { Authorization: `Bearer ${env.token}` } : null
 
 export const sherlockApi = createApi({
   reducerPath: 'sherlockApi',
@@ -14,7 +11,6 @@ export const sherlockApi = createApi({
       query: body => ({
         url: 'selection',
         method: 'POST',
-        headers,
         body,
       }),
     }),
@@ -22,8 +18,12 @@ export const sherlockApi = createApi({
       query: body => ({
         url: 'e13',
         method: 'POST',
-        headers,
         body,
+      }),
+    }),
+    getUserId: builder.query({
+      query: () => ({
+        responseHandler: response => response.text(),
       }),
     }),
   }),
@@ -31,4 +31,4 @@ export const sherlockApi = createApi({
 
 export default sherlockApi
 
-export const { usePostSelectionMutation, usePostAnnotationMutation } = sherlockApi
+export const { usePostSelectionMutation, usePostAnnotationMutation, useGetUserIdQuery } = sherlockApi
