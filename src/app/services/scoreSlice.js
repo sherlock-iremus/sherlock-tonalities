@@ -12,6 +12,7 @@ const initialState = {
   isSelectionMode: false,
   inspectedEntities: [{}],
   currentEntityIndex: 0,
+  editingSelectionIri: '',
   selectedEntities: [],
   focusEntityIndex: -1,
   hoveredEntity: {},
@@ -46,13 +47,22 @@ const scoreSlice = createSlice({
     setSelectionMode: state => {
       state.isInspectionMode = false
       state.isSelectionMode = true
+      state.selectedEntities = []
     },
     setInspectionMode: state => {
       state.isInspectionMode = true
       state.isSelectionMode = false
+      state.selectedEntities = []
+      state.editingSelectionIri = ''
     },
     setAnnotationEditor: (state, action) => {
       state.annotationEditor = state.annotationEditor.subject ? initialState.annotationEditor : action.payload
+    },
+    setEditingSelection: (state, action) => {
+      state.editingSelectionIri = action.payload.selectionIri
+      state.selectedEntities = action.payload.children
+      state.isInspectionMode = false
+      state.isSelectionMode = true
     },
     setSelectedEntity: (state, action) => {
       const index =
@@ -94,4 +104,5 @@ export const {
   setInspectionMode,
   setSelectionMode,
   setAnnotationEditor,
+  setEditingSelection,
 } = scoreSlice.actions

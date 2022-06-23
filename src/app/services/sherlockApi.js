@@ -14,6 +14,13 @@ export const sherlockApi = createApi({
         body,
       }),
     }),
+    patchSelection: builder.mutation({
+      query: ({ uuid, ...body }) => ({
+        url: `selection/${uuid}`,
+        method: 'PATCH',
+        body,
+      }),
+    }),
     postAnnotation: builder.mutation({
       query: body => ({
         url: 'e13',
@@ -31,4 +38,5 @@ export const sherlockApi = createApi({
 
 export default sherlockApi
 
-export const { usePostSelectionMutation, usePostAnnotationMutation, useGetUserIdQuery } = sherlockApi
+export const { usePostSelectionMutation, usePostAnnotationMutation, useGetUserIdQuery, usePatchSelectionMutation } =
+  sherlockApi

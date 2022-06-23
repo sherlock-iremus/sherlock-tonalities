@@ -17,7 +17,7 @@ import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectionMode } from '../../../app/services/scoreSlice'
-import { usePostSelectionMutation } from '../../../app/services/sherlockApi'
+import { usePatchSelectionMutation, usePostSelectionMutation } from '../../../app/services/sherlockApi'
 import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
 import { Item } from '../items/Item'
 import { COLOR_SELECTED } from '../mei.css'
@@ -26,11 +26,15 @@ import { AlertMessage } from './AlertMessage'
 
 export const SelectionEditor = () => {
   const dispatch = useDispatch()
-  const { selectedEntities, isSelectionMode, baseUrl, scoreIri } = useSelector(state => state.score)
+  const { selectedEntities, isSelectionMode, baseUrl, scoreIri, editingSelectionIri } = useSelector(
+    state => state.score
+  )
   const [confirmationMessage, setConfirmationMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const { refetch } = useGetScoreSelectionsQuery(scoreIri)
-  const [postSelection, { isLoading }] = usePostSelectionMutation()
+  const [postSelection, { isLoading: isPostLoading }] = usePostSelectionMutation()
+  const [patchSelection, { isLoading: isPatchLoading }] = usePatchSelectionMutation()
+  const isLoading = isPostLoading || isPatchLoading
 
   const createSelection = async () => {
     if (selectedEntities.length && !isLoading) {
@@ -43,6 +47,21 @@ export const SelectionEditor = () => {
         dispatch(setInspectionMode())
       } catch {
         setErrorMessage('An error occured while creating the selection')
+      }
+    }
+  }
+
+  const updateSelection = async () => {
+    if (selectedEntities.length && !isLoading) {
+      try {
+        const children = selectedEntities.map(findKey)
+        const document_contexts = [scoreIri]
+        await patchSelection({ children, document_contexts, uuid: editingSelectionIri.slice(baseUrl.length) }).unwrap()
+        setConfirmationMessage('Annotation was successfully updated')
+        refetch()
+        dispatch(setInspectionMode())
+      } catch {
+        setErrorMessage('An error occured while updating the selection')
       }
     }
   }
@@ -68,7 +87,7 @@ export const SelectionEditor = () => {
               centered
               sx={{ flexGrow: 1, '& .MuiTabs-indicator': { backgroundColor: COLOR_SELECTED } }}
             >
-              <Tab label="New selection" icon={<BubbleChart />} />
+              <Tab label={editingSelectionIri ? 'Edit selection' : 'New selection'} icon={<BubbleChart />} />
             </Tabs>
           </Toolbar>
         </AppBar>
@@ -79,7 +98,7 @@ export const SelectionEditor = () => {
         </List>
         <Tooltip title="Validate">
           <SpeedDial
-            onClick={createSelection}
+            onClick={editingSelectionIri ? updateSelection : createSelection}
             ariaLabel="validate"
             sx={{
               position: 'absolute',

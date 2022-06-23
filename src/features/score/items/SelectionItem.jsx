@@ -1,9 +1,9 @@
-import { BubbleChart, ChevronRight, Close, ExpandMore } from '@mui/icons-material'
+import { BubbleChart, ChevronRight, Close, Edit, ExpandMore } from '@mui/icons-material'
 import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetChildSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
+import { setEditingSelection, setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { findKey } from '../utils'
 import { ConceptItem } from './ConceptItem'
@@ -23,14 +23,19 @@ const BaseSelectionItem = ({ selectionIri, concepts, isEntity, baseUrlLength, di
         secondaryAction={
           <>
             {isEntity && (
-              <IconButton
-                onClick={() =>
-                  (isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))) ||
-                  (isSelectionMode && dispatch(setSelectedEntity({ selectionIri })))
-                }
-              >
-                <Close />
-              </IconButton>
+              <>
+                <IconButton onClick={() => dispatch(setEditingSelection({ selectionIri, children }))}>
+                  <Edit />
+                </IconButton>
+                <IconButton
+                  onClick={() =>
+                    (isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))) ||
+                    (isSelectionMode && dispatch(setSelectedEntity({ selectionIri })))
+                  }
+                >
+                  <Close />
+                </IconButton>
+              </>
             )}
             {conceptIri && <ConceptItem conceptIri={conceptIri} />}
           </>

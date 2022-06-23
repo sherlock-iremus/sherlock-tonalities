@@ -63,14 +63,9 @@ export const Selections = props => {
             disablePadding
             secondaryAction={
               selection.contributorIri.slice(baseUrl.length) === userId && (
-                <>
-                  <IconButton>
-                    <Edit />
-                  </IconButton>
-                  <IconButton>
-                    <Delete />
-                  </IconButton>
-                </>
+                <IconButton disabled>
+                  <Delete />
+                </IconButton>
               )
             }
           >
