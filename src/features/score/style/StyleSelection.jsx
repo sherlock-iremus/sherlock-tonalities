@@ -10,8 +10,9 @@ export const StyleSelection = props => {
   const selectionNode = document.getElementById(props.selectionIri)
   useEffect(() => {
     selectionNode ? (selectionNode.style.display = 'block') : children && drawSelection(children, props.selectionIri, scoreIri, props.mode)
+    selectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
     return () => selectionNode && (selectionNode.style.display = 'none')
-  }, [selectionNode, children])
+  }, [selectionNode, children, props.mode, props.selectionIri, scoreIri])
 
   return children?.map(child => child.noteIri && <StyleNote key={child.noteIri} noteIri={child.noteIri} mode={props.mode} />) || null
 }

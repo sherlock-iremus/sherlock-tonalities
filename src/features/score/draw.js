@@ -1,8 +1,18 @@
 import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
+import { sleep } from './utils'
 
-export const drawSelection = (selection, selectionIri, scoreIri, mode) => {
+export const drawSelection = async (selection, selectionIri, scoreIri, mode) => {
   const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1))).filter(Boolean)
-  if (notes.length) {
+
+  if (!notes.length) {
+    const pages = Array.from(document.getElementsByClassName('vrv-ui-page-wrapper'))
+    for (const page of pages) {
+      if (selection.find(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1)))) break
+      await sleep(100)
+      page.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    }
+  }
+  else {
     const hullPadding = 300
     const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
     selectionNode.setAttribute('id', selectionIri)
@@ -17,7 +27,7 @@ export const drawSelection = (selection, selectionIri, scoreIri, mode) => {
       })
     const systemNode = getSystem(notes[0])
     systemNode.parentNode.insertBefore(selectionNode, systemNode)
-  } else console.log('Scrollez toute la partition puis re-sélectionnez votre entité')
+  }
 }
 
 export const drawPositionnedNote = (positionnedNoteIri, clickedNote, mode) => {

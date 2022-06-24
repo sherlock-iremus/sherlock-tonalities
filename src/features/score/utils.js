@@ -25,3 +25,5 @@ export const findType = ({
   (selectionIri && SELECTION) ||
   (analyticalEntityIri && ANALYTICAL_ENTITY) ||
   (scoreIri && SCORE)
+
+export const sleep = time => new Promise(resolve => setTimeout(resolve, time))
