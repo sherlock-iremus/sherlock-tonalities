@@ -72,9 +72,10 @@ export const createVerovio = meiUri => {
   const js_lines = [
     'import "https://www.verovio.org/javascript/app/verovio-app.js";',
     `window.app = new Verovio.App(document.getElementById("verovio_container"), {
-            defaultView: 'document',
-            defaultZoom: 3,
-        });`,
+      defaultView: 'document',
+      enableResponsive: false,
+      defaultZoom: 3,
+    });`,
     `window.verovioCallback("${meiUri}");`,
   ]
   s.innerHTML = js_lines.join('\n') + '\n'
@@ -92,9 +93,7 @@ export const load = mei_uri => {
     redirect: 'follow',
   })
     .then(res => res.text())
-    .then(res => {
-      window.app.loadData(res)
-    })
+    .then(res => { window.app.loadData(res) })
 }
 
 export const drawSelection = (scoreSelection, mode) => {

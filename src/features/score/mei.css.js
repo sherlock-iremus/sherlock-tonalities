@@ -14,25 +14,9 @@ export const mainAreaStyle = css`
 
 export const verovioStyle = css`
   min-height: 100vh;
-
+  
   .vrv-ui-toolbar {
     font-family: 'Roboto';
-    .vrv-ui-btn-group {
-      display: flex;
-      justify-content: center;
-    }
-    .vrv-ui-btn-view-selector {
-      visibility: hidden;
-    }
-    .vrv-ui-separator {
-      visibility: hidden;
-    }
-    .vrv-ui-btn-previous {
-      visibility: hidden;
-    }
-    .vrv-ui-btn-next {
-      visibility: hidden;
-    }
   }
 
   .vrv-ui-doc-wrapper {
