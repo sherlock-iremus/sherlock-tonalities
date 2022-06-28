@@ -28,7 +28,12 @@
     { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasAmbitus" },
     { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasAmbitus" },
     { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#quintusHasAmbitus" },
-    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAmbitus" }
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAmbitus" },
+    {
+      "iri": "http://modality-tonality.huma-num.fr/analysisOntology#hasModalTonalAttribution",
+      "label": "hasModalTonalAttribution",
+      "icon": "🪜"
+    }
   ],
 
   "http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b": [
