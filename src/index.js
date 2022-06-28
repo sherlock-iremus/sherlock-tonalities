@@ -10,7 +10,7 @@ import { ScoreAnnotator } from './features/score/ScoreAnnotator'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/tonalities'>
       <Provider store={store}>
         <Routes>
           <Route path="/" element={<App />} />
