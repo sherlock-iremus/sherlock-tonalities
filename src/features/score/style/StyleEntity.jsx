@@ -1,4 +1,4 @@
-import { StyleAnnalyticalEntity } from './StyleAnnalyticalEntity'
+import { StyleAnalyticalEntity } from './StyleAnalyticalEntity'
 import { StyleNote } from './StyleNote'
 import { StylePositionnedNote } from './StylePositionnedNote'
 import { StyleSelection } from './StyleSelection'
@@ -13,10 +13,11 @@ export const StyleEntity = ({
   annotationIri,
   clickedNoteIri,
   attachedNoteIri,
+  analyticalEntityIri
 }) =>
   (noteIri && <StyleNote {...{ noteIri, mode }} />) ||
   (verticalityIri && <StyleVerticality {...{ verticalityIri, clickedNoteIri, mode }} />) ||
   (positionnedNoteIri && <StylePositionnedNote {...{ positionnedNoteIri, clickedNoteIri, attachedNoteIri, mode }} />) ||
   (selectionIri && <StyleSelection {...{ selectionIri, mode }} />) ||
-  (annotationIri && <StyleAnnalyticalEntity {...{ annotationIri, mode }} />) ||
+  (analyticalEntityIri && <StyleAnalyticalEntity {...{ analyticalEntityIri, mode }} />) ||
   null
