@@ -84,7 +84,7 @@ const scoreSlice = createSlice({
           )
         const currentEntity = state.inspectedEntities[state.currentEntityIndex]
         const newEntity = action.payload
-        state.inspectedEntities.push(findKey(currentEntity) === findKey(newEntity) ? {} : action.payload)
+        state.inspectedEntities.push(findKey(currentEntity) === findKey(newEntity) ? initialState.inspectedEntities[0] : action.payload)
         state.currentEntityIndex = ++state.currentEntityIndex
       }
     },
