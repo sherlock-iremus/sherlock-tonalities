@@ -1,29 +1,22 @@
 import { Avatar, Tooltip } from '@mui/material'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
+import { useGetContributorQuery } from '../../../app/services/sparql'
 import { withDispatch } from './withDispatch'
 
-const stringToColor = string => {
-  let hash = 0
-  let i
-
-  /* eslint-disable no-bitwise */
-  for (i = 0; i < string.length; i += 1) hash = string.charCodeAt(i) + ((hash << 5) - hash)
-
-  let color = '#'
-
-  for (i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff
-    color += `00${value.toString(16)}`.slice(-2)
-  }
-  /* eslint-enable no-bitwise */
-
-  return color
+const BaseContributorItem = ({ contributorIri, dispatch, baseUrlLength }) => {
+  const { data: contributor } = useGetContributorQuery(contributorIri)
+  contributor && console.log(contributor)
+  return (
+    (contributor && (
+      <Tooltip
+        title={contributorIri.slice(baseUrlLength)}
+        onClick={() => dispatch(setInspectedEntity({ contributorIri }))}
+      >
+        <Avatar sx={{ width: 24, height: 24, bgcolor: contributor.color }}>{contributor.emoji}</Avatar>
+      </Tooltip>
+    )) ||
+    null
+  )
 }
-
-const BaseContributorItem = ({ contributorIri, dispatch, baseUrlLength }) => (
-  <Tooltip title={contributorIri.slice(baseUrlLength)} onClick={() => dispatch(setInspectedEntity({ contributorIri }))}>
-    <Avatar sx={{ width: 24, height: 24, bgcolor: stringToColor(contributorIri) }} />
-  </Tooltip>
-)
 
 export const ContributorItem = withDispatch(BaseContributorItem)
