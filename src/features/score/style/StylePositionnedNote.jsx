@@ -13,7 +13,7 @@ export const StylePositionnedNote = props => {
       ? (positionnedNoteNode.style.display = 'block')
       : drawPositionnedNote(props.positionnedNoteIri, noteNode, props.mode)
     return () => positionnedNoteNode && (positionnedNoteNode.style.display = 'none')
-  }, [noteNode, positionnedNoteNode])
+  }, [noteNode, positionnedNoteNode, props.mode, props.positionnedNoteIri])
 
   return <StyleNote noteIri={props.attachedNoteIri} mode={props.mode} />
 }

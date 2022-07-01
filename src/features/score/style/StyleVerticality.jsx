@@ -15,7 +15,7 @@ export const StyleVerticality = props => {
       ? (verticalityNode.style.display = 'block')
       : drawVerticality(props.verticalityIri, noteNode, props.mode)
     return () => verticalityNode && (verticalityNode.style.display = 'none')
-  }, [verticalityNode])
+  }, [verticalityNode, noteNode, props.mode, props.verticalityIri])
 
   return (
     positionnedNotes?.map(e => <StyleNote key={e.attachedNoteIri} noteIri={e.attachedNoteIri} mode={props.mode} />) ||

@@ -28,5 +28,7 @@
     { "iri": "http://data-iremus.huma-num.fr/id/905674f2-40ed-4bf0-8d13-df113ed84513", "label": "Anticipation" },
     { "iri": "http://data-iremus.huma-num.fr/id/791d8d87-9eb0-43f5-ae34-3f2da8ea40cb", "label": "Suspension" },
     { "iri": "http://data-iremus.huma-num.fr/id/0bbe0556-1ac9-4ef8-b449-23e834dcc2b2", "label": "Escape note" }
+  ],
+  "http://modality-tonality.huma-num.fr/analysisOntology#hasModalTonalAttribution": [
   ]
 }

@@ -18,16 +18,17 @@ export const MeiViewer = props => {
   const dispatch = useDispatch()
   const [rightClickedNoteIri, setRightClickedNoteIri] = useState(null)
   const { data: verticalityIri } = useGetNoteVerticalityQuery(rightClickedNoteIri, { skip: !rightClickedNoteIri })
-  
+
+  const { isInspectionMode, isSelectionMode, inspectedEntities, currentEntityIndex, selectedEntities } = useSelector(
+    state => state.score
+  )
+
   useEffect(
     () =>
       (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri }))) ||
       (isSelectionMode && dispatch(setSelectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri }))),
-    [verticalityIri]
+    [verticalityIri, rightClickedNoteIri, isInspectionMode, isSelectionMode, dispatch]
   )
-
-  const { isInspectionMode, isSelectionMode, inspectedEntities, currentEntityIndex, selectedEntities } =
-    useSelector(state => state.score)
 
   const handleMouseOver = e => getNote(e.target)?.classList.add('focused')
   const handleMouseLeave = e => getNote(e.target)?.classList.remove('focused')

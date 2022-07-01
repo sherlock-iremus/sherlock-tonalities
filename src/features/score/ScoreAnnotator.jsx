@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { Assignment, Info } from '@mui/icons-material'
-import { Slide, SpeedDial, Tooltip } from '@mui/material'
+import { SpeedDial, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Inspector } from './Inspector'

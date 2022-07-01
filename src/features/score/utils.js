@@ -6,6 +6,7 @@ export const findKey = item =>
     item.verticalityIri ||
     item.positionnedNoteIri ||
     item.selectionIri ||
+    item.conceptIri ||
     item.annotationIri ||
     item.analyticalEntityIri ||
     item.contributorIri ||
@@ -25,3 +26,5 @@ export const findType = ({
   (selectionIri && SELECTION) ||
   (analyticalEntityIri && ANALYTICAL_ENTITY) ||
   (scoreIri && SCORE)
+
+export const sleep = time => new Promise(resolve => setTimeout(resolve, time))
