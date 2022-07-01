@@ -5,7 +5,7 @@ import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typograph
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getTreatise } from '../../app/treatises/treatises'
-import { SearchBar } from '../meiviewer/SearchField'
+import { SearchBar } from './navigator/SearchBar'
 import { COLOR_NAVIGATE } from './mei.css'
 import { Classes } from './navigator/Classes'
 import { Properties } from './navigator/Properties'
