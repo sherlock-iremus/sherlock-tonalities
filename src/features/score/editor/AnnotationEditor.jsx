@@ -22,19 +22,16 @@ import { Box } from '@mui/system'
 import { Item } from '../items/Item'
 import options from '../../../app/services/p177_p141.json'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAnnotationEditor } from '../../../app/services/scoreSlice'
+import { setAlert, setAnnotationEditor } from '../../../app/services/scoreSlice'
 import { findKey } from '../utils'
 import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../../app/services/sherlockApi'
 import { useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
-import { AlertMessage } from './AlertMessage'
 
 export const AnnotationEditor = () => {
   const dispatch = useDispatch()
   const [selectedOption, setSelectedOption] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [confirmationMessage, setConfirmationMessage] = useState('')
   const {
     baseUrl,
     annotationEditor: { subject, predicat },
@@ -51,11 +48,11 @@ export const AnnotationEditor = () => {
           p141: selectedOption,
           p141_type: 'uri',
         }).unwrap()
-        setConfirmationMessage('Annotation was successfully created')
         refetch()
         dispatch(setAnnotationEditor())
+        dispatch(setAlert({ confirmation: 'Annotation was successfully created' }))
       } catch {
-        setErrorMessage('An error occured while creating the annotation')
+        dispatch(setAlert({ error: 'An error occured while creating the annotation' }))
       }
     }
   }
@@ -127,8 +124,6 @@ export const AnnotationEditor = () => {
               icon={isLoading ? <CircularProgress /> : <Done />}
             />
           </Tooltip>
-
-          <AlertMessage {...{ confirmationMessage, errorMessage }} />
         </Box>
       )}
     </Drawer>

@@ -14,23 +14,19 @@ import {
   Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInspectionMode } from '../../../app/services/scoreSlice'
+import { setAlert, setInspectionMode } from '../../../app/services/scoreSlice'
 import { usePatchSelectionMutation, usePostSelectionMutation } from '../../../app/services/sherlockApi'
 import { useGetChildSelectionsQuery, useGetScoreSelectionsQuery } from '../../../app/services/sparql'
 import { Item } from '../items/Item'
 import { COLOR_SELECTED } from '../mei.css'
 import { findKey } from '../utils'
-import { AlertMessage } from './AlertMessage'
 
 export const SelectionEditor = () => {
   const dispatch = useDispatch()
   const { selectedEntities, isSelectionMode, baseUrl, scoreIri, editingSelectionIri } = useSelector(
     state => state.score
   )
-  const [confirmationMessage, setConfirmationMessage] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
   const { refetch } = useGetScoreSelectionsQuery(scoreIri)
   const { refetch: refetchEditionSelection } = useGetChildSelectionsQuery(editingSelectionIri)
 
@@ -44,11 +40,11 @@ export const SelectionEditor = () => {
         const children = selectedEntities.map(findKey)
         const document_contexts = [scoreIri]
         await postSelection({ children, document_contexts }).unwrap()
-        setConfirmationMessage('Annotation was successfully created')
         refetch()
         dispatch(setInspectionMode())
+        dispatch(setAlert({ confirmation: 'Annotation was successfully created' }))
       } catch {
-        setErrorMessage('An error occured while creating the selection')
+        dispatch(setAlert({ error: 'An error occured while creating the selection' }))
       }
     }
   }
@@ -59,12 +55,13 @@ export const SelectionEditor = () => {
         const children = selectedEntities.map(findKey)
         const document_contexts = [scoreIri]
         await patchSelection({ children, document_contexts, uuid: editingSelectionIri.slice(baseUrl.length) }).unwrap()
-        setConfirmationMessage('Annotation was successfully updated')
+        dispatch(setAlert({ confirmation: 'Annotation was successfully updated' }))
+
         refetch()
         refetchEditionSelection()
         dispatch(setInspectionMode())
       } catch {
-        setErrorMessage('An error occured while updating the selection')
+        dispatch(setAlert({ error: 'An error occured while updating the selection' }))
       }
     }
   }
@@ -112,7 +109,6 @@ export const SelectionEditor = () => {
             icon={isLoading ? <CircularProgress /> : <Done />}
           />
         </Tooltip>
-        <AlertMessage {...{ confirmationMessage, errorMessage }} />
       </Box>
     </Drawer>
   )

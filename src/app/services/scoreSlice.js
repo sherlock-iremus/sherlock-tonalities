@@ -17,6 +17,7 @@ const initialState = {
   focusEntityIndex: -1,
   hoveredEntity: {},
   annotationEditor: { subject: null, predicat: null, object: null },
+  alerts: { confirmation: '', error: '' },
 }
 
 const scoreSlice = createSlice({
@@ -34,6 +35,9 @@ const scoreSlice = createSlice({
       state.hoveredEntity === action.payload
         ? (state.hoveredEntity = initialState.hoveredEntity)
         : (state.hoveredEntity = action.payload)
+    },
+    setAlert: (state, action) => {
+      action.payload ? (state.alerts = { ...state.alerts, ...action.payload }) : (state.alerts = initialState.alerts)
     },
     setTreatiseIri: (state, action) => {
       state.treatiseIri = action.payload
@@ -84,7 +88,9 @@ const scoreSlice = createSlice({
           )
         const currentEntity = state.inspectedEntities[state.currentEntityIndex]
         const newEntity = action.payload
-        state.inspectedEntities.push(findKey(currentEntity) === findKey(newEntity) ? initialState.inspectedEntities[0] : action.payload)
+        state.inspectedEntities.push(
+          findKey(currentEntity) === findKey(newEntity) ? initialState.inspectedEntities[0] : action.payload
+        )
         state.currentEntityIndex = ++state.currentEntityIndex
       }
     },
@@ -105,4 +111,5 @@ export const {
   setSelectionMode,
   setAnnotationEditor,
   setEditingSelection,
+  setAlert,
 } = scoreSlice.actions
