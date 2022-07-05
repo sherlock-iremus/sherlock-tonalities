@@ -1,25 +1,27 @@
 import { Close, QueueMusic } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { withDispatch } from './withDispatch'
-import { useGetNoteInfoQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../../app/services/scoreSlice'
+import { useGetNoteInfoQuery, useGetPositionnedNoteInfoQuery } from '../../../app/services/sparql'
+import { setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
+import { useSelector } from 'react-redux'
 
-const BasePositionnedNoteItem = ({
-  positionnedNoteIri,
-  attachedNoteIri,
-  clickedNoteIri,
-  baseUrlLength,
-  dispatch,
-  isEntity,
-}) => {
-  const { data: noteLabel } = useGetNoteInfoQuery(attachedNoteIri)
+const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, isEntity }) => {
+  const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
+  const { data } = useGetPositionnedNoteInfoQuery(positionnedNoteIri)
+  const { data: noteLabel } = useGetNoteInfoQuery(data?.attachedNoteIri, { skip: !data })
   return noteLabel ? (
     <ListItem
       disablePadding
       secondaryAction={
         isEntity && (
-          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ positionnedNoteIri }))}>
+          <IconButton
+            disableRipple
+            onClick={() =>
+              (isInspectionMode && dispatch(setInspectedEntity({ positionnedNoteIri }))) ||
+              (isSelectionMode && dispatch(setSelectedEntity({ positionnedNoteIri })))
+            }
+          >
             <Close />
           </IconButton>
         )
@@ -28,13 +30,8 @@ const BasePositionnedNoteItem = ({
       <ListItemButton
         onClick={() =>
           !isEntity &&
-          dispatch(
-            setInspectedEntity({
-              positionnedNoteIri,
-              attachedNoteIri,
-              clickedNoteIri,
-            })
-          )
+          ((isInspectionMode && dispatch(setInspectedEntity({ positionnedNoteIri }))) ||
+            (isSelectionMode && dispatch(setSelectedEntity({ positionnedNoteIri }))))
         }
         sx={isEntity && { cursor: 'default' }}
       >
