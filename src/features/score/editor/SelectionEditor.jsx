@@ -38,7 +38,6 @@ export const SelectionEditor = () => {
   const [patchSelection, { isLoading: isPatchLoading }] = usePatchSelectionMutation()
   const isLoading = isPostLoading || isPatchLoading
 
-  console.log(selectedEntities)
   const createSelection = async () => {
     if (selectedEntities.length && !isLoading) {
       try {
