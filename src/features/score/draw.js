@@ -2,7 +2,7 @@ import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
 import { sleep } from './utils'
 
 export const drawSelection = async (selection, selectionIri, scoreIri, mode) => {
-  const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1))).filter(Boolean)
+  const notes = selection.map(s => document.getElementById(s?.noteIri?.slice(scoreIri.length + 1))).filter(Boolean)
 
   if (!notes.length) {
     const pages = Array.from(document.getElementsByClassName('vrv-ui-page-wrapper'))

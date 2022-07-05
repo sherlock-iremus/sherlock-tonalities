@@ -28,7 +28,7 @@ const BaseSelectionItem = ({ selectionIri, concepts, isEntity, baseUrlLength, di
           <>
             {isEntity && (
               <>
-                {contributorIri.slice(baseUrlLength) === userId && (
+                {isInspectionMode && contributorIri.slice(baseUrlLength) === userId && (
                   <IconButton onClick={() => dispatch(setEditingSelection({ selectionIri, children }))}>
                     <Edit />
                   </IconButton>
