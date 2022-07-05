@@ -21,10 +21,11 @@ import {
   getNoteVerticality,
   getOutgoingAnnotations,
   getParentSelections,
-  getScoreAnnotations,
+  getPositionnedNoteInfo,
   getScoreSelections,
   getSelectionAnalyticalEntities,
   getSubAnnotations,
+  getVerticalityCoordinates,
   getVerticalityPositionnedNotes,
 } from './sparqlQueries'
 
@@ -224,6 +225,37 @@ export const sparqlEndpoint = createApi({
         contributorIri: element.contributor?.value,
       }),
     }),
+    getVerticalityCoordinates: builder.query({
+      query: verticalityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getVerticalityCoordinates(verticalityIri) }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [
+            {
+              note: { value: noteIri },
+            },
+          ],
+        },
+      }) => noteIri,
+    }),
+    getPositionnedNoteInfo: builder.query({
+      query: positionnedNoteIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getPositionnedNoteInfo(positionnedNoteIri) }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [
+            {
+              attachedNote: { value: attachedNoteIri },
+              clickedNote: { value: clickedNoteIri },
+            },
+          ],
+        },
+      }) => ({ attachedNoteIri, clickedNoteIri }),
+    }),
   }),
 })
 
@@ -247,4 +279,6 @@ export const {
   useGetIncomingAnnotationsQuery,
   useGetOutgoingAnnotationsQuery,
   useGetAnnotationQuery,
+  useGetVerticalityCoordinatesQuery,
+  useGetPositionnedNoteInfoQuery,
 } = sparqlEndpoint

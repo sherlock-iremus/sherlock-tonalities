@@ -1,24 +1,24 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
+import { useGetVerticalityCoordinatesQuery, useGetVerticalityPositionnedNotesQuery } from '../../../app/services/sparql'
+import { INSPECTED, SELECTED } from '../constants'
 import { drawVerticality } from '../draw'
 import { StyleNote } from './StyleNote'
 
-export const StyleVerticality = props => {
+export const StyleVerticality = ({ verticalityIri }) => {
   const { scoreIri } = useSelector(state => state.score)
-  const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(props.verticalityIri)
-  const verticalityNode = document.getElementById(props.verticalityIri)
-  const noteNode = document.getElementById(props.clickedNoteIri.slice(scoreIri.length + 1))
+  const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
+  const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
+  const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(verticalityIri)
+  const { data: clickedNoteIri } = useGetVerticalityCoordinatesQuery(verticalityIri)
+  const noteNode = clickedNoteIri && document.getElementById(clickedNoteIri.slice(scoreIri.length + 1))
 
   useEffect(() => {
-    verticalityNode
-      ? (verticalityNode.style.display = 'block')
-      : drawVerticality(props.verticalityIri, noteNode, props.mode)
-    return () => verticalityNode && (verticalityNode.style.display = 'none')
-  }, [verticalityNode, noteNode, props.mode, props.verticalityIri])
+    !document.getElementById(verticalityIri) && noteNode && drawVerticality(verticalityIri, noteNode, mode)
+    return () => document.getElementById(verticalityIri)?.remove()
+  }, [noteNode, verticalityIri, mode])
 
   return (
-    positionnedNotes?.map(e => <StyleNote key={e.attachedNoteIri} noteIri={e.attachedNoteIri} mode={props.mode} />) ||
-    null
+    positionnedNotes?.map(e => <StyleNote key={e.attachedNoteIri} noteIri={e.attachedNoteIri} mode={mode} />) || null
   )
 }

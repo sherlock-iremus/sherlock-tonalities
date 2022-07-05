@@ -178,6 +178,17 @@ WHERE {
 }
 `
 
+export const getVerticalityCoordinates = verticalityIri => `
+PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+SELECT ?note ?note
+FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+WHERE {
+    ?note sherlockmei:contains_beat <${verticalityIri}>.
+}
+LIMIT 1
+`
+
+
 export const getSelectionAnalyticalEntities = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     SELECT ?annotation
@@ -246,4 +257,17 @@ export const getAnnotation = annotationIri => `
         ?annotation dcterms:created ?date.
         ?annotation crm:P14_carried_out_by ?contributor.
     }
+`
+
+export const getPositionnedNoteInfo = positionnedNoteIri => `
+PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+SELECT ?attachedNote ?clickedNote
+FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+WHERE {
+    ?attachedNote sherlockmei:has_beat_anchor <${positionnedNoteIri}>.
+    ?attachedNote sherlockmei:contains_beat ?verticality.
+    FILTER regex(str(?verticality), "${positionnedNoteIri.slice(-6)}")
+    ?clickedNote sherlockmei:contains_beat ?verticality.
+}
+LIMIT 1
 `
