@@ -11,11 +11,12 @@ import { SelectionEditor } from './editor/SelectionEditor'
 import { AnnotationEditor } from './editor/AnnotationEditor'
 import { COLOR_INSPECTED, COLOR_NAVIGATE } from './mei.css'
 import { Navigate } from 'react-router-dom'
+import { AlertMessage } from './editor/AlertMessage'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
-  const { meiUrl, scoreIri } = useSelector(state => state.score)
+  const { meiUrl, scoreIri, alerts } = useSelector(state => state.score)
 
   return (
     <>
@@ -30,7 +31,7 @@ export const ScoreAnnotator = () => {
             sx={{
               position: 'absolute',
               top: 40,
-              right: 0 ,
+              right: 0,
               '& .MuiSpeedDial-fab': {
                 backgroundColor: COLOR_INSPECTED,
                 borderTopRightRadius: 0,
@@ -65,6 +66,7 @@ export const ScoreAnnotator = () => {
 
       <SelectionEditor />
       <AnnotationEditor />
+      <AlertMessage {...alerts} />
     </>
   )
 }
