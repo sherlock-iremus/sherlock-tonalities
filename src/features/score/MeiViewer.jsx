@@ -60,7 +60,7 @@ export const MeiViewer = props => {
     () =>
       (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri }))) ||
       (isSelectionMode && dispatch(setSelectedEntity({ verticalityIri, clickedNoteIri: rightClickedNoteIri }))),
-    [verticalityIri, rightClickedNoteIri, isInspectionMode, isSelectionMode, dispatch]
+    [verticalityIri, rightClickedNoteIri]
   )
 
   const handleMouseOver = e => getNote(e.target)?.classList.add('focused')

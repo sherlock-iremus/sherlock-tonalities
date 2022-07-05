@@ -18,7 +18,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectionMode } from '../../../app/services/scoreSlice'
 import { usePatchSelectionMutation, usePostSelectionMutation } from '../../../app/services/sherlockApi'
-import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
+import { useGetChildSelectionsQuery, useGetScoreSelectionsQuery } from '../../../app/services/sparql'
 import { Item } from '../items/Item'
 import { COLOR_SELECTED } from '../mei.css'
 import { findKey } from '../utils'
@@ -32,10 +32,13 @@ export const SelectionEditor = () => {
   const [confirmationMessage, setConfirmationMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const { refetch } = useGetScoreSelectionsQuery(scoreIri)
+  const { refetch: refetchEditionSelection } = useGetChildSelectionsQuery(editingSelectionIri)
+
   const [postSelection, { isLoading: isPostLoading }] = usePostSelectionMutation()
   const [patchSelection, { isLoading: isPatchLoading }] = usePatchSelectionMutation()
   const isLoading = isPostLoading || isPatchLoading
 
+  console.log(selectedEntities)
   const createSelection = async () => {
     if (selectedEntities.length && !isLoading) {
       try {
@@ -59,6 +62,7 @@ export const SelectionEditor = () => {
         await patchSelection({ children, document_contexts, uuid: editingSelectionIri.slice(baseUrl.length) }).unwrap()
         setConfirmationMessage('Annotation was successfully updated')
         refetch()
+        refetchEditionSelection()
         dispatch(setInspectionMode())
       } catch {
         setErrorMessage('An error occured while updating the selection')
