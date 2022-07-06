@@ -40,7 +40,7 @@ const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch, se
         <ListItemIcon>
           <MusicNote />
         </ListItemIcon>
-        <ListItemText primary={noteLabel} secondary={noteIri.slice(baseUrlLength)} />
+        <ListItemText primary={`Note ${noteLabel}`} secondary={noteIri.slice(baseUrlLength)} />
       </ListItemButton>
     </ListItem>
   ) : (

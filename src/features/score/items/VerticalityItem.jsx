@@ -8,7 +8,14 @@ import { PositionnedNoteItem } from './PositionnedNoteItem'
 import { ConceptItem } from './ConceptItem'
 import { LoadingEntity } from '../entities/LoadingEntity'
 
-export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, concepts, secondaryAction, initialIsOpen = true }) => {
+export const VerticalityItem = ({
+  verticalityIri,
+  clickedNoteIri,
+  isEntity,
+  concepts,
+  secondaryAction,
+  initialIsOpen = true,
+}) => {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
@@ -19,20 +26,22 @@ export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, conc
     <>
       <ListItem
         disablePadding
-        secondaryAction={ secondaryAction ||
-          <>
-            {isEntity && (
-              <IconButton
-                onClick={() =>
-                  (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri }))) ||
-                  (isSelectionMode && dispatch(setSelectedEntity({ verticalityIri })))
-                }
-              >
-                <Close />
-              </IconButton>
-            )}
-            {conceptIri && <ConceptItem conceptIri={conceptIri} />}
-          </>
+        secondaryAction={
+          secondaryAction || (
+            <>
+              {isEntity && (
+                <IconButton
+                  onClick={() =>
+                    (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri }))) ||
+                    (isSelectionMode && dispatch(setSelectedEntity({ verticalityIri })))
+                  }
+                >
+                  <Close />
+                </IconButton>
+              )}
+              {conceptIri && <ConceptItem conceptIri={conceptIri} />}
+            </>
+          )
         }
       >
         <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
@@ -45,7 +54,10 @@ export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, conc
           <ListItemIcon>
             <AlignHorizontalCenter />
           </ListItemIcon>
-          <ListItemText primary="Verticality" secondary={verticalityIri.slice(baseUrlLength)} />
+          <ListItemText
+            primary={`Verticality ${verticalityIri.slice(baseUrlLength + 42)}`}
+            secondary={verticalityIri.slice(baseUrlLength)}
+          />
         </ListItemButton>
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>

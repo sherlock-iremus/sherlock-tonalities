@@ -38,7 +38,7 @@ const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, 
         <ListItemIcon>
           <QueueMusic />
         </ListItemIcon>
-        <ListItemText primary={noteLabel} secondary={positionnedNoteIri.slice(baseUrlLength)} />
+        <ListItemText primary={`Positionned note ${noteLabel}`} secondary={positionnedNoteIri.slice(baseUrlLength)} />
       </ListItemButton>
     </ListItem>
   ) : (
