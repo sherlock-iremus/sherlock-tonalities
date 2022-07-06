@@ -8,9 +8,9 @@ import { PositionnedNoteItem } from './PositionnedNoteItem'
 import { ConceptItem } from './ConceptItem'
 import { LoadingEntity } from '../entities/LoadingEntity'
 
-export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, concepts, secondaryAction }) => {
+export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, concepts, secondaryAction, initialIsOpen = true }) => {
   const dispatch = useDispatch()
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(verticalityIri)

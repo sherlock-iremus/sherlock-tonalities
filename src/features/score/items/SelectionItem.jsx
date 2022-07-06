@@ -11,8 +11,8 @@ import { Item } from './Item'
 import { withDispatch } from './withDispatch'
 import { useGetUserIdQuery } from '../../../app/services/sherlockApi'
 
-const BaseSelectionItem = ({ selectionIri, concepts, isEntity, baseUrlLength, dispatch }) => {
-  const [isOpen, setIsOpen] = useState(true)
+const BaseSelectionItem = ({ selectionIri, concepts, isEntity, baseUrlLength, dispatch, initialIsOpen = true }) => {
+  const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { data: userId } = useGetUserIdQuery()
   const { isInspectionMode, isSelectionMode, scoreIri } = useSelector(state => state.score)
   const { data: selections } = useGetScoreSelectionsQuery(scoreIri)
