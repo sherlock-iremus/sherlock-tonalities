@@ -87,7 +87,7 @@ export const getNoteSelections = noteIri => `
     }
 `
 
-export const getScoreSelections = scoreIri => `
+export const getScoreSelectionsOld = scoreIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterm: <http://purl.org/dc/terms/>
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
@@ -102,6 +102,33 @@ export const getScoreSelections = scoreIri => `
                 ?entity sherlockmei:in_score <${scoreIri}>.
                 ?selection crm:P106_is_composed_of ?entity.
                 ?selection crm:P2_has_type <${SELECTION}>.
+            }
+            GROUP BY ?selection
+        }
+    }
+`
+
+export const getScoreSelections = scoreIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+    
+    SELECT ?selection ?contributor ?date ?entities
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
+    WHERE {
+        ?selection dcterm:creator ?contributor.
+        ?selection dcterm:created ?date.
+        {
+            SELECT ?selection ((COUNT(?entity)) AS ?entities)
+            WHERE {
+                OPTIONAL {?selection sherlock:has_document_context <${scoreIri}>}
+                OPTIONAL {?selection sherlock:sheP_has_document_context <${scoreIri}>}
+                ?selection a crm:E28_Conceptual_Object.
+                ?selection crm:P2_has_type <${SELECTION}>.
+                ?selection crm:P106_is_composed_of ?entity.
             }
             GROUP BY ?selection
         }
