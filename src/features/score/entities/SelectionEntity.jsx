@@ -14,12 +14,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetParentSelectionsQuery, useGetSelectionAnalyticalEntitiesQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { SelectionItem } from '../items/SelectionItem'
+import { AnalyticalEntities } from '../annotations/AnalyticalEntities'
 
 export const SelectionEntity = ({ selectionIri }) => {
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: parents } = useGetParentSelectionsQuery(selectionIri)
-  const { data: analyticalEntities } = useGetSelectionAnalyticalEntitiesQuery(selectionIri)
   return (
     <>
       <SelectionItem {...{ selectionIri }} isEntity />
@@ -29,30 +29,14 @@ export const SelectionEntity = ({ selectionIri }) => {
           {parents.map((parentIri, index) => (
             <ListItem key={parentIri} disablePadding>
               <ListItemButton onClick={() => dispatch(setInspectedEntity({ parentIri }))}>
-                <ListItemText
-                  primary={`Parent selection ${index + 1}`}
-                  secondary={parentIri.slice(baseUrlLength)}
-                />
+                <ListItemText primary={`Parent selection ${index + 1}`} secondary={parentIri.slice(baseUrlLength)} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       )}
 
-      {!!analyticalEntities?.length && (
-        <List subheader={<ListSubheader>Analytical entities</ListSubheader>} dense disablePadding>
-          {analyticalEntities.map((analyticalEntityIri, index) => (
-            <ListItem key={analyticalEntityIri} disablePadding>
-              <ListItemButton onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
-                <ListItemText
-                  primary={`Analytical entity ${index + 1}`}
-                  secondary={analyticalEntityIri.slice(baseUrlLength)}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      )}
+      <AnalyticalEntities {...{ selectionIri }} />
 
       <Tooltip title="Create analytical entity">
         <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<SpeedDialIcon />}>

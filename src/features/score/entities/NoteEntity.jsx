@@ -1,19 +1,18 @@
 import { List, ListItem, ListItemButton, ListItemText, ListSubheader, SpeedDial, SpeedDialAction } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetNoteAnnalyticalEntitiesQuery, useGetNoteSelectionsQuery } from '../../../app/services/sparql'
+import { useGetNoteSelectionsQuery } from '../../../app/services/sparql'
 import { setAnnotationEditor, setInspectedEntity } from '../../../app/services/scoreSlice'
-import { ConceptItem } from '../items/ConceptItem'
 import { NoteItem } from '../items/NoteItem'
 import { NOTE } from '../constants'
 import actions from '../../../app/services/p140_p177.json'
 import { AddComment } from '@mui/icons-material'
 import { OutgoingAnnotations } from '../annotations/OutgoingAnnotations'
+import { AnalyticalEntities } from '../annotations/AnalyticalEntities'
 
 export const NoteEntity = ({ noteIri }) => {
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: selections } = useGetNoteSelectionsQuery(noteIri)
-  const { data: analyticalEntities } = useGetNoteAnnalyticalEntitiesQuery(noteIri)
   return (
     <>
       <NoteItem {...{ noteIri }} isEntity />
@@ -30,26 +29,8 @@ export const NoteEntity = ({ noteIri }) => {
         </List>
       )}
 
-      {!!analyticalEntities?.length && (
-        <List subheader={<ListSubheader>Current note is in analytical entity</ListSubheader>} dense disablePadding>
-          {analyticalEntities.map(({ iri: analyticalEntityIri, concept: conceptIri }) => (
-            <ListItem key={analyticalEntityIri} disablePadding>
-              <ListItemButton onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
-                <ListItemText
-                  primary={
-                    <>
-                      <ConceptItem {...{ conceptIri }} />
-                      in analytical entity
-                    </>
-                  }
-                  secondary={analyticalEntityIri.slice(baseUrlLength)}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      )}
-      
+      <AnalyticalEntities {...{ noteIri }} />
+
       <OutgoingAnnotations {...{ noteIri }} />
 
       <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>

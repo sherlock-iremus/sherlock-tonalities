@@ -88,7 +88,6 @@ export const getAnalyticalEntities = entityIri => `
            GROUP BY ?entity
        } 
     }
-
 `
 
 export const getNoteSelections = noteIri => `
@@ -99,27 +98,6 @@ export const getNoteSelections = noteIri => `
     WHERE {
         ?selection crm:P106_is_composed_of <${noteIri}>.
         ?selection crm:P2_has_type <${SELECTION}>.
-    }
-`
-
-export const getScoreSelectionsOld = scoreIri => `
-    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX dcterm: <http://purl.org/dc/terms/>
-    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-    SELECT ?selection ?entities ?contributor
-    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    WHERE {
-        ?selection dcterm:creator ?contributor
-        {
-            SELECT ?selection ((COUNT(?entity)) AS ?entities)
-            WHERE {
-                ?entity sherlockmei:in_score <${scoreIri}>.
-                ?selection crm:P106_is_composed_of ?entity.
-                ?selection crm:P2_has_type <${SELECTION}>.
-            }
-            GROUP BY ?selection
-        }
     }
 `
 
@@ -172,19 +150,6 @@ export const getParentSelections = selectionIri => `
     }
 `
 
-export const getNoteAnnalyticalEntities = noteIri => `
-    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    SELECT ?annotation ?concept
-    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    WHERE {
-        ?e13 crm:P141_assigned <${noteIri}>.
-        ?e13 crm:P177_assigned_property_of_type ?concept.
-        ?e13 crm:P140_assigned_attribute_to ?entity.
-        ?annotation crm:P141_assigned ?entity 
-    }
-`
-
 export const getAnnotationSelection = annotationIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     SELECT ?selection
@@ -233,11 +198,29 @@ LIMIT 1
 
 export const getSelectionAnalyticalEntities = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    SELECT ?annotation
+    PREFIX dcterm: <http://purl.org/dc/terms/>
+
+    SELECT ?entity ?contributor ?predicat ?date ?assignments
+
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+
     WHERE {
         ?annotation crm:P140_assigned_attribute_to <${selectionIri}>.
+        ?annotation crm:P141_assigned ?entity.
+        ?annotation crm:P177_assigned_property_of_type ?predicat.
+        ?annotation crm:P14_carried_out_by ?contributor.
+        ?annotation dcterm:created ?date.
+        {
+        SELECT ?entity ((COUNT(?assignment)) AS ?assignments)
+        WHERE {
+            ?annotation crm:P140_assigned_attribute_to <${selectionIri}>.
+            ?annotation crm:P141_assigned ?entity.
+            ?entity crm:P2_has_type <${ANALYTICAL_ENTITY}>.
+            ?assignment crm:P140_assigned_attribute_to ?entity
+        }
+        GROUP BY ?entity
+    } 
     }
 `
 

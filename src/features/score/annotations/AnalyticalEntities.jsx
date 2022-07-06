@@ -1,14 +1,12 @@
-import { Chip, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from '@mui/material'
+import { Chip, ListItem, ListItemButton, ListItemText, ListSubheader, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetAnalyticalEntitiesQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { ContributorItem } from '../items/ContributorItem'
-import { findKey } from '../utils'
-import { Lyrics } from '@mui/icons-material'
 
 export const AnalyticalEntities = props => {
-  const { data: analyticalEntities } = useGetAnalyticalEntitiesQuery(findKey(props))
+  const { data: analyticalEntities } = useGetAnalyticalEntitiesQuery(props)
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { treatiseIri } = useSelector(state => state.score)
@@ -37,11 +35,12 @@ export const AnalyticalEntities = props => {
             <ListItemButton onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
               <ListItemText
                 primary={
-                  props.conceptIri ? (
-                    `${props.conceptIri.slice(treatiseIri.length)} with ${assignments} annotations`
-                  ) : (
+                  (props.conceptIri &&
+                    `${props.conceptIri.slice(treatiseIri.length)} with ${assignments} annotations`) ||
+                  (props.selectionIri &&
+                    `Analytical entity with ${assignments} annotations`) || (
                     <>
-                      Is <Chip label={propertyIri} /> in analytical entity
+                      Is <Chip label={propertyIri.slice(treatiseIri.length)} /> in analytical entity
                     </>
                   )
                 }

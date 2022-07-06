@@ -72,6 +72,7 @@ export const OutgoingAnnotations = props => {
                                 options[predicat.iri].filter(a => a.iri === object)[0]?.label ||
                                 object.slice(baseUrlLength)
                               }
+                              sx={{ mb: 1 }}
                             />
                           }
                           secondary={annotationIri.slice(baseUrlLength)}

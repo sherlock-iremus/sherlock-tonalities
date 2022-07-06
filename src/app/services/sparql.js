@@ -7,6 +7,7 @@ import {
   SELECTION,
   VERTICALITY,
 } from '../../features/score/constants'
+import { findKey, findType } from '../../features/score/utils'
 import {
   getAnalyticalEntities,
   getAnnotation,
@@ -15,7 +16,6 @@ import {
   getChildSelections,
   getEntityType,
   getIncommingAnnotations,
-  getNoteAnnalyticalEntities,
   getNoteInfo,
   getNoteSelections,
   getNotesOnFirstBeat,
@@ -92,9 +92,14 @@ export const sparqlEndpoint = createApi({
         response.results?.bindings?.map(e => ({ entity: e.selection?.value, concept: e.type?.value })),
     }),
     getAnalyticalEntities: builder.query({
-      query: entityIri => ({
+      query: entity => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getAnalyticalEntities(entityIri) }),
+        body: new URLSearchParams({
+          query:
+            findType(entity) === SELECTION
+              ? getSelectionAnalyticalEntities(entity.selectionIri)
+              : getAnalyticalEntities(findKey(entity)),
+        }),
       }),
       transformResponse: response =>
         response.results?.bindings?.map(e => ({
@@ -103,7 +108,7 @@ export const sparqlEndpoint = createApi({
           contributorIri: e.contributor?.value,
           analyticalProjetIri: e.project?.value,
           date: e.date?.value,
-          assignments: e.assignments?.value
+          assignments: e.assignments?.value,
         })),
     }),
     getNoteSelections: builder.query({
@@ -149,14 +154,6 @@ export const sparqlEndpoint = createApi({
       }),
       transformResponse: response => response.results?.bindings?.map(e => e.parent?.value),
     }),
-    getNoteAnnalyticalEntities: builder.query({
-      query: noteIri => ({
-        method: 'POST',
-        body: new URLSearchParams({ query: getNoteAnnalyticalEntities(noteIri) }),
-      }),
-      transformResponse: response =>
-        response.results?.bindings?.map(e => ({ iri: e.annotation?.value, concept: e.concept?.value })),
-    }),
     getAnnotationSelection: builder.query({
       query: annotationIri => ({
         method: 'POST',
@@ -181,13 +178,6 @@ export const sparqlEndpoint = createApi({
           positionnedNoteIri: e.positionned_note?.value,
           attachedNoteIri: e.note?.value,
         })),
-    }),
-    getSelectionAnalyticalEntities: builder.query({
-      query: selectionIri => ({
-        method: 'POST',
-        body: new URLSearchParams({ query: getSelectionAnalyticalEntities(selectionIri) }),
-      }),
-      transformResponse: response => response.results?.bindings?.map(e => e.annotation?.value),
     }),
     getIncomingAnnotations: builder.query({
       query: entityIri => ({
@@ -313,11 +303,9 @@ export const {
   useGetScoreSelectionsQuery,
   useGetChildSelectionsQuery,
   useGetParentSelectionsQuery,
-  useGetNoteAnnalyticalEntitiesQuery,
   useGetAnnotationSelectionQuery,
   useGetNoteVerticalityQuery,
   useGetVerticalityPositionnedNotesQuery,
-  useGetSelectionAnalyticalEntitiesQuery,
   useGetIncomingAnnotationsQuery,
   useGetOutgoingAnnotationsQuery,
   useGetAnnotationQuery,
