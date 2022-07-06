@@ -1,16 +1,14 @@
 import { Close, HistoryEdu } from '@mui/icons-material'
-import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
-import { useGetConceptAnnotationsQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
-import { LoadingEntity } from './LoadingEntity'
 import { withDispatch } from '../items/withDispatch'
+import { AnalyticalEntities } from '../annotations/AnalyticalEntities'
 
 const BaseConceptEntity = ({ conceptIri, baseUrlLength, dispatch }) => {
-  const { data: analyticalEntities } = useGetConceptAnnotationsQuery(conceptIri)
   const { treatiseIri } = useSelector(state => state.score)
 
-  return analyticalEntities ? (
+  return (
     <>
       <ListItem
         disablePadding
@@ -30,21 +28,8 @@ const BaseConceptEntity = ({ conceptIri, baseUrlLength, dispatch }) => {
           />
         </ListItemButton>
       </ListItem>
-      <List subheader={<ListSubheader>Is used in annalytical entities</ListSubheader>}>
-        {analyticalEntities.map(({ iri: analyticalEntityIri}, index) => (
-          <ListItem key={analyticalEntityIri} disablePadding>
-            <ListItemButton onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
-              <ListItemText
-                primary={`${conceptIri.slice(treatiseIri.length)} ${++index}`}
-                secondary={analyticalEntityIri.slice(baseUrlLength)}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <AnalyticalEntities {...{ conceptIri }} />
     </>
-  ) : (
-    <LoadingEntity />
   )
 }
 

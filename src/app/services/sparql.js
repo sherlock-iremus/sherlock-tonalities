@@ -8,11 +8,11 @@ import {
   VERTICALITY,
 } from '../../features/score/constants'
 import {
+  getAnalyticalEntities,
   getAnnotation,
   getAnnotationInfo,
   getAnnotationSelection,
   getChildSelections,
-  getConceptAnnotations,
   getEntityType,
   getIncommingAnnotations,
   getNoteAnnalyticalEntities,
@@ -91,13 +91,20 @@ export const sparqlEndpoint = createApi({
       transformResponse: response =>
         response.results?.bindings?.map(e => ({ entity: e.selection?.value, concept: e.type?.value })),
     }),
-    getConceptAnnotations: builder.query({
-      query: conceptIri => ({
+    getAnalyticalEntities: builder.query({
+      query: entityIri => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getConceptAnnotations(conceptIri) }),
+        body: new URLSearchParams({ query: getAnalyticalEntities(entityIri) }),
       }),
       transformResponse: response =>
-        response.results?.bindings?.map(e => ({ iri: e.entity?.value, label: e.programName?.value })),
+        response.results?.bindings?.map(e => ({
+          analyticalEntityIri: e.entity?.value,
+          propertyIri: e.predicat?.value,
+          contributorIri: e.contributor?.value,
+          analyticalProjetIri: e.project?.value,
+          date: e.date?.value,
+          assignments: e.assignments?.value
+        })),
     }),
     getNoteSelections: builder.query({
       query: noteIri => ({
@@ -302,7 +309,6 @@ export const {
   useGetNoteInfoQuery,
   useGetAnnotationInfoQuery,
   useGetSubAnnotationsQuery,
-  useGetConceptAnnotationsQuery,
   useGetNoteSelectionsQuery,
   useGetScoreSelectionsQuery,
   useGetChildSelectionsQuery,
@@ -319,4 +325,5 @@ export const {
   useGetPositionnedNoteInfoQuery,
   useGetEntityTypeQuery,
   useGetPredicatLabelQuery,
+  useGetAnalyticalEntitiesQuery,
 } = sparqlEndpoint

@@ -1,4 +1,4 @@
-import { SELECTION } from '../../features/score/constants'
+import { ANALYTICAL_ENTITY, SELECTION } from '../../features/score/constants'
 
 export const getNotesOnFirstBeat = noteIri => `
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
@@ -62,18 +62,33 @@ export const getSubAnnotations = annotationIri => `
     }
 `
 
-export const getConceptAnnotations = conceptIri => `
+export const getAnalyticalEntities = entityIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    SELECT ?entity ?programName
+    PREFIX dcterm: <http://purl.org/dc/terms/>
+
+    SELECT ?entity ?contributor ?predicat ?date ?assignments
+
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
     WHERE {
-        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            ?annotation crm:P141_assigned <${conceptIri}>.
-            ?annotation crm:P140_assigned_attribute_to ?conceptualEntity.
-            ?entity crm:P141_assigned ?conceptualEntity.
-            ?entity crm:P14_carried_out_by ?infos.
-            ?infos <http://modality-tonality.huma-num.fr/analysisOntology#hasPythonClassName> ?programName.
-        }
+        ?annotation crm:P141_assigned <${entityIri}>.
+        ?annotation crm:P140_assigned_attribute_to ?entity.
+        ?annotation crm:P177_assigned_property_of_type ?predicat.
+        ?annotation crm:P14_carried_out_by ?contributor.
+        ?annotation dcterm:created ?date.
+        {
+           SELECT ?entity ((COUNT(?assignment)) AS ?assignments)
+           WHERE {
+               ?annotation crm:P141_assigned <${entityIri}>.
+               ?annotation crm:P140_assigned_attribute_to ?entity.
+               ?entity crm:P2_has_type <${ANALYTICAL_ENTITY}>.
+               ?assignment crm:P140_assigned_attribute_to ?entity
+           }
+           GROUP BY ?entity
+       } 
     }
+
 `
 
 export const getNoteSelections = noteIri => `
