@@ -1,3 +1,4 @@
+import { INSPECTED, SELECTED } from './constants'
 import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
 import { sleep } from './utils'
 
@@ -20,10 +21,7 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode) => 
       points.length &&
         points.forEach(p => {
           const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-          node.setAttribute(
-            'fill',
-            (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED)
-          )
+          node.setAttribute('fill', (mode === INSPECTED && COLOR_INSPECTED) || (mode === SELECTED && COLOR_SELECTED))
           node.setAttribute('fill-opacity', '30%')
           node.setAttribute('d', circleShape(p, hullPadding))
           selectionNode.appendChild(node)
@@ -34,18 +32,28 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode) => 
   }
 }
 
-export const drawPositionnedNote = (positionnedNoteIri, clickedNote, mode) => {
+export const drawPositionnedNote = (positionnedNoteIri, clickedNote, attachedNote, mode) => {
+  const hullPadding = 300
   const noteCoordinates = noteCoords(clickedNote)
   const measureCoordinates = measureCoords(getMeasure(clickedNote))
 
+  const positionnedNoteNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+  positionnedNoteNode.setAttribute('id', positionnedNoteIri)
+
   const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'line')
-  anchor.setAttribute('id', positionnedNoteIri)
   anchor.setAttribute('x1', noteCoordinates[0])
   anchor.setAttribute('y1', measureCoordinates.top)
   anchor.setAttribute('x2', noteCoordinates[0])
   anchor.setAttribute('y2', measureCoordinates.bottom)
-  anchor.setAttribute('stroke', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
-  anchor.setAttribute('stroke-width', '30')
+  anchor.setAttribute('stroke', (mode === INSPECTED && COLOR_INSPECTED) || (mode === SELECTED && COLOR_SELECTED))
+  anchor.setAttribute('stroke-width', '40')
+
+  const bubble = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+  bubble.setAttribute('fill', (mode === INSPECTED && COLOR_INSPECTED) || (mode === SELECTED && COLOR_SELECTED))
+  bubble.setAttribute('fill-opacity', '30%')
+  bubble.setAttribute('d', circleShape(attachedNote, hullPadding))
+  positionnedNoteNode.appendChild(bubble)
+  positionnedNoteNode.appendChild(anchor)
 
   getSystem(clickedNote).appendChild(anchor)
 }

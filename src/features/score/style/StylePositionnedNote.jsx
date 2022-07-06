@@ -10,11 +10,12 @@ export const StylePositionnedNote = ({ positionnedNoteIri }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
   const { data } = useGetPositionnedNoteInfoQuery(positionnedNoteIri)
-  const noteNode = data && document.getElementById(data.clickedNoteIri.slice(scoreIri.length + 1))
+  const clickedNote = data && document.getElementById(data.clickedNoteIri.slice(scoreIri.length + 1))
+  const attachedNote = data && document.getElementById(data.attachedNoteIri.slice(scoreIri.length + 1))
   useEffect(() => {
-    data && !document.getElementById(positionnedNoteIri) && drawPositionnedNote(positionnedNoteIri, noteNode, mode)
+    data && !document.getElementById(positionnedNoteIri) && drawPositionnedNote(positionnedNoteIri, clickedNote, attachedNote, mode)
     return () => document.getElementById(positionnedNoteIri)?.remove()
-  }, [noteNode, mode, positionnedNoteIri, data])
+  }, [clickedNote, mode, positionnedNoteIri, attachedNote, data])
 
   return (data && <StyleNote noteIri={data.attachedNoteIri} mode={mode} />) || null
 }
