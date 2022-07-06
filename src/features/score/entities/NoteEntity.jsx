@@ -18,8 +18,6 @@ export const NoteEntity = ({ noteIri }) => {
     <>
       <NoteItem {...{ noteIri }} isEntity />
 
-      <OutgoingAnnotations {...{ noteIri }} />
-
       {!!selections?.length && (
         <List subheader={<ListSubheader>Current note is in selections</ListSubheader>} dense disablePadding>
           {selections?.map(({ iri: selectionIri }, index) => (
@@ -51,6 +49,8 @@ export const NoteEntity = ({ noteIri }) => {
           ))}
         </List>
       )}
+      
+      <OutgoingAnnotations {...{ noteIri }} />
 
       <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
         {actions[NOTE].map(action => (

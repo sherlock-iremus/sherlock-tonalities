@@ -10,7 +10,7 @@ import actions from '../../../app/services/p140_p177.json'
 
 const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseUrl }) => (
   <Box>
-    <VerticalityItem {...{ verticalityIri, baseUrl, clickedNoteIri }} isEntity />
+    <VerticalityItem {...{ verticalityIri }} isEntity />
 
     <OutgoingAnnotations {...{ verticalityIri }} />
 
