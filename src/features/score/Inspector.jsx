@@ -39,11 +39,11 @@ import { ConceptEntity } from './entities/ConceptEntity'
 import { NoteEntity } from './entities/NoteEntity'
 import { SelectionEntity } from './entities/SelectionEntity'
 import { VerticalityEntity } from './entities/VerticalityEntity'
-import { PositionnedNoteItem } from './items/PositionnedNoteItem'
 import { ScoreItem } from './items/ScoreItem'
 import { findKey } from './utils'
 import { COLOR_INSPECTED } from './mei.css'
 import { AnnotationEntity } from './entities/AnnotationEntity'
+import { PositionnedNoteEntity } from './entities/PositionnedNoteEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -194,7 +194,7 @@ export const Inspector = props => {
             <List>
               {noteIri && <NoteEntity {...{ noteIri }} />}
               {analyticalEntityIri && <AnalyticalEntity {...{ analyticalEntityIri, scoreIri }} />}
-              {positionnedNoteIri && <PositionnedNoteItem {...{ positionnedNoteIri, attachedNoteIri }} isEntity />}
+              {positionnedNoteIri && <PositionnedNoteEntity {...{ positionnedNoteIri, attachedNoteIri }} isEntity />}
               {conceptIri && <ConceptEntity {...{ conceptIri }} />}
               {selectionIri && <SelectionEntity {...{ selectionIri }} />}
               {verticalityIri && <VerticalityEntity {...{ verticalityIri, clickedNoteIri }} />}

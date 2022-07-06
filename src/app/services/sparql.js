@@ -251,10 +251,11 @@ export const sparqlEndpoint = createApi({
             {
               attachedNote: { value: attachedNoteIri },
               clickedNote: { value: clickedNoteIri },
+              verticality: { value: verticalityIri },
             },
           ],
         },
-      }) => ({ attachedNoteIri, clickedNoteIri }),
+      }) => ({ attachedNoteIri, clickedNoteIri, verticalityIri }),
     }),
   }),
 })

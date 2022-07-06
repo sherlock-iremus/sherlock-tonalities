@@ -5,6 +5,6 @@ import { VerticalityItem } from './VerticalityItem'
 
 export const Item = props =>
   (props.noteIri && <NoteItem {...props} />) ||
-  (props.verticalityIri && <VerticalityItem {...props} />) ||
   (props.positionnedNoteIri && <PositionnedNoteItem {...props} />) ||
-  (props.selectionIri && <SelectionItem {...props} />)
+  (props.verticalityIri && <VerticalityItem {...props} initialIsOpen={false} />) ||
+  (props.selectionIri && <SelectionItem {...props} initialIsOpen={false} />)

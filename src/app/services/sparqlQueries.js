@@ -288,7 +288,7 @@ export const getAnnotation = annotationIri => `
 
 export const getPositionnedNoteInfo = positionnedNoteIri => `
 PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-SELECT ?attachedNote ?clickedNote
+SELECT ?attachedNote ?clickedNote ?verticality
 FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
 WHERE {
     ?attachedNote sherlockmei:has_beat_anchor <${positionnedNoteIri}>.
