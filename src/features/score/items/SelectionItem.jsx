@@ -1,7 +1,7 @@
 import { BubbleChart, ChevronRight, Close, Edit, ExpandMore } from '@mui/icons-material'
 import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useGetChildSelectionsQuery, useGetScoreSelectionsQuery } from '../../../app/services/sparql'
 import { setEditingSelection, setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'

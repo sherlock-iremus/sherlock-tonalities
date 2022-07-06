@@ -26,7 +26,6 @@ export const AnnotationEntity = ({ annotationIri }) => {
       <>
         <ListSubheader>Property</ListSubheader>
         <ListItem disablePadding>
-          {console.log(annotation)}
           <ListItemText primary={annotation.predicat} />
         </ListItem>
 

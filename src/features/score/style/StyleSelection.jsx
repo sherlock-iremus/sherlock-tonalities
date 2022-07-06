@@ -4,20 +4,18 @@ import { useGetChildSelectionsQuery } from '../../../app/services/sparql'
 import { StyleEntity } from './StyleEntity'
 import { drawSelection } from '../draw'
 import { findKey } from '../utils'
+import { INSPECTED, SELECTED } from '../constants'
 
-export const StyleSelection = props => {
-  const { scoreIri } = useSelector(state => state.score)
-  const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
-  children && console.log(children)
+export const StyleSelection = ({ selectionIri }) => {
+  const { scoreIri, isInspectionMode, isSelectionMode } = useSelector(state => state.score)
+  const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
+  const { data: children } = useGetChildSelectionsQuery(selectionIri)
+  
   useEffect(() => {
-    !document.getElementById(props.selectionIri) &&
-      children &&
-      drawSelection(children, props.selectionIri, scoreIri, props.mode)
-    document
-      .getElementById(props.selectionIri)
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
-    return () => document.getElementById(props.selectionIri)?.remove()
-  }, [children, props.mode, props.selectionIri, scoreIri])
+    !document.getElementById(selectionIri) && children && drawSelection(children, selectionIri, scoreIri, mode)
+    document.getElementById(selectionIri)?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    return () => document.getElementById(selectionIri)?.remove()
+  }, [children, mode, selectionIri, scoreIri])
 
   return children?.map(child => <StyleEntity key={findKey(child)} {...child} />) || null
 }
