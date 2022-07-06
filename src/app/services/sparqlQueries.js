@@ -298,3 +298,19 @@ WHERE {
 }
 LIMIT 1
 `
+
+export const getEntityType = entityIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+
+SELECT ?type ?iri ?label
+
+FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+
+WHERE {
+    VALUES ?iri {<${entityIri}>}.
+    OPTIONAL {<${entityIri}> crm:P2_has_type ?type}
+    OPTIONAL {<${entityIri}> crm:P1_is_identified_by ?label}
+    # FILTER (lang(?label) = "en" )
+}
+`

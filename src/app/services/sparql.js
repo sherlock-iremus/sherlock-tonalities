@@ -13,6 +13,7 @@ import {
   getAnnotationSelection,
   getChildSelections,
   getConceptAnnotations,
+  getEntityType,
   getIncommingAnnotations,
   getNoteAnnalyticalEntities,
   getNoteInfo,
@@ -131,6 +132,7 @@ export const sparqlEndpoint = createApi({
           if (e.type.value === SELECTION) return { selectionIri: e.child.value }
           if (e.type.value === ANALYTICAL_ENTITY) return { analyticalEntityIri: e.child.value }
           if (e.type.value === SCORE) return { scoreIri: e.child.value }
+          return null
         }),
     }),
     getParentSelections: builder.query({
@@ -218,9 +220,9 @@ export const sparqlEndpoint = createApi({
           bindings: [element],
         },
       }) => ({
-        subject: element.subject?.value,
+        subject: element.subject,
         predicat: element.predicat?.value,
-        object: element.object?.type === 'litteral' ? element.object?.value : { conceptIri: element.object?.value },
+        object: element.object,
         date: element.date?.value,
         contributorIri: element.contributor?.value,
       }),
@@ -257,6 +259,39 @@ export const sparqlEndpoint = createApi({
         },
       }) => ({ attachedNoteIri, clickedNoteIri, verticalityIri }),
     }),
+    getEntityType: builder.query({
+      query: entityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getEntityType(entityIri) }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [
+            {
+              iri: { value: iri },
+              type,
+              label,
+            },
+          ],
+        },
+      }) => {
+        if (type.value === NOTE) return { noteIri: iri }
+        if (type.value === VERTICALITY) return { verticalityIri: iri }
+        if (type.value === POSITIONNED_NOTE) return { positionnedNoteIri: iri }
+        if (type.value === SELECTION) return { selectionIri: iri }
+        if (type.value === ANALYTICAL_ENTITY) return { analyticalEntityIri: iri }
+        if (type.value === SCORE) return { scoreIri: iri }
+        if (label) return { classIri: iri, label: label.value }
+        return null
+      },
+    }),
+    getPredicatLabel: builder.query({
+      query: entityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getEntityType(entityIri) }),
+      }),
+      transformResponse: response => response.results.bindings[0].label.value,
+    }),
   }),
 })
 
@@ -282,4 +317,6 @@ export const {
   useGetAnnotationQuery,
   useGetVerticalityCoordinatesQuery,
   useGetPositionnedNoteInfoQuery,
+  useGetEntityTypeQuery,
+  useGetPredicatLabelQuery,
 } = sparqlEndpoint
