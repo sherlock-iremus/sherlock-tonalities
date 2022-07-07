@@ -28,16 +28,7 @@ export const AnnotationEntity = ({ annotationIri }) => {
     (data && (
       <>
         <AnnotationItem {...{ annotationIri }} isEntity />
-
-        <ListSubheader>Target entity</ListSubheader>
-        <AnnotationValueItem {...data.subject} />
-
-        <ListSubheader>Assigned property</ListSubheader>
-        <PropertyItem propertyIri={data.predicat} />
-
-        <ListSubheader>Assigned value</ListSubheader>
-        <AnnotationValueItem {...data.object} />
-
+        
         <ListSubheader>Contributor</ListSubheader>
         <ListItem disablePadding>
           <ListItemButton onClick={() => dispatch(setInspectedEntity({ contributorIri: data.contributorIri }))}>
@@ -50,6 +41,16 @@ export const AnnotationEntity = ({ annotationIri }) => {
             />
           </ListItemButton>
         </ListItem>
+
+        <ListSubheader>Target entity</ListSubheader>
+        <AnnotationValueItem {...data.subject} />
+
+        <ListSubheader>Assigned property</ListSubheader>
+        <PropertyItem propertyIri={data.predicat} />
+
+        <ListSubheader>Assigned value</ListSubheader>
+        <AnnotationValueItem {...data.object} />
+
         
         <OutgoingAnnotations {...{ annotationIri }} />
 
