@@ -11,40 +11,50 @@ import { Item } from './Item'
 import { withDispatch } from './withDispatch'
 import { useGetUserIdQuery } from '../../../app/services/sherlockApi'
 
-const BaseSelectionItem = ({ selectionIri, concepts, isEntity, baseUrlLength, dispatch, initialIsOpen = true }) => {
+const BaseSelectionItem = ({
+  selectionIri,
+  concepts,
+  isEntity,
+  baseUrlLength,
+  dispatch,
+  initialIsOpen = true,
+  secondaryAction,
+}) => {
   const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { data: userId } = useGetUserIdQuery()
   const { isInspectionMode, isSelectionMode, scoreIri } = useSelector(state => state.score)
   const { data: selections } = useGetScoreSelectionsQuery(scoreIri)
   const contributorIri = selections.filter(s => s.iri === selectionIri)[0]?.contributorIri
   const { data: children } = useGetChildSelectionsQuery(selectionIri)
-  const conceptIri = concepts?.find(e => e.entity === selectionIri)?.concept
+  const conceptIri = concepts?.find(e => e.entityIri === selectionIri)?.propertyIri
 
   return children ? (
     <>
       <ListItem
         disablePadding
         secondaryAction={
-          <>
-            {isEntity && (
-              <>
-                {isInspectionMode && contributorIri.slice(baseUrlLength) === userId && (
-                  <IconButton onClick={() => dispatch(setEditingSelection({ selectionIri, children }))}>
-                    <Edit />
+          secondaryAction || (
+            <>
+              {isEntity && (
+                <>
+                  {isInspectionMode && contributorIri.slice(baseUrlLength) === userId && (
+                    <IconButton onClick={() => dispatch(setEditingSelection({ selectionIri, children }))}>
+                      <Edit />
+                    </IconButton>
+                  )}
+                  <IconButton
+                    onClick={() =>
+                      (isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))) ||
+                      (isSelectionMode && dispatch(setSelectedEntity({ selectionIri })))
+                    }
+                  >
+                    <Close />
                   </IconButton>
-                )}
-                <IconButton
-                  onClick={() =>
-                    (isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))) ||
-                    (isSelectionMode && dispatch(setSelectedEntity({ selectionIri })))
-                  }
-                >
-                  <Close />
-                </IconButton>
-              </>
-            )}
-            {conceptIri && <ConceptItem conceptIri={conceptIri} />}
-          </>
+                </>
+              )}
+              {conceptIri && <ConceptItem conceptIri={conceptIri} />}
+            </>
+          )
         }
       >
         <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>

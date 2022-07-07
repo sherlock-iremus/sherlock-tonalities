@@ -6,7 +6,7 @@ import { setInspectedEntity, setSelectedEntity } from '../../../app/services/sco
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { useSelector } from 'react-redux'
 
-const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, isEntity }) => {
+const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, isEntity, secondaryAction }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data } = useGetPositionnedNoteInfoQuery(positionnedNoteIri)
   const { data: noteLabel } = useGetNoteInfoQuery(data?.attachedNoteIri, { skip: !data })
@@ -14,7 +14,8 @@ const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, 
     <ListItem
       disablePadding
       secondaryAction={
-        isEntity && (
+        secondaryAction ||
+        (isEntity && (
           <IconButton
             disableRipple
             onClick={() =>
@@ -24,7 +25,7 @@ const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, 
           >
             <Close />
           </IconButton>
-        )
+        ))
       }
     >
       <ListItemButton

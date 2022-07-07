@@ -21,7 +21,7 @@ export const VerticalityItem = ({
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(verticalityIri)
-  const conceptIri = concepts?.find(e => e.entity === verticalityIri)?.concept
+  const conceptIri = concepts?.find(e => e.entityIri === verticalityIri)?.propertyIri
   return positionnedNotes ? (
     <>
       <ListItem

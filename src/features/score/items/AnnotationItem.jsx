@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { withDispatch } from './withDispatch'
 
-const BaseAnnotationItem = ({ annotationIri, isEntity, baseUrlLength, dispatch, secondaryAction }) => {
+const BaseAnnotationItem = ({ annotationIri, isEntity, baseUrlLength, dispatch }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
 
   return (
