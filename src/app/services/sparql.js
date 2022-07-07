@@ -10,22 +10,21 @@ import {
 import { findKey, findType } from '../../features/score/utils'
 import {
   getAnalyticalEntities,
+  getAnalyticalEntity,
   getAnnotation,
-  getAnnotationInfo,
-  getAnnotationSelection,
   getChildSelections,
+  getEntityGlobalAnnotations,
+  getEntitySpecificAnnotations,
   getEntityType,
   getIncommingAnnotations,
   getNoteInfo,
   getNoteSelections,
-  getNotesOnFirstBeat,
   getNoteVerticality,
   getOutgoingAnnotations,
   getParentSelections,
   getPositionnedNoteInfo,
   getScoreSelections,
   getSelectionAnalyticalEntities,
-  getSubAnnotations,
   getVerticalityCoordinates,
   getVerticalityPositionnedNotes,
 } from './sparqlQueries'
@@ -34,12 +33,6 @@ export const sparqlEndpoint = createApi({
   reducerPath: 'sparqlApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://data-iremus.huma-num.fr/sparql' }),
   endpoints: builder => ({
-    getNotesOnFirstBeat: builder.query({
-      query: noteIri => ({
-        method: 'POST',
-        body: new URLSearchParams({ query: getNotesOnFirstBeat(noteIri) }),
-      }),
-    }),
     getNoteInfo: builder.query({
       query: noteIri => ({
         method: 'POST',
@@ -76,21 +69,6 @@ export const sparqlEndpoint = createApi({
         return pname.toUpperCase() + oct + alteration
       },
     }),
-    getAnnotationInfo: builder.query({
-      query: annotationIri => ({
-        method: 'POST',
-        body: new URLSearchParams({ query: getAnnotationInfo(annotationIri) }),
-      }),
-      transformResponse: response => response.results?.bindings?.map(e => e.concept?.value),
-    }),
-    getSubAnnotations: builder.query({
-      query: annotationIri => ({
-        method: 'POST',
-        body: new URLSearchParams({ query: getSubAnnotations(annotationIri) }),
-      }),
-      transformResponse: response =>
-        response.results?.bindings?.map(e => ({ entity: e.selection?.value, concept: e.type?.value })),
-    }),
     getAnalyticalEntities: builder.query({
       query: entity => ({
         method: 'POST',
@@ -109,6 +87,43 @@ export const sparqlEndpoint = createApi({
           analyticalProjetIri: e.project?.value,
           date: e.date?.value,
           assignments: e.assignments?.value,
+        })),
+    }),
+    getAnalyticalEntity: builder.query({
+      query: analyticalEntityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({
+          query: getAnalyticalEntity(analyticalEntityIri),
+        }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [{ selection, contributor, date }],
+        },
+      }) => ({ selectionIri: selection?.value, contributorIri: contributor?.value, date: date?.value }),
+    }),
+    getEntityGlobalAnnotations: builder.query({
+      query: analyticalEntityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({
+          query: getEntityGlobalAnnotations(analyticalEntityIri),
+        }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(({ annotation, object }) => ({ annotationIri: annotation?.value, object })),
+    }),
+    getEntitySpecificAnnotations: builder.query({
+      query: analyticalEntityIri => ({
+        method: 'POST',
+        body: new URLSearchParams({
+          query: getEntitySpecificAnnotations(analyticalEntityIri),
+        }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(({ annotation, object, predicat }) => ({
+          annotationIri: annotation?.value,
+          entityIri: object?.value,
+          propertyIri: predicat?.value,
         })),
     }),
     getNoteSelections: builder.query({
@@ -153,13 +168,6 @@ export const sparqlEndpoint = createApi({
         body: new URLSearchParams({ query: getParentSelections(selectionIri) }),
       }),
       transformResponse: response => response.results?.bindings?.map(e => e.parent?.value),
-    }),
-    getAnnotationSelection: builder.query({
-      query: annotationIri => ({
-        method: 'POST',
-        body: new URLSearchParams({ query: getAnnotationSelection(annotationIri) }),
-      }),
-      transformResponse: response => response.results?.bindings[0]?.selection?.value,
     }),
     getNoteVerticality: builder.query({
       query: noteIri => ({
@@ -272,14 +280,16 @@ export const sparqlEndpoint = createApi({
           ],
         },
       }) => {
-        if (type.value === NOTE) return { noteIri: iri }
-        if (type.value === VERTICALITY) return { verticalityIri: iri }
-        if (type.value === POSITIONNED_NOTE) return { positionnedNoteIri: iri }
-        if (type.value === SELECTION) return { selectionIri: iri }
-        if (type.value === ANALYTICAL_ENTITY) return { analyticalEntityIri: iri }
-        if (type.value === SCORE) return { scoreIri: iri }
+        if (type) {
+          if (type.value === NOTE) return { noteIri: iri }
+          if (type.value === VERTICALITY) return { verticalityIri: iri }
+          if (type.value === POSITIONNED_NOTE) return { positionnedNoteIri: iri }
+          if (type.value === SELECTION) return { selectionIri: iri }
+          if (type.value === ANALYTICAL_ENTITY) return { analyticalEntityIri: iri }
+          if (type.value === SCORE) return { scoreIri: iri }
+        }
         if (label) return { classIri: iri, label: label.value }
-        return null
+        return { classIri: iri }
       },
     }),
     getPredicatLabel: builder.query({
@@ -287,7 +297,7 @@ export const sparqlEndpoint = createApi({
         method: 'POST',
         body: new URLSearchParams({ query: getEntityType(entityIri) }),
       }),
-      transformResponse: response => response.results.bindings[0].label.value,
+      transformResponse: response => response.results?.bindings[0]?.label?.value,
     }),
   }),
 })
@@ -295,15 +305,11 @@ export const sparqlEndpoint = createApi({
 export default sparqlEndpoint
 
 export const {
-  useGetNotesOnFirstBeatQuery,
   useGetNoteInfoQuery,
-  useGetAnnotationInfoQuery,
-  useGetSubAnnotationsQuery,
   useGetNoteSelectionsQuery,
   useGetScoreSelectionsQuery,
   useGetChildSelectionsQuery,
   useGetParentSelectionsQuery,
-  useGetAnnotationSelectionQuery,
   useGetNoteVerticalityQuery,
   useGetVerticalityPositionnedNotesQuery,
   useGetIncomingAnnotationsQuery,
@@ -314,4 +320,7 @@ export const {
   useGetEntityTypeQuery,
   useGetPredicatLabelQuery,
   useGetAnalyticalEntitiesQuery,
+  useGetAnalyticalEntityQuery,
+  useGetEntityGlobalAnnotationsQuery,
+  useGetEntitySpecificAnnotationsQuery,
 } = sparqlEndpoint

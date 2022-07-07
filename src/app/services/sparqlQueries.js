@@ -1,64 +1,71 @@
 import { ANALYTICAL_ENTITY, SELECTION } from '../../features/score/constants'
 
-export const getNotesOnFirstBeat = noteIri => `
-    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-    SELECT ?notes ?beat ?selectedNote
-    WHERE {
-        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            ?notes sherlockmei:contains_beat ?beat
-            {
-                SELECT ?beat ?selectedNote
-                WHERE {
-                    BIND (<${noteIri}> AS ?selectedNote)
-                    ?selectedNote sherlockmei:contains_beat ?beat
-                }
-                ORDER BY ASC(?beat)
-                LIMIT 1
-            }
-        }
-    }
-`
-
 export const getNoteInfo = noteIri => `
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    
     SELECT *
+
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+
     WHERE {
-        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            VALUES ?note {<${noteIri}>}
-            ?note sherlockmei:pname ?pname.
-            ?note sherlockmei:oct ?oct.
-            OPTIONAL {?note sherlockmei:accid ?accid}
-        }
+        VALUES ?note {<${noteIri}>}
+        ?note sherlockmei:pname ?pname.
+        ?note sherlockmei:oct ?oct.
+        OPTIONAL {?note sherlockmei:accid ?accid}
+    }
+    LIMIT 1
+`
+
+export const getAnalyticalEntity = analyticalEntityIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX dcterm: <http://purl.org/dc/terms/>
+
+    SELECT ?selection ?contributor ?date
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+
+    WHERE {
+        ?annotation crm:P141_assigned <${analyticalEntityIri}>.
+        ?annotation crm:P140_assigned_attribute_to ?selection.
+        ?annotation crm:P14_carried_out_by ?contributor.
+        ?annotation dcterm:created ?date.
+    }
+    LIMIT 1
+`
+
+export const getEntityGlobalAnnotations = analyticalEntityIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+    SELECT ?annotation ?object
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
+    WHERE {
+        ?annotation crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
+        ?annotation crm:P177_assigned_property_of_type rdf:type.
+        ?annotation crm:P141_assigned ?object.   
     }
 `
 
-export const getAnnotationInfo = annotationIri => `
-    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    SELECT ?concept
-    WHERE {
-        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            <${annotationIri}> crm:P141_assigned ?group .
-            ?assignment crm:P140_assigned_attribute_to ?group .
-            ?assignment crm:P177_assigned_property_of_type rdf:type .
-            ?assignment crm:P141_assigned ?concept
-        }
-    }
-`
-
-export const getSubAnnotations = annotationIri => `
+export const getEntitySpecificAnnotations = analyticalEntityIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-    SELECT ?selection ?type
+    SELECT ?annotation ?predicat ?object
+
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+
     WHERE {
-        GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-            <${annotationIri}> crm:P141_assigned ?group .
-            ?assignment crm:P140_assigned_attribute_to ?group .
-            FILTER NOT EXISTS {?assignment crm:P177_assigned_property_of_type rdf:type }
-            ?assignment crm:P141_assigned ?selection .
-            ?assignment crm:P177_assigned_property_of_type ?type
-        }
+        ?annotation crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
+        FILTER NOT EXISTS {?annotation crm:P177_assigned_property_of_type rdf:type }
+        ?annotation crm:P177_assigned_property_of_type ?predicat.
+        ?annotation crm:P141_assigned ?object.
     }
 `
 
@@ -92,9 +99,12 @@ export const getAnalyticalEntities = entityIri => `
 
 export const getNoteSelections = noteIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    
     SELECT ?selection
+    
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
     WHERE {
         ?selection crm:P106_is_composed_of <${noteIri}>.
         ?selection crm:P2_has_type <${SELECTION}>.
@@ -130,9 +140,12 @@ export const getScoreSelections = scoreIri => `
 
 export const getChildSelections = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    
     SELECT ?child ?type
+    
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
     WHERE {
         <${selectionIri}> crm:P106_is_composed_of ?child.
         ?child crm:P2_has_type ?type
@@ -141,31 +154,26 @@ export const getChildSelections = selectionIri => `
 
 export const getParentSelections = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    
     SELECT ?parent ?type
+    
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
     WHERE {
         ?parent crm:P106_is_composed_of <${selectionIri}>.
         OPTIONAL {?parent crm:P2_has_type ?type}
     }
 `
 
-export const getAnnotationSelection = annotationIri => `
-    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    SELECT ?selection
-    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    WHERE {
-        <${annotationIri}> crm:P140_assigned_attribute_to ?selection
-    }
-    LIMIT 1
-`
-
 export const getNoteVerticality = noteIri => `
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    
     SELECT ?verticality ?selectedNote
+    
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
     WHERE {
         <${noteIri}> sherlockmei:contains_beat ?verticality
     }
@@ -174,27 +182,32 @@ export const getNoteVerticality = noteIri => `
 `
 
 export const getVerticalityPositionnedNotes = verticalityIri => `
-PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-SELECT ?positionned_note ?note
-FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-WHERE {
-    ?note sherlockmei:contains_beat <${verticalityIri}>.
-    ?note sherlockmei:has_beat_anchor ?positionned_note.
-    FILTER regex(str(?positionned_note), "${verticalityIri.slice(-6)}")
-}
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    
+    SELECT ?positionned_note ?note
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
+    WHERE {
+        ?note sherlockmei:contains_beat <${verticalityIri}>.
+        ?note sherlockmei:has_beat_anchor ?positionned_note.
+        FILTER regex(str(?positionned_note), "${verticalityIri.slice(-6)}")
+    }
 `
 
 export const getVerticalityCoordinates = verticalityIri => `
-PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-SELECT ?note ?note
-FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-WHERE {
-    ?note sherlockmei:contains_beat <${verticalityIri}>.
-}
-LIMIT 1
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+    
+    SELECT ?note ?note
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    
+    WHERE {
+        ?note sherlockmei:contains_beat <${verticalityIri}>.
+    }
+    LIMIT 1
 `
-
 
 export const getSelectionAnalyticalEntities = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
@@ -212,31 +225,34 @@ export const getSelectionAnalyticalEntities = selectionIri => `
         ?annotation crm:P14_carried_out_by ?contributor.
         ?annotation dcterm:created ?date.
         {
-        SELECT ?entity ((COUNT(?assignment)) AS ?assignments)
-        WHERE {
-            ?annotation crm:P140_assigned_attribute_to <${selectionIri}>.
-            ?annotation crm:P141_assigned ?entity.
-            ?entity crm:P2_has_type <${ANALYTICAL_ENTITY}>.
-            ?assignment crm:P140_assigned_attribute_to ?entity
-        }
-        GROUP BY ?entity
-    } 
+            SELECT ?entity ((COUNT(?assignment)) AS ?assignments)
+            WHERE {
+                ?annotation crm:P140_assigned_attribute_to <${selectionIri}>.
+                ?annotation crm:P141_assigned ?entity.
+                ?entity crm:P2_has_type <${ANALYTICAL_ENTITY}>.
+                ?assignment crm:P140_assigned_attribute_to ?entity
+            }
+            GROUP BY ?entity
+        } 
     }
 `
 
 export const getOutgoingAnnotations = entityIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
+    
     SELECT ?annotation ?date ?contributor ?object ?predicat
+    
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    
     WHERE {
-            ?annotation crm:P140_assigned_attribute_to <${entityIri}>.
-            ?annotation a crm:E13_Attribute_Assignment.
-            ?annotation dcterms:created ?date.
-            ?annotation crm:P141_assigned ?object.
-            ?annotation crm:P177_assigned_property_of_type ?predicat.
-            ?annotation crm:P14_carried_out_by ?contributor.
+        ?annotation crm:P140_assigned_attribute_to <${entityIri}>.
+        ?annotation a crm:E13_Attribute_Assignment.
+        ?annotation dcterms:created ?date.
+        ?annotation crm:P141_assigned ?object.
+        ?annotation crm:P177_assigned_property_of_type ?predicat.
+        ?annotation crm:P14_carried_out_by ?contributor.
     }
 `
 
@@ -285,30 +301,33 @@ export const getAnnotation = annotationIri => `
 `
 
 export const getPositionnedNoteInfo = positionnedNoteIri => `
-PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
-SELECT ?attachedNote ?clickedNote ?verticality
-FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-WHERE {
-    ?attachedNote sherlockmei:has_beat_anchor <${positionnedNoteIri}>.
-    ?attachedNote sherlockmei:contains_beat ?verticality.
-    FILTER regex(str(?verticality), "${positionnedNoteIri.slice(-6)}")
-    ?clickedNote sherlockmei:contains_beat ?verticality.
-}
-LIMIT 1
+    PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
+   
+    SELECT ?attachedNote ?clickedNote ?verticality
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    
+    WHERE {
+        ?attachedNote sherlockmei:has_beat_anchor <${positionnedNoteIri}>.
+        ?attachedNote sherlockmei:contains_beat ?verticality.
+        FILTER regex(str(?verticality), "${positionnedNoteIri.slice(-6)}")
+        ?clickedNote sherlockmei:contains_beat ?verticality.
+    }
+    LIMIT 1
 `
 
 export const getEntityType = entityIri => `
-PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 
-SELECT ?type ?iri ?label
+    SELECT ?type ?iri ?label
 
-FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 
-WHERE {
-    VALUES ?iri {<${entityIri}>}.
-    OPTIONAL {<${entityIri}> crm:P2_has_type ?type}
-    OPTIONAL {<${entityIri}> crm:P1_is_identified_by ?label}
-    # FILTER (lang(?label) = "en" )
-}
+    WHERE {
+        VALUES ?iri {<${entityIri}>}.
+        OPTIONAL {<${entityIri}> crm:P2_has_type ?type}
+        OPTIONAL {<${entityIri}> crm:P1_is_identified_by ?label}
+        # FILTER (lang(?label) = "en" )
+    }
 `
