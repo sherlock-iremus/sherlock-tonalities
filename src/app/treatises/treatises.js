@@ -14,3 +14,13 @@ const treatises = {
 }
 
 export const getTreatise = treatiseIri => treatises[treatiseIri]
+
+export const getConceptLabel = conceptIri => {
+  for (const treatiseIri of treatiseList) if (conceptIri.match(treatiseIri)) return conceptIri.slice(treatiseIri.length)
+  return conceptIri
+}
+
+export const getTreatiseIri = conceptIri => {
+  for (const treatiseIri of treatiseList) if (conceptIri.match(treatiseIri)) return treatiseIri
+  return null
+}
