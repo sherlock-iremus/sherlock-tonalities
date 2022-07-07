@@ -19,7 +19,7 @@ import { findKey, findType } from '../utils'
 import predicats from '../../../app/services/p140_p177.json'
 import options from '../../../app/services/p177_p141.json'
 import { useState } from 'react'
-import { ChevronRight, Comment, ExpandMore, HistoryEdu, Piano } from '@mui/icons-material'
+import { ChevronRight, ExpandMore } from '@mui/icons-material'
 
 export const OutgoingAnnotations = props => {
   const [isOpen, setIsOpen] = useState(true)
