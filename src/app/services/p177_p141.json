@@ -31,9 +31,7 @@
   ],
   "http://modality-tonality.huma-num.fr/analysisOntology#hasModalTonalAttribution": [],
   "http://modality-tonality.huma-num.fr/Speech#support": [
-    { "iri": "http://data-iremus.huma-num.fr/id/c9289aed-0ee9-43fa-bb67-699b9346d122", "label": "Passing note" }
   ],
   "http://modality-tonality.huma-num.fr/Speech#refute": [
-    { "iri": "http://data-iremus.huma-num.fr/id/c9289aed-0ee9-43fa-bb67-699b9346d122", "label": "Passing note" }
   ]
 }

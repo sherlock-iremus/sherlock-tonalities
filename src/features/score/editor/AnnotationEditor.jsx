@@ -14,6 +14,7 @@ import {
   SpeedDial,
   Tab,
   Tabs,
+  TextField,
   Toolbar,
   Tooltip,
   Typography,
@@ -46,7 +47,7 @@ export const AnnotationEditor = () => {
           p140: findKey(subject),
           p177: predicat.iri,
           p141: selectedOption,
-          p141_type: 'uri',
+          p141_type: options[predicat.iri].length ? 'uri' : 'literal',
         }).unwrap()
         refetch()
         dispatch(setAnnotationEditor())
@@ -102,13 +103,17 @@ export const AnnotationEditor = () => {
 
           <ListSubheader>Value</ListSubheader>
           <ListItem>
-            <Select required value={selectedOption} onChange={event => setSelectedOption(event.target.value)}>
-              {options[predicat.iri].map(option => (
-                <MenuItem key={option.iri} value={option.iri}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
+            {options[predicat.iri].length ? (
+              <Select required value={selectedOption} onChange={event => setSelectedOption(event.target.value)}>
+                {options[predicat.iri].map(option => (
+                  <MenuItem key={option.iri} value={option.iri}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            ) : (
+              <TextField value={selectedOption} onChange={event => setSelectedOption(event.target.value)} />
+            )}
           </ListItem>
 
           <Tooltip title="Validate">
