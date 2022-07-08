@@ -127,9 +127,7 @@ export const getScoreSelections = scoreIri => `
         {
             SELECT ?selection ((COUNT(?entity)) AS ?entities)
             WHERE {
-                OPTIONAL {?selection sherlock:has_document_context <${scoreIri}>}
-                OPTIONAL {?selection sherlock:sheP_has_document_context <${scoreIri}>}
-                ?selection a crm:E28_Conceptual_Object.
+                ?selection sherlock:has_document_context <${scoreIri}>.
                 ?selection crm:P2_has_type <${SELECTION}>.
                 ?selection crm:P106_is_composed_of ?entity.
             }
