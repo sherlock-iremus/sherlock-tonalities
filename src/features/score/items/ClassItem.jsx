@@ -13,7 +13,7 @@ export const ClassItem = ({ classIri, label, secondaryAction }) => {
         </ListItemIcon>
         <ListItemText
           primary={label || getConceptLabel(classIri)}
-          secondary={getTreatiseIri(classIri).slice(tonalityBaseUrl.length)}
+          secondary={getTreatiseIri(classIri)?.slice(tonalityBaseUrl.length)}
         />
       </ListItemButton>
     </ListItem>

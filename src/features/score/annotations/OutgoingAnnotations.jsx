@@ -17,16 +17,15 @@ import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { ContributorItem } from '../items/ContributorItem'
 import { findKey, findType } from '../utils'
 import predicats from '../../../app/services/p140_p177.json'
-import options from '../../../app/services/p177_p141.json'
 import { useState } from 'react'
 import { ChevronRight, ExpandMore } from '@mui/icons-material'
+import { ConceptItem } from '../items/ConceptItem'
 
 export const OutgoingAnnotations = props => {
   const [isOpen, setIsOpen] = useState(true)
   const { data: annotations } = useGetOutgoingAnnotationsQuery(findKey(props))
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
-
   return (
     !!annotations?.length && (
       <>
@@ -66,15 +65,7 @@ export const OutgoingAnnotations = props => {
                     >
                       <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
                         <ListItemText
-                          primary={
-                            <Chip
-                              label={
-                                options[predicat.iri].filter(a => a.iri === object)[0]?.label ||
-                                object.slice(baseUrlLength)
-                              }
-                              sx={{ mb: 1 }}
-                            />
-                          }
+                          primary={<ConceptItem conceptIri={object} />}
                           secondary={annotationIri.slice(baseUrlLength)}
                         />
                       </ListItemButton>

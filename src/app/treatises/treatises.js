@@ -17,7 +17,7 @@ export const getTreatise = treatiseIri => treatises[treatiseIri]
 
 export const getConceptLabel = conceptIri => {
   for (const treatiseIri of treatiseList) if (conceptIri.match(treatiseIri)) return conceptIri.slice(treatiseIri.length)
-  return conceptIri
+  return null
 }
 
 export const getTreatiseIri = conceptIri => {
