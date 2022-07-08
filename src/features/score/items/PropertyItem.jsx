@@ -8,7 +8,6 @@ import { withDispatch } from './withDispatch'
 const BasePropertyItem = ({ propertyIri, baseUrlLength }) => {
   const { data: label } = useGetPredicatLabelQuery(propertyIri)
   const { tonalityBaseUrl } = useSelector(state => state.score)
-  label && console.log(label)
   return (
     <ListItem disablePadding>
       <ListItemButton sx={{ cursor: 'default' }}>

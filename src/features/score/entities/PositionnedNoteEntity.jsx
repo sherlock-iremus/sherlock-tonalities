@@ -2,7 +2,6 @@ import { List, ListItem, ListItemButton, ListItemText, ListSubheader, SpeedDial,
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetNoteSelectionsQuery, useGetPositionnedNoteInfoQuery } from '../../../app/services/sparql'
 import { setAnnotationEditor, setInspectedEntity } from '../../../app/services/scoreSlice'
-import { ConceptItem } from '../items/ConceptItem'
 import { NoteItem } from '../items/NoteItem'
 import { VerticalityItem } from '../items/VerticalityItem'
 import { NOTE } from '../constants'
