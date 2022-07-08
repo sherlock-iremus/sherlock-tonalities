@@ -1,4 +1,4 @@
-import { ANALYTICAL_ENTITY, NOTE, POSITIONNED_NOTE, SCORE, SELECTION, VERTICALITY } from './constants'
+import { ANALYTICAL_ENTITY, ANNOTATION, NOTE, POSITIONNED_NOTE, SCORE, SELECTION, VERTICALITY } from './constants'
 
 export const findKey = item =>
   item &&
@@ -19,12 +19,14 @@ export const findType = ({
   selectionIri,
   scoreIri,
   analyticalEntityIri,
+  annotationIri,
 }) =>
   (noteIri && NOTE) ||
   (verticalityIri && VERTICALITY) ||
   (positionnedNoteIri && POSITIONNED_NOTE) ||
   (selectionIri && SELECTION) ||
   (analyticalEntityIri && ANALYTICAL_ENTITY) ||
-  (scoreIri && SCORE)
+  (scoreIri && SCORE) ||
+  (annotationIri && ANNOTATION)
 
 export const sleep = time => new Promise(resolve => setTimeout(resolve, time))
