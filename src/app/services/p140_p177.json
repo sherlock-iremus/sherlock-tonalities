@@ -2,7 +2,7 @@
   "http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd": [
     {
       "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
-      "label": "Type de dissonance",
+      "label": "Dissonance type",
       "icon": "🎶"
     }
   ],
@@ -10,7 +10,7 @@
   "http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df": [
     {
       "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
-      "label": "Type de dissonance",
+      "label": "Dissonance type",
       "icon": "🎶"
     }
   ],
@@ -18,7 +18,7 @@
   "http://data-iremus.huma-num.fr/id/90a2ae1e-0fbc-4357-ac8a-b4b3f2a06e86": [
     {
       "iri": "http://data-iremus.huma-num.fr/id/003559fc-f033-4fc3-9c05-0d5f283123ed",
-      "label": "Identifier une fondamentale",
+      "label": "Identify fundamental",
       "icon": "🎹"
     }
   ],
@@ -37,7 +37,7 @@
   ],
 
   "http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b": [
-    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence" }
+    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence", "label": "Identify a cadence", "icon": "🎼" }
   ],
 
   "http://data-iremus.huma-num.fr/id/82dbd157-20df-422c-88db-28d6075d99a1": [

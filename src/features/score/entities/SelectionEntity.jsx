@@ -1,20 +1,12 @@
-import { Lyrics, Timeline } from '@mui/icons-material'
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  ListSubheader,
-  SpeedDial,
-  SpeedDialAction,
-  SpeedDialIcon,
-  Tooltip,
-} from '@mui/material'
+import { AddComment } from '@mui/icons-material'
+import { List, ListItem, ListItemButton, ListItemText, ListSubheader, SpeedDial, SpeedDialAction } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetParentSelectionsQuery, useGetSelectionAnalyticalEntitiesQuery } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../../app/services/scoreSlice'
+import { useGetParentSelectionsQuery } from '../../../app/services/sparql'
+import { setAnnotationEditor, setInspectedEntity } from '../../../app/services/scoreSlice'
 import { SelectionItem } from '../items/SelectionItem'
 import { AnalyticalEntities } from '../annotations/AnalyticalEntities'
+import { SELECTION } from '../constants'
+import actions from '../../../app/services/p140_p177.json'
 
 export const SelectionEntity = ({ selectionIri }) => {
   const dispatch = useDispatch()
@@ -38,12 +30,16 @@ export const SelectionEntity = ({ selectionIri }) => {
 
       <AnalyticalEntities {...{ selectionIri }} />
 
-      <Tooltip title="Create analytical entity">
-        <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<SpeedDialIcon />}>
-          <SpeedDialAction tooltipTitle="Annotate a cadence" icon={<Timeline />} />
-          <SpeedDialAction icon={<Lyrics />} tooltipTitle="Create arbitrary analytical entity" />
-        </SpeedDial>
-      </Tooltip>
+      <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
+        {actions[SELECTION].map(action => (
+          <SpeedDialAction
+            key={action.iri}
+            onClick={() => dispatch(setAnnotationEditor({ subject: { selectionIri }, predicat: action }))}
+            tooltipTitle={action.label || action.iri.slice(baseUrlLength)}
+            icon={action.icon}
+          />
+        ))}
+      </SpeedDial>
     </>
   )
 }

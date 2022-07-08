@@ -33,5 +33,7 @@
   "http://modality-tonality.huma-num.fr/Speech#support": [
   ],
   "http://modality-tonality.huma-num.fr/Speech#refute": [
+  ],
+  "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence": [
   ]
 }
