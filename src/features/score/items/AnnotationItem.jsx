@@ -30,7 +30,7 @@ const BaseAnnotationItem = ({ annotationIri, isEntity, baseUrlLength, dispatch }
         <ListItemIcon>
           <Comment />
         </ListItemIcon>
-        <ListItemText primary="Attribute assignment" secondary={annotationIri.slice(baseUrlLength)} />
+        <ListItemText primary="Annotation" secondary={annotationIri.slice(baseUrlLength)} />
       </ListItemButton>
     </ListItem>
   )

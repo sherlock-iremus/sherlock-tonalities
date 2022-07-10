@@ -4,10 +4,9 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useGetPredicatLabelQuery } from '../../../app/services/sparql'
 import { getConceptLabel, getTreatiseIri } from '../../../app/treatises/treatises'
-import { withDispatch } from './withDispatch'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
 
-const BasePropertyItem = ({ propertyIri, baseUrlLength }) => {
+export const PropertyItem = ({ propertyIri }) => {
   const { data: label } = useGetPredicatLabelQuery(propertyIri)
   const { tonalityBaseUrl } = useSelector(state => state.score)
   const dispatch = useDispatch()
@@ -25,4 +24,3 @@ const BasePropertyItem = ({ propertyIri, baseUrlLength }) => {
     </ListItem>
   )
 }
-export const PropertyItem = withDispatch(BasePropertyItem)
