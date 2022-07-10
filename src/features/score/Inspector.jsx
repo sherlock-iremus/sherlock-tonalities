@@ -40,12 +40,12 @@ import { ConceptEntity } from './entities/ConceptEntity'
 import { NoteEntity } from './entities/NoteEntity'
 import { SelectionEntity } from './entities/SelectionEntity'
 import { VerticalityEntity } from './entities/VerticalityEntity'
-import { ScoreItem } from './items/ScoreItem'
 import { findKey } from './utils'
 import { COLOR_INSPECTED } from './mei.css'
 import { AnnotationEntity } from './entities/AnnotationEntity'
 import { PositionnedNoteEntity } from './entities/PositionnedNoteEntity'
 import { PropertyItem } from './items/PropertyItem'
+import { ScoreEntity } from './entities/ScoreEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -201,12 +201,12 @@ export const Inspector = props => {
             <List>
               {noteIri && <NoteEntity {...{ noteIri }} />}
               {analyticalEntityIri && <AnalyticalEntity {...{ analyticalEntityIri, scoreIri }} />}
-              {positionnedNoteIri && <PositionnedNoteEntity {...{ positionnedNoteIri, attachedNoteIri }} isEntity />}
+              {positionnedNoteIri && <PositionnedNoteEntity {...{ positionnedNoteIri, attachedNoteIri }} />}
               {conceptIri && <ConceptEntity {...{ conceptIri }} />}
               {propertyIri && <PropertyItem {...{ propertyIri }} />}
               {selectionIri && <SelectionEntity {...{ selectionIri }} />}
               {verticalityIri && <VerticalityEntity {...{ verticalityIri, clickedNoteIri }} />}
-              {scoreIri && <ScoreItem />}
+              {scoreIri && <ScoreEntity {...{ scoreIri }} />}
               {annotationIri && <AnnotationEntity {...{ annotationIri }} />}
             </List>
           </Box>
@@ -221,12 +221,13 @@ export const Inspector = props => {
       >
         <Alert variant="filled" severity="info" onClose={() => setIsShowingPopup(false)}>
           <Link onClick={props.onChange} underline="hover" color="inherit" sx={{ cursor: 'pointer' }}>
-            {(noteIri && 'A note has been selected, click to view inspection') ||
-              (verticalityIri && 'A verticality has been selected, click to view inspection') ||
-              (conceptIri && 'A concept has been selected, click to view inspection') ||
-              (propertyIri && 'A property has been selected, click to view inspection') ||
-              (selectionIri && 'A selection has been selected, click to view inspection') ||
-              (annotationIri && 'An annalytical entity has been selected, click to view inspection')}
+            {(noteIri && 'A note has been selected, click to view details') ||
+              (verticalityIri && 'A verticality has been selected, click to view details') ||
+              (conceptIri && 'A concept has been selected, click to view details') ||
+              (propertyIri && 'A property has been selected, click to view details') ||
+              (selectionIri && 'A selection has been selected, click to view details') ||
+              (annotationIri && 'An annalytical entity has been selected, click to view details') ||
+              (scoreIri && 'Entire score has been selected, click to view details')}
           </Link>
         </Alert>
       </Snackbar>

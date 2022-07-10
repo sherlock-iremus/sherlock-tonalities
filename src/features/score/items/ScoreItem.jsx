@@ -1,11 +1,10 @@
 import { Close, AudioFile } from '@mui/icons-material'
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import { useSelector } from 'react-redux'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
+import { getScoreLabel } from '../utils'
 import { withDispatch } from './withDispatch'
 
-const BaseScoreItem = ({ baseUrlLength, dispatch }) => {
-  const { scoreIri, scoreTitle } = useSelector(state => state.score)
+const BaseScoreItem = ({ scoreIri, baseUrlLength, dispatch }) => {
   return (
     <ListItem
       disablePadding
@@ -19,7 +18,7 @@ const BaseScoreItem = ({ baseUrlLength, dispatch }) => {
         <ListItemIcon>
           <AudioFile />
         </ListItemIcon>
-        <ListItemText primary={scoreTitle} secondary={scoreIri.slice(baseUrlLength)} />
+        <ListItemText primary={getScoreLabel(scoreIri)} secondary={scoreIri.slice(baseUrlLength)} />
       </ListItemButton>
     </ListItem>
   )

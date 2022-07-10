@@ -20,10 +20,8 @@ import {
   AlignHorizontalCenter,
   HighlightAlt,
   QueueMusic,
-  Lyrics,
 } from '@mui/icons-material'
 import { useState } from 'react'
-import { addInspectionStyle } from './verovioHelpers'
 
 export const ScoreItem = props => {
   const [isOpen, setIsOpen] = useState(false)
@@ -36,32 +34,28 @@ export const ScoreItem = props => {
   if (props.item.annotation && concepts && subAnnotations)
     return (
       <>
-            <ListItem disablePadding>
-                <ListItemButton>
-                    <ListItemText
-                        primary={concepts.map(concept => (
-                            <Chip
-                                key={concept}
-                                label={concept.slice(props.treatiseIri.length)}
-                                sx={{ m: 0.3 }}
-                            />
-                        ))}
-                        secondary={props.item.id}
-                    />
-                </ListItemButton>
-            </ListItem>
-            <List sx={{ pl: 2 }} dense disablePadding subheader={<ListSubheader>Associated selection</ListSubheader>}>
-                {subAnnotations.map(subAnnotation =>
-                    <ScoreItem
-                        disablePadding
-                        key={subAnnotation.entity}
-                        item={{ id: subAnnotation.entity.slice(props.scoreIri.length + 1)}}
-                        scoreIri={props.scoreIri}
-                        secondaryAction={<Chip label={subAnnotation.concept.slice(props.treatiseIri.length)} />}
-                    />
-                )}
-            </List>
-        </>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemText
+              primary={concepts.map(concept => (
+                <Chip key={concept} label={concept.slice(props.treatiseIri.length)} sx={{ m: 0.3 }} />
+              ))}
+              secondary={props.item.id}
+            />
+          </ListItemButton>
+        </ListItem>
+        <List sx={{ pl: 2 }} dense disablePadding subheader={<ListSubheader>Associated selection</ListSubheader>}>
+          {subAnnotations.map(subAnnotation => (
+            <ScoreItem
+              disablePadding
+              key={subAnnotation.entity}
+              item={{ id: subAnnotation.entity.slice(props.scoreIri.length + 1) }}
+              scoreIri={props.scoreIri}
+              secondaryAction={<Chip label={subAnnotation.concept.slice(props.treatiseIri.length)} />}
+            />
+          ))}
+        </List>
+      </>
     )
 
   if (props.labelOnly && noteLabel) return noteLabel
