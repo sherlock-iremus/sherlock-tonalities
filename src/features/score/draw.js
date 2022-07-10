@@ -2,7 +2,7 @@ import { INSPECTED, SELECTED } from './constants'
 import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
 import { sleep } from './utils'
 
-export const drawSelection = async (selection, selectionIri, scoreIri, mode) => {
+export const drawSelection = async (selection, selectionIri, scoreIri, mode, contributorIri) => {
   if (selection.find(e => e.noteIri)) {
     const notes = selection.map(s => document.getElementById(s?.noteIri?.slice(scoreIri.length + 1))).filter(Boolean)
 

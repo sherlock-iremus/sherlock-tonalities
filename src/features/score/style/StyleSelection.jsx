@@ -6,13 +6,13 @@ import { drawSelection } from '../draw'
 import { findKey } from '../utils'
 import { INSPECTED, SELECTED } from '../constants'
 
-export const StyleSelection = ({ selectionIri }) => {
+export const StyleSelection = ({ selectionIri, contributorIri }) => {
   const { scoreIri, isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
   const { data: children } = useGetChildSelectionsQuery(selectionIri)
-  
+
   useEffect(() => {
-    !document.getElementById(selectionIri) && children && drawSelection(children, selectionIri, scoreIri, mode)
+    !document.getElementById(selectionIri) && children && drawSelection(children, selectionIri, scoreIri, mode, contributorIri)
     document.getElementById(selectionIri)?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
     return () => document.getElementById(selectionIri)?.remove()
   }, [children, mode, selectionIri, scoreIri])
