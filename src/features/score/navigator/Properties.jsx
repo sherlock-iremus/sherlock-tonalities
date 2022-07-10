@@ -70,9 +70,9 @@ export const Properties = props => {
           filteredTree.properties.map(concept => (
             <Concept
               key={concept.iri}
-              selectedConcept={inspectedEntity.conceptIri}
+              selectedConcept={inspectedEntity.propertyIri}
               concept={concept}
-              setInspection={conceptIri => dispatch(setInspectedEntity({ conceptIri }))}
+              setInspection={propertyIri => dispatch(setInspectedEntity({ propertyIri }))}
             />
           ))}
       </List>

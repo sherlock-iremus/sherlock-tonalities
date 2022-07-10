@@ -29,7 +29,7 @@ export const PropertyAnnotationItem = ({ propertyIri, annotation }) => {
         <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <ExpandMore /> : <ChevronRight />}
         </IconButton>
-        <ListItemButton sx={{ cursor: 'default' }}>
+        <ListItemButton onClick={() => dispatch(setInspectedEntity({ propertyIri }))}>
           <ListItemIcon>
             <Sell />
           </ListItemIcon>

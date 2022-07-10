@@ -51,15 +51,15 @@ const BaseAnalyticalEntity = ({ analyticalEntityIri, baseUrlLength, dispatch }) 
         </ListItemButton>
       </ListItem>
 
-      <ListSubheader>Associated selection</ListSubheader>
-      <SelectionItem selectionIri={data.selectionIri} concepts={specificAnnotations} />
+      <ListSubheader>Target selection</ListSubheader>
+      <SelectionItem selectionIri={data.selectionIri} initialIsOpen={false} concepts={specificAnnotations} />
 
-      <ListSubheader>Attached classes</ListSubheader>
+      <ListSubheader>Assigned classes</ListSubheader>
       {globalAnnotations.map(({ annotationIri, object }) => (
         <ClassAnnotationItem key={annotationIri} {...object} annotationIri={annotationIri} />
       ))}
 
-      <ListSubheader>Attached properties</ListSubheader>
+      <ListSubheader>Assigned properties</ListSubheader>
       {specificAnnotations.map(e => (
         <PropertyAnnotationItem key={e.annotationIri} propertyIri={e.propertyIri} annotation={e} />
       ))}

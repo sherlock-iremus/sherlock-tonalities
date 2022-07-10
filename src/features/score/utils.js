@@ -7,6 +7,7 @@ export const findKey = item =>
     item.positionnedNoteIri ||
     item.selectionIri ||
     item.conceptIri ||
+    item.propertyIri ||
     item.annotationIri ||
     item.analyticalEntityIri ||
     item.contributorIri ||
