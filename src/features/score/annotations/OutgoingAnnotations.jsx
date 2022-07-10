@@ -22,10 +22,19 @@ import { ChevronRight, ExpandMore } from '@mui/icons-material'
 import { ConceptItem } from '../items/ConceptItem'
 
 export const OutgoingAnnotations = props => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState([1])
   const { data: annotations } = useGetOutgoingAnnotationsQuery(findKey(props))
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
+
+  const handleOpen = value => {
+    const currentIndex = isOpen.indexOf(value)
+    const newChecked = [...isOpen]
+    console.log('yo')
+    currentIndex === -1 ? newChecked.push(value) : newChecked.splice(currentIndex, 1)
+    setIsOpen(newChecked)
+  }
+  
   return (
     !!annotations?.length && (
       <>
@@ -34,15 +43,19 @@ export const OutgoingAnnotations = props => {
           <Box key={predicat.iri}>
             <ListItem
               disablePadding
-              secondaryAction={!isOpen && <Chip label={annotations.filter(a => a.predicat === predicat.iri).length} />}
+              secondaryAction={
+                isOpen.indexOf(predicat.iri) === -1 && (
+                  <Chip label={annotations.filter(a => a.predicat === predicat.iri).length} />
+                )
+              }
             >
-              <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
+              <IconButton disableRipple onClick={() => handleOpen(predicat.iri)}>
                 {isOpen ? <ExpandMore /> : <ChevronRight />}
               </IconButton>
               <ListItemIcon>{predicat.icon}</ListItemIcon>
               <ListItemText primary={predicat.label || predicat.iri.slice(baseUrlLength)} />
             </ListItem>
-            <Collapse in={isOpen} timeout="auto" unmountOnExit>
+            <Collapse in={isOpen.indexOf(predicat.iri) !== -1} timeout="auto" unmountOnExit>
               <List dense disablePadding>
                 {annotations
                   .filter(a => a.predicat === predicat.iri)
