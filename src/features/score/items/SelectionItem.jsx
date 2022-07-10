@@ -19,6 +19,7 @@ const BaseSelectionItem = ({
   dispatch,
   initialIsOpen = true,
   secondaryAction,
+  focusedEntityIri,
 }) => {
   const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { data: userId } = useGetUserIdQuery()

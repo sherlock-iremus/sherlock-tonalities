@@ -13,6 +13,7 @@ import { COLOR_INSPECTED, COLOR_NAVIGATE } from './mei.css'
 import { Navigate } from 'react-router-dom'
 import { AlertMessage } from './editor/AlertMessage'
 import { orange } from '@mui/material/colors'
+import { AnalyticalEntityEditor } from './editor/AnalyticalEntityEditor'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
@@ -84,6 +85,7 @@ export const ScoreAnnotator = () => {
 
       <SelectionEditor />
       <AnnotationEditor />
+      <AnalyticalEntityEditor />
       <AlertMessage {...alerts} />
     </>
   )

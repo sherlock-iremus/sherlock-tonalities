@@ -30,13 +30,13 @@ import { useEffect, useState } from 'react'
 import { usePostAnnotationMutation } from '../../../app/services/sherlockApi'
 import { useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
+import { PropertyItem } from '../items/PropertyItem'
 
 export const AnnotationEditor = () => {
   const dispatch = useDispatch()
   const [displayInfo, setDisplayInfo] = useState(true)
   const [selectedOption, setSelectedOption] = useState('')
   const {
-    baseUrl,
     annotationEditor: { subject, predicat, object },
   } = useSelector(state => state.score)
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
@@ -93,17 +93,7 @@ export const AnnotationEditor = () => {
           <Item key={findKey(subject)} {...subject} />
 
           <ListSubheader>Assigned property</ListSubheader>
-          <ListItem key={predicat.iri} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HistoryEdu />
-              </ListItemIcon>
-              <ListItemText
-                primary={predicat.label || predicat.iri.slice(baseUrl.length)}
-                secondary={predicat.iri.slice(baseUrl.length)}
-              />
-            </ListItemButton>
-          </ListItem>
+          <PropertyItem propertyIri={predicat.iri} />
 
           <ListSubheader>Assigned value</ListSubheader>
           <Box sx={{ ml: 2, mr: 2 }}>
