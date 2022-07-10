@@ -2,7 +2,7 @@ import { AddComment } from '@mui/icons-material'
 import { List, ListItem, ListItemButton, ListItemText, ListSubheader, SpeedDial, SpeedDialAction } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetParentSelectionsQuery } from '../../../app/services/sparql'
-import { setAnnotationEditor, setInspectedEntity } from '../../../app/services/scoreSlice'
+import { setAnalyticalEntityEditor, setAnnotationEditor, setInspectedEntity } from '../../../app/services/scoreSlice'
 import { SelectionItem } from '../items/SelectionItem'
 import { AnalyticalEntities } from '../annotations/AnalyticalEntities'
 import { SELECTION } from '../constants'
@@ -39,6 +39,18 @@ export const SelectionEntity = ({ selectionIri }) => {
             icon={action.icon}
           />
         ))}
+        <SpeedDialAction
+          onClick={() =>
+            dispatch(
+              setAnalyticalEntityEditor({
+                selectionIri,
+                propertyIri: 'http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence',
+              })
+            )
+          }
+          tooltipTitle="Identify cadence"
+          icon="🎼"
+        />
       </SpeedDial>
     </>
   )

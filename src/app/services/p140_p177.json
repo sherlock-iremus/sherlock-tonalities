@@ -41,11 +41,6 @@
   ],
 
   "http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b": [
-    {
-      "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence",
-      "label": "Identify a cadence",
-      "icon": "🎼"
-    },
     { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
   ],
 
