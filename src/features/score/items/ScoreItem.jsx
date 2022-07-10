@@ -4,14 +4,16 @@ import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { getScoreLabel } from '../utils'
 import { withDispatch } from './withDispatch'
 
-const BaseScoreItem = ({ scoreIri, baseUrlLength, dispatch }) => {
+const BaseScoreItem = ({ scoreIri, baseUrlLength, dispatch, isEntity }) => {
   return (
     <ListItem
       disablePadding
       secondaryAction={
-        <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ scoreIri }))}>
-          <Close />
-        </IconButton>
+        isEntity && (
+          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ scoreIri }))}>
+            <Close />
+          </IconButton>
+        )
       }
     >
       <ListItemButton sx={{ cursor: 'default' }}>
