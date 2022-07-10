@@ -30,11 +30,10 @@ export const OutgoingAnnotations = props => {
   const handleOpen = value => {
     const currentIndex = isOpen.indexOf(value)
     const newChecked = [...isOpen]
-    console.log('yo')
     currentIndex === -1 ? newChecked.push(value) : newChecked.splice(currentIndex, 1)
     setIsOpen(newChecked)
   }
-  
+
   return (
     !!annotations?.length && (
       <>
@@ -49,11 +48,13 @@ export const OutgoingAnnotations = props => {
                 )
               }
             >
-              <IconButton disableRipple onClick={() => handleOpen(predicat.iri)}>
-                {isOpen ? <ExpandMore /> : <ChevronRight />}
-              </IconButton>
-              <ListItemIcon>{predicat.icon}</ListItemIcon>
-              <ListItemText primary={predicat.label || predicat.iri.slice(baseUrlLength)} />
+              <ListItemButton onClick={() => handleOpen(predicat.iri)}>
+                <IconButton disableRipple>
+                  {isOpen.indexOf(predicat.iri) === -1 ? <ChevronRight /> : <ExpandMore />}
+                </IconButton>
+                <ListItemIcon>{predicat.icon}</ListItemIcon>
+                <ListItemText primary={predicat.label || predicat.iri.slice(baseUrlLength)} />
+              </ListItemButton>
             </ListItem>
             <Collapse in={isOpen.indexOf(predicat.iri) !== -1} timeout="auto" unmountOnExit>
               <List dense disablePadding>
