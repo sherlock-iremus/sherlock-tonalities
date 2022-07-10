@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { Assignment, Info } from '@mui/icons-material'
+import { Assignment, BugReport, Info } from '@mui/icons-material'
 import { SpeedDial, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ import { AnnotationEditor } from './editor/AnnotationEditor'
 import { COLOR_INSPECTED, COLOR_NAVIGATE } from './mei.css'
 import { Navigate } from 'react-router-dom'
 import { AlertMessage } from './editor/AlertMessage'
+import { orange } from '@mui/material/colors'
 
 export const ScoreAnnotator = () => {
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
@@ -63,6 +64,23 @@ export const ScoreAnnotator = () => {
         </Tooltip>
       )}
       <Navigator isOpen={isNavigatorOpen} onClose={() => setIsNavigatorOpen(false)} scoreIri={scoreIri} />
+
+      <Tooltip title="Report bug">
+        <SpeedDial
+          onClick={() => window.open('https://github.com/sherlock-iremus/sherlock-tonalities/issues/new', '_blank')}
+          ariaLabel="Report"
+          sx={{
+            position: 'absolute',
+            bottom: 20,
+            right: 20,
+            '& .MuiSpeedDial-fab': {
+              backgroundColor: orange[700],
+              borderRadius: 3,
+            },
+          }}
+          icon={<BugReport />}
+        />
+      </Tooltip>
 
       <SelectionEditor />
       <AnnotationEditor />
