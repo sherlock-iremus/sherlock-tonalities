@@ -1,4 +1,4 @@
-import { AddComment, Piano } from '@mui/icons-material'
+import { AddComment } from '@mui/icons-material'
 import { SpeedDial, SpeedDialAction } from '@mui/material'
 import { Box } from '@mui/system'
 import { VERTICALITY } from '../constants'
