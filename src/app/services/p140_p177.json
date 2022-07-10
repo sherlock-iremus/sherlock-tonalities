@@ -4,7 +4,8 @@
       "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
       "label": "Dissonance type",
       "icon": "🎶"
-    }
+    },
+    { "iri": "http://modality-tonality.huma-num.fr/Speech#Support", "label": "Support", "icon": "⇉" }
   ],
 
   "http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df": [
@@ -41,7 +42,7 @@
   ],
 
   "http://data-iremus.huma-num.fr/id/82dbd157-20df-422c-88db-28d6075d99a1": [
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#support", "label": "Support", "icon": "⇉" },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#refute", "label": "Refute", "icon": "↯" }
+    { "iri": "http://modality-tonality.huma-num.fr/Speech#Support", "label": "Support", "icon": "⇉" },
+    { "iri": "http://modality-tonality.huma-num.fr/Speech#Refute", "label": "Refute", "icon": "↯" }
   ]
 }
