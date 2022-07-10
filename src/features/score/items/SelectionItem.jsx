@@ -24,8 +24,8 @@ const BaseSelectionItem = ({
   const { data: userId } = useGetUserIdQuery()
   const { isInspectionMode, isSelectionMode, scoreIri } = useSelector(state => state.score)
   const { data: selections } = useGetScoreSelectionsQuery(scoreIri)
-  const contributorIri = selections.filter(s => s.iri === selectionIri)[0]?.contributorIri
   const { data: children } = useGetChildSelectionsQuery(selectionIri)
+  const contributorIri = selections.filter(s => s.iri === selectionIri)[0]?.contributorIri
   const conceptIri = concepts?.find(e => e.entityIri === selectionIri)?.propertyIri
 
   return children ? (
@@ -37,7 +37,7 @@ const BaseSelectionItem = ({
             <>
               {isEntity && (
                 <>
-                  {isInspectionMode && contributorIri.slice(baseUrlLength) === userId && (
+                  {isInspectionMode && contributorIri?.slice(baseUrlLength) === userId && (
                     <IconButton onClick={() => dispatch(setEditingSelection({ selectionIri, children }))}>
                       <Edit />
                     </IconButton>
