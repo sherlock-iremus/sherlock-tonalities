@@ -3,7 +3,7 @@ import { ClassItem } from '../items/ClassItem'
 
 export const ConceptEntity = ({ conceptIri }) => (
   <>
-    <ClassItem classIri={conceptIri} />
+    <ClassItem classIri={conceptIri} isEntity />
     <AnalyticalEntities {...{ conceptIri }} />
   </>
 )

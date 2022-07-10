@@ -203,7 +203,7 @@ export const Inspector = props => {
               {analyticalEntityIri && <AnalyticalEntity {...{ analyticalEntityIri, scoreIri }} />}
               {positionnedNoteIri && <PositionnedNoteEntity {...{ positionnedNoteIri, attachedNoteIri }} />}
               {conceptIri && <ConceptEntity {...{ conceptIri }} />}
-              {propertyIri && <PropertyItem {...{ propertyIri }} />}
+              {propertyIri && <PropertyItem {...{ propertyIri }} isEntity />}
               {selectionIri && <SelectionEntity {...{ selectionIri }} />}
               {verticalityIri && <VerticalityEntity {...{ verticalityIri, clickedNoteIri }} />}
               {scoreIri && <ScoreEntity {...{ scoreIri }} />}

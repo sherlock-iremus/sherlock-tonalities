@@ -1,18 +1,27 @@
-import { Sell } from '@mui/icons-material'
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { Close, Sell } from '@mui/icons-material'
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useGetPredicatLabelQuery } from '../../../app/services/sparql'
 import { getConceptLabel, getTreatiseIri } from '../../../app/treatises/treatises'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
 
-export const PropertyItem = ({ propertyIri }) => {
+export const PropertyItem = ({ propertyIri, isEntity }) => {
   const { data: label } = useGetPredicatLabelQuery(propertyIri)
   const { tonalityBaseUrl } = useSelector(state => state.score)
   const dispatch = useDispatch()
   return (
-    <ListItem disablePadding>
-      <ListItemButton onClick={() => dispatch(setInspectedEntity({ propertyIri }))}>
+    <ListItem
+      disablePadding
+      secondaryAction={
+        isEntity && (
+          <IconButton onClick={() => dispatch(setInspectedEntity({ propertyIri }))}>
+            <Close />
+          </IconButton>
+        )
+      }
+    >
+      <ListItemButton onClick={() => !isEntity && dispatch(setInspectedEntity({ propertyIri }))}>
         <ListItemIcon>
           <Sell />
         </ListItemIcon>
