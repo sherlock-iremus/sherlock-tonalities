@@ -17,6 +17,13 @@ const initialState = {
   focusEntityIndex: -1,
   hoveredEntity: {},
   annotationEditor: { subject: null, predicat: null, object: null },
+  analyticalEntityEditor: {
+    selectionIri: null,
+    propertyIri: null,
+    focusedEntityIri: null,
+    concepts: [],
+    properties: [],
+  },
   alerts: { confirmation: '', error: '' },
 }
 
@@ -35,6 +42,10 @@ const scoreSlice = createSlice({
       state.hoveredEntity === action.payload
         ? (state.hoveredEntity = initialState.hoveredEntity)
         : (state.hoveredEntity = action.payload)
+    },
+    setAnalyticalEntityFocus: (state, action) => {
+      state.analyticalEntityEditor.focusedEntityIri =
+        state.analyticalEntityEditor.focusedEntityIri === action.payload ? null : action.payload
     },
     setAlert: (state, action) => {
       action.payload ? (state.alerts = { ...state.alerts, ...action.payload }) : (state.alerts = initialState.alerts)
@@ -62,6 +73,11 @@ const scoreSlice = createSlice({
     setAnnotationEditor: (state, action) => {
       state.annotationEditor = state.annotationEditor.subject ? initialState.annotationEditor : action.payload
     },
+    setAnalyticalEntityEditor: (state, action) => {
+      state.analyticalEntityEditor = state.analyticalEntityEditor.selectionIri
+        ? initialState.analyticalEntityEditor
+        : { ...initialState.analyticalEntityEditor, ...action.payload }
+    },
     setEditingSelection: (state, action) => {
       state.editingSelectionIri = action.payload.selectionIri
       state.selectedEntities = action.payload.children
@@ -83,6 +99,19 @@ const scoreSlice = createSlice({
       if (state.annotationEditor.subject) {
         state.annotationEditor.object =
           findKey(state.annotationEditor.object) !== findKey(action.payload) ? action.payload : null
+      } else if (state.analyticalEntityEditor.selectionIri) {
+        if (action.payload.propertyIri) {
+          const currentIndex = state.analyticalEntityEditor.properties.indexOf(action.payload.propertyIri)
+          currentIndex === -1
+            ? state.analyticalEntityEditor.properties.push(action.payload.propertyIri)
+            : state.analyticalEntityEditor.properties.splice(currentIndex, 1)
+        }
+        if (action.payload.conceptIri) {
+          const currentIndex = state.analyticalEntityEditor.concepts.indexOf(action.payload.conceptIri)
+          currentIndex === -1
+            ? state.analyticalEntityEditor.concepts.push(action.payload.conceptIri)
+            : state.analyticalEntityEditor.concepts.splice(currentIndex, 1)
+        }
       } else {
         if (state.inspectedEntities.length > state.currentEntityIndex + 1)
           state.inspectedEntities.splice(
@@ -115,4 +144,6 @@ export const {
   setAnnotationEditor,
   setEditingSelection,
   setAlert,
+  setAnalyticalEntityEditor,
+  setAnalyticalEntityFocus,
 } = scoreSlice.actions
