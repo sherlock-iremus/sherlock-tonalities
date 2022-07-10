@@ -80,7 +80,10 @@ const scoreSlice = createSlice({
       index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push(action.payload)
     },
     setInspectedEntity: (state, action) => {
-      if (!state.annotationEditor.subject) {
+      if (state.annotationEditor.subject) {
+        state.annotationEditor.object =
+          findKey(state.annotationEditor.object) !== findKey(action.payload) ? action.payload : null
+      } else {
         if (state.inspectedEntities.length > state.currentEntityIndex + 1)
           state.inspectedEntities.splice(
             state.currentEntityIndex + 1,

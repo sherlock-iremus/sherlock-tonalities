@@ -1,5 +1,6 @@
 import { AddComment, Close, Done, HistoryEdu } from '@mui/icons-material'
 import {
+  Alert,
   AppBar,
   CircularProgress,
   Drawer,
@@ -25,29 +26,32 @@ import options from '../../../app/services/p177_p141.json'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAlert, setAnnotationEditor } from '../../../app/services/scoreSlice'
 import { findKey } from '../utils'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePostAnnotationMutation } from '../../../app/services/sherlockApi'
 import { useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
 
 export const AnnotationEditor = () => {
   const dispatch = useDispatch()
+  const [displayInfo, setDisplayInfo] = useState(true)
   const [selectedOption, setSelectedOption] = useState('')
   const {
     baseUrl,
-    annotationEditor: { subject, predicat },
+    annotationEditor: { subject, predicat, object },
   } = useSelector(state => state.score)
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch } = useGetOutgoingAnnotationsQuery(findKey(subject), { skip: !subject })
 
+  useEffect(() => !subject && setSelectedOption(''), [subject])
+
   const createAnnotation = async () => {
-    if (selectedOption && !isLoading) {
+    if (!isLoading && (selectedOption || object)) {
       try {
         await postAnnotation({
           p140: findKey(subject),
           p177: predicat.iri,
-          p141: selectedOption,
-          p141_type: options[predicat.iri].length ? 'uri' : 'literal',
+          p141: findKey(object) || selectedOption,
+          p141_type: options[predicat.iri].length ? 'uri' : object ? 'uri' : 'literal',
         }).unwrap()
         refetch()
         dispatch(setAnnotationEditor())
@@ -85,7 +89,10 @@ export const AnnotationEditor = () => {
             </Toolbar>
           </AppBar>
 
-          <ListSubheader>Property</ListSubheader>
+          <ListSubheader>Target entity</ListSubheader>
+          <Item key={findKey(subject)} {...subject} />
+
+          <ListSubheader>Assigned property</ListSubheader>
           <ListItem key={predicat.iri} disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -98,11 +105,8 @@ export const AnnotationEditor = () => {
             </ListItemButton>
           </ListItem>
 
-          <ListSubheader>Subject</ListSubheader>
-          <Item key={findKey(subject)} {...subject} />
-
-          <ListSubheader>Value</ListSubheader>
-          <ListItem>
+          <ListSubheader>Assigned value</ListSubheader>
+          <Box sx={{ ml: 2, mr: 2 }}>
             {options[predicat.iri].length ? (
               <Select required value={selectedOption} onChange={event => setSelectedOption(event.target.value)}>
                 {options[predicat.iri].map(option => (
@@ -112,9 +116,27 @@ export const AnnotationEditor = () => {
                 ))}
               </Select>
             ) : (
-              <TextField value={selectedOption} onChange={event => setSelectedOption(event.target.value)} />
+              <>
+                {displayInfo && (
+                  <Alert severity="info" onClose={() => setDisplayInfo(false)} sx={{ mb: 2 }}>
+                    Insert text justification or select entity from score or navigator
+                  </Alert>
+                )}
+                {object ? (
+                  <Item {...object} isEntity />
+                ) : (
+                  <TextField
+                    value={selectedOption}
+                    onChange={event => setSelectedOption(event.target.value)}
+                    placeholder="Insert text justification"
+                    rows={2}
+                    multiline
+                    fullWidth
+                  />
+                )}
+              </>
             )}
-          </ListItem>
+          </Box>
 
           <Tooltip title="Validate">
             <SpeedDial

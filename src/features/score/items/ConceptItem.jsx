@@ -11,6 +11,6 @@ export const ConceptItem = ({ conceptIri }) => {
   const label = getConceptLabel(conceptIri) || (!conceptIri.match(baseUrl) && conceptIri)
   const { data } = useGetEntityTypeQuery(conceptIri, { skip: label })
   return (
-    <Chip label={label || data?.label} onClick={() => dispatch(setInspectedEntity({ conceptIri }))} sx={{ m: 0.3 }} />
+    <Chip label={label || data?.label || 'Entity'} onClick={() => dispatch(setInspectedEntity({ conceptIri }))} sx={{ m: 0.3 }} />
   )
 }
