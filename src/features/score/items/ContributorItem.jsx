@@ -5,7 +5,6 @@ import { withDispatch } from './withDispatch'
 
 const BaseContributorItem = ({ contributorIri, dispatch, baseUrlLength }) => {
   const { data: contributor } = useGetContributorQuery(contributorIri)
-  contributor && console.log(contributor)
   return (
     (contributor && (
       <Tooltip
