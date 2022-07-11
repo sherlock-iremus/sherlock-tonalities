@@ -17,7 +17,8 @@ export const SelectionEntity = ({ selectionIri }) => {
   const filteredActions = [
     ...(treatiseIri in actions[SELECTION] ? actions[SELECTION][treatiseIri] : []),
     ...actions[SELECTION].common,
-  ]  return (
+  ]
+  return (
     <>
       <SelectionItem {...{ selectionIri }} isEntity />
 

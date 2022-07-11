@@ -28,7 +28,8 @@ export const AnnotationEntity = ({ annotationIri }) => {
   const filteredActions = [
     ...(treatiseIri in actions[ANNOTATION] ? actions[ANNOTATION][treatiseIri] : []),
     ...actions[ANNOTATION].common,
-  ]  return (
+  ]
+  return (
     (data && (
       <>
         <AnnotationItem {...{ annotationIri }} isEntity />
