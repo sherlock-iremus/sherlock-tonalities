@@ -33,19 +33,21 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode, con
 }
 
 export const drawPositionnedNote = (positionnedNoteIri, clickedNote, mode) => {
-  const noteCoordinates = noteCoords(clickedNote)
-  const measureCoordinates = measureCoords(getMeasure(clickedNote))
+  if (positionnedNoteIri && clickedNote && mode) {
+    const noteCoordinates = noteCoords(clickedNote)
+    const measureCoordinates = measureCoords(getMeasure(clickedNote))
 
-  const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'line')
-  anchor.setAttribute('id', positionnedNoteIri)
-  anchor.setAttribute('x1', noteCoordinates[0])
-  anchor.setAttribute('y1', measureCoordinates.top)
-  anchor.setAttribute('x2', noteCoordinates[0])
-  anchor.setAttribute('y2', measureCoordinates.bottom)
-  anchor.setAttribute('stroke', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
-  anchor.setAttribute('stroke-width', '30')
+    const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+    anchor.setAttribute('id', positionnedNoteIri)
+    anchor.setAttribute('x1', noteCoordinates[0])
+    anchor.setAttribute('y1', measureCoordinates.top)
+    anchor.setAttribute('x2', noteCoordinates[0])
+    anchor.setAttribute('y2', measureCoordinates.bottom)
+    anchor.setAttribute('stroke', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
+    anchor.setAttribute('stroke-width', '30')
 
-  getSystem(clickedNote).appendChild(anchor)
+    getSystem(clickedNote).appendChild(anchor)
+  }
 }
 
 export const drawVerticality = (verticalityIri, clickedNote, mode) => {
