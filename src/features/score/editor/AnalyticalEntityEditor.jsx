@@ -82,8 +82,7 @@ export const AnalyticalEntityEditor = () => {
           <PropertyItem propertyIri={propertyIri} />
 
           <ListSubheader>Target selection</ListSubheader>
-          <SelectionItem {...{ selectionIri, focusedEntityIri }} />
-
+          <SelectionItem {...{ selectionIri, focusedEntityIri, concepts: properties }} />
           <ListSubheader>Assigned concepts</ListSubheader>
           {concepts.map(concept => (
             <ClassItem key={concept} classIri={concept} isEntity />

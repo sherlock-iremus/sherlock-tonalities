@@ -43,10 +43,6 @@ const scoreSlice = createSlice({
         ? (state.hoveredEntity = initialState.hoveredEntity)
         : (state.hoveredEntity = action.payload)
     },
-    setAnalyticalEntityFocus: (state, action) => {
-      state.analyticalEntityEditor.focusedEntityIri =
-        state.analyticalEntityEditor.focusedEntityIri === action.payload ? null : action.payload
-    },
     setAlert: (state, action) => {
       action.payload ? (state.alerts = { ...state.alerts, ...action.payload }) : (state.alerts = initialState.alerts)
     },
@@ -100,20 +96,31 @@ const scoreSlice = createSlice({
         state.annotationEditor.object =
           findKey(state.annotationEditor.object) !== findKey(action.payload) ? action.payload : null
       } else if (state.analyticalEntityEditor.selectionIri) {
-        if (action.payload.propertyIri) {
-          const currentIndex = state.analyticalEntityEditor.properties.indexOf(action.payload.propertyIri)
-          currentIndex === -1
-            ? state.analyticalEntityEditor.properties.push({
-                propertyIri: action.payload.propertyIri,
-                ...state.annotationEditor.focusedEntityIri,
-              })
-            : state.analyticalEntityEditor.properties.splice(currentIndex, 1)
-        }
         if (action.payload.conceptIri) {
           const currentIndex = state.analyticalEntityEditor.concepts.indexOf(action.payload.conceptIri)
           currentIndex === -1
             ? state.analyticalEntityEditor.concepts.push(action.payload.conceptIri)
             : state.analyticalEntityEditor.concepts.splice(currentIndex, 1)
+        }
+        if (action.payload.propertyIri && state.analyticalEntityEditor.focusedEntityIri) {
+          const currentIndex = state.analyticalEntityEditor.properties.findIndex(
+            e => e.propertyIri === action.payload.propertyIri
+          )
+          currentIndex === -1
+            ? state.analyticalEntityEditor.properties.push({
+                propertyIri: action.payload.propertyIri,
+                entityIri: findKey(state.analyticalEntityEditor.focusedEntityIri),
+              })
+            : state.analyticalEntityEditor.properties.splice(currentIndex, 1)
+        }
+        if (
+          action.payload.selectionIri ||
+          action.payload.noteIri ||
+          action.payload.positionnedNoteIri ||
+          action.payload.verticalityIri
+        ) {
+          state.analyticalEntityEditor.focusedEntityIri =
+            findKey(state.analyticalEntityEditor.focusedEntityIri) === findKey(action.payload) ? null : action.payload
         }
       } else {
         if (state.inspectedEntities.length > state.currentEntityIndex + 1)
@@ -148,5 +155,4 @@ export const {
   setEditingSelection,
   setAlert,
   setAnalyticalEntityEditor,
-  setAnalyticalEntityFocus,
 } = scoreSlice.actions

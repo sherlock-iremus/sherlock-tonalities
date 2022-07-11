@@ -15,6 +15,7 @@ export const VerticalityItem = ({
   concepts,
   secondaryAction,
   initialIsOpen = true,
+  focusedEntityIri,
 }) => {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(initialIsOpen)
@@ -50,6 +51,7 @@ export const VerticalityItem = ({
         <ListItemButton
           onClick={() => !isEntity && isInspectionMode && dispatch(setInspectedEntity({ verticalityIri }))}
           sx={isEntity && { cursor: 'default' }}
+          selected={focusedEntityIri.verticalityIri === verticalityIri}
         >
           <ListItemIcon>
             <AlignHorizontalCenter />
@@ -68,6 +70,7 @@ export const VerticalityItem = ({
               positionnedNoteIri={e.positionnedNoteIri}
               attachedNoteIri={e.attachedNoteIri}
               clickedNoteIri={clickedNoteIri}
+              focusedEntityIri={focusedEntityIri}
             />
           ))}
         </List>

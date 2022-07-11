@@ -7,11 +7,10 @@ import { LoadingEntity } from '../entities/LoadingEntity'
 import { ConceptItem } from './ConceptItem'
 import { withDispatch } from './withDispatch'
 
-const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch, secondaryAction }) => {
+const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch, secondaryAction, focusedEntityIri }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data: noteLabel } = useGetNoteInfoQuery(noteIri)
   const conceptIri = concepts?.find(e => e.entityIri === noteIri)?.propertyIri
-
   return noteLabel ? (
     <ListItem
       disablePadding
@@ -36,6 +35,7 @@ const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch, se
       <ListItemButton
         onClick={() => !isEntity && isInspectionMode && dispatch(setInspectedEntity({ noteIri }))}
         sx={isEntity && { cursor: 'default' }}
+        selected={focusedEntityIri?.noteIri === noteIri}
       >
         <ListItemIcon>
           <MusicNote />

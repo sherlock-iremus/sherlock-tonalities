@@ -7,10 +7,18 @@ import { getConceptLabel } from '../../../app/treatises/treatises'
 
 export const ConceptItem = ({ conceptIri }) => {
   const dispatch = useDispatch()
-  const { baseUrl } = useSelector(state => state.score)
+  const {
+    baseUrl,
+    analyticalEntityEditor: { selection },
+  } = useSelector(state => state.score)
   const label = getConceptLabel(conceptIri) || (!conceptIri.match(baseUrl) && conceptIri)
   const { data } = useGetEntityTypeQuery(conceptIri, { skip: label })
   return (
-    <Chip label={label || data?.label || 'Entity'} onClick={() => dispatch(setInspectedEntity({ conceptIri }))} sx={{ m: 0.3 }} />
+    <Chip
+      label={label || data?.label || 'Entity'}
+      onClick={() => dispatch(setInspectedEntity({ conceptIri }))}
+      sx={{ m: 0.3 }}
+      {...(selection && { onDelete: () => dispatch(setInspectedEntity({ propertyIri: conceptIri })) })}
+    />
   )
 }

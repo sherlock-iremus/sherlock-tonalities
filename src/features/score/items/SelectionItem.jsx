@@ -64,6 +64,7 @@ const BaseSelectionItem = ({
         <ListItemButton
           onClick={() => !isEntity && isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))}
           sx={isEntity && { cursor: 'default' }}
+          selected={focusedEntityIri?.selectionIri === selectionIri}
         >
           <ListItemIcon>
             <BubbleChart />
@@ -77,7 +78,7 @@ const BaseSelectionItem = ({
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List sx={{ pl: 2 }} dense disablePadding>
           {children?.map(child => (
-            <Item key={findKey(child)} {...child} {...{ concepts }} />
+            <Item key={findKey(child)} {...child} {...{ concepts, focusedEntityIri }} />
           ))}
         </List>
       </Collapse>
