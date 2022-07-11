@@ -40,7 +40,7 @@ export const Navigator = props => {
             sx={{ '& .MuiTabs-indicator': { backgroundColor: 'white' } }}
           >
             <Tab icon={<BubbleChart />} label="Selections" />
-            <Tab icon={<HistoryEdu />} label="Classes" />
+            <Tab icon={<HistoryEdu />} label="Concepts" />
             <Tab icon={<Sell />} label="Properties" />
           </Tabs>
         </AppBar>

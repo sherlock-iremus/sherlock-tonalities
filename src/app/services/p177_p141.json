@@ -29,6 +29,18 @@
     { "iri": "http://data-iremus.huma-num.fr/id/791d8d87-9eb0-43f5-ae34-3f2da8ea40cb", "label": "Suspension" },
     { "iri": "http://data-iremus.huma-num.fr/id/0bbe0556-1ac9-4ef8-b449-23e834dcc2b2", "label": "Escape note" }
   ],
-  "http://modality-tonality.huma-num.fr/analysisOntology#hasModalTonalAttribution": [
+  "http://modality-tonality.huma-num.fr/analysisOntology#hasModalTonalAttribution": [],
+  "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasAmbitus" : [],
+  "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasAmbitus" : [],
+  "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasAmbitus" : [],
+  "http://modality-tonality.huma-num.fr/Zarlino_1558#quintusHasAmbitus" : [],
+  "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAmbitus" : [],
+  "http://modality-tonality.huma-num.fr/Speech#Support": [
+  ],
+  "http://modality-tonality.huma-num.fr/Speech#Refute": [
+  ],
+  "http://modality-tonality.huma-num.fr/Speech#Comment": [
+  ],
+  "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence": [
   ]
 }

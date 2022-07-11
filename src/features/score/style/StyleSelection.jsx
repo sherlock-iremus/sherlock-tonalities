@@ -1,18 +1,21 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useGetChildSelectionsQuery } from '../../../app/services/sparql'
-import { StyleNote } from './StyleNote'
+import { StyleEntity } from './StyleEntity'
 import { drawSelection } from '../draw'
+import { findKey } from '../utils'
+import { INSPECTED, SELECTED } from '../constants'
 
-export const StyleSelection = props => {
-  const { scoreIri } = useSelector(state => state.score)
-  const { data: children } = useGetChildSelectionsQuery(props.selectionIri)
-  const selectionNode = document.getElementById(props.selectionIri)
+export const StyleSelection = ({ selectionIri, contributorIri }) => {
+  const { scoreIri, isInspectionMode, isSelectionMode } = useSelector(state => state.score)
+  const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
+  const { data: children } = useGetChildSelectionsQuery(selectionIri)
+
   useEffect(() => {
-    selectionNode ? (selectionNode.style.display = 'block') : children && drawSelection(children, props.selectionIri, scoreIri, props.mode)
-    selectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
-    return () => selectionNode && (selectionNode.style.display = 'none')
-  }, [selectionNode, children, props.mode, props.selectionIri, scoreIri])
+    !document.getElementById(selectionIri) && children && drawSelection(children, selectionIri, scoreIri, mode, contributorIri)
+    document.getElementById(selectionIri)?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    return () => document.getElementById(selectionIri)?.remove()
+  }, [children, mode, selectionIri, scoreIri])
 
-  return children?.map(child => child.noteIri && <StyleNote key={child.noteIri} noteIri={child.noteIri} mode={props.mode} />) || null
+  return children?.map(child => <StyleEntity key={findKey(child)} {...child} />) || null
 }

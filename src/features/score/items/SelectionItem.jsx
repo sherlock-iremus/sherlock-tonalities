@@ -1,7 +1,7 @@
 import { BubbleChart, ChevronRight, Close, Edit, ExpandMore } from '@mui/icons-material'
 import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useGetChildSelectionsQuery, useGetScoreSelectionsQuery } from '../../../app/services/sparql'
 import { setEditingSelection, setInspectedEntity, setSelectedEntity } from '../../../app/services/scoreSlice'
 import { LoadingEntity } from '../entities/LoadingEntity'
@@ -11,40 +11,51 @@ import { Item } from './Item'
 import { withDispatch } from './withDispatch'
 import { useGetUserIdQuery } from '../../../app/services/sherlockApi'
 
-const BaseSelectionItem = ({ selectionIri, concepts, isEntity, baseUrlLength, dispatch }) => {
-  const [isOpen, setIsOpen] = useState(true)
+const BaseSelectionItem = ({
+  selectionIri,
+  concepts,
+  isEntity,
+  baseUrlLength,
+  dispatch,
+  initialIsOpen = true,
+  secondaryAction,
+  focusedEntityIri,
+}) => {
+  const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { data: userId } = useGetUserIdQuery()
   const { isInspectionMode, isSelectionMode, scoreIri } = useSelector(state => state.score)
   const { data: selections } = useGetScoreSelectionsQuery(scoreIri)
-  const contributorIri = selections.filter(s => s.iri === selectionIri)[0]?.contributorIri
   const { data: children } = useGetChildSelectionsQuery(selectionIri)
-  const conceptIri = concepts?.find(e => e.entity === selectionIri)?.concept
+  const contributorIri = selections.filter(s => s.iri === selectionIri)[0]?.contributorIri
+  const conceptIri = concepts?.find(e => e.entityIri === selectionIri)?.propertyIri
 
   return children ? (
     <>
       <ListItem
         disablePadding
         secondaryAction={
-          <>
-            {isEntity && (
-              <>
-                {contributorIri.slice(baseUrlLength) === userId && (
-                  <IconButton onClick={() => dispatch(setEditingSelection({ selectionIri, children }))}>
-                    <Edit />
+          secondaryAction || (
+            <>
+              {isEntity && (
+                <>
+                  {isInspectionMode && contributorIri?.slice(baseUrlLength) === userId && (
+                    <IconButton onClick={() => dispatch(setEditingSelection({ selectionIri, children }))}>
+                      <Edit />
+                    </IconButton>
+                  )}
+                  <IconButton
+                    onClick={() =>
+                      (isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))) ||
+                      (isSelectionMode && dispatch(setSelectedEntity({ selectionIri })))
+                    }
+                  >
+                    <Close />
                   </IconButton>
-                )}
-                <IconButton
-                  onClick={() =>
-                    (isInspectionMode && dispatch(setInspectedEntity({ selectionIri }))) ||
-                    (isSelectionMode && dispatch(setSelectedEntity({ selectionIri })))
-                  }
-                >
-                  <Close />
-                </IconButton>
-              </>
-            )}
-            {conceptIri && <ConceptItem conceptIri={conceptIri} />}
-          </>
+                </>
+              )}
+              {conceptIri && <ConceptItem conceptIri={conceptIri} />}
+            </>
+          )
         }
       >
         <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>

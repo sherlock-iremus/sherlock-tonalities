@@ -10,7 +10,7 @@ import { withDispatch } from './withDispatch'
 const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch, secondaryAction }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data: noteLabel } = useGetNoteInfoQuery(noteIri)
-  const conceptIri = concepts?.find(e => e.entity === noteIri)?.concept
+  const conceptIri = concepts?.find(e => e.entityIri === noteIri)?.propertyIri
 
   return noteLabel ? (
     <ListItem
@@ -40,7 +40,7 @@ const BaseNoteItem = ({ noteIri, concepts, isEntity, baseUrlLength, dispatch, se
         <ListItemIcon>
           <MusicNote />
         </ListItemIcon>
-        <ListItemText primary={noteLabel} secondary={noteIri.slice(baseUrlLength)} />
+        <ListItemText primary={`Note ${noteLabel}`} secondary={noteIri.slice(baseUrlLength)} />
       </ListItemButton>
     </ListItem>
   ) : (

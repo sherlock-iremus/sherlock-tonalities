@@ -1,25 +1,25 @@
 import { AddComment } from '@mui/icons-material'
 import { SpeedDial, SpeedDialAction } from '@mui/material'
 import { Box } from '@mui/system'
-import { VERTICALITY } from '../constants'
-import { VerticalityItem } from '../items/VerticalityItem'
 import { setAnnotationEditor } from '../../../app/services/scoreSlice'
 import { withDispatch } from '../items/withDispatch'
 import { OutgoingAnnotations } from '../annotations/OutgoingAnnotations'
 import actions from '../../../app/services/p140_p177.json'
+import { ScoreItem } from '../items/ScoreItem'
+import { SCORE } from '../constants'
 
-const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseUrl }) => (
+const BaseScoreEntity = ({ scoreIri, dispatch, baseUrlLength }) => (
   <Box>
-    <VerticalityItem {...{ verticalityIri }} isEntity />
+    <ScoreItem {...{ scoreIri }} isEntity />
 
-    <OutgoingAnnotations {...{ verticalityIri }} />
+    <OutgoingAnnotations {...{ scoreIri }} />
 
     <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
-      {actions[VERTICALITY].map(action => (
+      {actions[SCORE].map(action => (
         <SpeedDialAction
           key={action.iri}
-          onClick={() => dispatch(setAnnotationEditor({ subject: { verticalityIri }, predicat: action }))}
-          tooltipTitle={action.label || action.iri.slice(baseUrl.length)}
+          onClick={() => dispatch(setAnnotationEditor({ subject: { scoreIri }, predicat: action }))}
+          tooltipTitle={action.label || action.iri.slice(baseUrlLength)}
           icon={action.icon}
         />
       ))}
@@ -27,4 +27,4 @@ const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseU
   </Box>
 )
 
-export const VerticalityEntity = withDispatch(BaseVerticalityEntity)
+export const ScoreEntity = withDispatch(BaseScoreEntity)

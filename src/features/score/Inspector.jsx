@@ -15,6 +15,7 @@ import {
   Lyrics,
   MusicNote,
   QueueMusic,
+  Sell,
 } from '@mui/icons-material'
 import {
   Alert,
@@ -39,11 +40,12 @@ import { ConceptEntity } from './entities/ConceptEntity'
 import { NoteEntity } from './entities/NoteEntity'
 import { SelectionEntity } from './entities/SelectionEntity'
 import { VerticalityEntity } from './entities/VerticalityEntity'
-import { PositionnedNoteItem } from './items/PositionnedNoteItem'
-import { ScoreItem } from './items/ScoreItem'
 import { findKey } from './utils'
 import { COLOR_INSPECTED } from './mei.css'
 import { AnnotationEntity } from './entities/AnnotationEntity'
+import { PositionnedNoteEntity } from './entities/PositionnedNoteEntity'
+import { PropertyItem } from './items/PropertyItem'
+import { ScoreEntity } from './entities/ScoreEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -68,6 +70,7 @@ export const Inspector = props => {
     positionnedNoteIri,
     selectionIri,
     conceptIri,
+    propertyIri,
     annotationIri,
     scoreIri,
     analyticalEntityIri,
@@ -104,6 +107,7 @@ export const Inspector = props => {
                       !previousEntity.positionnedNoteIri &&
                       !previousEntity.selectionIri &&
                       !previousEntity.conceptIri &&
+                      !previousEntity.propertyIri &&
                       !previousEntity.annotationIri &&
                       !previousEntity.analyticalEntityIri &&
                       !previousEntity.contributorIri &&
@@ -124,6 +128,7 @@ export const Inspector = props => {
                       !nextEntity.positionnedNoteIri &&
                       !nextEntity.selectionIri &&
                       !nextEntity.conceptIri &&
+                      !nextEntity.propertyIri &&
                       !nextEntity.annotationIri &&
                       !nextEntity.analyticalEntityIri &&
                       !nextEntity.contributorIri &&
@@ -147,6 +152,7 @@ export const Inspector = props => {
                       (positionnedNoteIri && 'Positionned note') ||
                       (selectionIri && 'Selection') ||
                       (conceptIri && 'Concept') ||
+                      (propertyIri && 'Property') ||
                       (annotationIri && 'Annotation') ||
                       (analyticalEntityIri && 'Analytical entity') ||
                       (contributorIri && 'Contributor') ||
@@ -158,6 +164,7 @@ export const Inspector = props => {
                       (positionnedNoteIri && <QueueMusic />) ||
                       (selectionIri && <BubbleChart />) ||
                       (conceptIri && <HistoryEdu />) ||
+                      (propertyIri && <Sell />) ||
                       (annotationIri && <Comment />) ||
                       (analyticalEntityIri && <Lyrics />) ||
                       (contributorIri && <AccountBox />) ||
@@ -194,11 +201,12 @@ export const Inspector = props => {
             <List>
               {noteIri && <NoteEntity {...{ noteIri }} />}
               {analyticalEntityIri && <AnalyticalEntity {...{ analyticalEntityIri, scoreIri }} />}
-              {positionnedNoteIri && <PositionnedNoteItem {...{ positionnedNoteIri, attachedNoteIri }} isEntity />}
+              {positionnedNoteIri && <PositionnedNoteEntity {...{ positionnedNoteIri, attachedNoteIri }} />}
               {conceptIri && <ConceptEntity {...{ conceptIri }} />}
+              {propertyIri && <PropertyItem {...{ propertyIri }} isEntity />}
               {selectionIri && <SelectionEntity {...{ selectionIri }} />}
               {verticalityIri && <VerticalityEntity {...{ verticalityIri, clickedNoteIri }} />}
-              {scoreIri && <ScoreItem />}
+              {scoreIri && <ScoreEntity {...{ scoreIri }} />}
               {annotationIri && <AnnotationEntity {...{ annotationIri }} />}
             </List>
           </Box>
@@ -213,11 +221,13 @@ export const Inspector = props => {
       >
         <Alert variant="filled" severity="info" onClose={() => setIsShowingPopup(false)}>
           <Link onClick={props.onChange} underline="hover" color="inherit" sx={{ cursor: 'pointer' }}>
-            {(noteIri && 'A note entity has been selected, click to view inspection') ||
-              (verticalityIri && 'A verticality has been selected, click to view inspection') ||
-              (conceptIri && 'A concept entity has been selected, click to view inspection') ||
-              (selectionIri && 'A selection entity has been selected, click to view inspection') ||
-              (annotationIri && 'An annalytical entity has been selected, click to view inspection')}
+            {(noteIri && 'A note has been selected, click to view details') ||
+              (verticalityIri && 'A verticality has been selected, click to view details') ||
+              (conceptIri && 'A concept has been selected, click to view details') ||
+              (propertyIri && 'A property has been selected, click to view details') ||
+              (selectionIri && 'A selection has been selected, click to view details') ||
+              (annotationIri && 'An annalytical entity has been selected, click to view details') ||
+              (scoreIri && 'Entire score has been selected, click to view details')}
           </Link>
         </Alert>
       </Snackbar>

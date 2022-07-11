@@ -1,32 +1,34 @@
+import { INSPECTED, SELECTED } from './constants'
 import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
 import { sleep } from './utils'
 
-export const drawSelection = async (selection, selectionIri, scoreIri, mode) => {
-  const notes = selection.map(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1))).filter(Boolean)
+export const drawSelection = async (selection, selectionIri, scoreIri, mode, contributorIri) => {
+  if (selection.find(e => e.noteIri)) {
+    const notes = selection.map(s => document.getElementById(s?.noteIri?.slice(scoreIri.length + 1))).filter(Boolean)
 
-  if (!notes.length) {
-    const pages = Array.from(document.getElementsByClassName('vrv-ui-page-wrapper'))
-    for (const page of pages) {
-      if (selection.find(s => document.getElementById(s?.noteIri.slice(scoreIri.length + 1)))) break
-      await sleep(100)
-      page.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    if (!notes.length) {
+      const pages = Array.from(document.getElementsByClassName('vrv-ui-page-wrapper'))
+      for (const page of pages) {
+        if (selection.find(s => document.getElementById(s?.noteIri?.slice(scoreIri.length + 1)))) break
+        await sleep(100)
+        page.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+      }
+    } else {
+      const hullPadding = 300
+      const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+      selectionNode.setAttribute('id', selectionIri)
+      const points = notes.map(s => s && noteCoords(s))
+      points.length &&
+        points.forEach(p => {
+          const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+          node.setAttribute('fill', (mode === INSPECTED && COLOR_INSPECTED) || (mode === SELECTED && COLOR_SELECTED))
+          node.setAttribute('fill-opacity', '30%')
+          node.setAttribute('d', circleShape(p, hullPadding))
+          selectionNode.appendChild(node)
+        })
+      const systemNode = getSystem(notes[0])
+      systemNode.parentNode.insertBefore(selectionNode, systemNode)
     }
-  }
-  else {
-    const hullPadding = 300
-    const selectionNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
-    selectionNode.setAttribute('id', selectionIri)
-    const points = notes.map(s => s && noteCoords(s))
-    points.length &&
-      points.forEach(p => {
-        const node = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-        node.setAttribute('fill', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
-        node.setAttribute('fill-opacity', '30%')
-        node.setAttribute('d', circleShape(p, hullPadding))
-        selectionNode.appendChild(node)
-      })
-    const systemNode = getSystem(notes[0])
-    systemNode.parentNode.insertBefore(selectionNode, systemNode)
   }
 }
 

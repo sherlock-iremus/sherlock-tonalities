@@ -1,5 +1,9 @@
 {
-  "iri": "http://modality-tonality.huma-num.fr/MyTreaty#",
-  "classes": [{ "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#maClasse", "label": "Ma super classe" }],
-  "properties": [{ "iri": "http://modality-tonality.huma-num.fr/MyTreaty#maProp", "label": "Ma super prop" }]
+  "iri": "http://modality-tonality.huma-num.fr/Speech#",
+  "classes": [{ "iri": "http://modality-tonality.huma-num.fr/Speech#maClasse", "label": "Ma super classe" }],
+  "properties": [
+    { "iri": "http://modality-tonality.huma-num.fr/Speech#Support", "label": "Support" },
+    { "iri": "http://modality-tonality.huma-num.fr/Speech#Refute", "label": "Refute" },
+    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment" }
+  ]
 }

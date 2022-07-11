@@ -1,19 +1,20 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { useGetPositionnedNoteInfoQuery } from '../../../app/services/sparql'
+import { INSPECTED, SELECTED } from '../constants'
 import { drawPositionnedNote } from '../draw'
 import { StyleNote } from './StyleNote'
 
-export const StylePositionnedNote = props => {
+export const StylePositionnedNote = ({ positionnedNoteIri }) => {
   const { scoreIri } = useSelector(state => state.score)
-  const positionnedNoteNode = document.getElementById(props.positionnedNoteIri)
-  const noteNode = document.getElementById(props.clickedNoteIri.slice(scoreIri.length + 1))
-
+  const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
+  const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
+  const { data } = useGetPositionnedNoteInfoQuery(positionnedNoteIri)
+  const noteNode = data && document.getElementById(data.clickedNoteIri.slice(scoreIri.length + 1))
   useEffect(() => {
-    positionnedNoteNode
-      ? (positionnedNoteNode.style.display = 'block')
-      : drawPositionnedNote(props.positionnedNoteIri, noteNode, props.mode)
-    return () => positionnedNoteNode && (positionnedNoteNode.style.display = 'none')
-  }, [noteNode, positionnedNoteNode, props.mode, props.positionnedNoteIri])
+    data && !document.getElementById(positionnedNoteIri) && drawPositionnedNote(positionnedNoteIri, noteNode, mode)
+    return () => document.getElementById(positionnedNoteIri)?.remove()
+  }, [noteNode, mode, positionnedNoteIri, data])
 
-  return <StyleNote noteIri={props.attachedNoteIri} mode={props.mode} />
+  return (data && <StyleNote noteIri={data.attachedNoteIri} mode={mode} />) || null
 }

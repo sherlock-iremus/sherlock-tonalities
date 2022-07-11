@@ -8,31 +8,40 @@ import { PositionnedNoteItem } from './PositionnedNoteItem'
 import { ConceptItem } from './ConceptItem'
 import { LoadingEntity } from '../entities/LoadingEntity'
 
-export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, concepts, secondaryAction }) => {
+export const VerticalityItem = ({
+  verticalityIri,
+  clickedNoteIri,
+  isEntity,
+  concepts,
+  secondaryAction,
+  initialIsOpen = true,
+}) => {
   const dispatch = useDispatch()
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(verticalityIri)
-  const conceptIri = concepts?.find(e => e.entity === verticalityIri)?.concept
+  const conceptIri = concepts?.find(e => e.entityIri === verticalityIri)?.propertyIri
   return positionnedNotes ? (
     <>
       <ListItem
         disablePadding
-        secondaryAction={ secondaryAction ||
-          <>
-            {isEntity && (
-              <IconButton
-                onClick={() =>
-                  (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri }))) ||
-                  (isSelectionMode && dispatch(setSelectedEntity({ verticalityIri })))
-                }
-              >
-                <Close />
-              </IconButton>
-            )}
-            {conceptIri && <ConceptItem conceptIri={conceptIri} />}
-          </>
+        secondaryAction={
+          secondaryAction || (
+            <>
+              {isEntity && (
+                <IconButton
+                  onClick={() =>
+                    (isInspectionMode && dispatch(setInspectedEntity({ verticalityIri }))) ||
+                    (isSelectionMode && dispatch(setSelectedEntity({ verticalityIri })))
+                  }
+                >
+                  <Close />
+                </IconButton>
+              )}
+              {conceptIri && <ConceptItem conceptIri={conceptIri} />}
+            </>
+          )
         }
       >
         <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
@@ -45,7 +54,10 @@ export const VerticalityItem = ({ verticalityIri, clickedNoteIri, isEntity, conc
           <ListItemIcon>
             <AlignHorizontalCenter />
           </ListItemIcon>
-          <ListItemText primary="Verticality" secondary={verticalityIri.slice(baseUrlLength)} />
+          <ListItemText
+            primary={`Verticality ${verticalityIri.slice(baseUrlLength + 42)}`}
+            secondary={verticalityIri.slice(baseUrlLength)}
+          />
         </ListItemButton>
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
