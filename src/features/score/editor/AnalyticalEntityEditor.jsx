@@ -73,7 +73,7 @@ export const AnalyticalEntityEditor = () => {
           </AppBar>
 
           {displayInfo && (
-            <Alert severity="info" onClose={() => setDisplayInfo(false)} sx={{ mb: 2 }}>
+            <Alert severity="info" onClose={() => setDisplayInfo(false)}>
               Select concepts and asign properties to specific elements in the selection
             </Alert>
           )}

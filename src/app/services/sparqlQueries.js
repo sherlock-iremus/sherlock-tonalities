@@ -321,6 +321,7 @@ export const getContributor = contributorIri => `
             ?hexcode crm:P2_has_type <http://data-iremus.huma-num.fr/id/5f1bb74f-6ea0-4073-8b68-086f98454f1c>.
             ?hexcode crm:P190_has_symbolic_content ?color.
         }
+    }
 `
 
 export const getPositionnedNoteInfo = positionnedNoteIri => `

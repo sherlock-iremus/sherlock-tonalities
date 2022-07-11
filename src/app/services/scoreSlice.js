@@ -103,7 +103,10 @@ const scoreSlice = createSlice({
         if (action.payload.propertyIri) {
           const currentIndex = state.analyticalEntityEditor.properties.indexOf(action.payload.propertyIri)
           currentIndex === -1
-            ? state.analyticalEntityEditor.properties.push(action.payload.propertyIri)
+            ? state.analyticalEntityEditor.properties.push({
+                propertyIri: action.payload.propertyIri,
+                ...state.annotationEditor.focusedEntityIri,
+              })
             : state.analyticalEntityEditor.properties.splice(currentIndex, 1)
         }
         if (action.payload.conceptIri) {
