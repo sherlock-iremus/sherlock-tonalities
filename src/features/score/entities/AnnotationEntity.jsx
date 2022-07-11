@@ -23,12 +23,16 @@ import { LoadingEntity } from './LoadingEntity'
 export const AnnotationEntity = ({ annotationIri }) => {
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
+  const { treatiseIri } = useSelector(state => state.score)
   const { data } = useGetAnnotationQuery(annotationIri)
-  return (
+  const filteredActions = [
+    ...(treatiseIri in actions[ANNOTATION] ? actions[ANNOTATION][treatiseIri] : []),
+    ...actions[ANNOTATION].common,
+  ]  return (
     (data && (
       <>
         <AnnotationItem {...{ annotationIri }} isEntity />
-        
+
         <ListSubheader>Contributor</ListSubheader>
         <ListItem disablePadding>
           <ListItemButton onClick={() => dispatch(setInspectedEntity({ contributorIri: data.contributorIri }))}>
@@ -51,11 +55,10 @@ export const AnnotationEntity = ({ annotationIri }) => {
         <ListSubheader>Assigned value</ListSubheader>
         <AnnotationValueItem {...data.object} />
 
-        
         <OutgoingAnnotations {...{ annotationIri }} />
 
         <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
-          {actions[ANNOTATION].map(action => (
+          {filteredActions.map(action => (
             <SpeedDialAction
               key={action.iri}
               onClick={() => dispatch(setAnnotationEditor({ subject: { annotationIri }, predicat: action }))}

@@ -39,58 +39,59 @@ export const OutgoingAnnotations = props => {
     !!annotations?.length && (
       <>
         <ListSubheader>Annotations</ListSubheader>
-        {predicats[findType(props)].map(predicat =>
-          !!annotations.filter(a => a.predicat === predicat.iri).length && (
-            <Box key={predicat.iri}>
-              <ListItem
-                disablePadding
-                secondaryAction={
-                  isOpen.indexOf(predicat.iri) === -1 && (
-                    <Chip label={annotations.filter(a => a.predicat === predicat.iri).length} />
-                  )
-                }
-              >
-                <ListItemButton onClick={() => handleOpen(predicat.iri)}>
-                  <IconButton disableRipple>
-                    {isOpen.indexOf(predicat.iri) === -1 ? <ChevronRight /> : <ExpandMore />}
-                  </IconButton>
-                  <ListItemIcon>{predicat.icon}</ListItemIcon>
-                  <ListItemText primary={predicat.label || getConceptLabel(predicat.iri)} />
-                </ListItemButton>
-              </ListItem>
-              <Collapse in={isOpen.indexOf(predicat.iri) !== -1} timeout="auto" unmountOnExit>
-                <List dense disablePadding>
-                  {annotations
-                    .filter(a => a.predicat === predicat.iri)
-                    .map(({ annotationIri, date, contributorIri, object }) => (
-                      <ListItem
-                        key={annotationIri}
-                        disablePadding
-                        secondaryAction={
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              flexDirection: 'column',
-                              alignItems: 'center',
-                            }}
-                          >
-                            <ContributorItem {...{ contributorIri }} />
-                            <Typography variant="caption">{new Date(date).toLocaleDateString('en-GB')}</Typography>
-                          </Box>
-                        }
-                      >
-                        <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
-                          <ListItemText
-                            primary={<ConceptItem conceptIri={object} />}
-                            secondary={annotationIri.slice(baseUrlLength)}
-                          />
-                        </ListItemButton>
-                      </ListItem>
-                    ))}
-                </List>
-              </Collapse>
-            </Box>
-          )
+        {Object.values(predicats[findType(props)]).flat().map(
+          predicat =>
+            !!annotations.filter(a => a.predicat === predicat.iri).length && (
+              <Box key={predicat.iri}>
+                <ListItem
+                  disablePadding
+                  secondaryAction={
+                    isOpen.indexOf(predicat.iri) === -1 && (
+                      <Chip label={annotations.filter(a => a.predicat === predicat.iri).length} />
+                    )
+                  }
+                >
+                  <ListItemButton onClick={() => handleOpen(predicat.iri)}>
+                    <IconButton disableRipple>
+                      {isOpen.indexOf(predicat.iri) === -1 ? <ChevronRight /> : <ExpandMore />}
+                    </IconButton>
+                    <ListItemIcon>{predicat.icon}</ListItemIcon>
+                    <ListItemText primary={predicat.label || getConceptLabel(predicat.iri)} />
+                  </ListItemButton>
+                </ListItem>
+                <Collapse in={isOpen.indexOf(predicat.iri) !== -1} timeout="auto" unmountOnExit>
+                  <List dense disablePadding>
+                    {annotations
+                      .filter(a => a.predicat === predicat.iri)
+                      .map(({ annotationIri, date, contributorIri, object }) => (
+                        <ListItem
+                          key={annotationIri}
+                          disablePadding
+                          secondaryAction={
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <ContributorItem {...{ contributorIri }} />
+                              <Typography variant="caption">{new Date(date).toLocaleDateString('en-GB')}</Typography>
+                            </Box>
+                          }
+                        >
+                          <ListItemButton onClick={() => dispatch(setInspectedEntity({ annotationIri }))}>
+                            <ListItemText
+                              primary={<ConceptItem conceptIri={object} />}
+                              secondary={annotationIri.slice(baseUrlLength)}
+                            />
+                          </ListItemButton>
+                        </ListItem>
+                      ))}
+                  </List>
+                </Collapse>
+              </Box>
+            )
         )}
       </>
     )

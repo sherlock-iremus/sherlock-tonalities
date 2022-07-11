@@ -13,6 +13,11 @@ export const NoteEntity = ({ noteIri }) => {
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: selections } = useGetNoteSelectionsQuery(noteIri)
+  const { treatiseIri } = useSelector(state => state.score)
+  const filteredActions = [
+    ...(treatiseIri in actions[NOTE] ? actions[NOTE][treatiseIri] : []),
+    ...actions[NOTE].common,
+  ]
   return (
     <>
       <NoteItem {...{ noteIri }} isEntity />
@@ -34,7 +39,7 @@ export const NoteEntity = ({ noteIri }) => {
       <OutgoingAnnotations {...{ noteIri }} />
 
       <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
-        {actions[NOTE].map(action => (
+        {filteredActions.map(action => (
           <SpeedDialAction
             key={action.iri}
             onClick={() => dispatch(setAnnotationEditor({ subject: { noteIri }, predicat: action }))}

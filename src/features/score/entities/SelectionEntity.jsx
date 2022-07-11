@@ -6,13 +6,18 @@ import { setAnalyticalEntityEditor, setAnnotationEditor, setInspectedEntity } fr
 import { SelectionItem } from '../items/SelectionItem'
 import { AnalyticalEntities } from '../annotations/AnalyticalEntities'
 import { SELECTION } from '../constants'
+import { OutgoingAnnotations } from '../annotations/OutgoingAnnotations'
 import actions from '../../../app/services/p140_p177.json'
 
 export const SelectionEntity = ({ selectionIri }) => {
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   const { data: parents } = useGetParentSelectionsQuery(selectionIri)
-  return (
+  const { treatiseIri } = useSelector(state => state.score)
+  const filteredActions = [
+    ...(treatiseIri in actions[SELECTION] ? actions[SELECTION][treatiseIri] : []),
+    ...actions[SELECTION].common,
+  ]  return (
     <>
       <SelectionItem {...{ selectionIri }} isEntity />
 
@@ -30,8 +35,10 @@ export const SelectionEntity = ({ selectionIri }) => {
 
       <AnalyticalEntities {...{ selectionIri }} />
 
+      <OutgoingAnnotations {...{ selectionIri }} />
+
       <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
-        {actions[SELECTION].map(action => (
+        {filteredActions.map(action => (
           <SpeedDialAction
             key={action.iri}
             onClick={() => dispatch(setAnnotationEditor({ subject: { selectionIri }, predicat: action }))}

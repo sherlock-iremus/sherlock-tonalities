@@ -1,52 +1,64 @@
 {
-  "http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd": [
-    {
-      "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
-      "label": "Dissonance type",
-      "icon": "🎶"
-    },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
-  ],
+  "http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd": {
+    "common": [
+      {
+        "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
+        "label": "Dissonance type",
+        "icon": "🎶"
+      },
+      { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
+    ]
+  },
 
-  "http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df": [
-    {
-      "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
-      "label": "Dissonance type",
-      "icon": "🎶"
-    },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
-  ],
+  "http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df": {
+    "common": [
+      {
+        "iri": "http://data-iremus.huma-num.fr/id/169ab089-c0a8-43ab-aec4-5a1a6e1b52c1",
+        "label": "Dissonance type",
+        "icon": "🎶"
+      },
+      { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
+    ]
+  },
 
-  "http://data-iremus.huma-num.fr/id/90a2ae1e-0fbc-4357-ac8a-b4b3f2a06e86": [
-    {
-      "iri": "http://data-iremus.huma-num.fr/id/003559fc-f033-4fc3-9c05-0d5f283123ed",
-      "label": "Identify fundamental",
-      "icon": "🎹"
-    },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
-  ],
+  "http://data-iremus.huma-num.fr/id/90a2ae1e-0fbc-4357-ac8a-b4b3f2a06e86": {
+    "common": [
+      {
+        "iri": "http://data-iremus.huma-num.fr/id/003559fc-f033-4fc3-9c05-0d5f283123ed",
+        "label": "Identify fundamental",
+        "icon": "🎹"
+      },
+      { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
+    ]
+  },
 
-  "http://data-iremus.huma-num.fr/id/bf9dce29-8123-4e8e-b24d-0c7f134bbc8e": [
-    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasAmbitus", "icon": "Alt" },
-    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasAmbitus", "icon": "Bss" },
-    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasAmbitus", "icon": "Cts" },
-    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#quintusHasAmbitus", "icon": "Qts" },
-    { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAmbitus", "icon": "Tnr" },
-    {
-      "iri": "http://modality-tonality.huma-num.fr/analysisOntology#hasModalTonalAttribution",
-      "label": "hasModalTonalAttribution",
-      "icon": "🪜"
-    },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
-  ],
+  "http://data-iremus.huma-num.fr/id/bf9dce29-8123-4e8e-b24d-0c7f134bbc8e": {
+    "http://modality-tonality.huma-num.fr/Zarlino_1558#": [
+      { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#altusHasAmbitus", "icon": "Alt" },
+      { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#bassusHasAmbitus", "icon": "Bss" },
+      { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#cantusHasAmbitus", "icon": "Cts" },
+      { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#quintusHasAmbitus", "icon": "Qts" },
+      { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#tenorHasAmbitus", "icon": "Tnr" }
+    ],
+    "common": [
+      {
+        "iri": "http://modality-tonality.huma-num.fr/analysisOntology#hasModalTonalAttribution",
+        "label": "hasModalTonalAttribution",
+        "icon": "🪜"
+      },
+      { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
+    ]
+  },
 
-  "http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b": [
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
-  ],
+  "http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b": {
+    "common": [{ "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }]
+  },
 
-  "http://data-iremus.huma-num.fr/id/82dbd157-20df-422c-88db-28d6075d99a1": [
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Support", "label": "Support", "icon": "⇉" },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Refute", "label": "Refute", "icon": "↯" },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
-  ]
+  "http://data-iremus.huma-num.fr/id/82dbd157-20df-422c-88db-28d6075d99a1": {
+    "common": [
+      { "iri": "http://modality-tonality.huma-num.fr/Speech#Support", "label": "Support", "icon": "⇉" },
+      { "iri": "http://modality-tonality.huma-num.fr/Speech#Refute", "label": "Refute", "icon": "↯" },
+      { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }
+    ]
+  }
 }
