@@ -1,5 +1,15 @@
 import { CompareArrows, HistoryEdu } from '@mui/icons-material'
-import { Button, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Tooltip } from '@mui/material'
+import {
+  Button,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Tooltip,
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
@@ -34,6 +44,7 @@ export const Classes = props => {
   return (
     <>
       <TretiseLibrary isOpen={isTreatySelectorOpen} onClose={() => setIsTreatySelectorOpen(false)} />
+      <ListSubheader>Current treatise</ListSubheader>
       <ListItem
         disablePadding
         secondaryAction={

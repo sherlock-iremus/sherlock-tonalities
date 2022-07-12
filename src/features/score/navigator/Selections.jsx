@@ -36,6 +36,7 @@ export const Selections = props => {
 
   return (
     <>
+      <ListSubheader>Current score</ListSubheader>
       <ListItem
         disablePadding
         secondaryAction={
