@@ -16,6 +16,7 @@ import { setInspectedEntity, setSelectedEntity, setSelectionMode } from '../../.
 import { useNavigate } from 'react-router-dom'
 import { COLOR_NAVIGATE } from '../mei.css'
 import { useGetUserIdQuery } from '../../../app/services/sherlockApi'
+import { ContributorItem } from '../items/ContributorItem'
 
 export const Selections = props => {
   const { data: selections } = useGetScoreSelectionsQuery(props.scoreIri)
@@ -57,18 +58,45 @@ export const Selections = props => {
           <ListItemText primary={scoreTitle} secondary={scoreIri.slice(baseUrl.length)} />
         </ListItemButton>
       </ListItem>
+
       <List subheader={<ListSubheader>Created selections</ListSubheader>}>
-        {selections?.map(selection => (
-          <ListItem
-            key={selection.iri}
-            disablePadding
-            secondaryAction={
-              selection.contributorIri.slice(baseUrl.length) === userId && (
+        {selections
+          ?.filter(s => s.contributorIri.slice(baseUrl.length) === userId)
+          .map(selection => (
+            <ListItem
+              key={selection.iri}
+              disablePadding
+              secondaryAction={
                 <IconButton disabled>
                   <Delete />
                 </IconButton>
-              )
-            }
+              }
+            >
+              <ListItemButton
+                onClick={() =>
+                  (isInspectionMode && dispatch(setInspectedEntity({ selectionIri: selection.iri }))) ||
+                  (isSelectionMode && dispatch(setSelectedEntity({ selectionIri: selection.iri })))
+                }
+                selected={
+                  (isInspectionMode && selection.iri === inspectedSelection) ||
+                  (isSelectionMode && !!selectedEntities.find(s => s.selectionIri === selection.iri))
+                }
+              >
+                <ListItemText
+                  primary={`Selection with ${selection.entities} elements`}
+                  secondary={selection.iri.slice(baseUrl.length)}
+                />
+              </ListItemButton>
+            </ListItem>
+          ))}
+      </List>
+
+      <List subheader={<ListSubheader>Other selections</ListSubheader>}>
+        {selections?.filter(s => s.contributorIri.slice(baseUrl.length) !== userId).map(selection => (
+          <ListItem
+            key={selection.iri}
+            disablePadding
+            secondaryAction={<ContributorItem contributorIri={selection.contributorIri} />}
           >
             <ListItemButton
               onClick={() =>

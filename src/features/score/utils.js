@@ -33,17 +33,6 @@ export const findType = ({
 
 export const sleep = time => new Promise(resolve => setTimeout(resolve, time))
 
-const groupByOld = (list, key) => list.reduce((prev, curr) => ({ ...prev, [curr[key]]: [...(prev[key] || []), curr] }), {})
-
-export const groupBy = (list, key) => {
-  return list.reduce((prev, curr) => {
-    return {
-      ...prev,
-      [curr[key]]: [...(prev[key] || []), curr],
-    }
-  }, {})
-}
-
 export const stringToColor = string => {
   let hash = 0
   let i
@@ -61,6 +50,7 @@ export const stringToColor = string => {
 
   return color
 }
+
 export const getScoreLabel = scoreIri => {
   for (const score of scores) if (scoreIri.match(score.scoreIri)) return score.scoreTitle
   return null
