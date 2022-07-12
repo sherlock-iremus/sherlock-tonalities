@@ -197,7 +197,7 @@ export const getVerticalityPositionnedNotes = verticalityIri => `
 export const getVerticalityCoordinates = verticalityIri => `
     PREFIX sherlockmei: <http://data-iremus.huma-num.fr/ns/sherlockmei#>
     
-    SELECT ?note ?note
+    SELECT ?note
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     

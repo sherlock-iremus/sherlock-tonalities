@@ -51,7 +51,7 @@ export const VerticalityItem = ({
         <ListItemButton
           onClick={() => !isEntity && isInspectionMode && dispatch(setInspectedEntity({ verticalityIri }))}
           sx={isEntity && { cursor: 'default' }}
-          selected={focusedEntityIri.verticalityIri === verticalityIri}
+          selected={focusedEntityIri?.verticalityIri === verticalityIri}
         >
           <ListItemIcon>
             <AlignHorizontalCenter />

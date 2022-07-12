@@ -5,13 +5,15 @@ import { INSPECTED, SELECTED } from '../constants'
 import { drawVerticality } from '../draw'
 import { StyleNote } from './StyleNote'
 
-export const StyleVerticality = ({ verticalityIri }) => {
+export const StyleVerticality = ({ verticalityIri, clickedNoteIri }) => {
   const { scoreIri } = useSelector(state => state.score)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
   const { data: positionnedNotes } = useGetVerticalityPositionnedNotesQuery(verticalityIri)
-  const { data: clickedNoteIri } = useGetVerticalityCoordinatesQuery(verticalityIri)
-  const noteNode = clickedNoteIri && document.getElementById(clickedNoteIri.slice(scoreIri.length + 1))
+  const { data } = useGetVerticalityCoordinatesQuery(verticalityIri, { skip: clickedNoteIri })
+  const noteNode =
+    (clickedNoteIri && document.getElementById(clickedNoteIri.slice(scoreIri.length + 1))) ||
+    (data && document.getElementById(data.slice(scoreIri.length + 1)))
 
   useEffect(() => {
     !document.getElementById(verticalityIri) && noteNode && drawVerticality(verticalityIri, noteNode, mode)
