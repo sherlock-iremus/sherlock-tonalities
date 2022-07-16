@@ -32,7 +32,7 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode, con
 
         const minHeight = points.reduce((prev, curr) => (prev[1] < curr[1] ? prev : curr))[1]
         const maxHeight = points.reduce((prev, curr) => (prev[1] > curr[1] ? prev : curr))[1]
-        const coordinates = [20000, minHeight + (maxHeight - minHeight) / 2]
+        const coordinates = [0, minHeight + (maxHeight - minHeight) / 2]
 
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'path')
         circle.setAttribute('fill', contributor.color)
