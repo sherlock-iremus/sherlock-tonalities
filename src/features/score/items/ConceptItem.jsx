@@ -9,7 +9,7 @@ export const ConceptItem = ({ conceptIri }) => {
   const dispatch = useDispatch()
   const {
     baseUrl,
-    analyticalEntityEditor: { selection },
+    analyticalEntityEditor: { selectionIri },
   } = useSelector(state => state.score)
   const label = getConceptLabel(conceptIri) || (!conceptIri.match(baseUrl) && conceptIri)
   const { data } = useGetEntityTypeQuery(conceptIri, { skip: label })
@@ -18,7 +18,7 @@ export const ConceptItem = ({ conceptIri }) => {
       label={label || data?.label || 'Entity'}
       onClick={() => dispatch(setInspectedEntity({ conceptIri }))}
       sx={{ m: 0.3 }}
-      {...(selection && { onDelete: () => dispatch(setInspectedEntity({ propertyIri: conceptIri })) })}
+      {...(selectionIri && { onDelete: () => dispatch(setInspectedEntity({ propertyIri: conceptIri })) })}
     />
   )
 }

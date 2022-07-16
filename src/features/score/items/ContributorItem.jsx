@@ -7,12 +7,12 @@ const BaseContributorItem = ({ contributorIri, dispatch, baseUrlLength }) => {
   const { data: contributor } = useGetContributorQuery(contributorIri)
   return (
     (contributor && (
-      <Tooltip
-        title={contributorIri.slice(baseUrlLength)}
+      <Avatar
         onClick={() => dispatch(setInspectedEntity({ contributorIri }))}
+        sx={{ width: 24, height: 24, bgcolor: contributor.color, cursor: 'pointer' }}
       >
-        <Avatar sx={{ width: 24, height: 24, bgcolor: contributor.color }}>{contributor.emoji}</Avatar>
-      </Tooltip>
+        {contributor.emoji}
+      </Avatar>
     )) ||
     null
   )
