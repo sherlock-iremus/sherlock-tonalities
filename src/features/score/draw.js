@@ -2,7 +2,7 @@ import { INSPECTED, SELECTED } from './constants'
 import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
 import { sleep } from './utils'
 
-export const drawSelection = async (selection, selectionIri, scoreIri, mode, contributorIri) => {
+export const drawSelection = async (selection, selectionIri, scoreIri, mode, contributorIri, contributor) => {
   if (selection.find(e => e.noteIri)) {
     const notes = selection.map(s => document.getElementById(s?.noteIri?.slice(scoreIri.length + 1))).filter(Boolean)
 
@@ -26,17 +26,26 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode, con
           node.setAttribute('d', circleShape(p, hullPadding))
           selectionNode.appendChild(node)
         })
-      if (contributorIri) {
+      if (contributorIri && contributor) {
         const contributorNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
         contributorNode.setAttribute('id', contributorIri)
-        
+
+        const minHeight = points.reduce((prev, curr) => (prev[1] < curr[1] ? prev : curr))[1]
+        const maxHeight = points.reduce((prev, curr) => (prev[1] > curr[1] ? prev : curr))[1]
+        const coordinates = [20000, minHeight + (maxHeight - minHeight) / 2]
+
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-        circle.setAttribute('fill', 'blue') // contributorColor
-        circle.setAttribute('d', drawContributor(points))
+        circle.setAttribute('fill', contributor.color)
+        circle.setAttribute('d', circleShape(coordinates, 500))
         contributorNode.appendChild(circle)
-        
+
         const emoji = document.createElementNS('http://www.w3.org/2000/svg', 'text')
-        emoji.setAttribute('content', '🍔') // contributorEmoji
+        emoji.setAttribute('x', coordinates[0])
+        emoji.setAttribute('y', coordinates[1] + 150)
+        emoji.setAttribute('text-anchor', 'middle')
+        emoji.setAttribute('font-size', '500')
+        emoji.textContent = contributor.emoji
+        contributorNode.appendChild(emoji)
         
         selectionNode.appendChild(contributorNode)
       }
@@ -44,16 +53,6 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode, con
       systemNode.parentNode.insertBefore(selectionNode, systemNode)
     }
   }
-}
-
-export const drawContributor = points => {
-  let lowest = points[0].y
-  let highest = points[0].y
-  for (const point in points) {
-    if (point.y < lowest) lowest = point.y
-    if (point.y > highest) highest = point.y
-  }
-  return circleShape([SIDE_X, highest - lowest], 500)
 }
 
 export const drawPositionnedNote = (positionnedNoteIri, clickedNote, mode) => {
