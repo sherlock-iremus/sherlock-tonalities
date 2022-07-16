@@ -45,6 +45,7 @@ export const Properties = props => {
   return (
     <>
       <TretiseLibrary isOpen={isTreatySelectorOpen} onClose={() => setIsTreatySelectorOpen(false)} />
+      <ListSubheader>Current treatise</ListSubheader>
       <ListItem
         disablePadding
         secondaryAction={
@@ -61,7 +62,7 @@ export const Properties = props => {
           </ListItemIcon>
           <ListItemText
             primary={props.treatise.iri.slice(tonalityBaseUrl.length)}
-            secondary={props.treatise.iri.slice(0,tonalityBaseUrl.length)}
+            secondary={props.treatise.iri.slice(0, tonalityBaseUrl.length)}
           />
         </ListItemButton>
       </ListItem>

@@ -7,12 +7,15 @@ import {
   SELECTION,
   VERTICALITY,
 } from '../../features/score/constants'
+import { stringToColor } from '../../features/score/utils'
 import { findKey, findType } from '../../features/score/utils'
 import {
   getAnalyticalEntities,
   getAnalyticalEntity,
   getAnnotation,
   getChildSelections,
+  getConceptAnnotations,
+  getContributor,
   getEntityGlobalAnnotations,
   getEntitySpecificAnnotations,
   getEntityType,
@@ -232,6 +235,20 @@ export const sparqlEndpoint = createApi({
         contributorIri: element.contributor?.value,
       }),
     }),
+    getContributor: builder.query({
+      query: contributorIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getContributor(contributorIri) }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [{ contributor, program, color, emoji }],
+        },
+      }) =>
+        program
+          ? { color: stringToColor(contributor.value), emoji: '🖥' }
+          : { color: '#' + color?.value, emoji: emoji?.value },
+    }),
     getVerticalityCoordinates: builder.query({
       query: verticalityIri => ({
         method: 'POST',
@@ -315,6 +332,7 @@ export const {
   useGetIncomingAnnotationsQuery,
   useGetOutgoingAnnotationsQuery,
   useGetAnnotationQuery,
+  useGetContributorQuery,
   useGetVerticalityCoordinatesQuery,
   useGetPositionnedNoteInfoQuery,
   useGetEntityTypeQuery,

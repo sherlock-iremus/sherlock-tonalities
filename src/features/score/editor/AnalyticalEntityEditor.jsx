@@ -73,7 +73,7 @@ export const AnalyticalEntityEditor = () => {
           </AppBar>
 
           {displayInfo && (
-            <Alert severity="info" onClose={() => setDisplayInfo(false)} sx={{ mb: 2 }}>
+            <Alert severity="info" onClose={() => setDisplayInfo(false)}>
               Select concepts and asign properties to specific elements in the selection
             </Alert>
           )}
@@ -82,8 +82,7 @@ export const AnalyticalEntityEditor = () => {
           <PropertyItem propertyIri={propertyIri} />
 
           <ListSubheader>Target selection</ListSubheader>
-          <SelectionItem {...{ selectionIri, focusedEntityIri }} />
-
+          <SelectionItem {...{ selectionIri, focusedEntityIri, concepts: properties }} />
           <ListSubheader>Assigned concepts</ListSubheader>
           {concepts.map(concept => (
             <ClassItem key={concept} classIri={concept} isEntity />

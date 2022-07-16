@@ -6,7 +6,7 @@ import { setInspectedEntity, setSelectedEntity } from '../../../app/services/sco
 import { LoadingEntity } from '../entities/LoadingEntity'
 import { useSelector } from 'react-redux'
 
-const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, isEntity, secondaryAction }) => {
+const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, isEntity, secondaryAction, focusedEntityIri }) => {
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const { data } = useGetPositionnedNoteInfoQuery(positionnedNoteIri)
   const { data: noteLabel } = useGetNoteInfoQuery(data?.attachedNoteIri, { skip: !data })
@@ -35,6 +35,7 @@ const BasePositionnedNoteItem = ({ positionnedNoteIri, baseUrlLength, dispatch, 
             (isSelectionMode && dispatch(setSelectedEntity({ positionnedNoteIri }))))
         }
         sx={isEntity && { cursor: 'default' }}
+        selected={focusedEntityIri?.positionnedNoteIri === positionnedNoteIri}
       >
         <ListItemIcon>
           <QueueMusic />

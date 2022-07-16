@@ -7,24 +7,33 @@ import { setAnnotationEditor } from '../../../app/services/scoreSlice'
 import { withDispatch } from '../items/withDispatch'
 import { OutgoingAnnotations } from '../annotations/OutgoingAnnotations'
 import actions from '../../../app/services/p140_p177.json'
+import { useSelector } from 'react-redux'
 
-const BaseVerticalityEntity = ({ verticalityIri, clickedNoteIri, dispatch, baseUrl }) => (
-  <Box>
-    <VerticalityItem {...{ verticalityIri }} isEntity />
+const BaseVerticalityEntity = ({ verticalityIri, dispatch, baseUrl }) => {
+  const { treatiseIri } = useSelector(state => state.score)
+  const filteredActions = [
+    ...(treatiseIri in actions[VERTICALITY] ? actions[VERTICALITY][treatiseIri] : []),
+    ...actions[VERTICALITY].common,
+  ]
 
-    <OutgoingAnnotations {...{ verticalityIri }} />
+  return (
+    <Box>
+      <VerticalityItem {...{ verticalityIri }} isEntity />
 
-    <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
-      {actions[VERTICALITY].map(action => (
-        <SpeedDialAction
-          key={action.iri}
-          onClick={() => dispatch(setAnnotationEditor({ subject: { verticalityIri }, predicat: action }))}
-          tooltipTitle={action.label || action.iri.slice(baseUrl.length)}
-          icon={action.icon}
-        />
-      ))}
-    </SpeedDial>
-  </Box>
-)
+      <OutgoingAnnotations {...{ verticalityIri }} />
+
+      <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
+        {filteredActions.map(action => (
+          <SpeedDialAction
+            key={action.iri}
+            onClick={() => dispatch(setAnnotationEditor({ subject: { verticalityIri }, predicat: action }))}
+            tooltipTitle={action.label || action.iri.slice(baseUrl.length)}
+            icon={action.icon}
+          />
+        ))}
+      </SpeedDial>
+    </Box>
+  )
+}
 
 export const VerticalityEntity = withDispatch(BaseVerticalityEntity)
