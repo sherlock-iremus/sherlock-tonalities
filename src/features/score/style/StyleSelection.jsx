@@ -12,10 +12,12 @@ export const StyleSelection = ({ selectionIri, contributorIri }) => {
   const { data: children } = useGetChildSelectionsQuery(selectionIri)
 
   useEffect(() => {
-    !document.getElementById(selectionIri) && children && drawSelection(children, selectionIri, scoreIri, mode, contributorIri)
+    !document.getElementById(selectionIri) &&
+      children &&
+      drawSelection(children, selectionIri, scoreIri, mode, contributorIri)
     document.getElementById(selectionIri)?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
     return () => document.getElementById(selectionIri)?.remove()
-  }, [children, mode, selectionIri, scoreIri])
+  }, [children, mode, selectionIri, scoreIri, contributorIri])
 
   return children?.map(child => <StyleEntity key={findKey(child)} {...child} />) || null
 }

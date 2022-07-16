@@ -26,10 +26,34 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode, con
           node.setAttribute('d', circleShape(p, hullPadding))
           selectionNode.appendChild(node)
         })
+      if (contributorIri) {
+        const contributorNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+        contributorNode.setAttribute('id', contributorIri)
+        
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+        circle.setAttribute('fill', 'blue') // contributorColor
+        circle.setAttribute('d', drawContributor(points))
+        contributorNode.appendChild(circle)
+        
+        const emoji = document.createElementNS('http://www.w3.org/2000/svg', 'text')
+        emoji.setAttribute('content', '🍔') // contributorEmoji
+        
+        selectionNode.appendChild(contributorNode)
+      }
       const systemNode = getSystem(notes[0])
       systemNode.parentNode.insertBefore(selectionNode, systemNode)
     }
   }
+}
+
+export const drawContributor = points => {
+  let lowest = points[0].y
+  let highest = points[0].y
+  for (const point in points) {
+    if (point.y < lowest) lowest = point.y
+    if (point.y > highest) highest = point.y
+  }
+  return circleShape([SIDE_X, highest - lowest], 500)
 }
 
 export const drawPositionnedNote = (positionnedNoteIri, clickedNote, mode) => {
