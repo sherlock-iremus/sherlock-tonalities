@@ -14,7 +14,7 @@ export const Item = props =>
   (props.verticalityIri && <VerticalityItem {...props} initialIsOpen={false} />) ||
   (props.selectionIri && <SelectionItem {...props} initialIsOpen={false} />) ||
   (props.classIri && <ClassItem {...props} />) ||
-  (props.conceptIri && <ClassItem classIri={props.conceptIri} />) ||
+  (props.conceptIri && <ClassItem classIri={props.conceptIri} {...props} />) ||
   (props.propertyIri && <PropertyItem {...props} />) ||
   (props.analyticalEntityIri && <AnalyticalEntityItem {...props} />) ||
   (props.annotationIri && <AnnotationItem {...props} />) ||
