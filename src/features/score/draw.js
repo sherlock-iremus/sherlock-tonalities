@@ -1,3 +1,4 @@
+import { grey } from '@mui/material/colors'
 import { INSPECTED, SELECTED } from './constants'
 import { COLOR_INSPECTED, COLOR_SELECTED } from './mei.css'
 import { sleep } from './utils'
@@ -46,7 +47,7 @@ export const drawSelection = async (selection, selectionIri, scoreIri, mode, con
         emoji.setAttribute('font-size', '500')
         emoji.textContent = contributor.emoji
         contributorNode.appendChild(emoji)
-        
+
         selectionNode.appendChild(contributorNode)
       }
       const systemNode = getSystem(notes[0])
@@ -73,7 +74,7 @@ export const drawPositionnedNote = (positionnedNoteIri, clickedNote, mode) => {
   }
 }
 
-export const drawVerticality = (verticalityIri, clickedNote, mode) => {
+export const drawVerticality = (verticalityIri, clickedNote, mode, fundamentals) => {
   const noteCoordinates = noteCoords(clickedNote)
   const measureCoordinates = measureCoords(getMeasure(clickedNote))
 
@@ -82,14 +83,32 @@ export const drawVerticality = (verticalityIri, clickedNote, mode) => {
     [noteCoordinates[0], measureCoordinates.top],
     [noteCoordinates[0], measureCoordinates.bottom],
   ]
+  const verticalityNode = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+  verticalityNode.setAttribute('id', verticalityIri)
 
   const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-  anchor.setAttribute('id', verticalityIri)
   anchor.setAttribute('d', capsuleShape(points, padding))
   anchor.setAttribute('fill', (mode === 'inspected' && COLOR_INSPECTED) || (mode === 'selected' && COLOR_SELECTED))
   anchor.setAttribute('fill-opacity', '30%')
+  verticalityNode.appendChild(anchor)
 
-  getSystem(clickedNote).appendChild(anchor)
+  fundamentals?.forEach((f, index) => {
+    const coordinates = [points[0][0] + index * 1000, points[0][1] - 150]
+    const bubble = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    bubble.setAttribute('fill', grey[400])
+    bubble.setAttribute('d', circleShape(coordinates, 500))
+    verticalityNode.appendChild(bubble)
+
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text')
+    text.setAttribute('x', coordinates[0])
+    text.setAttribute('y', coordinates[1] + 150)
+    text.setAttribute('text-anchor', 'middle')
+    text.setAttribute('font-size', '500')
+    text.textContent = f
+    verticalityNode.appendChild(text)
+  })
+
+  getSystem(clickedNote).appendChild(verticalityNode)
 }
 
 const noteCoords = note => [
