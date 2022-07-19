@@ -124,7 +124,7 @@ export const Selections = props => {
             sx={{
               position: 'fixed',
               bottom: 16,
-              left: 316,
+              left: 370,
               '& .MuiSpeedDial-fab': { backgroundColor: COLOR_NAVIGATE },
             }}
             icon={<Add />}

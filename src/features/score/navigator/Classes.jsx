@@ -66,7 +66,7 @@ export const Classes = props => {
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Classes</ListSubheader>}>
-        {filteredTree.classes.length &&
+        {!!filteredTree.classes.length &&
           filteredTree.classes.map(concept => (
             <Concept
               key={concept.iri}

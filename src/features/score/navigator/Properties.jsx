@@ -67,7 +67,7 @@ export const Properties = props => {
         </ListItemButton>
       </ListItem>
       <List subheader={<ListSubheader>Properties</ListSubheader>}>
-        {filteredTree.properties.length &&
+        {!!filteredTree.properties.length &&
           filteredTree.properties.map(concept => (
             <Concept
               key={concept.iri}
