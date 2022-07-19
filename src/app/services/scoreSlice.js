@@ -86,17 +86,17 @@ const scoreSlice = createSlice({
       index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push(action.payload)
     },
     setInspectedEntity: (state, action) => {
-      if (state.annotationEditor.subject) {
+      if (state.annotationEditor.subject) { // annotationEditor is open
         state.annotationEditor.object =
           findKey(state.annotationEditor.object) !== findKey(action.payload) ? action.payload : null
-      } else if (state.analyticalEntityEditor.selectionIri) {
-        if (action.payload.conceptIri) {
+      } else if (state.analyticalEntityEditor.selectionIri) { // analyticalEntityEditor is open
+        if (action.payload.conceptIri) { // set type
           const currentIndex = state.analyticalEntityEditor.concepts.indexOf(action.payload.conceptIri)
           currentIndex === -1
             ? state.analyticalEntityEditor.concepts.push(action.payload.conceptIri)
             : state.analyticalEntityEditor.concepts.splice(currentIndex, 1)
         }
-        if (action.payload.propertyIri && state.analyticalEntityEditor.focusedEntityIri) {
+        if (action.payload.propertyIri && state.analyticalEntityEditor.focusedEntityIri) { // set property on focused entity
           const currentIndex = state.analyticalEntityEditor.properties.findIndex(
             e => e.propertyIri === action.payload.propertyIri
           )
@@ -107,7 +107,7 @@ const scoreSlice = createSlice({
               })
             : state.analyticalEntityEditor.properties.splice(currentIndex, 1)
         }
-        if (
+        if ( // set focus
           action.payload.selectionIri ||
           action.payload.noteIri ||
           action.payload.positionnedNoteIri ||
@@ -116,7 +116,7 @@ const scoreSlice = createSlice({
           state.analyticalEntityEditor.focusedEntityIri =
             findKey(state.analyticalEntityEditor.focusedEntityIri) === findKey(action.payload) ? null : action.payload
         }
-      } else {
+      } else { // is inspection mode
         if (state.inspectedEntities.length > state.currentEntityIndex + 1)
           state.inspectedEntities.splice(
             state.currentEntityIndex + 1,
