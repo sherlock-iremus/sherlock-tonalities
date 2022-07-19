@@ -40,7 +40,7 @@ export const ContributorEntity = ({ contributorIri }) => {
 
       {!!annotations?.length && (
         <List subheader={<ListSubheader>Carried out annotations</ListSubheader>} dense disablePadding>
-          {annotations?.map(({ annotationIri, subject, predicat, object, date }) => (
+          {annotations?.map(({ annotationIri, predicat, object, date }) => (
             <ListItem
               key={annotationIri}
               disablePadding
@@ -53,7 +53,6 @@ export const ContributorEntity = ({ contributorIri }) => {
                 <ListItemText
                   primary={
                     <>
-                      <ConceptItem conceptIri={subject} />
                       <ConceptItem conceptIri={predicat} />
                       <ConceptItem conceptIri={object} />
                     </>
