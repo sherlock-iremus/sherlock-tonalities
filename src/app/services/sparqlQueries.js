@@ -12,6 +12,8 @@ export const getNoteInfo = noteIri => `
         VALUES ?note {<${noteIri}>}
         ?note sherlockmei:pname ?pname.
         ?note sherlockmei:oct ?oct.
+        ?note sherlockmei:measure_number ?measure.
+        ?note sherlockmei:from_beat ?beat.
         OPTIONAL {?note sherlockmei:accid ?accid}
     }
     LIMIT 1

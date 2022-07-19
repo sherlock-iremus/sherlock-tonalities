@@ -42,19 +42,19 @@ export const sparqlEndpoint = createApi({
         method: 'POST',
         body: new URLSearchParams({ query: getNoteInfo(noteIri) }),
       }),
-      transformResponse: response => {
-        const {
-          results: {
-            bindings: [
-              {
-                pname: { value: pname },
-                oct: { value: oct },
-                accid,
-              },
-            ],
-          },
-        } = response
-
+      transformResponse: ({
+        results: {
+          bindings: [
+            {
+              measure: { value: measure },
+              beat: { value: beat },
+              pname: { value: pname },
+              oct: { value: oct },
+              accid,
+            },
+          ],
+        },
+      }) => {
         let alteration = ''
         if (accid) {
           switch (accid.value) {
@@ -70,7 +70,7 @@ export const sparqlEndpoint = createApi({
           }
         }
 
-        return pname.toUpperCase() + oct + alteration
+        return pname.toUpperCase() + oct + alteration + ` measure ${measure} beat ${beat}`
       },
     }),
     getAnalyticalEntities: builder.query({
