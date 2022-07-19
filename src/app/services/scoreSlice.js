@@ -15,7 +15,6 @@ const initialState = {
   editingSelectionIri: '',
   selectedEntities: [],
   focusEntityIndex: -1,
-  hoveredEntity: {},
   annotationEditor: { subject: null, predicat: null, object: null },
   analyticalEntityEditor: {
     selectionIri: null,
@@ -37,11 +36,6 @@ const scoreSlice = createSlice({
         state.scoreTitle = action.payload.scoreTitle
         state.meiUrl = action.payload.meiUrl
       }
-    },
-    setHoverEntity: (state, action) => {
-      state.hoveredEntity === action.payload
-        ? (state.hoveredEntity = initialState.hoveredEntity)
-        : (state.hoveredEntity = action.payload)
     },
     setAlert: (state, action) => {
       action.payload ? (state.alerts = { ...state.alerts, ...action.payload }) : (state.alerts = initialState.alerts)
@@ -143,7 +137,6 @@ export default scoreSlice
 
 export const {
   setScore,
-  setHoverEntity,
   setInspectedEntity,
   setToPreviousInspection,
   setToNextInspection,
