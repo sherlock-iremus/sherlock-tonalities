@@ -4,26 +4,24 @@ import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { getScoreLabel } from '../utils'
 import { withDispatch } from './withDispatch'
 
-const BaseScoreItem = ({ scoreIri, baseUrlLength, dispatch, isEntity }) => {
-  return (
-    <ListItem
-      disablePadding
-      secondaryAction={
-        isEntity && (
-          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ scoreIri }))}>
-            <Close />
-          </IconButton>
-        )
-      }
-    >
-      <ListItemButton sx={{ cursor: 'default' }}>
-        <ListItemIcon>
-          <AudioFile />
-        </ListItemIcon>
-        <ListItemText primary={getScoreLabel(scoreIri)} secondary={scoreIri.slice(baseUrlLength)} />
-      </ListItemButton>
-    </ListItem>
-  )
-}
+const BaseScoreItem = ({ scoreIri, baseUrlLength, dispatch, isEntity }) => (
+  <ListItem
+    disablePadding
+    secondaryAction={
+      isEntity && (
+        <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ scoreIri }))}>
+          <Close />
+        </IconButton>
+      )
+    }
+  >
+    <ListItemButton sx={{ cursor: 'default' }}>
+      <ListItemIcon>
+        <AudioFile />
+      </ListItemIcon>
+      <ListItemText primary={getScoreLabel(scoreIri)} secondary={scoreIri.slice(baseUrlLength)} />
+    </ListItemButton>
+  </ListItem>
+)
 
 export const ScoreItem = withDispatch(BaseScoreItem)

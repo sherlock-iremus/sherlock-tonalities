@@ -11,6 +11,7 @@ export const StyleSelection = ({ selectionIri, contributorIri }) => {
   const { scoreIri, isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
   const { data: children } = useGetChildSelectionsQuery(selectionIri)
+  
   useEffect(() => {
     !document.getElementById(selectionIri) &&
       children &&
