@@ -14,8 +14,8 @@ import {
   getAnalyticalEntity,
   getAnnotation,
   getChildSelections,
-  getConceptAnnotations,
   getContributor,
+  getContributors,
   getEntityGlobalAnnotations,
   getEntitySpecificAnnotations,
   getEntityType,
@@ -316,6 +316,17 @@ export const sparqlEndpoint = createApi({
       }),
       transformResponse: response => response.results?.bindings[0]?.label?.value,
     }),
+    getContributors: builder.query({
+      query: () => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getContributors() }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings?.map(e => ({
+          contributorIri: e.contributor.value,
+          annotations: e.annotations.value,
+        })),
+    }),
   }),
 })
 
@@ -341,4 +352,5 @@ export const {
   useGetAnalyticalEntityQuery,
   useGetEntityGlobalAnnotationsQuery,
   useGetEntitySpecificAnnotationsQuery,
+  useGetContributorsQuery,
 } = sparqlEndpoint

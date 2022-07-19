@@ -355,3 +355,40 @@ export const getEntityType = entityIri => `
         # FILTER (lang(?label) = "en" )
     }
 `
+
+export const getContributors = () => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    
+    SELECT ?contributor ((COUNT(?annotation)) AS ?annotations)
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
+    WHERE { ?annotation crm:P14_carried_out_by ?contributor }
+    
+    GROUP BY ?contributor
+`
+
+// WIP
+export const getContributorAnnotations = contributorIri => `
+    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+    
+    SELECT 
+    
+    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    
+    WHERE {
+        ?selection dcterm:creator ?contributor.
+        ?selection dcterm:created ?date.
+        {
+            SELECT ?selection ((COUNT(?entity)) AS ?entities)
+            WHERE {
+                ?annotation crm:P14_carried_out_by <${contributorIri}>.
+            }
+            GROUP BY ?selection
+        }
+    }
+`

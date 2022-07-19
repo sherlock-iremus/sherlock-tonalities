@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { BubbleChart, Close, HistoryEdu, Sell } from '@mui/icons-material'
+import { BubbleChart, Close, HistoryEdu, RecentActors, Sell } from '@mui/icons-material'
 import { AppBar, Box, Drawer, IconButton, Tab, Tabs, Toolbar, Tooltip, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -10,6 +10,7 @@ import { COLOR_NAVIGATE } from './mei.css'
 import { Classes } from './navigator/Classes'
 import { Properties } from './navigator/Properties'
 import { Selections } from './navigator/Selections'
+import { Contributors } from './navigator/Contributors'
 
 export const Navigator = props => {
   const [selectedTab, setSelectedTab] = useState(0)
@@ -40,13 +41,15 @@ export const Navigator = props => {
             sx={{ '& .MuiTabs-indicator': { backgroundColor: 'white' } }}
           >
             <Tab icon={<BubbleChart />} label="Selections" />
+            <Tab icon={<RecentActors />} label="Contributors" />
             <Tab icon={<HistoryEdu />} label="Concepts" />
             <Tab icon={<Sell />} label="Properties" />
           </Tabs>
         </AppBar>
         {selectedTab === 0 && <Selections scoreIri={props.scoreIri} />}
-        {selectedTab === 1 && <Classes treatise={treatise} filter={filter} />}
-        {selectedTab === 2 && <Properties treatise={treatise} filter={filter} />}
+        {selectedTab === 1 && <Contributors />}
+        {selectedTab === 2 && <Classes treatise={treatise} filter={filter} />}
+        {selectedTab === 3 && <Properties treatise={treatise} filter={filter} />}
       </Box>
     </Drawer>
   )
