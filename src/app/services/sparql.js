@@ -15,6 +15,7 @@ import {
   getAnnotation,
   getChildSelections,
   getContributor,
+  getContributorAnnotations,
   getContributors,
   getEntityGlobalAnnotations,
   getEntitySpecificAnnotations,
@@ -327,6 +328,20 @@ export const sparqlEndpoint = createApi({
           annotations: e.annotations.value,
         })),
     }),
+    getContributorAnnotations: builder.query({
+      query: contributorIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getContributorAnnotations(contributorIri) }),
+      }),
+      transformResponse: response =>
+        response.results?.bindings.map(e => ({
+          annotationIri: e?.annotation?.value,
+          date: e?.date?.value,
+          subject: e?.subject?.value,
+          predicat: e?.predicat?.value,
+          object: e?.object?.value,
+        })),
+    }),
   }),
 })
 
@@ -353,4 +368,5 @@ export const {
   useGetEntityGlobalAnnotationsQuery,
   useGetEntitySpecificAnnotationsQuery,
   useGetContributorsQuery,
+  useGetContributorAnnotationsQuery,
 } = sparqlEndpoint
