@@ -20,7 +20,7 @@ export const Navigator = props => {
 
   return (
     <Drawer open={props.isOpen} anchor="left" variant="persistent">
-      <Box sx={{ width: 400 }}>
+      <Box sx={{ width: 450 }}>
         <AppBar position="sticky" sx={{ bgcolor: COLOR_NAVIGATE }}>
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1 }}>

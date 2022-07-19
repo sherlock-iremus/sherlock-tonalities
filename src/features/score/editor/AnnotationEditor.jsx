@@ -65,7 +65,7 @@ export const AnnotationEditor = () => {
   return (
     <Drawer open={!!subject} anchor="right" variant="persistent" SlideProps={{ direction: 'up' }}>
       {subject && (
-        <Box sx={{ width: 400 }}>
+        <Box sx={{ width: 450 }}>
           <AppBar position="sticky" sx={{ bgcolor: COLOR_SELECTED }}>
             <Toolbar>
               <Typography variant="h6" sx={{ flexGrow: 1 }}>

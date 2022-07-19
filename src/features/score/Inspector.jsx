@@ -85,7 +85,7 @@ export const Inspector = props => {
     <>
       <Drawer open={props.isOpen} anchor="right" variant="persistent">
         {isInspectionMode && (
-          <Box sx={{ width: 400 }}>
+          <Box sx={{ width: 450 }}>
             <AppBar position="sticky" sx={{ bgcolor: COLOR_INSPECTED }}>
               <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
