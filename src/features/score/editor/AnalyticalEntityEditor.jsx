@@ -1,6 +1,5 @@
 import { AddComment, Close, Done } from '@mui/icons-material'
 import {
-  Alert,
   AppBar,
   CircularProgress,
   Drawer,
@@ -15,7 +14,7 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAlert, setAnalyticalEntityEditor, setAnnotationEditor } from '../../../app/services/scoreSlice'
+import { setAlert, setAnalyticalEntityEditor } from '../../../app/services/scoreSlice'
 import { useState } from 'react'
 import { useGetAnalyticalEntitiesQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
@@ -25,7 +24,6 @@ import { PropertyItem } from '../items/PropertyItem'
 
 export const AnalyticalEntityEditor = () => {
   const dispatch = useDispatch()
-  const [displayInfo, setDisplayInfo] = useState(true)
   const {
     analyticalEntityEditor: { selectionIri, propertyIri, focusedEntityIri, concepts, properties },
   } = useSelector(state => state.score)
@@ -72,21 +70,20 @@ export const AnalyticalEntityEditor = () => {
             </Toolbar>
           </AppBar>
 
-          {displayInfo && (
-            <Alert severity="info" onClose={() => setDisplayInfo(false)}>
-              Select concepts and asign properties to specific elements in the selection
-            </Alert>
-          )}
-
           <ListSubheader>Assigned property</ListSubheader>
           <PropertyItem propertyIri={propertyIri} />
 
-          <ListSubheader>Target selection</ListSubheader>
-          <SelectionItem {...{ selectionIri, focusedEntityIri, concepts: properties }} />
-          <ListSubheader>Assigned concepts</ListSubheader>
+          <Tooltip title="Asign types to this analytical entity from the concept tree">
+            <ListSubheader>Assigned types</ListSubheader>
+          </Tooltip>
           {concepts.map(concept => (
             <ClassItem key={concept} classIri={concept} isEntity />
           ))}
+
+          <Tooltip title="Asign properties from the property tree by selecting a specific entity from the target selection">
+            <ListSubheader>Target selection</ListSubheader>
+          </Tooltip>
+          <SelectionItem {...{ selectionIri, focusedEntityIri, concepts: properties }} />
 
           <Tooltip title="Validate">
             <SpeedDial
