@@ -24,6 +24,9 @@ export const Contributors = () => {
   const dispatch = useDispatch()
   const profile = contributors?.filter(c => c.contributorIri.slice(baseUrl.length) === userId)?.[0]
 
+  const removeCookie = () => {
+  }
+
   return (
     <>
       <List subheader={<ListSubheader>Personal profile</ListSubheader>}>
@@ -33,7 +36,7 @@ export const Contributors = () => {
             disablePadding
             secondaryAction={
               <Tooltip title="Logout">
-                <IconButton>
+                <IconButton onClick={removeCookie}>
                   <Logout />
                 </IconButton>
               </Tooltip>

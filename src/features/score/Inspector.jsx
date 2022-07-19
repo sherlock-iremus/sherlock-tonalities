@@ -46,6 +46,7 @@ import { AnnotationEntity } from './entities/AnnotationEntity'
 import { PositionnedNoteEntity } from './entities/PositionnedNoteEntity'
 import { PropertyItem } from './items/PropertyItem'
 import { ScoreEntity } from './entities/ScoreEntity'
+import { ContributorEntity } from './entities/ContributorEntity'
 
 export const Inspector = props => {
   const dispatch = useDispatch()
@@ -97,7 +98,7 @@ export const Inspector = props => {
                   </IconButton>
                 </Tooltip>
               </Toolbar>
-              <Toolbar>
+              <Toolbar sx={{ height: 10 }}>
                 {previousEntity && (
                   <IconButton
                     onClick={() => dispatch(setToPreviousInspection())}
@@ -208,6 +209,7 @@ export const Inspector = props => {
               {verticalityIri && <VerticalityEntity {...{ verticalityIri, clickedNoteIri }} />}
               {scoreIri && <ScoreEntity {...{ scoreIri }} />}
               {annotationIri && <AnnotationEntity {...{ annotationIri }} />}
+              {contributorIri && <ContributorEntity {...{ contributorIri }} />}
             </List>
           </Box>
         )}
@@ -227,7 +229,8 @@ export const Inspector = props => {
               (propertyIri && 'A property has been selected, click to view details') ||
               (selectionIri && 'A selection has been selected, click to view details') ||
               (annotationIri && 'An annalytical entity has been selected, click to view details') ||
-              (scoreIri && 'Entire score has been selected, click to view details')}
+              (scoreIri && 'Entire score has been selected, click to view details') ||
+              (contributorIri && 'A contributor has been selected, click to view details')}
           </Link>
         </Alert>
       </Snackbar>

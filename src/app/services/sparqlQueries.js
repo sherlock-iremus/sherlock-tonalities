@@ -20,7 +20,7 @@ export const getNoteInfo = noteIri => `
 export const getAnalyticalEntity = analyticalEntityIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
 
     SELECT ?selection ?contributor ?date
     
@@ -31,7 +31,7 @@ export const getAnalyticalEntity = analyticalEntityIri => `
         ?annotation crm:P141_assigned <${analyticalEntityIri}>.
         ?annotation crm:P140_assigned_attribute_to ?selection.
         ?annotation crm:P14_carried_out_by ?contributor.
-        ?annotation dcterm:created ?date.
+        ?annotation dcterms:created ?date.
     }
     LIMIT 1
 `
@@ -71,7 +71,7 @@ export const getEntitySpecificAnnotations = analyticalEntityIri => `
 
 export const getAnalyticalEntities = entityIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
 
     SELECT ?entity ?contributor ?predicat ?date ?assignments
 
@@ -83,7 +83,7 @@ export const getAnalyticalEntities = entityIri => `
         ?annotation crm:P140_assigned_attribute_to ?entity.
         ?annotation crm:P177_assigned_property_of_type ?predicat.
         ?annotation crm:P14_carried_out_by ?contributor.
-        ?annotation dcterm:created ?date.
+        ?annotation dcterms:created ?date.
         {
            SELECT ?entity ((COUNT(?assignment)) AS ?assignments)
            WHERE {
@@ -113,7 +113,7 @@ export const getNoteSelections = noteIri => `
 
 export const getScoreSelections = scoreIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
     
     SELECT ?selection ?contributor ?date ?entities
@@ -122,8 +122,8 @@ export const getScoreSelections = scoreIri => `
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     
     WHERE {
-        ?selection dcterm:creator ?contributor.
-        ?selection dcterm:created ?date.
+        ?selection dcterms:creator ?contributor.
+        ?selection dcterms:created ?date.
         {
             SELECT ?selection ((COUNT(?entity)) AS ?entities)
             WHERE {
@@ -209,7 +209,7 @@ export const getVerticalityCoordinates = verticalityIri => `
 
 export const getSelectionAnalyticalEntities = selectionIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
 
     SELECT ?entity ?contributor ?predicat ?date ?assignments
 
@@ -221,7 +221,7 @@ export const getSelectionAnalyticalEntities = selectionIri => `
         ?annotation crm:P141_assigned ?entity.
         ?annotation crm:P177_assigned_property_of_type ?predicat.
         ?annotation crm:P14_carried_out_by ?contributor.
-        ?annotation dcterm:created ?date.
+        ?annotation dcterms:created ?date.
         {
             SELECT ?entity ((COUNT(?assignment)) AS ?assignments)
             WHERE {
@@ -369,26 +369,22 @@ export const getContributors = () => `
     GROUP BY ?contributor
 `
 
-// WIP
 export const getContributorAnnotations = contributorIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX dcterm: <http://purl.org/dc/terms/>
+    PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
     
-    SELECT 
+    SELECT ?annotation ?date ?subject ?predicat ?object
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     
     WHERE {
-        ?selection dcterm:creator ?contributor.
-        ?selection dcterm:created ?date.
-        {
-            SELECT ?selection ((COUNT(?entity)) AS ?entities)
-            WHERE {
-                ?annotation crm:P14_carried_out_by <${contributorIri}>.
-            }
-            GROUP BY ?selection
-        }
+        ?annotation crm:P14_carried_out_by <${contributorIri}>.
+        ?annotation a crm:E13_Attribute_Assignment.
+        ?annotation dcterms:created ?date.
+        ?annotation crm:P140_assigned_attribute_to ?subject.
+        ?annotation crm:P177_assigned_property_of_type ?predicat.
+        ?annotation crm:P141_assigned ?object.
     }
 `
