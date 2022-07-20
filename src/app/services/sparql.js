@@ -67,6 +67,8 @@ export const sparqlEndpoint = createApi({
             case 'n':
               alteration = '♮'
               break
+            default:
+              break
           }
         }
 
