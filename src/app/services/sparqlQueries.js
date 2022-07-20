@@ -289,7 +289,7 @@ export const getAnnotation = annotationIri => `
         ?annotation a crm:E13_Attribute_Assignment.
         
         ?annotation crm:P140_assigned_attribute_to ?subject.
-        ?subject crm:P2_has_type ?subjectType.
+        OPTIONAL { ?subject crm:P2_has_type ?subjectType }
 
         ?annotation crm:P141_assigned ?object.
         OPTIONAL { ?object crm:P2_has_type ?objectType }
