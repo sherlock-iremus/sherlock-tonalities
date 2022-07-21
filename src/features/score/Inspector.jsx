@@ -51,15 +51,8 @@ import { ContributorEntity } from './entities/ContributorEntity'
 export const Inspector = props => {
   const dispatch = useDispatch()
   const [isShowingPopup, setIsShowingPopup] = useState(false)
-  const [isCopied, setIsCopied] = useState(false)
 
   const { isInspectionMode, inspectedEntities, currentEntityIndex } = useSelector(state => state.score)
-
-  const copyToClipboard = async value => {
-    await navigator.clipboard.writeText(value)
-    setIsCopied(true)
-    setTimeout(() => setIsCopied(false), 2000)
-  }
 
   const currentEntity = inspectedEntities[currentEntityIndex]
   const previousEntity = inspectedEntities[currentEntityIndex - 1] || {}
@@ -173,17 +166,6 @@ export const Inspector = props => {
                     }
                   />
                 </Tabs>
-                <Tooltip title={isCopied ? 'Copied !' : 'Copy element IRI'}>
-                  <span>
-                    <IconButton
-                      disabled={!findKey(currentEntity)}
-                      onClick={() => copyToClipboard(findKey(currentEntity))}
-                      color="inherit"
-                    >
-                      <ContentCopy />
-                    </IconButton>
-                  </span>
-                </Tooltip>
                 <Tooltip title="Open element in Sherlock">
                   <span>
                     <IconButton
