@@ -10,7 +10,7 @@ import { drawVerticality } from '../draw'
 import { StyleNote } from './StyleNote'
 import options from '../../../app/services/p177_p141.json'
 
-export const StyleVerticality = ({ verticalityIri, clickedNoteIri }) => {
+export const StyleVerticality = ({ verticalityIri }) => {
   const { scoreIri } = useSelector(state => state.score)
   const { isInspectionMode, isSelectionMode } = useSelector(state => state.score)
   const mode = (isInspectionMode && INSPECTED) || (isSelectionMode && SELECTED)
@@ -20,10 +20,8 @@ export const StyleVerticality = ({ verticalityIri, clickedNoteIri }) => {
     ?.filter(a => options[a.predicat])
     ?.map(a => options[a.predicat].filter(o => o.iri === a.object)[0]?.label)
 
-  const { data } = useGetVerticalityCoordinatesQuery(verticalityIri, { skip: clickedNoteIri })
-  const noteNode =
-    (clickedNoteIri && document.getElementById(clickedNoteIri.slice(scoreIri.length + 1))) ||
-    (data && document.getElementById(data.slice(scoreIri.length + 1)))
+  const { data: clickedNoteIri } = useGetVerticalityCoordinatesQuery(verticalityIri)
+  const noteNode = clickedNoteIri && document.getElementById(clickedNoteIri.slice(scoreIri.length + 1))
 
   useEffect(() => {
     !document.getElementById(verticalityIri) &&

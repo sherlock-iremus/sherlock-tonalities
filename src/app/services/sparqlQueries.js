@@ -192,7 +192,7 @@ export const getVerticalityPositionnedNotes = verticalityIri => `
     WHERE {
         ?note sherlockmei:contains_beat <${verticalityIri}>.
         ?note sherlockmei:has_beat_anchor ?positionned_note.
-        FILTER regex(str(?positionned_note), "${verticalityIri.slice(-6)}")
+        FILTER regex(str(?positionned_note), "${verticalityIri.split('-').slice(-1)}")
     }
 `
 
@@ -205,6 +205,8 @@ export const getVerticalityCoordinates = verticalityIri => `
     
     WHERE {
         ?note sherlockmei:contains_beat <${verticalityIri}>.
+        ?note sherlockmei:from_beat ?firstBeat.
+        FILTER regex(str(?firstBeat), "${verticalityIri.split('-').slice(-1)}")
     }
     LIMIT 1
 `
@@ -336,8 +338,10 @@ export const getPositionnedNoteInfo = positionnedNoteIri => `
     WHERE {
         ?attachedNote sherlockmei:has_beat_anchor <${positionnedNoteIri}>.
         ?attachedNote sherlockmei:contains_beat ?verticality.
-        FILTER regex(str(?verticality), "${positionnedNoteIri.slice(-6)}")
+        FILTER regex(str(?verticality), "${positionnedNoteIri.split('-').slice(-1)}")
         ?clickedNote sherlockmei:contains_beat ?verticality.
+        ?clickedNote sherlockmei:from_beat ?firstBeat.
+        FILTER regex(str(?firstBeat), "${positionnedNoteIri.split('-').slice(-1)}")
     }
     LIMIT 1
 `
