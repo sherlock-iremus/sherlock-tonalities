@@ -17,7 +17,8 @@ export const SelectionEntity = ({ selectionIri }) => {
   const filteredActions = [
     ...(treatiseIri in actions[SELECTION] ? actions[SELECTION][treatiseIri] : []),
     ...actions[SELECTION].common,
-  ]
+  ].filter(e => e.iri !== 'http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence')
+  
   return (
     <>
       <SelectionItem {...{ selectionIri }} isEntity />
