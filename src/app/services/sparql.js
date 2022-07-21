@@ -320,9 +320,9 @@ export const sparqlEndpoint = createApi({
       transformResponse: response => response.results?.bindings[0]?.label?.value,
     }),
     getContributors: builder.query({
-      query: () => ({
+      query: scoreIri => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getContributors() }),
+        body: new URLSearchParams({ query: getContributors(scoreIri) }),
       }),
       transformResponse: response =>
         response.results?.bindings?.map(e => ({
@@ -331,9 +331,9 @@ export const sparqlEndpoint = createApi({
         })),
     }),
     getContributorAnnotations: builder.query({
-      query: contributorIri => ({
+      query: ({ contributorIri, scoreIri }) => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getContributorAnnotations(contributorIri) }),
+        body: new URLSearchParams({ query: getContributorAnnotations(contributorIri, scoreIri) }),
       }),
       transformResponse: response =>
         response.results?.bindings.map(e => ({

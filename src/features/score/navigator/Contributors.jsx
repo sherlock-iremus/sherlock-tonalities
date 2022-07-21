@@ -14,16 +14,18 @@ import { useGetContributorsQuery } from '../../../app/services/sparql'
 import { setInspectedEntity } from '../../../app/services/scoreSlice'
 import { useGetUserIdQuery } from '../../../app/services/sherlockApi'
 import { ContributorItem } from '../items/ContributorItem'
-import { LoadingEntity } from '../entities/LoadingEntity'
 import { useNavigate } from 'react-router-dom'
 
 export const Contributors = () => {
-  const { data: contributors } = useGetContributorsQuery()
   const { data: userId } = useGetUserIdQuery()
-  const { inspectedEntities, currentEntityIndex, baseUrl } = useSelector(state => state.score)
+  const { inspectedEntities, currentEntityIndex, baseUrl, scoreIri } = useSelector(state => state.score)
+  const { data: contributors } = useGetContributorsQuery(scoreIri)
   const { contributorIri: inspectedContributor } = inspectedEntities[currentEntityIndex]
   const dispatch = useDispatch()
-  const profile = contributors?.filter(c => c.contributorIri.slice(baseUrl.length) === userId)?.[0]
+  const profile = contributors?.filter(c => c.contributorIri.slice(baseUrl.length) === userId)?.[0] || {
+    contributorIri: baseUrl + userId,
+    annotations: 0,
+  }
   const navigate = useNavigate()
 
   const removeCookie = () => {
@@ -34,7 +36,7 @@ export const Contributors = () => {
   return (
     <>
       <List subheader={<ListSubheader>Personal profile</ListSubheader>}>
-        {profile ? (
+        {userId ? (
           <ListItem
             key={profile.contributorIri}
             disablePadding
@@ -62,7 +64,7 @@ export const Contributors = () => {
             </ListItemButton>
           </ListItem>
         ) : (
-          <LoadingEntity />
+          navigate(0)
         )}
       </List>
 

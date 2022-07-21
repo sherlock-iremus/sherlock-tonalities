@@ -362,20 +362,25 @@ export const getEntityType = entityIri => `
     }
 `
 
-export const getContributors = () => `
+export const getContributors = scoreIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    
+    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+
     SELECT ?contributor ((COUNT(?annotation)) AS ?annotations)
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     
-    WHERE { ?annotation crm:P14_carried_out_by ?contributor }
+    WHERE {
+        ?annotation crm:P14_carried_out_by ?contributor.
+        ?annotation crm:P140_assigned_attribute_to ?subject.
+        ?subject sherlock:has_document_context <${scoreIri}>.
+    }
     
     GROUP BY ?contributor
 `
 
-export const getContributorAnnotations = contributorIri => `
+export const getContributorAnnotations = (contributorIri, scoreIri) => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
@@ -390,6 +395,7 @@ export const getContributorAnnotations = contributorIri => `
         ?annotation a crm:E13_Attribute_Assignment.
         ?annotation dcterms:created ?date.
         ?annotation crm:P140_assigned_attribute_to ?subject.
+        ?subject sherlock:has_document_context <${scoreIri}>.
         ?annotation crm:P177_assigned_property_of_type ?predicat.
         ?annotation crm:P141_assigned ?object.
     }
