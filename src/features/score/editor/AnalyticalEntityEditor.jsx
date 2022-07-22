@@ -16,7 +16,7 @@ import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAlert, setAnalyticalEntityEditor } from '../../../app/services/scoreSlice'
 import { useState } from 'react'
-import { useGetAnalyticalEntitiesQuery } from '../../../app/services/sparql'
+import { useGetAnalyticalEntitiesQuery, useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
 import { SelectionItem } from '../items/SelectionItem'
 import { ClassItem } from '../items/ClassItem'
@@ -28,7 +28,12 @@ export const AnalyticalEntityEditor = () => {
   const {
     analyticalEntityEditor: { selectionIri, propertyIri, focusedEntityIri, concepts, properties },
   } = useSelector(state => state.score)
-  const { refetch } = useGetAnalyticalEntitiesQuery({ selectionIri }, { skip: !selectionIri })
+  const { refetch: refetchAnalyticalEntities } = useGetAnalyticalEntitiesQuery(
+    { selectionIri },
+    { skip: !selectionIri }
+  )
+  const { refetch: refetchAnnotations } = useGetOutgoingAnnotationsQuery(selectionIri, { skip: !selectionIri })
+
   const [postAnalyticalEntity, { isLoading }] = usePostAnalyticalEntityMutation()
   const createAnalyticalEntity = async () => {
     const e13s = concepts
@@ -45,7 +50,8 @@ export const AnalyticalEntityEditor = () => {
           p177: propertyIri,
           e13s,
         }).unwrap()
-        refetch()
+        refetchAnalyticalEntities()
+        refetchAnnotations()
         dispatch(setAnalyticalEntityEditor())
         dispatch(setAlert({ confirmation: 'Analytical entity was successfully created' }))
       } catch {
