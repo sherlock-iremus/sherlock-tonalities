@@ -28,6 +28,13 @@ export const sherlockApi = createApi({
         body,
       }),
     }),
+    postAnalyticalEntity: builder.mutation({
+      query: body => ({
+        url: 'analytical-entity',
+        method: 'POST',
+        body,
+      }),
+    }),
     getUserId: builder.query({
       query: () => ({
         responseHandler: response => response.text(),
@@ -38,5 +45,10 @@ export const sherlockApi = createApi({
 
 export default sherlockApi
 
-export const { usePostSelectionMutation, usePostAnnotationMutation, useGetUserIdQuery, usePatchSelectionMutation } =
-  sherlockApi
+export const {
+  usePostSelectionMutation,
+  usePostAnnotationMutation,
+  useGetUserIdQuery,
+  usePatchSelectionMutation,
+  usePostAnalyticalEntityMutation,
+} = sherlockApi
