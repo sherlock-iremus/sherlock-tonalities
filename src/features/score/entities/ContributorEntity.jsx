@@ -18,8 +18,8 @@ import { Close, Comment } from '@mui/icons-material'
 export const ContributorEntity = ({ contributorIri }) => {
   const dispatch = useDispatch()
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
-  const { data: annotations } = useGetContributorAnnotationsQuery(contributorIri)
-
+  const { scoreIri } = useSelector(state => state.score)
+  const { data: annotations } = useGetContributorAnnotationsQuery({ contributorIri, scoreIri })
   return (
     <>
       <ListItem
@@ -32,7 +32,7 @@ export const ContributorEntity = ({ contributorIri }) => {
       >
         <ListItemButton sx={{ cursor: 'default' }}>
           <ListItemIcon>
-            <ContributorItem />
+            <ContributorItem {...{ contributorIri }} />
           </ListItemIcon>
           <ListItemText primary="Contributor" secondary={contributorIri.slice(baseUrlLength)} />
         </ListItemButton>

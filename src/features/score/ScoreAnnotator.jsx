@@ -14,14 +14,17 @@ import { Navigate } from 'react-router-dom'
 import { AlertMessage } from './editor/AlertMessage'
 import { orange } from '@mui/material/colors'
 import { AnalyticalEntityEditor } from './editor/AnalyticalEntityEditor'
+import { useGetUserIdQuery } from '../../app/services/sherlockApi'
 
 export const ScoreAnnotator = () => {
+  const { data: userId } = useGetUserIdQuery()
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
   const { meiUrl, scoreIri, alerts } = useSelector(state => state.score)
 
   return (
     <>
+      {!userId && <Navigate to="/" />}
       {!scoreIri && <Navigate to="/" />}
       <MeiViewer meiUrl={meiUrl} scoreIri={scoreIri} />
 

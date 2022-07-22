@@ -51,7 +51,10 @@
   },
 
   "http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b": {
-    "common": [{ "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }]
+    "common": [{ "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment", "icon": "💬" }],
+    "http://modality-tonality.huma-num.fr/Zarlino_1558#": [
+      { "iri": "http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence", "label": "Is cadence", "icon": "🎶" }
+    ]
   },
 
   "http://data-iremus.huma-num.fr/id/82dbd157-20df-422c-88db-28d6075d99a1": {

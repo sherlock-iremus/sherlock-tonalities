@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Box } from '@mui/system'
 import React from 'react'
@@ -24,6 +25,9 @@ const App = () => {
           >
             <PolifoniaLogo width={'100px'} height={'100px'} />
             <ScoreLibrary />
+            <Typography sx={{ pt: 4 }} variant="caption">
+              V 2.1
+            </Typography>
           </Box>
         </nav>
       </header>

@@ -192,7 +192,7 @@ export const getVerticalityPositionnedNotes = verticalityIri => `
     WHERE {
         ?note sherlockmei:contains_beat <${verticalityIri}>.
         ?note sherlockmei:has_beat_anchor ?positionned_note.
-        FILTER regex(str(?positionned_note), "${verticalityIri.slice(-6)}")
+        FILTER regex(str(?positionned_note), "${verticalityIri.split('-').slice(-1)}")
     }
 `
 
@@ -205,6 +205,8 @@ export const getVerticalityCoordinates = verticalityIri => `
     
     WHERE {
         ?note sherlockmei:contains_beat <${verticalityIri}>.
+        ?note sherlockmei:from_beat ?firstBeat.
+        FILTER regex(str(?firstBeat), "${verticalityIri.split('-').slice(-1)}")
     }
     LIMIT 1
 `
@@ -289,7 +291,7 @@ export const getAnnotation = annotationIri => `
         ?annotation a crm:E13_Attribute_Assignment.
         
         ?annotation crm:P140_assigned_attribute_to ?subject.
-        ?subject crm:P2_has_type ?subjectType.
+        OPTIONAL { ?subject crm:P2_has_type ?subjectType }
 
         ?annotation crm:P141_assigned ?object.
         OPTIONAL { ?object crm:P2_has_type ?objectType }
@@ -336,8 +338,10 @@ export const getPositionnedNoteInfo = positionnedNoteIri => `
     WHERE {
         ?attachedNote sherlockmei:has_beat_anchor <${positionnedNoteIri}>.
         ?attachedNote sherlockmei:contains_beat ?verticality.
-        FILTER regex(str(?verticality), "${positionnedNoteIri.slice(-6)}")
+        FILTER regex(str(?verticality), "${positionnedNoteIri.split('-').slice(-1)}")
         ?clickedNote sherlockmei:contains_beat ?verticality.
+        ?clickedNote sherlockmei:from_beat ?firstBeat.
+        FILTER regex(str(?firstBeat), "${positionnedNoteIri.split('-').slice(-1)}")
     }
     LIMIT 1
 `
@@ -358,20 +362,25 @@ export const getEntityType = entityIri => `
     }
 `
 
-export const getContributors = () => `
+export const getContributors = scoreIri => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    
+    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+
     SELECT ?contributor ((COUNT(?annotation)) AS ?annotations)
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     
-    WHERE { ?annotation crm:P14_carried_out_by ?contributor }
+    WHERE {
+        ?annotation crm:P14_carried_out_by ?contributor.
+        ?annotation crm:P140_assigned_attribute_to ?subject.
+        ?subject sherlock:has_document_context <${scoreIri}>.
+    }
     
     GROUP BY ?contributor
 `
 
-export const getContributorAnnotations = contributorIri => `
+export const getContributorAnnotations = (contributorIri, scoreIri) => `
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
@@ -386,6 +395,7 @@ export const getContributorAnnotations = contributorIri => `
         ?annotation a crm:E13_Attribute_Assignment.
         ?annotation dcterms:created ?date.
         ?annotation crm:P140_assigned_attribute_to ?subject.
+        ?subject sherlock:has_document_context <${scoreIri}>.
         ?annotation crm:P177_assigned_property_of_type ?predicat.
         ?annotation crm:P141_assigned ?object.
     }
