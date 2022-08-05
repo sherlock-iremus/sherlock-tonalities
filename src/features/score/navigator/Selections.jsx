@@ -12,14 +12,15 @@ import {
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetScoreSelectionsQuery } from '../../../app/services/sparql'
-import { setInspectedEntity, setSelectedEntity, setSelectionMode } from '../../../app/services/scoreSlice'
+import { setInspectedEntity, setSelectedEntity, setSelectionMode, setAlert } from '../../../app/services/scoreSlice'
 import { useNavigate } from 'react-router-dom'
 import { COLOR_NAVIGATE } from '../mei.css'
-import { useGetUserIdQuery } from '../../../app/services/sherlockApi'
+import { useDeleteSelectionMutation, useGetUserIdQuery } from '../../../app/services/sherlockApi'
 import { ContributorItem } from '../items/ContributorItem'
+import { getUuidFromSherlockIri } from '../utils'
 
 export const Selections = props => {
-  const { data: selections } = useGetScoreSelectionsQuery(props.scoreIri)
+  const { data: selections, refetch } = useGetScoreSelectionsQuery(props.scoreIri)
   const { data: userId } = useGetUserIdQuery()
   const {
     inspectedEntities,
@@ -31,9 +32,19 @@ export const Selections = props => {
     scoreTitle,
     baseUrl,
   } = useSelector(state => state.score)
+  const [deleteSelection] = useDeleteSelectionMutation()
   const { selectionIri: inspectedSelection, scoreIri: inspectedScore } = inspectedEntities[currentEntityIndex]
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const onClick = (iri) => {
+    deleteSelection(getUuidFromSherlockIri(iri)).unwrap()
+      .then(() => {
+        refetch();
+        dispatch(setAlert({ confirmation: 'Selection successfully deleted' }))
+      })
+      .catch(() => dispatch(setAlert({ error: 'An error occured while deleting selection' })))
+  }
 
   return (
     <>
@@ -59,7 +70,7 @@ export const Selections = props => {
         </ListItemButton>
       </ListItem>
 
-      <List subheader={<ListSubheader>Created selections</ListSubheader>}>
+      <List subheader={<ListSubheader>Your selections</ListSubheader>}>
         {selections
           ?.filter(s => s.contributorIri.slice(baseUrl.length) === userId)
           .map(selection => (
@@ -67,7 +78,7 @@ export const Selections = props => {
               key={selection.iri}
               disablePadding
               secondaryAction={
-                <IconButton disabled>
+                <IconButton onClick={() => onClick(selection.iri)}>
                   <Delete />
                 </IconButton>
               }

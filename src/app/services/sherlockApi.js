@@ -21,6 +21,12 @@ export const sherlockApi = createApi({
         body,
       }),
     }),
+    deleteSelection: builder.mutation({
+      query: (uuid) => ({
+        url: `selection/${uuid}`,
+        method: 'DELETE'
+      }),
+    }),
     postAnnotation: builder.mutation({
       query: body => ({
         url: 'e13',
@@ -50,5 +56,6 @@ export const {
   usePostAnnotationMutation,
   useGetUserIdQuery,
   usePatchSelectionMutation,
+  useDeleteSelectionMutation,
   usePostAnalyticalEntityMutation,
 } = sherlockApi
