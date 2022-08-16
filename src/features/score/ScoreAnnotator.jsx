@@ -10,22 +10,33 @@ import { Navigator } from './Navigator'
 import { SelectionEditor } from './editor/SelectionEditor'
 import { AnnotationEditor } from './editor/AnnotationEditor'
 import { COLOR_INSPECTED, COLOR_NAVIGATE } from './mei.css'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { AlertMessage } from './editor/AlertMessage'
 import { orange } from '@mui/material/colors'
 import { AnalyticalEntityEditor } from './editor/AnalyticalEntityEditor'
 import { useGetUserIdQuery } from '../../app/services/sherlockApi'
+import scores from '../../app/scores.json'
+import { getSherlockIriFromUuid } from './utils'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setScore } from '../../app/services/scoreSlice'
+import { DISCONNECTED } from './constants'
 
 export const ScoreAnnotator = () => {
-  const { data: userId } = useGetUserIdQuery()
+  const { scoreUuid } = useParams()
+  const { data: userId, isLoading } = useGetUserIdQuery()
+  const dispatch = useDispatch()
   const [isNavigatorOpen, setIsNavigatorOpen] = useState(false)
   const [isInspectorOpen, setIsInspectorOpen] = useState(false)
-  const { meiUrl, scoreIri, alerts } = useSelector(state => state.score)
-
+  const { meiUrl, alerts, scoreIri } = useSelector(state => state.score)
+  useEffect(() => {
+    const scoreIri = getSherlockIriFromUuid(scoreUuid)
+    const score = scores.find(score => score.scoreIri === scoreIri)
+    score && dispatch(setScore(score))  
+  }, [dispatch, scoreUuid] )
   return (
     <>
-      {!userId && <Navigate to="/" />}
-      {!scoreIri && <Navigate to="/" />}
+      {!isLoading && (!userId || userId === DISCONNECTED) && <Navigate to="/" />}
       <MeiViewer meiUrl={meiUrl} scoreIri={scoreIri} />
 
       {!isInspectorOpen && (

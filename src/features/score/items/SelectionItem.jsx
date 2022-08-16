@@ -20,6 +20,7 @@ const BaseSelectionItem = ({
   initialIsOpen = true,
   secondaryAction,
   focusedEntityIri,
+  onChildClick
 }) => {
   const [isOpen, setIsOpen] = useState(initialIsOpen)
   const { data: userId } = useGetUserIdQuery()

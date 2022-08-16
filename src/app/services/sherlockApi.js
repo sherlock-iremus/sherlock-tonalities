@@ -41,6 +41,12 @@ export const sherlockApi = createApi({
         body,
       }),
     }),
+    deleteAnalyticalEntity: builder.mutation({
+      query: uuid => ({
+        url: `analytical-entity/${uuid}`,
+        method: 'DELETE'
+      }),
+    }),
     getUserId: builder.query({
       query: () => ({
         responseHandler: response => response.text(),
@@ -58,4 +64,5 @@ export const {
   usePatchSelectionMutation,
   useDeleteSelectionMutation,
   usePostAnalyticalEntityMutation,
+  useDeleteAnalyticalEntityMutation
 } = sherlockApi

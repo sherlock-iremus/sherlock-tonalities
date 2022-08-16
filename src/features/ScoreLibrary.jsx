@@ -15,21 +15,21 @@ import {
   ListSubheader,
   Typography,
 } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { setScore } from '../app/services/scoreSlice'
+import { useSelector } from 'react-redux'
 import scores from '../app/scores.json'
 import cover from '../images/bg-score.jpg'
-import { Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useGetUserIdQuery } from '../app/services/sherlockApi'
 import { DISCONNECTED } from './score/constants'
+import { useNavigate } from 'react-router-dom'
+import { getUuidFromSherlockIri } from './score/utils'
 
 export const ScoreLibrary = () => {
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { data: userId } = useGetUserIdQuery()
   const isUserConnected = userId !== DISCONNECTED
   const { scoreIri } = useSelector(state => state.score)
-  const [selectedScore, setSelectedScore] = useState({ scoreIri })
+  const [selectedScoreIri, setSelectedScoreIri] = useState(scoreIri)
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   return (
     <Card sx={{ maxWidth: 400, maxHeight: 700 }}>
@@ -64,9 +64,9 @@ export const ScoreLibrary = () => {
               <ListItem key={score.scoreIri} disablePadding>
                 <ListItemButton
                   onClick={() =>
-                    setSelectedScore(score.scoreIri === selectedScore.scoreIri ? { scoreIri: null } : score)
+                    setSelectedScoreIri(score.scoreIri)
                   }
-                  selected={score.scoreIri === selectedScore.scoreIri}
+                  selected={score.scoreIri === selectedScoreIri}
                 >
                   <ListItemIcon>
                     <Avatar>
@@ -79,10 +79,9 @@ export const ScoreLibrary = () => {
             ))}
           </List>
           <CardActions>
-            <Button size="small" disabled={!selectedScore.scoreIri} onClick={() => dispatch(setScore(selectedScore))}>
+            <Button size="small" disabled={!selectedScoreIri} onClick={() => navigate(`/score/${getUuidFromSherlockIri(selectedScoreIri)}`)}>
               Open score
             </Button>
-            {scoreIri && <Navigate to="/score" />}
           </CardActions>
         </>
       ) : (

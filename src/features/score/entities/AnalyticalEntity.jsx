@@ -1,31 +1,49 @@
-import { Close, Lyrics } from '@mui/icons-material'
-import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { Delete, Lyrics } from '@mui/icons-material'
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Tooltip } from '@mui/material'
 import {
   useGetAnalyticalEntityQuery,
   useGetEntityGlobalAnnotationsQuery,
   useGetEntitySpecificAnnotationsQuery,
 } from '../../../app/services/sparql'
-import { setInspectedEntity } from '../../../app/services/scoreSlice'
+import { removeInspectedEntity, removeNInspectedEntities, setAlert, setInspectedEntity } from '../../../app/services/scoreSlice'
 import { SelectionItem } from '../items/SelectionItem'
 import { LoadingEntity } from './LoadingEntity'
 import { ContributorItem } from '../items/ContributorItem'
 import { withDispatch } from '../items/withDispatch'
 import { ClassAnnotationItem } from '../items/ClassAnnotationItem'
 import { PropertyAnnotationItem } from '../items/PropertyAnnotationItem'
+import { useDeleteAnalyticalEntityMutation } from '../../../app/services/sherlockApi'
+import { getUuidFromSherlockIri } from '../utils'
+import { useConfirm } from 'material-ui-confirm'
 
 const BaseAnalyticalEntity = ({ analyticalEntityIri, baseUrlLength, dispatch }) => {
+  const confirm = useConfirm();
   const { data } = useGetAnalyticalEntityQuery(analyticalEntityIri)
   const { data: globalAnnotations } = useGetEntityGlobalAnnotationsQuery(analyticalEntityIri)
   const { data: specificAnnotations } = useGetEntitySpecificAnnotationsQuery(analyticalEntityIri)
+  const [deleteAnalyticalEntity] = useDeleteAnalyticalEntityMutation()
+
+  const confirmDeletion = () => {
+    confirm({description: 'Delete this analytical entity and all annotations linked ?', confirmationButtonProps: {color: 'error'}, confirmationText: 'DELETE'})
+      .then(() => {
+        deleteAnalyticalEntity(getUuidFromSherlockIri(analyticalEntityIri)).unwrap()
+          .then(() => {
+            dispatch(setAlert({ confirmation: 'Analytical entity successfully deleted. Refresh this page' }))
+          })
+      })
+  }
   return data && globalAnnotations && specificAnnotations ? (
     <>
       <ListItem
         disablePadding
         secondaryAction={
-          <IconButton disableRipple onClick={() => dispatch(setInspectedEntity({ analyticalEntityIri }))}>
-            <Close />
-          </IconButton>
+          <Tooltip title="Delete analytical entity">
+            <IconButton toolti disableRipple onClick={confirmDeletion}>
+              <Delete />
+            </IconButton>
+          </Tooltip>
         }
+        action
       >
         <ListItemButton sx={{ cursor: 'default' }}>
           <ListItemIcon>

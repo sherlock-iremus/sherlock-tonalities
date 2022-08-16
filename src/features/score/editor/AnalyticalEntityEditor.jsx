@@ -97,7 +97,7 @@ export const AnalyticalEntityEditor = () => {
             <ClassItem key={concept} classIri={concept} isEntity />
           ))}
 
-          <Tooltip title="Asign properties from the property tree by first selecting the target entity from current selection">
+          <Tooltip title="Assign properties from the property tree by first selecting the target entity from current selection">
             <ListSubheader>Target selection</ListSubheader>
           </Tooltip>
           <SelectionItem {...{ selectionIri, focusedEntityIri, concepts: properties }} />
@@ -107,7 +107,7 @@ export const AnalyticalEntityEditor = () => {
               onClick={createAnalyticalEntity}
               ariaLabel="validate"
               sx={{
-                position: 'absolute',
+                position: 'fixed',
                 bottom: 16,
                 right: 16,
                 '& .MuiSpeedDial-fab': { backgroundColor: COLOR_SELECTED },
