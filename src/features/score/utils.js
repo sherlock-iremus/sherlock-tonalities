@@ -55,3 +55,11 @@ export const getScoreLabel = scoreIri => {
   for (const score of scores) if (scoreIri.match(score.scoreIri)) return score.scoreTitle
   return null
 }
+
+export const getUuidFromSherlockIri = iri => {
+  return iri.split('/').pop()
+}
+
+export const getSherlockIriFromUuid = uuid => {
+  return `http://data-iremus.huma-num.fr/id/${uuid}`
+}

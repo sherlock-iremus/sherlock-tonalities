@@ -2,12 +2,13 @@ import { AddComment } from '@mui/icons-material'
 import { List, ListItem, ListItemButton, ListItemText, ListSubheader, SpeedDial, SpeedDialAction } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetParentSelectionsQuery } from '../../../app/services/sparql'
-import { setAnalyticalEntityEditor, setAnnotationEditor, setInspectedEntity } from '../../../app/services/scoreSlice'
+import { setAlert, setAnalyticalEntityEditor, setAnnotationEditor, setInspectedEntity, setNavigatorPopup, setNavigatorSelectedTab } from '../../../app/services/scoreSlice'
 import { SelectionItem } from '../items/SelectionItem'
 import { AnalyticalEntities } from '../annotations/AnalyticalEntities'
 import { SELECTION } from '../constants'
 import { OutgoingAnnotations } from '../annotations/OutgoingAnnotations'
 import actions from '../../../app/services/p140_p177.json'
+import { NavigatorTab } from '../Navigator'
 
 export const SelectionEntity = ({ selectionIri }) => {
   const dispatch = useDispatch()
@@ -35,8 +36,6 @@ export const SelectionEntity = ({ selectionIri }) => {
         </List>
       )}
 
-      <AnalyticalEntities {...{ selectionIri }} />
-
       <OutgoingAnnotations {...{ selectionIri }} />
 
       <SpeedDial ariaLabel="New" sx={{ position: 'fixed', bottom: 16, right: 16 }} icon={<AddComment />}>
@@ -49,13 +48,20 @@ export const SelectionEntity = ({ selectionIri }) => {
           />
         ))}
         <SpeedDialAction
-          onClick={() =>
-            dispatch(
-              setAnalyticalEntityEditor({
-                selectionIri,
-                propertyIri: 'http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence',
-              })
-            )
+          onClick={() => {
+              dispatch(
+                setAnalyticalEntityEditor({
+                  selectionIri,
+                  propertyIri: 'http://modality-tonality.huma-num.fr/Zarlino_1558#hasCadence',
+                })
+              );
+              dispatch(
+                setNavigatorSelectedTab(NavigatorTab.CLASSES)
+              )
+              dispatch(
+                setNavigatorPopup('Select a concept to type your cadence')
+              )
+            }
           }
           tooltipTitle="Identify cadence"
           icon="🎼"

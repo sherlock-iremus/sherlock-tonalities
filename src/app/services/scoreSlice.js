@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { NavigatorTab } from '../../features/score/Navigator'
 import { findKey } from '../../features/score/utils'
 
 const initialState = {
@@ -22,6 +23,10 @@ const initialState = {
     focusedEntityIri: null,
     concepts: [],
     properties: [],
+  },
+  navigator: {
+    tab: NavigatorTab.SELECTIONS,
+    popup: null
   },
   alerts: { confirmation: '', error: '' },
 }
@@ -73,6 +78,12 @@ const scoreSlice = createSlice({
       state.selectedEntities = action.payload.children
       state.isInspectionMode = false
       state.isSelectionMode = true
+    },
+    setNavigatorSelectedTab: (state, action) => {
+      state.navigator.tab = action.payload
+    },
+    setNavigatorPopup: (state, action) => {
+      state.navigator.popup = action.payload
     },
     setSelectedEntity: (state, action) => {
       const index =
@@ -148,4 +159,6 @@ export const {
   setEditingSelection,
   setAlert,
   setAnalyticalEntityEditor,
+  setNavigatorSelectedTab,
+  setNavigatorPopup
 } = scoreSlice.actions

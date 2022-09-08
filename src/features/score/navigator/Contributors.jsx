@@ -29,7 +29,7 @@ export const Contributors = () => {
   const navigate = useNavigate()
 
   const removeCookie = () => {
-    document.cookie = `JWT=; path=/; domain=data-iremus.huma-num.fr; expires=${new Date(0).toUTCString()}`
+    document.cookie = `JWT=; path=/; expires=${new Date(0).toUTCString()}`
     navigate(0)
   }
 

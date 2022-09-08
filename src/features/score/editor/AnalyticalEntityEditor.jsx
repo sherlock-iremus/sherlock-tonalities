@@ -16,25 +16,42 @@ import { Box } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAlert, setAnalyticalEntityEditor } from '../../../app/services/scoreSlice'
 import { useState } from 'react'
-import { useGetAnalyticalEntitiesQuery } from '../../../app/services/sparql'
+import { useGetAnalyticalEntitiesQuery, useGetOutgoingAnnotationsQuery } from '../../../app/services/sparql'
 import { COLOR_SELECTED } from '../mei.css'
 import { SelectionItem } from '../items/SelectionItem'
 import { ClassItem } from '../items/ClassItem'
 import { PropertyItem } from '../items/PropertyItem'
+import { usePostAnalyticalEntityMutation } from '../../../app/services/sherlockApi'
 
 export const AnalyticalEntityEditor = () => {
   const dispatch = useDispatch()
   const {
     analyticalEntityEditor: { selectionIri, propertyIri, focusedEntityIri, concepts, properties },
   } = useSelector(state => state.score)
-  const { refetch } = useGetAnalyticalEntitiesQuery({ selectionIri }, { skip: !selectionIri })
-  const isLoading = false
+  const { refetch: refetchAnalyticalEntities } = useGetAnalyticalEntitiesQuery(
+    { selectionIri },
+    { skip: !selectionIri }
+  )
+  const { refetch: refetchAnnotations } = useGetOutgoingAnnotationsQuery(selectionIri, { skip: !selectionIri })
 
+  const [postAnalyticalEntity, { isLoading }] = usePostAnalyticalEntityMutation()
   const createAnalyticalEntity = async () => {
-    if (isLoading(concepts.length || properties.length)) {
+    const e13s = concepts
+      .map(c => ({
+        p177: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+        p141: c,
+        p141_type: 'uri',
+      }))
+      .concat(properties.map(p => ({ p177: p.propertyIri, p141: p.entityIri, p141_type: 'uri' })))
+    if (!isLoading && (concepts.length || properties.length)) {
       try {
-        // POST ROUTE
-        refetch()
+        await postAnalyticalEntity({
+          p140: selectionIri,
+          p177: propertyIri,
+          e13s,
+        }).unwrap()
+        refetchAnalyticalEntities()
+        refetchAnnotations()
         dispatch(setAnalyticalEntityEditor())
         dispatch(setAlert({ confirmation: 'Analytical entity was successfully created' }))
       } catch {
@@ -73,14 +90,14 @@ export const AnalyticalEntityEditor = () => {
           <ListSubheader>Assigned property</ListSubheader>
           <PropertyItem propertyIri={propertyIri} />
 
-          <Tooltip title="Asign types to this analytical entity from the concept tree">
+          <Tooltip title="Asign types from the concept tree">
             <ListSubheader>Assigned types</ListSubheader>
           </Tooltip>
           {concepts.map(concept => (
             <ClassItem key={concept} classIri={concept} isEntity />
           ))}
 
-          <Tooltip title="Asign properties from the property tree by selecting a specific entity from the target selection">
+          <Tooltip title="Assign properties from the property tree by first selecting the target entity from current selection">
             <ListSubheader>Target selection</ListSubheader>
           </Tooltip>
           <SelectionItem {...{ selectionIri, focusedEntityIri, concepts: properties }} />
@@ -90,7 +107,7 @@ export const AnalyticalEntityEditor = () => {
               onClick={createAnalyticalEntity}
               ariaLabel="validate"
               sx={{
-                position: 'absolute',
+                position: 'fixed',
                 bottom: 16,
                 right: 16,
                 '& .MuiSpeedDial-fab': { backgroundColor: COLOR_SELECTED },

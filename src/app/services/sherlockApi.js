@@ -21,11 +21,30 @@ export const sherlockApi = createApi({
         body,
       }),
     }),
+    deleteSelection: builder.mutation({
+      query: (uuid) => ({
+        url: `selection/${uuid}`,
+        method: 'DELETE'
+      }),
+    }),
     postAnnotation: builder.mutation({
       query: body => ({
         url: 'e13',
         method: 'POST',
         body,
+      }),
+    }),
+    postAnalyticalEntity: builder.mutation({
+      query: body => ({
+        url: 'analytical-entity',
+        method: 'POST',
+        body,
+      }),
+    }),
+    deleteAnalyticalEntity: builder.mutation({
+      query: uuid => ({
+        url: `analytical-entity/${uuid}`,
+        method: 'DELETE'
       }),
     }),
     getUserId: builder.query({
@@ -38,5 +57,12 @@ export const sherlockApi = createApi({
 
 export default sherlockApi
 
-export const { usePostSelectionMutation, usePostAnnotationMutation, useGetUserIdQuery, usePatchSelectionMutation } =
-  sherlockApi
+export const {
+  usePostSelectionMutation,
+  usePostAnnotationMutation,
+  useGetUserIdQuery,
+  usePatchSelectionMutation,
+  useDeleteSelectionMutation,
+  usePostAnalyticalEntityMutation,
+  useDeleteAnalyticalEntityMutation
+} = sherlockApi

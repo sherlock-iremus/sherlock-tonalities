@@ -7,17 +7,20 @@ import App from './App'
 import { store } from './app/store'
 import * as serviceWorker from './serviceWorker'
 import { ScoreAnnotator } from './features/score/ScoreAnnotator'
+import { ConfirmProvider } from 'material-ui-confirm'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename='/tonalities'>
-      <Provider store={store}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/score" element={<ScoreAnnotator />} />
-        </Routes>
-      </Provider>
-    </BrowserRouter>
+    <ConfirmProvider>
+      <BrowserRouter basename='/tonalities'>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/score/:scoreUuid" element={<ScoreAnnotator />} />
+          </Routes>
+        </Provider>
+      </BrowserRouter>
+    </ConfirmProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
