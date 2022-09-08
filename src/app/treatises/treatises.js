@@ -5,7 +5,7 @@ import Proetorius_1619 from './Praetorius_1619.json'
 import Guillotel from './Guillotel.json'
 
 // include treatiseIris in array
-export const treatiseList = [Zarlino_1588.iri, My_Treaty.iri, Proetorius_1619.iri, Guillotel]
+export const treatiseList = [Zarlino_1588.iri, My_Treaty.iri, Proetorius_1619.iri, Guillotel.iri]
 
 // include treatise in object
 const treatises = {
