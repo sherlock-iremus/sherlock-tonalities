@@ -94,6 +94,7 @@ const scoreSlice = createSlice({
           state.selectedEntities.findIndex(e => e.positionnedNoteIri === action.payload.positionnedNoteIri)) ||
         (action.payload.selectionIri &&
           state.selectedEntities.findIndex(e => e.selectionIri === action.payload.selectionIri))
+      // If the element was not already selected, remove it from state
       index !== -1 ? state.selectedEntities.splice(index, 1) : state.selectedEntities.push(action.payload)
     },
     setInspectedEntity: (state, action) => {
