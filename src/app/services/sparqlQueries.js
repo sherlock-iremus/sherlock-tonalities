@@ -114,42 +114,57 @@ export const getNoteSelections = noteIri => `
 `
 
 export const getScoreSelections = scoreIri => `
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
     PREFIX dcterms: <http://purl.org/dc/terms/>
     PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
-    
-    SELECT ?selection ?contributor ?date ?entities
-    
-    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+
+    SELECT DISTINCT ?selection ?contributor ?date (COUNT(?item) AS ?items_count) ?analyticalEntity_type
+
     WHERE {
+    GRAPH ?g {
+        
+        #######################################
+        ######## GET SELECTIONS ITEMS #########
+        #######################################
+        
         ?selection dcterms:creator ?contributor.
         ?selection dcterms:created ?date.
-        {
-            SELECT ?selection ((COUNT(?entity)) AS ?entities)
-            WHERE {
-                ?selection sherlock:has_document_context <${scoreIri}>.
-                ?selection crm:P2_has_type <${SELECTION}>.
-                ?selection crm:P106_is_composed_of ?entity.
-            }
-            GROUP BY ?selection
+        ?selection sherlock:has_document_context <${scoreIri}>.
+        ?selection crm:P2_has_type <${SELECTION}>.
+        ?selection crm:P106_is_composed_of ?item.
+        
+        #######################################
+        #### GET ANALYTICAL ENTITIES TYPES ####
+        #######################################
+        
+        OPTIONAL {
+        ?e13_selection_analyticalEntity crm:P140_assigned_attribute_to ?selection.
+        ?e13_selection_analyticalEntity rdf:type crm:E13_Attribute_Assignment.
+        ?e13_selection_analyticalEntity crm:P141_assigned ?analyticalEntity.
+        ?analyticalEntity crm:P2_has_type <${ANALYTICAL_ENTITY}>.
+        ?e13_analyticalEntity_types crm:P140_assigned_attribute_to ?analyticalEntity.
+        ?e13_analyticalEntity_types crm:P177_assigned_property_of_type rdf:type.
+        ?e13_analyticalEntity_types crm:P141_assigned ?analyticalEntity_type.
         }
     }
-`
+    }
+
+    GROUP BY ?selection ?contributor ?date ?analyticalEntity_type
+    `
 
 export const getChildSelections = selectionIri => `
-    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    
-    SELECT ?child ?type
-    
-    FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
-    WHERE {
-        <${selectionIri}> crm:P106_is_composed_of ?child.
-        ?child crm:P2_has_type ?type
-    }
+        PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+        
+        SELECT ?child ?type
+        
+        FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+        FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+        
+        WHERE {
+            <${selectionIri}> crm:P106_is_composed_of ?child.
+            ?child crm:P2_has_type ?type
+        }
 `
 
 export const getParentSelections = selectionIri => `
