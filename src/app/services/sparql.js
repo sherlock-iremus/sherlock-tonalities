@@ -153,9 +153,9 @@ export const sparqlEndpoint = createApi({
             iri: selection.selection.value,
             entities: selection.items_count.value,
             contributorIri: selection.contributor?.value,
-            analyticalEntitiesTypes: selection.analyticalEntitiesTypes,
-            minMeasureNumber: selection.min_measure_number
-        }))
+            analyticalEntitiesTypes: selection.analyticalEntitiesTypes.sort(),
+            minMeasureNumber: selection.min_measure_number.value
+        })).sort((s1, s2) => s1.minMeasureNumber - s2.minMeasureNumber)
       },
     ),
     getChildSelections: builder.query({

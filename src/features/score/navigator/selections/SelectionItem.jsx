@@ -25,7 +25,7 @@ export const SelectionItem = props => {
   }
 
   const { selectionIri: inspectedSelection } = inspectedEntities[currentEntityIndex]
-  const analyticalEntitiesTypesStr = props.selection.analyticalEntitiesTypes.map((type) => type && type.substring(type.indexOf('#') + 1) ).join(' · ')
+  const analyticalEntitiesTypesStr = props.selection.analyticalEntitiesTypes.map((type) => type && type.substring(type.indexOf('#') + 1) ).join(' • ')
 
   return (
     <ListItem
@@ -49,9 +49,8 @@ export const SelectionItem = props => {
       >
         
         <ListItemText
-          secondaryTypographyProps={{style: { overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}}
-          primary={`Selection with ${props.selection.entities} elements`}
-          secondary={`measure ${props.selection.minMeasureNumber.value} · ${analyticalEntitiesTypesStr}`}
+          primary={`Selection with ${props.selection.entities} elements • measure ${props.selection.minMeasureNumber} `}
+          secondary={`📝 ${analyticalEntitiesTypesStr}`}
         />
         <ListItemText
           
