@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { selections } from 'sherlock-sparql-queries/src/queries/selections'
 import {
   ANALYTICAL_ENTITY,
   NOTE,
@@ -7,7 +8,7 @@ import {
   SELECTION,
   VERTICALITY,
 } from '../../features/score/constants'
-import { stringToColor } from '../../features/score/utils'
+import { concatAnalyticalEntities, stringToColor } from '../../features/score/utils'
 import { findKey, findType } from '../../features/score/utils'
 import {
   getAnalyticalEntities,
@@ -143,15 +144,20 @@ export const sparqlEndpoint = createApi({
     getScoreSelections: builder.query({
       query: scoreIri => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getScoreSelections(scoreIri) }),
+        body: new URLSearchParams({ query: selections(scoreIri) }),
       }),
-      transformResponse: response =>
-        response.results?.bindings?.map(e => ({
-          iri: e.selection?.value,
-          entities: e.entities?.value,
-          contributorIri: e.contributor?.value,
-        })),
-    }),
+      transformResponse: response => concatAnalyticalEntities(
+          response?.results?.bindings,
+          (e1, e2) => e1.selection.value === e2.selection.value
+        ).map(selection => ({
+            iri: selection.selection.value,
+            entities: selection.items_count.value,
+            contributorIri: selection.contributor?.value,
+            analyticalEntitiesTypes: selection.analyticalEntitiesTypes,
+            minMeasureNumber: selection.min_measure_number
+        }))
+      },
+    ),
     getChildSelections: builder.query({
       query: selectionIri => ({
         method: 'POST',

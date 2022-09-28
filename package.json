@@ -18,6 +18,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "6",
     "react-scripts": "5.0.0",
+    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries#main",
     "uuid": "^8.3.2"
   },
   "scripts": {

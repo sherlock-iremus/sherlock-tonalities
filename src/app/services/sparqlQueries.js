@@ -7,6 +7,7 @@ export const getNoteInfo = noteIri => `
 
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
 
     WHERE {
         VALUES ?note {<${noteIri}>}
@@ -28,6 +29,7 @@ export const getAnalyticalEntity = analyticalEntityIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
 
     WHERE {
         ?annotation crm:P141_assigned <${analyticalEntityIri}>.
@@ -46,7 +48,8 @@ export const getEntityGlobalAnnotations = analyticalEntityIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?annotation crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
         ?annotation crm:P177_assigned_property_of_type rdf:type.
@@ -62,6 +65,7 @@ export const getEntitySpecificAnnotations = analyticalEntityIri => `
 
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
 
     WHERE {
         ?annotation crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
@@ -79,7 +83,8 @@ export const getAnalyticalEntities = entityIri => `
 
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?annotation crm:P141_assigned <${entityIri}>.
         ?annotation crm:P140_assigned_attribute_to ?entity.
@@ -106,52 +111,13 @@ export const getNoteSelections = noteIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?selection crm:P106_is_composed_of <${noteIri}>.
         ?selection crm:P2_has_type <${SELECTION}>.
     }
 `
-
-export const getScoreSelections = scoreIri => `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-    PREFIX dcterms: <http://purl.org/dc/terms/>
-    PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
-
-    SELECT DISTINCT ?selection ?contributor ?date (COUNT(?item) AS ?items_count) ?analyticalEntity_type
-
-    WHERE {
-    GRAPH ?g {
-        
-        #######################################
-        ######## GET SELECTIONS ITEMS #########
-        #######################################
-        
-        ?selection dcterms:creator ?contributor.
-        ?selection dcterms:created ?date.
-        ?selection sherlock:has_document_context <${scoreIri}>.
-        ?selection crm:P2_has_type <${SELECTION}>.
-        ?selection crm:P106_is_composed_of ?item.
-        
-        #######################################
-        #### GET ANALYTICAL ENTITIES TYPES ####
-        #######################################
-        
-        OPTIONAL {
-        ?e13_selection_analyticalEntity crm:P140_assigned_attribute_to ?selection.
-        ?e13_selection_analyticalEntity rdf:type crm:E13_Attribute_Assignment.
-        ?e13_selection_analyticalEntity crm:P141_assigned ?analyticalEntity.
-        ?analyticalEntity crm:P2_has_type <${ANALYTICAL_ENTITY}>.
-        ?e13_analyticalEntity_types crm:P140_assigned_attribute_to ?analyticalEntity.
-        ?e13_analyticalEntity_types crm:P177_assigned_property_of_type rdf:type.
-        ?e13_analyticalEntity_types crm:P141_assigned ?analyticalEntity_type.
-        }
-    }
-    }
-
-    GROUP BY ?selection ?contributor ?date ?analyticalEntity_type
-    `
 
 export const getChildSelections = selectionIri => `
         PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
@@ -160,7 +126,8 @@ export const getChildSelections = selectionIri => `
         
         FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
         FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-        
+        FROM <http://data-iremus.huma-num.fr/graph/mei>
+
         WHERE {
             <${selectionIri}> crm:P106_is_composed_of ?child.
             ?child crm:P2_has_type ?type
@@ -174,7 +141,8 @@ export const getParentSelections = selectionIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?parent crm:P106_is_composed_of <${selectionIri}>.
         OPTIONAL {?parent crm:P2_has_type ?type}
@@ -188,7 +156,8 @@ export const getNoteVerticality = noteIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         <${noteIri}> sherlockmei:contains_beat ?verticality
     }
@@ -203,7 +172,8 @@ export const getVerticalityPositionnedNotes = verticalityIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?note sherlockmei:contains_beat <${verticalityIri}>.
         ?note sherlockmei:has_beat_anchor ?positionned_note.
@@ -217,7 +187,8 @@ export const getVerticalityCoordinates = verticalityIri => `
     SELECT ?note
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?note sherlockmei:contains_beat <${verticalityIri}>.
         ?note sherlockmei:from_beat ?firstBeat.
@@ -234,6 +205,7 @@ export const getSelectionAnalyticalEntities = selectionIri => `
 
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
 
     WHERE {
         ?annotation crm:P140_assigned_attribute_to <${selectionIri}>.
@@ -262,7 +234,8 @@ export const getOutgoingAnnotations = entityIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?annotation crm:P140_assigned_attribute_to <${entityIri}>.
         ?annotation a crm:E13_Attribute_Assignment.
@@ -281,7 +254,8 @@ export const getIncommingAnnotations = entityIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?annotation crm:P141_assigned <${entityIri}>.
         ?annotation a crm:E13_Attribute_Assignment.
@@ -300,7 +274,8 @@ export const getAnnotation = annotationIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         VALUES ?annotation {<${annotationIri}>}
         ?annotation a crm:E13_Attribute_Assignment.
@@ -324,7 +299,9 @@ export const getContributor = contributorIri => `
     SELECT ?contributor ?color ?emoji ?program
 
     FROM <http://data-iremus.huma-num.fr/graph/users>
+    FROM <http://data-iremus.huma-num.fr/graph/sherlock>
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
 
     WHERE {
         VALUES ?contributor { <${contributorIri}> }
@@ -349,7 +326,8 @@ export const getPositionnedNoteInfo = positionnedNoteIri => `
     SELECT ?attachedNote ?clickedNote ?verticality
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?attachedNote sherlockmei:has_beat_anchor <${positionnedNoteIri}>.
         ?attachedNote sherlockmei:contains_beat ?verticality.
@@ -368,6 +346,7 @@ export const getEntityType = entityIri => `
 
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
 
     WHERE {
         VALUES ?iri {<${entityIri}>}.
@@ -385,7 +364,8 @@ export const getContributors = scoreIri => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?annotation crm:P14_carried_out_by ?contributor.
         ?annotation crm:P140_assigned_attribute_to ?subject.
@@ -404,7 +384,8 @@ export const getContributorAnnotations = (contributorIri, scoreIri) => `
     
     FROM <http://data-iremus.huma-num.fr/graph/modality-tonality>
     FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-    
+    FROM <http://data-iremus.huma-num.fr/graph/mei>
+
     WHERE {
         ?annotation crm:P14_carried_out_by <${contributorIri}>.
         ?annotation a crm:E13_Attribute_Assignment.

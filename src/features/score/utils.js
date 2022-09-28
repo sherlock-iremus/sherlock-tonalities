@@ -63,3 +63,18 @@ export const getUuidFromSherlockIri = iri => {
 export const getSherlockIriFromUuid = uuid => {
   return `http://data-iremus.huma-num.fr/id/${uuid}`
 }
+
+/**
+ *
+ * @param {array} x
+ * @param {func} f Function that returns true if element should be grouped
+ * @returns
+ */
+export const concatAnalyticalEntities = (x, f) =>
+  x.reduce((a, b) => {
+    const selection = a.find(e => f(e, b))
+    selection
+      ? selection.analyticalEntitiesTypes.push(b.analyticalEntity_type?.value)
+      : a.push({ analyticalEntitiesTypes: [b.analyticalEntity_type?.value], ...b })
+    return a
+  }, [])
