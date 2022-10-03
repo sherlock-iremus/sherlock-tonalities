@@ -51,7 +51,11 @@ export const AnnotationEditor = () => {
           p140: findKey(subject),
           p177: predicat.iri,
           p141: findKey(object) || selectedOption,
-          p141_type: options[predicat.iri].length ? 'uri' : object ? 'uri' : 'literal',
+          p141_type: options[predicat.iri].length 
+            ? 'uri' 
+            : object 
+              ? 'uri' 
+              : 'literal',
         }).unwrap()
         refetch()
         dispatch(setAnnotationEditor())

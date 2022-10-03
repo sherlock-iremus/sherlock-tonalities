@@ -21,7 +21,7 @@ export const PropertyItem = ({ propertyIri, isEntity }) => {
         )
       }
     >
-      <ListItemButton onClick={() => !isEntity && dispatch(setInspectedEntity({ propertyIri }))}>
+      <ListItemButton>
         <ListItemIcon>
           <Sell />
         </ListItemIcon>
