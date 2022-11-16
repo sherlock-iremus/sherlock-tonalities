@@ -32,23 +32,37 @@ export const ScoreLibrary = () => {
   const [selectedScoreIri, setSelectedScoreIri] = useState(scoreIri)
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
   return (
-    <Card sx={{ maxWidth: 400, maxHeight: 700 }}>
+    <Card sx={{ maxWidth: 800, overflowY: "visible" }}>
       <CardMedia component="img" height="140" image={cover} alt="score" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Pilot <i>Tonalities</i>
+          TONALITIES PILOT
         </Typography>
         {!isUserConnected && (
           <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'justify' }}>
-            Tonalities is developing tools for the modal-tonal identification, exploration and classification of
-            monophonic and polyphonic notated music from the Renaissance to the 20th century.
-            <br />
-            The pilot has a broader societal and pedagogical dimension: it does not only impact research on the theory
-            and evolution of the musical language but is also relevant for the understanding of music collections by
-            students, performers, and informed music lovers.
-            <br />
-            The recording industry is a potential target for the classification of works and the constitution of
-            playlists.
+            <p>
+              The modal-tonal organization of European music is decisive for its structural properties, its inner coherence, its dramatic plot and, ultimately, for its artistic meaning. TONALITIES embraces the open linked data paradigm to reference large corpora of music made available in digital score libraries and to explore them through a quantitative-qualitative approach. This approach consists of modeling different theories — historical or contemporary, specific or general — and applying them to musical works through a dedicated interface combining machine learning and human annotations.
+            </p>
+            <p>
+              This interface addresses the following challenges:
+              <ul>
+                <li>select different models, corresponding to different theoretical and analytical viewpoints</li>
+                <li>select every item on the score (verticalities, groups of notes, etc.) at any level of granularity</li>
+                <li>create arbitrary selection trees through nested selections, edit a selection or add/remove elements (including other selections)</li>
+                <li>associate concepts derived from the models with these analytical elements</li>
+                <li>comment on the analytical annotations</li>
+                <li>compare the annotations made on the same score either by different users or on the basis of different models</li>
+              </ul>
+            </p>
+            <p>It thus becomes possible to grasp how distinct theoretical viewpoints bring to light different — sometimes conflicting — musical properties; to confront different analytical interpretations; to look “inside” both theories and works; to understand how both evolve in time in relation to each other; and ultimately to provide an argued, documented and authored modal-tonal classification of musical pieces.</p>
+            <hr />
+            <p>
+              For logging in:
+              <ol>
+                <li>create an <a href="https://www.orcid.org">ORCID</a> account</li>
+                <li>once the ORCID account created, please come back to this page and click on the green button LOGIN WITH ORCID</li>
+              </ol>
+            </p>
           </Typography>
         )}
       </CardContent>
