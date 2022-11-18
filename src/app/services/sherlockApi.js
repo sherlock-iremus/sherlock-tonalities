@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const sherlockApi = createApi({
   reducerPath: 'sherlockApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://data-iremus.huma-num.fr/sherlock/api/',
+    baseUrl: 'https://data-iremus.huma-num.fr/sherlock/api/',
     credentials: 'include',
   }),
   endpoints: builder => ({

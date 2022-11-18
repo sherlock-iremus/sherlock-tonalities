@@ -36,7 +36,7 @@ import {
 
 export const sparqlEndpoint = createApi({
   reducerPath: 'sparqlApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://data-iremus.huma-num.fr/sparql' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://data-iremus.huma-num.fr/sparql' }),
   endpoints: builder => ({
     getNoteInfo: builder.query({
       query: noteIri => ({
