@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './index.css'
 import App from './App'
@@ -8,16 +8,28 @@ import { store } from './app/store'
 import * as serviceWorker from './serviceWorker'
 import { ScoreAnnotator } from './features/score/ScoreAnnotator'
 import { ConfirmProvider } from 'material-ui-confirm'
+import { useGetUserIdQuery } from './app/services/sherlockApi'
+
+const TonalitiesRoutes = () => {
+  // Sherlock API request to see whether user token is valid or not
+  useGetUserIdQuery()
+  
+  const { isUserConnected } = useSelector(state => state.score)
+
+  return (
+    <Routes>
+      { isUserConnected && <Route path="/score/:scoreUuid" element={<ScoreAnnotator />} />}
+      <Route path="*" element={<App />} />
+    </Routes>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
     <ConfirmProvider>
-      <BrowserRouter basename='/tonalities'>
+      <BrowserRouter basename="/tonalities">
         <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/score/:scoreUuid" element={<ScoreAnnotator />} />
-          </Routes>
+          <TonalitiesRoutes />
         </Provider>
       </BrowserRouter>
     </ConfirmProvider>

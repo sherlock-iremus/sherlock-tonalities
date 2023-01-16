@@ -29,6 +29,7 @@ const initialState = {
     popup: null
   },
   alerts: { confirmation: '', error: '' },
+  isUserConnected: true
 }
 
 const scoreSlice = createSlice({
@@ -84,6 +85,9 @@ const scoreSlice = createSlice({
     },
     setNavigatorPopup: (state, action) => {
       state.navigator.popup = action.payload
+    },
+    setIsUserConnected: (state, action) => {
+      state.isUserConnected = action.payload
     },
     setSelectedEntity: (state, action) => {
       const index =
@@ -161,5 +165,6 @@ export const {
   setAlert,
   setAnalyticalEntityEditor,
   setNavigatorSelectedTab,
-  setNavigatorPopup
+  setNavigatorPopup,
+  setIsUserConnected
 } = scoreSlice.actions
