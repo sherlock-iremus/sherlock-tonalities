@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tonalities/static/css/main.ff9caf5d.css",
-    "main.js": "/tonalities/static/js/main.9cc8c8ac.js",
+    "main.js": "/tonalities/static/js/main.d7e4c252.js",
     "static/media/bg-score.jpg": "/tonalities/static/media/bg-score.10477ca808567fd51e68.jpg",
     "static/media/polifonia.svg": "/tonalities/static/media/polifonia.dac8756588bad692c51778beade5878a.svg",
     "index.html": "/tonalities/index.html",
     "main.ff9caf5d.css.map": "/tonalities/static/css/main.ff9caf5d.css.map",
-    "main.9cc8c8ac.js.map": "/tonalities/static/js/main.9cc8c8ac.js.map"
+    "main.d7e4c252.js.map": "/tonalities/static/js/main.d7e4c252.js.map"
   },
   "entrypoints": [
     "static/css/main.ff9caf5d.css",
-    "static/js/main.9cc8c8ac.js"
+    "static/js/main.d7e4c252.js"
   ]
 }
