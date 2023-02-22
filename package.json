@@ -1,25 +1,21 @@
 {
   "homepage": "/tonalities/",
   "name": "tonalities",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.4.2",
-    "@mui/material": "^5.4.2",
-    "@reduxjs/toolkit": "^1.8.0",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "material-ui-confirm": "^3.0.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.6",
-    "react-router-dom": "6",
-    "react-scripts": "5.0.0",
-    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries#main",
-    "uuid": "^8.3.2"
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/material": "^5.11.10",
+    "@reduxjs/toolkit": "^1.9.3",
+    "material-ui-confirm": "^3.0.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "6.8.1",
+    "react-scripts": "5.0.1",
+    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#commit=16ca8bd617a96e2a2e0da5de22ba45adb6588ab4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@3.4.1"
 }

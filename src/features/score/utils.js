@@ -56,13 +56,9 @@ export const getScoreLabel = scoreIri => {
   return null
 }
 
-export const getUuidFromSherlockIri = iri => {
-  return iri.split('/').pop()
-}
+export const getUuidFromSherlockIri = iri => iri.split('/').pop()
 
-export const getSherlockIriFromUuid = uuid => {
-  return `http://data-iremus.huma-num.fr/id/${uuid}`
-}
+export const getSherlockIriFromUuid = uuid => `http://data-iremus.huma-num.fr/id/${uuid}`
 
 /**
  *

@@ -1,8 +1,0 @@
-PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-SELECT ?child ?type
-WHERE {
-    GRAPH <http://data-iremus.huma-num.fr/graph/modality-tonality> {
-        <http://data-iremus.huma-num.fr/id/d4b7d615-b156-44fa-a825-792f02b6ba22> crm:P106_is_composed_of ?child.
-        ?child crm:P2_has_type ?type
-    }
-}

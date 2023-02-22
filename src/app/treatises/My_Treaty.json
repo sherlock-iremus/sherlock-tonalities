@@ -1,9 +1,0 @@
-{
-  "iri": "http://modality-tonality.huma-num.fr/Speech#",
-  "classes": [{ "iri": "http://modality-tonality.huma-num.fr/Speech#maClasse", "label": "Ma super classe" }],
-  "properties": [
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Support", "label": "Support" },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Refute", "label": "Refute" },
-    { "iri": "http://modality-tonality.huma-num.fr/Speech#Comment", "label": "Comment" }
-  ]
-}

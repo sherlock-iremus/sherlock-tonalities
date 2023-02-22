@@ -16,7 +16,7 @@ import {
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import scores from '../app/scores.json'
-import cover from '../images/bg-score.jpg'
+import cover from '../assets/bg-score.jpg'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUuidFromSherlockIri } from './score/utils'
@@ -27,6 +27,7 @@ export const ScoreLibrary = () => {
   const { scoreIri } = useSelector(state => state.score)
   const [selectedScoreIri, setSelectedScoreIri] = useState(scoreIri)
   const baseUrlLength = useSelector(state => state.score.baseUrl.length)
+  
   return (
     <Card sx={{ maxWidth: 800, overflowY: 'visible' }}>
       <CardMedia component="img" height="140" image={cover} alt="score" />

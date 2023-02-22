@@ -1,48 +1,37 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { Provider, useSelector } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './index.css'
-import App from './App'
 import { store } from './app/store'
-import * as serviceWorker from './serviceWorker'
 import { ScoreAnnotator } from './features/score/ScoreAnnotator'
 import { ConfirmProvider } from 'material-ui-confirm'
 import { useGetUserIdQuery } from './app/services/sherlockApi'
-import { CoPresent } from '@mui/icons-material'
+import { Landing } from './Landing'
+import { createRoot } from 'react-dom/client'
 
 const TonalitiesRoutes = () => {
-  // Sherlock API request to see whether user token is valid or not
   useGetUserIdQuery()
-
   const { isUserConnected } = useSelector(state => state.score)
 
   return (
     <Routes>
       {isUserConnected && <Route path="/score/:scoreUuid" element={<ScoreAnnotator />} />}
-      <Route path="*" element={<App />} />
+      <Route path="*" element={<Landing />} />
     </Routes>
   )
 }
 
 window.verovio.module.onRuntimeInitialized = function () {
-  window.tk = new window.verovio.toolkit();
-  window.tk.setOptions({});
-  ReactDOM.render(
+  window.tk = new window.verovio.toolkit()
+  const root = createRoot(document.getElementById('app'))
+  root.render(
     <React.StrictMode>
       <ConfirmProvider>
         <BrowserRouter basename="/tonalities">
-          <Provider store={store}>
+          <Provider {...{ store }}>
             <TonalitiesRoutes />
           </Provider>
         </BrowserRouter>
       </ConfirmProvider>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
   )
 }
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
