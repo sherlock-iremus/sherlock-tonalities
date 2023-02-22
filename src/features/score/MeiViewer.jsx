@@ -1,7 +1,4 @@
-/** @jsxImportSource @emotion/react */
-
 import { useEffect, useState } from 'react'
-import { verovioStyle } from './mei.css'
 
 export const MeiViewer = ({ meiUrl, scoreIri }) => {
   const [pageCount, setPageCount] = useState(0)
@@ -10,8 +7,11 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
   const loadScore = async () => {
     const blob = await fetch(meiUrl)
     const file = await blob.text()
-    window.tk.loadData(file)
-    document.getElementById('verovio').innerHTML = window.tk.renderToSVG(1)
+    document.getElementById('verovio').innerHTML = window.tk.renderData(file, {
+      pageWidth: 20000,
+      pageHeight: 10000,
+      breaks: 'none',
+    })
     setPageCount(window.tk.getPageCount())
   }
 
@@ -49,7 +49,7 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
           </button>
         </>
       )}
-      <div css={verovioStyle} id="verovio" />
+      <div id="verovio" />
     </>
   )
 }
