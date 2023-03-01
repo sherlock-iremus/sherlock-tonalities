@@ -1,5 +1,5 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Avatar, Backdrop, CircularProgress, IconButton, Pagination } from '@mui/material'
+import { Avatar, Backdrop, CircularProgress, IconButton, Pagination, Tooltip } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -35,29 +35,43 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
 
   return (
     <Stack>
-      <Stack spacing={2} padding={2} direction="row" justifyContent="space-between">
-        <IconButton onClick={() => navigate('/')}>
-          <ArrowBack />
-        </IconButton>
+      <Stack
+        position="sticky"
+        top={0}
+        bgcolor="white"
+        spacing={2}
+        padding={2}
+        direction="row"
+        justifyContent="space-between"
+      >
+        <Tooltip title="Back to home">
+          <IconButton onClick={() => navigate('/')}>
+            <ArrowBack />
+          </IconButton>
+        </Tooltip>
         <Stack direction="row">
-          <IconButton
-            onClick={() =>
-              window.tk.setOptions({
-                scale: scale + 10,
-              }) && setScale(scale + 10)
-            }
-          >
-            <ZoomIn />
-          </IconButton>
-          <IconButton
-            onClick={() =>
-              window.tk.setOptions({
-                scale: scale - 10,
-              }) && setScale(scale - 10)
-            }
-          >
-            <ZoomOut />
-          </IconButton>
+          <Tooltip title="Zoom in">
+            <IconButton
+              onClick={() =>
+                window.tk.setOptions({
+                  scale: scale + 10,
+                }) && setScale(scale + 10)
+              }
+            >
+              <ZoomIn />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Zoom out">
+            <IconButton
+              onClick={() =>
+                window.tk.setOptions({
+                  scale: scale - 10,
+                }) && setScale(scale - 10)
+              }
+            >
+              <ZoomOut />
+            </IconButton>
+          </Tooltip>
           <Pagination
             count={pageCount}
             page={currentPage}
