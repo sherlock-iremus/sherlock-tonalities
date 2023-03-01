@@ -1,5 +1,5 @@
-import { ANALYTICAL_ENTITY, ANNOTATION, NOTE, POSITIONNED_NOTE, SCORE, SELECTION, VERTICALITY } from './constants'
-import scores from '../../app/scores.json'
+import { ANALYTICAL_ENTITY, ANNOTATION, NOTE, POSITIONNED_NOTE, SCORE, SELECTION, VERTICALITY } from './features/score/constants'
+import scores from './app/scores.json'
 
 export const findKey = item =>
   item &&
