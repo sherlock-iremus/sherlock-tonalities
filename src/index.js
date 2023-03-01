@@ -7,6 +7,7 @@ import { ConfirmProvider } from 'material-ui-confirm'
 import { useGetUserIdQuery } from './app/services/sherlockApi'
 import { Landing } from './Landing'
 import { createRoot } from 'react-dom/client'
+import * as serviceWorker from './serviceWorker'
 
 const TonalitiesRoutes = () => {
   useGetUserIdQuery()
@@ -35,3 +36,5 @@ window.verovio.module.onRuntimeInitialized = function () {
     </React.StrictMode>
   )
 }
+
+serviceWorker.unregister()
