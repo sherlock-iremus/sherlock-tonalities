@@ -8948,17 +8948,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"material-ui-confirm@npm:^3.0.8":
-  version: 3.0.8
-  resolution: "material-ui-confirm@npm:3.0.8"
-  peerDependencies:
-    "@mui/material": ">= 5.0.0"
-    react: ^17.0.0 || ^18.0.0
-    react-dom: ^17.0.0 || ^18.0.0
-  checksum: 41f5e561752f6091312835683963c2dfdd88a4ccc961e030df33131ee23c0a0f5fa8e25910b874be8a5e123bace8cbda444008288c035dbfa0da75926ac2ef45
-  languageName: node
-  linkType: hard
-
 "mdn-data@npm:2.0.14":
   version: 2.0.14
   resolution: "mdn-data@npm:2.0.14"
@@ -12535,7 +12524,6 @@ __metadata:
     "@mui/icons-material": ^5.11.9
     "@mui/material": ^5.11.10
     "@reduxjs/toolkit": ^1.9.3
-    material-ui-confirm: ^3.0.8
     react: ^18.2.0
     react-dom: ^18.2.0
     react-redux: ^8.0.5
