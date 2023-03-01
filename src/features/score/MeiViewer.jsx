@@ -1,55 +1,79 @@
+import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
+import { Avatar, Backdrop, CircularProgress, IconButton, Pagination } from '@mui/material'
+import { Box, Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const MeiViewer = ({ meiUrl, scoreIri }) => {
+  const navigate = useNavigate()
   const [pageCount, setPageCount] = useState(0)
+  const [scale, setScale] = useState(60)
   const [currentPage, setCurrentPage] = useState(1)
 
   const loadScore = async () => {
-    const blob = await fetch(meiUrl)
-    const file = await blob.text()
+    const file = await (await fetch(meiUrl)).text()
     document.getElementById('verovio').innerHTML = window.tk.renderData(file, {
-      pageWidth: 20000,
-      pageHeight: 10000,
-      breaks: 'none',
+      scale,
+      adjustPageWidth: true,
+      adjustPageHeight: true,
+      header: 'none',
+      footer: 'none',
     })
     setPageCount(window.tk.getPageCount())
   }
 
-  useEffect(() => {
-    if (1 <= currentPage && currentPage <= pageCount) {
-      const svg = window.tk.renderToSVG(currentPage)
-      document.getElementById('verovio').innerHTML = svg
+  const onPageChange = newPage => {
+    if (1 <= newPage && newPage <= pageCount) {
+      document.getElementById('verovio').innerHTML = window.tk.renderToSVG(newPage)
+      setCurrentPage(newPage)
     }
-  }, [currentPage])
+  }
 
   useEffect(() => {
     loadScore()
   }, [meiUrl])
 
   return (
-    <>
-      {window.tk && (
-        <>
-          <button
-            onClick={e => {
-              if (currentPage >= 2) setCurrentPage(currentPage - 1)
-            }}
+    <Stack>
+      <Stack spacing={2} padding={2} direction="row" justifyContent="space-between">
+        <IconButton onClick={() => navigate('/')}>
+          <ArrowBack />
+        </IconButton>
+        <Stack direction="row">
+          <IconButton
+            onClick={() =>
+              window.tk.setOptions({
+                scale: scale + 10,
+              }) && setScale(scale + 10)
+            }
           >
-            previous
-          </button>
-          <button>
-            {currentPage}/{pageCount}
-          </button>
-          <button
-            onClick={e => {
-              if (currentPage < pageCount) setCurrentPage(currentPage + 1)
-            }}
+            <ZoomIn />
+          </IconButton>
+          <IconButton
+            onClick={() =>
+              window.tk.setOptions({
+                scale: scale - 10,
+              }) && setScale(scale - 10)
+            }
           >
-            next
-          </button>
-        </>
+            <ZoomOut />
+          </IconButton>
+          <Pagination
+            count={pageCount}
+            page={currentPage}
+            onChange={e => onPageChange(Number(e.target.textContent))}
+            color="primary"
+            size="large"
+          />
+        </Stack>
+        <Avatar />
+      </Stack>
+      <Box flex={1} id="verovio" />
+      {!pageCount && (
+        <Backdrop open>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       )}
-      <div id="verovio" />
-    </>
+    </Stack>
   )
 }
