@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux'
 import scores from '../app/scores.json'
 import cover from '../assets/bg-score.jpg'
 import { useNavigate } from 'react-router-dom'
-import { getUuidFromSherlockIri } from './score/utils'
+import { getUuidFromSherlockIri } from '../utils'
 
 export const ScoreLibrary = () => {
   const navigate = useNavigate()

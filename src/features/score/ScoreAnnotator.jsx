@@ -3,7 +3,7 @@
 import { useSelector } from 'react-redux'
 import { MeiViewer } from './MeiViewer'
 import { useParams } from 'react-router-dom'
-import { getSherlockIriFromUuid } from './utils'
+import { getSherlockIriFromUuid } from '../../utils'
 import { useEffect } from 'react'
 import { setScore } from '../../app/services/scoreSlice'
 import { useDispatch } from 'react-redux'

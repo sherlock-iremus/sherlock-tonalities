@@ -3,7 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const sherlockApi = createApi({
   reducerPath: 'sherlockApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://data-iremus.huma-num.fr/sherlock/api/',
+    baseUrl: !process.env.NODE_ENV
+      ? 'http://sherlock.freeboxos.fr/sherlock/api/'
+      : 'https://data-iremus.huma-num.fr/sherlock/api/',
     credentials: 'include',
   }),
   endpoints: builder => ({
@@ -22,9 +24,9 @@ export const sherlockApi = createApi({
       }),
     }),
     deleteSelection: builder.mutation({
-      query: (uuid) => ({
+      query: uuid => ({
         url: `selection/${uuid}`,
-        method: 'DELETE'
+        method: 'DELETE',
       }),
     }),
     postAnnotation: builder.mutation({
@@ -44,7 +46,7 @@ export const sherlockApi = createApi({
     deleteAnalyticalEntity: builder.mutation({
       query: uuid => ({
         url: `analytical-entity/${uuid}`,
-        method: 'DELETE'
+        method: 'DELETE',
       }),
     }),
     getUserId: builder.query({
@@ -64,5 +66,5 @@ export const {
   usePatchSelectionMutation,
   useDeleteSelectionMutation,
   usePostAnalyticalEntityMutation,
-  useDeleteAnalyticalEntityMutation
+  useDeleteAnalyticalEntityMutation,
 } = sherlockApi
