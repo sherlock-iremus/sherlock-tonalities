@@ -1,8 +1,9 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Avatar, Backdrop, CircularProgress, IconButton, Pagination, Tooltip } from '@mui/material'
+import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AccountMenu } from '../AccountMenu'
 
 export const MeiViewer = ({ meiUrl, scoreIri }) => {
   const navigate = useNavigate()
@@ -80,7 +81,7 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
             size="large"
           />
         </Stack>
-        <Avatar />
+        <AccountMenu />
       </Stack>
       <Box flex={1} id="verovio" />
       {!pageCount && (
