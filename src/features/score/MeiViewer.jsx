@@ -76,6 +76,8 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
           <Pagination
             count={pageCount}
             page={currentPage}
+            siblingCount={1}
+            boundaryCount={1}
             onChange={e => onPageChange(Number(e.target.textContent))}
             color="primary"
             size="large"

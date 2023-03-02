@@ -1,6 +1,7 @@
 import { Logout, PersonAdd, Settings } from '@mui/icons-material'
 import { IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useGetUserIdQuery } from '../app/services/sherlockApi'
 import { getSherlockIriFromUuid } from '../utils'
 import { ContributorItem } from './items/ContributorItem'
@@ -9,8 +10,16 @@ export const AccountMenu = () => {
   const { data: userId } = useGetUserIdQuery()
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
+  const navigate = useNavigate()
 
   const handleClose = () => setAnchorEl(null)
+
+  const logOut = () => {
+    document.cookie = `JWT=; path=/; expires=${new Date(0).toUTCString()}`
+    document.cookie = `JWT_REFRESH_TOKEN=; path=/; expires=${new Date(0).toUTCString()}`
+    navigate(0)
+  }
+
   if (userId)
     return (
       <>
@@ -66,13 +75,13 @@ export const AccountMenu = () => {
             </ListItemIcon>
             New analytical project
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={() => window.location.href = 'https://data-iremus.huma-num.fr/sherlock/me' }>
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>
-            Settings
+            Profile info
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={logOut} disabled={process.env.NODE_ENV !== 'production'}>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
