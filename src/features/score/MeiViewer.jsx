@@ -30,6 +30,12 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
     }
   }
 
+  const zoom = newScale => {
+    window.tk.setOptions({ scale: newScale })
+    document.getElementById('verovio').innerHTML = window.tk.renderToSVG(currentPage)
+    setScale(newScale)
+  }
+
   useEffect(() => {
     loadScore()
   }, [meiUrl])
@@ -52,24 +58,12 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
         </Tooltip>
         <Stack direction="row">
           <Tooltip title="Zoom in">
-            <IconButton
-              onClick={() =>
-                window.tk.setOptions({
-                  scale: scale + 10,
-                }) && setScale(scale + 10)
-              }
-            >
+            <IconButton onClick={() => zoom(scale + 10)}>
               <ZoomIn />
             </IconButton>
           </Tooltip>
           <Tooltip title="Zoom out">
-            <IconButton
-              onClick={() =>
-                window.tk.setOptions({
-                  scale: scale - 10,
-                }) && setScale(scale - 10)
-              }
-            >
+            <IconButton onClick={() => zoom(scale - 10)}>
               <ZoomOut />
             </IconButton>
           </Tooltip>
