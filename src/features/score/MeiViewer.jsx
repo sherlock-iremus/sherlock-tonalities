@@ -1,11 +1,12 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
 import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip } from '@mui/material'
-import { Box, Stack } from '@mui/system'
+import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AccountMenu } from '../AccountMenu'
+import { verovioStyle } from './style'
 
-export const MeiViewer = ({ meiUrl, scoreIri }) => {
+export const MeiViewer = ({ meiUrl }) => {
   const navigate = useNavigate()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(60)
@@ -36,6 +37,17 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
     setScale(newScale)
   }
 
+  const getNote = node =>
+    node.classList && node.classList.contains('note') ? node : node.parentNode && getNote(node.parentNode)
+
+  const handleClick = e => {
+    const noteId = getNote(e.target)?.id
+    const onset = window.tk.getTimesForElement(noteId).realTimeOnsetMilliseconds
+    const { notes } = window.tk.getElementsAtTime(onset)
+    console.log(notes)
+    notes.map(note => document.getElementById(note).classList.add('focused'))
+  }
+
   useEffect(() => {
     loadScore()
   }, [meiUrl])
@@ -50,6 +62,7 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
         padding={2}
         direction="row"
         justifyContent="space-between"
+        alignItems="center"
       >
         <Tooltip title="Back to home">
           <IconButton onClick={() => navigate('/')}>
@@ -79,7 +92,15 @@ export const MeiViewer = ({ meiUrl, scoreIri }) => {
         </Stack>
         <AccountMenu />
       </Stack>
-      <Box flex={1} id="verovio" />
+      <Stack direction="row" justifyContent="space-between" alignItems="center" paddingX={2} width="80vw" height="80vh">
+        <Stack borderRadius="10px" bgcolor="grey" boxShadow={1}>
+          Arbre de concepts
+        </Stack>
+        <Stack id="verovio" alignSelf="center" onClick={handleClick} />
+        <Stack borderRadius="10px" bgcolor="grey" boxShadow={1}>
+          Navigateur d'individus
+        </Stack>
+      </Stack>
       {!pageCount && (
         <Backdrop open>
           <CircularProgress color="inherit" />
