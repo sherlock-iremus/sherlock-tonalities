@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Landing } from './Landing'
 import { ScoreAnnotator } from './features/score/ScoreAnnotator'
 
-export const Router = () => {
+export const App = () => {
   useGetUserIdQuery()
   const { isUserConnected } = useSelector(state => state.score)
 

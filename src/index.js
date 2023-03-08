@@ -5,7 +5,7 @@ import { store } from './app/store'
 import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './theme'
-import { Router } from './Router'
+import { App } from './App'
 
 window.verovio.module.onRuntimeInitialized = () => {
   window.tk = new window.verovio.toolkit()
@@ -16,7 +16,7 @@ window.verovio.module.onRuntimeInitialized = () => {
       <BrowserRouter basename="/tonalities">
         <ThemeProvider {...{ theme }}>
           <ReduxProvider {...{ store }}>
-            <Router />
+            <App />
           </ReduxProvider>
         </ThemeProvider>
       </BrowserRouter>
