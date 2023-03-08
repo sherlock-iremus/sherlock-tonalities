@@ -33,11 +33,11 @@ export const Landing = () => {
         <PolifoniaLogo width="120px" />
         <AccountMenu />
       </Stack>
-      <Stack borderRadius="10px" bgcolor="white" boxShadow={1} marginX={2} overflow="auto">
+      <Stack borderRadius="10px" bgcolor="white" boxShadow={1} marginX={2}>
         {!isUserConnected ? (
           <Intro />
         ) : (
-          <Stack direction="row" justifyContent="space-evenly">
+          <Stack direction="row" height="60vh">
             <List
               subheader={<ListSubheader>Annotated scores</ListSubheader>}
               disablePadding
@@ -79,6 +79,9 @@ export const Landing = () => {
               ))}
             </List>
             <List
+              disablePadding
+              dense
+              sx={{ overflow: 'auto' }}
               subheader={
                 <Stack direction="row" justifyContent="space-between">
                   <ListSubheader>Analytical projects</ListSubheader>
@@ -91,8 +94,6 @@ export const Landing = () => {
                   </Box>
                 </Stack>
               }
-              disablePadding
-              dense
             >
               {[0, 190820938, 20098097, 3203040, 4000].map(project => (
                 <ListItem key={project} disablePadding secondaryAction={<ContributorItem small />}>
