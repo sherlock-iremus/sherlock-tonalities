@@ -1,9 +1,9 @@
 import { Logout, PersonAdd, Settings } from '@mui/icons-material'
 import { Button, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material'
 import { Box } from '@mui/system'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useGetUserIdQuery } from '../app/services/sherlockApi'
+import { BASE_API_URL, useGetUserIdQuery } from '../app/services/sherlockApi'
 import { getSherlockIriFromUuid } from '../utils'
 import { ContributorItem } from './items/ContributorItem'
 
@@ -20,15 +20,20 @@ export const AccountMenu = () => {
     document.cookie = `JWT_REFRESH_TOKEN=; path=/; expires=${new Date(0).toUTCString()}`
     navigate(0)
   }
+  
+  const getUserId = async () => {
+    const response = await fetch('http://sherlock.freeboxos.fr/sherlock/api/', { credentials: 'include' })
+    const id = await response.json()
+    console.log(id)
+  }
+
+  useEffect(() => {
+    getUserId()
+  }, [])
 
   return !userId ? (
     <Box>
-      <Button
-        href={`http://data-iremus.huma-num.fr/sso?redirect-uri=${window.location.href}`}
-        variant="contained"
-        color="success"
-        size="small"
-      >
+      <Button href={BASE_API_URL + `oauth/login/orcid`} variant="contained" color="success" size="small">
         Login
       </Button>
     </Box>

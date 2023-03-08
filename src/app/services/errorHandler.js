@@ -1,8 +1,9 @@
 import { isRejectedWithValue } from '@reduxjs/toolkit'
 import { setIsUserConnected } from './scoreSlice'
+import { BASE_API_URL } from './sherlockApi'
 
 const SHERLOCK_API_ERROR = 'sherlockApi/'
-const SHERLOCK_API_REFRESH_ENDPOIT = 'https://data-iremus.huma-num.fr/sherlock/oauth/access_token'
+const SHERLOCK_API_REFRESH_ENDPOIT = BASE_API_URL + 'sherlock/oauth/access_token'
 
 export const tokenExpirationHandler = api => next => async action => {
   if (isRejectedWithValue(action)) {
