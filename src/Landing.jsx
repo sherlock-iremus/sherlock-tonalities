@@ -17,14 +17,14 @@ import { Add, AudioFile, ChevronRight, LibraryMusic, RoomService, TextSnippet } 
 import scores from './app/scores.json'
 import { AccountMenu } from './features/AccountMenu'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Intro } from './features/Intro'
 import { ContributorItem } from './features/items/ContributorItem'
 import { Box } from '@mui/system'
+import { useGetUserIdQuery } from './app/services/sherlockApi'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { isUserConnected } = useSelector(state => state.score)
+  const { data: userId } = useGetUserIdQuery()
 
   return (
     <Stack height="100vh" flex={1} justifyContent="space-between" alignItems="center" bgcolor={grey[100]}>
@@ -34,7 +34,7 @@ export const Landing = () => {
         <AccountMenu />
       </Stack>
       <Stack borderRadius="10px" bgcolor="white" boxShadow={1} marginX={2}>
-        {!isUserConnected ? (
+        {!userId ? (
           <Intro />
         ) : (
           <Stack direction="row" height="60vh">
