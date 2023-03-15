@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const BASE_API_URL =
-  process.env.NODE_ENV === 'development' ? 'http://sherlock.freeboxos.fr/' : 'https://data-iremus.huma-num.fr/'
-export const sherlockApi = createApi({
+  process.env.NODE_ENV === 'development' ? 'https://sherlock.freeboxos.fr/' : 'https://data-iremus.huma-num.fr/'
+
+  export const sherlockApi = createApi({
   reducerPath: 'sherlockApi',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_API_URL + 'sherlock/api/',
@@ -50,9 +51,7 @@ export const sherlockApi = createApi({
       }),
     }),
     getUserId: builder.query({
-      query: () => ({
-      }),
-      transformResponse: response => console.log(response)
+      query: () => ({}),
     }),
   }),
 })

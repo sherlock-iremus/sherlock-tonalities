@@ -5,12 +5,7 @@ import { BASE_API_URL } from './sherlockApi'
 
 export const sparqlEndpoint = createApi({
   reducerPath: 'sparqlApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl:
-      process.env.NODE_ENV === 'development'
-        ? 'http://sherlock.freeboxos.fr:3030/iremus/sparql'
-        : BASE_API_URL + 'sparql',
-  }),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL + 'sparql' }),
   endpoints: builder => ({
     getContributor: builder.query({
       query: contributorIri => ({

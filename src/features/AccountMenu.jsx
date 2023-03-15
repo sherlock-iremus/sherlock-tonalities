@@ -1,7 +1,7 @@
 import { Logout, PersonAdd, Settings } from '@mui/icons-material'
 import { Button, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material'
 import { Box } from '@mui/system'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BASE_API_URL, useGetUserIdQuery } from '../app/services/sherlockApi'
 import { getSherlockIriFromUuid } from '../utils'
@@ -20,16 +20,6 @@ export const AccountMenu = () => {
     document.cookie = `JWT_REFRESH_TOKEN=; path=/; expires=${new Date(0).toUTCString()}`
     navigate(0)
   }
-  
-  const getUserId = async () => {
-    const response = await fetch('http://sherlock.freeboxos.fr/sherlock/api/', { credentials: 'include' })
-    const id = await response.json()
-    console.log(id)
-  }
-
-  useEffect(() => {
-    getUserId()
-  }, [])
 
   return !userId ? (
     <Box>
