@@ -27,13 +27,13 @@ export const Landing = () => {
   const { data: userId } = useGetUserIdQuery()
 
   return (
-    <Stack height="100vh" flex={1} justifyContent="space-between" alignItems="center" bgcolor={grey[100]}>
+    <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor={grey[100]}>
       <ScoreLibrary {...{ isOpen, setIsOpen }} />
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
-        <PolifoniaLogo width="120px" />
+        <PolifoniaLogo width="100px" />
         <AccountMenu />
       </Stack>
-      <Stack borderRadius="10px" bgcolor="white" boxShadow={1} marginX={2}>
+      <Stack borderRadius={5} bgcolor="white" boxShadow={1} overflow="hidden" marginX={2}>
         {!userId ? (
           <Intro />
         ) : (

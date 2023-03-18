@@ -3,7 +3,7 @@ import { Button, IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/materi
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BASE_API_URL, useGetUserIdQuery } from '../app/services/sherlockApi'
+import { BASE_API_URL, isInDevMode, useGetUserIdQuery } from '../app/services/sherlockApi'
 import { Menu } from '../components/Menu'
 import { getSherlockIriFromUuid } from '../utils'
 import { ContributorItem } from './items/ContributorItem'
@@ -42,13 +42,13 @@ export const AccountMenu = () => {
         </IconButton>
       </Tooltip>
       <Menu anchorEl={anchorEl} id="account-menu" open={open} onClose={handleClose} onClick={handleClose}>
-        <MenuItem onClick={() => (window.location.href = 'https://data-iremus.huma-num.fr/sherlock/me')}>
+        <MenuItem onClick={() => (window.location.href = BASE_API_URL + 'sherlock/me')}>
           <ListItemIcon>
             <AccountCircle fontSize="small" />
           </ListItemIcon>
           My account
         </MenuItem>
-        <MenuItem onClick={logOut} disabled={process.env.NODE_ENV !== 'production'}>
+        <MenuItem onClick={logOut} disabled={isInDevMode}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
