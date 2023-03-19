@@ -1,4 +1,4 @@
-import { ScoreLibrary } from './features/ScoreLibrary'
+import { NewProject } from './features/NewProject'
 import {
   Button,
   Divider,
@@ -32,7 +32,6 @@ import { Intro } from './features/Intro'
 import { ContributorItem } from './features/items/ContributorItem'
 import { useGetUserIdQuery } from './app/services/sherlockApi'
 import scores from './app/scores.json'
-import { Box } from '@mui/system'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,7 +43,9 @@ export const Landing = () => {
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor={grey[100]}>
-      <ScoreLibrary {...{ isOpen, setIsOpen }} />
+      {isScoreSelected && !isAllScoresSelected && (
+        <NewProject {...{ isOpen, setIsOpen, score: scores[selectedScoreIndex] }} />
+      )}
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <PolifoniaLogo width="100px" />
         <AccountMenu />
@@ -117,20 +118,22 @@ export const Landing = () => {
               <Divider orientation="vertical" />
               <Stack flex={1}>
                 {isScoreSelected && (
-                  <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5} minWidth={0}>
+                  <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
                     <ListSubheader
                       sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 300 }}
                     >
                       Analytical projects for{' '}
                       {isAllScoresSelected ? 'all scores' : scores[selectedScoreIndex].scoreTitle}
                     </ListSubheader>
-                    <Stack>
-                      <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
-                        <IconButton>
-                          <Add />
-                        </IconButton>
-                      </Tooltip>
-                    </Stack>
+                    {!isAllScoresSelected && (
+                      <Stack>
+                        <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
+                          <IconButton>
+                            <Add />
+                          </IconButton>
+                        </Tooltip>
+                      </Stack>
+                    )}
                   </Stack>
                 )}
                 {isAllScoresSelected ? (
