@@ -1,5 +1,7 @@
 import { ScoreLibrary } from './features/ScoreLibrary'
 import {
+  Button,
+  Divider,
   IconButton,
   List,
   ListItem,
@@ -9,22 +11,36 @@ import {
   ListSubheader,
   Stack,
   Tooltip,
+  Typography,
 } from '@mui/material'
 import { ReactComponent as PolifoniaLogo } from './assets/polifonia.svg'
 import { grey } from '@mui/material/colors'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AudioFile, ChevronRight, LibraryMusic, RoomService, TextSnippet } from '@mui/icons-material'
-import scores from './app/scores.json'
+import {
+  Add,
+  AudioFile,
+  ChevronRight,
+  Language,
+  LibraryMusic,
+  RoomService,
+  SwapHoriz,
+  TextSnippet,
+} from '@mui/icons-material'
 import { AccountMenu } from './features/AccountMenu'
 import { useState } from 'react'
 import { Intro } from './features/Intro'
 import { ContributorItem } from './features/items/ContributorItem'
-import { Box } from '@mui/system'
 import { useGetUserIdQuery } from './app/services/sherlockApi'
+import scores from './app/scores.json'
+import { Box } from '@mui/system'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectedScoreIndex, setSelectedScoreIndex] = useState(-1)
   const { data: userId } = useGetUserIdQuery()
+
+  const isAllScoresSelected = selectedScoreIndex === scores.length
+  const isScoreSelected = selectedScoreIndex !== -1
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor={grey[100]}>
@@ -33,89 +49,134 @@ export const Landing = () => {
         <PolifoniaLogo width="100px" />
         <AccountMenu />
       </Stack>
-      <Stack borderRadius={5} bgcolor="white" boxShadow={1} overflow="hidden" marginX={2}>
-        {!userId ? (
-          <Intro />
-        ) : (
-          <Stack direction="row" height="60vh">
-            <List
-              subheader={<ListSubheader>Annotated scores</ListSubheader>}
-              disablePadding
-              dense
-              sx={{ overflow: 'auto' }}
-            >
-              <ListItem
-                disablePadding
-                secondaryAction={
-                  <IconButton edge="end">
-                    <ChevronRight />
-                  </IconButton>
-                }
-              >
-                <ListItemButton selected>
-                  <ListItemIcon>
-                    <LibraryMusic />
-                  </ListItemIcon>
-                  <ListItemText primary="All" secondary="View all analytical projects" />
-                </ListItemButton>
-              </ListItem>
-              {scores.map(score => (
-                <ListItem
-                  key={score.scoreIri}
-                  disablePadding
-                  secondaryAction={
-                    <IconButton edge="end">
-                      <ChevronRight />
-                    </IconButton>
-                  }
-                >
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <AudioFile />
-                    </ListItemIcon>
-                    <ListItemText primary={score.scoreTitle} secondary="Composer" />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-            <List
-              disablePadding
-              dense
-              sx={{ overflow: 'auto' }}
-              subheader={
-                <Stack direction="row" justifyContent="space-between">
-                  <ListSubheader>Analytical projects</ListSubheader>
-                  <Box>
-                    <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
-                      <IconButton>
-                        <Add />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
-                </Stack>
-              }
-            >
-              {[0, 190820938, 20098097, 3203040, 4000].map(project => (
-                <ListItem key={project} disablePadding secondaryAction={<ContributorItem small />}>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <TextSnippet />
-                    </ListItemIcon>
-                    <ListItemText primary={'Project n°' + project} secondary="Musicologist" />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
+      <Stack borderRadius={4} bgcolor="white" boxShadow={1} marginX={4}>
+        <Stack direction="row" height="60vh">
+          <Stack flex={2}>
+            <Stack direction="row" spacing={0.5} p={2}>
+              <Typography variant="h5">Tonalities</Typography>
+              <Typography fontSize={12} variant="h6">
+                2.0
+              </Typography>
+            </Stack>
+            <Intro />
           </Stack>
-        )}
+          {userId && (
+            <Stack direction="row" flex={3}>
+              <Divider orientation="vertical" />
+              <Stack flex={1}>
+                <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
+                  <ListSubheader>Available scores</ListSubheader>
+                  <Stack>
+                    <IconButton disabled>
+                      <SwapHoriz />
+                    </IconButton>
+                  </Stack>
+                </Stack>
+                <List disablePadding dense sx={{ overflow: 'auto' }}>
+                  <ListItem
+                    disablePadding
+                    secondaryAction={
+                      <IconButton edge="end" disableRipple>
+                        <ChevronRight />
+                      </IconButton>
+                    }
+                  >
+                    <ListItemButton
+                      selected={isAllScoresSelected}
+                      onClick={() => setSelectedScoreIndex(!isAllScoresSelected ? scores.length : -1)}
+                    >
+                      <ListItemIcon>
+                        <LibraryMusic />
+                      </ListItemIcon>
+                      <ListItemText primary="All scores" secondary="View all analytical projects" />
+                    </ListItemButton>
+                  </ListItem>
+                  {scores.map(({ scoreIri, scoreTitle }, index) => (
+                    <ListItem
+                      key={scoreIri}
+                      disablePadding
+                      secondaryAction={
+                        <IconButton edge="end" disableRipple>
+                          <ChevronRight />
+                        </IconButton>
+                      }
+                    >
+                      <ListItemButton
+                        selected={selectedScoreIndex === index}
+                        onClick={() => setSelectedScoreIndex(selectedScoreIndex !== index ? index : -1)}
+                      >
+                        <ListItemIcon>
+                          <AudioFile />
+                        </ListItemIcon>
+                        <ListItemText primary={scoreTitle} secondary="Composer" />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Stack>
+              <Divider orientation="vertical" />
+              <Stack flex={1}>
+                {isScoreSelected && (
+                  <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5} minWidth={0}>
+                    <ListSubheader
+                      sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 300 }}
+                    >
+                      Analytical projects for{' '}
+                      {isAllScoresSelected ? 'all scores' : scores[selectedScoreIndex].scoreTitle}
+                    </ListSubheader>
+                    <Stack>
+                      <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
+                        <IconButton>
+                          <Add />
+                        </IconButton>
+                      </Tooltip>
+                    </Stack>
+                  </Stack>
+                )}
+                {isAllScoresSelected ? (
+                  <List disablePadding dense sx={{ overflow: 'auto' }}>
+                    {[0, 1, 2, 3, 4].map(project => (
+                      <ListItem key={project} disablePadding secondaryAction={<ContributorItem small />}>
+                        <ListItemButton>
+                          <ListItemIcon>
+                            <TextSnippet />
+                          </ListItemIcon>
+                          <ListItemText primary={'Project n°' + project} secondary="Félix Poullet-Pagès" />
+                        </ListItemButton>
+                      </ListItem>
+                    ))}
+                  </List>
+                ) : (
+                  <Stack flex={1} justifyContent="center" alignItems="center" p={2}>
+                    <Typography textAlign="center" color="text.secondary" fontSize={14}>
+                      {isScoreSelected
+                        ? 'There is currently no created analytical project for this score'
+                        : 'No score selected, start by selecting a score to browse analytical projects'}
+                    </Typography>
+                    {isScoreSelected && (
+                      <Button size="small" onClick={() => setIsOpen(true)}>
+                        Create new analytical project
+                      </Button>
+                    )}
+                  </Stack>
+                )}
+              </Stack>
+            </Stack>
+          )}
+        </Stack>
       </Stack>
       <Stack alignSelf="end" direction="row" padding={2}>
+        <Tooltip title="Polifonia website">
+          <IconButton href="https://polifonia-project.eu/pilots/tonalities/">
+            <Language />
+          </IconButton>
+        </Tooltip>
         <Tooltip title="Source code">
           <IconButton href="https://github.com/sherlock-iremus/sherlock-tonalities">
             <GitHubIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Report bug">
+        <Tooltip title="Report a bug">
           <IconButton href="https://github.com/sherlock-iremus/sherlock-tonalities/issues/new">
             <RoomService />
           </IconButton>
