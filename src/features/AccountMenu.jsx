@@ -24,7 +24,12 @@ export const AccountMenu = () => {
 
   return !userId ? (
     <Box>
-      <Button href={BASE_API_URL + `oauth/login/orcid`} variant="contained" color="success" size="small">
+      <Button
+        href={BASE_API_URL + `sherlock/login?redirect-uri=${window.location.href}`}
+        variant="contained"
+        color="success"
+        size="small"
+      >
         Login
       </Button>
     </Box>
