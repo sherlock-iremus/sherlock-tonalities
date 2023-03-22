@@ -89,7 +89,7 @@ export const MeiViewer = ({ meiUrl }) => {
         <AccountMenu />
       </Stack>
       <Stack flex={1} alignItems="center" justifyContent="center">
-        <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="65%" height="85vh" overflow="scroll">
+        <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="62%" height="85vh" overflow="scroll">
           <Stack id="verovio" onClick={handleClick} sx={verovioStyle} />
         </Stack>
 

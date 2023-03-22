@@ -21,9 +21,7 @@ export const verovioStyle = css`
     stroke: ${COLOR_INSPECTED};
     cursor: pointer;
   }
-  svg {
-    align-self: center;
-  }
+
 `
 export const verovio = {
   focused: {
