@@ -1,5 +1,6 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
 import { Backdrop, CircularProgress, IconButton, Pagination, TextField, Tooltip } from '@mui/material'
+import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +11,7 @@ export const MeiViewer = ({ meiUrl }) => {
   const navigate = useNavigate()
   const [pageCount, setPageCount] = useState(0)
   const [offset, setOffset] = useState(0)
-  const [scale, setScale] = useState(60)
+  const [scale, setScale] = useState(40)
   const [currentPage, setCurrentPage] = useState(1)
 
   const loadScore = async () => {
@@ -57,17 +58,8 @@ export const MeiViewer = ({ meiUrl }) => {
   }, [meiUrl])
 
   return (
-    <Stack overflow="hidden">
-      <Stack
-        position="absolute"
-        right={0}
-        left={0}
-        spacing={2}
-        padding={2}
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+    <Stack height="100vh" bgcolor={grey[100]}>
+      <Stack padding={2} direction="row" justifyContent="space-between" alignItems="center">
         <Tooltip title="Back to home">
           <IconButton onClick={() => navigate('/')}>
             <ArrowBack />
@@ -84,15 +76,6 @@ export const MeiViewer = ({ meiUrl }) => {
               <ZoomOut />
             </IconButton>
           </Tooltip>
-          <TextField
-            value={offset}
-            onChange={event =>
-              setOffset(event.target.value) &&
-              window.tk
-                .getElementsAtTime(event.target.value)
-                .map(note => document.getElementById(note).classList.add('focused'))
-            }
-          ></TextField>
           <Pagination
             count={pageCount}
             page={currentPage}
@@ -105,14 +88,17 @@ export const MeiViewer = ({ meiUrl }) => {
         </Stack>
         <AccountMenu />
       </Stack>
+      <Stack flex={1} alignItems="center" justifyContent="center">
+        <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="65%" height="85vh" overflow="scroll">
+          <Stack id="verovio" onClick={handleClick} sx={verovioStyle} />
+        </Stack>
 
-      <Stack id="verovio" onClick={handleClick} sx={verovioStyle} />
-
-      {!pageCount && (
-        <Backdrop open>
-          <CircularProgress color="inherit" />
-        </Backdrop>
-      )}
+        {!pageCount && (
+          <Backdrop open>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
+      </Stack>
     </Stack>
   )
 }
