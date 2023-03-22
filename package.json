@@ -6,13 +6,13 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.11.10",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",
     "@reduxjs/toolkit": "^1.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "react-router-dom": "6.8.1",
+    "react-router-dom": "6.9.0",
     "react-scripts": "5.0.1",
     "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#commit=16ca8bd617a96e2a2e0da5de22ba45adb6588ab4"
   },
