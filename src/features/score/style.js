@@ -22,3 +22,20 @@ export const verovioStyle = css`
     cursor: pointer;
   }
 `
+export const verovio = {
+  focused: {
+    fill: COLOR_FOCUSED,
+    stroke: COLOR_FOCUSED,
+    cursor: 'pointer',
+  },
+  selected: {
+    fill: COLOR_SELECTED,
+    stroke: COLOR_SELECTED,
+    cursor: 'pointer',
+  },
+  inspected: {
+    fill: COLOR_INSPECTED,
+    stroke: COLOR_INSPECTED,
+    cursor: 'pointer',
+  },
+}

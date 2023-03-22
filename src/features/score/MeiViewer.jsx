@@ -1,5 +1,5 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip } from '@mui/material'
+import { Backdrop, CircularProgress, IconButton, Pagination, TextField, Tooltip } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ import { verovioStyle } from './style'
 export const MeiViewer = ({ meiUrl }) => {
   const navigate = useNavigate()
   const [pageCount, setPageCount] = useState(0)
+  const [offset, setOffset] = useState(0)
   const [scale, setScale] = useState(60)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -38,14 +39,17 @@ export const MeiViewer = ({ meiUrl }) => {
   }
 
   const getNote = node =>
-    node.classList && node.classList.contains('note') ? node : node.parentNode && getNote(node.parentNode)
+    node.classList?.contains('note') ? node.id : (node.parentNode && getNote(node.parentNode)) || null
 
   const handleClick = e => {
-    const noteId = getNote(e.target)?.id
-    const onset = window.tk.getTimesForElement(noteId).realTimeOnsetMilliseconds
-    const { notes } = window.tk.getElementsAtTime(onset)
-    console.log(notes)
-    notes.map(note => document.getElementById(note).classList.add('focused'))
+    const noteId = getNote(e.target)
+    if (noteId) {
+      const infos = window.tk.getElementAttr(noteId)
+      const onset = window.tk.getTimesForElement(noteId)
+      // const { notes } = window.tk.getElementsAtTime(onset)
+      console.log(infos, onset)
+      // notes.map(note => document.getElementById(note).classList.add('focused'))
+    }
   }
 
   useEffect(() => {
@@ -53,11 +57,11 @@ export const MeiViewer = ({ meiUrl }) => {
   }, [meiUrl])
 
   return (
-    <Stack>
+    <Stack overflow="hidden">
       <Stack
-        position="sticky"
-        top={0}
-        bgcolor="white"
+        position="absolute"
+        right={0}
+        left={0}
         spacing={2}
         padding={2}
         direction="row"
@@ -80,6 +84,15 @@ export const MeiViewer = ({ meiUrl }) => {
               <ZoomOut />
             </IconButton>
           </Tooltip>
+          <TextField
+            value={offset}
+            onChange={event =>
+              setOffset(event.target.value) &&
+              window.tk
+                .getElementsAtTime(event.target.value)
+                .map(note => document.getElementById(note).classList.add('focused'))
+            }
+          ></TextField>
           <Pagination
             count={pageCount}
             page={currentPage}
@@ -92,15 +105,9 @@ export const MeiViewer = ({ meiUrl }) => {
         </Stack>
         <AccountMenu />
       </Stack>
-      <Stack direction="row" justifyContent="space-between" alignItems="center" paddingX={2} width="80vw" height="80vh">
-        <Stack borderRadius="10px" bgcolor="grey" boxShadow={1}>
-          Arbre de concepts
-        </Stack>
-        <Stack id="verovio" alignSelf="center" onClick={handleClick} />
-        <Stack borderRadius="10px" bgcolor="grey" boxShadow={1}>
-          Navigateur d'individus
-        </Stack>
-      </Stack>
+
+      <Stack id="verovio" onClick={handleClick} sx={verovioStyle} />
+
       {!pageCount && (
         <Backdrop open>
           <CircularProgress color="inherit" />
