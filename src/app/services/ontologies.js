@@ -9,7 +9,7 @@ export const ontologies = createApi({
     getCadencesGuillotel: builder.query({
       query: () => ({ url: 'otherModels/JSON/cadences_Guillotel.json' }),
       transformResponse: response => {
-        const classes = response.filter(node => node['@type'].includes('http://www.w3.org/2002/07/owl#Class'))
+        const classes = response.filter(c => c['@type'].includes('http://www.w3.org/2002/07/owl#Class'))
         const classesIri = classes.map(c => c['@id'])
         const classesWithParent = classes.map(c => {
           const parent = c['http://www.w3.org/2000/01/rdf-schema#subClassOf']?.find(p =>
