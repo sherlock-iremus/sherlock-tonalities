@@ -81,7 +81,7 @@ export const MeiViewer = ({ meiUrl }) => {
             page={currentPage}
             siblingCount={1}
             boundaryCount={1}
-            onChange={e => onPageChange(Number(e.target.textContent))}
+            onChange={(event, value) => onPageChange(value)}
             color="primary"
             size="large"
           />
