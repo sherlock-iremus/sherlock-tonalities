@@ -4,6 +4,7 @@ import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { circleShape, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
 
@@ -24,33 +25,33 @@ export const MeiViewer = ({ meiUrl }) => {
       footer: 'none',
     })
     setPageCount(window.tk.getPageCount())
+    triggerNotes()
+  }
+
+  const triggerNotes = () => {
+    const notes = document.querySelectorAll('.note')
+    notes.forEach(note => {
+      const coordinates = noteCoords(note)
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+      rect.setAttribute('d', circleShape(coordinates, 300))
+      rect.setAttribute('fill', 'transparent')
+      note.insertBefore(rect, note.children[0])
+      note.addEventListener('click', e => console.log(e.currentTarget))
+      note.addEventListener('mouseover', e => e.currentTarget.children[0].setAttribute('fill', 'grey'))
+      note.addEventListener('mouseout', e => e.currentTarget.children[0].setAttribute('fill', 'transparent'))
+    })
   }
 
   const onPageChange = newPage => {
-    if (1 <= newPage && newPage <= pageCount) {
-      document.getElementById('verovio').innerHTML = window.tk.renderToSVG(newPage)
-      setCurrentPage(newPage)
-    }
+    document.getElementById('verovio').innerHTML = window.tk.renderToSVG(newPage)
+    setCurrentPage(newPage)
+    triggerNotes()
   }
 
   const zoom = newScale => {
     window.tk.setOptions({ scale: newScale })
     document.getElementById('verovio').innerHTML = window.tk.renderToSVG(currentPage)
     setScale(newScale)
-  }
-
-  const getNote = node =>
-    node.classList?.contains('note') ? node.id : (node.parentNode && getNote(node.parentNode)) || null
-
-  const handleClick = e => {
-    const noteId = getNote(e.target)
-    if (noteId) {
-      const infos = window.tk.getElementAttr(noteId)
-      const onset = window.tk.getTimesForElement(noteId)
-      // const { notes } = window.tk.getElementsAtTime(onset)
-      console.log(infos, onset)
-      // notes.map(note => document.getElementById(note).classList.add('focused'))
-    }
   }
 
   useEffect(() => {
@@ -90,7 +91,7 @@ export const MeiViewer = ({ meiUrl }) => {
       </Stack>
       <Stack flex={1} alignItems="center" justifyContent="center">
         <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="62%" height="85vh" overflow="scroll">
-          <Stack id="verovio" onClick={handleClick} sx={verovioStyle} />
+          <Stack id="verovio" sx={verovioStyle} />
         </Stack>
 
         {!pageCount && (
