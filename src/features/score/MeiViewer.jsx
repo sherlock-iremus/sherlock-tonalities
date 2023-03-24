@@ -106,7 +106,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
         </Stack>
       </Stack>
       <Stack flex={1} alignItems="center" justifyContent="center" minHeight={0} pb={2}>
-        <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="62%" overflow="scroll">
+        <Stack borderRadius={3} bgcolor="white" boxShadow={1} width="62%" overflow="scroll">
           <Stack id="verovio" sx={verovioStyle} />
         </Stack>
 

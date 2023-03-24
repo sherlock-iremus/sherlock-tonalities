@@ -50,9 +50,9 @@ export const Landing = () => {
         <PolifoniaLogo width="100px" />
         <AccountMenu />
       </Stack>
-      <Stack borderRadius={4} bgcolor="white" boxShadow={1} marginX={4} minHeight={0}>
+      <Stack borderRadius={3} bgcolor="white" boxShadow={1} marginX={4} minHeight={0}>
         <Stack direction="row" minHeight={0}>
-          <Stack flex={2} maxWidth="40vw">
+          <Stack flex={2}>
             <Stack direction="row" spacing={0.5} p={2}>
               <Typography variant="h5">Tonalities</Typography>
               <Typography fontSize={12} variant="h6">
