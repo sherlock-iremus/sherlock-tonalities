@@ -52,7 +52,7 @@ export const Landing = () => {
       </Stack>
       <Stack borderRadius={4} bgcolor="white" boxShadow={1} marginX={4}>
         <Stack direction="row" height="60vh">
-          <Stack flex={2}>
+          <Stack flex={2} maxWidth="40vw">
             <Stack direction="row" spacing={0.5} p={2}>
               <Typography variant="h5">Tonalities</Typography>
               <Typography fontSize={12} variant="h6">
