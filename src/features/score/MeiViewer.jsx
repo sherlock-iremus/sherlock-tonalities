@@ -1,5 +1,5 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, CircularProgress, IconButton, Pagination, TextField, Tooltip } from '@mui/material'
+import { Backdrop, CircularProgress, IconButton, Pagination, TextField, Tooltip, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
@@ -8,7 +8,7 @@ import { circleShape, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
 
-export const MeiViewer = ({ meiUrl }) => {
+export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
   const [pageCount, setPageCount] = useState(0)
   const [offset, setOffset] = useState(0)
@@ -52,6 +52,7 @@ export const MeiViewer = ({ meiUrl }) => {
     window.tk.setOptions({ scale: newScale })
     document.getElementById('verovio').innerHTML = window.tk.renderToSVG(currentPage)
     setScale(newScale)
+    triggerNotes()
   }
 
   useEffect(() => {
@@ -61,31 +62,34 @@ export const MeiViewer = ({ meiUrl }) => {
   return (
     <Stack height="100vh" bgcolor={grey[100]}>
       <Stack padding={2} direction="row" justifyContent="space-between" alignItems="center">
-        <Tooltip title="Back to home">
-          <IconButton onClick={() => navigate('/')}>
-            <ArrowBack />
-          </IconButton>
-        </Tooltip>
-        <Stack direction="row">
-          <Tooltip title="Zoom in">
-            <IconButton onClick={() => zoom(scale + 10)}>
-              <ZoomIn />
+        <Stack direction="row" alignItems="center" spacing>
+          <Tooltip title="Back to home">
+            <IconButton onClick={() => navigate('/')}>
+              <ArrowBack />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Zoom out">
-            <IconButton onClick={() => zoom(scale - 10)}>
-              <ZoomOut />
-            </IconButton>
-          </Tooltip>
+          <Typography>{scoreTitle}</Typography>
+        </Stack>
+        <Stack direction="row" alignItems="center" spacing>
           <Pagination
             count={pageCount}
             page={currentPage}
-            siblingCount={1}
+            siblingCount={0}
             boundaryCount={1}
             onChange={(event, value) => onPageChange(value)}
             color="primary"
             size="large"
           />
+          <Tooltip title="Zoom out">
+            <IconButton onClick={() => zoom(scale - 10)}>
+              <ZoomOut />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Zoom in">
+            <IconButton onClick={() => zoom(scale + 10)}>
+              <ZoomIn />
+            </IconButton>
+          </Tooltip>
         </Stack>
         <AccountMenu />
       </Stack>

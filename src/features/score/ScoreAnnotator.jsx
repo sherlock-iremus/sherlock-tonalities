@@ -12,7 +12,7 @@ import scores from '../../app/scores.json'
 export const ScoreAnnotator = () => {
   const { scoreId } = useParams()
   const dispatch = useDispatch()
-  const { meiUrl, scoreIri } = useSelector(state => state.score)
+  const { meiUrl, scoreTitle } = useSelector(state => state.score)
 
   useEffect(() => {
     const scoreIri = getSherlockIriFromUuid(scoreId)
@@ -20,5 +20,5 @@ export const ScoreAnnotator = () => {
     score && dispatch(setScore(score))
   }, [dispatch, scoreId])
 
-  return <MeiViewer {...{ meiUrl, scoreIri }} />
+  return <MeiViewer {...{ meiUrl, scoreTitle }} />
 }
