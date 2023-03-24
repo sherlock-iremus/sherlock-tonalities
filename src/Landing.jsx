@@ -50,8 +50,8 @@ export const Landing = () => {
         <PolifoniaLogo width="100px" />
         <AccountMenu />
       </Stack>
-      <Stack borderRadius={4} bgcolor="white" boxShadow={1} marginX={4}>
-        <Stack direction="row" height="60vh">
+      <Stack borderRadius={4} bgcolor="white" boxShadow={1} marginX={4} minHeight={0}>
+        <Stack direction="row" minHeight={0}>
           <Stack flex={2} maxWidth="40vw">
             <Stack direction="row" spacing={0.5} p={2}>
               <Typography variant="h5">Tonalities</Typography>
@@ -116,11 +116,11 @@ export const Landing = () => {
                 </List>
               </Stack>
               <Divider orientation="vertical" />
-              <Stack flex={1}>
+              <Stack flex={1} minWidth={0}>
                 {isScoreSelected && (
                   <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
                     <ListSubheader
-                      sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', maxWidth: 300 }}
+                      sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
                     >
                       Analytical projects for{' '}
                       {isAllScoresSelected ? 'all scores' : scores[selectedScoreIndex].scoreTitle}
