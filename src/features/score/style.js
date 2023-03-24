@@ -7,7 +7,7 @@ export const COLOR_INSPECTED = red[200]
 
 export const verovioStyle = css`
   .selected {
-    path {
+    #bubble {
       fill: ${COLOR_SELECTED};
       stroke: ${COLOR_SELECTED};
     }
