@@ -1,17 +1,27 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, CircularProgress, IconButton, Pagination, TextField, Tooltip, Typography } from '@mui/material'
+import {
+  Backdrop,
+  Button,
+  CircularProgress,
+  IconButton,
+  Pagination,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setSelectedNotes } from '../../app/services/scoreSlice'
 import { circleShape, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
 
 export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
-  const [offset, setOffset] = useState(0)
   const [scale, setScale] = useState(40)
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -35,8 +45,9 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
       const rect = document.createElementNS('http://www.w3.org/2000/svg', 'path')
       rect.setAttribute('d', circleShape(coordinates, 300))
       rect.setAttribute('fill', 'transparent')
+      note.setAttribute('cursor', 'pointer')
       note.insertBefore(rect, note.children[0])
-      note.addEventListener('click', e => console.log(e.currentTarget))
+      note.addEventListener('click', e => dispatch(setSelectedNotes(e.currentTarget.id)))
       note.addEventListener('mouseover', e => e.currentTarget.children[0].setAttribute('fill', 'grey'))
       note.addEventListener('mouseout', e => e.currentTarget.children[0].setAttribute('fill', 'transparent'))
     })
@@ -91,7 +102,12 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
             </IconButton>
           </Tooltip>
         </Stack>
-        <AccountMenu />
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Button disabled variant="contained">
+            Publish
+          </Button>
+          <AccountMenu />
+        </Stack>
       </Stack>
       <Stack flex={1} alignItems="center" justifyContent="center">
         <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="62%" height="85vh" overflow="scroll">

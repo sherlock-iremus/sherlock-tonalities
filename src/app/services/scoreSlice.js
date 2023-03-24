@@ -6,7 +6,8 @@ const initialState = {
   scoreIri: '',
   scoreTitle: '',
   meiUrl: '',
-  isUserConnected: true
+  isUserConnected: true,
+  selectedNotes: [],
 }
 
 const scoreSlice = createSlice({
@@ -23,9 +24,13 @@ const scoreSlice = createSlice({
     setIsUserConnected: (state, action) => {
       state.isUserConnected = action.payload
     },
+    setSelectedNotes: (state, action) => {
+      const index = state.selectedNotes.findIndex(e => e === action.payload)
+      index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
+    },
   },
 })
 
 export default scoreSlice
 
-export const { setIsUserConnected, setScore } = scoreSlice.actions
+export const { setIsUserConnected, setScore, setSelectedNotes } = scoreSlice.actions
