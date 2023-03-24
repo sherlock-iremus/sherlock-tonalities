@@ -33,7 +33,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const triggerNotes = () => {
     const notes = document.querySelectorAll('.note')
     const svg = document.getElementById('verovio').children[0]
-    svg.addEventListener('click', e => e.target === svg && dispatch(setSelectedNotes()))
+    svg?.addEventListener('click', e => e.target === svg && dispatch(setSelectedNotes()))
     notes.forEach(note => {
       const coordinates = noteCoords(note)
       const rect = document.createElementNS('http://www.w3.org/2000/svg', 'path')
@@ -69,7 +69,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   return (
     <Stack height="100vh" bgcolor={grey[100]}>
       <Stack padding={2} direction="row" justifyContent="space-between" alignItems="center">
-        <Stack direction="row" alignItems="center" spacing>
+        <Stack direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">
             <IconButton onClick={() => navigate('/')}>
               <ArrowBack />
@@ -77,7 +77,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           </Tooltip>
           <Typography>{scoreTitle}</Typography>
         </Stack>
-        <Stack direction="row" alignItems="center" spacing>
+        <Stack direction="row" alignItems="center" spacing={1}>
           <Pagination
             count={pageCount}
             page={currentPage}
@@ -105,8 +105,8 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           <AccountMenu />
         </Stack>
       </Stack>
-      <Stack flex={1} alignItems="center" justifyContent="center">
-        <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="62%" height="85vh" overflow="scroll">
+      <Stack flex={1} alignItems="center" justifyContent="center" minHeight={0} pb={2}>
+        <Stack borderRadius={4} bgcolor="white" boxShadow={1} width="62%" overflow="scroll">
           <Stack id="verovio" sx={verovioStyle} />
         </Stack>
 
