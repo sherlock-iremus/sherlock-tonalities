@@ -1,13 +1,5 @@
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import {
-  Backdrop,
-  Button,
-  CircularProgress,
-  IconButton,
-  Pagination,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { Backdrop, Button, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
@@ -53,15 +45,17 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
     })
   }
 
+  const reloadVerovio = page => (document.getElementById('verovio').innerHTML = window.tk.renderToSVG(page))
+
   const onPageChange = newPage => {
-    document.getElementById('verovio').innerHTML = window.tk.renderToSVG(newPage)
+    reloadVerovio(newPage)
     setCurrentPage(newPage)
     triggerNotes()
   }
 
   const zoom = newScale => {
     window.tk.setOptions({ scale: newScale })
-    document.getElementById('verovio').innerHTML = window.tk.renderToSVG(currentPage)
+    reloadVerovio(currentPage)
     setScale(newScale)
     triggerNotes()
   }
