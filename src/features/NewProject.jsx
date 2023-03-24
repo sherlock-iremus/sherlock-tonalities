@@ -32,6 +32,7 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
           margin="dense"
           label="New project name"
           fullWidth
+          onKeyDown={e => e.key === 'Enter' && name && navigate(`/score/${getUuidFromSherlockIri(score.scoreIri)}`)}
         />
       </DialogContent>
       <ListSubheader>Selected score</ListSubheader>
