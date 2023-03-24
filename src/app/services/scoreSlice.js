@@ -25,8 +25,11 @@ const scoreSlice = createSlice({
       state.isUserConnected = action.payload
     },
     setSelectedNotes: (state, action) => {
-      const index = state.selectedNotes.findIndex(e => e === action.payload)
-      index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
+      if (!action.payload) state.selectedNotes = initialState.selectedNotes
+      else {
+        const index = state.selectedNotes.findIndex(e => e === action.payload)
+        index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
+      }
     },
   },
 })

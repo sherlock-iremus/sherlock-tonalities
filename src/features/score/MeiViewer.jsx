@@ -32,6 +32,8 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
 
   const triggerNotes = () => {
     const notes = document.querySelectorAll('.note')
+    const svg = document.getElementById('verovio').children[0]
+    svg.addEventListener('click', e => e.target === svg && dispatch(setSelectedNotes()))
     notes.forEach(note => {
       const coordinates = noteCoords(note)
       const rect = document.createElementNS('http://www.w3.org/2000/svg', 'path')
@@ -97,7 +99,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           </Tooltip>
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <Button disabled variant="contained">
+          <Button size="small" disabled variant="contained">
             Publish
           </Button>
           <AccountMenu />
