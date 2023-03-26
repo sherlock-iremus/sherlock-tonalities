@@ -14,7 +14,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
-  const [scale, setScale] = useState(40)
+  const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
 
   const loadScore = async () => {
@@ -107,7 +107,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
         </Stack>
       </Stack>
       <Stack flex={1} alignItems="center" justifyContent="center" minHeight={0} pb={2}>
-        <Stack borderRadius={3} bgcolor="white" boxShadow={1} width="62%" overflow="scroll">
+        <Stack borderRadius={3} bgcolor="white" boxShadow={1} width="46%" overflow="scroll">
           <Stack id="verovio" sx={verovioStyle} />
         </Stack>
 
