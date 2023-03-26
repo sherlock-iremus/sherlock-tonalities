@@ -5,14 +5,6 @@ export const Menu = styled(props => (
   <DefaultMenu
     disableAutoFocusItem
     elevation={0}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'right',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'right',
-    }}
     {...props}
   />
 ))(({ theme }) => ({

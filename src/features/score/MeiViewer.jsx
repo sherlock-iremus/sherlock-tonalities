@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { setSelectedNotes } from '../../app/services/scoreSlice'
 import { circleShape, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
+import { ContextMenu } from './ContextMenu'
 import { verovioStyle } from './style'
 
 export const MeiViewer = ({ meiUrl, scoreTitle }) => {
@@ -16,6 +17,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
+  const [contextMenu, setContextMenu] = useState(null)
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
@@ -63,6 +65,11 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
     triggerNotes()
   }
 
+  const handleContextMenu = event => {
+    event.preventDefault()
+    setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
+  }
+  
   useEffect(() => {
     loadScore()
   }, [meiUrl])
@@ -107,8 +114,9 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
         </Stack>
       </Stack>
       <Stack flex={1} alignItems="center" justifyContent="center" minHeight={0} pb={2}>
+        <ContextMenu {...{ contextMenu, setContextMenu }} />
         <Stack borderRadius={3} bgcolor="white" boxShadow={1} width="46%" overflow="scroll">
-          <Stack id="verovio" sx={verovioStyle} />
+          <Stack id="verovio" sx={verovioStyle} onContextMenu={handleContextMenu} />
         </Stack>
 
         {!pageCount && (

@@ -27,7 +27,7 @@ export const Concepts = () => {
 
   if (filteredTree)
     return (
-      <List subheader={<ListSubheader>Concepts</ListSubheader>}>
+      <List subheader={<ListSubheader>Assign concepts</ListSubheader>}>
         {!!filteredTree.length && filteredTree.map(concept => <Concept key={concept.iri} concept={concept} />)}
       </List>
     )
