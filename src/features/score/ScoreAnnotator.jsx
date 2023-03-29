@@ -24,8 +24,9 @@ export const ScoreAnnotator = () => {
     <>
       <MeiViewer {...{ meiUrl, scoreTitle, selectedNotes }} />
       <Snackbar
-        open={selectedNotes.length}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        open={!!selectedNotes.length}
+        sx={{ paddingTop: 10 }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         message={selectedNotes.length === 1 ? 'One selected note' : selectedNotes.length + ' selected notes'}
         action={
           <Button size="small" onClick={() => dispatch(setSelectedNotes())}>
