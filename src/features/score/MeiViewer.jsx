@@ -27,13 +27,14 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
-    if (verovio) verovio.innerHTML = toolkit.renderData(file, {
-      scale,
-      adjustPageWidth: true,
-      adjustPageHeight: true,
-      header: 'none',
-      footer: 'none',
-    })
+    if (verovio)
+      verovio.innerHTML = toolkit.renderData(file, {
+        scale,
+        adjustPageWidth: true,
+        adjustPageHeight: true,
+        header: 'none',
+        footer: 'none',
+      })
     setPageCount(toolkit.getPageCount())
     triggerNotes()
   }
@@ -111,15 +112,14 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
             boundaryCount={1}
             onChange={(event, value) => onPageChange(value)}
             color="primary"
-            size="large"
           />
           <Tooltip title="Zoom out">
-            <IconButton onClick={() => zoom(scale - 10)}>
+            <IconButton onClick={() => zoom(scale - 10)} size="small">
               <ZoomOut />
             </IconButton>
           </Tooltip>
           <Tooltip title="Zoom in">
-            <IconButton onClick={() => zoom(scale + 10)}>
+            <IconButton onClick={() => zoom(scale + 10)} size="small">
               <ZoomIn />
             </IconButton>
           </Tooltip>
