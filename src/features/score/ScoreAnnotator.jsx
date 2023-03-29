@@ -22,7 +22,7 @@ export const ScoreAnnotator = () => {
 
   return (
     <>
-      <MeiViewer {...{ meiUrl, scoreTitle }} />
+      <MeiViewer {...{ meiUrl, scoreTitle, selectedNotes }} />
       <Snackbar
         open={selectedNotes.length}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}

@@ -11,7 +11,7 @@ import { AccountMenu } from '../AccountMenu'
 import { ContextMenu } from './ContextMenu'
 import { verovioStyle } from './style'
 
-export const MeiViewer = ({ meiUrl, scoreTitle }) => {
+export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
@@ -67,7 +67,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
 
   const handleContextMenu = event => {
     event.preventDefault()
-    setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
+    selectedNotes.length && setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
   }
   
   useEffect(() => {
