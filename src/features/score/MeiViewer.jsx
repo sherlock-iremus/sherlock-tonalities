@@ -3,7 +3,7 @@ import { Backdrop, Button, CircularProgress, IconButton, Pagination, Tooltip, Ty
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setSelectedNotes } from '../../app/services/scoreSlice'
 import { circleShape, noteCoords } from '../../draw'
@@ -18,6 +18,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [contextMenu, setContextMenu] = useState(null)
+  const { selectedNotes } = useSelector(state => state.score)
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
@@ -32,6 +33,19 @@ export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
     triggerNotes()
   }
 
+  const groupSelection = (startNoteId, endNoteId) => {
+    // if (getSystemId(startNoteId) === getSystemId(startNoteId)) {
+    //   if (getStaffIndex(startNoteId) === getStaffIndex(startNoteId)) {
+    //     const startNoteTime = window.tk.getTimeForElement(startNoteId)
+    //     const endNoteTime = window.tk.getTimeForElement(endNoteId)
+    //     if(startNoteTime > endNoteTime) // à gérer
+    //     for (i =startNoteTime; i+=100; endNoteTime) {
+    //       window.tk.getElementForTime(i)
+    //     }
+    //   }
+    // }
+  }
+
   const triggerNotes = () => {
     const notes = document.querySelectorAll('.note')
     const svg = document.getElementById('verovio').children[0]
@@ -44,7 +58,10 @@ export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
       bubble.setAttribute('fill', 'transparent')
       note.setAttribute('cursor', 'pointer')
       note.insertBefore(bubble, note.children[0])
-      note.addEventListener('click', e => dispatch(setSelectedNotes(e.currentTarget.id)))
+      note.addEventListener('click', e => {
+        if (e.shiftKey) groupSelection(selectedNotes[selectedNotes.length - 1], e.currentTarget.id)
+        dispatch(setSelectedNotes(e.currentTarget.id))
+      })
       note.addEventListener('mouseover', e => e.currentTarget.children[0].setAttribute('fill', 'grey'))
       note.addEventListener('mouseout', e => e.currentTarget.children[0].setAttribute('fill', 'transparent'))
     })
