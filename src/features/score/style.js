@@ -12,4 +12,5 @@ export const verovioStyle = css`
       stroke: ${COLOR_SELECTED};
     }
   }
+  user-select: none
 `

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
 import { Backdrop, Button, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
@@ -6,49 +7,40 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setSelectedNotes } from '../../app/services/scoreSlice'
-import { circleShape, noteCoords } from '../../draw'
+import { circleShape, groupSelection, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { ContextMenu } from './ContextMenu'
 import { verovioStyle } from './style'
 
-export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
+export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [contextMenu, setContextMenu] = useState(null)
+  const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes } = useSelector(state => state.score)
+
+  const verovio = document.getElementById('verovio')
+  const toolkit = window.tk
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
-    document.getElementById('verovio').innerHTML = window.tk.renderData(file, {
+    if (verovio) verovio.innerHTML = toolkit.renderData(file, {
       scale,
       adjustPageWidth: true,
       adjustPageHeight: true,
       header: 'none',
       footer: 'none',
     })
-    setPageCount(window.tk.getPageCount())
+    setPageCount(toolkit.getPageCount())
     triggerNotes()
-  }
-
-  const groupSelection = (startNoteId, endNoteId) => {
-    // if (getSystemId(startNoteId) === getSystemId(startNoteId)) {
-    //   if (getStaffIndex(startNoteId) === getStaffIndex(startNoteId)) {
-    //     const startNoteTime = window.tk.getTimeForElement(startNoteId)
-    //     const endNoteTime = window.tk.getTimeForElement(endNoteId)
-    //     if(startNoteTime > endNoteTime) // à gérer
-    //     for (i =startNoteTime; i+=100; endNoteTime) {
-    //       window.tk.getElementForTime(i)
-    //     }
-    //   }
-    // }
   }
 
   const triggerNotes = () => {
     const notes = document.querySelectorAll('.note')
-    const svg = document.getElementById('verovio').children[0]
+    const svg = verovio?.children[0]
     svg?.addEventListener('click', e => e.target === svg && dispatch(setSelectedNotes()))
     notes.forEach(note => {
       const coordinates = noteCoords(note)
@@ -59,15 +51,15 @@ export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
       note.setAttribute('cursor', 'pointer')
       note.insertBefore(bubble, note.children[0])
       note.addEventListener('click', e => {
-        if (e.shiftKey) groupSelection(selectedNotes[selectedNotes.length - 1], e.currentTarget.id)
-        dispatch(setSelectedNotes(e.currentTarget.id))
+        if (e.shiftKey) setFinalNoteId(e.currentTarget.id)
+        else dispatch(setSelectedNotes(e.currentTarget.id))
       })
       note.addEventListener('mouseover', e => e.currentTarget.children[0].setAttribute('fill', 'grey'))
       note.addEventListener('mouseout', e => e.currentTarget.children[0].setAttribute('fill', 'transparent'))
     })
   }
 
-  const reloadVerovio = page => (document.getElementById('verovio').innerHTML = window.tk.renderToSVG(page))
+  const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
 
   const onPageChange = newPage => {
     reloadVerovio(newPage)
@@ -76,7 +68,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
   }
 
   const zoom = newScale => {
-    window.tk.setOptions({ scale: newScale })
+    toolkit.setOptions({ scale: newScale })
     reloadVerovio(currentPage)
     setScale(newScale)
     triggerNotes()
@@ -84,12 +76,21 @@ export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
 
   const handleContextMenu = event => {
     event.preventDefault()
-    selectedNotes.length && setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
+    selectedNotes.length &&
+      setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
   }
-  
+
   useEffect(() => {
     loadScore()
   }, [meiUrl])
+
+  useEffect(() => {
+    if (finalNoteId) {
+      if (selectedNotes.length)
+        dispatch(setSelectedNotes(groupSelection(selectedNotes[selectedNotes.length - 1], finalNoteId)))
+      setFinalNoteId(null)
+    }
+  }, [finalNoteId])
 
   return (
     <Stack height="100vh" bgcolor={grey[100]}>
@@ -136,11 +137,9 @@ export const MeiViewer = ({ meiUrl, scoreTitle, selectedNotes }) => {
           <Stack id="verovio" sx={verovioStyle} onContextMenu={handleContextMenu} />
         </Stack>
 
-        {!pageCount && (
-          <Backdrop open>
-            <CircularProgress color="inherit" />
-          </Backdrop>
-        )}
+        <Backdrop open={!pageCount}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </Stack>
     </Stack>
   )
