@@ -95,8 +95,8 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
 
   return (
     <Stack height="100vh" bgcolor={grey[100]}>
-      <Stack padding={2} direction="row" justifyContent="space-between" alignItems="center">
-        <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack padding={2} direction="row" alignItems="center">
+        <Stack flex={1} direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">
             <IconButton onClick={() => navigate('/')}>
               <ArrowBack />
@@ -104,7 +104,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           </Tooltip>
           <Typography>{scoreTitle}</Typography>
         </Stack>
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack flex={1} direction="row" justifyContent="center" alignItems="center" spacing={1}>
           <Pagination
             count={pageCount}
             page={currentPage}
@@ -124,7 +124,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
             </IconButton>
           </Tooltip>
         </Stack>
-        <Stack direction="row" alignItems="center" spacing={2}>
+        <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
           <Button size="small" disabled variant="contained">
             Publish
           </Button>
