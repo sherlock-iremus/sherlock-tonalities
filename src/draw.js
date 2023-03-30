@@ -26,7 +26,7 @@ const staffCoords = staff => ({
   absolute: staff.children[0].getBBox().y,
 })
 
-export const groupSelection = (initialNoteId, finalNoteId) => {
+export const findInBetweenNotes = (initialNoteId, finalNoteId) => {
   const initialNote = document.getElementById(initialNoteId)
   const finalNote = document.getElementById(finalNoteId)
   if (getSystem(initialNote).id === getSystem(finalNote).id) {

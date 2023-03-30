@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setSelectedNotes } from '../../app/services/scoreSlice'
-import { circleShape, groupSelection, noteCoords } from '../../draw'
+import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { ContextMenu } from './ContextMenu'
 import { verovioStyle } from './style'
@@ -88,7 +88,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   useEffect(() => {
     if (finalNoteId) {
       if (selectedNotes.length)
-        dispatch(setSelectedNotes(groupSelection(selectedNotes[selectedNotes.length - 1], finalNoteId)))
+        dispatch(setSelectedNotes(findInBetweenNotes(selectedNotes[selectedNotes.length - 1], finalNoteId)))
       setFinalNoteId(null)
     }
   }, [finalNoteId])
