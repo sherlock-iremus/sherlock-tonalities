@@ -6,9 +6,16 @@ on:
     branches: [ "staging" ]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
     steps:
+    - name: Build
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
@@ -16,22 +23,12 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - run: yarn build
+    
     - name: Upload
     - uses: actions/upload-artifact@v3
       with:
         name: deployment
-        path: build/
-
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v1
+        path: 'build/'
+    - name: Deploy
+      id: deployment
+      uses: actions/deploy-pages@v2
