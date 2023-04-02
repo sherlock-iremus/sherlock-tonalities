@@ -53,11 +53,16 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
       note.insertBefore(bubble, note.children[0])
       note.addEventListener('click', e => {
         if (e.shiftKey) setFinalNoteId(e.currentTarget.id)
+        else if (e.altKey) addVerticality(toolkit.getTimeForElement(e.currentTarget.id))
         else dispatch(setSelectedNotes(e.currentTarget.id))
       })
       note.addEventListener('mouseover', e => e.currentTarget.children[0].setAttribute('fill', 'grey'))
       note.addEventListener('mouseout', e => e.currentTarget.children[0].setAttribute('fill', 'transparent'))
     })
+  }
+
+  const addVerticality = time => {
+    dispatch(setSelectedNotes(toolkit.getElementsAtTime(time).notes))
   }
 
   const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
