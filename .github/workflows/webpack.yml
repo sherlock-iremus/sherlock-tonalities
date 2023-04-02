@@ -8,8 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
+    - name: Build
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
@@ -17,17 +17,21 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - run: yarn build
+    - uses: actions/upload-artifact@v3
+      with:
+        name: deployment
+        path: build/
 
   deploy:
     needs: build
     permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v1
