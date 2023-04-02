@@ -1,4 +1,4 @@
-import { AccountCircle, Logout, PersonAdd } from '@mui/icons-material'
+import { AccountCircle, Logout } from '@mui/icons-material'
 import { Button, IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'

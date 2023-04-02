@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useGetUserIdQuery } from './app/services/sherlockApi'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
