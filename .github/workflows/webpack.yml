@@ -30,7 +30,4 @@ jobs:
       with:
         name: deployment
         path: 'build/'
-        
-    - name: Deploy
-      uses: actions/deploy-pages@v2
-      id: deployment
+
