@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setSelectedNotes } from '../../app/services/scoreSlice'
-import { circleShape, groupSelection, noteCoords } from '../../draw'
+import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { ContextMenu } from './ContextMenu'
 import { verovioStyle } from './style'
@@ -53,11 +53,16 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
       note.insertBefore(bubble, note.children[0])
       note.addEventListener('click', e => {
         if (e.shiftKey) setFinalNoteId(e.currentTarget.id)
+        else if (e.altKey) addVerticality(toolkit.getTimeForElement(e.currentTarget.id))
         else dispatch(setSelectedNotes(e.currentTarget.id))
       })
       note.addEventListener('mouseover', e => e.currentTarget.children[0].setAttribute('fill', 'grey'))
       note.addEventListener('mouseout', e => e.currentTarget.children[0].setAttribute('fill', 'transparent'))
     })
+  }
+
+  const addVerticality = time => {
+    dispatch(setSelectedNotes(toolkit.getElementsAtTime(time).notes))
   }
 
   const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
@@ -88,15 +93,15 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   useEffect(() => {
     if (finalNoteId) {
       if (selectedNotes.length)
-        dispatch(setSelectedNotes(groupSelection(selectedNotes[selectedNotes.length - 1], finalNoteId)))
+        dispatch(setSelectedNotes(findInBetweenNotes(selectedNotes[selectedNotes.length - 1], finalNoteId)))
       setFinalNoteId(null)
     }
   }, [finalNoteId])
 
   return (
     <Stack height="100vh" bgcolor={grey[100]}>
-      <Stack padding={2} direction="row" justifyContent="space-between" alignItems="center">
-        <Stack direction="row" alignItems="center" spacing={1}>
+      <Stack padding={2} direction="row" alignItems="center">
+        <Stack flex={1} direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">
             <IconButton onClick={() => navigate('/')}>
               <ArrowBack />
@@ -104,7 +109,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           </Tooltip>
           <Typography>{scoreTitle}</Typography>
         </Stack>
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack flex={1} direction="row" justifyContent="center" alignItems="center" spacing={1}>
           <Pagination
             count={pageCount}
             page={currentPage}
@@ -124,7 +129,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
             </IconButton>
           </Tooltip>
         </Stack>
-        <Stack direction="row" alignItems="center" spacing={2}>
+        <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
           <Button size="small" disabled variant="contained">
             Publish
           </Button>

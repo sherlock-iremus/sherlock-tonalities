@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './theme'
 import { App } from './App'
+import { isInDevMode } from './app/services/sherlockApi'
 
 window.verovio.module.onRuntimeInitialized = () => {
   window.tk = new window.verovio.toolkit()
@@ -13,7 +14,7 @@ window.verovio.module.onRuntimeInitialized = () => {
 
   root.render(
     <React.StrictMode>
-      <BrowserRouter basename="/sherlock-tonalities/">
+      <BrowserRouter basename={isInDevMode ? 'sherlock-tonalities' : 'tonalities'}>
         <ThemeProvider {...{ theme }}>
           <ReduxProvider {...{ store }}>
             <App />
