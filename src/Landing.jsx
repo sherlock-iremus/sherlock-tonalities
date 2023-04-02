@@ -119,9 +119,7 @@ export const Landing = () => {
               <Stack flex={1} minWidth={0}>
                 {isScoreSelected && (
                   <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
-                    <ListSubheader
-                      sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
-                    >
+                    <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
                       Analytical projects for{' '}
                       {isAllScoresSelected ? 'all scores' : scores[selectedScoreIndex].scoreTitle}
                     </ListSubheader>

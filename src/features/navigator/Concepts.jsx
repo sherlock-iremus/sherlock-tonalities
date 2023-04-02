@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useGetCadencesGuillotelQuery } from '../../app/services/ontologies'
 import { Concept } from './Concept'
 
 export const Concepts = () => {
-  const [filter, setFilter] = useState('')
+  const [filter] = useState('')
   const { data: cadencesGuillotel } = useGetCadencesGuillotelQuery()
   const [filteredTree, setFilteredTree] = useState(cadencesGuillotel)
 
