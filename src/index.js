@@ -13,7 +13,7 @@ window.verovio.module.onRuntimeInitialized = () => {
 
   root.render(
     <React.StrictMode>
-      <BrowserRouter basename="/tonalities">
+      <BrowserRouter basename="/sherlock-tonalities/">
         <ThemeProvider {...{ theme }}>
           <ReduxProvider {...{ store }}>
             <App />
