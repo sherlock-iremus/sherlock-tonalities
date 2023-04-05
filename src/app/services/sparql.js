@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { getContributor } from '../../features/items/ContributorItem'
 import { stringToColor } from '../../utils'
 import { BASE_API_URL } from './sherlockApi'
+import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 
 export const sparqlEndpoint = createApi({
   reducerPath: 'sparqlApi',
