@@ -16,23 +16,37 @@ import {
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUuidFromSherlockIri } from '../utils'
+import { usePostAnalyticalProjectMutation } from '../app/services/sherlockApi'
 
 export const NewProject = ({ isOpen, setIsOpen, score }) => {
   const navigate = useNavigate()
-  const [name, setName] = useState('')
+  const [label, setLabel] = useState('')
+  const [postAnalyticalProject, { isLoading }] = usePostAnalyticalProjectMutation()
+
+  const createAnalyticalProject = async () => {
+    if (label.length && !isLoading)
+      try {
+        const response = await postAnalyticalProject({ label }).unwrap()
+        const projectId = getUuidFromSherlockIri(response[0]['@id'])
+        const scoreId = getUuidFromSherlockIri(score.scoreIri)
+        navigate(`/project/${projectId}/score/${scoreId}`)
+      } catch (error) {
+        console.log(error)
+      }
+  }
 
   return (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
       <DialogTitle>Create analytical project?</DialogTitle>
       <DialogContent>
         <TextField
-          value={name}
-          onChange={event => setName(capitalize(event.target.value))}
+          value={label}
+          onChange={event => setLabel(capitalize(event.target.value))}
           autoFocus
           margin="dense"
-          label="New project name"
+          label="New project label"
           fullWidth
-          onKeyDown={e => e.key === 'Enter' && name && navigate(`/score/${getUuidFromSherlockIri(score.scoreIri)}`)}
+          onKeyDown={e => e.key === 'Enter' && label && navigate(`/score/${getUuidFromSherlockIri(score.scoreIri)}`)}
         />
       </DialogContent>
       <ListSubheader>Selected score</ListSubheader>
@@ -48,7 +62,7 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
         <Button color="text" onClick={() => setIsOpen(false)}>
           Cancel
         </Button>
-        <Button disabled={!name} onClick={() => navigate(`/score/${getUuidFromSherlockIri(score.scoreIri)}`)}>
+        <Button disabled={!label} onClick={createAnalyticalProject}>
           Create project
         </Button>
       </DialogActions>

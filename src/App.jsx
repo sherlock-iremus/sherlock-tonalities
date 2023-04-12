@@ -12,7 +12,7 @@ export const App = () => {
   useGetUserIdQuery()
   const navigate = useNavigate()
   const { isUserConnected } = useSelector(state => state.score)
-  
+
   useEffect(() => {
     if (window.innerWidth < 600) navigate('/mobile')
   }, [])
@@ -20,7 +20,7 @@ export const App = () => {
   return (
     <Routes>
       {window.innerWidth < 600 && <Route path="/mobile" element={<MobileInfo />} />}
-      {isUserConnected && <Route path="/score/:scoreId" element={<ScoreAnnotator />} />}
+      {isUserConnected && <Route path="/project/:projectId/score/:scoreId" element={<ScoreAnnotator />} />}
       <Route path="*" element={<Landing />} />
       <Route path="/models" element={<ModelLibrary />} />
     </Routes>

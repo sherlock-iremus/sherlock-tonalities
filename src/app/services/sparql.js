@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { stringToColor } from '../../utils'
-import { BASE_API_URL } from './sherlockApi'
+import { BASE_API_URL, isInDevMode } from './sherlockApi'
 import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 
 export const sparqlEndpoint = createApi({
   reducerPath: 'sparqlApi',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL + 'sparql' }),
+  baseQuery: fetchBaseQuery({ baseUrl: isInDevMode ? 'http://localhost:3030/iremus' : BASE_API_URL + 'sparql' }),
   endpoints: builder => ({
     getContributor: builder.query({
       query: contributorIri => ({
