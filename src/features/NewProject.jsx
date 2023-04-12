@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getUuidFromSherlockIri } from '../utils'
+import { getUuid } from '../utils'
 import { usePostAnalyticalProjectMutation } from '../app/services/sherlockApi'
 
 export const NewProject = ({ isOpen, setIsOpen, score }) => {
@@ -27,8 +27,9 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
     if (label.length && !isLoading)
       try {
         const response = await postAnalyticalProject({ label }).unwrap()
-        const projectId = getUuidFromSherlockIri(response[0]['@id'])
-        const scoreId = getUuidFromSherlockIri(score.scoreIri)
+        const project = response.find(e => e['@type'].includes('http://www.cidoc-crm.org/cidoc-crm/E7_Activity'))
+        const projectId = getUuid(project['@id'])
+        const scoreId = getUuid(score.scoreIri)
         navigate(`/project/${projectId}/score/${scoreId}`)
       } catch (error) {
         console.log(error)
@@ -46,7 +47,7 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
           margin="dense"
           label="New project label"
           fullWidth
-          onKeyDown={e => e.key === 'Enter' && label && navigate(`/score/${getUuidFromSherlockIri(score.scoreIri)}`)}
+          onKeyDown={e => e.key === 'Enter' && label && createAnalyticalProject()}
         />
       </DialogContent>
       <ListSubheader>Selected score</ListSubheader>

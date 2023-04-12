@@ -11,8 +11,10 @@ import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { ContextMenu } from './ContextMenu'
 import { verovioStyle } from './style'
+import { useGetAnalyticalProjectQuery } from '../../app/services/sparql'
+import { getIri } from '../../utils'
 
-export const MeiViewer = ({ meiUrl, scoreTitle }) => {
+export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
@@ -21,6 +23,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const [contextMenu, setContextMenu] = useState(null)
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes } = useSelector(state => state.score)
+  const { data: analyticalProject } = useGetAnalyticalProjectQuery(getIri(projectId))
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
