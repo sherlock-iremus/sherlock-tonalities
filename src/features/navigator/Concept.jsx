@@ -7,11 +7,13 @@ export const Concept = props => {
 
   return (
     <>
-      <ListItem disablePadding>
-        {props.concept.subClasses && (
-          <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
-        )}
+      <ListItem disablePadding dense>
         <ListItemButton>
+          {props.concept.subClasses && (
+            <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <ExpandMore /> : <ChevronRight />}
+            </IconButton>
+          )}
           <ListItemText primary={props.concept.iri} />
         </ListItemButton>
       </ListItem>
