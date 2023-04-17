@@ -1,6 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, Button, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
+import {
+  Backdrop,
+  Button,
+  CircularProgress,
+  IconButton,
+  Pagination,
+  Tooltip,
+  Typography,
+  ListSubheader,
+} from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
@@ -10,6 +19,7 @@ import { setSelectedNotes } from '../../app/services/scoreSlice'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { ContextMenu } from './ContextMenu'
+import { Concepts } from '../navigator/Concepts'
 import { verovioStyle } from './style'
 import { useGetAnalyticalProjectQuery } from '../../app/services/sparql'
 import { getIri } from '../../utils'
@@ -139,10 +149,19 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
           <AccountMenu />
         </Stack>
       </Stack>
-      <Stack flex={1} alignItems="center" justifyContent="center" minHeight={0} pb={2}>
+      <Stack flex={1} direction="row" justifyContent="center" minHeight={0} spacing={2} pb={2} px={2}>
         <ContextMenu {...{ contextMenu, setContextMenu }} />
-        <Stack borderRadius={3} bgcolor="white" boxShadow={1} width="46%" overflow="scroll">
+
+        <Stack borderRadius={3} bgcolor="white" boxShadow={1} flex={1} overflow="scroll" pt={1}>
+          <Concepts flex={1} />
+        </Stack>
+
+        <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
           <Stack id="verovio" sx={verovioStyle} onContextMenu={handleContextMenu} />
+        </Stack>
+
+        <Stack borderRadius={3} bgcolor="white" boxShadow={1} flex={1} pt={1} overflow="scroll">
+          <ListSubheader>My analytical project</ListSubheader>
         </Stack>
 
         <Backdrop open={!pageCount}>
