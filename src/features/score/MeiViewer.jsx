@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
+import { ArrowBack, ZoomIn, ZoomOut, HistoryEdu, Lyrics, Delete } from '@mui/icons-material'
 import {
   Backdrop,
   Button,
@@ -9,6 +9,10 @@ import {
   Tooltip,
   Typography,
   ListSubheader,
+  ListItem,
+  ListItemIcon,
+  ListItemButton,
+  ListItemText,
 } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
@@ -152,16 +156,52 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
       <Stack flex={1} direction="row" justifyContent="center" minHeight={0} spacing={2} pb={2} px={2}>
         <ContextMenu {...{ contextMenu, setContextMenu }} />
 
-        <Stack borderRadius={3} bgcolor="white" boxShadow={1} flex={1} overflow="scroll" pt={1}>
-          <Concepts flex={1} />
+        <Stack flex={1}>
+          <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
+            <ListItem dense disablePadding secondaryAction={<Button>Switch model</Button>}>
+              <ListItemButton selected>
+                <ListItemIcon>
+                  <HistoryEdu />
+                </ListItemIcon>
+                <ListItemText primary="Guillotel" secondary="2022" />
+              </ListItemButton>
+            </ListItem>
+            <Concepts flex={1} />
+          </Stack>
         </Stack>
 
         <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
           <Stack id="verovio" sx={verovioStyle} onContextMenu={handleContextMenu} />
         </Stack>
 
-        <Stack borderRadius={3} bgcolor="white" boxShadow={1} flex={1} pt={1} overflow="scroll">
-          <ListSubheader>My analytical project</ListSubheader>
+        <Stack flex={1}>
+          <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
+            <ListItem dense disablePadding secondaryAction={<Button>Create</Button>}>
+              <ListItemButton selected>
+                <ListItemIcon>
+                  <Lyrics />
+                </ListItemIcon>
+                <ListItemText primary="New annotation" secondary="5 selected notes" />
+              </ListItemButton>
+            </ListItem>
+            <ListSubheader>Assigned concepts</ListSubheader>
+            <ListItem
+              dense
+              disablePadding
+              secondaryAction={
+                <IconButton>
+                  <Delete />
+                </IconButton>
+              }
+            >
+              <ListItemButton>
+                <ListItemIcon>
+                  <HistoryEdu />
+                </ListItemIcon>
+                <ListItemText primary="Cadence" secondary="Guillotel 2022" />
+              </ListItemButton>
+            </ListItem>
+          </Stack>
         </Stack>
 
         <Backdrop open={!pageCount}>
