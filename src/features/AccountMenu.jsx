@@ -27,7 +27,6 @@ export const AccountMenu = () => {
       <Button
         href={BASE_API_URL + `sherlock/login?redirect-uri=${window.location.href}`}
         variant="contained"
-        color="success"
         size="small"
       >
         Login
