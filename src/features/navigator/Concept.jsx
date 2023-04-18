@@ -10,7 +10,7 @@ export const Concept = props => {
       <ListItem disablePadding dense>
         <ListItemButton>
           {props.concept.subClasses && (
-            <IconButton disableRipple onClick={() => setIsOpen(!isOpen)}>
+            <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <ExpandMore /> : <ChevronRight />}
             </IconButton>
           )}
