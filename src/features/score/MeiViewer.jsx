@@ -1,19 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ArrowBack, ZoomIn, ZoomOut, HistoryEdu, Lyrics, Delete } from '@mui/icons-material'
-import {
-  Backdrop,
-  Button,
-  CircularProgress,
-  IconButton,
-  Pagination,
-  Tooltip,
-  Typography,
-  ListSubheader,
-  ListItem,
-  ListItemIcon,
-  ListItemButton,
-  ListItemText,
-} from '@mui/material'
+import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
+import { Backdrop, Button, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
@@ -23,10 +10,11 @@ import { setSelectedNotes } from '../../app/services/scoreSlice'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { ContextMenu } from './ContextMenu'
-import { Concepts } from '../navigator/Concepts'
 import { verovioStyle } from './style'
-import { useGetAnalyticalProjectQuery } from '../../app/services/sparql'
 import { getIri } from '../../utils'
+import { Editor } from './Editor'
+import { Model } from './Model'
+import { Project } from './Project'
 
 export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
   const navigate = useNavigate()
@@ -37,7 +25,6 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
   const [contextMenu, setContextMenu] = useState(null)
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes } = useSelector(state => state.score)
-  const { data: analyticalProject } = useGetAnalyticalProjectQuery(getIri(projectId))
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
@@ -157,51 +144,16 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
         <ContextMenu {...{ contextMenu, setContextMenu }} />
 
         <Stack flex={1}>
-          <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
-            <ListItem dense disablePadding secondaryAction={<Button>Switch model</Button>}>
-              <ListItemButton selected>
-                <ListItemIcon>
-                  <HistoryEdu />
-                </ListItemIcon>
-                <ListItemText primary="Guillotel" secondary="2022" />
-              </ListItemButton>
-            </ListItem>
-            <Concepts flex={1} />
-          </Stack>
+          <Model />
         </Stack>
 
         <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
           <Stack id="verovio" sx={verovioStyle} onContextMenu={handleContextMenu} />
         </Stack>
 
-        <Stack flex={1}>
-          <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
-            <ListItem dense disablePadding secondaryAction={<Button>Create</Button>}>
-              <ListItemButton selected>
-                <ListItemIcon>
-                  <Lyrics />
-                </ListItemIcon>
-                <ListItemText primary="New annotation" secondary="5 selected notes" />
-              </ListItemButton>
-            </ListItem>
-            <ListSubheader>Assigned concepts</ListSubheader>
-            <ListItem
-              dense
-              disablePadding
-              secondaryAction={
-                <IconButton>
-                  <Delete />
-                </IconButton>
-              }
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  <HistoryEdu />
-                </ListItemIcon>
-                <ListItemText primary="Cadence" secondary="Guillotel 2022" />
-              </ListItemButton>
-            </ListItem>
-          </Stack>
+        <Stack flex={1} spacing={2}>
+          <Editor />
+          <Project projectIri={getIri(projectId)} />
         </Stack>
 
         <Backdrop open={!pageCount}>
