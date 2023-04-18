@@ -8,8 +8,16 @@ export const Model = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
-      <ListItem dense disablePadding secondaryAction={<Button disabled>Switch</Button>}>
+    <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0} overflow="auto">
+      <ListItem
+        dense
+        disablePadding
+        secondaryAction={
+          <Button size="small" disabled>
+            change
+          </Button>
+        }
+      >
         <ListItemButton selected>
           <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <ExpandMore /> : <ChevronRight />}

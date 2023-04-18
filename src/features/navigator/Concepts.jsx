@@ -28,7 +28,7 @@ export const Concepts = () => {
 
   if (filteredTree)
     return (
-      <List subheader={<ListSubheader>Assign concepts</ListSubheader>}>
+      <List sx={{ overflow: 'scroll' }} subheader={<ListSubheader>Available concepts</ListSubheader>}>
         {!!filteredTree.length && filteredTree.map(concept => <Concept key={concept.iri} concept={concept} />)}
       </List>
     )

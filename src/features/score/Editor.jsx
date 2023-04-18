@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemText,
   Collapse,
+  Typography,
 } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,7 +29,7 @@ export const Editor = () => {
               <Button color="text" size="small" onClick={() => dispatch(setSelectedNotes())}>
                 undo
               </Button>
-              <Button>Create</Button>
+              <Button size="small">Create</Button>
             </>
           }
         >
@@ -43,7 +44,12 @@ export const Editor = () => {
           </ListItemButton>
         </ListItem>
         <ListSubheader>Assigned concepts</ListSubheader>
-        <ListItem
+        <Stack paddingY={4} flex={1} justifyContent="center">
+          <Typography textAlign="center" color="text.secondary" fontSize={12} padding={2}>
+            Drag and drop concepts from the left panel to assign them to the selected notes
+          </Typography>
+        </Stack>
+        {/* <ListItem
           dense
           disablePadding
           secondaryAction={
@@ -56,9 +62,9 @@ export const Editor = () => {
             <ListItemIcon>
               <HistoryEdu />
             </ListItemIcon>
-            <ListItemText primary="Cadence" secondary="Guillotel 2022" />
+            <ListItemText primary="PCadence" secondary="Guillotel 2022" />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
       </Stack>
     </Collapse>
   )

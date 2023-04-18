@@ -1,5 +1,5 @@
-import { Lyrics } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemButton, ListItemText, Typography } from '@mui/material'
+import { CollectionsBookmark } from '@mui/icons-material'
+import { ListItem, ListItemIcon, ListItemButton, ListItemText, Typography, ListSubheader } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useGetAnalyticalProjectQuery } from '../../app/services/sparql'
 
@@ -11,13 +11,14 @@ export const Project = ({ projectIri }) => {
       <ListItem dense disablePadding>
         <ListItemButton selected>
           <ListItemIcon>
-            <Lyrics />
+            <CollectionsBookmark />
           </ListItemIcon>
-          <ListItemText primary="New project" secondary="Analytical project" />
+          <ListItemText primary="My new project" secondary="Analytical project" />
         </ListItemButton>
       </ListItem>
+      <ListSubheader>Created annotations</ListSubheader>
       <Stack flex={1} justifyContent="center">
-        <Typography textAlign="center" color="text.secondary" fontSize={14}>
+        <Typography textAlign="center" color="text.secondary" fontSize={12} padding={2}>
           No created annotation, start by selecting notes and assigning them concepts
         </Typography>
       </Stack>
