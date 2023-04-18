@@ -22,7 +22,6 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
-  const [contextMenu, setContextMenu] = useState(null)
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes } = useSelector(state => state.score)
 
@@ -84,12 +83,6 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
     triggerNotes()
   }
 
-  const handleContextMenu = event => {
-    event.preventDefault()
-    selectedNotes.length &&
-      setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
-  }
-
   useEffect(() => {
     loadScore()
   }, [meiUrl])
@@ -141,14 +134,12 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
         </Stack>
       </Stack>
       <Stack flex={1} direction="row" justifyContent="center" minHeight={0} spacing={2} pb={2} px={2}>
-        <ContextMenu {...{ contextMenu, setContextMenu }} />
-
         <Stack flex={1}>
           <Model />
         </Stack>
 
         <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
-          <Stack id="verovio" sx={verovioStyle} onContextMenu={handleContextMenu} />
+          <Stack id="verovio" sx={verovioStyle} />
         </Stack>
 
         <Stack flex={1} spacing={2}>
