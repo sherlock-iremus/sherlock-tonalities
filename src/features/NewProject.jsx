@@ -6,7 +6,6 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -51,14 +50,12 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
         />
       </DialogContent>
       <ListSubheader>Selected score</ListSubheader>
-      <ListItem disablePadding>
-        <ListItemButton selected disableRipple>
+        <ListItemButton selected disableRipple disablePadding>
           <ListItemIcon>
             <AudioFile />
           </ListItemIcon>
           <ListItemText primary={score.scoreTitle} secondary="Composer" />
         </ListItemButton>
-      </ListItem>
       <DialogActions>
         <Button color="text" onClick={() => setIsOpen(false)}>
           Cancel
