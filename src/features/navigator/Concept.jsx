@@ -1,13 +1,15 @@
 import { ListItem, ListItemButton, ListItemText, Collapse, List, IconButton } from '@mui/material'
 import { ExpandMore, ChevronRight } from '@mui/icons-material'
 import { useState } from 'react'
+import { useDraggable } from '@dnd-kit/core'
 
 export const Concept = props => {
   const [isOpen, setIsOpen] = useState(false)
+  const { attributes, listeners, setNodeRef } = useDraggable({ id: props.concept.iri })
 
   return (
     <>
-      <ListItem disablePadding dense>
+      <ListItem disablePadding dense ref={setNodeRef} {...listeners} {...attributes}>
         <ListItemButton>
           {props.concept.subClasses && (
             <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>

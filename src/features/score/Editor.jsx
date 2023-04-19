@@ -1,7 +1,6 @@
-import { HistoryEdu, Lyrics, Delete } from '@mui/icons-material'
+import { Lyrics } from '@mui/icons-material'
 import {
   Button,
-  IconButton,
   ListSubheader,
   ListItem,
   ListItemIcon,
@@ -13,13 +12,14 @@ import {
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedNotes } from '../../app/services/scoreSlice'
+import { DropZone } from './DropZone'
 
 export const Editor = () => {
   const { selectedNotes } = useSelector(state => state.score)
   const dispatch = useDispatch()
 
   return (
-    <Collapse in={selectedNotes.length} timeout="auto" unmountOnExit>
+    <Collapse in={!!selectedNotes.length} timeout="auto" unmountOnExit>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
         <ListItem
           dense
@@ -44,11 +44,8 @@ export const Editor = () => {
           </ListItemButton>
         </ListItem>
         <ListSubheader>Assigned concepts</ListSubheader>
-        <Stack paddingY={4} flex={1} justifyContent="center">
-          <Typography textAlign="center" color="text.secondary" fontSize={12} padding={2}>
-            Drag and drop concepts from the left panel to assign them to the selected notes
-          </Typography>
-        </Stack>
+        <DropZone/>
+
         {/* <ListItem
           dense
           disablePadding
