@@ -2,18 +2,14 @@ import { useSelector } from 'react-redux'
 import { MeiViewer } from './MeiViewer'
 import { useParams } from 'react-router-dom'
 import { getIri } from '../../utils'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { setScore } from '../../app/services/scoreSlice'
 import { useDispatch } from 'react-redux'
 import { StyleNote } from './StyleNote'
 import scores from '../../app/scores.json'
-import { DndContext, DragOverlay } from '@dnd-kit/core'
-import { Chip } from '@mui/material'
 
 export const ScoreAnnotator = () => {
   const { scoreId, projectId } = useParams()
-  const [activeId, setActiveId] = useState(null)
-
   const dispatch = useDispatch()
   const { meiUrl, scoreTitle, selectedNotes } = useSelector(state => state.score)
 
@@ -23,23 +19,14 @@ export const ScoreAnnotator = () => {
     score && dispatch(setScore(score))
   }, [dispatch, scoreId])
 
-  const asignConcept = e => {
-    if (e.over) {
-      //todo : dispatch concept array
-      setActiveId(null)
-    }
-  }
-
   return (
-    <DndContext onDragStart={event => setActiveId(event.active.id)} onDragEnd={asignConcept}>
+    <>
       <MeiViewer {...{ meiUrl, scoreTitle, projectId }} />
-      <DragOverlay>{activeId && <Chip label={activeId} />}</DragOverlay>
 
-      
       {selectedNotes.map(note => (
         //bug : refresh on zoom
         <StyleNote key={note} noteId={note} />
       ))}
-    </DndContext>
+    </>
   )
 }

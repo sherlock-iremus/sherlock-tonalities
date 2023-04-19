@@ -1,17 +1,8 @@
-import { Lyrics } from '@mui/icons-material'
-import {
-  Button,
-  ListSubheader,
-  ListItem,
-  ListItemIcon,
-  ListItemButton,
-  ListItemText,
-  Collapse,
-} from '@mui/material'
+import { Cancel, Lyrics } from '@mui/icons-material'
+import { ListItem, ListItemIcon, ListItemButton, ListItemText, Collapse, IconButton } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedNotes } from '../../app/services/scoreSlice'
-import { DropZone } from './DropZone'
 
 export const Editor = () => {
   const { selectedNotes } = useSelector(state => state.score)
@@ -24,12 +15,9 @@ export const Editor = () => {
           dense
           disablePadding
           secondaryAction={
-            <>
-              <Button color="text" size="small" onClick={() => dispatch(setSelectedNotes())}>
-                undo
-              </Button>
-              <Button size="small">Create</Button>
-            </>
+            <IconButton edge="end" onClick={() => dispatch(setSelectedNotes())}>
+              <Cancel />
+            </IconButton>
           }
         >
           <ListItemButton selected>
@@ -37,30 +25,11 @@ export const Editor = () => {
               <Lyrics />
             </ListItemIcon>
             <ListItemText
-              primary="New annotation"
+              primary="Current annotation"
               secondary={selectedNotes.length === 1 ? 'One selected note' : selectedNotes.length + ' selected notes'}
             />
           </ListItemButton>
         </ListItem>
-        <ListSubheader>Assigned concepts</ListSubheader>
-        <DropZone/>
-
-        {/* <ListItem
-          dense
-          disablePadding
-          secondaryAction={
-            <IconButton>
-              <Delete />
-            </IconButton>
-          }
-        >
-          <ListItemButton>
-            <ListItemIcon>
-              <HistoryEdu />
-            </ListItemIcon>
-            <ListItemText primary="PCadence" secondary="Guillotel 2022" />
-          </ListItemButton>
-        </ListItem> */}
       </Stack>
     </Collapse>
   )
