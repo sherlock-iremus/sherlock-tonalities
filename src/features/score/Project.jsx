@@ -5,15 +5,15 @@ import { useGetAnalyticalProjectQuery } from '../../app/services/sparql'
 
 export const Project = ({ projectIri }) => {
   const { data: analyticalProject } = useGetAnalyticalProjectQuery(projectIri)
-  console.log(analyticalProject)
-  return (
+
+  return !analyticalProject ? null : (
     <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
       <ListItem dense disablePadding>
         <ListItemButton selected>
           <ListItemIcon>
             <CollectionsBookmark />
           </ListItemIcon>
-          <ListItemText primary="My new project" secondary="Analytical project" />
+          <ListItemText primary={analyticalProject.label} secondary="Analytical project" />
         </ListItemButton>
       </ListItem>
       <ListSubheader>Created annotations</ListSubheader>
