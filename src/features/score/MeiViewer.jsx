@@ -146,11 +146,10 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
           <Editor />
           <Project projectIri={getIri(projectId)} />
         </Stack>
-
-        <Backdrop open={!pageCount}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
       </Stack>
+      <Backdrop open={!pageCount}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Stack>
   )
 }

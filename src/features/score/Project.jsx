@@ -16,7 +16,7 @@ export const Project = ({ projectIri }) => {
           <ListItemText primary={analyticalProject.label} secondary="Analytical project" />
         </ListItemButton>
       </ListItem>
-      <ListSubheader>Created annotations</ListSubheader>
+      <ListSubheader disableSticky>Created annotations</ListSubheader>
       <Stack flex={1} justifyContent="center">
         <Typography textAlign="center" color="text.secondary" fontSize={12} padding={2}>
           No created annotation, start by selecting notes and assigning them concepts
