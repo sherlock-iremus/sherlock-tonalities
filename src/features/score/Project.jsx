@@ -18,7 +18,7 @@ export const Project = ({ projectIri }) => {
       </ListItem>
       <ListSubheader disableSticky>Created annotations</ListSubheader>
       <Stack flex={1} justifyContent="center">
-        <Typography textAlign="center" color="text.secondary" fontSize={12} padding={2}>
+        <Typography textAlign="center" color="text.secondary" fontSize={14} padding={2}>
           No created annotation, start by selecting notes and assigning them concepts
         </Typography>
       </Stack>
