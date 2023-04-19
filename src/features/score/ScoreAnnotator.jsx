@@ -23,11 +23,21 @@ export const ScoreAnnotator = () => {
     score && dispatch(setScore(score))
   }, [dispatch, scoreId])
 
+  const asignConcept = e => {
+    if (e.over) {
+      //todo : dispatch concept array
+      setActiveId(null)
+    }
+  }
+
   return (
-    <DndContext onDragStart={event => setActiveId(event.active.id)} onDragEnd={() => setActiveId(null)}>
+    <DndContext onDragStart={event => setActiveId(event.active.id)} onDragEnd={asignConcept}>
       <MeiViewer {...{ meiUrl, scoreTitle, projectId }} />
       <DragOverlay>{activeId && <Chip label={activeId} />}</DragOverlay>
+
+      
       {selectedNotes.map(note => (
+        //bug : refresh on zoom
         <StyleNote key={note} noteId={note} />
       ))}
     </DndContext>

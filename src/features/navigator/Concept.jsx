@@ -9,14 +9,14 @@ export const Concept = props => {
 
   return (
     <>
-      <ListItem disablePadding dense ref={setNodeRef} {...listeners} {...attributes}>
+      <ListItem disablePadding dense>
         <ListItemButton>
           {props.concept.subClasses && (
             <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <ExpandMore /> : <ChevronRight />}
             </IconButton>
           )}
-          <ListItemText primary={props.concept.iri} />
+          <ListItemText ref={setNodeRef} {...listeners} {...attributes} primary={props.concept.iri} />
         </ListItemButton>
       </ListItem>
       {props.concept.subClasses && (

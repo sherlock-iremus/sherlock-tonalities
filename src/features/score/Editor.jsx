@@ -7,7 +7,6 @@ import {
   ListItemButton,
   ListItemText,
   Collapse,
-  Typography,
 } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
