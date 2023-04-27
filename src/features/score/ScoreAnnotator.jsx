@@ -24,7 +24,7 @@ export const ScoreAnnotator = () => {
       <MeiViewer {...{ meiUrl, scoreTitle, projectId }} />
 
       {selectedNotes.map(note => (
-        //bug : refresh on zoom
+        //bug : refresh on zoom & page chage
         <StyleNote key={note} noteId={note} />
       ))}
     </>
