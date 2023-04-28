@@ -2,20 +2,16 @@
 import { MeiViewer } from './MeiViewer'
 import { useParams } from 'react-router-dom'
 import { getIri } from '../../utils'
-import { useEffect } from 'react'
-import { setScore } from '../../services/globals'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
 import scores from '../../config/scores.json'
 
 export const ScoreAnnotator = () => {
   const { scoreId, projectId } = useParams()
-  const dispatch = useDispatch()
+  const [score, setScore] = useState(null)
 
   useEffect(() => {
-    const scoreIri = getIri(scoreId)
-    const score = scores.find(score => score.scoreIri === scoreIri)
-    score && dispatch(setScore(score))
-  }, [scoreId])
+    setScore(scores.find(score => score.scoreIri === getIri(scoreId)))
+  }, [])
 
-  return <MeiViewer {...{ projectId }} />
+  return <MeiViewer {...score} {...{ projectId }} />
 }

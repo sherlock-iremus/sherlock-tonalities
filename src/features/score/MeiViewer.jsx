@@ -16,14 +16,14 @@ import { Model } from './Model'
 import { Project } from './Project'
 import { StyleNote } from './StyleNote'
 
-export const MeiViewer = ({ projectId }) => {
+export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { meiUrl, scoreTitle, selectedNotes } = useSelector(state => state.globals)
+  const { selectedNotes } = useSelector(state => state.globals)
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk

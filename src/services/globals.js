@@ -1,11 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  baseUrl: 'http://data-iremus.huma-num.fr/id/',
-  tonalityBaseUrl: 'http://modality-tonality.huma-num.fr/',
-  scoreIri: '',
-  scoreTitle: '',
-  meiUrl: '',
   isUserConnected: true,
   selectedNotes: [],
   selectedConcepts: [],
@@ -16,13 +11,6 @@ const globals = createSlice({
   name: 'globals',
   initialState,
   reducers: {
-    setScore: (state, action) => {
-      if (state.scoreIri !== action.payload.scoreIri) {
-        state.scoreIri = action.payload.scoreIri
-        state.scoreTitle = action.payload.scoreTitle
-        state.meiUrl = action.payload.meiUrl
-      }
-    },
     setIsUserConnected: (state, action) => {
       state.isUserConnected = action.payload
     },
@@ -56,5 +44,4 @@ const globals = createSlice({
 
 export default globals
 
-export const { setIsUserConnected, setScore, setSelectedNotes, setSelectedConcepts, setSelectedModelIndex } =
-  globals.actions
+export const { setIsUserConnected, setSelectedNotes, setSelectedConcepts, setSelectedModelIndex } = globals.actions
