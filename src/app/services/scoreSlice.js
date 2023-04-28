@@ -9,6 +9,7 @@ const initialState = {
   isUserConnected: true,
   selectedNotes: [],
   selectedConcepts: [],
+  selectedModelIndex: 0,
 }
 
 const scoreSlice = createSlice({
@@ -24,6 +25,9 @@ const scoreSlice = createSlice({
     },
     setIsUserConnected: (state, action) => {
       state.isUserConnected = action.payload
+    },
+    setSelectedModelIndex: (state, action) => {
+      state.selectedModelIndex = action.payload
     },
     setSelectedNotes: (state, action) => {
       if (!action.payload) {
@@ -52,4 +56,5 @@ const scoreSlice = createSlice({
 
 export default scoreSlice
 
-export const { setIsUserConnected, setScore, setSelectedNotes, setSelectedConcepts } = scoreSlice.actions
+export const { setIsUserConnected, setScore, setSelectedNotes, setSelectedConcepts, setSelectedModelIndex } =
+  scoreSlice.actions

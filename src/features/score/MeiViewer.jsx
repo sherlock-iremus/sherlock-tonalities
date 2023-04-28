@@ -139,6 +139,9 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
 
         <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
           <Stack id="verovio" sx={verovioStyle} />
+          <Backdrop open={!pageCount}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </Stack>
 
         <Stack flex={1} spacing={2}>
@@ -146,9 +149,6 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
           <Project projectIri={getIri(projectId)} />
         </Stack>
       </Stack>
-      <Backdrop open={!pageCount}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
     </Stack>
   )
 }

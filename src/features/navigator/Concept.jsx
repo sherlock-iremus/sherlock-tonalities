@@ -27,7 +27,7 @@ export const Concept = ({ concept }) => {
       </ListItem>
       {concept.subClasses && (
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
-          <List sx={{ pl: 4 }} disablePadding>
+          <List sx={{ pl: 4 }} dense disablePadding>
             {concept.subClasses.map(subClass => (
               <Concept key={subClass.iri} concept={subClass} />
             ))}
