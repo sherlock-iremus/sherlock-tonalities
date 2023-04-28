@@ -3,10 +3,10 @@ import { Button, IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/materi
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BASE_API_URL, isInDevMode, useGetUserIdQuery } from '../app/services/sherlockApi'
 import { Menu } from '../components/Menu'
-import { getSherlockIriFromUuid } from '../utils'
+import { getIri } from '../utils'
 import { ContributorItem } from './items/ContributorItem'
+import { BASE_API_URL, useGetUserIdQuery } from '../services/service'
 
 export const AccountMenu = () => {
   const { data: userId } = useGetUserIdQuery()
@@ -27,7 +27,6 @@ export const AccountMenu = () => {
       <Button
         href={BASE_API_URL + `sherlock/login?redirect-uri=${window.location.href}`}
         variant="contained"
-        color="success"
         size="small"
       >
         Login
@@ -43,7 +42,7 @@ export const AccountMenu = () => {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <ContributorItem contributorIri={getSherlockIriFromUuid(userId)} />
+          <ContributorItem contributorIri={getIri(userId)} />
         </IconButton>
       </Tooltip>
       <Menu anchorEl={anchorEl} id="account-menu" open={open} onClose={handleClose} onClick={handleClose}>
@@ -53,7 +52,7 @@ export const AccountMenu = () => {
           </ListItemIcon>
           My account
         </MenuItem>
-        <MenuItem onClick={logOut} disabled={isInDevMode}>
+        <MenuItem onClick={logOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

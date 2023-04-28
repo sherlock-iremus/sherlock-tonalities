@@ -11,6 +11,14 @@
   <base href="%PUBLIC_URL%/">
   <title>Tonalities</title>
   <script type="text/javascript" src="verovio-toolkit-wasm.js"></script>
+  <script type="text/javascript">
+    (l => {
+      if (l.search[1] === '/') {
+        const decoded = l.search.slice(1).split('&').map(s => s.replace(/~and~/g, '&')).join('?')
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash)
+      }
+    })(window.location)
+  </script>
 </head>
 
 <body style="margin: 0">

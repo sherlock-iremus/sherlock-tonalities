@@ -1,1 +1,0 @@
-curl --data-urlencode "query@$1" http://data-iremus.huma-num.fr/sparql

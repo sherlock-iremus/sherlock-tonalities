@@ -14,7 +14,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "6.9.0",
     "react-scripts": "5.0.1",
-    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#commit=16ca8bd617a96e2a2e0da5de22ba45adb6588ab4"
+    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#main"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,5 +37,8 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "resolutions": {
+    "sherlock-sparql-queries": "portal:/home/fepoulpa/Documents/sherlock-sparql-queries"
+  }
 }

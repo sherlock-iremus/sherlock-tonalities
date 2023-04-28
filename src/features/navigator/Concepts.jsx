@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { List, ListSubheader } from '@mui/material'
+import { Backdrop, CircularProgress, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { useGetCadencesGuillotelQuery } from '../../app/services/ontologies'
 import { Concept } from './Concept'
+import { useSelector } from 'react-redux'
+import { useGetModelQuery } from '../../services/model'
 
 export const Concepts = () => {
   const [filter] = useState('')
-  const { data: cadencesGuillotel } = useGetCadencesGuillotelQuery()
-  const [filteredTree, setFilteredTree] = useState(cadencesGuillotel)
+  const { selectedModelIndex } = useSelector(state => state.globals)
+  const { data, isLoading } = useGetModelQuery(selectedModelIndex)
+  const [filteredTree, setFilteredTree] = useState(data)
 
   const filterTree = (node, newFilter) => {
     if (node.classes) return { ...node, classes: node.classes.map(c => filterTree(c, newFilter)).filter(Boolean) }
@@ -23,13 +25,22 @@ export const Concepts = () => {
   }
 
   useEffect(() => {
-    cadencesGuillotel && setFilteredTree(filter ? filterTree(cadencesGuillotel, filter) : cadencesGuillotel)
-  }, [filter, cadencesGuillotel])
+    data && setFilteredTree(filter ? filterTree(data, filter) : data)
+  }, [filter, data])
 
-  if (filteredTree)
-    return (
-      <List subheader={<ListSubheader>Assign concepts</ListSubheader>}>
+  return (
+    filteredTree && (
+      <List
+        sx={{ overflow: 'scroll' }}
+        subheader={<ListSubheader>Available concepts</ListSubheader>}
+        disablePadding
+        dense
+      >
         {!!filteredTree.length && filteredTree.map(concept => <Concept key={concept.iri} concept={concept} />)}
+        <Backdrop open={isLoading}>
+          <CircularProgress />
+        </Backdrop>
       </List>
     )
+  )
 }

@@ -1,4 +1,4 @@
-import { NewProject } from './features/NewProject'
+import { NewProject } from './NewProject'
 import {
   Button,
   Divider,
@@ -13,7 +13,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { ReactComponent as PolifoniaLogo } from './assets/polifonia.svg'
+import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
 import { grey } from '@mui/material/colors'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import {
@@ -26,12 +26,12 @@ import {
   SwapHoriz,
   TextSnippet,
 } from '@mui/icons-material'
-import { AccountMenu } from './features/AccountMenu'
+import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
-import { Intro } from './features/Intro'
-import { ContributorItem } from './features/items/ContributorItem'
-import { useGetUserIdQuery } from './app/services/sherlockApi'
-import scores from './app/scores.json'
+import { Intro } from './Intro'
+import { ContributorItem } from './items/ContributorItem'
+import { useGetUserIdQuery } from '../services/service'
+import scores from '../config/scores.json'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)

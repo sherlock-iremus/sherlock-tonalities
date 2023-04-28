@@ -6,21 +6,24 @@ import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setSelectedNotes } from '../../app/services/scoreSlice'
+import { setSelectedNotes } from '../../services/globals'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
-import { ContextMenu } from './ContextMenu'
 import { verovioStyle } from './style'
+import { getIri } from '../../utils'
+import { Editor } from './Editor'
+import { Model } from './Model'
+import { Project } from './Project'
+import { StyleNote } from './StyleNote'
 
-export const MeiViewer = ({ meiUrl, scoreTitle }) => {
+export const MeiViewer = ({ projectId }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
-  const [contextMenu, setContextMenu] = useState(null)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { selectedNotes } = useSelector(state => state.score)
+  const { meiUrl, scoreTitle, selectedNotes } = useSelector(state => state.globals)
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
@@ -36,7 +39,6 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
         footer: 'none',
       })
     setPageCount(toolkit.getPageCount())
-    triggerNotes()
   }
 
   const triggerNotes = () => {
@@ -70,25 +72,21 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const onPageChange = newPage => {
     reloadVerovio(newPage)
     setCurrentPage(newPage)
-    triggerNotes()
   }
 
   const zoom = newScale => {
     toolkit.setOptions({ scale: newScale })
     reloadVerovio(currentPage)
     setScale(newScale)
-    triggerNotes()
-  }
-
-  const handleContextMenu = event => {
-    event.preventDefault()
-    selectedNotes.length &&
-      setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
   }
 
   useEffect(() => {
     loadScore()
   }, [meiUrl])
+
+  useEffect(() => {
+    triggerNotes()
+  }, [currentPage, scale, pageCount])
 
   useEffect(() => {
     if (finalNoteId) {
@@ -136,15 +134,25 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           <AccountMenu />
         </Stack>
       </Stack>
-      <Stack flex={1} alignItems="center" justifyContent="center" minHeight={0} pb={2}>
-        <ContextMenu {...{ contextMenu, setContextMenu }} />
-        <Stack borderRadius={3} bgcolor="white" boxShadow={1} width="46%" overflow="scroll">
-          <Stack id="verovio" sx={verovioStyle} onContextMenu={handleContextMenu} />
+      <Stack flex={1} direction="row" justifyContent="center" minHeight={0} spacing={2} pb={2} px={2}>
+        <Stack flex={1}>
+          <Model />
         </Stack>
 
-        <Backdrop open={!pageCount}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
+          <Stack id="verovio" sx={verovioStyle} />
+          <Backdrop open={!pageCount}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+          {selectedNotes.map(noteId => (
+            <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} />
+          ))}
+        </Stack>
+
+        <Stack flex={1} spacing={2}>
+          <Editor />
+          <Project projectIri={getIri(projectId)} />
+        </Stack>
       </Stack>
     </Stack>
   )

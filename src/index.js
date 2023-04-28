@@ -1,12 +1,12 @@
 import React from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { store } from './app/store'
+import { store } from './services/store'
 import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './theme'
 import { App } from './App'
-import { isInDevMode } from './app/services/sherlockApi'
+import { DEV_ENV } from './services/service'
 
 window.verovio.module.onRuntimeInitialized = () => {
   window.tk = new window.verovio.toolkit()
@@ -14,7 +14,7 @@ window.verovio.module.onRuntimeInitialized = () => {
 
   root.render(
     <React.StrictMode>
-      <BrowserRouter basename={isInDevMode ? 'sherlock-tonalities' : 'tonalities'}>
+      <BrowserRouter basename={DEV_ENV ? 'sherlock-tonalities' : 'tonalities'}>
         <ThemeProvider {...{ theme }}>
           <ReduxProvider {...{ store }}>
             <App />
