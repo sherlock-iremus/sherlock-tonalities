@@ -19,7 +19,7 @@ export const ContextMenu = ({ contextMenu, setContextMenu }) => {
         {models.map((model, index) => (
           <ListItemButton
             key={model.baseIri}
-            onClick={() => dispatch(setSelectedModelIndex(index))}
+            onClick={() => dispatch(setSelectedModelIndex(index)) && setContextMenu(null)}
             disabled={index === selectedModelIndex}
           >
             <ListItemText primary={model.name} />
