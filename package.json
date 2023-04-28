@@ -38,7 +38,4 @@
     ]
   },
   "packageManager": "yarn@3.4.1",
-  "resolutions": {
-    "sherlock-sparql-queries": "portal:/home/fepoulpa/Documents/sherlock-sparql-queries"
-  }
 }
