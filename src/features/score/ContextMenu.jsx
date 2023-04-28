@@ -1,12 +1,12 @@
 import { Menu } from '../../components/Menu'
-import { List, ListItemButton, ListItemText } from '@mui/material'
-import models from '../../app/models.json'
-import { setSelectedModelIndex } from '../../app/services/scoreSlice'
+import { List, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { setSelectedModelIndex } from '../../services/globals'
 import { useDispatch, useSelector } from 'react-redux'
+import models from '../../config/models.json'
 
 export const ContextMenu = ({ contextMenu, setContextMenu }) => {
   const dispatch = useDispatch()
-  const { selectedModelIndex } = useSelector(state => state.score)
+  const { selectedModelIndex } = useSelector(state => state.globals)
 
   return (
     <Menu
@@ -15,7 +15,7 @@ export const ContextMenu = ({ contextMenu, setContextMenu }) => {
       anchorReference="anchorPosition"
       {...(contextMenu && { anchorPosition: { top: contextMenu.mouseY, left: contextMenu.mouseX } })}
     >
-      <List dense disablePadding>
+      <List subheader={<ListSubheader>Available models</ListSubheader>} dense disablePadding>
         {models.map((model, index) => (
           <ListItemButton
             key={model.baseIri}

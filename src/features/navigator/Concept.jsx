@@ -2,12 +2,12 @@ import { ListItem, Collapse, List, IconButton, Chip } from '@mui/material'
 import { ExpandMore, ChevronRight } from '@mui/icons-material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedConcepts } from '../../app/services/scoreSlice'
+import { setSelectedConcepts } from '../../services/globals'
 
 export const Concept = ({ concept }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
-  const { selectedConcepts, selectedNotes } = useSelector(state => state.score)
+  const { selectedConcepts, selectedNotes } = useSelector(state => state.globals)
 
   const isSelected = selectedNotes.length && selectedConcepts.includes(concept.iri)
   const handleClick = () => dispatch(setSelectedConcepts(concept.iri))
@@ -22,7 +22,7 @@ export const Concept = ({ concept }) => {
           label={concept.iri}
           disabled={!selectedNotes.length}
           onClick={handleClick}
-          {...(!isSelected ? { variant: 'outlined' } : { onDelete: handleClick })}
+          {...(!isSelected ? { variant: 'outlined' } : { onDelete: handleClick, color: 'primary' })}
         />
       </ListItem>
       {concept.subClasses && (

@@ -1,7 +1,7 @@
 import { CollectionsBookmark } from '@mui/icons-material'
 import { ListItem, ListItemIcon, ListItemButton, ListItemText, Typography, ListSubheader } from '@mui/material'
 import { Stack } from '@mui/system'
-import { useGetAnalyticalProjectQuery } from '../../app/services/sparql'
+import { useGetAnalyticalProjectQuery } from '../../services/sparql'
 
 export const Project = ({ projectIri }) => {
   const { data: analyticalProject } = useGetAnalyticalProjectQuery(projectIri)

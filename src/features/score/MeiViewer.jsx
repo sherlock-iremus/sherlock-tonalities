@@ -6,7 +6,7 @@ import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setSelectedNotes } from '../../app/services/scoreSlice'
+import { setSelectedNotes } from '../../services/globals'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
@@ -22,7 +22,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { selectedNotes } = useSelector(state => state.score)
+  const { selectedNotes } = useSelector(state => state.globals)
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk

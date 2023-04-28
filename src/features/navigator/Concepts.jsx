@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Backdrop, CircularProgress, List, ListSubheader } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { useGetModelQuery } from '../../app/services/ontologies'
 import { Concept } from './Concept'
 import { useSelector } from 'react-redux'
-import { grey } from '@mui/material/colors'
+import { useGetModelQuery } from '../../services/model'
 
 export const Concepts = () => {
   const [filter] = useState('')
-  const { selectedModelIndex } = useSelector(state => state.score)
+  const { selectedModelIndex } = useSelector(state => state.globals)
   const { data, isLoading } = useGetModelQuery(selectedModelIndex)
   const [filteredTree, setFilteredTree] = useState(data)
 

@@ -12,8 +12,8 @@ const initialState = {
   selectedModelIndex: 0,
 }
 
-const scoreSlice = createSlice({
-  name: 'score',
+const globals = createSlice({
+  name: 'globals',
   initialState,
   reducers: {
     setScore: (state, action) => {
@@ -54,7 +54,7 @@ const scoreSlice = createSlice({
   },
 })
 
-export default scoreSlice
+export default globals
 
 export const { setIsUserConnected, setScore, setSelectedNotes, setSelectedConcepts, setSelectedModelIndex } =
-  scoreSlice.actions
+  globals.actions

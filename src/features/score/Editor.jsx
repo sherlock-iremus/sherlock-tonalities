@@ -2,10 +2,10 @@ import { Cancel, Lyrics } from '@mui/icons-material'
 import { ListItem, ListItemIcon, ListItemButton, ListItemText, Collapse, IconButton } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedNotes } from '../../app/services/scoreSlice'
+import { setSelectedNotes } from '../../services/globals'
 
 export const Editor = () => {
-  const { selectedNotes } = useSelector(state => state.score)
+  const { selectedNotes } = useSelector(state => state.globals)
   const dispatch = useDispatch()
 
   return (

@@ -3,10 +3,10 @@ import { Button, IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/materi
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { BASE_API_URL, useGetUserIdQuery } from '../app/services/sherlockApi'
 import { Menu } from '../components/Menu'
 import { getIri } from '../utils'
 import { ContributorItem } from './items/ContributorItem'
+import { BASE_API_URL, useGetUserIdQuery } from '../services/service'
 
 export const AccountMenu = () => {
   const { data: userId } = useGetUserIdQuery()

@@ -1,5 +1,5 @@
 import { Avatar } from '@mui/material'
-import { useGetContributorQuery } from '../../app/services/sparql'
+import { useGetContributorQuery } from '../../services/sparql'
 
 export const ContributorItem = ({ contributorIri, small }) => {
   const { data: contributor } = useGetContributorQuery(contributorIri)

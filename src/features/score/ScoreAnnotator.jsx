@@ -3,15 +3,15 @@ import { MeiViewer } from './MeiViewer'
 import { useParams } from 'react-router-dom'
 import { getIri } from '../../utils'
 import { useEffect } from 'react'
-import { setScore } from '../../app/services/scoreSlice'
+import { setScore } from '../../services/globals'
 import { useDispatch } from 'react-redux'
 import { StyleNote } from './StyleNote'
-import scores from '../../app/scores.json'
+import scores from '../../config/scores.json'
 
 export const ScoreAnnotator = () => {
   const { scoreId, projectId } = useParams()
   const dispatch = useDispatch()
-  const { meiUrl, scoreTitle, selectedNotes } = useSelector(state => state.score)
+  const { meiUrl, scoreTitle, selectedNotes } = useSelector(state => state.globals)
 
   useEffect(() => {
     const scoreIri = getIri(scoreId)

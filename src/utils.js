@@ -1,5 +1,3 @@
-import scores from './app/scores.json'
-
 export const stringToColor = string => {
   let hash = 0
   let i
@@ -12,11 +10,6 @@ export const stringToColor = string => {
   }
   /* eslint-enable no-bitwise */
   return color
-}
-
-export const getScoreLabel = scoreIri => {
-  for (const score of scores) if (scoreIri.match(score.scoreIri)) return score.scoreTitle
-  return null
 }
 
 export const getUuid = iri => iri.split('/').pop()

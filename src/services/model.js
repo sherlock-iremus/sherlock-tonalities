@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { removeBaseIri } from '../../utils'
-import { isInDevMode } from './sherlockApi'
-import models from '../models.json'
+import { DEV_ENV } from './service'
+import models from '../config/models.json'
+import { removeBaseIri } from '../utils'
 
-const baseUrl = isInDevMode
+const baseUrl = DEV_ENV
   ? 'https://raw.githubusercontent.com/felix-commits/modal-tonal-ontology/patch-2/otherModels/JSON/'
   : 'https://raw.githubusercontent.com/polifonia-project/modal-tonal-ontology/main/otherModels/JSON/'
 
-export const ontologies = createApi({
-  reducerPath: 'ontologies',
+export const model = createApi({
+  reducerPath: 'model',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: builder => ({
     getModel: builder.query({
@@ -36,6 +36,6 @@ export const ontologies = createApi({
   }),
 })
 
-export default ontologies
+export default model
 
-export const { useGetModelQuery } = ontologies
+export const { useGetModelQuery } = model

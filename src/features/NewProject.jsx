@@ -15,7 +15,7 @@ import {
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUuid } from '../utils'
-import { usePostAnalyticalProjectMutation } from '../app/services/sherlockApi'
+import { usePostAnalyticalProjectMutation } from '../services/service'
 
 export const NewProject = ({ isOpen, setIsOpen, score }) => {
   const navigate = useNavigate()
