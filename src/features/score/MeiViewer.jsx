@@ -14,15 +14,16 @@ import { getIri } from '../../utils'
 import { Editor } from './Editor'
 import { Model } from './Model'
 import { Project } from './Project'
+import { StyleNote } from './StyleNote'
 
-export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
+export const MeiViewer = ({ projectId }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { selectedNotes } = useSelector(state => state.globals)
+  const { meiUrl, scoreTitle, selectedNotes } = useSelector(state => state.globals)
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
@@ -38,7 +39,6 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
         footer: 'none',
       })
     setPageCount(toolkit.getPageCount())
-    triggerNotes()
   }
 
   const triggerNotes = () => {
@@ -72,19 +72,21 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
   const onPageChange = newPage => {
     reloadVerovio(newPage)
     setCurrentPage(newPage)
-    triggerNotes()
   }
 
   const zoom = newScale => {
     toolkit.setOptions({ scale: newScale })
     reloadVerovio(currentPage)
     setScale(newScale)
-    triggerNotes()
   }
 
   useEffect(() => {
     loadScore()
   }, [meiUrl])
+
+  useEffect(() => {
+    triggerNotes()
+  }, [currentPage, scale, pageCount])
 
   useEffect(() => {
     if (finalNoteId) {
@@ -142,6 +144,9 @@ export const MeiViewer = ({ meiUrl, scoreTitle, projectId }) => {
           <Backdrop open={!pageCount}>
             <CircularProgress color="inherit" />
           </Backdrop>
+          {selectedNotes.map(noteId => (
+            <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} />
+          ))}
         </Stack>
 
         <Stack flex={1} spacing={2}>
