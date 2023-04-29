@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, Button, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
+import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
@@ -11,9 +11,9 @@ import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
 import { getIri } from '../../utils'
-import { Editor } from './Editor'
-import { Model } from './Model'
-import { Project } from './Project'
+import { Editor } from '../edition/Editor'
+import { Model } from '../navigator/Model'
+import { Project } from '../edition/Project'
 import { StyleNote } from './StyleNote'
 
 export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
@@ -23,7 +23,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { selectedNotes } = useSelector(state => state.globals)
+  const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
@@ -69,7 +69,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
 
   const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
 
-  const onPageChange = newPage => {
+  const changePage = newPage => {
     reloadVerovio(newPage)
     setCurrentPage(newPage)
   }
@@ -83,6 +83,10 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   useEffect(() => {
     loadScore()
   }, [meiUrl])
+
+  useEffect(() => {
+    selectedAnnotation && selectedAnnotation.page !== currentPage && changePage(selectedAnnotation.page)
+  }, [selectedAnnotation])
 
   useEffect(() => {
     triggerNotes()
@@ -113,7 +117,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
             page={currentPage}
             siblingCount={0}
             boundaryCount={1}
-            onChange={(event, value) => onPageChange(value)}
+            onChange={(event, value) => changePage(value)}
             color="primary"
           />
           <Tooltip title="Zoom out">
@@ -128,9 +132,6 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
           </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
-          <Button size="small" disabled variant="contained">
-            Publish
-          </Button>
           <AccountMenu />
         </Stack>
       </Stack>
@@ -145,7 +146,13 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
             <CircularProgress color="inherit" />
           </Backdrop>
           {selectedNotes.map(noteId => (
-            <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} />
+            <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} className="selected" />
+          ))}
+          {selectedAnnotation?.notes.map(noteId => (
+            <StyleNote key={noteId} {...{ noteId }} className="selected" />
+          ))}
+          {hoveredAnnotation?.notes.map(noteId => (
+            <StyleNote key={noteId} {...{ noteId }} className="hovered" />
           ))}
         </Stack>
 
