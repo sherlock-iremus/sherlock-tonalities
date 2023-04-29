@@ -1,13 +1,14 @@
-import { Comment } from '@mui/icons-material'
-import { IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { Edit, Comment } from '@mui/icons-material'
+import { Collapse, IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { ContextChip } from '../../components/ContextChip'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
 
 export const Annotation = ({ annotation }) => {
-  const { selectedAnnotation } = useSelector(state => state.globals)
+  const { hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
   const dispatch = useDispatch()
   const isSelected = selectedAnnotation === annotation
+  const isHovered = hoveredAnnotation === annotation
 
   return (
     <ListItem
@@ -16,9 +17,14 @@ export const Annotation = ({ annotation }) => {
       onMouseLeave={() => dispatch(setHoveredAnnotation())}
       disablePadding
       secondaryAction={
-        <IconButton edge="end">
-          <Comment />
-        </IconButton>
+        <Collapse in={isHovered} timeout="auto" unmountOnExit>
+          <IconButton>
+            <Edit />
+          </IconButton>
+          <IconButton edge="end">
+            <Comment />
+          </IconButton>
+        </Collapse>
       }
     >
       <ListItemButton
