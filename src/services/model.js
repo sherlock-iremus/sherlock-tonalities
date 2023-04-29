@@ -14,7 +14,9 @@ export const model = createApi({
     getModel: builder.query({
       query: index => ({ url: models[index].filename }),
       transformResponse: response => {
-        const classes = response.filter(c => c['@type'].includes('http://www.w3.org/2002/07/owl#Class'))
+        const classes = response
+          .filter(c => c['@type'].includes('http://www.w3.org/2002/07/owl#Class'))
+          .filter(c => c['@id'].includes('#'))
         const classesIri = classes.map(c => c['@id'])
         const classesWithParent = classes.map(c => {
           const parent = c['http://www.w3.org/2000/01/rdf-schema#subClassOf']?.find(p =>

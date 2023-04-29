@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, Button, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
-import { grey } from '@mui/material/colors'
+import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,19 +10,20 @@ import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
 import { getIri } from '../../utils'
-import { Editor } from './Editor'
-import { Model } from './Model'
-import { Project } from './Project'
+import { Editor } from '../edition/Editor'
+import { Model } from '../navigator/Model'
+import { Project } from '../edition/Project'
 import { StyleNote } from './StyleNote'
+import { PRIMARY_COLOR } from '../../theme'
 
-export const MeiViewer = ({ projectId }) => {
+export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { meiUrl, scoreTitle, selectedNotes } = useSelector(state => state.globals)
+  const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
 
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
@@ -69,9 +69,11 @@ export const MeiViewer = ({ projectId }) => {
 
   const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
 
-  const onPageChange = newPage => {
-    reloadVerovio(newPage)
-    setCurrentPage(newPage)
+  const changePage = newPage => {
+    if (1 <= newPage && newPage <= pageCount) {
+      reloadVerovio(newPage)
+      setCurrentPage(newPage)
+    }
   }
 
   const zoom = newScale => {
@@ -83,6 +85,10 @@ export const MeiViewer = ({ projectId }) => {
   useEffect(() => {
     loadScore()
   }, [meiUrl])
+
+  useEffect(() => {
+    selectedAnnotation && selectedAnnotation.page !== currentPage && changePage(selectedAnnotation.page)
+  }, [selectedAnnotation])
 
   useEffect(() => {
     triggerNotes()
@@ -97,7 +103,7 @@ export const MeiViewer = ({ projectId }) => {
   }, [finalNoteId])
 
   return (
-    <Stack height="100vh" bgcolor={grey[100]}>
+    <Stack height="100vh" bgcolor={PRIMARY_COLOR[50]}>
       <Stack padding={2} direction="row" alignItems="center">
         <Stack flex={1} direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">
@@ -113,7 +119,7 @@ export const MeiViewer = ({ projectId }) => {
             page={currentPage}
             siblingCount={0}
             boundaryCount={1}
-            onChange={(event, value) => onPageChange(value)}
+            onChange={(event, value) => changePage(value)}
             color="primary"
           />
           <Tooltip title="Zoom out">
@@ -128,9 +134,6 @@ export const MeiViewer = ({ projectId }) => {
           </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
-          <Button size="small" disabled variant="contained">
-            Publish
-          </Button>
           <AccountMenu />
         </Stack>
       </Stack>
@@ -145,7 +148,13 @@ export const MeiViewer = ({ projectId }) => {
             <CircularProgress color="inherit" />
           </Backdrop>
           {selectedNotes.map(noteId => (
-            <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} />
+            <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} className="selected" />
+          ))}
+          {selectedAnnotation?.notes.map(noteId => (
+            <StyleNote key={noteId} {...{ noteId }} className="selected" />
+          ))}
+          {hoveredAnnotation?.notes.map(noteId => (
+            <StyleNote key={noteId} {...{ noteId }} className="hovered" />
           ))}
         </Stack>
 

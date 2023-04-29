@@ -1,14 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  baseUrl: 'http://data-iremus.huma-num.fr/id/',
-  tonalityBaseUrl: 'http://modality-tonality.huma-num.fr/',
-  scoreIri: '',
-  scoreTitle: '',
-  meiUrl: '',
   isUserConnected: true,
   selectedNotes: [],
-  selectedConcepts: [],
+  annotations: [],
+  hoveredAnnotation: null,
+  selectedAnnotation: null,
   selectedModelIndex: 0,
 }
 
@@ -16,13 +13,6 @@ const globals = createSlice({
   name: 'globals',
   initialState,
   reducers: {
-    setScore: (state, action) => {
-      if (state.scoreIri !== action.payload.scoreIri) {
-        state.scoreIri = action.payload.scoreIri
-        state.scoreTitle = action.payload.scoreTitle
-        state.meiUrl = action.payload.meiUrl
-      }
-    },
     setIsUserConnected: (state, action) => {
       state.isUserConnected = action.payload
     },
@@ -32,7 +22,7 @@ const globals = createSlice({
     setSelectedNotes: (state, action) => {
       if (!action.payload) {
         state.selectedNotes = initialState.selectedNotes
-        state.selectedConcepts = initialState.selectedConcepts
+        state.selectedAnnotation = initialState.selectedAnnotation
       } else if (Array.isArray(action.payload))
         state.selectedNotes.push(...action.payload.filter(e => !state.selectedNotes.includes(e)))
       else {
@@ -40,21 +30,35 @@ const globals = createSlice({
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
       }
     },
-    setSelectedConcepts: (state, action) => {
+    addAnnotation: (state, action) => {
       if (state.selectedNotes.length) {
-        if (!action.payload) state.selectedConcepts = initialState.selectedConcepts
-        else if (Array.isArray(action.payload))
-          state.selectedConcepts.push(...action.payload.filter(e => !state.selectedConcepts.includes(e)))
-        else {
-          const index = state.selectedConcepts.findIndex(e => e === action.payload)
-          index !== -1 ? state.selectedConcepts.splice(index, 1) : state.selectedConcepts.push(action.payload)
-        }
+        state.annotations.push({
+          notes: state.selectedNotes,
+          concepts: [action.payload.concept],
+          page: action.payload.page,
+          date: Date.now(),
+        })
+        state.selectedNotes = initialState.selectedNotes
       }
+    },
+    setSelectedAnnotation: (state, action) => {
+      if (!action.payload) state.selectedAnnotation = initialState.selectedAnnotation
+      else state.selectedAnnotation = state.annotations.find(a => a.date === action.payload)
+    },
+    setHoveredAnnotation: (state, action) => {
+      if (!action.payload) state.hoveredAnnotation = initialState.hoveredAnnotation
+      else state.hoveredAnnotation = state.annotations.find(a => a.date === action.payload)
     },
   },
 })
 
 export default globals
 
-export const { setIsUserConnected, setScore, setSelectedNotes, setSelectedConcepts, setSelectedModelIndex } =
-  globals.actions
+export const {
+  setIsUserConnected,
+  setSelectedNotes,
+  addAnnotation,
+  setSelectedModelIndex,
+  setSelectedAnnotation,
+  setHoveredAnnotation,
+} = globals.actions

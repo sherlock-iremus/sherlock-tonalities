@@ -1,5 +1,5 @@
 import { Menu } from '../../components/Menu'
-import { List, ListItemButton, ListItemText, ListSubheader } from '@mui/material'
+import { List, ListItemButton, ListItemText } from '@mui/material'
 import { setSelectedModelIndex } from '../../services/globals'
 import { useDispatch, useSelector } from 'react-redux'
 import models from '../../config/models.json'
@@ -15,7 +15,7 @@ export const ContextMenu = ({ contextMenu, setContextMenu }) => {
       anchorReference="anchorPosition"
       {...(contextMenu && { anchorPosition: { top: contextMenu.mouseY, left: contextMenu.mouseX } })}
     >
-      <List subheader={<ListSubheader>Available models</ListSubheader>} dense disablePadding>
+      <List dense disablePadding>
         {models.map((model, index) => (
           <ListItemButton
             key={model.baseIri}

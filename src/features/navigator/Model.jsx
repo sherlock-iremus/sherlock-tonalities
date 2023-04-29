@@ -1,13 +1,16 @@
 import { HistoryEdu, ExpandMore, ChevronRight } from '@mui/icons-material'
 import { Button, IconButton, ListItem, ListItemIcon, ListItemButton, ListItemText, Collapse } from '@mui/material'
 import { Stack } from '@mui/system'
-import { Concepts } from '../navigator/Concepts'
+import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import models from '../../config/models.json'
 
 export const Model = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const [contextMenu, setContextMenu] = useState(false)
+  const { selectedModelIndex } = useSelector(state => state.globals)
 
   return (
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0} overflow="auto">
@@ -33,7 +36,7 @@ export const Model = () => {
           <ListItemIcon>
             <HistoryEdu />
           </ListItemIcon>
-          <ListItemText primary="Guillotel 2022" secondary="Selected model" />
+          <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
         </ListItemButton>
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>

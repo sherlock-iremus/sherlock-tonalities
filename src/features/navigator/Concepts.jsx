@@ -32,7 +32,7 @@ export const Concepts = () => {
     filteredTree && (
       <List
         sx={{ overflow: 'scroll' }}
-        subheader={<ListSubheader>Available concepts</ListSubheader>}
+        subheader={<ListSubheader disableSticky>Available concepts</ListSubheader>}
         disablePadding
         dense
       >

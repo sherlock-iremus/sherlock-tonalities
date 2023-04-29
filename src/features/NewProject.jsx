@@ -50,7 +50,7 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
         />
       </DialogContent>
       <ListSubheader>Selected score</ListSubheader>
-        <ListItemButton selected disableRipple disablePadding>
+        <ListItemButton selected disableRipple dense>
           <ListItemIcon>
             <AudioFile />
           </ListItemIcon>

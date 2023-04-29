@@ -2,13 +2,12 @@ import { Typography } from '@mui/material'
 
 export const Intro = () => (
   <Typography textAlign="justify" component="span" color="text.secondary" px={2} overflow="scroll" fontSize={14}>
-    The modal-tonal organization of European music is decisive for its structural properties, its inner coherence, its
-    dramatic plot and, ultimately, for its artistic meaning. TONALITIES embraces the open linked data paradigm to
-    reference large corpora of music made available in digital score libraries and to explore them through a
-    quantitative-qualitative approach. This approach consists of modeling different theories — historical or
-    contemporary, specific or general — and applying them to musical works through a dedicated interface combining
-    machine learning and human annotations.
-    <p>This interface addresses the following challenges:</p>
+    This interface leverages web technologies to grasp how distinct theoretical viewpoints bring to light different,
+    sometimes conflicting musical properties; confront different interpretations; and, ultimately, provide documented
+    and authored analyses of musical pieces. To this end, Tonalities (a) makes use of theoretical models, which (b) can
+    be associated with arbitrary selections on the score and (c) lead to critical analyses through collaborative
+    approaches.
+    <p>The interface addresses the following challenges:</p>
     <ul>
       <li>select different models, corresponding to different theoretical and analytical viewpoints</li>
       <li>select every item on the score (verticalities, groups of notes, etc.) at any level of granularity</li>

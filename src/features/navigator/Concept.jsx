@@ -2,15 +2,22 @@ import { ListItem, Collapse, List, IconButton, Chip } from '@mui/material'
 import { ExpandMore, ChevronRight } from '@mui/icons-material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedConcepts } from '../../services/globals'
+import { addAnnotation } from '../../services/globals'
 
 export const Concept = ({ concept }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
-  const { selectedConcepts, selectedNotes } = useSelector(state => state.globals)
+  const { hoveredAnnotation, selectedAnnotation, selectedNotes } = useSelector(state => state.globals)
 
-  const isSelected = selectedNotes.length && selectedConcepts.includes(concept.iri)
-  const handleClick = () => dispatch(setSelectedConcepts(concept.iri))
+  const isSelected = selectedAnnotation?.concepts.includes(concept.iri)
+  const isHovered = hoveredAnnotation?.concepts.includes(concept.iri)
+
+  const createAnnotation = () => {
+    const offsets = selectedNotes.map(note => window.tk.getTimeForElement(note))
+    const firstNote = selectedNotes[offsets.findIndex(e => e === Math.min(offsets))]
+    const page = window.tk.getPageWithElement(firstNote)
+    dispatch(addAnnotation({ concept: concept.iri, page: page ? page : 1 }))
+  }
 
   return (
     <>
@@ -21,8 +28,8 @@ export const Concept = ({ concept }) => {
         <Chip
           label={concept.iri}
           disabled={!selectedNotes.length}
-          onClick={handleClick}
-          {...(!isSelected ? { variant: 'outlined' } : { onDelete: handleClick, color: 'primary' })}
+          onClick={createAnnotation}
+          {...(isHovered || isSelected ? { color: 'primary' } : { variant: 'outlined' })}
         />
       </ListItem>
       {concept.subClasses && (
