@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { isRejectedWithValue } from '@reduxjs/toolkit'
 import { setIsUserConnected } from './globals'
+import { DEV_ENV, NGROK_5555 } from '../config/services'
 
-export const DEV_ENV = process.env.NODE_ENV === 'development'
-export const BASE_API_URL = DEV_ENV ? 'http://localhost:5555/' : 'https://sherlock.freeboxos.fr/'
+export const BASE_API_URL = DEV_ENV ? 'http://localhost:5555/' : NGROK_5555
 
 const SHERLOCK_API_ERROR = 'sherlockApi/'
 const SHERLOCK_API_REFRESH_ENDPOIT = BASE_API_URL + 'sherlock/oauth/access_token'

@@ -2,11 +2,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { stringToColor } from '../utils'
 import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
-import { BASE_API_URL, DEV_ENV } from './service'
+import { DEV_ENV, NGROK_3030 } from '../config/services'
+
+const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : NGROK_3030 + 'mac'
 
 export const sparql = createApi({
   reducerPath: 'sparql',
-  baseQuery: fetchBaseQuery({ baseUrl: DEV_ENV ? 'http://localhost:3030/iremus' : BASE_API_URL + 'sparql' }),
+  baseQuery: fetchBaseQuery({ baseUrl: SPARQL_ENDPOINT }),
   endpoints: builder => ({
     getContributor: builder.query({
       query: contributorIri => ({
