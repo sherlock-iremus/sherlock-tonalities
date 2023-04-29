@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  colorIndex: Math.floor(Math.random() * 20),
   isUserConnected: true,
   selectedNotes: [],
   annotations: [],
@@ -13,6 +14,9 @@ const globals = createSlice({
   name: 'globals',
   initialState,
   reducers: {
+    setColorIndex: (state, action) => {
+      state.colorIndex = action.payload
+    },
     setIsUserConnected: (state, action) => {
       state.isUserConnected = action.payload
     },
@@ -61,4 +65,5 @@ export const {
   setSelectedModelIndex,
   setSelectedAnnotation,
   setHoveredAnnotation,
+  setColorIndex,
 } = globals.actions

@@ -14,7 +14,7 @@ import { Editor } from '../edition/Editor'
 import { Model } from '../navigator/Model'
 import { Project } from '../edition/Project'
 import { StyleNote } from './StyleNote'
-import { PRIMARY_COLOR } from '../../theme'
+import { ThemePicker } from '../ThemePicker'
 
 export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
@@ -103,7 +103,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   }, [finalNoteId])
 
   return (
-    <Stack height="100vh" bgcolor={PRIMARY_COLOR[50]}>
+    <Stack height="100vh" bgcolor='secondary.light'>
       <Stack padding={2} direction="row" alignItems="center">
         <Stack flex={1} direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">
@@ -134,6 +134,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
           </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
+          <ThemePicker />
           <AccountMenu />
         </Stack>
       </Stack>

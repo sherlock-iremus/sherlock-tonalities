@@ -1,14 +1,5 @@
 import { ChevronRight, CollectionsBookmark, ExpandMore } from '@mui/icons-material'
-import {
-  ListItem,
-  ListItemIcon,
-  ListItemButton,
-  ListItemText,
-  Typography,
-  IconButton,
-  Button,
-  Collapse,
-} from '@mui/material'
+import { ListItem, ListItemIcon, ListItemText, Typography, IconButton, Button, Collapse } from '@mui/material'
 import { TimelineDot, TimelineSeparator, TimelineConnector } from '@mui/lab'
 import { Stack } from '@mui/system'
 import { useGetAnalyticalProjectQuery } from '../../services/sparql'
@@ -37,22 +28,20 @@ export const Project = ({ projectIri }) => {
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
       <ListItem
         dense
-        disablePadding
+        sx={{ bgcolor: 'secondary.main' }}
         secondaryAction={
           <Button size="small" disabled>
             publish
           </Button>
         }
       >
-        <ListItemButton selected>
-          <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <ExpandMore /> : <ChevronRight />}
-          </IconButton>
-          <ListItemIcon>
-            <CollectionsBookmark />
-          </ListItemIcon>
-          <ListItemText primary={analyticalProject.label} secondary="Selected project" />
-        </ListItemButton>
+        <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <ExpandMore /> : <ChevronRight />}
+        </IconButton>
+        <ListItemIcon>
+          <CollectionsBookmark />
+        </ListItemIcon>
+        <ListItemText primary={analyticalProject.label} secondary="Selected project" />
       </ListItem>
 
       <Collapse in={isOpen} timeout="auto" unmountOnExit>

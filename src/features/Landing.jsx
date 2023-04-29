@@ -31,7 +31,7 @@ import { Intro } from './Intro'
 import { ContributorItem } from './items/ContributorItem'
 import { useGetUserIdQuery } from '../services/service'
 import scores from '../config/scores.json'
-import { PRIMARY_COLOR } from '../theme'
+import { ThemePicker } from './ThemePicker'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,13 +42,14 @@ export const Landing = () => {
   const isScoreSelected = selectedScoreIndex !== -1
 
   return (
-    <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor={PRIMARY_COLOR[50]}>
+    <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
       {isScoreSelected && !isAllScoresSelected && (
         <NewProject {...{ isOpen, setIsOpen, score: scores[selectedScoreIndex] }} />
       )}
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <PolifoniaLogo width="100px" />
         <AccountMenu />
+        <ThemePicker />
       </Stack>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1} marginX={4} minHeight={0}>
         <Stack direction="row" minHeight={0}>

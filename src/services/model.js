@@ -1,11 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import models from '../config/models.json'
 import { removeBaseIri } from '../utils'
-import { DEV_ENV } from '../config/services'
 
-const baseUrl = DEV_ENV
-  ? 'https://raw.githubusercontent.com/felix-commits/modal-tonal-ontology/patch-2/otherModels/JSON/'
-  : 'https://raw.githubusercontent.com/polifonia-project/modal-tonal-ontology/main/otherModels/JSON/'
+const baseUrl = 'https://raw.githubusercontent.com/felix-commits/modal-tonal-ontology/patch-2/otherModels/JSON/'
+// https://raw.githubusercontent.com/polifonia-project/modal-tonal-ontology/main/otherModels/JSON/'
 
 export const model = createApi({
   reducerPath: 'model',

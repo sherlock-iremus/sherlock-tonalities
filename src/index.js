@@ -3,8 +3,6 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
 import { store } from './services/store'
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider } from '@mui/material'
-import { theme } from './theme'
 import { App } from './App'
 
 window.verovio.module.onRuntimeInitialized = () => {
@@ -14,11 +12,9 @@ window.verovio.module.onRuntimeInitialized = () => {
   root.render(
     <React.StrictMode>
       <HashRouter>
-        <ThemeProvider {...{ theme }}>
-          <ReduxProvider {...{ store }}>
-            <App />
-          </ReduxProvider>
-        </ThemeProvider>
+        <ReduxProvider {...{ store }}>
+          <App />
+        </ReduxProvider>
       </HashRouter>
     </React.StrictMode>
   )
