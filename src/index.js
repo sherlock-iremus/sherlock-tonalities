@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { store } from './services/store'
 import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from '@mui/material'
@@ -13,13 +13,13 @@ window.verovio.module.onRuntimeInitialized = () => {
 
   root.render(
     <React.StrictMode>
-      <BrowserRouter basename="sherlock-tonalities">
+      <HashRouter basename="sherlock-tonalities">
         <ThemeProvider {...{ theme }}>
           <ReduxProvider {...{ store }}>
             <App />
           </ReduxProvider>
         </ThemeProvider>
-      </BrowserRouter>
+      </HashRouter>
     </React.StrictMode>
   )
 }
