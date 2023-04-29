@@ -13,7 +13,7 @@ window.verovio.module.onRuntimeInitialized = () => {
 
   root.render(
     <React.StrictMode>
-      <HashRouter basename="sherlock-tonalities">
+      <HashRouter>
         <ThemeProvider {...{ theme }}>
           <ReduxProvider {...{ store }}>
             <App />
