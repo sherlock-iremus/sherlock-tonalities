@@ -1,5 +1,5 @@
 import { HistoryEdu, ExpandMore, ChevronRight } from '@mui/icons-material'
-import { Button, IconButton, ListItem, ListItemIcon, ListItemButton, ListItemText, Collapse } from '@mui/material'
+import { Button, IconButton, ListItem, ListItemIcon, ListItemText, Collapse } from '@mui/material'
 import { Stack } from '@mui/system'
 import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
@@ -16,8 +16,8 @@ export const Model = () => {
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0} overflow="auto">
       <ContextMenu {...{ contextMenu, setContextMenu }} />
       <ListItem
+        sx={{ bgcolor: 'secondary.main' }}
         dense
-        disablePadding
         secondaryAction={
           <Button
             size="small"
@@ -29,15 +29,13 @@ export const Model = () => {
           </Button>
         }
       >
-        <ListItemButton selected>
-          <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <ExpandMore /> : <ChevronRight />}
-          </IconButton>
-          <ListItemIcon>
-            <HistoryEdu />
-          </ListItemIcon>
-          <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
-        </ListItemButton>
+        <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <ExpandMore /> : <ChevronRight />}
+        </IconButton>
+        <ListItemIcon>
+          <HistoryEdu />
+        </ListItemIcon>
+        <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <Concepts flex={1} />

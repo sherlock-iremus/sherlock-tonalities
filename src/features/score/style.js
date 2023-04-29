@@ -1,11 +1,10 @@
 import { css } from '@emotion/react'
-import { PRIMARY_COLOR } from '../../theme'
 
-export const verovioStyle = css`
+export const verovioStyle = color => css`
   .selected {
     #bubble {
-      fill: ${PRIMARY_COLOR[500]} !important;
-      stroke: ${PRIMARY_COLOR[500]} !important;
+      fill: ${color};
+      stroke: ${color};
     }
   }
   .hovered {
