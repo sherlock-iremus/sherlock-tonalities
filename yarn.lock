@@ -11948,9 +11948,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sherlock-sparql-queries@portal:/home/fepoulpa/Documents/sherlock-sparql-queries::locator=tonalities%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "sherlock-sparql-queries@portal:/home/fepoulpa/Documents/sherlock-sparql-queries::locator=tonalities%40workspace%3A."
+"sherlock-sparql-queries@https://github.com/sherlock-iremus/sherlock-sparql-queries.git#main":
+  version: 0.1.0
+  resolution: "sherlock-sparql-queries@https://github.com/sherlock-iremus/sherlock-sparql-queries.git#commit=4dc608f1e9473fc6fe253188450cb867c310d17c"
   dependencies:
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^13.3.0
@@ -11959,8 +11959,9 @@ __metadata:
     react-dom: ^18.1.0
     react-scripts: 5.0.1
     web-vitals: ^2.1.4
+  checksum: 6727353fbd731bf02c86ebc005577165b8782cf2274654154098e62ed32a668edd38bd13edbe383061b53a8feef3af07d4f661c46904f7a9247d089f1010fa5e
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "side-channel@npm:^1.0.4":
   version: 1.0.4
