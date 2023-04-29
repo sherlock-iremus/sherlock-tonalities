@@ -11,11 +11,13 @@ import {
   ListItemText,
   ListSubheader,
   TextField,
+  Tooltip,
 } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUuid } from '../utils'
 import { usePostAnalyticalProjectMutation } from '../services/service'
+import { PRIMARY_COLOR } from '../theme'
 
 export const NewProject = ({ isOpen, setIsOpen, score }) => {
   const navigate = useNavigate()
@@ -38,7 +40,7 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
   return (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
       <DialogTitle>Create analytical project?</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ paddingX: 2, paddingY: 0 }}>
         <TextField
           value={label}
           onChange={event => setLabel(capitalize(event.target.value))}
@@ -49,20 +51,19 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
           onKeyDown={e => e.key === 'Enter' && label && createAnalyticalProject()}
         />
       </DialogContent>
-      <ListSubheader>Selected score</ListSubheader>
-        <ListItemButton selected disableRipple dense>
-          <ListItemIcon>
-            <AudioFile />
-          </ListItemIcon>
-          <ListItemText primary={score.scoreTitle} secondary="Composer" />
-        </ListItemButton>
-      <DialogActions>
-        <Button color="text" onClick={() => setIsOpen(false)}>
-          Cancel
-        </Button>
-        <Button disabled={!label} onClick={createAnalyticalProject}>
-          Create project
-        </Button>
+      <ListSubheader disableSticky>Start working on</ListSubheader>
+      <ListItemButton selected disableRipple dense>
+        <ListItemIcon>
+          <AudioFile />
+        </ListItemIcon>
+        <ListItemText primary={score.scoreTitle} secondary="Composer" />
+      </ListItemButton>
+      <DialogActions sx={{ paddingTop: 2 }}>
+        <Tooltip title="Hit Enter key">
+          <Button disabled={!label} onClick={createAnalyticalProject}>
+            Create project
+          </Button>
+        </Tooltip>
       </DialogActions>
     </Dialog>
   )
