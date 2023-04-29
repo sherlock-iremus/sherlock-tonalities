@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
 import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
-import { grey } from '@mui/material/colors'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +14,7 @@ import { Editor } from '../edition/Editor'
 import { Model } from '../navigator/Model'
 import { Project } from '../edition/Project'
 import { StyleNote } from './StyleNote'
+import { PRIMARY_COLOR } from '../../theme'
 
 export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const navigate = useNavigate()
@@ -103,7 +103,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   }, [finalNoteId])
 
   return (
-    <Stack height="100vh" bgcolor={grey[100]}>
+    <Stack height="100vh" bgcolor={PRIMARY_COLOR[50]}>
       <Stack padding={2} direction="row" alignItems="center">
         <Stack flex={1} direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">

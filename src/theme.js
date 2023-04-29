@@ -1,11 +1,8 @@
 import { createTheme } from '@mui/material'
-import { grey, blueGrey } from '@mui/material/colors'
+import { blueGrey } from '@mui/material/colors'
 
-export const PRIMARY_COLOR = blueGrey[500]
+export const PRIMARY_COLOR = blueGrey
 
 export const theme = createTheme({
-  palette: {
-    primary: { main: PRIMARY_COLOR },
-    text: { main: grey[500] },
-  },
+  palette: { primary: PRIMARY_COLOR },
 })

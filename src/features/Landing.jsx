@@ -14,7 +14,6 @@ import {
   Typography,
 } from '@mui/material'
 import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
-import { grey } from '@mui/material/colors'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import {
   Add,
@@ -32,6 +31,7 @@ import { Intro } from './Intro'
 import { ContributorItem } from './items/ContributorItem'
 import { useGetUserIdQuery } from '../services/service'
 import scores from '../config/scores.json'
+import { PRIMARY_COLOR } from '../theme'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,7 +42,7 @@ export const Landing = () => {
   const isScoreSelected = selectedScoreIndex !== -1
 
   return (
-    <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor={grey[100]}>
+    <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor={PRIMARY_COLOR[50]}>
       {isScoreSelected && !isAllScoresSelected && (
         <NewProject {...{ isOpen, setIsOpen, score: scores[selectedScoreIndex] }} />
       )}

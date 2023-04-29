@@ -7,14 +7,14 @@ import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/glob
 export const Annotation = ({ annotation }) => {
   const { selectedAnnotation } = useSelector(state => state.globals)
   const dispatch = useDispatch()
-
   const isSelected = selectedAnnotation === annotation
 
   return (
     <ListItem
       key={annotation.date}
+      onMouseEnter={() => dispatch(setHoveredAnnotation(annotation.date))}
+      onMouseLeave={() => dispatch(setHoveredAnnotation())}
       disablePadding
-      onClick={() => dispatch(setSelectedAnnotation(!isSelected ? annotation.date : null))}
       secondaryAction={
         <IconButton edge="end">
           <Comment />
@@ -22,9 +22,8 @@ export const Annotation = ({ annotation }) => {
       }
     >
       <ListItemButton
+        onClick={() => dispatch(setSelectedAnnotation(!isSelected ? annotation.date : null))}
         selected={isSelected}
-        onMouseEnter={() => dispatch(setHoveredAnnotation(annotation))}
-        onMouseLeave={() => dispatch(setHoveredAnnotation())}
       >
         {annotation.concepts.map(concept => (
           <ContextChip key={concept} primary={concept} secondary="Guillotel" sx={{ m: 0.2 }} />

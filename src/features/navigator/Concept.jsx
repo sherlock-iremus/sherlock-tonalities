@@ -29,9 +29,7 @@ export const Concept = ({ concept }) => {
           label={concept.iri}
           disabled={!selectedNotes.length}
           onClick={createAnnotation}
-          {...(isHovered && { color: 'text' })}
-          {...(isSelected && { color: 'primary' })}
-          {...(!isHovered && !isSelected && { variant: 'outlined' })}
+          {...(isHovered || isSelected ? { color: 'primary' } : { variant: 'outlined' })}
         />
       </ListItem>
       {concept.subClasses && (
