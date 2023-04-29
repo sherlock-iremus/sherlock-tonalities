@@ -16,7 +16,6 @@ export const Model = () => {
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0} overflow="auto">
       <ContextMenu {...{ contextMenu, setContextMenu }} />
       <ListItem
-        sx={{ bgcolor: 'secondary.main' }}
         dense
         secondaryAction={
           <Button

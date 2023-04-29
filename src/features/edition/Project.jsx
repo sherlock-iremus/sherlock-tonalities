@@ -25,10 +25,9 @@ export const Project = ({ projectIri }) => {
   }, [annotations])
 
   return !analyticalProject ? null : (
-    <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
+    <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
       <ListItem
         dense
-        sx={{ bgcolor: 'secondary.main' }}
         secondaryAction={
           <Button size="small" disabled>
             publish

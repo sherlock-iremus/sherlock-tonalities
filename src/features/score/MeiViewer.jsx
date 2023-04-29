@@ -27,7 +27,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
 
-  const color = theme.palette.primary.main
+  const color = theme.palette.primary.light
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
 
