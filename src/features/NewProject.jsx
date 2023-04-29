@@ -17,7 +17,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUuid } from '../utils'
 import { usePostAnalyticalProjectMutation } from '../services/service'
-import { PRIMARY_COLOR } from '../theme'
 
 export const NewProject = ({ isOpen, setIsOpen, score }) => {
   const navigate = useNavigate()
