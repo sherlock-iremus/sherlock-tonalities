@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { DEV_ENV } from './service'
 import models from '../config/models.json'
 import { removeBaseIri } from '../utils'
+import { DEV_ENV } from '../config/services'
 
 const baseUrl = DEV_ENV
   ? 'https://raw.githubusercontent.com/felix-commits/modal-tonal-ontology/patch-2/otherModels/JSON/'
