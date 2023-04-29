@@ -16,7 +16,7 @@ export const Concept = ({ concept }) => {
     const offsets = selectedNotes.map(note => window.tk.getTimeForElement(note))
     const firstNote = selectedNotes[offsets.findIndex(e => e === Math.min(offsets))]
     const page = window.tk.getPageWithElement(firstNote)
-    dispatch(addAnnotation({ concept: concept.iri, page }))
+    dispatch(addAnnotation({ concept: concept.iri, page: page ? page : 1 }))
   }
 
   return (

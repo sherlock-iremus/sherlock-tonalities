@@ -1,5 +1,5 @@
 import { Comment } from '@mui/icons-material'
-import { IconButton, ListItem, ListItemButton } from '@mui/material'
+import { IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { ContextChip } from '../../components/ContextChip'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
@@ -29,6 +29,10 @@ export const Annotation = ({ annotation }) => {
         {annotation.concepts.map(concept => (
           <ContextChip key={concept} primary={concept} secondary="Guillotel" sx={{ m: 0.2 }} />
         ))}
+        <ListItemText
+          sx={{ paddingLeft: 1 }}
+          secondary={annotation.notes.length === 1 ? 'on one note' : `on ${annotation.notes.length} notes`}
+        />
       </ListItemButton>
     </ListItem>
   )

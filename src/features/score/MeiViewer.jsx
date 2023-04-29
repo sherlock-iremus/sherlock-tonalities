@@ -70,8 +70,10 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
 
   const changePage = newPage => {
-    reloadVerovio(newPage)
-    setCurrentPage(newPage)
+    if (1 <= newPage && newPage <= pageCount) {
+      reloadVerovio(newPage)
+      setCurrentPage(newPage)
+    }
   }
 
   const zoom = newScale => {
