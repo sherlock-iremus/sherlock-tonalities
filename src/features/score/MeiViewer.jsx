@@ -15,8 +15,10 @@ import { Model } from '../navigator/Model'
 import { Project } from '../edition/Project'
 import { StyleNote } from './StyleNote'
 import { ThemePicker } from '../ThemePicker'
+import { useTheme } from '@mui/material/styles'
 
 export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
+  const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
@@ -25,6 +27,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
 
+  const color = theme.palette.primary.main
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
 
@@ -103,7 +106,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   }, [finalNoteId])
 
   return (
-    <Stack height="100vh" bgcolor='secondary.light'>
+    <Stack height="100vh" bgcolor="secondary.light">
       <Stack padding={2} direction="row" alignItems="center">
         <Stack flex={1} direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">
@@ -144,7 +147,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
         </Stack>
 
         <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
-          <Stack id="verovio" sx={verovioStyle} />
+          <Stack id="verovio" sx={verovioStyle(color)} />
           <Backdrop open={!pageCount}>
             <CircularProgress color="inherit" />
           </Backdrop>
