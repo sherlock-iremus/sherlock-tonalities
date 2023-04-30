@@ -149,9 +149,11 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
 
         <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
           <Stack id="verovio" sx={verovioStyle(color)} />
-          <Backdrop open={!pageCount}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
+          {!pageCount && (
+            <Stack flex={1} justifyContent="center" alignItems="center">
+              <CircularProgress color="inherit" />
+            </Stack>
+          )}
           {selectedNotes.map(noteId => (
             <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} className="selected" />
           ))}

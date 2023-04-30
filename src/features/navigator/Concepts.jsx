@@ -30,10 +30,7 @@ export const Concepts = () => {
 
   return (
     filteredTree && (
-      <List
-        disablePadding
-        dense
-      >
+      <List disablePadding dense>
         {!!filteredTree.length && filteredTree.map(concept => <Concept key={concept.iri} concept={concept} />)}
         <Backdrop open={isLoading}>
           <CircularProgress />
