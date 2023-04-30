@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import models from '../../config/models.json'
 
 export const Model = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex } = useSelector(state => state.globals)
 
