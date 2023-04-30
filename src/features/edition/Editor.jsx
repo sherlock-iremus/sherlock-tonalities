@@ -1,5 +1,5 @@
 import { Cancel, Lyrics } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, Collapse, IconButton, ListItemButton } from '@mui/material'
+import { ListItem, ListItemIcon, ListItemText, Collapse, IconButton } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedNotes } from '../../services/globals'
