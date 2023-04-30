@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
+import { Backdrop, CircularProgress, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -114,7 +114,10 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
               <ArrowBack />
             </IconButton>
           </Tooltip>
-          <Typography>{scoreTitle}</Typography>
+          <Stack>
+            <Typography>{scoreTitle}</Typography>
+            <ListItemText sx={{ m: 0 }} secondary="Selected score" />
+          </Stack>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="center" alignItems="center" spacing={1}>
           <Pagination
