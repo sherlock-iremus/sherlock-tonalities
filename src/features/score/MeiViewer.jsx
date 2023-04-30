@@ -33,7 +33,7 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
-    if (verovio)
+    if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
         scale,
         adjustPageWidth: true,
@@ -41,10 +41,14 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
         header: 'none',
         footer: 'none',
       })
-    setPageCount(toolkit.getPageCount())
+      reloadVerovio(1)
+      setPageCount(toolkit.getPageCount())
+    }
   }
 
-  const triggerNotes = () => {
+  const reloadVerovio = page => {
+    verovio.innerHTML = toolkit.renderToSVG(page)
+
     const notes = document.querySelectorAll('.note')
     const svg = verovio?.children[0]
     svg?.addEventListener('click', e => e.target === svg && dispatch(setSelectedNotes()))
@@ -70,8 +74,6 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
     dispatch(setSelectedNotes(toolkit.getElementsAtTime(time).notes))
   }
 
-  const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
-
   const changePage = newPage => {
     if (1 <= newPage && newPage <= pageCount) {
       reloadVerovio(newPage)
@@ -92,10 +94,6 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   useEffect(() => {
     selectedAnnotation && selectedAnnotation.page !== currentPage && changePage(selectedAnnotation.page)
   }, [selectedAnnotation])
-
-  useEffect(() => {
-    triggerNotes()
-  }, [currentPage, scale, pageCount])
 
   useEffect(() => {
     if (finalNoteId) {
