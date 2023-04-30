@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  colorIndex: Math.floor(Math.random() * 20),
+  colorIndex: Math.floor(Math.random() * 10),
   isUserConnected: true,
   selectedNotes: [],
   annotations: [],
