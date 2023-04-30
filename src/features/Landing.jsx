@@ -18,10 +18,10 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import {
   Add,
   AudioFile,
+  BugReport,
   ChevronRight,
   Language,
   LibraryMusic,
-  RoomService,
   SwapHoriz,
   TextSnippet,
 } from '@mui/icons-material'
@@ -180,7 +180,7 @@ export const Landing = () => {
         </Tooltip>
         <Tooltip title="Report a bug">
           <IconButton href="https://github.com/sherlock-iremus/sherlock-tonalities/issues/new">
-            <RoomService />
+            <BugReport />
           </IconButton>
         </Tooltip>
       </Stack>
