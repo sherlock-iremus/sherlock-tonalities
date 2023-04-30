@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, CircularProgress, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
+import { CircularProgress, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
