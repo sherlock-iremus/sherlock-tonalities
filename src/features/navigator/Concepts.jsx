@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Backdrop, CircularProgress, List, ListSubheader } from '@mui/material'
+import { Backdrop, CircularProgress, List } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { Concept } from './Concept'
 import { useSelector } from 'react-redux'
@@ -31,8 +31,6 @@ export const Concepts = () => {
   return (
     filteredTree && (
       <List
-        sx={{ overflow: 'scroll' }}
-        subheader={<ListSubheader disableSticky>Available concepts</ListSubheader>}
         disablePadding
         dense
       >
