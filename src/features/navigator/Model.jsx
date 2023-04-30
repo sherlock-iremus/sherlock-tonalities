@@ -1,5 +1,5 @@
 import { HistoryEdu, ExpandMore, ChevronRight } from '@mui/icons-material'
-import { Button, IconButton, ListItem, ListItemIcon, ListItemText, Collapse } from '@mui/material'
+import { Button, IconButton, ListItem, ListItemIcon, ListItemText, Collapse, ListSubheader } from '@mui/material'
 import { Stack } from '@mui/system'
 import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
@@ -13,7 +13,7 @@ export const Model = () => {
   const { selectedModelIndex } = useSelector(state => state.globals)
 
   return (
-    <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0} overflow="auto">
+    <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
       <ContextMenu {...{ contextMenu, setContextMenu }} />
       <ListItem
         dense
@@ -36,8 +36,9 @@ export const Model = () => {
         </ListItemIcon>
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>
-      <Collapse in={isOpen} timeout="auto" unmountOnExit>
-        <Concepts flex={1} />
+      <Collapse in={isOpen} timeout="auto" unmountOnExit sx={{ overflow: 'auto' }}>
+        <ListSubheader>Available concepts</ListSubheader>
+        <Concepts />
       </Collapse>
     </Stack>
   )
