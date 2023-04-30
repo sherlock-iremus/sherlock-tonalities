@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Backdrop, CircularProgress, IconButton, Pagination, Tooltip, Typography } from '@mui/material'
+import { Backdrop, CircularProgress, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,13 +27,13 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
 
-  const color = theme.palette.primary.main
+  const color = theme.palette.primary.light
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
-    if (verovio)
+    if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
         scale,
         adjustPageWidth: true,
@@ -41,10 +41,14 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
         header: 'none',
         footer: 'none',
       })
-    setPageCount(toolkit.getPageCount())
+      reloadVerovio(1)
+      setPageCount(toolkit.getPageCount())
+    }
   }
 
-  const triggerNotes = () => {
+  const reloadVerovio = page => {
+    verovio.innerHTML = toolkit.renderToSVG(page)
+
     const notes = document.querySelectorAll('.note')
     const svg = verovio?.children[0]
     svg?.addEventListener('click', e => e.target === svg && dispatch(setSelectedNotes()))
@@ -70,8 +74,6 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
     dispatch(setSelectedNotes(toolkit.getElementsAtTime(time).notes))
   }
 
-  const reloadVerovio = page => (verovio.innerHTML = toolkit.renderToSVG(page))
-
   const changePage = newPage => {
     if (1 <= newPage && newPage <= pageCount) {
       reloadVerovio(newPage)
@@ -94,10 +96,6 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
   }, [selectedAnnotation])
 
   useEffect(() => {
-    triggerNotes()
-  }, [currentPage, scale, pageCount])
-
-  useEffect(() => {
     if (finalNoteId) {
       if (selectedNotes.length)
         dispatch(setSelectedNotes(findInBetweenNotes(selectedNotes[selectedNotes.length - 1], finalNoteId)))
@@ -114,7 +112,10 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
               <ArrowBack />
             </IconButton>
           </Tooltip>
-          <Typography>{scoreTitle}</Typography>
+          <Stack>
+            <Typography>{scoreTitle}</Typography>
+            <ListItemText sx={{ m: 0 }} secondary="Selected score" />
+          </Stack>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="center" alignItems="center" spacing={1}>
           <Pagination

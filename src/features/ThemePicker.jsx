@@ -1,51 +1,40 @@
 import { Palette } from '@mui/icons-material'
 import { SpeedDial, SpeedDialAction } from '@mui/material'
 import {
-  amber,
   blue,
   blueGrey,
   brown,
-  common,
-  cyan,
   deepOrange,
   deepPurple,
-  green,
   grey,
   indigo,
-  lightBlue,
-  lightGreen,
-  lime,
-  orange,
   pink,
   purple,
   red,
   teal,
-  yellow,
 } from '@mui/material/colors'
 import { useDispatch } from 'react-redux'
 import { setColorIndex } from '../services/globals'
 
 export const colors = [
-  amber,
+  //amber
   blue,
   blueGrey,
   brown,
-  common,
-  cyan,
+  //cyan
   deepOrange,
   deepPurple,
-  green,
+  //green
   grey,
   indigo,
-  lightBlue,
-  lightGreen,
-  lime,
-  orange,
+  //lightBlue
+  //lightGreen
+  //lime
+  //orange
   pink,
   purple,
   red,
   teal,
-  yellow,
 ]
 
 export const ThemePicker = () => {
