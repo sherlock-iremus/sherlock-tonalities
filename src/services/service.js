@@ -14,6 +14,7 @@ export const service = createApi({
   endpoints: builder => ({
     getUserId: builder.query({ query: () => ({}) }),
     postAnalyticalProject: builder.mutation({ query: body => ({ url: 'analytical-project', method: 'POST', body }) }),
+    postAnnotation: builder.mutation({ query: body => ({ url: 'e13', method: 'POST', body }) }),
   }),
 })
 
@@ -32,4 +33,4 @@ export const tokenExpirationHandler = api => next => async action => {
 
 export default service
 
-export const { useGetUserIdQuery, usePostAnalyticalProjectMutation } = service
+export const { useGetUserIdQuery, usePostAnalyticalProjectMutation, usePostAnnotationMutation } = service

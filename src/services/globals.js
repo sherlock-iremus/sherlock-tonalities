@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  projectIri: null,
+  scoreIri: null,
   colorIndex: Math.floor(Math.random() * 10),
   isUserConnected: true,
   selectedNotes: [],
-  annotations: [],
   hoveredAnnotation: null,
   selectedAnnotation: null,
   selectedModelIndex: 0,
@@ -16,6 +17,10 @@ const globals = createSlice({
   reducers: {
     setColorIndex: (state, action) => {
       state.colorIndex = action.payload
+    },
+    setScoreAnnotator: (state, action) => {
+      state.projectIri = action.payload.projectIri
+      state.scoreIri = action.payload.scoreIri
     },
     setIsUserConnected: (state, action) => {
       state.isUserConnected = action.payload
@@ -34,17 +39,6 @@ const globals = createSlice({
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
       }
     },
-    addAnnotation: (state, action) => {
-      if (state.selectedNotes.length) {
-        state.annotations.push({
-          notes: state.selectedNotes,
-          concepts: [action.payload.concept],
-          page: action.payload.page,
-          date: Date.now(),
-        })
-        state.selectedNotes = initialState.selectedNotes
-      }
-    },
     setSelectedAnnotation: (state, action) => {
       if (!action.payload) state.selectedAnnotation = initialState.selectedAnnotation
       else state.selectedAnnotation = state.annotations.find(a => a.date === action.payload)
@@ -61,9 +55,9 @@ export default globals
 export const {
   setIsUserConnected,
   setSelectedNotes,
-  addAnnotation,
   setSelectedModelIndex,
   setSelectedAnnotation,
   setHoveredAnnotation,
   setColorIndex,
+  setScoreAnnotator,
 } = globals.actions
