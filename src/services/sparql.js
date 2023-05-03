@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { stringToColor } from '../utils'
+import { getPage, stringToColor } from '../utils'
 import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
+import { getAnnotations } from 'sherlock-sparql-queries/src/queries/annotations'
+
 import { DEV_ENV, NGROK_3030 } from '../config/services'
 
 const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/' : NGROK_3030
@@ -35,9 +37,23 @@ export const sparql = createApi({
         },
       }) => ({ label: label.value, contributor: contributor.value, ...(draft && { isDraft: true }) }),
     }),
+    getAnnotations: builder.query({
+      query: ({ scoreIri, projectIri }) => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
+      }),
+      transformResponse: response =>
+        response.results.bindings.map(({ concept, date, entity, notes, page }) => ({
+          concept: concept.value,
+          date: date.value,
+          entity: entity.value,
+          notes: notes.value,
+          page: getPage(page.value),
+        })),
+    }),
   }),
 })
 
 export default sparql
 
-export const { useGetContributorQuery, useGetAnalyticalProjectQuery } = sparql
+export const { useGetContributorQuery, useGetAnalyticalProjectQuery, useGetAnnotationsQuery } = sparql

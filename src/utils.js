@@ -16,4 +16,6 @@ export const getUuid = iri => iri.split('/').pop()
 
 export const removeBaseIri = iri => iri.split('#').pop()
 
+export const getPage = iri => Number(iri.split('_').pop())
+
 export const getIri = uuid => `http://data-iremus.huma-num.fr/id/${uuid}`

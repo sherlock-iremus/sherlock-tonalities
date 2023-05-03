@@ -3,21 +3,15 @@ import { Collapse, IconButton, ListItem, ListItemButton, ListItemText } from '@m
 import { useDispatch, useSelector } from 'react-redux'
 import { ContextChip } from '../../components/ContextChip'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
+import { removeBaseIri } from '../../utils'
 
-export const Annotation = ({ annotation }) => {
-  const { hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
-  const dispatch = useDispatch()
-  const isSelected = selectedAnnotation === annotation
-  const isHovered = hoveredAnnotation === annotation
-
+export const Annotation = ({ concept, date, entity, notes, page }) => {
   return (
     <ListItem
-      key={annotation.date}
-      onMouseEnter={() => dispatch(setHoveredAnnotation(annotation.date))}
-      onMouseLeave={() => dispatch(setHoveredAnnotation())}
+      key={date}
       disablePadding
       secondaryAction={
-        <Collapse in={isHovered} timeout="auto" unmountOnExit>
+        <Collapse in={true} timeout="auto" unmountOnExit>
           <IconButton>
             <Edit />
           </IconButton>
@@ -27,16 +21,11 @@ export const Annotation = ({ annotation }) => {
         </Collapse>
       }
     >
-      <ListItemButton
-        onClick={() => dispatch(setSelectedAnnotation(!isSelected ? annotation.date : null))}
-        selected={isSelected}
-      >
-        {annotation.concepts.map(concept => (
-          <ContextChip key={concept} primary={concept} secondary="Guillotel" sx={{ m: 0.2 }} />
-        ))}
+      <ListItemButton>
+        <ContextChip key={concept} primary={removeBaseIri(concept)} secondary="Guillotel" sx={{ m: 0.2 }} />
         <ListItemText
           sx={{ paddingLeft: 1 }}
-          secondary={annotation.notes.length === 1 ? 'on one note' : `on ${annotation.notes.length} notes`}
+          //secondary={notes.length === 1 ? 'on one note' : `on ${notes.length} notes`}
         />
       </ListItemButton>
     </ListItem>
