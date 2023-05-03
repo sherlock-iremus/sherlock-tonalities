@@ -16,6 +16,7 @@ import { StyleNote } from './StyleNote'
 import { ThemePicker } from '../ThemePicker'
 import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
+import { getId } from '../../utils'
 
 export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const theme = useTheme()
@@ -153,11 +154,11 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           {selectedNotes.map(noteId => (
             <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} className="selected" />
           ))}
-          {selectedAnnotation?.notes.map(noteId => (
-            <StyleNote key={noteId} {...{ noteId }} className="selected" />
+          {selectedAnnotation?.notes.map(noteIri => (
+            <StyleNote key={noteIri} noteId={getId(noteIri)} className="selected" />
           ))}
-          {hoveredAnnotation?.notes.map(noteId => (
-            <StyleNote key={noteId} {...{ noteId }} className="hovered" />
+          {hoveredAnnotation?.notes.map(noteIri => (
+            <StyleNote key={noteIri} noteId={getId(noteIri)} className="hovered" />
           ))}
         </Stack>
 

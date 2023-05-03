@@ -3,6 +3,7 @@ import { getPage, stringToColor } from '../utils'
 import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import { getAnnotations } from 'sherlock-sparql-queries/src/queries/annotations'
+import { getP140 } from 'sherlock-sparql-queries/src/queries/p140'
 
 import { DEV_ENV, NGROK_3030 } from '../config/services'
 
@@ -37,17 +38,24 @@ export const sparql = createApi({
         },
       }) => ({ label: label.value, contributor: contributor.value, ...(draft && { isDraft: true }) }),
     }),
+    getP140: builder.query({
+      query: e13 => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getP140(e13) }),
+      }),
+      transformResponse: response => response.results.bindings.map(binding => binding.p140.value),
+    }),
     getAnnotations: builder.query({
       query: ({ scoreIri, projectIri }) => ({
         method: 'POST',
         body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
       }),
       transformResponse: response =>
-        response.results.bindings.map(({ concept, date, entity, notes, page }) => ({
+        response.results.bindings.map(({ concept, date, entity, e13, page }) => ({
           concept: concept.value,
           date: date.value,
           entity: entity.value,
-          notes: notes.value,
+          e13: e13.value,
           page: getPage(page.value),
         })),
     }),
@@ -56,4 +64,4 @@ export const sparql = createApi({
 
 export default sparql
 
-export const { useGetContributorQuery, useGetAnalyticalProjectQuery, useGetAnnotationsQuery } = sparql
+export const { useGetContributorQuery, useGetAnalyticalProjectQuery, useGetAnnotationsQuery, useGetP140Query } = sparql

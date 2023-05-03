@@ -41,11 +41,11 @@ const globals = createSlice({
     },
     setSelectedAnnotation: (state, action) => {
       if (!action.payload) state.selectedAnnotation = initialState.selectedAnnotation
-      else state.selectedAnnotation = state.annotations.find(a => a.date === action.payload)
+      else state.selectedAnnotation = action.payload
     },
     setHoveredAnnotation: (state, action) => {
       if (!action.payload) state.hoveredAnnotation = initialState.hoveredAnnotation
-      else state.hoveredAnnotation = state.annotations.find(a => a.date === action.payload)
+      else state.hoveredAnnotation = action.payload
     },
   },
 })

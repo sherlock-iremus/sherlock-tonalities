@@ -8,8 +8,8 @@ export const Concept = ({ concept, createAnnotation }) => {
   const [isOpen, setIsOpen] = useState(false)
   const { hoveredAnnotation, selectedAnnotation, selectedNotes } = useSelector(state => state.globals)
 
-  const isSelected = selectedAnnotation?.concepts.includes(concept.iri)
-  const isHovered = hoveredAnnotation?.concepts.includes(concept.iri)
+  const isSelected = selectedAnnotation?.concept === concept.iri
+  const isHovered = hoveredAnnotation?.concept === concept.iri
 
   return (
     <>
