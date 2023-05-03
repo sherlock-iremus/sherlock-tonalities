@@ -1,5 +1,5 @@
-import { Cancel, Lyrics } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, Collapse, IconButton } from '@mui/material'
+import { Lyrics } from '@mui/icons-material'
+import { ListItem, ListItemIcon, ListItemText, Collapse, Button } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedNotes } from '../../services/globals'
@@ -11,14 +11,7 @@ export const Editor = () => {
   return (
     <Collapse in={!!selectedNotes.length} timeout="auto" unmountOnExit>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1}>
-        <ListItem
-          dense
-          secondaryAction={
-            <IconButton edge="end" onClick={() => dispatch(setSelectedNotes())}>
-              <Cancel />
-            </IconButton>
-          }
-        >
+        <ListItem dense secondaryAction={<Button onClick={() => dispatch(setSelectedNotes())}>undo</Button>}>
           <ListItemIcon>
             <Lyrics />
           </ListItemIcon>
