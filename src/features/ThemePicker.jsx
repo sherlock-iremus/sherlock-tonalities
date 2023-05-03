@@ -6,7 +6,6 @@ import {
   brown,
   deepOrange,
   deepPurple,
-  grey,
   indigo,
   pink,
   purple,
@@ -25,7 +24,7 @@ export const colors = [
   deepOrange,
   deepPurple,
   //green
-  grey,
+  //grey,
   indigo,
   //lightBlue
   //lightGreen
