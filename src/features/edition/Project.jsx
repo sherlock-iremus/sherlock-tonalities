@@ -6,7 +6,6 @@ import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../serv
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { Annotation } from './Annotation'
-import { Loader } from '../../components/Loader'
 
 export const Project = () => {
   const [isOpen, setIsOpen] = useState(true)
