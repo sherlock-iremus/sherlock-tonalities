@@ -6,8 +6,10 @@ import { ContextMenu } from './ContextMenu'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import models from '../../config/models.json'
+import { Input } from '../../components/Input'
 
 export const Model = () => {
+  const [filter, setFilter] = useState('')
   const [isOpen, setIsOpen] = useState(true)
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex } = useSelector(state => state.globals)
@@ -37,8 +39,9 @@ export const Model = () => {
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit sx={{ overflow: 'auto' }}>
+        <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search" />
         <ListSubheader>Available concepts</ListSubheader>
-        <Concepts />
+        <Concepts {...{ filter }} />
       </Collapse>
     </Stack>
   )

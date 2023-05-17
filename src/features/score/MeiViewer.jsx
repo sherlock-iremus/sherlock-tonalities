@@ -9,15 +9,16 @@ import { setSelectedNotes } from '../../services/globals'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
-import { getIri } from '../../utils'
 import { Editor } from '../edition/Editor'
 import { Model } from '../navigator/Model'
 import { Project } from '../edition/Project'
 import { StyleNote } from './StyleNote'
 import { ThemePicker } from '../ThemePicker'
 import { useTheme } from '@mui/material/styles'
+import { Loader } from '../../components/Loader'
+import { getId } from '../../utils'
 
-export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
+export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -148,26 +149,22 @@ export const MeiViewer = ({ projectId, meiUrl, scoreTitle }) => {
         </Stack>
 
         <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
+          <Loader isLoading={!pageCount} />
           <Stack id="verovio" sx={verovioStyle(color)} />
-          {!pageCount && (
-            <Stack flex={1} justifyContent="center" alignItems="center">
-              <CircularProgress color="inherit" />
-            </Stack>
-          )}
           {selectedNotes.map(noteId => (
             <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} className="selected" />
           ))}
-          {selectedAnnotation?.notes.map(noteId => (
-            <StyleNote key={noteId} {...{ noteId }} className="selected" />
+          {selectedAnnotation?.notes.map(noteIri => (
+            <StyleNote key={noteIri} noteId={getId(noteIri)} className="selected" />
           ))}
-          {hoveredAnnotation?.notes.map(noteId => (
-            <StyleNote key={noteId} {...{ noteId }} className="hovered" />
+          {hoveredAnnotation?.notes.map(noteIri => (
+            <StyleNote key={noteIri} noteId={getId(noteIri)} className="hovered" />
           ))}
         </Stack>
 
         <Stack flex={1} spacing={2}>
           <Editor />
-          <Project projectIri={getIri(projectId)} />
+          <Project />
         </Stack>
       </Stack>
     </Stack>

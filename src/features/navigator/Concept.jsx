@@ -1,23 +1,15 @@
 import { ListItem, Collapse, List, IconButton, Chip } from '@mui/material'
 import { ExpandMore, ChevronRight } from '@mui/icons-material'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addAnnotation } from '../../services/globals'
+import { useSelector } from 'react-redux'
+import { removeBaseIri } from '../../utils'
 
-export const Concept = ({ concept }) => {
+export const Concept = ({ concept, createAnnotation }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const dispatch = useDispatch()
   const { hoveredAnnotation, selectedAnnotation, selectedNotes } = useSelector(state => state.globals)
 
-  const isSelected = selectedAnnotation?.concepts.includes(concept.iri)
-  const isHovered = hoveredAnnotation?.concepts.includes(concept.iri)
-
-  const createAnnotation = () => {
-    const offsets = selectedNotes.map(note => window.tk.getTimeForElement(note))
-    const firstNote = selectedNotes[offsets.findIndex(e => e === Math.min(offsets))]
-    const page = window.tk.getPageWithElement(firstNote)
-    dispatch(addAnnotation({ concept: concept.iri, page: page ? page : 1 }))
-  }
+  const isSelected = selectedAnnotation?.concept === concept.iri
+  const isHovered = hoveredAnnotation?.concept === concept.iri
 
   return (
     <>
@@ -26,9 +18,9 @@ export const Concept = ({ concept }) => {
           <IconButton onClick={() => setIsOpen(!isOpen)}>{isOpen ? <ExpandMore /> : <ChevronRight />}</IconButton>
         )}
         <Chip
-          label={concept.iri}
+          label={removeBaseIri(concept.iri)}
           disabled={!selectedNotes.length}
-          onClick={createAnnotation}
+          onClick={() => createAnnotation(concept.iri)}
           {...(isHovered || isSelected ? { color: 'primary' } : { variant: 'outlined' })}
         />
       </ListItem>

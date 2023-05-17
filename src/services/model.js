@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import models from '../config/models.json'
-import { removeBaseIri } from '../utils'
 
 const baseUrl = 'https://raw.githubusercontent.com/felix-commits/modal-tonal-ontology/patch-2/otherModels/JSON/'
 // https://raw.githubusercontent.com/polifonia-project/modal-tonal-ontology/main/otherModels/JSON/'
@@ -28,7 +27,7 @@ export const model = createApi({
 
         const createNode = iri => {
           const subClasses = getSubClasses(iri)
-          return { iri: removeBaseIri(iri), ...(subClasses.length && { subClasses }) }
+          return { iri, ...(subClasses.length && { subClasses }) }
         }
         return rootClasses.map(c => createNode(c.iri))
       },

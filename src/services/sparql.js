@@ -1,14 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { stringToColor } from '../utils'
+import { getPage, stringToColor } from '../utils'
 import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
-import { DEV_ENV, NGROK_3030 } from '../config/services'
+import { getAnnotations } from 'sherlock-sparql-queries/src/queries/annotations'
+import { getP140 } from 'sherlock-sparql-queries/src/queries/p140'
+import { DEV_ENV } from '../config/services'
 
-const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/' : NGROK_3030
+const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
 
 export const sparql = createApi({
   reducerPath: 'sparql',
-  baseQuery: fetchBaseQuery({ baseUrl: SPARQL_ENDPOINT + 'iremus' }),
+  baseQuery: fetchBaseQuery({ baseUrl: SPARQL_ENDPOINT }),
   endpoints: builder => ({
     getContributor: builder.query({
       query: contributorIri => ({
@@ -35,9 +37,30 @@ export const sparql = createApi({
         },
       }) => ({ label: label.value, contributor: contributor.value, ...(draft && { isDraft: true }) }),
     }),
+    getP140: builder.query({
+      query: e13 => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getP140(e13) }),
+      }),
+      transformResponse: response => response.results.bindings.map(binding => binding.p140.value),
+    }),
+    getAnnotations: builder.query({
+      query: ({ scoreIri, projectIri }) => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
+      }),
+      transformResponse: response =>
+        response.results.bindings.map(({ concept, date, entity, e13, page }) => ({
+          concept: concept.value,
+          date: date.value,
+          entity: entity.value,
+          e13: e13.value,
+          page: getPage(page.value),
+        })),
+    }),
   }),
 })
 
 export default sparql
 
-export const { useGetContributorQuery, useGetAnalyticalProjectQuery } = sparql
+export const { useGetContributorQuery, useGetAnalyticalProjectQuery, useGetAnnotationsQuery, useGetP140Query } = sparql

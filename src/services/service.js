@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { isRejectedWithValue } from '@reduxjs/toolkit'
 import { setIsUserConnected } from './globals'
-import { DEV_ENV, NGROK_5555 } from '../config/services'
+import { DEV_ENV } from '../config/services'
 
-export const BASE_API_URL = DEV_ENV ? 'http://localhost:5555/' : NGROK_5555
+export const BASE_API_URL = DEV_ENV ? 'http://localhost:5555/' : 'https://sherlock.freeboxos.fr/'
 
 const SHERLOCK_API_ERROR = 'sherlockApi/'
 const SHERLOCK_API_REFRESH_ENDPOIT = BASE_API_URL + 'sherlock/oauth/access_token'
@@ -14,6 +14,7 @@ export const service = createApi({
   endpoints: builder => ({
     getUserId: builder.query({ query: () => ({}) }),
     postAnalyticalProject: builder.mutation({ query: body => ({ url: 'analytical-project', method: 'POST', body }) }),
+    postAnnotation: builder.mutation({ query: body => ({ url: 'e13', method: 'POST', body }) }),
   }),
 })
 
@@ -32,4 +33,4 @@ export const tokenExpirationHandler = api => next => async action => {
 
 export default service
 
-export const { useGetUserIdQuery, usePostAnalyticalProjectMutation } = service
+export const { useGetUserIdQuery, usePostAnalyticalProjectMutation, usePostAnnotationMutation } = service
