@@ -4,14 +4,13 @@ import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import { getAnnotations } from 'sherlock-sparql-queries/src/queries/annotations'
 import { getP140 } from 'sherlock-sparql-queries/src/queries/p140'
+import { DEV_ENV } from '../config/services'
 
-import { DEV_ENV, NGROK_3030 } from '../config/services'
-
-const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/' : NGROK_3030
+const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
 
 export const sparql = createApi({
   reducerPath: 'sparql',
-  baseQuery: fetchBaseQuery({ baseUrl: SPARQL_ENDPOINT + 'iremus' }),
+  baseQuery: fetchBaseQuery({ baseUrl: SPARQL_ENDPOINT }),
   endpoints: builder => ({
     getContributor: builder.query({
       query: contributorIri => ({
