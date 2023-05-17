@@ -2,9 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getPage, stringToColor } from '../utils'
 import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
-import { getAnnotations } from 'sherlock-sparql-queries/src/queries/annotations'
-import { getP140 } from 'sherlock-sparql-queries/src/queries/p140'
 import { DEV_ENV } from '../config/services'
+import { getAnnotations, getP140 } from './queries'
 
 const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
 
