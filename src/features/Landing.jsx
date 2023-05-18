@@ -133,7 +133,7 @@ export const Landing = () => {
                     )}
                   </Stack>
                 )}
-                {isScoreSelected ? (
+                {isScoreSelected && !isAllScoresSelected ? (
                   <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
                 ) : (
                   <Stack flex={1} justifyContent="center" alignItems="center" p={2}>
