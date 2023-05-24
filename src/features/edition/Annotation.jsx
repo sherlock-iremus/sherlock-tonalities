@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { AddCircle } from '@mui/icons-material'
 import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,7 +13,7 @@ import { getId } from '../../utils'
 export const Annotation = ({ concept, date, entity, e13, page, annotation }) => {
   const { data: notes } = useGetP140Query(e13, { skip: !e13 })
   const dispatch = useDispatch()
-  const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri, selectedNotes } = useSelector(
+  const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts } = useSelector(
     state => state.globals
   )
 
@@ -21,17 +22,21 @@ export const Annotation = ({ concept, date, entity, e13, page, annotation }) => 
   const [isDisabled, setIsDisabled] = useState(false)
 
   const checkIsDisabled = () => {
-    if (!selectedNotes.length) return false
-    if (selectedNotes.length === notes.length) {
-      const intersection = selectedNotes.filter(e => new Set(notes.map(x => getId(x))).has(e))
-      if (intersection.length === selectedNotes.length) return false
+    if (selectedConcepts.length) return !selectedConcepts.includes(concept)
+    if (selectedNotes.length) {
+      if (!selectedNotes.length) return false
+      if (selectedNotes.length === notes.length) {
+        const intersection = selectedNotes.filter(e => new Set(notes.map(x => getId(x))).has(e))
+        if (intersection.length === selectedNotes.length) return false
+      }
+      return true
     }
-    return true
+    return false
   }
 
   useEffect(() => {
     setIsDisabled(checkIsDisabled())
-  }, [selectedNotes, notes])
+  }, [selectedNotes, selectedConcepts, notes])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })

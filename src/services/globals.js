@@ -6,6 +6,7 @@ const initialState = {
   colorIndex: Math.floor(Math.random() * 10),
   isUserConnected: true,
   selectedNotes: [],
+  selectedConcepts: [],
   hoveredAnnotation: null,
   selectedAnnotation: null,
   selectedModelIndex: 0,
@@ -29,6 +30,7 @@ const globals = createSlice({
       state.selectedModelIndex = action.payload
     },
     setSelectedNotes: (state, action) => {
+      state.selectedConcepts = initialState.selectedConcepts
       if (!action.payload) {
         state.selectedNotes = initialState.selectedNotes
         state.selectedAnnotation = initialState.selectedAnnotation
@@ -37,6 +39,13 @@ const globals = createSlice({
       else {
         const index = state.selectedNotes.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
+      }
+    },
+    setSelectedConcepts: (state, action) => {
+      if (!action.payload) state.selectedConcepts = initialState.selectedConcepts
+      else {
+        const index = state.selectedConcepts.findIndex(e => e === action.payload)
+        index !== -1 ? state.selectedConcepts.splice(index, 1) : state.selectedConcepts.push(action.payload)
       }
     },
     setSelectedAnnotation: (state, action) => {
@@ -60,4 +69,5 @@ export const {
   setHoveredAnnotation,
   setColorIndex,
   setScoreAnnotator,
+  setSelectedConcepts,
 } = globals.actions
