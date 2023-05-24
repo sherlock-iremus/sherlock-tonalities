@@ -1,19 +1,37 @@
-import { Delete } from '@mui/icons-material'
-import { Collapse, IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { AddCircle } from '@mui/icons-material'
+import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { ContextChip } from '../../components/ContextChip'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
 import { getModel, getUuid, removeBaseIri } from '../../utils'
 import { useGetAnnotationsQuery, useGetP140Query } from '../../services/sparql'
 import { useDeleteAnnotationMutation } from '../../services/service'
+import { useEffect, useState } from 'react'
+import { getId } from '../../utils'
 
 export const Annotation = ({ concept, date, entity, e13, page, annotation }) => {
   const { data: notes } = useGetP140Query(e13, { skip: !e13 })
   const dispatch = useDispatch()
-  const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri } = useSelector(state => state.globals)
+  const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri, selectedNotes } = useSelector(
+    state => state.globals
+  )
 
   const isSelected = selectedAnnotation?.entity === entity
   const isHovered = hoveredAnnotation?.entity === entity
+  const [isDisabled, setIsDisabled] = useState(false)
+
+  const checkIsDisabled = () => {
+    if (!selectedNotes.length) return false
+    if (selectedNotes.length === notes.length) {
+      const intersection = selectedNotes.filter(e => new Set(notes.map(x => getId(x))).has(e))
+      if (intersection.length === selectedNotes.length) return false
+    }
+    return true
+  }
+
+  useEffect(() => {
+    setIsDisabled(checkIsDisabled())
+  }, [selectedNotes, notes])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
@@ -35,11 +53,14 @@ export const Annotation = ({ concept, date, entity, e13, page, annotation }) => 
         onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, concept }))}
         onMouseLeave={() => dispatch(setHoveredAnnotation())}
         disablePadding
+        disabled={isDisabled}
         secondaryAction={
           <Collapse in={isHovered} timeout="auto" unmountOnExit>
-            <IconButton edge="end" onClick={removeAnnotation} color="error">
-              <Delete />
-            </IconButton>
+            <Tooltip title="Add concept">
+              <IconButton edge="end" onClick={removeAnnotation}>
+                <AddCircle />
+              </IconButton>
+            </Tooltip>
           </Collapse>
         }
       >
