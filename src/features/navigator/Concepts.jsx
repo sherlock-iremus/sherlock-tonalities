@@ -5,9 +5,10 @@ import { Concept } from './Concept'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetModelQuery } from '../../services/model'
 import { usePostAnnotationMutation } from '../../services/service'
-import { ANALYTICAL_ENTITY } from 'sherlock-sparql-queries/src/queries/constants'
+//import { ANALYTICAL_ENTITY } from 'sherlock-sparql-queries/src/queries/constants'
 import { useGetAnnotationsQuery } from '../../services/sparql'
 import { setSelectedNotes } from '../../services/globals'
+import { ANALYTICAL_ENTITY } from '../../services/queries'
 
 export const Concepts = ({ filter }) => {
   const { selectedModelIndex, selectedNotes, scoreIri, projectIri } = useSelector(state => state.globals)

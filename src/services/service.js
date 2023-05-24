@@ -13,8 +13,10 @@ export const service = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL + 'sherlock/api/', credentials: 'include' }),
   endpoints: builder => ({
     getUserId: builder.query({ query: () => ({}) }),
+    putUser: builder.mutation({ query: body => ({ url: 'user/config', method: 'PUT', body }) }),
     postAnalyticalProject: builder.mutation({ query: body => ({ url: 'analytical-project', method: 'POST', body }) }),
     postAnnotation: builder.mutation({ query: body => ({ url: 'e13', method: 'POST', body }) }),
+    deleteAnnotation: builder.mutation({ query: iri => ({ url: `e13/${iri}`, method: 'DELETE' }) }),
   }),
 })
 
@@ -33,4 +35,10 @@ export const tokenExpirationHandler = api => next => async action => {
 
 export default service
 
-export const { useGetUserIdQuery, usePostAnalyticalProjectMutation, usePostAnnotationMutation } = service
+export const {
+  useGetUserIdQuery,
+  usePostAnalyticalProjectMutation,
+  usePostAnnotationMutation,
+  useDeleteAnnotationMutation,
+  usePutUserMutation,
+} = service

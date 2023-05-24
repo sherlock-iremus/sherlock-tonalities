@@ -1,5 +1,5 @@
 import { AccountCircle, Logout } from '@mui/icons-material'
-import { Button, IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/material'
+import { Button, Dialog, DialogContent, DialogTitle, IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,7 @@ import { BASE_API_URL, useGetUserIdQuery } from '../services/service'
 export const AccountMenu = () => {
   const { data: userId } = useGetUserIdQuery()
   const [anchorEl, setAnchorEl] = useState(null)
+  const [isEditing, setIsEditing] = useState(null)
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
 
@@ -46,7 +47,7 @@ export const AccountMenu = () => {
         </IconButton>
       </Tooltip>
       <Menu anchorEl={anchorEl} id="account-menu" open={open} onClose={handleClose} onClick={handleClose}>
-        <MenuItem onClick={() => (window.location.href = BASE_API_URL + 'sherlock/me')}>
+        <MenuItem onClick={() => setIsEditing(true)}>
           <ListItemIcon>
             <AccountCircle fontSize="small" />
           </ListItemIcon>
@@ -59,6 +60,12 @@ export const AccountMenu = () => {
           Logout
         </MenuItem>
       </Menu>
+      <Dialog open={isEditing} onClose={() => setIsEditing(false)}>
+        <DialogTitle>My Sherlock profile</DialogTitle>
+        <DialogContent>
+
+        </DialogContent>
+      </Dialog>
     </Box>
   )
 }
