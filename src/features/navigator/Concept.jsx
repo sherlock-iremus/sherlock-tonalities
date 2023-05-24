@@ -8,10 +8,9 @@ import { setSelectedConcepts } from '../../services/globals'
 export const Concept = ({ concept, createAnnotation }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
-  const { hoveredAnnotation, selectedAnnotation, selectedNotes, selectedConcepts } = useSelector(state => state.globals)
+  const { selectedAnnotation, selectedNotes, selectedConcepts } = useSelector(state => state.globals)
 
   const isSelected = selectedAnnotation?.concept === concept.iri || selectedConcepts.includes(concept.iri)
-  const isHovered = hoveredAnnotation?.concept === concept.iri
 
   return (
     <>
@@ -21,8 +20,10 @@ export const Concept = ({ concept, createAnnotation }) => {
         )}
         <Chip
           label={removeBaseIri(concept.iri)}
-          onClick={() => selectedNotes.length ? createAnnotation(concept.iri) : dispatch(setSelectedConcepts(concept.iri))}
-          {...(isHovered || isSelected ? { color: 'primary' } : { variant: 'outlined' })}
+          onClick={() =>
+            selectedNotes.length ? createAnnotation(concept.iri) : dispatch(setSelectedConcepts(concept.iri))
+          }
+          {...(isSelected ? { color: 'primary' } : { variant: 'outlined' })}
         />
       </ListItem>
       {concept.subClasses && (
