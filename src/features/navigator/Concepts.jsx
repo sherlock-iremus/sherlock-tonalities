@@ -9,6 +9,7 @@ import { usePostAnnotationMutation } from '../../services/service'
 import { useGetAnnotationsQuery } from '../../services/sparql'
 import { setSelectedNotes } from '../../services/globals'
 import { ANALYTICAL_ENTITY } from '../../services/queries'
+import { removeBaseIri } from '../../utils'
 
 export const Concepts = ({ filter }) => {
   const { selectedModelIndex, selectedNotes, scoreIri, projectIri } = useSelector(state => state.globals)
@@ -16,16 +17,16 @@ export const Concepts = ({ filter }) => {
   const [filteredTree, setFilteredTree] = useState(data)
   const dispatch = useDispatch()
 
-  const filterTree = (node, newFilter) => {
-    if (node.classes) return { ...node, classes: node.classes.map(c => filterTree(c, newFilter)).filter(Boolean) }
-    else if (node.children) {
-      const filteredNode = {
-        ...node,
-        children: node.children.map(c => filterTree(c, newFilter)).filter(Boolean),
-      }
-      if (filteredNode.children.length) return filteredNode
-    }
-    if (node.label && node.label.toLowerCase().includes(newFilter.toLowerCase())) return node
+  // console.log(filteredTree)
+  // const filterTree = (subClasses, iri = '') => {
+  //   if (subClasses) return subClasses.map(c => filterTree(c.subClasses, c.iri)).filter(e => !e?.length)
+  //   if (iri.toLowerCase().includes(filter.toLowerCase())) console.log('yo')
+  //   return null
+  // }
+  console.log(filteredTree)
+  const filterTree = node => {
+    if (node.subClasses) return { ...node, subClasses: node.subClasses.map(c => filterTree(c, filter)).filter(Boolean) }
+    if (node.iri && removeBaseIri(node.iri).toLowerCase().includes(filter.toLowerCase())) return node
     return null
   }
 
@@ -69,7 +70,10 @@ export const Concepts = ({ filter }) => {
   }
 
   useEffect(() => {
-    data && setFilteredTree(filter ? filterTree(data, filter) : data)
+    if (filter) {
+      const mytest = filterTree({ subClasses: data })
+      setFilteredTree(mytest.subClasses)
+    } else setFilteredTree(data)
   }, [filter, data])
 
   return (
