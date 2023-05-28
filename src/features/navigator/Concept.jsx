@@ -1,15 +1,16 @@
 import { ListItem, Collapse, List, IconButton, Chip } from '@mui/material'
 import { ExpandMore, ChevronRight } from '@mui/icons-material'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { removeBaseIri } from '../../utils'
+import { setSelectedConcepts } from '../../services/globals'
 
 export const Concept = ({ concept, createAnnotation }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const { hoveredAnnotation, selectedAnnotation, selectedNotes } = useSelector(state => state.globals)
+  const dispatch = useDispatch()
+  const { selectedAnnotation, selectedNotes, selectedConcepts } = useSelector(state => state.globals)
 
-  const isSelected = selectedAnnotation?.concept === concept.iri
-  const isHovered = hoveredAnnotation?.concept === concept.iri
+  const isSelected = selectedAnnotation?.concept === concept.iri || selectedConcepts.includes(concept.iri)
 
   return (
     <>
@@ -19,9 +20,10 @@ export const Concept = ({ concept, createAnnotation }) => {
         )}
         <Chip
           label={removeBaseIri(concept.iri)}
-          disabled={!selectedNotes.length}
-          onClick={() => createAnnotation(concept.iri)}
-          {...(isHovered || isSelected ? { color: 'primary' } : { variant: 'outlined' })}
+          onClick={() =>
+            selectedNotes.length ? createAnnotation(concept.iri) : dispatch(setSelectedConcepts(concept.iri))
+          }
+          {...(isSelected ? { color: 'primary' } : { variant: 'outlined' })}
         />
       </ListItem>
       {concept.subClasses && (

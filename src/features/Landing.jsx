@@ -1,6 +1,5 @@
 import { NewProject } from './NewProject'
 import {
-  Button,
   Divider,
   IconButton,
   List,
@@ -23,15 +22,14 @@ import {
   Language,
   LibraryMusic,
   SwapHoriz,
-  TextSnippet,
 } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
-import { ContributorItem } from './items/ContributorItem'
 import { useGetUserIdQuery } from '../services/service'
 import scores from '../config/scores.json'
 import { ThemePicker } from './ThemePicker'
+import { Projects } from './Projects'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -135,31 +133,13 @@ export const Landing = () => {
                     )}
                   </Stack>
                 )}
-                {isAllScoresSelected ? (
-                  <List disablePadding dense sx={{ overflow: 'auto' }}>
-                    {[0, 1, 2, 3, 4].map(project => (
-                      <ListItem key={project} disablePadding secondaryAction={<ContributorItem small />}>
-                        <ListItemButton>
-                          <ListItemIcon>
-                            <TextSnippet />
-                          </ListItemIcon>
-                          <ListItemText primary={'Project n°' + project} secondary="Félix Poullet-Pagès" />
-                        </ListItemButton>
-                      </ListItem>
-                    ))}
-                  </List>
+                {isScoreSelected && !isAllScoresSelected ? (
+                  <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
                 ) : (
                   <Stack flex={1} justifyContent="center" alignItems="center" p={2}>
                     <Typography textAlign="center" color="text.secondary" fontSize={14}>
-                      {isScoreSelected
-                        ? 'There is currently no created analytical project for this score'
-                        : 'No score selected, start by selecting a score to browse analytical projects'}
+                      No score selected, start by selecting a score to browse analytical projects
                     </Typography>
-                    {isScoreSelected && (
-                      <Button size="small" onClick={() => setIsOpen(true)}>
-                        Create new analytical project
-                      </Button>
-                    )}
                   </Stack>
                 )}
               </Stack>
