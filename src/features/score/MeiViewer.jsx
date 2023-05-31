@@ -72,11 +72,13 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
   }
 
   const addVerticality = time => {
-    const notes = toolkit.getElementsAtTime(time).notes.map(e => ({ id: e, time: toolkit.getTimesForElement(e) }))
-    const notesFiltered = notes.filter(
+    const notes = [
+      ...new Set([...toolkit.getElementsAtTime(time).notes, ...toolkit.getElementsAtTime(time + 1000).notes]),
+    ].map(e => ({ id: e, time: toolkit.getTimesForElement(e) }))
+    const filteredNotes = notes.filter(
       e => e.time.realTimeOnsetMilliseconds <= time && time < e.time.realTimeOffsetMilliseconds
     )
-    dispatch(setSelectedNotes(notesFiltered.map(e => e.id)))
+    dispatch(setSelectedNotes(filteredNotes.map(e => e.id)))
   }
 
   const changePage = newPage => {
