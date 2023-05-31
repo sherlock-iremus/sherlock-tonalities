@@ -5,9 +5,11 @@ import { Concept } from './Concept'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetModelQuery } from '../../services/model'
 import { usePostAnnotationMutation } from '../../services/service'
-import { ANALYTICAL_ENTITY } from 'sherlock-sparql-queries/src/queries/constants'
+//import { ANALYTICAL_ENTITY } from 'sherlock-sparql-queries/src/queries/constants'
 import { useGetAnnotationsQuery } from '../../services/sparql'
 import { setSelectedNotes } from '../../services/globals'
+import { ANALYTICAL_ENTITY } from '../../services/queries'
+import { removeBaseIri } from '../../utils'
 
 export const Concepts = ({ filter }) => {
   const { selectedModelIndex, selectedNotes, scoreIri, projectIri } = useSelector(state => state.globals)
@@ -15,16 +17,12 @@ export const Concepts = ({ filter }) => {
   const [filteredTree, setFilteredTree] = useState(data)
   const dispatch = useDispatch()
 
-  const filterTree = (node, newFilter) => {
-    if (node.classes) return { ...node, classes: node.classes.map(c => filterTree(c, newFilter)).filter(Boolean) }
-    else if (node.children) {
-      const filteredNode = {
-        ...node,
-        children: node.children.map(c => filterTree(c, newFilter)).filter(Boolean),
-      }
-      if (filteredNode.children.length) return filteredNode
+  const filterTree = node => {
+    if (node.iri && removeBaseIri(node.iri).toLowerCase().includes(filter.toLowerCase())) return node
+    if (node.subClasses) {
+      const subClasses = node.subClasses.map(c => filterTree(c)).filter(Boolean)
+      if (subClasses.length) return { ...node, subClasses }
     }
-    if (node.label && node.label.toLowerCase().includes(newFilter.toLowerCase())) return node
     return null
   }
 
@@ -34,8 +32,8 @@ export const Concepts = ({ filter }) => {
   const createAnnotation = async concept => {
     try {
       const offsets = selectedNotes.map(note => window.tk.getTimeForElement(note))
-      const firstNote = selectedNotes[offsets.findIndex(e => e === Math.min(offsets))]
-      const page = window.tk.getPageWithElement(firstNote) || 1
+      const firstNote = selectedNotes[offsets.findIndex(e => e === Math.min(...offsets))]
+      const page = window.tk.getPageWithElement(firstNote)
 
       const body = {
         p140: selectedNotes.map(note => scoreIri + '_' + note),
@@ -68,7 +66,8 @@ export const Concepts = ({ filter }) => {
   }
 
   useEffect(() => {
-    data && setFilteredTree(filter ? filterTree(data, filter) : data)
+    if (filter) setFilteredTree(filterTree({ subClasses: data })?.subClasses)
+    else setFilteredTree(data)
   }, [filter, data])
 
   return (

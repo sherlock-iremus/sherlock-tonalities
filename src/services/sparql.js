@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getPage, stringToColor } from '../utils'
-import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
-import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
+//import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
+//import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import { DEV_ENV } from '../config/services'
-import { getAnnotations, getP140, getProjects } from './queries'
+import { getAnalyticalProject, getAnnotations, getContributor, getP140, getProjects } from './queries'
 
 const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
 
@@ -49,7 +49,8 @@ export const sparql = createApi({
         body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
       }),
       transformResponse: response =>
-        response.results.bindings.map(({ concept, date, entity, e13, page }) => ({
+        response.results.bindings.map(({ concept, date, entity, e13, page, annotation }) => ({
+          annotation: annotation.value,
           concept: concept.value,
           date: date.value,
           entity: entity.value,

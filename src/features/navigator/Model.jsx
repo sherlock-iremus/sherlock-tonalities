@@ -4,15 +4,17 @@ import { Stack } from '@mui/system'
 import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import models from '../../config/models.json'
 import { Input } from '../../components/Input'
+import { setSelectedConcepts } from '../../services/globals'
 
 export const Model = () => {
+  const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [isOpen, setIsOpen] = useState(true)
   const [contextMenu, setContextMenu] = useState(false)
-  const { selectedModelIndex } = useSelector(state => state.globals)
+  const { selectedModelIndex, selectedConcepts } = useSelector(state => state.globals)
 
   return (
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
@@ -40,7 +42,14 @@ export const Model = () => {
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit sx={{ overflow: 'auto' }}>
         <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search" />
-        <ListSubheader>Available concepts</ListSubheader>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
+          <ListSubheader>Available concepts</ListSubheader>
+          {!!selectedConcepts.length && (
+            <Button onClick={() => dispatch(setSelectedConcepts())} size="small">
+              Clear filter
+            </Button>
+          )}
+        </Stack>
         <Concepts {...{ filter }} />
       </Collapse>
     </Stack>

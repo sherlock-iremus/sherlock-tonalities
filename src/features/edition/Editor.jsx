@@ -11,7 +11,14 @@ export const Editor = () => {
   return (
     <Collapse in={!!selectedNotes.length} timeout="auto" unmountOnExit>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1}>
-        <ListItem dense secondaryAction={<Button onClick={() => dispatch(setSelectedNotes())}>undo</Button>}>
+        <ListItem
+          dense
+          secondaryAction={
+            <Button size="small" onClick={() => dispatch(setSelectedNotes())}>
+              clear
+            </Button>
+          }
+        >
           <ListItemIcon>
             <Lyrics />
           </ListItemIcon>
