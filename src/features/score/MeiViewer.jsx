@@ -18,22 +18,29 @@ import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
 
-export const MeiViewer = ({ meiUrl, scoreTitle }) => {
+export const MeiViewer = ({ meiUrl }) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
+  const [scoreTitle, setScoreTitle] = useState('')
+  const [scoreComposer, setScoreComposer] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
-
   const color = theme.palette.primary.light
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
+    
+    const parser = new DOMParser()
+    const mei = parser.parseFromString(file, 'application/xml')
+    setScoreTitle(mei.querySelector('title').innerHTML)
+    // setScoreComposer(mei.querySelector('name[composer]').innerHTML)
+
     if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
         scale,
@@ -121,7 +128,7 @@ export const MeiViewer = ({ meiUrl, scoreTitle }) => {
           </Tooltip>
           <Stack>
             <Typography>{scoreTitle}</Typography>
-            <ListItemText sx={{ m: 0 }} secondary="Selected score" />
+            <ListItemText sx={{ m: 0 }} secondary={scoreComposer} />
           </Stack>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="center" alignItems="center" spacing={1}>
