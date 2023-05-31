@@ -17,16 +17,12 @@ export const Concepts = ({ filter }) => {
   const [filteredTree, setFilteredTree] = useState(data)
   const dispatch = useDispatch()
 
-  // console.log(filteredTree)
-  // const filterTree = (subClasses, iri = '') => {
-  //   if (subClasses) return subClasses.map(c => filterTree(c.subClasses, c.iri)).filter(e => !e?.length)
-  //   if (iri.toLowerCase().includes(filter.toLowerCase())) console.log('yo')
-  //   return null
-  // }
-  console.log(filteredTree)
   const filterTree = node => {
-    if (node.subClasses) return { ...node, subClasses: node.subClasses.map(c => filterTree(c, filter)).filter(Boolean) }
     if (node.iri && removeBaseIri(node.iri).toLowerCase().includes(filter.toLowerCase())) return node
+    if (node.subClasses) {
+      const subClasses = node.subClasses.map(c => filterTree(c)).filter(Boolean)
+      if (subClasses.length) return { ...node, subClasses }
+    }
     return null
   }
 
@@ -70,10 +66,8 @@ export const Concepts = ({ filter }) => {
   }
 
   useEffect(() => {
-    if (filter) {
-      const mytest = filterTree({ subClasses: data })
-      setFilteredTree(mytest.subClasses)
-    } else setFilteredTree(data)
+    if (filter) setFilteredTree(filterTree({ subClasses: data })?.subClasses)
+    else setFilteredTree(data)
   }, [filter, data])
 
   return (
