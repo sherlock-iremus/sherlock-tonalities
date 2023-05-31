@@ -32,8 +32,8 @@ export const Concepts = ({ filter }) => {
   const createAnnotation = async concept => {
     try {
       const offsets = selectedNotes.map(note => window.tk.getTimeForElement(note))
-      const firstNote = selectedNotes[offsets.findIndex(e => e === Math.min(offsets))]
-      const page = window.tk.getPageWithElement(firstNote) || 1
+      const firstNote = selectedNotes[offsets.findIndex(e => e === Math.min(...offsets))]
+      const page = window.tk.getPageWithElement(firstNote)
 
       const body = {
         p140: selectedNotes.map(note => scoreIri + '_' + note),
