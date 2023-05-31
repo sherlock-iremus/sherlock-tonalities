@@ -1,5 +1,15 @@
 import { AccountCircle, Logout } from '@mui/icons-material'
-import { Button, Dialog, DialogContent, DialogTitle, IconButton, ListItemIcon, MenuItem, Tooltip } from '@mui/material'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  ListItemIcon,
+  MenuItem,
+  Tooltip,
+} from '@mui/material'
 import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -24,15 +34,18 @@ export const AccountMenu = () => {
   }
 
   return !userId ? (
-    <Box>
-      <Button
-        href={BASE_API_URL + `sherlock/login?redirect-uri=${window.location.href}`}
-        variant="contained"
-        size="small"
-      >
-        Login
-      </Button>
-    </Box>
+    <Dialog open>
+      <DialogTitle>It's been a while...</DialogTitle>
+      <DialogActions>
+        <Button
+          href={BASE_API_URL + `sherlock/login?redirect-uri=${window.location.href}`}
+          variant="contained"
+          size="small"
+        >
+          Login
+        </Button>
+      </DialogActions>
+    </Dialog>
   ) : (
     <Box>
       <Tooltip title="Account">
@@ -62,9 +75,7 @@ export const AccountMenu = () => {
       </Menu>
       <Dialog open={isEditing} onClose={() => setIsEditing(false)}>
         <DialogTitle>My Sherlock profile</DialogTitle>
-        <DialogContent>
-
-        </DialogContent>
+        <DialogContent></DialogContent>
       </Dialog>
     </Box>
   )
