@@ -25,7 +25,6 @@ export const MeiViewer = ({ meiUrl }) => {
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [scoreTitle, setScoreTitle] = useState('')
-  const [scoreComposer, setScoreComposer] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
   const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
@@ -128,7 +127,7 @@ export const MeiViewer = ({ meiUrl }) => {
           </Tooltip>
           <Stack>
             <Typography>{scoreTitle}</Typography>
-            <ListItemText sx={{ m: 0 }} secondary={scoreComposer} />
+            <ListItemText sx={{ m: 0 }} secondary="Selected score" />
           </Stack>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="center" alignItems="center" spacing={1}>
