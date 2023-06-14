@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AddCircle } from '@mui/icons-material'
-import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Tooltip } from '@mui/material'
+import { AddCircle, Delete } from '@mui/icons-material'
+import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Stack, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { ContextChip } from '../../components/ContextChip'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
-import { getModel, getUuid, removeBaseIri } from '../../utils'
-import { useGetAnnotationsQuery, useGetP140Query } from '../../services/sparql'
+import { getUuid } from '../../utils'
+import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from '../../services/sparql'
 import { useDeleteAnnotationMutation } from '../../services/service'
 import { useEffect, useState } from 'react'
 import { getId } from '../../utils'
+import { ConceptItem } from '../items/ConceptItem'
 
-export const Annotation = ({ concept, date, entity, e13, page, annotation }) => {
-  const { data: notes } = useGetP140Query(e13, { skip: !e13 })
+export const Annotation = ({ annotation, entity, date, author, page }) => {
+  const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
+  const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
   const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts } = useSelector(
     state => state.globals
@@ -22,7 +23,8 @@ export const Annotation = ({ concept, date, entity, e13, page, annotation }) => 
   const [isDisabled, setIsDisabled] = useState(false)
 
   const checkIsDisabled = () => {
-    if (selectedConcepts.length) return !selectedConcepts.includes(concept)
+    if (isLoading) return true
+    if (selectedConcepts.length) return assignments?.some(({ concept }) => !selectedConcepts.includes(concept))
     if (selectedNotes.length) {
       if (!selectedNotes.length) return false
       if (selectedNotes.length === notes.length) {
@@ -36,7 +38,7 @@ export const Annotation = ({ concept, date, entity, e13, page, annotation }) => 
 
   useEffect(() => {
     setIsDisabled(checkIsDisabled())
-  }, [selectedNotes, selectedConcepts, notes])
+  }, [selectedNotes, selectedConcepts, notes, assignments])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
@@ -44,7 +46,6 @@ export const Annotation = ({ concept, date, entity, e13, page, annotation }) => 
   const removeAnnotation = async () => {
     try {
       await deleteAnnotation(getUuid(annotation)).unwrap()
-      await deleteAnnotation(getUuid(e13)).unwrap()
       refetchAnnotations()
     } catch (error) {
       console.log(error)
@@ -55,31 +56,43 @@ export const Annotation = ({ concept, date, entity, e13, page, annotation }) => 
     return (
       <ListItem
         key={date}
-        onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, concept }))}
+        onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, assignments }))}
         onMouseLeave={() => dispatch(setHoveredAnnotation())}
         disablePadding
-        disabled={isDisabled}
+        sx={{ '& .MuiListItemSecondaryAction-root': { top: 36 } }}
         secondaryAction={
           <Collapse in={isHovered} timeout="auto" unmountOnExit>
-            <Tooltip title="Add concept">
-              <IconButton edge="end" onClick={removeAnnotation}>
+            <Tooltip title="Add assignments">
+              <IconButton>
                 <AddCircle />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete entity">
+              <IconButton onClick={removeAnnotation}>
+                <Delete />
               </IconButton>
             </Tooltip>
           </Collapse>
         }
       >
-        <ListItemButton
-          disabled={isLoading}
-          onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, concept } : null))}
-          selected={isSelected}
-        >
-          <ContextChip key={concept} primary={removeBaseIri(concept)} secondary={getModel(concept)} sx={{ m: 0.2 }} />
-          <ListItemText
-            sx={{ paddingLeft: 1 }}
-            secondary={notes.length === 1 ? 'on one note' : `on ${notes.length} notes`}
-          />
-        </ListItemButton>
+        <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden" margin={1}>
+          <ListItemButton
+            disabled={isDisabled}
+            onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
+            selected={isSelected}
+          >
+            <Stack flex={1}>
+              <ListItemText
+                sx={{ paddingLeft: 1 }}
+                primary="Analytical entity"
+                secondary={notes.length === 1 ? 'with one note' : `with ${notes.length} notes`}
+              />
+              {assignments?.map(assignment => (
+                <ConceptItem key={assignment.assignment} {...assignment} refetch={refetch} />
+              ))}
+            </Stack>
+          </ListItemButton>
+        </Stack>
       </ListItem>
     )
 }

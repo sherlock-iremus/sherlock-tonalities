@@ -3,7 +3,15 @@ import { getPage, stringToColor } from '../utils'
 //import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 //import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import { DEV_ENV } from '../config/services'
-import { getAnalyticalProject, getAnnotations, getContributor, getP140, getProjects } from './queries'
+import {
+  getAnalyticalProject,
+  getAnnotations,
+  getAssignments,
+  getContributor,
+  getP140,
+  getP141,
+  getProjects,
+} from './queries'
 
 const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
 
@@ -43,18 +51,27 @@ export const sparql = createApi({
       }),
       transformResponse: response => response.results.bindings.map(binding => binding.p140.value),
     }),
+    getAssignments: builder.query({
+      query: entity => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getAssignments(entity) }),
+      }),
+      transformResponse: response =>
+        response.results.bindings.map(binding => ({
+          assignment: binding.assignment.value,
+          concept: binding.concept.value,
+        })),
+    }),
     getAnnotations: builder.query({
       query: ({ scoreIri, projectIri }) => ({
         method: 'POST',
         body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
       }),
       transformResponse: response =>
-        response.results.bindings.map(({ concept, date, entity, e13, page, annotation }) => ({
+        response.results.bindings.map(({ annotation, entity, date, page }) => ({
           annotation: annotation.value,
-          concept: concept.value,
-          date: date.value,
           entity: entity.value,
-          e13: e13.value,
+          date: date.value,
           page: getPage(page.value),
         })),
     }),
@@ -80,5 +97,6 @@ export const {
   useGetAnalyticalProjectQuery,
   useGetAnnotationsQuery,
   useGetP140Query,
+  useGetAssignmentsQuery,
   useGetProjectsQuery,
 } = sparql
