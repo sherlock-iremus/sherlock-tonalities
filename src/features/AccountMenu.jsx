@@ -21,7 +21,7 @@ import { BASE_API_URL, useGetUserIdQuery } from '../services/service'
 export const AccountMenu = () => {
   const { data: userId } = useGetUserIdQuery()
   const [anchorEl, setAnchorEl] = useState(null)
-  const [isEditing, setIsEditing] = useState(null)
+  const [isEditing, setIsEditing] = useState(false)
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
 
