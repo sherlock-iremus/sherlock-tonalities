@@ -28,7 +28,7 @@ export const Project = () => {
 
   if (project && annotations)
     return (
-      <Stack borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden">
+      <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
         <ListItem
           dense
           secondaryAction={
@@ -46,7 +46,7 @@ export const Project = () => {
           <ListItemText primary={project.label} secondary="Selected project" />
         </ListItem>
 
-        <Collapse in={isOpen} timeout="auto" unmountOnExit>
+        <Collapse in={isOpen} timeout="auto" unmountOnExit sx={{overflow: 'auto'}}>
           {annotations.length ? (
             Object.entries(annotationsByPage).map(([page, pageAnnotations]) => (
               <Stack direction="row" key={page}>
@@ -59,7 +59,7 @@ export const Project = () => {
                 </TimelineSeparator>
                 <Stack flex={1} paddingLeft={1}>
                   {pageAnnotations.map(annotation => (
-                    <Annotation key={annotation.entity} {...annotation} />
+                    <Annotation key={annotation.annotation} {...annotation} />
                   ))}
                 </Stack>
               </Stack>
