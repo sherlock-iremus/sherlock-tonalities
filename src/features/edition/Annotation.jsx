@@ -62,13 +62,8 @@ export const Annotation = ({ annotation, entity, date, author, page }) => {
         sx={{ '& .MuiListItemSecondaryAction-root': { top: 36 } }}
         secondaryAction={
           <Collapse in={isHovered} timeout="auto" unmountOnExit>
-            <Tooltip title="Add assignments">
-              <IconButton size='small' edge="end">
-                <AddCircle />
-              </IconButton>
-            </Tooltip>
             <Tooltip title="Delete entity">
-              <IconButton onClick={removeAnnotation} size='small'>
+              <IconButton onClick={removeAnnotation} size="small">
                 <Delete />
               </IconButton>
             </Tooltip>
@@ -77,7 +72,7 @@ export const Annotation = ({ annotation, entity, date, author, page }) => {
       >
         <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden" margin={1}>
           <ListItemButton
-          dense
+            dense
             disabled={isDisabled}
             onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
             selected={isSelected}

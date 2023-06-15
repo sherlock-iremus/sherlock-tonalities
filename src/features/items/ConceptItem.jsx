@@ -1,11 +1,8 @@
-import { useSelector } from 'react-redux'
 import { ContextChip } from '../../components/ContextChip'
 import { useDeleteAnnotationMutation } from '../../services/service'
-import { useGetAnnotationsQuery } from '../../services/sparql'
 import { getModel, getUuid, removeBaseIri } from '../../utils'
 
 export const ConceptItem = ({ assignment, concept, refetch }) => {
-  const { scoreIri, projectIri } = useSelector(state => state.globals)
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
 
   const removeAssignment = async () => {
