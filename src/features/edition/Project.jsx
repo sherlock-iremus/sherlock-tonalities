@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 import { Annotation } from './Annotation'
 
 export const Project = () => {
-  const [isOpen, setIsOpen] = useState(true)
   const { scoreIri, projectIri } = useSelector(state => state.globals)
   const [annotationsByPage, setAnnotationsByPage] = useState([])
   const { data: project } = useGetAnalyticalProjectQuery(projectIri, { skip: !projectIri })
@@ -37,16 +36,13 @@ export const Project = () => {
             </Button>
           }
         >
-          <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <ExpandMore /> : <ChevronRight />}
-          </IconButton>
           <ListItemIcon>
             <CollectionsBookmark />
           </ListItemIcon>
           <ListItemText primary={project.label} secondary="Selected project" />
         </ListItem>
 
-        <Collapse in={isOpen} timeout="auto" unmountOnExit sx={{overflow: 'auto'}}>
+        <Stack sx={{ overflow: 'auto' }}>
           {annotations.length ? (
             Object.entries(annotationsByPage).map(([page, pageAnnotations]) => (
               <Stack direction="row" key={page}>
@@ -71,7 +67,7 @@ export const Project = () => {
               </Typography>
             </Stack>
           )}
-        </Collapse>
+        </Stack>
       </Stack>
     )
 }

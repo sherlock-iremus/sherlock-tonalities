@@ -12,7 +12,6 @@ import { setSelectedConcepts } from '../../services/globals'
 export const Model = () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
-  const [isOpen, setIsOpen] = useState(true)
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex, selectedConcepts } = useSelector(state => state.globals)
 
@@ -32,15 +31,11 @@ export const Model = () => {
           </Button>
         }
       >
-        <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <ExpandMore /> : <ChevronRight />}
-        </IconButton>
         <ListItemIcon>
           <HistoryEdu />
         </ListItemIcon>
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>
-      <Collapse in={isOpen} timeout="auto" unmountOnExit sx={{ overflow: 'auto' }}>
         <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search" />
         <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
           <ListSubheader>Available concepts</ListSubheader>
@@ -51,7 +46,6 @@ export const Model = () => {
           )}
         </Stack>
         <Concepts {...{ filter }} />
-      </Collapse>
     </Stack>
   )
 }
