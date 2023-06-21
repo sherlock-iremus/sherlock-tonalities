@@ -7,7 +7,7 @@ import { useGetModelQuery } from '../../services/model'
 import { usePostAnnotationMutation } from '../../services/service'
 //import { ANALYTICAL_ENTITY } from 'sherlock-sparql-queries/src/queries/constants'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
-import { setSelectedNotes } from '../../services/globals'
+import { setSelectedAnnotation, setSelectedNotes } from '../../services/globals'
 import { ANALYTICAL_ENTITY } from '../../services/queries'
 import { removeBaseIri } from '../../utils'
 
@@ -81,6 +81,9 @@ export const Concepts = ({ filter }) => {
         analytical_project: projectIri,
       }
       await postAnnotation(body).unwrap()
+      dispatch(
+        setSelectedAnnotation({ ...selectedAnnotation, assignments: [...selectedAnnotation.assignments, { concept }] })
+      )
       refetchAssignments()
     } catch (error) {
       console.log(error)
