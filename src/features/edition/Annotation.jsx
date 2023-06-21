@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AddCircle, Delete } from '@mui/icons-material'
+import { Delete, MarkChatUnread } from '@mui/icons-material'
 import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Stack, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { getId } from '../../utils'
 import { ConceptItem } from '../items/ConceptItem'
 
-export const Annotation = ({ annotation, entity, date, author, page }) => {
+export const Annotation = ({ annotation, entity, date, author, page, openAnnotation }) => {
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
@@ -65,6 +65,11 @@ export const Annotation = ({ annotation, entity, date, author, page }) => {
             <Tooltip title="Delete entity">
               <IconButton onClick={removeAnnotation} size="small">
                 <Delete />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="View comments">
+              <IconButton onClick={openAnnotation} size="small">
+                <MarkChatUnread />
               </IconButton>
             </Tooltip>
           </Collapse>
