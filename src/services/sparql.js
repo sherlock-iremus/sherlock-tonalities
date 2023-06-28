@@ -9,7 +9,6 @@ import {
   getAssignments,
   getContributor,
   getP140,
-  getP141,
   getProjects,
 } from './queries'
 
