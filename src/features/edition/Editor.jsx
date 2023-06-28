@@ -10,7 +10,7 @@ export const Editor = () => {
 
   return (
     <Collapse in={!!selectedNotes.length} timeout="auto" unmountOnExit>
-      <Stack borderRadius={3} bgcolor="white" boxShadow={1}>
+      <Stack borderRadius={3} bgcolor="white" boxShadow={1} marginBottom={4}>
         <ListItem
           dense
           secondaryAction={

@@ -5,12 +5,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeBaseIri } from '../../utils'
 import { setSelectedConcepts } from '../../services/globals'
 
-export const Concept = ({ concept, createAnnotation }) => {
+export const Concept = ({ concept, createAnnotation, addAssignment }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
   const { selectedAnnotation, selectedNotes, selectedConcepts } = useSelector(state => state.globals)
 
-  const isSelected = selectedAnnotation?.concept === concept.iri || selectedConcepts.includes(concept.iri)
+  const isSelected =
+    selectedAnnotation?.assignments.some(a => a.concept === concept.iri) || selectedConcepts.includes(concept.iri)
+
+  const onClick = () => {
+    if (selectedAnnotation && !isSelected) addAssignment(concept.iri, selectedAnnotation.entity)
+    else if (selectedNotes.length) createAnnotation(concept.iri)
+    else dispatch(setSelectedConcepts(concept.iri))
+  }
 
   return (
     <>
@@ -20,9 +27,7 @@ export const Concept = ({ concept, createAnnotation }) => {
         )}
         <Chip
           label={removeBaseIri(concept.iri)}
-          onClick={() =>
-            selectedNotes.length ? createAnnotation(concept.iri) : dispatch(setSelectedConcepts(concept.iri))
-          }
+          {...{ onClick }}
           {...(isSelected ? { color: 'primary' } : { variant: 'outlined' })}
         />
       </ListItem>

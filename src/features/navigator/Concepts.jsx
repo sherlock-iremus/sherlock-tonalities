@@ -6,15 +6,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGetModelQuery } from '../../services/model'
 import { usePostAnnotationMutation } from '../../services/service'
 //import { ANALYTICAL_ENTITY } from 'sherlock-sparql-queries/src/queries/constants'
-import { useGetAnnotationsQuery } from '../../services/sparql'
-import { setSelectedNotes } from '../../services/globals'
+import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
+import { setSelectedAnnotation, setSelectedNotes } from '../../services/globals'
 import { ANALYTICAL_ENTITY } from '../../services/queries'
 import { removeBaseIri } from '../../utils'
 
 export const Concepts = ({ filter }) => {
-  const { selectedModelIndex, selectedNotes, scoreIri, projectIri } = useSelector(state => state.globals)
+  const { selectedModelIndex, selectedNotes, scoreIri, projectIri, selectedAnnotation } = useSelector(
+    state => state.globals
+  )
   const { data } = useGetModelQuery(selectedModelIndex)
   const [filteredTree, setFilteredTree] = useState(data)
+  const [entity, setEntity] = useState(null)
   const dispatch = useDispatch()
 
   const filterTree = node => {
@@ -28,6 +31,7 @@ export const Concepts = ({ filter }) => {
 
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
+  const { refetch: refetchAssignments } = useGetAssignmentsQuery(entity, { skip: !entity })
 
   const createAnnotation = async concept => {
     try {
@@ -45,12 +49,12 @@ export const Concepts = ({ filter }) => {
       }
 
       const response = await postAnnotation(body).unwrap()
-      const annotation = response.find(e =>
+      const entity = response.find(e =>
         e['@type']?.includes('http://www.cidoc-crm.org/cidoc-crm/E28_Conceptual_Object')
       )
 
       const body2 = {
-        p140: annotation['@id'],
+        p140: entity['@id'],
         p177: 'crm:P2_has_type',
         p141: concept,
         p141_type: 'uri',
@@ -65,6 +69,27 @@ export const Concepts = ({ filter }) => {
     }
   }
 
+  const addAssignment = async (concept, entity) => {
+    try {
+      setEntity(entity)
+      const body = {
+        p140: entity,
+        p177: 'crm:P2_has_type',
+        p141: concept,
+        p141_type: 'uri',
+        document_context: scoreIri,
+        analytical_project: projectIri,
+      }
+      await postAnnotation(body).unwrap()
+      dispatch(
+        setSelectedAnnotation({ ...selectedAnnotation, assignments: [...selectedAnnotation.assignments, { concept }] })
+      )
+      refetchAssignments()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     if (filter) setFilteredTree(filterTree({ subClasses: data })?.subClasses)
     else setFilteredTree(data)
@@ -72,9 +97,9 @@ export const Concepts = ({ filter }) => {
 
   return (
     filteredTree && (
-      <List disablePadding dense>
+      <List disablePadding dense sx={{ overflow: 'auto' }}>
         {!!filteredTree.length &&
-          filteredTree.map(concept => <Concept key={concept.iri} {...{ concept, createAnnotation }} />)}
+          filteredTree.map(concept => <Concept key={concept.iri} {...{ concept, createAnnotation, addAssignment }} />)}
         <Backdrop open={isLoading}>
           <CircularProgress />
         </Backdrop>

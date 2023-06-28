@@ -1,5 +1,5 @@
-import { HistoryEdu, ExpandMore, ChevronRight } from '@mui/icons-material'
-import { Button, IconButton, ListItem, ListItemIcon, ListItemText, Collapse, ListSubheader } from '@mui/material'
+import { HistoryEdu } from '@mui/icons-material'
+import { Button, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { Stack } from '@mui/system'
 import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
@@ -12,7 +12,6 @@ import { setSelectedConcepts } from '../../services/globals'
 export const Model = () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
-  const [isOpen, setIsOpen] = useState(true)
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex, selectedConcepts } = useSelector(state => state.globals)
 
@@ -32,26 +31,21 @@ export const Model = () => {
           </Button>
         }
       >
-        <IconButton edge="start" disableRipple onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <ExpandMore /> : <ChevronRight />}
-        </IconButton>
         <ListItemIcon>
           <HistoryEdu />
         </ListItemIcon>
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>
-      <Collapse in={isOpen} timeout="auto" unmountOnExit sx={{ overflow: 'auto' }}>
-        <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search" />
-        <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
-          <ListSubheader>Available concepts</ListSubheader>
-          {!!selectedConcepts.length && (
-            <Button onClick={() => dispatch(setSelectedConcepts())} size="small">
-              Clear filter
-            </Button>
-          )}
-        </Stack>
-        <Concepts {...{ filter }} />
-      </Collapse>
+      <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search" />
+      <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
+        <ListSubheader disableSticky>Available concepts</ListSubheader>
+        {!!selectedConcepts.length && (
+          <Button onClick={() => dispatch(setSelectedConcepts())} size="small">
+            Clear filter
+          </Button>
+        )}
+      </Stack>
+      <Concepts {...{ filter }} />
     </Stack>
   )
 }
