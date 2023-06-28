@@ -82,7 +82,7 @@ export const Annotation = ({ annotation, entity, date, author, page, openAnnotat
             onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
             selected={isSelected}
           >
-            <Stack flex={1}>
+            <Stack flex={1} spacing={1}>
               <ListItemText
                 sx={{ paddingLeft: 1 }}
                 primary="Analytical entity"

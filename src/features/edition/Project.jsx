@@ -30,7 +30,7 @@ export const Project = () => {
   if (project && annotations)
     return (
       <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
-        <AnnotationPage annotation={openedAnnotation} onClose={() => setOpenedAnnotation(null)} />
+        <AnnotationPage {...openedAnnotation} onClose={() => setOpenedAnnotation(null)} />
         {!openedAnnotation && (
           <>
             <ListItem
