@@ -42,7 +42,8 @@ const globals = createSlice({
       }
     },
     setSelectedConcepts: (state, action) => {
-      if (!action.payload) state.selectedConcepts = initialState.selectedConcepts
+      if (Array.isArray(action.payload)) state.selectedConcepts = action.payload
+      else if (!action.payload) state.selectedConcepts = initialState.selectedConcepts
       else {
         const index = state.selectedConcepts.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedConcepts.splice(index, 1) : state.selectedConcepts.push(action.payload)

@@ -3,7 +3,6 @@ import { Backdrop, CircularProgress, List } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { Concept } from './Concept'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetModelQuery } from '../../services/model'
 import { usePostAnnotationMutation } from '../../services/service'
 //import { ANALYTICAL_ENTITY } from 'sherlock-sparql-queries/src/queries/constants'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
@@ -11,11 +10,10 @@ import { setSelectedAnnotation, setSelectedNotes } from '../../services/globals'
 import { ANALYTICAL_ENTITY } from '../../services/queries'
 import { removeBaseIri } from '../../utils'
 
-export const Concepts = ({ filter }) => {
-  const { selectedModelIndex, selectedNotes, scoreIri, projectIri, selectedAnnotation } = useSelector(
+export const Concepts = ({ data, filter }) => {
+  const { selectedNotes, scoreIri, projectIri, selectedAnnotation } = useSelector(
     state => state.globals
   )
-  const { data } = useGetModelQuery(selectedModelIndex)
   const [filteredTree, setFilteredTree] = useState(data)
   const [entity, setEntity] = useState(null)
   const dispatch = useDispatch()
