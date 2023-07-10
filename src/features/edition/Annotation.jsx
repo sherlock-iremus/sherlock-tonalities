@@ -25,14 +25,8 @@ export const Annotation = ({ annotation, entity, date, author, page, openAnnotat
   const checkIsDisabled = () => {
     if (isLoading) return true
     if (selectedConcepts.length) return assignments?.some(({ concept }) => !selectedConcepts.includes(concept))
-    if (selectedNotes.length) {
-      if (!selectedNotes.length) return false
-      if (selectedNotes.length === notes.length) {
-        const intersection = selectedNotes.filter(e => new Set(notes.map(x => getId(x))).has(e))
-        if (intersection.length === selectedNotes.length) return false
-      }
-      return true
-    }
+    if (selectedNotes.length) return !notes.some(e => selectedNotes.includes(getId(e)))
+
     return false
   }
 
