@@ -8,9 +8,9 @@ import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from 
 import { useDeleteAnnotationMutation } from '../../services/service'
 import { useEffect, useState } from 'react'
 import { getId } from '../../utils'
-import { ConceptItem } from '../items/ConceptItem'
+import { Assignment } from '../items/Assignment'
 
-export const Annotation = ({ annotation, entity, date, author, page, openAnnotation }) => {
+export const Annotation = ({ annotation, entity, date, page, openAnnotation }) => {
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
@@ -83,7 +83,7 @@ export const Annotation = ({ annotation, entity, date, author, page, openAnnotat
                 secondary={notes.length === 1 ? 'with one note' : `with ${notes.length} notes`}
               />
               {assignments?.map(assignment => (
-                <ConceptItem key={assignment.assignment} {...assignment} refetch={refetch} />
+                <Assignment key={assignment.assignment} {...assignment} refetch={refetch} />
               ))}
             </Stack>
           </ListItemButton>

@@ -3,14 +3,7 @@ import { getPage, stringToColor } from '../utils'
 //import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 //import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import { DEV_ENV } from '../config/services'
-import {
-  getAnalyticalProject,
-  getAnnotations,
-  getAssignments,
-  getContributor,
-  getP140,
-  getProjects,
-} from './queries'
+import { getAnalyticalProject, getAnnotations, getAssignments, getContributor, getP140, getProjects } from './queries'
 
 const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
 
@@ -58,7 +51,9 @@ export const sparql = createApi({
       transformResponse: response =>
         response.results.bindings.map(binding => ({
           assignment: binding.assignment.value,
-          concept: binding.concept.value,
+          ...(binding.concept.type === 'literal'
+            ? { comment: binding.concept.value }
+            : { concept: binding.concept.value }),
         })),
     }),
     getAnnotations: builder.query({

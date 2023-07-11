@@ -38,7 +38,7 @@ export const Model = () => {
         </ListItemIcon>
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>
-      <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search" />
+      <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search..." />
       <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
         <ListSubheader disableSticky>Available concepts</ListSubheader>
         {!selectedConcepts.length ? (
