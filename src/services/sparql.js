@@ -51,6 +51,8 @@ export const sparql = createApi({
       transformResponse: response =>
         response.results.bindings.map(binding => ({
           assignment: binding.assignment.value,
+          author: binding.author.value,
+          date: binding.date.value,
           ...(binding.concept.type === 'literal'
             ? { comment: binding.concept.value }
             : { concept: binding.concept.value }),
