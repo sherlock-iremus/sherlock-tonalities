@@ -30,6 +30,7 @@ export const AnnotationPage = ({ isOpen }) => {
         analytical_project: projectIri,
       }
       await postAnnotation(body).unwrap()
+      setInput('')
       refetch()
     } catch (error) {
       console.log(error)
