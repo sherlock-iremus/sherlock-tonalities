@@ -28,7 +28,7 @@ export const Project = () => {
 
   if (project && annotations)
     return (
-      <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
+      <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
         <AnnotationPage />
         {!selectedAnnotation && (
           <>

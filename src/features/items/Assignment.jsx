@@ -1,6 +1,6 @@
-import { Chip, Collapse, Stack, Tooltip, capitalize } from '@mui/material'
+import { Chip, Collapse, capitalize } from '@mui/material'
 import { useDeleteAnnotationMutation } from '../../services/service'
-import { getModel, getUuid, removeBaseIri } from '../../utils'
+import { getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
 import { useState } from 'react'
 
@@ -30,7 +30,7 @@ export const Assignment = ({ assignment, concept, comment, refetch, date, author
             '& .MuiChip-label': { fontSize: 9 },
             bgcolor: 'white',
             cursor: 'pointer',
-            left: 40,
+            right: 40,
           }}
         />
       </Collapse>
