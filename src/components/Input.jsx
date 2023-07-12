@@ -4,6 +4,7 @@ const Container = styled('div')(({ theme }) => ({
   position: 'relative',
   margin: theme.spacing(1),
   borderRadius: 8,
+  display: 'flex',
   backgroundColor: alpha(theme.palette.secondary.dark, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.secondary.dark, 0.25),
@@ -12,10 +13,10 @@ const Container = styled('div')(({ theme }) => ({
 
 const TextField = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
+  flex: 1,
   '& .MuiInputBase-input': {
     fontSize: 14,
     padding: theme.spacing(1),
-    width: '100%',
   },
 }))
 
