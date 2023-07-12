@@ -2,7 +2,7 @@
 import { Delete } from '@mui/icons-material'
 import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Stack, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
+import { setAssignmentsOnScore, setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
 import { getUuid } from '../../utils'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from '../../services/sparql'
 import { useDeleteAnnotationMutation } from '../../services/service'
@@ -33,6 +33,10 @@ export const Annotation = ({ annotation, entity, date, page }) => {
   useEffect(() => {
     setIsDisabled(checkIsDisabled())
   }, [selectedNotes, selectedConcepts, notes, assignments])
+
+  useEffect(() => {
+    if (isSelected) dispatch(setAssignmentsOnScore(assignments))
+  }, [selectedNotes, notes, assignments])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
@@ -71,7 +75,7 @@ export const Annotation = ({ annotation, entity, date, page }) => {
             onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
             selected={isSelected}
           >
-            <Stack flex={1} spacing={1}>
+            <Stack flex={1}>
               <ListItemText
                 sx={{ paddingLeft: 1 }}
                 primary="Analytical entity"

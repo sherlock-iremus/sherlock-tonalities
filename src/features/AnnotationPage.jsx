@@ -64,10 +64,11 @@ export const AnnotationPage = ({ isOpen }) => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        {assignments?.map(assignment => (
-          <Assignment key={assignment.assignment} {...assignment} refetch={refetch} />
-        ))}
-
+        <Stack padding={1}>
+          {assignments?.map(assignment => (
+            <Assignment key={assignment.assignment} {...assignment} refetch={refetch} />
+          ))}
+        </Stack>
         <Stack flex={1} direction="row" alignItems="center" paddingRight={1}>
           <Stack flex={1}>
             <Input value={input} onChange={handleInputChange} placeholder="Comment..." />

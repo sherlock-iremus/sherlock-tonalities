@@ -1,19 +1,7 @@
-import {
-  Avatar,
-  CircularProgress,
-  Collapse,
-  IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  Tooltip,
-} from '@mui/material'
+import { Chip, Collapse, Stack, Tooltip, capitalize } from '@mui/material'
 import { useDeleteAnnotationMutation } from '../../services/service'
 import { getModel, getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
-import { Comment, Delete } from '@mui/icons-material'
 import { useState } from 'react'
 
 export const Assignment = ({ assignment, concept, comment, refetch, date, author }) => {
@@ -23,60 +11,48 @@ export const Assignment = ({ assignment, concept, comment, refetch, date, author
   const removeAssignment = async () => {
     try {
       await deleteAnnotation(getUuid(assignment)).unwrap()
-      refetch()
+      if (refetch) refetch()
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    <ul style={{ margin: 0, padding: 0 }}>
-      <Stack
-        key={concept || comment}
-        flex={1}
-        borderRadius={3}
-        bgcolor="secondary.main"
-        boxShadow={1}
-        overflow="hidden"
-        margin={1}
-      >
-        <ListItem
-          disablePadding
-          sx={{ '& .MuiListItemSecondaryAction-root': { top: 30 } }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          secondaryAction={
-            <Collapse in={isHovered} timeout="auto" unmountOnExit>
-              <Stack direction="row" alignItems="center">
-                <ContributorItem contributorIri={author} />
-                <Tooltip title="Delete assignment">
-                  <IconButton onClick={removeAssignment} size="small">
-                    {isLoading ? <CircularProgress /> : <Delete />}
-                  </IconButton>
-                </Tooltip>
-              </Stack>
-            </Collapse>
-          }
-        >
-          <ListItemButton dense>
-            <ListItemIcon>
-              {concept ? (
-                <Tooltip title={getModel(concept) + ' music model'}>
-                  <Avatar sx={{ height: 32, width: 32 }}>{getModel(concept)[0].toUpperCase()}</Avatar>
-                </Tooltip>
-              ) : (
-                <Avatar sx={{ height: 32, width: 32 }}>
-                  <Comment fontSize="8" />
-                </Avatar>
-              )}
-            </ListItemIcon>
-            <ListItemText
-              primary={comment ? comment[0].toUpperCase() + comment : removeBaseIri(concept)}
-              secondary={new Date(date).toLocaleDateString('en-GB')}
-            ></ListItemText>
-          </ListItemButton>
-        </ListItem>
-      </Stack>
-    </ul>
+    <>
+      <Collapse in={isHovered} timeout="auto" unmountOnExit>
+        <Chip
+          label={new Date(date).toLocaleDateString('en-GB')}
+          variant="outlined"
+          size="small"
+          sx={{
+            position: 'absolute',
+            zIndex: 1,
+            '& .MuiChip-label': { fontSize: 9 },
+            bgcolor: 'white',
+            cursor: 'pointer',
+            left: 40,
+          }}
+        />
+      </Collapse>
+      <Chip
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        clickable
+        disabled={isLoading}
+        icon={<ContributorItem contributorIri={author} />}
+        label={comment ? capitalize(comment) : removeBaseIri(concept)}
+        sx={{
+          marginTop: 1,
+          justifyContent: 'space-between',
+          cursor: 'pointer',
+          '& .MuiChip-label': {
+            display: 'block',
+            whiteSpace: 'normal',
+          },
+        }}
+        {...(concept && { color: 'primary' })}
+        {...(isHovered && { onDelete: removeAssignment })}
+      />
+    </>
   )
 }
