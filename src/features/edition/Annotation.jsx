@@ -2,7 +2,7 @@
 import { Delete } from '@mui/icons-material'
 import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Stack, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAssignmentsOnScore, setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
+import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
 import { getUuid } from '../../utils'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from '../../services/sparql'
 import { useDeleteAnnotationMutation } from '../../services/service'
@@ -33,10 +33,6 @@ export const Annotation = ({ annotation, entity, date, page }) => {
   useEffect(() => {
     setIsDisabled(checkIsDisabled())
   }, [selectedNotes, selectedConcepts, notes, assignments])
-
-  useEffect(() => {
-    if (isSelected) dispatch(setAssignmentsOnScore(assignments))
-  }, [selectedNotes, notes, assignments])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
