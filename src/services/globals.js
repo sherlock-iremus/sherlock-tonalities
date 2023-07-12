@@ -36,7 +36,7 @@ const globals = createSlice({
         state.selectedAnnotation = initialState.selectedAnnotation
       } else if (Array.isArray(action.payload))
         state.selectedNotes.push(...action.payload.filter(e => !state.selectedNotes.includes(e)))
-      else {
+      else if (!state.selectedAnnotation) {
         const index = state.selectedNotes.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
       }
@@ -51,7 +51,10 @@ const globals = createSlice({
     },
     setSelectedAnnotation: (state, action) => {
       if (!action.payload) state.selectedAnnotation = initialState.selectedAnnotation
-      else state.selectedAnnotation = action.payload
+      else {
+        state.selectedAnnotation = action.payload
+        state.selectedNotes = initialState.selectedNotes
+      }
     },
     setHoveredAnnotation: (state, action) => {
       if (!action.payload) state.hoveredAnnotation = initialState.hoveredAnnotation
