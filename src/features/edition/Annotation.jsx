@@ -64,14 +64,14 @@ export const Annotation = ({ annotation, entity, date, page }) => {
           </Collapse>
         }
       >
-        <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden" margin={1}>
+        <Stack flex={1} borderRadius={3} bgcolor="secondary.light" boxShadow={1} overflow="hidden" margin={1}>
           <ListItemButton
             dense
             disabled={isDisabled}
             onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
             selected={isSelected}
           >
-            <Stack flex={1}>
+            <Stack flex={1} spacing={1}>
               <ListItemText
                 sx={{ paddingLeft: 1 }}
                 primary="Analytical entity"

@@ -65,7 +65,7 @@ export const AnnotationPage = ({ isOpen }) => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Stack padding={1}>
+        <Stack padding={1} spacing={1} paddingTop={2}>
           {assignments?.map(assignment => (
             <Assignment key={assignment.assignment} {...assignment} refetch={refetch} />
           ))}
