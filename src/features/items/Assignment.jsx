@@ -1,4 +1,4 @@
-import { Chip, Collapse, Stack, Tooltip, capitalize } from '@mui/material'
+import { Chip, Collapse, Stack, Typography, capitalize } from '@mui/material'
 import { useDeleteAnnotationMutation } from '../../services/service'
 import { getModel, getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
@@ -18,41 +18,29 @@ export const Assignment = ({ assignment, concept, comment, refetch, date, author
   }
 
   return (
-    <>
-      <Collapse in={isHovered} timeout="auto" unmountOnExit>
-        <Chip
-          label={new Date(date).toLocaleDateString('en-GB')}
-          variant="outlined"
-          size="small"
-          sx={{
-            position: 'absolute',
-            zIndex: 1,
-            '& .MuiChip-label': { fontSize: 9 },
-            bgcolor: 'white',
-            cursor: 'pointer',
-            left: 40,
-          }}
-        />
-      </Collapse>
-      <Chip
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        clickable
-        disabled={isLoading}
-        icon={<ContributorItem contributorIri={author} />}
-        label={comment ? capitalize(comment) : removeBaseIri(concept)}
-        sx={{
-          marginTop: 1,
-          justifyContent: 'space-between',
-          cursor: 'pointer',
-          '& .MuiChip-label': {
-            display: 'block',
-            whiteSpace: 'normal',
-          },
-        }}
-        {...(concept && { color: 'primary' })}
-        {...(isHovered && { onDelete: removeAssignment })}
-      />
-    </>
+    <Chip
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      clickable
+      disabled={isLoading}
+      label={
+        <Stack overflow="hidden">
+          <Collapse in={!isHovered} timeout="auto" unmountOnExit>
+            <Typography variant="caption">{comment ? capitalize(comment) : removeBaseIri(concept)}</Typography>
+          </Collapse>
+          <Collapse in={isHovered} timeout="auto" unmountOnExit>
+            <Typography variant="caption">
+              {concept && getModel(concept)}, {new Date(date).toLocaleDateString('en-GB')}
+            </Typography>
+          </Collapse>
+        </Stack>
+      }
+      sx={{
+        cursor: 'pointer',
+        justifyContent: 'space-between',
+      }}
+      {...(concept && { color: 'primary' })}
+      {...(isHovered && { onDelete: removeAssignment, avatar: <ContributorItem contributorIri={author} /> })}
+    />
   )
 }
