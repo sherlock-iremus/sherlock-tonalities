@@ -1,17 +1,17 @@
 [
   {
     "baseIri": "http://modality-tonality.huma-num.fr/Guillotel_2022#",
-    "name": "Guillotel",
+    "name": "Guillotel 2022",
     "filename": "cadences_Guillotel.jsonld"
   },
   {
     "baseIri": "http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#",
-    "name": "Praetorius",
+    "name": "Praetorius 1619",
     "filename": "Praetorius.jsonld"
   },
   {
     "baseIri": "https://w3id.org/polifonia/ontology/modal-tonal#",
-    "name": "Zarlino",
+    "name": "Zarlino 1558",
     "filename": "Zarlino.jsonld"
   }
 ]

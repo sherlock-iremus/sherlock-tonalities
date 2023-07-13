@@ -22,4 +22,9 @@ export const getId = iri => iri.split('_').pop()
 
 export const getIri = uuid => `http://data-iremus.huma-num.fr/id/${uuid}`
 
-export const getModel = iri => iri.split('/').pop().split('_').shift()
+export const getModelGeneric = iri => iri.split('/').pop().split('_').shift()
+
+export const getModel = iri =>
+  (iri.includes('Praetorius') && 'Praetorius 1619') ||
+  (iri.includes('Polifonia') && 'Zarlino 1558') ||
+  (iri.includes('Guillotel') && 'Guillotel 2022')
