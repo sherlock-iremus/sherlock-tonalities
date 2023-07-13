@@ -1,4 +1,4 @@
-import { Close, Delete, Send } from '@mui/icons-material'
+import { Add, Close, Delete, Send } from '@mui/icons-material'
 import { AppBar, CircularProgress, IconButton, ListItem, ListItemText, Slide, Stack, Toolbar } from '@mui/material'
 import { useState } from 'react'
 import { ContextMenu } from './navigator/ContextMenu'
@@ -7,7 +7,7 @@ import { useGetAssignmentsQuery } from '../services/sparql'
 import { usePostAnnotationMutation } from '../services/service'
 import { useDispatch, useSelector } from 'react-redux'
 import { Assignment } from './items/Assignment'
-import { setSelectedAnnotation } from '../services/globals'
+import { setIsSubSelecting, setSelectedAnnotation } from '../services/globals'
 
 export const AnnotationPage = ({ isOpen }) => {
   const { selectedAnnotation, scoreIri, projectIri } = useSelector(state => state.globals)
@@ -60,6 +60,9 @@ export const AnnotationPage = ({ isOpen }) => {
                 }
               ></ListItemText>
             </ListItem>
+            <IconButton color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
+              <Add />
+            </IconButton>
             <IconButton edge="end" color="inherit">
               <Delete />
             </IconButton>

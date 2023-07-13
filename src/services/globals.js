@@ -10,6 +10,7 @@ const initialState = {
   hoveredAnnotation: null,
   selectedAnnotation: null,
   selectedModelIndex: 0,
+  isSubSelecting: false,
 }
 
 const globals = createSlice({
@@ -33,10 +34,10 @@ const globals = createSlice({
       state.selectedConcepts = initialState.selectedConcepts
       if (!action.payload) {
         state.selectedNotes = initialState.selectedNotes
-        state.selectedAnnotation = initialState.selectedAnnotation
+        state.isSubSelecting = initialState.isSubSelecting
       } else if (Array.isArray(action.payload))
         state.selectedNotes.push(...action.payload.filter(e => !state.selectedNotes.includes(e)))
-      else if (!state.selectedAnnotation) {
+      else if (!state.selectedAnnotation || state.isSubSelecting) {
         const index = state.selectedNotes.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
       }
@@ -56,6 +57,9 @@ const globals = createSlice({
         state.selectedNotes = initialState.selectedNotes
       }
     },
+    setIsSubSelecting: (state, action) => {
+      state.isSubSelecting = !state.isSubSelecting
+    },
     setHoveredAnnotation: (state, action) => {
       if (!action.payload) state.hoveredAnnotation = initialState.hoveredAnnotation
       else state.hoveredAnnotation = action.payload
@@ -74,4 +78,5 @@ export const {
   setColorIndex,
   setScoreAnnotator,
   setSelectedConcepts,
+  setIsSubSelecting,
 } = globals.actions

@@ -10,7 +10,7 @@ import { useGetAnnotationsQuery } from '../../services/sparql'
 import { createEntity } from '../../helper'
 
 export const Editor = () => {
-  const { selectedNotes, scoreIri, projectIri } = useSelector(state => state.globals)
+  const { selectedNotes, isSubSelecting, scoreIri, projectIri } = useSelector(state => state.globals)
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
   const [input, setInput] = useState('')
@@ -37,7 +37,7 @@ export const Editor = () => {
   }
 
   return (
-    <Collapse in={!!selectedNotes.length} timeout="auto" unmountOnExit>
+    <Collapse in={!!selectedNotes.length || isSubSelecting} timeout="auto" unmountOnExit>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1}>
         <ListItem
           dense
@@ -52,7 +52,9 @@ export const Editor = () => {
           </ListItemIcon>
           <ListItemText
             primary={`
-              New entity with ${selectedNotes.length === 1 ? 'one note' : selectedNotes.length + ' notes'}`}
+              ${isSubSelecting ? 'Sub' : 'New '} entity with ${
+              selectedNotes.length === 1 ? 'one note' : selectedNotes.length + ' notes'
+            }`}
             secondary="Select a concept to assign it"
           />
         </ListItem>
