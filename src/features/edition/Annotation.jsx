@@ -64,7 +64,7 @@ export const Annotation = ({ annotation, entity, date, page }) => {
           </Collapse>
         }
       >
-        <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden" margin={1}>
+        <Stack flex={1} borderRadius={3} bgcolor="secondary.light" boxShadow={1} overflow="hidden" margin={1}>
           <ListItemButton
             dense
             disabled={isDisabled}
