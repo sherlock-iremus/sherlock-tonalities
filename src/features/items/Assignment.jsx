@@ -1,6 +1,6 @@
 import { Chip, Collapse, Stack, Typography, capitalize } from '@mui/material'
 import { useDeleteAnnotationMutation } from '../../services/service'
-import { getUuid, removeBaseIri } from '../../utils'
+import { getModel, getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
 import { useState } from 'react'
 
