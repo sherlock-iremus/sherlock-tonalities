@@ -5,7 +5,7 @@ import { ContributorItem } from './ContributorItem'
 import { useState } from 'react'
 import { Annotation } from '../edition/Annotation'
 
-export const Assignment = ({ assignment, concept, comment, subentity, annotation, refetch, date, author }) => {
+export const Assignment = ({ assignment, concept, comment, subentity, annotation, refetch, date, author, color }) => {
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const [isHovered, setIsHovered] = useState(false)
 
@@ -17,7 +17,7 @@ export const Assignment = ({ assignment, concept, comment, subentity, annotation
       console.log(error)
     }
   }
-  if (subentity) return <Annotation entity={subentity} {...{ date, author, annotation }} isSubEntity />
+  if (subentity) return <Annotation entity={subentity} {...{ date, author, annotation }} isSubEntity color={!color} />
   else
     return (
       <Chip

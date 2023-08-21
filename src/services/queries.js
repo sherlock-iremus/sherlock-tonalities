@@ -57,7 +57,7 @@ export const getAssignments = analyticalEntityIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     ?assignment crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
     ?assignment crm:P141_assigned ?p141.

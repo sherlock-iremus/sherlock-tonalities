@@ -58,7 +58,7 @@ export const Project = () => {
                     </TimelineSeparator>
                     <Stack flex={1} paddingLeft={1}>
                       {pageAnnotations.map(annotation => (
-                        <Annotation key={annotation.annotation} {...annotation} />
+                        <Annotation key={annotation.annotation} {...annotation} color />
                       ))}
                     </Stack>
                   </Stack>

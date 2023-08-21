@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { getId } from '../../utils'
 import { Assignment } from '../items/Assignment'
 
-export const Annotation = ({ annotation, entity, date, page, isSubEntity }) => {
+export const Annotation = ({ annotation, entity, date, page, isSubEntity, color }) => {
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
@@ -67,7 +67,7 @@ export const Annotation = ({ annotation, entity, date, page, isSubEntity }) => {
         <Stack
           flex={1}
           borderRadius={3}
-          bgcolor={isSubEntity ? 'white' : 'secondary.light'}
+          bgcolor={color ? 'secondary.light' : 'white'}
           boxShadow={1}
           overflow="hidden"
           margin={1}
@@ -85,7 +85,7 @@ export const Annotation = ({ annotation, entity, date, page, isSubEntity }) => {
                 secondary={notes.length === 1 ? 'with one note' : `with ${notes.length} notes`}
               />
               {assignments?.map(assignment => (
-                <Assignment key={assignment.assignment} {...assignment} refetch={refetch} />
+                <Assignment key={assignment.assignment} {...assignment} {...{ refetch, color }} />
               ))}
             </Stack>
           </ListItemButton>
