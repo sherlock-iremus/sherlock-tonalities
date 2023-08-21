@@ -1,5 +1,15 @@
-import { Add, Close, Delete, Send } from '@mui/icons-material'
-import { AppBar, CircularProgress, IconButton, ListItem, ListItemText, Slide, Stack, Toolbar } from '@mui/material'
+import { Add, ArrowBack, Close, Delete, Send } from '@mui/icons-material'
+import {
+  AppBar,
+  CircularProgress,
+  Collapse,
+  IconButton,
+  ListItem,
+  ListItemText,
+  Slide,
+  Stack,
+  Toolbar,
+} from '@mui/material'
 import { useState } from 'react'
 import { ContextMenu } from './navigator/ContextMenu'
 import { Input } from '../components/Input'
@@ -7,10 +17,10 @@ import { useGetAssignmentsQuery } from '../services/sparql'
 import { usePostAnnotationMutation } from '../services/service'
 import { useDispatch, useSelector } from 'react-redux'
 import { Assignment } from './items/Assignment'
-import { setIsSubSelecting, setSelectedAnnotation } from '../services/globals'
+import { setIsSubSelecting, setPreviousAnnotation, setSelectedAnnotation } from '../services/globals'
 
 export const AnnotationPage = () => {
-  const { selectedAnnotation, scoreIri, projectIri } = useSelector(state => state.globals)
+  const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations } = useSelector(state => state.globals)
   const { data: assignments, refetch } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
   })
@@ -48,6 +58,11 @@ export const AnnotationPage = () => {
       <Stack overflow="auto" flex={1}>
         <AppBar sx={{ position: 'relative', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
           <Toolbar>
+            <Collapse in={selectedAnnotations.length > 1} timeout="auto" unmountOnExit>
+              <IconButton edge="start" color="inherit" onClick={() => dispatch(setPreviousAnnotation())}>
+                <ArrowBack />
+              </IconButton>
+            </Collapse>
             <IconButton edge="start" color="inherit" onClick={() => dispatch(setSelectedAnnotation())}>
               <Close />
             </IconButton>

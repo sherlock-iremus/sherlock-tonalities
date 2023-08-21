@@ -9,6 +9,7 @@ const initialState = {
   selectedConcepts: [],
   hoveredAnnotation: null,
   selectedAnnotation: null,
+  selectedAnnotations: [],
   selectedModelIndex: 0,
   isSubSelecting: false,
 }
@@ -51,11 +52,18 @@ const globals = createSlice({
       }
     },
     setSelectedAnnotation: (state, action) => {
-      if (!action.payload) state.selectedAnnotation = initialState.selectedAnnotation
-      else {
+      if (!action.payload) {
+        state.selectedAnnotation = initialState.selectedAnnotation
+        state.selectedAnnotations = initialState.selectedAnnotations
+      } else {
+        state.selectedAnnotations.push(action.payload)
         state.selectedAnnotation = action.payload
         state.selectedNotes = initialState.selectedNotes
       }
+    },
+    setPreviousAnnotation: state => {
+      state.selectedAnnotations.pop()
+      state.selectedAnnotation = state.selectedAnnotations[state.selectedAnnotations.length - 1]
     },
     setIsSubSelecting: (state, action) => {
       state.isSubSelecting = !state.isSubSelecting
@@ -79,4 +87,5 @@ export const {
   setScoreAnnotator,
   setSelectedConcepts,
   setIsSubSelecting,
+  setPreviousAnnotation,
 } = globals.actions
