@@ -49,6 +49,7 @@ export const Annotation = ({ annotation, entity, date, page, isSubEntity, color 
   if (notes)
     return (
       <ListItem
+        component="div"
         key={date}
         onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, assignments }))}
         onMouseLeave={() => dispatch(setHoveredAnnotation())}
