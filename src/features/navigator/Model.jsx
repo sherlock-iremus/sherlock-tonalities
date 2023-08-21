@@ -14,7 +14,7 @@ export const Model = () => {
   const dispatch = useDispatch()
   const [filter, setFilter] = useState('')
   const [contextMenu, setContextMenu] = useState(false)
-  const { selectedModelIndex, selectedConcepts } = useSelector(state => state.globals)
+  const { selectedModelIndex, selectedConcepts, selectedNotes, isSubSelecting } = useSelector(state => state.globals)
   const { data } = useGetModelQuery(selectedModelIndex)
 
   return (
@@ -42,7 +42,11 @@ export const Model = () => {
       <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
         <ListSubheader disableSticky>Available concepts</ListSubheader>
         {!selectedConcepts.length ? (
-          <Button size="small" onClick={() => dispatch(setSelectedConcepts(data.map(e => e.iri)))}>
+          <Button
+            size="small"
+            onClick={() => dispatch(setSelectedConcepts(data.map(e => e.iri)))}
+            disabled={!!selectedNotes.length || isSubSelecting}
+          >
             Select all
           </Button>
         ) : (

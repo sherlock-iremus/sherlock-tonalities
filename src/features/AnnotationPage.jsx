@@ -45,7 +45,7 @@ export const AnnotationPage = ({ isOpen }) => {
 
   return (
     <Slide direction="up" in={!!selectedAnnotation} mountOnEnter unmountOnExit>
-      <Stack overflow="auto">
+      <Stack overflow="auto" flex={1}>
         <AppBar sx={{ position: 'relative', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={() => dispatch(setSelectedAnnotation())}>
@@ -68,12 +68,12 @@ export const AnnotationPage = ({ isOpen }) => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Stack padding={1} spacing={1} paddingTop={2}>
+        <Stack padding={1} spacing={1} paddingTop={2} flex={1} alignItems="center">
           {assignments?.map(assignment => (
             <Assignment key={assignment.assignment} {...assignment} refetch={refetch} />
           ))}
         </Stack>
-        <Stack flex={1} direction="row" alignItems="center" paddingRight={1}>
+        <Stack direction="row" paddingRight={1} justifySelf="flex-end" alignItems="center">
           <Stack flex={1}>
             <Input value={input} onChange={handleInputChange} placeholder="Comment..." />
           </Stack>

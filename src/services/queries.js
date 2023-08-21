@@ -60,9 +60,10 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     ?assignment crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
-    ?assignment crm:P141_assigned ?concept.
+    ?assignment crm:P141_assigned ?p141.
     ?assignment dcterms:created ?date.
     ?assignment dcterms:creator ?author.
+    OPTIONAL { ?p141 crm:P2_has_type ?type }.
 }
 `
 

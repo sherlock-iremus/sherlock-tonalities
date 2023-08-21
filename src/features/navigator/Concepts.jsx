@@ -7,7 +7,7 @@ import { usePostAnnotationMutation } from '../../services/service'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
 import { setSelectedAnnotation, setSelectedNotes } from '../../services/globals'
 import { removeBaseIri } from '../../utils'
-import { createEntity } from '../../helper'
+import { assignConcept, createEntity } from '../../helper'
 
 export const Concepts = ({ data, filter }) => {
   const { selectedNotes, scoreIri, projectIri, selectedAnnotation } = useSelector(state => state.globals)
@@ -28,44 +28,23 @@ export const Concepts = ({ data, filter }) => {
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
   const { refetch: refetchAssignments } = useGetAssignmentsQuery(entity, { skip: !entity })
 
-  const createAnnotation = async concept => {
+  const createAnnotation = async conceptIri => {
     const entityIri = await createEntity({ selectedNotes, scoreIri, projectIri, postAnnotation })
-    try {
-      const body = {
-        p140: entityIri,
-        p177: 'crm:P2_has_type',
-        p141: concept,
-        p141_type: 'uri',
-        document_context: scoreIri,
-        analytical_project: projectIri,
-      }
-      await postAnnotation(body).unwrap()
-      dispatch(setSelectedNotes())
-      refetchAnnotations()
-    } catch (error) {
-      console.log(error)
-    }
+    await assignConcept({ entityIri, conceptIri, scoreIri, projectIri, postAnnotation })
+    dispatch(setSelectedNotes())
+    refetchAnnotations()
   }
 
-  const addAssignment = async (concept, entity) => {
-    try {
-      setEntity(entity)
-      const body = {
-        p140: entity,
-        p177: 'crm:P2_has_type',
-        p141: concept,
-        p141_type: 'uri',
-        document_context: scoreIri,
-        analytical_project: projectIri,
-      }
-      await postAnnotation(body).unwrap()
-      dispatch(
-        setSelectedAnnotation({ ...selectedAnnotation, assignments: [...selectedAnnotation.assignments, { concept }] })
-      )
-      refetchAssignments()
-    } catch (error) {
-      console.log(error)
-    }
+  const addAssignment = async (conceptIri, entityIri) => {
+    setEntity(entityIri)
+    await assignConcept({ entityIri, conceptIri, scoreIri, projectIri, postAnnotation })
+    dispatch(
+      setSelectedAnnotation({
+        ...selectedAnnotation,
+        assignments: [...selectedAnnotation.assignments, { concept: conceptIri }],
+      })
+    )
+    refetchAssignments()
   }
 
   useEffect(() => {

@@ -1,10 +1,11 @@
-import { Chip, Collapse, Stack, Typography, capitalize } from '@mui/material'
+import { Chip, capitalize } from '@mui/material'
 import { useDeleteAnnotationMutation } from '../../services/service'
-import { getModel, getUuid, removeBaseIri } from '../../utils'
+import { getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
 import { useState } from 'react'
+import { Annotation } from '../edition/Annotation'
 
-export const Assignment = ({ assignment, concept, comment, refetch, date, author }) => {
+export const Assignment = ({ assignment, concept, comment, subentity, refetch, date, author }) => {
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const [isHovered, setIsHovered] = useState(false)
 
@@ -16,31 +17,30 @@ export const Assignment = ({ assignment, concept, comment, refetch, date, author
       console.log(error)
     }
   }
-
-  return (
-    <Chip
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      clickable
-      disabled={isLoading}
-      label={
-        <Stack overflow="hidden">
-          <Collapse in={!isHovered} timeout="auto" unmountOnExit>
-            <Typography variant="caption">{comment ? capitalize(comment) : removeBaseIri(concept)}</Typography>
-          </Collapse>
-          <Collapse in={isHovered} timeout="auto" unmountOnExit>
-            <Typography variant="caption">
-              {concept && getModel(concept)}, {new Date(date).toLocaleDateString('en-GB')}
-            </Typography>
-          </Collapse>
-        </Stack>
-      }
-      sx={{
-        cursor: 'pointer',
-        justifyContent: 'space-between',
-      }}
-      {...(concept && { color: 'primary' })}
-      {...(isHovered && { onDelete: removeAssignment, avatar: <ContributorItem contributorIri={author} /> })}
-    />
-  )
+  if (subentity) return <Annotation annotation={assignment} entity={subentity} {...{ date, author }} isSubEntity />
+  else
+    return (
+      <Chip
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        clickable
+        disabled={isLoading}
+        label={
+          !isHovered
+            ? comment
+              ? capitalize(comment)
+              : removeBaseIri(concept)
+            : new Date(date).toLocaleDateString('en-GB')
+        }
+        sx={{
+          justifyContent: 'space-between',
+          maxWidth: 200,
+          cursor: 'pointer',
+          '& .MuiChip-label': { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' },
+          '& .MuiTouchRipple-root': { flexShrink: 0 },
+        }}
+        {...(concept && { color: 'primary' })}
+        {...(isHovered && { onDelete: removeAssignment, avatar: <ContributorItem contributorIri={author} /> })}
+      />
+    )
 }

@@ -6,34 +6,36 @@ import { setSelectedNotes } from '../../services/globals'
 import { Input } from '../../components/Input'
 import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../services/service'
-import { useGetAnnotationsQuery } from '../../services/sparql'
-import { createEntity } from '../../helper'
+import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
+import { assignArbitraryText, assignSubEntity, createEntity } from '../../helper'
 
 export const Editor = () => {
-  const { selectedNotes, isSubSelecting, scoreIri, projectIri } = useSelector(state => state.globals)
+  const { selectedNotes, isSubSelecting, scoreIri, projectIri, selectedAnnotation } = useSelector(
+    state => state.globals
+  )
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
+  const { refetch: refetchAssignments } = useGetAssignmentsQuery(selectedAnnotation?.entity, { skip: !selectedAnnotation })
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
 
   const createAnnotation = async concept => {
     const entityIri = await createEntity({ selectedNotes, scoreIri, projectIri, postAnnotation })
-    try {
-      const body = {
-        p140: entityIri,
-        p177: 'crm:P2_has_type',
-        p141: input,
-        p141_type: 'literal',
-        document_context: scoreIri,
-        analytical_project: projectIri,
-      }
-      await postAnnotation(body).unwrap()
-      dispatch(setSelectedNotes())
-      refetchAnnotations()
-      setInput('')
-    } catch (error) {
-      console.log(error)
+    await assignArbitraryText({ entityIri, input, scoreIri, projectIri, postAnnotation })
+    if (isSubSelecting) {
+      await assignSubEntity({
+        parentEntity: selectedAnnotation.entity,
+        childEntity: entityIri,
+        predicate: 'guillotel:has_line',
+        scoreIri,
+        projectIri,
+        postAnnotation,
+      })
+      refetchAssignments()
     }
+    dispatch(setSelectedNotes())
+    refetchAnnotations()
+    setInput('')
   }
 
   return (

@@ -8,13 +8,13 @@ import { setSelectedConcepts } from '../../services/globals'
 export const Concept = ({ concept, createAnnotation, addAssignment }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
-  const { selectedAnnotation, selectedNotes, selectedConcepts } = useSelector(state => state.globals)
+  const { selectedAnnotation, selectedNotes, selectedConcepts, isSubSelecting } = useSelector(state => state.globals)
 
   const isSelected =
     selectedAnnotation?.assignments.some(a => a.concept === concept.iri) || selectedConcepts.includes(concept.iri)
 
   const onClick = () => {
-    if (selectedAnnotation && !isSelected) addAssignment(concept.iri, selectedAnnotation.entity)
+    if (selectedAnnotation && !isSelected && !isSubSelecting) addAssignment(concept.iri, selectedAnnotation.entity)
     else if (selectedNotes.length) createAnnotation(concept.iri)
     else dispatch(setSelectedConcepts(concept.iri))
   }

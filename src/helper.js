@@ -22,3 +22,63 @@ export const createEntity = async ({ selectedNotes, scoreIri, projectIri, postAn
     console.log(error)
   }
 }
+
+export const assignConcept = async ({ entityIri, conceptIri, scoreIri, projectIri, postAnnotation }) => {
+  try {
+    const body = {
+      p140: entityIri,
+      p177: 'crm:P2_has_type',
+      p141: conceptIri,
+      p141_type: 'uri',
+      document_context: scoreIri,
+      analytical_project: projectIri,
+    }
+    const response = await postAnnotation(body).unwrap()
+    const annotation = response.find(e =>
+      e['@type']?.includes('http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment')
+    )
+    return annotation['@id']
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const assignArbitraryText = async ({ entityIri, input, scoreIri, projectIri, postAnnotation }) => {
+  try {
+    const body = {
+      p140: entityIri,
+      p177: 'crm:P2_has_type',
+      p141: input,
+      p141_type: 'literal',
+      document_context: scoreIri,
+      analytical_project: projectIri,
+    }
+    const response = await postAnnotation(body).unwrap()
+    const annotation = response.find(e =>
+      e['@type']?.includes('http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment')
+    )
+    return annotation['@id']
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const assignSubEntity = async ({ parentEntity, childEntity, predicate, scoreIri, projectIri, postAnnotation }) => {
+  try {
+    const body = {
+      p140: parentEntity,
+      p177: predicate,
+      p141: childEntity,
+      p141_type: 'uri',
+      document_context: scoreIri,
+      analytical_project: projectIri,
+    }
+    const response = await postAnnotation(body).unwrap()
+    const annotation = response.find(e =>
+      e['@type']?.includes('http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment')
+    )
+    return annotation['@id']
+  } catch (error) {
+    console.log(error)
+  }
+}

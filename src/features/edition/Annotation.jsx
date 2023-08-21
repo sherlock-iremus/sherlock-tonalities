@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { getId } from '../../utils'
 import { Assignment } from '../items/Assignment'
 
-export const Annotation = ({ annotation, entity, date, page }) => {
+export const Annotation = ({ annotation, entity, date, page, isSubEntity }) => {
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
@@ -19,7 +19,7 @@ export const Annotation = ({ annotation, entity, date, page }) => {
   )
 
   const isSelected = selectedAnnotation?.entity === entity
-  const isHovered = hoveredAnnotation?.entity === entity
+  const isHovered = !isSubEntity && hoveredAnnotation?.entity === entity
   const [isDisabled, setIsDisabled] = useState(false)
 
   const checkIsDisabled = () => {
@@ -64,17 +64,24 @@ export const Annotation = ({ annotation, entity, date, page }) => {
           </Collapse>
         }
       >
-        <Stack flex={1} borderRadius={3} bgcolor="secondary.light" boxShadow={1} overflow="hidden" margin={1}>
+        <Stack
+          flex={1}
+          borderRadius={3}
+          bgcolor={isSubEntity ? 'white' : 'secondary.light'}
+          boxShadow={1}
+          overflow="hidden"
+          margin={1}
+        >
           <ListItemButton
             dense
             disabled={isDisabled}
             onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
             selected={isSelected}
           >
-            <Stack flex={1} spacing={1}>
+            <Stack flex={1} spacing={0.5} alignItems="center">
               <ListItemText
-                sx={{ paddingLeft: 1 }}
-                primary="Analytical entity"
+                sx={{ paddingLeft: 1, textAlign: 'center' }}
+                primary={isSubEntity ? 'Sub-entity' : 'Entity'}
                 secondary={notes.length === 1 ? 'with one note' : `with ${notes.length} notes`}
               />
               {assignments?.map(assignment => (
