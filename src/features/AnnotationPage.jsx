@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Assignment } from './items/Assignment'
 import { setIsSubSelecting, setSelectedAnnotation } from '../services/globals'
 
-export const AnnotationPage = ({ isOpen }) => {
+export const AnnotationPage = () => {
   const { selectedAnnotation, scoreIri, projectIri } = useSelector(state => state.globals)
   const { data: assignments, refetch } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,

@@ -14,7 +14,7 @@ export const Concept = ({ concept, createAnnotation, addAssignment }) => {
     selectedAnnotation?.assignments.some(a => a.concept === concept.iri) || selectedConcepts.includes(concept.iri)
 
   const onClick = () => {
-    if (selectedAnnotation && !isSelected && !isSubSelecting) addAssignment(concept.iri, selectedAnnotation.entity)
+    if (selectedAnnotation && !isSelected && !isSubSelecting) addAssignment(concept.iri)
     else if (selectedNotes.length) createAnnotation(concept.iri)
     else dispatch(setSelectedConcepts(concept.iri))
   }

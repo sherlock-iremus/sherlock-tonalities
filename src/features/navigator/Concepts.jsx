@@ -7,12 +7,13 @@ import { usePostAnnotationMutation } from '../../services/service'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
 import { setSelectedAnnotation, setSelectedNotes } from '../../services/globals'
 import { removeBaseIri } from '../../utils'
-import { assignConcept, createEntity } from '../../helper'
+import { assignConcept, assignSubEntity, createEntity } from '../../helper'
 
 export const Concepts = ({ data, filter }) => {
-  const { selectedNotes, scoreIri, projectIri, selectedAnnotation } = useSelector(state => state.globals)
+  const { selectedNotes, scoreIri, projectIri, selectedAnnotation, isSubSelecting } = useSelector(
+    state => state.globals
+  )
   const [filteredTree, setFilteredTree] = useState(data)
-  const [entity, setEntity] = useState(null)
   const dispatch = useDispatch()
 
   const filterTree = node => {
@@ -26,18 +27,30 @@ export const Concepts = ({ data, filter }) => {
 
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
-  const { refetch: refetchAssignments } = useGetAssignmentsQuery(entity, { skip: !entity })
+  const { refetch: refetchAssignments } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
+    skip: !selectedAnnotation,
+  })
 
   const createAnnotation = async conceptIri => {
     const entityIri = await createEntity({ selectedNotes, scoreIri, projectIri, postAnnotation })
     await assignConcept({ entityIri, conceptIri, scoreIri, projectIri, postAnnotation })
     dispatch(setSelectedNotes())
+    if (isSubSelecting) {
+      await assignSubEntity({
+        parentEntity: selectedAnnotation.entity,
+        childEntity: entityIri,
+        predicate: 'guillotel:has_line',
+        scoreIri,
+        projectIri,
+        postAnnotation,
+      })
+      refetchAssignments()
+    }
     refetchAnnotations()
   }
 
-  const addAssignment = async (conceptIri, entityIri) => {
-    setEntity(entityIri)
-    await assignConcept({ entityIri, conceptIri, scoreIri, projectIri, postAnnotation })
+  const addAssignment = async conceptIri => {
+    await assignConcept({ entityIri: selectedAnnotation?.entity, conceptIri, scoreIri, projectIri, postAnnotation })
     dispatch(
       setSelectedAnnotation({
         ...selectedAnnotation,
