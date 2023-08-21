@@ -14,15 +14,7 @@ import {
 } from '@mui/material'
 import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import {
-  Add,
-  AudioFile,
-  BugReport,
-  ChevronRight,
-  Language,
-  LibraryMusic,
-  SwapHoriz,
-} from '@mui/icons-material'
+import { Add, AudioFile, BugReport, ChevronRight, FileUpload, Language, LibraryMusic } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
@@ -34,6 +26,8 @@ import { Projects } from './Projects'
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedScoreIndex, setSelectedScoreIndex] = useState(-1)
+  const [upload, setUpload] = useState(null)
+
   const { data: userId } = useGetUserIdQuery()
 
   const isAllScoresSelected = selectedScoreIndex === scores.length
@@ -42,7 +36,7 @@ export const Landing = () => {
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
       {isScoreSelected && !isAllScoresSelected && (
-        <NewProject {...{ isOpen, setIsOpen, score: scores[selectedScoreIndex] }} />
+        <NewProject {...{ isOpen, setIsOpen, upload, score: scores[selectedScoreIndex] }} />
       )}
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <PolifoniaLogo width="100px" />
@@ -67,8 +61,9 @@ export const Landing = () => {
                 <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
                   <ListSubheader>Available scores</ListSubheader>
                   <Stack>
-                    <IconButton disabled>
-                      <SwapHoriz />
+                    <IconButton component="label">
+                      <FileUpload />
+                      <input type="file" hidden onClick={e => setUpload(e.target.files[0]) && setIsOpen(true)} />
                     </IconButton>
                   </Stack>
                 </Stack>

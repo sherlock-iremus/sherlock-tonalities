@@ -28,3 +28,5 @@ export const getModel = iri =>
   (iri.includes('Praetorius') && 'Praetorius 1619') ||
   (iri.includes('Polifonia') && 'Zarlino 1558') ||
   (iri.includes('Guillotel') && 'Guillotel 2022')
+
+export const createUuid = () => URL.createObjectURL(new Blob([])).slice(-36)

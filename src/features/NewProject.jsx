@@ -15,10 +15,10 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getUuid } from '../utils'
+import { createUuid, getUuid } from '../utils'
 import { usePostAnalyticalProjectMutation } from '../services/service'
 
-export const NewProject = ({ isOpen, setIsOpen, score }) => {
+export const NewProject = ({ isOpen, setIsOpen, score, upload }) => {
   const navigate = useNavigate()
   const [label, setLabel] = useState('')
   const [postAnalyticalProject, { isLoading }] = usePostAnalyticalProjectMutation()
@@ -29,8 +29,8 @@ export const NewProject = ({ isOpen, setIsOpen, score }) => {
         const response = await postAnalyticalProject({ label }).unwrap()
         const project = response.find(e => e['@type'].includes('http://www.cidoc-crm.org/cidoc-crm/E7_Activity'))
         const projectId = getUuid(project['@id'])
-        const scoreId = getUuid(score.scoreIri)
-        navigate(`/project/${projectId}/score/${scoreId}`)
+        const scoreId = score ? getUuid(score.scoreIri) : createUuid()
+        navigate(`/project/${projectId}/score/${scoreId}`, { state: { upload } })
       } catch (error) {
         console.log(error)
       }

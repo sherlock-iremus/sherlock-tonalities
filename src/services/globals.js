@@ -55,6 +55,7 @@ const globals = createSlice({
       if (!action.payload) {
         state.selectedAnnotation = initialState.selectedAnnotation
         state.selectedAnnotations = initialState.selectedAnnotations
+        state.isSubSelecting = false
       } else {
         state.selectedAnnotations.push(action.payload)
         state.selectedAnnotation = action.payload
