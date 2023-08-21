@@ -66,6 +66,7 @@ WHERE {
     OPTIONAL {
         ?p141 crm:P2_has_type ?type.
         ?annotation crm:P141_assigned ?p141.
+        ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     }
 }
 `
