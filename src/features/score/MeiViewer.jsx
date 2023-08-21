@@ -27,14 +27,14 @@ export const MeiViewer = ({ meiUrl }) => {
   const [scoreTitle, setScoreTitle] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { selectedNotes, hoveredAnnotation, selectedAnnotation } = useSelector(state => state.globals)
+  const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting } = useSelector(state => state.globals)
   const color = theme.palette.primary.light
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
 
   const loadScore = async () => {
     const file = await (await fetch(meiUrl)).text()
-    
+
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
     setScoreTitle(mei.querySelector('title').innerHTML)
@@ -167,7 +167,7 @@ export const MeiViewer = ({ meiUrl }) => {
             <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} className="selected" />
           ))}
           {selectedAnnotation?.notes.map(noteIri => (
-            <StyleNote key={noteIri} noteId={getId(noteIri)} className="selected" />
+            <StyleNote key={noteIri} noteId={getId(noteIri)} className={isSubSelecting ? 'focused' : 'selected'} />
           ))}
           {hoveredAnnotation?.notes.map(noteIri => (
             <StyleNote key={noteIri} noteId={getId(noteIri)} className="hovered" />

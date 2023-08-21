@@ -9,11 +9,10 @@ import { Annotation } from './Annotation'
 import { AnnotationPage } from '../AnnotationPage'
 
 export const Project = () => {
-  const { scoreIri, projectIri } = useSelector(state => state.globals)
+  const { scoreIri, projectIri, selectedAnnotation } = useSelector(state => state.globals)
   const [annotationsByPage, setAnnotationsByPage] = useState([])
   const { data: project } = useGetAnalyticalProjectQuery(projectIri, { skip: !projectIri })
   const { data: annotations } = useGetAnnotationsQuery({ scoreIri, projectIri }, { skip: !projectIri })
-  const [openedAnnotation, setOpenedAnnotation] = useState(null)
 
   useEffect(() => {
     if (annotations)
@@ -29,9 +28,9 @@ export const Project = () => {
 
   if (project && annotations)
     return (
-      <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
-        <AnnotationPage {...openedAnnotation} onClose={() => setOpenedAnnotation(null)} />
-        {!openedAnnotation && (
+      <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
+        <AnnotationPage />
+        {!selectedAnnotation && (
           <>
             <ListItem
               dense
@@ -59,11 +58,7 @@ export const Project = () => {
                     </TimelineSeparator>
                     <Stack flex={1} paddingLeft={1}>
                       {pageAnnotations.map(annotation => (
-                        <Annotation
-                          key={annotation.annotation}
-                          {...annotation}
-                          openAnnotation={() => setOpenedAnnotation(annotation)}
-                        />
+                        <Annotation key={annotation.annotation} {...annotation} color />
                       ))}
                     </Stack>
                   </Stack>

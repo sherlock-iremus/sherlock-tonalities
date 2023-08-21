@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Delete, MarkChatUnread } from '@mui/icons-material'
+import { Delete } from '@mui/icons-material'
 import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Stack, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
@@ -8,9 +8,9 @@ import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from 
 import { useDeleteAnnotationMutation } from '../../services/service'
 import { useEffect, useState } from 'react'
 import { getId } from '../../utils'
-import { ConceptItem } from '../items/ConceptItem'
+import { Assignment } from '../items/Assignment'
 
-export const Annotation = ({ annotation, entity, date, author, page, openAnnotation }) => {
+export const Annotation = ({ annotation, entity, date, page, isSubEntity, color }) => {
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
@@ -19,25 +19,19 @@ export const Annotation = ({ annotation, entity, date, author, page, openAnnotat
   )
 
   const isSelected = selectedAnnotation?.entity === entity
-  const isHovered = hoveredAnnotation?.entity === entity
+  const isHovered = !isSubEntity && hoveredAnnotation?.entity === entity
   const [isDisabled, setIsDisabled] = useState(false)
 
   const checkIsDisabled = () => {
     if (isLoading) return true
     if (selectedConcepts.length) return assignments?.some(({ concept }) => !selectedConcepts.includes(concept))
-    if (selectedNotes.length) {
-      if (!selectedNotes.length) return false
-      if (selectedNotes.length === notes.length) {
-        const intersection = selectedNotes.filter(e => new Set(notes.map(x => getId(x))).has(e))
-        if (intersection.length === selectedNotes.length) return false
-      }
-      return true
-    }
+    if (selectedNotes.length) return !notes.some(e => selectedNotes.includes(getId(e)))
+
     return false
   }
 
   useEffect(() => {
-    setIsDisabled(checkIsDisabled())
+    if (notes) setIsDisabled(checkIsDisabled())
   }, [selectedNotes, selectedConcepts, notes, assignments])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
@@ -55,6 +49,7 @@ export const Annotation = ({ annotation, entity, date, author, page, openAnnotat
   if (notes)
     return (
       <ListItem
+        component="div"
         key={date}
         onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, assignments }))}
         onMouseLeave={() => dispatch(setHoveredAnnotation())}
@@ -67,29 +62,31 @@ export const Annotation = ({ annotation, entity, date, author, page, openAnnotat
                 <Delete />
               </IconButton>
             </Tooltip>
-            <Tooltip title="View comments">
-              <IconButton onClick={openAnnotation} size="small">
-                <MarkChatUnread />
-              </IconButton>
-            </Tooltip>
           </Collapse>
         }
       >
-        <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} overflow="hidden" margin={1}>
+        <Stack
+          flex={1}
+          borderRadius={3}
+          bgcolor={color ? 'secondary.light' : 'white'}
+          boxShadow={1}
+          overflow="hidden"
+          margin={1}
+        >
           <ListItemButton
             dense
             disabled={isDisabled}
             onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
             selected={isSelected}
           >
-            <Stack flex={1} spacing={1}>
+            <Stack flex={1} spacing={0.5} alignItems="center">
               <ListItemText
-                sx={{ paddingLeft: 1 }}
-                primary="Analytical entity"
+                sx={{ paddingLeft: 1, textAlign: 'center' }}
+                primary={isSubEntity ? 'Sub-entity' : 'Entity'}
                 secondary={notes.length === 1 ? 'with one note' : `with ${notes.length} notes`}
               />
               {assignments?.map(assignment => (
-                <ConceptItem key={assignment.assignment} {...assignment} refetch={refetch} />
+                <Assignment key={assignment.assignment} {...assignment} {...{ refetch, color }} />
               ))}
             </Stack>
           </ListItemButton>

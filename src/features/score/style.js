@@ -7,6 +7,12 @@ export const verovioStyle = color => css`
       stroke: ${color} !important;
     }
   }
+  .focused {
+    #bubble {
+      fill: grey;
+      stroke: grey;
+    }
+  }
   .hovered {
     #bubble {
       fill: grey;

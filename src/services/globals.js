@@ -9,7 +9,9 @@ const initialState = {
   selectedConcepts: [],
   hoveredAnnotation: null,
   selectedAnnotation: null,
+  selectedAnnotations: [],
   selectedModelIndex: 0,
+  isSubSelecting: false,
 }
 
 const globals = createSlice({
@@ -33,24 +35,38 @@ const globals = createSlice({
       state.selectedConcepts = initialState.selectedConcepts
       if (!action.payload) {
         state.selectedNotes = initialState.selectedNotes
-        state.selectedAnnotation = initialState.selectedAnnotation
+        state.isSubSelecting = initialState.isSubSelecting
       } else if (Array.isArray(action.payload))
         state.selectedNotes.push(...action.payload.filter(e => !state.selectedNotes.includes(e)))
-      else {
+      else if (!state.selectedAnnotation || state.isSubSelecting) {
         const index = state.selectedNotes.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
       }
     },
     setSelectedConcepts: (state, action) => {
-      if (!action.payload) state.selectedConcepts = initialState.selectedConcepts
+      if (Array.isArray(action.payload)) state.selectedConcepts = action.payload
+      else if (!action.payload) state.selectedConcepts = initialState.selectedConcepts
       else {
         const index = state.selectedConcepts.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedConcepts.splice(index, 1) : state.selectedConcepts.push(action.payload)
       }
     },
     setSelectedAnnotation: (state, action) => {
-      if (!action.payload) state.selectedAnnotation = initialState.selectedAnnotation
-      else state.selectedAnnotation = action.payload
+      if (!action.payload) {
+        state.selectedAnnotation = initialState.selectedAnnotation
+        state.selectedAnnotations = initialState.selectedAnnotations
+      } else {
+        state.selectedAnnotations.push(action.payload)
+        state.selectedAnnotation = action.payload
+        state.selectedNotes = initialState.selectedNotes
+      }
+    },
+    setPreviousAnnotation: state => {
+      state.selectedAnnotations.pop()
+      state.selectedAnnotation = state.selectedAnnotations[state.selectedAnnotations.length - 1]
+    },
+    setIsSubSelecting: (state, action) => {
+      state.isSubSelecting = !state.isSubSelecting
     },
     setHoveredAnnotation: (state, action) => {
       if (!action.payload) state.hoveredAnnotation = initialState.hoveredAnnotation
@@ -70,4 +86,6 @@ export const {
   setColorIndex,
   setScoreAnnotator,
   setSelectedConcepts,
+  setIsSubSelecting,
+  setPreviousAnnotation,
 } = globals.actions
