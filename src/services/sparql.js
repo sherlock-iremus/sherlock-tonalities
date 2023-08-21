@@ -53,7 +53,7 @@ export const sparql = createApi({
           assignment: binding.assignment.value,
           author: binding.author.value,
           date: binding.date.value,
-          ...((binding.type && { subentity: binding.p141.value }) ||
+          ...((binding.type && { subentity: binding.p141.value, annotation: binding.annotation.value }) ||
             (binding.p141.type === 'literal' ? { comment: binding.p141.value } : { concept: binding.p141.value })),
         })),
     }),

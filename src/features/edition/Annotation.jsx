@@ -31,7 +31,7 @@ export const Annotation = ({ annotation, entity, date, page, isSubEntity }) => {
   }
 
   useEffect(() => {
-    setIsDisabled(checkIsDisabled())
+    if (notes) setIsDisabled(checkIsDisabled())
   }, [selectedNotes, selectedConcepts, notes, assignments])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
