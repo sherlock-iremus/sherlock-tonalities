@@ -14,15 +14,7 @@ import {
 } from '@mui/material'
 import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import {
-  Add,
-  AudioFile,
-  BugReport,
-  ChevronRight,
-  Language,
-  LibraryMusic,
-  SwapHoriz,
-} from '@mui/icons-material'
+import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
@@ -34,6 +26,8 @@ import { Projects } from './Projects'
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedScoreIndex, setSelectedScoreIndex] = useState(-1)
+  const [upload, setUpload] = useState(null)
+
   const { data: userId } = useGetUserIdQuery()
 
   const isAllScoresSelected = selectedScoreIndex === scores.length
@@ -41,9 +35,7 @@ export const Landing = () => {
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
-      {isScoreSelected && !isAllScoresSelected && (
-        <NewProject {...{ isOpen, setIsOpen, score: scores[selectedScoreIndex] }} />
-      )}
+      <NewProject {...{ isOpen, setIsOpen, upload, score: scores[selectedScoreIndex] }} />
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <PolifoniaLogo width="100px" />
         <AccountMenu />
@@ -64,14 +56,7 @@ export const Landing = () => {
             <Stack direction="row" flex={3}>
               <Divider orientation="vertical" />
               <Stack flex={1}>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
-                  <ListSubheader>Available scores</ListSubheader>
-                  <Stack>
-                    <IconButton disabled>
-                      <SwapHoriz />
-                    </IconButton>
-                  </Stack>
-                </Stack>
+                <ListSubheader>Available scores</ListSubheader>
                 <List disablePadding dense sx={{ overflow: 'auto' }}>
                   <ListItem
                     disablePadding
@@ -136,9 +121,27 @@ export const Landing = () => {
                 {isScoreSelected && !isAllScoresSelected ? (
                   <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
                 ) : (
-                  <Stack flex={1} justifyContent="center" alignItems="center" p={2}>
+                  <Stack
+                    flex={1}
+                    justifyContent="center"
+                    alignItems="center"
+                    p={2}
+                    onDrop={e => {
+                      e.preventDefault()
+                      setUpload(e.dataTransfer.files[0])
+                    }}
+                    onDragOver={e => e.preventDefault()}
+                    onDragEnter={e => {
+                      e.preventDefault()
+                      e.target.style.backgroundColor = 'grey'
+                    }}
+                    onDragLeave={e => {
+                      e.preventDefault()
+                      e.target.style.backgroundColor = 'transparent'
+                    }}
+                  >
                     <Typography textAlign="center" color="text.secondary" fontSize={14}>
-                      No score selected, start by selecting a score to browse analytical projects
+                      No score selected, start by selecting one in the list or drag MEI file here
                     </Typography>
                   </Stack>
                 )}

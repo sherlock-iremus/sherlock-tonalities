@@ -35,7 +35,7 @@ export const Concept = ({ concept, createAnnotation, addAssignment }) => {
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List sx={{ pl: 4 }} dense disablePadding>
             {concept.subClasses.map(subClass => (
-              <Concept key={subClass.iri} concept={subClass} />
+              <Concept key={subClass.iri} concept={subClass} {...{ createAnnotation, addAssignment }} />
             ))}
           </List>
         </Collapse>

@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
+import { IconButton, ListItemText, Pagination, Snackbar, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { setSelectedNotes } from '../../services/globals'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
@@ -18,10 +18,11 @@ import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
 
-export const MeiViewer = ({ meiUrl }) => {
+export const MeiViewer = ({ file }) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const { state } = useLocation()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [scoreTitle, setScoreTitle] = useState('')
@@ -33,12 +34,9 @@ export const MeiViewer = ({ meiUrl }) => {
   const toolkit = window.tk
 
   const loadScore = async () => {
-    const file = await (await fetch(meiUrl)).text()
-
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
-    setScoreTitle(mei.querySelector('title').innerHTML)
-    // setScoreComposer(mei.querySelector('name[composer]').innerHTML)
+    setScoreTitle(mei.querySelector('title').textContent)
 
     if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
@@ -102,7 +100,7 @@ export const MeiViewer = ({ meiUrl }) => {
 
   useEffect(() => {
     loadScore()
-  }, [meiUrl])
+  }, [file])
 
   useEffect(() => {
     selectedAnnotation && selectedAnnotation.page !== currentPage && changePage(selectedAnnotation.page)
@@ -179,6 +177,11 @@ export const MeiViewer = ({ meiUrl }) => {
           <Project />
         </Stack>
       </Stack>
+      <Snackbar
+        open={!!state}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        message="You are currently working on a local file, your work cannot be saved after session expires"
+      />
     </Stack>
   )
 }
