@@ -18,12 +18,11 @@ import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
 
-export const MeiViewer = ({ meiUrl }) => {
+export const MeiViewer = ({ file }) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { state } = useLocation()
-  if (!state) navigate('/')
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [scoreTitle, setScoreTitle] = useState('')
@@ -35,12 +34,9 @@ export const MeiViewer = ({ meiUrl }) => {
   const toolkit = window.tk
 
   const loadScore = async () => {
-    const file = state.upload ? await state.upload.text() : await (await fetch(meiUrl)).text()
-
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
     setScoreTitle(mei.querySelector('title').textContent)
-    // setScoreComposer(mei.querySelector('name[composer]').textContent)
 
     if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
@@ -104,7 +100,7 @@ export const MeiViewer = ({ meiUrl }) => {
 
   useEffect(() => {
     loadScore()
-  }, [meiUrl])
+  }, [file])
 
   useEffect(() => {
     selectedAnnotation && selectedAnnotation.page !== currentPage && changePage(selectedAnnotation.page)
@@ -182,9 +178,9 @@ export const MeiViewer = ({ meiUrl }) => {
         </Stack>
       </Stack>
       <Snackbar
-        open={state}
+        open={!!state}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        message="Currently working on uploaded scores, your work will not be saved"
+        message="You are currently working on a local file, your work cannot be saved after session expires"
       />
     </Stack>
   )

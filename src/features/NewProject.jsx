@@ -37,7 +37,7 @@ export const NewProject = ({ isOpen, setIsOpen, score, upload }) => {
   }
 
   return (
-    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+    <Dialog open={isOpen || !!upload} onClose={() => setIsOpen(false)}>
       <DialogTitle>Create analytical project?</DialogTitle>
       <DialogContent sx={{ paddingX: 2, paddingY: 0 }}>
         <TextField
@@ -55,13 +55,18 @@ export const NewProject = ({ isOpen, setIsOpen, score, upload }) => {
         <ListItemIcon>
           <AudioFile />
         </ListItemIcon>
-        <ListItemText primary={score.scoreTitle} secondary="Composer" />
+        <ListItemText
+          primary={score?.scoreTitle || upload?.name.split('.mei')}
+          secondary={(score && 'Online file') || (upload && 'Local file')}
+        />
       </ListItemButton>
       <DialogActions sx={{ paddingTop: 2 }}>
         <Tooltip title="Hit Enter key">
-          <Button disabled={!label} onClick={createAnalyticalProject}>
-            Create project
-          </Button>
+          <span>
+            <Button disabled={!label} onClick={createAnalyticalProject}>
+              Create project
+            </Button>
+          </span>
         </Tooltip>
       </DialogActions>
     </Dialog>

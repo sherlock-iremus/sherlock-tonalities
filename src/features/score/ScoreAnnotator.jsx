@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { MeiViewer } from './MeiViewer'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { getIri } from '../../utils'
 import { useEffect, useState } from 'react'
 import scores from '../../config/scores.json'
@@ -9,13 +9,22 @@ import { setScoreAnnotator } from '../../services/globals'
 
 export const ScoreAnnotator = () => {
   const { scoreId, projectId } = useParams()
-  const [score, setScore] = useState(null)
+  const { state } = useLocation()
+  const [file, setFile] = useState(null)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    setScore(scores.find(score => score.scoreIri === getIri(scoreId)))
+  const getFile = async () => {
+    if (state) setFile(await state.upload.text())
+    else {
+      const url = scores.find(score => score.scoreIri === getIri(scoreId)).meiUrl
+      setFile(await (await fetch(url)).text())
+    }
     dispatch(setScoreAnnotator({ scoreIri: getIri(scoreId), projectIri: getIri(projectId) }))
+  }
+
+  useEffect(() => {
+    getFile()
   }, [])
 
-  return <MeiViewer {...score} />
+  return file ? <MeiViewer {...{ file }} /> : null
 }
