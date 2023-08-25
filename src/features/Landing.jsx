@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AudioFile, BugReport, ChevronRight, FileUpload, Language, LibraryMusic } from '@mui/icons-material'
+import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
