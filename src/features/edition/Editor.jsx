@@ -1,5 +1,5 @@
 import { Lyrics, Send } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, Collapse, Button, IconButton, CircularProgress } from '@mui/material'
+import { ListItem, ListItemIcon, ListItemText, Collapse, Button, IconButton } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedNotes } from '../../services/globals'
@@ -15,7 +15,9 @@ export const Editor = () => {
   )
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
-  const { refetch: refetchAssignments } = useGetAssignmentsQuery(selectedAnnotation?.entity, { skip: !selectedAnnotation })
+  const { refetch: refetchAssignments } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
+    skip: !selectedAnnotation,
+  })
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
 
@@ -64,7 +66,9 @@ export const Editor = () => {
           <Stack flex={1}>
             <Input value={input} onChange={e => setInput(e.target.value)} placeholder="Comment..." />
           </Stack>
-          <IconButton onClick={createAnnotation}>{isLoading ? <CircularProgress /> : <Send />}</IconButton>
+          <IconButton onClick={createAnnotation} disabled={isLoading}>
+            <Send />
+          </IconButton>
         </Stack>
       </Stack>
     </Collapse>

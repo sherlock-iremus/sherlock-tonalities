@@ -63,10 +63,11 @@ export const sparql = createApi({
         body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
       }),
       transformResponse: response =>
-        response.results.bindings.map(({ annotation, entity, date, page }) => ({
+        response.results.bindings.map(({ annotation, entity, date, author, page }) => ({
           annotation: annotation.value,
           entity: entity.value,
           date: date.value,
+          author: author.value,
           page: getPage(page.value),
         })),
     }),

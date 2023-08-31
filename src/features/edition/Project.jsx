@@ -1,5 +1,5 @@
-import { CollectionsBookmark } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, Typography, Button } from '@mui/material'
+import { CollectionsBookmark, Edit } from '@mui/icons-material'
+import { ListItem, ListItemIcon, ListItemText, Typography, Button, IconButton } from '@mui/material'
 import { TimelineDot, TimelineSeparator, TimelineConnector } from '@mui/lab'
 import { Stack } from '@mui/system'
 import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
@@ -10,6 +10,7 @@ import { AnnotationPage } from '../AnnotationPage'
 
 export const Project = () => {
   const { scoreIri, projectIri, selectedAnnotation } = useSelector(state => state.globals)
+  const [isHovered, setIsHovered] = useState(false)
   const [annotationsByPage, setAnnotationsByPage] = useState([])
   const { data: project } = useGetAnalyticalProjectQuery(projectIri, { skip: !projectIri })
   const { data: annotations } = useGetAnnotationsQuery({ scoreIri, projectIri }, { skip: !projectIri })
@@ -41,7 +42,9 @@ export const Project = () => {
               }
             >
               <ListItemIcon>
-                <CollectionsBookmark />
+                <IconButton onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                  {isHovered ? <Edit /> : <CollectionsBookmark />}
+                </IconButton>
               </ListItemIcon>
               <ListItemText primary={project.label} secondary="Selected project" />
             </ListItem>
