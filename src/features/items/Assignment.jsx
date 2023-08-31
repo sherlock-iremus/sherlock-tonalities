@@ -58,7 +58,9 @@ export const Assignment = ({
             {...(concept && {
               avatar: (
                 <Avatar sx={{ fontSize: 12, height: 24, width: 24 }}>
-                  <Tooltip title={getModel(concept)}>{getModel(concept).charAt(0)}</Tooltip>
+                  <Tooltip title={getModel(concept)}>
+                    <span>{getModel(concept).charAt(0)}</span>
+                  </Tooltip>
                 </Avatar>
               ),
             })}

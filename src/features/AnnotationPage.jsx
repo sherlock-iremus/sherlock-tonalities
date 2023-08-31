@@ -86,7 +86,7 @@ export const AnnotationPage = () => {
           <Stack flex={1}>
             <Input value={input} onChange={handleInputChange} placeholder="Comment..." />
           </Stack>
-          <IconButton onClick={addComment} disabled={isLoading}>
+          <IconButton onClick={addComment} disabled={!!isLoading}>
             <Send />
           </IconButton>
           <ContextMenu {...{ contextMenu, setContextMenu }} />
