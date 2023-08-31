@@ -35,7 +35,10 @@ export const Landing = () => {
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
-      <NewProject {...{ isOpen, setIsOpen, upload, score: scores[selectedScoreIndex] }} />
+      <NewProject
+        {...{ isOpen, upload, score: scores[selectedScoreIndex] }}
+        onClose={() => (isOpen && setIsOpen(false)) || (upload && setUpload(null))}
+      />
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <PolifoniaLogo width="100px" />
         <AccountMenu />

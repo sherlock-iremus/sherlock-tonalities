@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom'
 import { createUuid, getUuid } from '../utils'
 import { usePostAnalyticalProjectMutation } from '../services/service'
 
-export const NewProject = ({ isOpen, setIsOpen, score, upload }) => {
+export const NewProject = ({ isOpen, onClose, score, upload }) => {
   const navigate = useNavigate()
   const [label, setLabel] = useState('')
   const [postAnalyticalProject, { isLoading }] = usePostAnalyticalProjectMutation()
@@ -37,7 +37,7 @@ export const NewProject = ({ isOpen, setIsOpen, score, upload }) => {
   }
 
   return (
-    <Dialog open={isOpen || !!upload} onClose={() => setIsOpen(false)}>
+    <Dialog open={isOpen || !!upload} {...{ onClose }}>
       <DialogTitle>Create analytical project?</DialogTitle>
       <DialogContent sx={{ paddingX: 2, paddingY: 0 }}>
         <TextField
