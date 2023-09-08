@@ -10,13 +10,15 @@
     "@mui/lab": "^5.0.0-alpha.134",
     "@mui/material": "^5.13.6",
     "@reduxjs/toolkit": "^1.9.5",
+    "rdflib": "^2.2.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "6.14.0",
     "react-scripts": "5.0.1",
     "react-slider-color-picker": "^2.0.0",
-    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#main"
+    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#main",
+    "url": "^0.11.1"
   },
   "scripts": {
     "start": "react-scripts start",
