@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { MeiViewer } from './MeiViewer'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { getIri } from '../../utils'
 import { useEffect, useState } from 'react'
 import scores from '../../config/scores.json'
@@ -15,10 +15,12 @@ export const ScoreAnnotator = () => {
   const [file, setFile] = useState(null)
   const dispatch = useDispatch()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const navigate = useNavigate()
 
-  const handleFileUpload = async e => {
-    setFile(await e.target.files[0].text())
+  const handleFileUpload = e => {
+    const upload = e.target.files[0]
     setIsDialogOpen(false)
+    navigate('.', { state: { upload } })
   }
 
   const getFile = async () => {
