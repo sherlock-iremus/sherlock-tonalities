@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom'
 export const PersonalProjects = ({ userId }) => {
   const { data: projects, isFetching } = useGetPersonalProjectsQuery(getIri(userId))
   const navigate = useNavigate()
-  console.log(projects)
+
   return (
     <Stack flex={1}>
       <ListSubheader>Personal analytical projects</ListSubheader>

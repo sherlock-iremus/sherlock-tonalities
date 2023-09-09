@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic } from '@mui/icons-material'
+import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic, UploadFile } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
@@ -146,6 +146,12 @@ export const Landing = () => {
                     <Typography textAlign="center" color="text.secondary" fontSize={14}>
                       No score selected, start by selecting one in the list or drag MEI file here
                     </Typography>
+                    <Tooltip title="Upload MEI file">
+                      <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input hidden accept=".mei" type="file" onChange={e => setUpload(e.target.files[0])} />
+                        <UploadFile />
+                      </IconButton>
+                    </Tooltip>
                   </Stack>
                 )}
               </Stack>
