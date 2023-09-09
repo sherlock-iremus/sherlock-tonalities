@@ -84,28 +84,6 @@ WHERE {
  GROUP BY ?project
 `
 
-export const exportEntity = entityIri => `
-SELECT ?s ?p ?o
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
-WHERE {
-  {
-    ?s1 ?p1 <${entityIri}>.
-    ?o ?p2 ?s1 .
-    ?s ?p ?o
-    }
-  UNION
-  {
-    ?o ?p1 <${entityIri}>.
-    ?s ?p ?o
-  }
-  UNION
-  {
-    ?s ?p <${entityIri}>.
-    BIND (<${entityIri}> AS ?o)
-  }
-}
-`
-
 export const NOTE = 'http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd'
 export const SELECTION = 'http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b'
 export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df'

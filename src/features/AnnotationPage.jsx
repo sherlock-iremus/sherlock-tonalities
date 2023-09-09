@@ -1,34 +1,18 @@
-import { AddCircle, ArrowBack, Cancel, Close, Downloading, Send } from '@mui/icons-material'
-import { graph, sym, serialize } from 'rdflib'
-import {
-  AppBar,
-  CircularProgress,
-  Collapse,
-  IconButton,
-  ListItem,
-  ListItemText,
-  Slide,
-  Stack,
-  Toolbar,
-  Tooltip,
-} from '@mui/material'
+import { AddCircle, ArrowBack, Cancel, Close, Send } from '@mui/icons-material'
+import { AppBar, Collapse, IconButton, ListItem, ListItemText, Slide, Stack, Toolbar, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { ContextMenu } from './navigator/ContextMenu'
 import { Input } from '../components/Input'
-import { useExportEntityQuery, useGetAssignmentsQuery } from '../services/sparql'
+import { useGetAssignmentsQuery } from '../services/sparql'
 import { usePostAnnotationMutation } from '../services/service'
 import { useDispatch, useSelector } from 'react-redux'
 import { Assignment } from './items/Assignment'
 import { setIsSubSelecting, setPreviousAnnotation, setSelectedAnnotation } from '../services/globals'
 
 export const AnnotationPage = () => {
-  const [isDownloading, setIsDownloading] = useState(false)
   const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations } = useSelector(state => state.globals)
   const { data: assignments, refetch } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
-  })
-  const { data: exports } = useExportEntityQuery(selectedAnnotation?.entity, {
-    skip: !isDownloading,
   })
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const [input, setInput] = useState('')
@@ -51,26 +35,6 @@ export const AnnotationPage = () => {
     } catch (error) {
       console.log(error)
     }
-  }
-
-  const downloadFile = async () => {
-    setIsDownloading(true)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    if (exports)
-      try {
-        const store = graph()
-        exports.forEach(({ subject, predicate, object }) => store.add(sym(subject), sym(predicate), sym(object)))
-        const data = serialize(undefined, store, undefined, 'text/turtle')
-        const blob = new Blob([data], { type: 'text/turtle' })
-        const file = new File([blob], 'export.ttl', { type: 'text/turtle' })
-        const downloadLink = document.createElement('a')
-        downloadLink.href = URL.createObjectURL(file)
-        downloadLink.download = 'export.ttl'
-        downloadLink.click()
-      } catch (e) {
-        console.error(e)
-      }
-    setIsDownloading(false)
   }
 
   const handleInputChange = event => {
@@ -101,11 +65,6 @@ export const AnnotationPage = () => {
                 }
               ></ListItemText>
             </ListItem>
-            <Tooltip title="Download Turtle file">
-              <IconButton color="inherit" onClick={downloadFile}>
-                {isDownloading ? <CircularProgress color="inherit" size={20} /> : <Downloading />}
-              </IconButton>
-            </Tooltip>
             <Tooltip title="New layer">
               <IconButton color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
                 <AddCircle />
