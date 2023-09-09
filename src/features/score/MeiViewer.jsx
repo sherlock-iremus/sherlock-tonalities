@@ -180,7 +180,7 @@ export const MeiViewer = ({ file }) => {
       <Snackbar
         open={!!state}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        message="You are currently working on a local file, your work cannot be saved after session expires"
+        message="You are currently working on a local file, you will need to reupload file after session expires"
       />
     </Stack>
   )
