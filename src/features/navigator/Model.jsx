@@ -45,7 +45,7 @@ export const Model = () => {
           <Button
             size="small"
             onClick={() => dispatch(setSelectedConcepts(data.map(e => e.iri)))}
-            disabled={selectedAnnotation}
+            disabled={!!selectedAnnotation}
           >
             Select all
           </Button>
