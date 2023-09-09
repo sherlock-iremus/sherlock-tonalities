@@ -84,6 +84,24 @@ WHERE {
  GROUP BY ?project
 `
 
+export const exportProject = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+CONSTRUCT { ?s ?p ?o }
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE
+{ 
+    {
+        <${projectIri}> crm:P9_consists_of ?s.
+        ?s ?p ?o.
+    }
+    UNION
+    {
+        <${projectIri}> ?p ?o.
+        BIND (<${projectIri}> AS ?s)        
+    }
+ }
+`
+
 export const NOTE = 'http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd'
 export const SELECTION = 'http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b'
 export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df'

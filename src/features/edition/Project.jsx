@@ -16,7 +16,7 @@ export const Project = () => {
   const { data: project } = useGetAnalyticalProjectQuery(projectIri, { skip: !projectIri })
   const { data: annotations } = useGetAnnotationsQuery({ scoreIri, projectIri }, { skip: !projectIri })
   const [isDownloading, setIsDownloading] = useState(false)
-  const { data } = useExportProjectQuery('yes', { skip: !isDownloading })
+  const { data } = useExportProjectQuery(projectIri, { skip: !isDownloading })
 
   useEffect(() => {
     if (annotations)
