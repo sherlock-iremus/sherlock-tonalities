@@ -84,6 +84,20 @@ WHERE {
  GROUP BY ?project
 `
 
+export const getPersonalProjects = userIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+SELECT ?project (COUNT(?annotation) AS ?annotations) (SAMPLE(?name) AS ?label) (SAMPLE(?score) AS ?scoreIri)
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE { 
+    ?project crm:P14_carried_out_by <${userIri}>.
+    ?project crm:P1_is_identified_by ?name.
+    ?project crm:P9_consists_of ?annotation.
+    ?annotation sherlock:has_document_context ?score.
+ }
+ GROUP BY ?project
+`
+
 export const exportProject = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 CONSTRUCT { ?s ?p ?o }

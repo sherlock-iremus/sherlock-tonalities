@@ -10,6 +10,7 @@ import {
   getAssignments,
   getContributor,
   getP140,
+  getPersonalProjects,
   getProjects,
 } from './queries'
 
@@ -103,6 +104,19 @@ export const sparql = createApi({
           label: e.label.value,
         })),
     }),
+    getPersonalProjects: builder.query({
+      query: userIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getPersonalProjects(userIri) }),
+      }),
+      transformResponse: response =>
+        response.results.bindings.map(e => ({
+          iri: e.project.value,
+          annotations: Number(e.annotations.value),
+          label: e.label.value,
+          scoreIri: e.scoreIri.value.split('_').shift(),
+        })),
+    }),
   }),
 })
 
@@ -115,5 +129,6 @@ export const {
   useGetP140Query,
   useGetAssignmentsQuery,
   useGetProjectsQuery,
+  useGetPersonalProjectsQuery,
   useExportProjectQuery,
 } = sparql

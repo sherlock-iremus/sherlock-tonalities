@@ -22,6 +22,7 @@ import { useGetUserIdQuery } from '../services/service'
 import scores from '../config/scores.json'
 import { ThemePicker } from './ThemePicker'
 import { Projects } from './Projects'
+import { PersonalProjects } from './PersonalProjects'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,9 +30,8 @@ export const Landing = () => {
   const [upload, setUpload] = useState(null)
 
   const { data: userId } = useGetUserIdQuery()
-
-  const isAllScoresSelected = selectedScoreIndex === scores.length
-  const isScoreSelected = selectedScoreIndex !== -1
+  const isPersonalsSelected = selectedScoreIndex === scores.length
+  const isScoreSelected = selectedScoreIndex !== -1 && !isPersonalsSelected
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
@@ -59,26 +59,27 @@ export const Landing = () => {
             <Stack direction="row" flex={3}>
               <Divider orientation="vertical" />
               <Stack flex={1}>
+                <ListSubheader>Recent projects</ListSubheader>
+                <ListItem
+                  disablePadding
+                  secondaryAction={
+                    <IconButton edge="end" disableRipple>
+                      <ChevronRight />
+                    </IconButton>
+                  }
+                >
+                  <ListItemButton
+                    selected={isPersonalsSelected}
+                    onClick={() => setSelectedScoreIndex(!isPersonalsSelected ? scores.length : -1)}
+                  >
+                    <ListItemIcon>
+                      <LibraryMusic />
+                    </ListItemIcon>
+                    <ListItemText primary="My analytical projects" secondary="View recent analytical projects" />
+                  </ListItemButton>
+                </ListItem>
                 <ListSubheader>Available scores</ListSubheader>
                 <List disablePadding dense sx={{ overflow: 'auto' }}>
-                  <ListItem
-                    disablePadding
-                    secondaryAction={
-                      <IconButton edge="end" disableRipple>
-                        <ChevronRight />
-                      </IconButton>
-                    }
-                  >
-                    <ListItemButton
-                      selected={isAllScoresSelected}
-                      onClick={() => setSelectedScoreIndex(!isAllScoresSelected ? scores.length : -1)}
-                    >
-                      <ListItemIcon>
-                        <LibraryMusic />
-                      </ListItemIcon>
-                      <ListItemText primary="All scores" secondary="View all analytical projects" />
-                    </ListItemButton>
-                  </ListItem>
                   {scores.map(({ scoreIri, scoreTitle }, index) => (
                     <ListItem
                       key={scoreIri}
@@ -104,13 +105,14 @@ export const Landing = () => {
               </Stack>
               <Divider orientation="vertical" />
               <Stack flex={1} minWidth={0}>
-                {isScoreSelected && (
-                  <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
-                    <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                      Analytical projects for{' '}
-                      {isAllScoresSelected ? 'all scores' : scores[selectedScoreIndex].scoreTitle}
-                    </ListSubheader>
-                    {!isAllScoresSelected && (
+                {isPersonalsSelected ? (
+                  <PersonalProjects userId={userId} />
+                ) : isScoreSelected ? (
+                  <Stack flex={1}>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
+                      <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                        {`Analytical projects for ${scores[selectedScoreIndex].scoreTitle}`}
+                      </ListSubheader>
                       <Stack>
                         <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
                           <IconButton>
@@ -118,11 +120,9 @@ export const Landing = () => {
                           </IconButton>
                         </Tooltip>
                       </Stack>
-                    )}
+                    </Stack>
+                    <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
                   </Stack>
-                )}
-                {isScoreSelected && !isAllScoresSelected ? (
-                  <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
                 ) : (
                   <Stack
                     flex={1}
