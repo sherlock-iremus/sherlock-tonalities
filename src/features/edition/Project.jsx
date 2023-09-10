@@ -1,5 +1,5 @@
 import { CollectionsBookmark, Downloading, Edit } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, Typography, IconButton, Tooltip, CircularProgress } from '@mui/material'
+import { ListItem, ListItemIcon, ListItemText, Typography, IconButton, Tooltip } from '@mui/material'
 import { TimelineDot, TimelineSeparator, TimelineConnector } from '@mui/lab'
 import { Stack } from '@mui/system'
 import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
