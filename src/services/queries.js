@@ -122,6 +122,31 @@ WHERE
  }
 `
 
+export const exportProjectToMeta = projectIri => `
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX core: <https://w3id.org/polifonia/ontology/core/>
+PREFIX mm: <https://w3id.org/polifonia/ontology/music-meta/>
+PREFIX mr: <https://w3id.org/polifonia/ontology/music-representation/>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX sherlockuuid: <http://data-iremus.huma-num.fr/id/>
+PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
+PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
+PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
+CONSTRUCT {
+    ?project a mr:Analysis.
+    ?project mr:involvesAnalyst ?user.
+    ?project core:title ?label.
+}
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE {
+    BIND (<${projectIri}> AS ?project).
+    ?project dcterms:creator ?user.
+    ?project crm:P1_is_identified_by ?label.
+}
+`
+
 export const NOTE = 'http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd'
 export const SELECTION = 'http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b'
 export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df'

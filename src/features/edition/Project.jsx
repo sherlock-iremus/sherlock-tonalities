@@ -1,13 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { CollectionsBookmark, Downloading, Edit } from '@mui/icons-material'
 import { ListItem, ListItemIcon, ListItemText, Typography, IconButton, Tooltip, CircularProgress } from '@mui/material'
 import { TimelineDot, TimelineSeparator, TimelineConnector } from '@mui/lab'
 import { Stack } from '@mui/system'
-import { useExportProjectQuery, useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
+import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { Annotation } from './Annotation'
 import { AnnotationPage } from '../AnnotationPage'
+import { ExportMenu } from '../ExportMenu'
 
 export const Project = () => {
   const { scoreIri, projectIri, selectedAnnotation } = useSelector(state => state.globals)
@@ -15,8 +15,7 @@ export const Project = () => {
   const [annotationsByPage, setAnnotationsByPage] = useState([])
   const { data: project } = useGetAnalyticalProjectQuery(projectIri, { skip: !projectIri })
   const { data: annotations } = useGetAnnotationsQuery({ scoreIri, projectIri }, { skip: !projectIri })
-  const [isDownloading, setIsDownloading] = useState(false)
-  const { data } = useExportProjectQuery(projectIri, { skip: !isDownloading })
+  const [contextMenu, setContextMenu] = useState(false)
 
   useEffect(() => {
     if (annotations)
@@ -30,27 +29,10 @@ export const Project = () => {
       )
   }, [annotations])
 
-  const downloadFile = async () => {
-    try {
-      const blob = new Blob([data], { type: 'text/turtle' })
-      const file = new File([blob], project.label + '.ttl', { type: 'text/turtle' })
-      const downloadLink = document.createElement('a')
-      downloadLink.href = URL.createObjectURL(file)
-      downloadLink.download = project.label + '.ttl'
-      downloadLink.click()
-      setIsDownloading(false)
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  useEffect(() => {
-    if (data && isDownloading) downloadFile()
-  }, [data])
-
   if (project && annotations)
     return (
       <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
+        <ExportMenu {...{ projectIri, contextMenu, setContextMenu }} filename={project.label} />
         <AnnotationPage />
         {!selectedAnnotation && (
           <>
@@ -58,8 +40,14 @@ export const Project = () => {
               dense
               secondaryAction={
                 <Tooltip title="Download Turtle file">
-                  <IconButton color="inherit" onClick={() => setIsDownloading(true)} edge="end">
-                    {isDownloading ? <CircularProgress color="inherit" size={20} /> : <Downloading />}
+                  <IconButton
+                    color="inherit"
+                    onClick={event =>
+                      setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
+                    }
+                    edge="end"
+                  >
+                    <Downloading />
                   </IconButton>
                 </Tooltip>
               }

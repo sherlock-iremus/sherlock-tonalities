@@ -62,6 +62,7 @@ export const Landing = () => {
                 <ListSubheader>Recent projects</ListSubheader>
                 <ListItem
                   disablePadding
+                  dense
                   secondaryAction={
                     <IconButton edge="end" disableRipple>
                       <ChevronRight />

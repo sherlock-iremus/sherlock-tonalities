@@ -5,6 +5,7 @@ import { getPage, stringToColor } from '../utils'
 import { DEV_ENV } from '../config/services'
 import {
   exportProject,
+  exportProjectToMeta,
   getAnalyticalProject,
   getAnnotations,
   getAssignments,
@@ -92,6 +93,18 @@ export const sparql = createApi({
         responseHandler: response => response.text(),
       }),
     }),
+    exportProjectToMeta: builder.query({
+      query: projectIri => ({
+        url:
+          '?' +
+          new URLSearchParams({
+            graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
+            query: exportProjectToMeta(projectIri),
+          }),
+        method: 'GET',
+        responseHandler: response => response.text(),
+      }),
+    }),
     getProjects: builder.query({
       query: scoreIri => ({
         method: 'POST',
@@ -131,4 +144,5 @@ export const {
   useGetProjectsQuery,
   useGetPersonalProjectsQuery,
   useExportProjectQuery,
+  useExportProjectToMetaQuery,
 } = sparql
