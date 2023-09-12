@@ -136,17 +136,50 @@ PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
 CONSTRUCT {
     ?project a mr:Analysis.
-    ?project mr:involvesAnalyst ?user.
+    ?project mr:involvesAnalyst ?user1.
     ?project core:title ?label.
+    ?project mr:hasAnnotation ?annotation.
+
+    ?annotation a mr:Annotation.
+    ?annotation mr:hasAnnotator ?user2.
+    ?annotation dcterms:created ?date1.
+
+    ?score a mr:MusicContent.
+    ?score a mm:Score.
+    ?score mr:hasAnnotation ?annotation.
+
+    ?assignment a mr:Observation.
+    ?annotation mr:hasObservation ?assignment.
+    ?assignment mr:hasSubject ?concept.
+    ?annotation dcterms:created ?date2.
+
+    ?concept a mr:MusicProjection.
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     BIND (<${projectIri}> AS ?project).
-    ?project dcterms:creator ?user.
+
+    ?project dcterms:creator ?user1.
     ?project crm:P1_is_identified_by ?label.
+    ?project crm:P9_consists_of ?annotation.
+
+    ?annotation crm:P141_assigned ?entity.
+    ?entity dcterms:creator ?x.
+    ?annotation dcterms:creator ?user2.
+    ?annotation dcterms:created ?date1.
+    ?annotation sherlock:has_document_context ?score.
+
+    ?assignment crm:P140_assigned_attribute_to ?entity.
+    ?annotation dcterms:created ?date2.
+    ?assignment crm:P141_assigned ?concept.
 }
 `
+// ?annotation crm:P141_assigned ?entity.
+// ?entity a crm:E28_Conceptual_Entity.
+// ?assignment crm:P140_assigned_attribute_to ?entity.
 
+// ?entity mr:describesFragment ?annotation.
+// ?entity mr:hasObservation ?assignment.
 export const NOTE = 'http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd'
 export const SELECTION = 'http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b'
 export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df'
