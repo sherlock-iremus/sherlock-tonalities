@@ -24,12 +24,10 @@ export const ScoreAnnotator = () => {
   }
 
   const getFile = async () => {
-    if (state) setFile(await state.upload.text())
-    else {
-      const url = scores.find(score => score.scoreIri === getIri(scoreId))?.meiUrl
-      if (!url) setIsDialogOpen(true)
-      setFile(await (await fetch(url)).text())
-    }
+    const url = scores.find(score => score.scoreIri === getIri(scoreId))?.meiUrl
+    if (url) setFile(await (await fetch(url)).text())
+    else if (state.upload) setFile(await state.upload.text())
+    else setIsDialogOpen(true)
     dispatch(setScoreAnnotator({ scoreIri: getIri(scoreId), projectIri: getIri(projectId) }))
   }
 

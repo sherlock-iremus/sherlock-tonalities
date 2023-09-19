@@ -100,7 +100,7 @@ export const MeiViewer = ({ file }) => {
 
   useEffect(() => {
     loadScore()
-  }, [verovio])
+  }, [file, verovio])
 
   useEffect(() => {
     selectedAnnotation && selectedAnnotation.page !== currentPage && changePage(selectedAnnotation.page)
