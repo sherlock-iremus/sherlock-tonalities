@@ -18,10 +18,10 @@ export const PersonalProjects = ({ userId }) => {
   const navigate = useNavigate()
 
   return (
-    <Stack flex={1}>
-      <ListSubheader>Personal analytical projects</ListSubheader>
+    <Stack flex={1} minHeight={0}>
+      <ListSubheader disableSticky>Personal analytical projects</ListSubheader>
       {projects?.length ? (
-        <List dense>
+        <List dense sx={{ overflow: 'auto' }}>
           {projects.map(project => (
             <ListItemButton
               key={project.iri}
