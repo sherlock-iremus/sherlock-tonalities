@@ -98,7 +98,7 @@ export const Landing = () => {
                         <ListItemIcon>
                           <AudioFile />
                         </ListItemIcon>
-                        <ListItemText primary={scoreTitle} secondary="Composer" />
+                        <ListItemText primary={scoreTitle} secondary="Josquin des Prez" />
                       </ListItemButton>
                     </ListItem>
                   ))}
