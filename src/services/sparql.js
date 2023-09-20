@@ -15,7 +15,7 @@ import {
   getProjects,
 } from './queries'
 
-const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
+const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://data-iremus.huma-num.fr/sparql'
 
 export const sparql = createApi({
   reducerPath: 'sparql',
