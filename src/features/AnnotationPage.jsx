@@ -22,10 +22,10 @@ export const AnnotationPage = () => {
   const addComment = async () => {
     try {
       const body = {
-        p140: selectedAnnotation.entity,
+        p140: [selectedAnnotation.entity],
         p177: 'crm:P2_has_type',
         p141: input,
-        p141_type: 'literal',
+        p141_type: 'LITERAL',
         document_context: scoreIri,
         analytical_project: projectIri,
       }

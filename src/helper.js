@@ -10,7 +10,7 @@ export const createEntity = async ({ selectedNotes, scoreIri, projectIri, postAn
       p140: selectedNotes.map(note => scoreIri + '_' + note),
       p177: 'crm:P67_refers_to',
       new_p141: { rdf_type: ['crm:E28_Conceptual_Object'], p2_type: [ANALYTICAL_ENTITY] },
-      p141_type: 'new resource',
+      p141_type: 'NEW_RESOURCE',
       document_context: scoreIri + '_' + page,
       analytical_project: projectIri,
     }
@@ -26,10 +26,10 @@ export const createEntity = async ({ selectedNotes, scoreIri, projectIri, postAn
 export const assignConcept = async ({ entityIri, conceptIri, scoreIri, projectIri, postAnnotation }) => {
   try {
     const body = {
-      p140: entityIri,
+      p140: [entityIri],
       p177: 'crm:P2_has_type',
       p141: conceptIri,
-      p141_type: 'uri',
+      p141_type: 'URI',
       document_context: scoreIri,
       analytical_project: projectIri,
     }
@@ -46,10 +46,10 @@ export const assignConcept = async ({ entityIri, conceptIri, scoreIri, projectIr
 export const assignArbitraryText = async ({ entityIri, input, scoreIri, projectIri, postAnnotation }) => {
   try {
     const body = {
-      p140: entityIri,
+      p140: [entityIri],
       p177: 'crm:P2_has_type',
       p141: input,
-      p141_type: 'literal',
+      p141_type: 'LITERAL',
       document_context: scoreIri,
       analytical_project: projectIri,
     }
@@ -66,10 +66,10 @@ export const assignArbitraryText = async ({ entityIri, input, scoreIri, projectI
 export const assignSubEntity = async ({ parentEntity, childEntity, scoreIri, projectIri, postAnnotation }) => {
   try {
     const body = {
-      p140: parentEntity,
+      p140: [parentEntity],
       p177: 'crm:P106_is_composed_of',
       p141: childEntity,
-      p141_type: 'uri',
+      p141_type: 'URI',
       document_context: scoreIri,
       analytical_project: projectIri,
     }
