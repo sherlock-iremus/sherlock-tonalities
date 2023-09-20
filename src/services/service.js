@@ -3,7 +3,7 @@ import { isRejectedWithValue } from '@reduxjs/toolkit'
 import { setIsUserConnected } from './globals'
 import { DEV_ENV } from '../config/services'
 
-export const BASE_API_URL = DEV_ENV ? 'http://localhost:5555/' : 'https://sherlock.freeboxos.fr/'
+export const BASE_API_URL = DEV_ENV ? 'http://localhost:5555/' : 'https://data-iremus.huma-num.fr/'
 
 const SHERLOCK_API_ERROR = 'sherlockApi/'
 const SHERLOCK_API_REFRESH_ENDPOIT = BASE_API_URL + 'sherlock/oauth/access_token'
