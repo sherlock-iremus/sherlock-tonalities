@@ -455,38 +455,38 @@
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2701_CGN.mei"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Praeter.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ec531913-04ad-4fa7-bd96-9659a6eceed7",
-    "scoreTitle": "Praeter rerum seriem",
-    "meiUrl": "https://data-iremus.huma-num.fr/files/modality-tonality/mei/ec531913-04ad-4fa7-bd96-9659a6eceed7.mei"
+    "scoreTitle": "Praeter rerum seriem"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Giunto.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/957d5328-27ff-4d91-86c2-eeb719fffcde",
-    "scoreTitle": "Giunto m'à Amor fra belle et crude braccia",
-    "meiUrl": "https://data-iremus.huma-num.fr/files/modality-tonality/mei/957d5328-27ff-4d91-86c2-eeb719fffcde.mei"
+    "scoreTitle": "Giunto m'à Amor fra belle et crude braccia"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Josquin_Inviolata.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/7148e26d-f82b-4d34-9316-49e50da32972",
-    "scoreTitle": "Inviolata integra et casta es",
-    "meiUrl": "https://data-iremus.huma-num.fr/files/modality-tonality/mei/7148e26d-f82b-4d34-9316-49e50da32972.mei"
+    "scoreTitle": "Inviolata integra et casta es"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Laudate_pueri.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ca471109-3ead-49fc-b4ba-8d6d869da56d",
-    "scoreTitle": "Laudate pueri Dominum",
-    "meiUrl": "https://data-iremus.huma-num.fr/files/modality-tonality/mei/ca471109-3ead-49fc-b4ba-8d6d869da56d.mei"
+    "scoreTitle": "Laudate pueri Dominum"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Veni_Sancte_6vv.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/f158e5f5-8d1f-43d0-8e85-1892824798e1",
-    "scoreTitle": "Veni Sancte Spiritus",
-    "meiUrl": "https://data-iremus.huma-num.fr/files/modality-tonality/mei/f158e5f5-8d1f-43d0-8e85-1892824798e1.mei"
+    "scoreTitle": "Veni Sancte Spiritus"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Hellinck_Beati.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/5c78cbd8-d7f0-4911-a023-6b0bcf78f7ef",
-    "scoreTitle": "Beati omnes qui timent Dominum",
-    "meiUrl": "https://data-iremus.huma-num.fr/files/modality-tonality/mei/5c78cbd8-d7f0-4911-a023-6b0bcf78f7ef.mei"
+    "scoreTitle": "Beati omnes qui timent Dominum"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Hellinck_In_convertendo.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/709bcdaf-811d-45f8-af50-29db8318bd48",
-    "scoreTitle": "In Convertendo Dominus",
-    "meiUrl": "https://data-iremus.huma-num.fr/files/modality-tonality/mei/709bcdaf-811d-45f8-af50-29db8318bd48.mei"
+    "scoreTitle": "In Convertendo Dominus"
   }
 ]
