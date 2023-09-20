@@ -36,7 +36,7 @@ export const MeiViewer = ({ file }) => {
   const loadScore = async () => {
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
-    setScoreTitle(mei.querySelector('title').textContent)
+    mei.querySelectorAll('title').forEach((e, i) => e.textContent && i < 2 && setScoreTitle(e.textContent))
 
     if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
