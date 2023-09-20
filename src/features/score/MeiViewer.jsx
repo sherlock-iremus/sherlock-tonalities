@@ -36,7 +36,7 @@ export const MeiViewer = ({ file }) => {
   const loadScore = async () => {
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
-    setScoreTitle(mei.querySelector('title').textContent)
+    mei.querySelectorAll('title').forEach((e, i) => e.textContent && i < 2 && setScoreTitle(e.textContent))
 
     if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
@@ -100,7 +100,7 @@ export const MeiViewer = ({ file }) => {
 
   useEffect(() => {
     loadScore()
-  }, [file])
+  }, [file, verovio])
 
   useEffect(() => {
     selectedAnnotation && selectedAnnotation.page !== currentPage && changePage(selectedAnnotation.page)
@@ -180,7 +180,7 @@ export const MeiViewer = ({ file }) => {
       <Snackbar
         open={!!state}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        message="You are currently working on a local file, your work cannot be saved after session expires"
+        message="You are currently working on a local file, you will need to reupload file after session expires"
       />
     </Stack>
   )

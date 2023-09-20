@@ -84,6 +84,105 @@ WHERE {
  GROUP BY ?project
 `
 
+export const getPersonalProjects = userIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+SELECT ?project (COUNT(?annotation) AS ?annotations) (SAMPLE(?name) AS ?label) (SAMPLE(?score) AS ?scoreIri)
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE { 
+    ?project crm:P14_carried_out_by <${userIri}>.
+    ?project crm:P1_is_identified_by ?name.
+    ?project crm:P9_consists_of ?annotation.
+    ?annotation sherlock:has_document_context ?score.
+ }
+ GROUP BY ?project
+`
+
+export const exportProject = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
+PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
+PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
+PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
+CONSTRUCT { ?s ?p ?o }
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE
+{ 
+    {
+        <${projectIri}> crm:P9_consists_of ?s.
+        ?s ?p ?o.
+    }
+    UNION
+    {
+        <${projectIri}> ?p ?o.
+        BIND (<${projectIri}> AS ?s)        
+    }
+    UNION
+    {
+        ?t crm:P4_has_time-span ?s.
+        ?s ?p ?o        
+    }
+ }
+`
+
+export const exportProjectToMeta = projectIri => `
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX core: <https://w3id.org/polifonia/ontology/core/>
+PREFIX mm: <https://w3id.org/polifonia/ontology/music-meta/>
+PREFIX mr: <https://w3id.org/polifonia/ontology/music-representation/>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX sherlockuuid: <http://data-iremus.huma-num.fr/id/>
+PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
+PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
+PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
+CONSTRUCT {
+    ?project a mr:Analysis.
+    ?project mr:involvesAnalyst ?user1.
+    ?project core:title ?label.
+    ?project mr:hasAnnotation ?annotation.
+
+    ?annotation a mr:Annotation.
+    ?annotation mr:hasAnnotator ?user2.
+    ?annotation dcterms:created ?date1.
+
+    ?score a mr:MusicContent.
+    ?score a mm:Score.
+    ?score mr:hasAnnotation ?annotation.
+
+    ?assignment a mr:Observation.
+    ?annotation mr:hasObservation ?assignment.
+    ?assignment mr:hasSubject ?concept.
+    ?annotation dcterms:created ?date2.
+
+    ?link core:isDerivedFrom ?sup
+}
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE {
+    BIND (<${projectIri}> AS ?project).
+
+    ?project dcterms:creator ?user1.
+    ?project crm:P1_is_identified_by ?label.
+    ?project crm:P9_consists_of ?annotation.
+
+    ?annotation crm:P141_assigned ?entity.
+    ?entity dcterms:creator ?x.
+    ?annotation dcterms:creator ?user2.
+    ?annotation dcterms:created ?date1.
+    ?annotation sherlock:has_document_context ?score.
+
+    ?assignment crm:P140_assigned_attribute_to ?entity.
+    ?annotation dcterms:created ?date2.
+    ?assignment crm:P141_assigned ?concept.
+
+    ?link crm:P177_assigned_property_of_type <guillotel:has_line>.
+    ?link crm:P140_assigned_attribute_to ?sub.
+}
+`
+
 export const NOTE = 'http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd'
 export const SELECTION = 'http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b'
 export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df'

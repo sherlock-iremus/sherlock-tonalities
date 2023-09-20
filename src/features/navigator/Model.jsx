@@ -39,13 +39,13 @@ export const Model = () => {
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>
       <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search..." />
-      <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center" pr={2}>
         <ListSubheader disableSticky>Available concepts</ListSubheader>
         {!selectedConcepts.length ? (
           <Button
             size="small"
             onClick={() => dispatch(setSelectedConcepts(data.map(e => e.iri)))}
-            disabled={selectedAnnotation}
+            disabled={!!selectedAnnotation}
           >
             Select all
           </Button>

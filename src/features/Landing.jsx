@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic } from '@mui/icons-material'
+import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic, UploadFile } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
@@ -22,6 +22,7 @@ import { useGetUserIdQuery } from '../services/service'
 import scores from '../config/scores.json'
 import { ThemePicker } from './ThemePicker'
 import { Projects } from './Projects'
+import { PersonalProjects } from './PersonalProjects'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,13 +30,15 @@ export const Landing = () => {
   const [upload, setUpload] = useState(null)
 
   const { data: userId } = useGetUserIdQuery()
-
-  const isAllScoresSelected = selectedScoreIndex === scores.length
-  const isScoreSelected = selectedScoreIndex !== -1
+  const isPersonalsSelected = selectedScoreIndex === scores.length
+  const isScoreSelected = selectedScoreIndex !== -1 && !isPersonalsSelected
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
-      <NewProject {...{ isOpen, setIsOpen, upload, score: scores[selectedScoreIndex] }} />
+      <NewProject
+        {...{ isOpen, upload, score: scores[selectedScoreIndex] }}
+        onClose={() => (isOpen && setIsOpen(false)) || (upload && setUpload(null))}
+      />
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <PolifoniaLogo width="100px" />
         <AccountMenu />
@@ -56,26 +59,28 @@ export const Landing = () => {
             <Stack direction="row" flex={3}>
               <Divider orientation="vertical" />
               <Stack flex={1}>
+                <ListSubheader>Recent projects</ListSubheader>
+                <ListItem
+                  disablePadding
+                  dense
+                  secondaryAction={
+                    <IconButton edge="end" disableRipple>
+                      <ChevronRight />
+                    </IconButton>
+                  }
+                >
+                  <ListItemButton
+                    selected={isPersonalsSelected}
+                    onClick={() => setSelectedScoreIndex(!isPersonalsSelected ? scores.length : -1)}
+                  >
+                    <ListItemIcon>
+                      <LibraryMusic />
+                    </ListItemIcon>
+                    <ListItemText primary="My analytical projects" secondary="View recent analytical projects" />
+                  </ListItemButton>
+                </ListItem>
                 <ListSubheader>Available scores</ListSubheader>
                 <List disablePadding dense sx={{ overflow: 'auto' }}>
-                  <ListItem
-                    disablePadding
-                    secondaryAction={
-                      <IconButton edge="end" disableRipple>
-                        <ChevronRight />
-                      </IconButton>
-                    }
-                  >
-                    <ListItemButton
-                      selected={isAllScoresSelected}
-                      onClick={() => setSelectedScoreIndex(!isAllScoresSelected ? scores.length : -1)}
-                    >
-                      <ListItemIcon>
-                        <LibraryMusic />
-                      </ListItemIcon>
-                      <ListItemText primary="All scores" secondary="View all analytical projects" />
-                    </ListItemButton>
-                  </ListItem>
                   {scores.map(({ scoreIri, scoreTitle }, index) => (
                     <ListItem
                       key={scoreIri}
@@ -93,7 +98,7 @@ export const Landing = () => {
                         <ListItemIcon>
                           <AudioFile />
                         </ListItemIcon>
-                        <ListItemText primary={scoreTitle} secondary="Composer" />
+                        <ListItemText primary={scoreTitle} secondary="Josquin des Prez" />
                       </ListItemButton>
                     </ListItem>
                   ))}
@@ -101,13 +106,14 @@ export const Landing = () => {
               </Stack>
               <Divider orientation="vertical" />
               <Stack flex={1} minWidth={0}>
-                {isScoreSelected && (
-                  <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
-                    <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                      Analytical projects for{' '}
-                      {isAllScoresSelected ? 'all scores' : scores[selectedScoreIndex].scoreTitle}
-                    </ListSubheader>
-                    {!isAllScoresSelected && (
+                {isPersonalsSelected ? (
+                  <PersonalProjects userId={userId} />
+                ) : isScoreSelected ? (
+                  <Stack flex={1}>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
+                      <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                        {`Analytical projects for ${scores[selectedScoreIndex].scoreTitle}`}
+                      </ListSubheader>
                       <Stack>
                         <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
                           <IconButton>
@@ -115,11 +121,9 @@ export const Landing = () => {
                           </IconButton>
                         </Tooltip>
                       </Stack>
-                    )}
+                    </Stack>
+                    <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
                   </Stack>
-                )}
-                {isScoreSelected && !isAllScoresSelected ? (
-                  <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
                 ) : (
                   <Stack
                     flex={1}
@@ -143,6 +147,12 @@ export const Landing = () => {
                     <Typography textAlign="center" color="text.secondary" fontSize={14}>
                       No score selected, start by selecting one in the list or drag MEI file here
                     </Typography>
+                    <Tooltip title="Upload MEI file">
+                      <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input hidden accept=".mei" type="file" onChange={e => setUpload(e.target.files[0])} />
+                        <UploadFile />
+                      </IconButton>
+                    </Tooltip>
                   </Stack>
                 )}
               </Stack>

@@ -1,15 +1,5 @@
-import { Add, ArrowBack, Close, Delete, Send } from '@mui/icons-material'
-import {
-  AppBar,
-  CircularProgress,
-  Collapse,
-  IconButton,
-  ListItem,
-  ListItemText,
-  Slide,
-  Stack,
-  Toolbar,
-} from '@mui/material'
+import { AddCircle, ArrowBack, Cancel, Close, Send } from '@mui/icons-material'
+import { AppBar, Collapse, IconButton, ListItem, ListItemText, Slide, Stack, Toolbar, Tooltip } from '@mui/material'
 import { useState } from 'react'
 import { ContextMenu } from './navigator/ContextMenu'
 import { Input } from '../components/Input'
@@ -55,7 +45,7 @@ export const AnnotationPage = () => {
 
   return (
     <Slide direction="up" in={!!selectedAnnotation} mountOnEnter unmountOnExit>
-      <Stack overflow="auto" flex={1}>
+      <Stack flex={1} minHeight={0}>
         <AppBar sx={{ position: 'relative', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
           <Toolbar>
             <Collapse in={selectedAnnotations.length > 1} timeout="auto" unmountOnExit>
@@ -70,29 +60,35 @@ export const AnnotationPage = () => {
               <ListItemText
                 primary={
                   selectedAnnotation?.notes.length === 1
-                    ? 'Analytical entity with one note'
-                    : `Analytical entity with ${selectedAnnotation?.notes.length} notes`
+                    ? 'Entity with one note'
+                    : `Entity with ${selectedAnnotation?.notes.length} notes`
                 }
               ></ListItemText>
             </ListItem>
-            <IconButton color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
-              <Add />
-            </IconButton>
-            <IconButton edge="end" color="inherit">
-              <Delete />
-            </IconButton>
+            <Tooltip title="New layer">
+              <IconButton color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
+                <AddCircle />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete entity">
+              <IconButton edge="end" color="inherit">
+                <Cancel />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
-        <Stack padding={1} spacing={1} paddingTop={2} flex={1} alignItems="center">
+        <Stack flex={1} overflow="auto" padding={1} spacing={1} paddingTop={2}>
           {assignments?.map(assignment => (
-            <Assignment key={assignment.assignment} {...assignment} refetch={refetch} />
+            <Assignment key={assignment.assignment} {...assignment} refetch={refetch} onPage />
           ))}
         </Stack>
         <Stack direction="row" paddingRight={1} justifySelf="flex-end" alignItems="center">
           <Stack flex={1}>
             <Input value={input} onChange={handleInputChange} placeholder="Comment..." />
           </Stack>
-          <IconButton onClick={addComment}>{isLoading ? <CircularProgress /> : <Send />}</IconButton>
+          <IconButton onClick={addComment} disabled={!!isLoading}>
+            <Send />
+          </IconButton>
           <ContextMenu {...{ contextMenu, setContextMenu }} />
         </Stack>
       </Stack>

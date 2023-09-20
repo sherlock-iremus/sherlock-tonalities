@@ -3,7 +3,17 @@ import { getPage, stringToColor } from '../utils'
 //import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 //import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import { DEV_ENV } from '../config/services'
-import { getAnalyticalProject, getAnnotations, getAssignments, getContributor, getP140, getProjects } from './queries'
+import {
+  exportProject,
+  exportProjectToMeta,
+  getAnalyticalProject,
+  getAnnotations,
+  getAssignments,
+  getContributor,
+  getP140,
+  getPersonalProjects,
+  getProjects,
+} from './queries'
 
 const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://sherlock.freeboxos.fr/sparql'
 
@@ -63,12 +73,37 @@ export const sparql = createApi({
         body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
       }),
       transformResponse: response =>
-        response.results.bindings.map(({ annotation, entity, date, page }) => ({
+        response.results.bindings.map(({ annotation, entity, date, author, page }) => ({
           annotation: annotation.value,
           entity: entity.value,
           date: date.value,
+          author: author.value,
           page: getPage(page.value),
         })),
+    }),
+    exportProject: builder.query({
+      query: projectIri => ({
+        url:
+          '?' +
+          new URLSearchParams({
+            graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
+            query: exportProject(projectIri),
+          }),
+        method: 'GET',
+        responseHandler: response => response.text(),
+      }),
+    }),
+    exportProjectToMeta: builder.query({
+      query: projectIri => ({
+        url:
+          '?' +
+          new URLSearchParams({
+            graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
+            query: exportProjectToMeta(projectIri),
+          }),
+        method: 'GET',
+        responseHandler: response => response.text(),
+      }),
     }),
     getProjects: builder.query({
       query: scoreIri => ({
@@ -80,6 +115,19 @@ export const sparql = createApi({
           iri: e.project.value,
           annotations: Number(e.annotations.value),
           label: e.label.value,
+        })),
+    }),
+    getPersonalProjects: builder.query({
+      query: userIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getPersonalProjects(userIri) }),
+      }),
+      transformResponse: response =>
+        response.results.bindings.map(e => ({
+          iri: e.project.value,
+          annotations: Number(e.annotations.value),
+          label: e.label.value,
+          scoreIri: e.scoreIri.value.split('_').shift(),
         })),
     }),
   }),
@@ -94,4 +142,7 @@ export const {
   useGetP140Query,
   useGetAssignmentsQuery,
   useGetProjectsQuery,
+  useGetPersonalProjectsQuery,
+  useExportProjectQuery,
+  useExportProjectToMetaQuery,
 } = sparql
