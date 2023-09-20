@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { IconButton, ListItemText, Pagination, Snackbar, Tooltip, Typography } from '@mui/material'
+import { IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { setSelectedNotes } from '../../services/globals'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
@@ -22,7 +22,6 @@ export const MeiViewer = ({ file }) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { state } = useLocation()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
   const [scoreTitle, setScoreTitle] = useState('')
@@ -177,11 +176,6 @@ export const MeiViewer = ({ file }) => {
           <Project />
         </Stack>
       </Stack>
-      <Snackbar
-        open={!!state}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        message="You are currently working on a local file, you will need to reupload file after session expires"
-      />
     </Stack>
   )
 }
