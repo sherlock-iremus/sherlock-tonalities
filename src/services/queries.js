@@ -178,7 +178,7 @@ WHERE {
     ?annotation dcterms:created ?date2.
     ?assignment crm:P141_assigned ?concept.
 
-    ?link crm:P177_assigned_property_of_type <guillotel:has_line>.
+    ?link crm:P177_assigned_property_of_type crm:P106_is_composed_of.
     ?link crm:P140_assigned_attribute_to ?sub.
 }
 `

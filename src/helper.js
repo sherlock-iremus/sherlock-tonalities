@@ -63,11 +63,11 @@ export const assignArbitraryText = async ({ entityIri, input, scoreIri, projectI
   }
 }
 
-export const assignSubEntity = async ({ parentEntity, childEntity, predicate, scoreIri, projectIri, postAnnotation }) => {
+export const assignSubEntity = async ({ parentEntity, childEntity, scoreIri, projectIri, postAnnotation }) => {
   try {
     const body = {
       p140: parentEntity,
-      p177: predicate,
+      p177: 'crm:P106_is_composed_of',
       p141: childEntity,
       p141_type: 'uri',
       document_context: scoreIri,
