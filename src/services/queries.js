@@ -102,7 +102,7 @@ export const exportProject = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX sherlockuuid: <http://data-iremus.huma-num.fr/id/>
+PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
 PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
@@ -118,6 +118,11 @@ WHERE
     {
         <${projectIri}> ?p ?o.
         BIND (<${projectIri}> AS ?s)        
+    }
+    UNION
+    {
+        ?t crm:P4_has_time-span ?s.
+        ?s ?p ?o        
     }
  }
 `
@@ -153,7 +158,7 @@ CONSTRUCT {
     ?assignment mr:hasSubject ?concept.
     ?annotation dcterms:created ?date2.
 
-    ?concept a mr:MusicProjection.
+    ?link core:isDerivedFrom ?sup
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
@@ -172,14 +177,12 @@ WHERE {
     ?assignment crm:P140_assigned_attribute_to ?entity.
     ?annotation dcterms:created ?date2.
     ?assignment crm:P141_assigned ?concept.
+
+    ?link crm:P177_assigned_property_of_type <guillotel:has_line>.
+    ?link crm:P140_assigned_attribute_to ?sub.
 }
 `
-// ?annotation crm:P141_assigned ?entity.
-// ?entity a crm:E28_Conceptual_Entity.
-// ?assignment crm:P140_assigned_attribute_to ?entity.
 
-// ?entity mr:describesFragment ?annotation.
-// ?entity mr:hasObservation ?assignment.
 export const NOTE = 'http://data-iremus.huma-num.fr/id/d2a536eb-4a95-484f-b13d-f597ac8ea2fd'
 export const SELECTION = 'http://data-iremus.huma-num.fr/id/9d0388cb-a178-46b2-b047-b5a98f7bdf0b'
 export const POSITIONNED_NOTE = 'http://data-iremus.huma-num.fr/id/689e148d-a97d-45b4-898d-c395a24884df'
