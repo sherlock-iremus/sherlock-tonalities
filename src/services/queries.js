@@ -185,7 +185,9 @@ WHERE {
     ?linking crm:P141_assigned ?sub.
     ?linking crm:P140_assigned_attribute_to ?sup.
     ?subAnnotation crm:P141_assigned ?sub.
+    ?subAnnotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     ?supAnnotation crm:P141_assigned ?sup.
+    ?supAnnotation crm:P177_assigned_property_of_type crm:P67_refers_to.
 }
 `
 
