@@ -6,11 +6,15 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     <${projectIri}> crm:P9_consists_of ?annotation.
+    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     ?annotation sherlock:has_document_context ?page.
-    FILTER CONTAINS(str(?page), "${scoreIri}").
-    ?annotation crm:P141_assigned ?entity.
     ?annotation dcterms:created ?date.
-    ?entity dcterms:creator ?author.
+    ?annotation crm:P141_assigned ?entity.
+    ?annotation dcterms:creator ?author.
+    NOT EXISTS {
+        ?supAnnotation crm:P141_assigned ?entity.
+        ?supAnnotation crm:P177_assigned_property_of_type <guillotel:has_line>.
+    }
 }
 `
 
