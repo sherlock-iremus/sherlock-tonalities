@@ -25,5 +25,5 @@
     "build": "tsc && vite build",
     "serve": "vite preview"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.6.3"
 }
