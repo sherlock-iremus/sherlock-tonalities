@@ -29,6 +29,7 @@ export const getModel = iri =>
   (iri?.includes('ilaber') && 'Filaber Guillotel Gurrieri 2023') ||
   (iri?.includes('modal-tonal') && 'Zarlino 1558') ||
   (iri?.includes('uillotel') && 'Guillotel 2022') ||
+  (iri?.includes('ugue') && 'Fugue') ||
   ''
 
 export const createUuid = () => URL.createObjectURL(new Blob([])).slice(-36)
