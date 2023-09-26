@@ -152,8 +152,10 @@ CONSTRUCT {
     ?score a mr:MusicContent.
     ?score a mm:Score.
     ?score mr:hasAnnotation ?annotation.
+    ?score mr:hasFragment ?notes.
 
     ?annotation a mr:Annotation.
+    ?annotation mr:describesFragment ?notes.
     ?annotation mr:hasAnnotator ?annotator.
     ?annotation dcterms:created ?annotationDate.
 
@@ -175,6 +177,7 @@ WHERE {
     ?project crm:P9_consists_of ?linking.
 
     ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
+    ?annotation crm:P140_assigned_attribute_to ?notes.
     ?annotation dcterms:creator ?annotator.
     ?annotation dcterms:created ?annotationDate.
     ?annotation sherlock:has_document_context ?score.
