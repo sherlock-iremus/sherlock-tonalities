@@ -41,7 +41,13 @@ export const Assignment = ({
         onMouseLeave={() => onPage && setIsHovered(false)}
         alignSelf={!onPage ? 'center' : canDelete ? 'flex-end' : 'flex-start'}
       >
-        <Stack direction="row" spacing={1} alignItems="center" alignSelf={canDelete ? 'flex-end' : 'flex-start'}>
+        <Stack
+          direction={canDelete ? 'row' : 'row-reverse'}
+          pl={1}
+          spacing={1}
+          alignItems="center"
+          alignSelf={canDelete ? 'flex-end' : 'flex-start'}
+        >
           <Chip
             sx={{
               height: 'auto',

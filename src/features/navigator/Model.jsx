@@ -1,5 +1,5 @@
 import { HistoryEdu } from '@mui/icons-material'
-import { Button, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
+import { Avatar, Button, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { Stack } from '@mui/system'
 import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
@@ -9,6 +9,7 @@ import models from '../../config/models.json'
 import { Input } from '../../components/Input'
 import { useGetModelQuery } from '../../services/model'
 import { setSelectedConcepts } from '../../services/globals'
+import { getModel } from '../../utils'
 
 export const Model = () => {
   const dispatch = useDispatch()
@@ -34,7 +35,9 @@ export const Model = () => {
         }
       >
         <ListItemIcon>
-          <HistoryEdu />
+          <Avatar sx={{ fontSize: 12, height: 32, width: 32, marginLeft: 1 }}>
+            {getModel(models[selectedModelIndex].name).charAt(0)}
+          </Avatar>
         </ListItemIcon>
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
       </ListItem>

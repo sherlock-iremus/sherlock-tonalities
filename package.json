@@ -6,41 +6,24 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.11.16",
-    "@mui/lab": "^5.0.0-alpha.134",
-    "@mui/material": "^5.13.6",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/lab": "^5.0.0-alpha.145",
+    "@mui/material": "^5.14.10",
     "@reduxjs/toolkit": "^1.9.5",
+    "@vitejs/plugin-react-swc": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.1.1",
-    "react-router-dom": "6.14.0",
-    "react-scripts": "5.0.1",
-    "react-slider-color-picker": "^2.0.0",
-    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#main"
+    "react-redux": "^8.1.2",
+    "react-router-dom": "6.16.0",
+    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#commit=d7e135975c43af16195fe4c0fa25435a86b8c880",
+    "verovio": "^4.0.1",
+    "vite": "^4.4.9",
+    "vite-plugin-svgr": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "packageManager": "yarn@3.4.1",
-  "resolutions": {
-    "sherlock-sparql-queries": "portal:/home/fepoulpa/Documents/sherlock-sparql-queries"
-  }
+  "packageManager": "yarn@3.6.3"
 }

@@ -12,7 +12,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { ReactComponent as PolifoniaLogo } from '../assets/polifonia.svg'
+import PolifoniaLogo from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic, UploadFile } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
@@ -40,7 +40,7 @@ export const Landing = () => {
         onClose={() => (isOpen && setIsOpen(false)) || (upload && setUpload(null))}
       />
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
-        <PolifoniaLogo width="100px" />
+        <img src={PolifoniaLogo} width="100px" />
         <AccountMenu />
         <ThemePicker />
       </Stack>

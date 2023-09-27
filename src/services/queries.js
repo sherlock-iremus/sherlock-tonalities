@@ -6,11 +6,15 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     <${projectIri}> crm:P9_consists_of ?annotation.
+    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     ?annotation sherlock:has_document_context ?page.
-    FILTER CONTAINS(str(?page), "${scoreIri}").
-    ?annotation crm:P141_assigned ?entity.
     ?annotation dcterms:created ?date.
-    ?entity dcterms:creator ?author.
+    ?annotation crm:P141_assigned ?entity.
+    ?annotation dcterms:creator ?author.
+    NOT EXISTS {
+        ?supAnnotation crm:P141_assigned ?entity.
+        ?supAnnotation crm:P177_assigned_property_of_type <guillotel:has_line>.
+    }
 }
 `
 
@@ -135,51 +139,62 @@ PREFIX mr: <https://w3id.org/polifonia/ontology/music-representation/>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX sherlockuuid: <http://data-iremus.huma-num.fr/id/>
+PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
 PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
 CONSTRUCT {
     ?project a mr:Analysis.
-    ?project mr:involvesAnalyst ?user1.
+    ?project mr:involvesAnalyst ?analyst.
     ?project core:title ?label.
     ?project mr:hasAnnotation ?annotation.
-
-    ?annotation a mr:Annotation.
-    ?annotation mr:hasAnnotator ?user2.
-    ?annotation dcterms:created ?date1.
 
     ?score a mr:MusicContent.
     ?score a mm:Score.
     ?score mr:hasAnnotation ?annotation.
+    ?score mr:hasFragment ?notes.
 
-    ?assignment a mr:Observation.
-    ?annotation mr:hasObservation ?assignment.
-    ?assignment mr:hasSubject ?concept.
-    ?annotation dcterms:created ?date2.
+    ?annotation a mr:Annotation.
+    ?annotation mr:describesFragment ?notes.
+    ?annotation mr:hasAnnotator ?annotator.
+    ?annotation dcterms:created ?annotationDate.
 
-    ?link core:isDerivedFrom ?sup
+    ?observation a mr:Observation.
+    ?annotation mr:hasObservation ?observation.
+    ?observation mr:hasSubject ?concept.
+    ?observation dcterms:created ?observationDate.
+
+    ?subAnnotation core:isDerivedFrom ?supAnnotation
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     BIND (<${projectIri}> AS ?project).
 
-    ?project dcterms:creator ?user1.
+    ?project dcterms:creator ?analyst.
     ?project crm:P1_is_identified_by ?label.
     ?project crm:P9_consists_of ?annotation.
+    ?project crm:P9_consists_of ?observation.
+    ?project crm:P9_consists_of ?linking.
 
-    ?annotation crm:P141_assigned ?entity.
-    ?entity dcterms:creator ?x.
-    ?annotation dcterms:creator ?user2.
-    ?annotation dcterms:created ?date1.
+    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
+    ?annotation crm:P140_assigned_attribute_to ?notes.
+    ?annotation dcterms:creator ?annotator.
+    ?annotation dcterms:created ?annotationDate.
     ?annotation sherlock:has_document_context ?score.
+    ?annotation crm:P141_assigned ?entity.
+    
+    ?observation crm:P140_assigned_attribute_to ?entity.
+    ?observation crm:P177_assigned_property_of_type crm:P2_has_type.
+    ?observation dcterms:created ?observationDate.
+    ?observation crm:P141_assigned ?concept.
 
-    ?assignment crm:P140_assigned_attribute_to ?entity.
-    ?annotation dcterms:created ?date2.
-    ?assignment crm:P141_assigned ?concept.
-
-    ?link crm:P177_assigned_property_of_type crm:P106_is_composed_of.
-    ?link crm:P140_assigned_attribute_to ?sub.
+    ?linking crm:P177_assigned_property_of_type <guillotel:has_line>.
+    ?linking crm:P141_assigned ?sub.
+    ?linking crm:P140_assigned_attribute_to ?sup.
+    ?subAnnotation crm:P141_assigned ?sub.
+    ?subAnnotation crm:P177_assigned_property_of_type crm:P67_refers_to.
+    ?supAnnotation crm:P141_assigned ?sup.
+    ?supAnnotation crm:P177_assigned_property_of_type crm:P67_refers_to.
 }
 `
 
