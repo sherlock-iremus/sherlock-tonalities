@@ -18,4 +18,4 @@ jobs:
     steps:
     - name: Calling deploy script
       shell: bash
-      run: ./deploy.sh
+      run: bash /home/iremus/github_runners/deploy.sh 
