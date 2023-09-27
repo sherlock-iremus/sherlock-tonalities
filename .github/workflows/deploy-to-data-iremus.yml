@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   deploy-to-data-iremus:
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: [self-hosted, linux]
     steps:
     - name: Calling deploy script
       shell: bash
