@@ -81,7 +81,7 @@ export const Landing = () => {
                 </ListItem>
                 <ListSubheader>Available scores</ListSubheader>
                 <List disablePadding dense sx={{ overflow: 'auto' }}>
-                  {scores.map(({ scoreIri, scoreTitle }, index) => (
+                  {scores.map(({ scoreIri, scoreTitle, scoreComposer }, index) => (
                     <ListItem
                       key={scoreIri}
                       disablePadding
@@ -98,7 +98,7 @@ export const Landing = () => {
                         <ListItemIcon>
                           <AudioFile />
                         </ListItemIcon>
-                        <ListItemText primary={scoreTitle} secondary="Josquin des Prez" />
+                        <ListItemText primary={scoreTitle} secondary={scoreComposer} />
                       </ListItemButton>
                     </ListItem>
                   ))}
@@ -112,7 +112,7 @@ export const Landing = () => {
                   <Stack flex={1}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
                       <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                        {`Analytical projects for ${scores[selectedScoreIndex].scoreTitle}`}
+                        {`Analytical projects for ${(scores[selectedScoreIndex].scoreTitle, scoreComposer)}`}
                       </ListSubheader>
                       <Stack>
                         <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
