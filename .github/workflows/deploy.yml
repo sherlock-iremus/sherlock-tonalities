@@ -23,4 +23,5 @@ jobs:
       - name: Build
         run: yarn build
       - name: Deploy
-        run: ls -la && echo ${{ github.iremus_server_url }}
+        run: mv dist tonalities
+        run: scp -r tonalities ${{ github.iremus_server_url }}:sherlock/apache/public_html/
