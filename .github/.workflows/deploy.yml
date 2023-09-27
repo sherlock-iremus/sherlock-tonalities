@@ -1,0 +1,22 @@
+name: Deploy prod
+on:
+  push:
+    branches: [ prod ]
+  pull_request:
+    branches: [ prod ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+      - name: Deploy
+        run: bash deploy.sh ${{ github.iremus_server_url }}
