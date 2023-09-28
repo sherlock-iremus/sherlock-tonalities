@@ -112,7 +112,7 @@ export const Landing = () => {
                   <Stack flex={1}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
                       <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                        {`Analytical projects for ${(scores[selectedScoreIndex].scoreTitle, scoreComposer)}`}
+                        {`Analytical projects for ${scores[selectedScoreIndex].scoreTitle}`}
                       </ListSubheader>
                       <Stack>
                         <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
