@@ -23,4 +23,8 @@ jobs:
       - name: Build
         run: yarn build
       - name: Deploy
-        run: mv dist tonalities && scp -r tonalities ${{ github.iremus_server_url }}:sherlock/apache/public_html/
+        env:
+          SERVER: ${{ secrets.iremus_server_url }}
+        run: |
+          mv dist tonalities
+          scp -r tonalities "$SERVER":sherlock/apache/public_html/
