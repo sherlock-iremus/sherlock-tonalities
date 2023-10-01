@@ -131,8 +131,8 @@ WHERE
  }
 `
 
-export const exportProjectToMeta = projectIri => `
-BASE <http://data-iremus.huma-num.fr/id/>
+export const exportProjectToMeta = ({ projectIri, scoreUrl}) => `
+PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX core: <https://w3id.org/polifonia/ontology/core/>
 PREFIX mm: <https://w3id.org/polifonia/ontology/music-meta/>
@@ -150,7 +150,8 @@ CONSTRUCT {
     ?project mr:hasAnnotation ?annotation.
 
     ?score a mr:MusicContent.
-    ?score a mm:Score.
+    ?score a mm:DigitalScore.
+    ?score owl:sameAs <${scoreUrl}>.
     ?score mr:hasAnnotation ?annotation.
     ?score mr:hasFragment ?notes.
 

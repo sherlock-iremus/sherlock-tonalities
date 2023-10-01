@@ -5,7 +5,7 @@ import { getIri } from '../../utils'
 import { useEffect, useState } from 'react'
 import scores from '../../config/scores.json'
 import { useDispatch } from 'react-redux'
-import { setScoreAnnotator } from '../../services/globals'
+import { setScoreUrl, setScoreAnnotator } from '../../services/globals'
 import { Dialog, DialogTitle, IconButton, Stack, Tooltip } from '@mui/material'
 import { UploadFile } from '@mui/icons-material'
 
@@ -24,9 +24,11 @@ export const ScoreAnnotator = () => {
   }
 
   const getFile = async () => {
-    const url = scores.find(score => score.scoreIri === getIri(scoreId))?.meiUrl
-    if (url) setFile(await (await fetch(url)).text())
-    else if (state.upload) setFile(await state.upload.text())
+    const scoreUrl = scores.find(score => score.scoreIri === getIri(scoreId))?.meiUrl
+    if (scoreUrl) {
+      setFile(await (await fetch(scoreUrl)).text())
+      dispatch(setScoreUrl(scoreUrl))
+    } else if (state.upload) setFile(await state.upload.text())
     else setIsDialogOpen(true)
     dispatch(setScoreAnnotator({ scoreIri: getIri(scoreId), projectIri: getIri(projectId) }))
   }

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   projectIri: null,
   scoreIri: null,
+  scoreUrl: null,
   colorIndex: Math.floor(Math.random() * 10),
   isUserConnected: true,
   selectedNotes: [],
@@ -66,6 +67,9 @@ const globals = createSlice({
       state.selectedAnnotations.pop()
       state.selectedAnnotation = state.selectedAnnotations[state.selectedAnnotations.length - 1]
     },
+    setScoreUrl: (state, action) => {
+      state.scoreUrl = action.payload
+    },
     setIsSubSelecting: (state, action) => {
       state.isSubSelecting = !state.isSubSelecting
     },
@@ -89,4 +93,5 @@ export const {
   setSelectedConcepts,
   setIsSubSelecting,
   setPreviousAnnotation,
+  setScoreUrl
 } = globals.actions
