@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Menu } from '../components/Menu'
 import { List, ListItemButton, ListItemText } from '@mui/material'
 import { useExportProjectQuery, useExportProjectToMetaQuery } from '../services/sparql'
+import { useSelector } from 'react-redux'
 
 export const ExportMenu = ({ projectIri, filename, contextMenu, setContextMenu }) => {
   const [isDownloadingCidoc, setIsDownloadingCidoc] = useState(false)

@@ -131,7 +131,7 @@ WHERE
  }
 `
 
-export const exportProjectToMeta = ({ projectIri, scoreUrl}) => `
+export const exportProjectToMeta = ({ projectIri, scoreUrl }) => `
 PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX core: <https://w3id.org/polifonia/ontology/core/>
@@ -143,6 +143,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
 PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 CONSTRUCT {
     ?project a mr:Analysis.
     ?project mr:involvesAnalyst ?analyst.

@@ -27,7 +27,7 @@ export const ScoreAnnotator = () => {
     const scoreUrl = scores.find(score => score.scoreIri === getIri(scoreId))?.meiUrl
     if (scoreUrl) {
       setFile(await (await fetch(scoreUrl)).text())
-      dispatch(setScoreUrl(scoreUrl))
+      dispatch(setScoreUrl(encodeURI(scoreUrl)))
     } else if (state.upload) setFile(await state.upload.text())
     else setIsDialogOpen(true)
     dispatch(setScoreAnnotator({ scoreIri: getIri(scoreId), projectIri: getIri(projectId) }))
