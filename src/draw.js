@@ -12,8 +12,8 @@ export const circleShape = (points, hullPadding) => {
 }
 
 export const noteCoords = note => [
-  note.getElementsByTagName('use')[0].x.animVal.value + 140, // x
-  note.getElementsByTagName('use')[0].y.animVal.value, // y
+  note.getElementsByTagName('use')[0]?.x.animVal.value + 140, // x
+  note.getElementsByTagName('use')[0]?.y.animVal.value, // y
 ]
 
 const getSystem = node => (node?.classList.contains('system') ? node : node.parentNode && getSystem(node.parentNode))
