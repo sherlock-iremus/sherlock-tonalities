@@ -81,7 +81,7 @@ export const Landing = () => {
                 </ListItem>
                 <ListSubheader>Available scores</ListSubheader>
                 <List disablePadding dense sx={{ overflow: 'auto' }}>
-                  {scores.map(({ scoreIri, scoreTitle }, index) => (
+                  {scores.map(({ scoreIri, scoreTitle, scoreComposer }, index) => (
                     <ListItem
                       key={scoreIri}
                       disablePadding
@@ -98,7 +98,7 @@ export const Landing = () => {
                         <ListItemIcon>
                           <AudioFile />
                         </ListItemIcon>
-                        <ListItemText primary={scoreTitle} secondary="Josquin des Prez" />
+                        <ListItemText primary={scoreTitle} secondary={scoreComposer} />
                       </ListItemButton>
                     </ListItem>
                   ))}

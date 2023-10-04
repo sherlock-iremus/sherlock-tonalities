@@ -1,492 +1,596 @@
 [
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Bach/Bach_Fugues/Fugue_I_in_C_major_BWV_846_-_Well_Tempered_Clavier_First_Book.mei",
+    "scoreTitle": "Fugue I In C major",
+    "scoreComposer": "Johann Sebastian Bach",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/20d44fd2-134d-413c-a929-a0a396a04d37"
+  },
+  {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3011.mei",
     "scoreTitle": "Si vous n'avez",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/db84fee7-2cdc-45e3-8a60-86b25f653d0a"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3005.mei",
     "scoreTitle": "Jay bien cause de lamenter",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/123ff7a1-c292-4622-88db-d499988507a2"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2904.mei",
     "scoreTitle": "Douleur me bat",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/a1122568-3492-48b1-9cff-e81010da8a94"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2910.mei",
     "scoreTitle": "Je me complains",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/746234a6-145a-49dd-b9f8-8beb55dd18ce"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2723.mei",
     "scoreTitle": "L'heure est venue / Circumdederunt me",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/d8c9b568-6bd5-4150-93dd-39b0feafaa9d"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2736.mei",
     "scoreTitle": "Vray dieu d'amour",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/bd47a914-d402-498c-82dc-5c5f99b83dc2"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2722.mei",
     "scoreTitle": "La plus des plus",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/a616f383-67c9-4b4a-a64e-d8c4690268fc"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2911.mei",
     "scoreTitle": "Je ne me puis tenir d'aimer",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/1cedc446-7a84-4aaa-904e-8d2743d27c96"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2905.mei",
     "scoreTitle": "Du mien amant",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ec0a9d80-96a6-4f50-8a55-2050c994b954"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3004.mei",
     "scoreTitle": "Fors seulement [Bologna 142 fragment]",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/01787aea-c3d4-454e-aa16-738c1c404a74"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3010.mei",
     "scoreTitle": "Se congie prens",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/6548fe42-05f1-4daf-b567-c1d9cca41aef"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3006.mei",
     "scoreTitle": "Nimphes, nappés / Circumdederunt me",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/24737ab1-8ece-4183-ae87-b60557a16a01"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3012.mei",
     "scoreTitle": "Tenez moy en voz bras",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/eff75906-7f73-48f0-bda9-185a4ddec070"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2913.mei",
     "scoreTitle": "L’amye a tous / Je ne viz oncques",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/efd4b28e-aefc-43f5-95c0-2663370915f1"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2907.mei",
     "scoreTitle": "Faulte d'argent",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/74ba4d0c-9e2a-44d5-9fa1-9abc28510af9"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2734.mei",
     "scoreTitle": "Si j'ay perdu mon amy",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/6504d1b7-baee-46c3-a3ad-145f89516cad"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2720.mei",
     "scoreTitle": "La belle se siet",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/f6ba2318-1ac4-4f4e-b2ac-422f55b59ed5"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2721.mei",
     "scoreTitle": "La Bernardina",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/c22b933c-8fc4-4e6c-a633-6b79665a4eaa"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2735.mei",
     "scoreTitle": "Si jeusse Marion",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/5a26fd7d-d78c-41c2-a4ec-5434e87e2071"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2906.mei",
     "scoreTitle": "En non saichant",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/6da24c60-ef13-4fa2-a1cb-4d95e3bcd684"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2912.mei",
     "scoreTitle": "Propter peccata quae peccatis (=La Spagna)",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ec1eb635-91a0-4173-8e0c-37f08d9c212c"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3013.mei",
     "scoreTitle": "Vous l'arez",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/28506432-90e3-4e89-8841-5b3f81d55343"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3007.mei",
     "scoreTitle": "Petite camusette",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/d5bc0fc7-c299-4f39-93ed-9eddc816fd44"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3003.mei",
     "scoreTitle": "Baisiez moy",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/0e97a852-9cf4-400a-94d9-a24d7ed87fc7"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3017.mei",
     "scoreTitle": "Il n'est plaisir",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/8b5c6768-49e0-4066-8899-a5e09406eea3"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2916.mei",
     "scoreTitle": "N'avez point neu [=Mala se nea]",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/e0f8c0af-54fa-434c-9740-989ffa7111cd"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2719.mei",
     "scoreTitle": "Je n'ose plus",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/9936e195-90aa-45db-bd91-8e82e38f18bd"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2731.mei",
     "scoreTitle": "Petite camusette",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/48158a7e-990a-4a5f-be0e-a2725a6d39e2"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2725.mei",
     "scoreTitle": "Marguerite",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/aafc1560-fa53-458d-9760-2573fae658da"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2724.mei",
     "scoreTitle": "Madame helas",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/681c8499-a846-47cc-a53e-7886f4973c31"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2730.mei",
     "scoreTitle": "Pensif mari",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/20f0d46b-559d-4bad-80fc-842ed55d7f84"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2903.mei",
     "scoreTitle": "Cueurs desolez par toute nation / Plorans ploravit",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/253f0511-29f1-4206-a3a3-904bc6f2e869"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2917.mei",
     "scoreTitle": "N'esse pas ung grant deplaisir",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/c347276f-9e99-4814-b5cb-d9248e04efe0"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3002.mei",
     "scoreTitle": "Allegez moy",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/80748118-fca2-433f-b12c-4d87a5f9bfbc"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3014.mei",
     "scoreTitle": "Vous ne l'aurez pas",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/fbb5ba73-7190-4609-9073-1307171e4fce"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2901.mei",
     "scoreTitle": "Cent mille regretz",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/493f6933-11f9-4d41-bc71-ec0b38dc402d"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2915.mei",
     "scoreTitle": "Mi lares vous tousjours languir",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/e302141a-b0e7-4211-b259-e2dcb9b8200f"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2726.mei",
     "scoreTitle": "Mes pensees",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/a5d04120-877d-4601-b4db-9b443560a90e"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2732.mei",
     "scoreTitle": "Quant je vous voye",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/1e1a15bc-737c-45ba-9179-412a350378b0"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2914.mei",
     "scoreTitle": "Ma bouche rit (à 5)",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/e6a29fb3-e5c0-4d71-9f0c-e5f07ea11771"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3001.mei",
     "scoreTitle": "Adieu mes amours (texted Ave Maria; 3 vv. extant)",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/28b5c032-2548-40d7-b26a-bb9bef04a4a3"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2813.mei",
     "scoreTitle": "En l'ombre d'ung buissonnet",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/bc2448bd-8a5f-4850-82c3-9c86c4422219"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2807.mei",
     "scoreTitle": "Comment peult avoir joye",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/a21b1155-b07f-4b34-8898-737056cab7cc"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2806.mei",
     "scoreTitle": "Bergerette savoysienne",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/a3f1a528-9d7b-4642-b407-d40e356dac02"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2812.mei",
     "scoreTitle": "El grillo",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/c1eae32e-6764-4ec8-b7bd-838f00ff168e"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2838.mei",
     "scoreTitle": "Textless Piece 3",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ddb63ef7-8301-4d93-96f6-684dd1699860"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2804.mei",
     "scoreTitle": "Baisiez moy",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/5702df9c-9914-499d-816c-7a404b0a66e2"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2810.mei",
     "scoreTitle": "Dictez moy bergere",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/4b493e17-6ab1-4ab3-806d-5f2e4abac342"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2811.mei",
     "scoreTitle": "Dulces exuviae",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/1455eeab-ab22-4c3a-ad74-2ea8f6fc8231"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2805.mei",
     "scoreTitle": "Belle pour l'amour de vous",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/61173593-2fb3-4f74-8a46-740079b0c549"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2839.mei",
     "scoreTitle": "Textless Piece 4",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/4dbd1887-a396-47e8-a404-698348f4d76d"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2801.mei",
     "scoreTitle": "A l'heure",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/22a04ccb-3de9-4a69-876c-247022119d6e"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2815.mei",
     "scoreTitle": "Fama malum",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/5cc07132-f6b0-4bea-930b-08d8408760ee"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2829.mei",
     "scoreTitle": "Qui belles amours",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/bd15d844-38a1-47eb-ab12-18c5bb42f969"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2828.mei",
     "scoreTitle": "Plus nulz regretz",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/1a0dc975-db57-4028-a080-1c2764f7381b"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2814.mei",
     "scoreTitle": "Entré je suis",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/a4f02158-3fe9-4ac2-b0cc-8d2ca224fe4c"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2816.mei",
     "scoreTitle": "Fors seulement II",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/5ccdaa4a-a90b-45cc-997b-1ba17ae729a4"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2802.mei",
     "scoreTitle": "Ach hulff mich leid",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/4231c6a2-05bf-4277-8e57-2085cbfa4f24"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2803.mei",
     "scoreTitle": "Adieu mes amours / Adieu mes amours",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ce340b53-65cd-467e-941f-f71deea44b76"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2817.mei",
     "scoreTitle": "Guillaume se va chaufer",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/9aa51823-6b42-4c45-934b-d1e7a8e195c2"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2832.mei",
     "scoreTitle": "Si j'ay perdu mon amy",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/f2de8593-5fc9-4469-bef4-205b63b3cb50"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2826.mei",
     "scoreTitle": "Mon seul plaisir",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/49b99237-049d-41e4-bbe1-de7548b2ea37"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2827.mei",
     "scoreTitle": "Plus n'estes ma maistresse",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/605f66ec-ef88-46e6-84bf-bb9852aa51ae"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2833.mei",
     "scoreTitle": "Tant vous aimme",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ed4aee1e-65f0-4a29-b57f-750e907a8ccf"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2819.mei",
     "scoreTitle": "Je ris",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/0956661a-5370-447f-80ea-1751fac8fc16"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2825.mei",
     "scoreTitle": "Mille regretz",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/eeeb66de-5ba5-4ee1-94d1-5370bbb31eb5"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2831.mei",
     "scoreTitle": "Se congie prens",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/c3dbdc64-57d9-41aa-88f7-006bc1d1ecc8"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2830.mei",
     "scoreTitle": "Scaramella",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/0b67d5c0-650c-47f5-9e42-666785b95831"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2818.mei",
     "scoreTitle": "In te, domine, speravi",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ce0ec5fc-2a15-43c6-b3ce-933673a51bed"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2820.mei",
     "scoreTitle": "Je sey bien dire",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/8761e3be-b1c8-4a79-a243-fd61c2cfe17c"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2834.mei",
     "scoreTitle": "Tous les regretz",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/f51bd021-d537-4744-8597-c8447f20f6a6"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2808.mei",
     "scoreTitle": "Cueurs desolez",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/bd1b0ed0-be69-4dec-af6c-405801e77489"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2809.mei",
     "scoreTitle": "De tous biens plaine",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/b79f6d49-6ccc-4011-a21a-75d3405b735e"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2835.mei",
     "scoreTitle": "Une musque de Biscaye",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/4d8ba5e9-32bd-45b2-955e-09050b4eb2a3"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2821.mei",
     "scoreTitle": "Leal schray tante",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/3a400e05-7ab2-46c8-aa7e-81e606265d64"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2837.mei",
     "scoreTitle": "Vivrai je tousjours",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/b6394ae5-223e-4dbf-9fb4-1633a8cfa587"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2823.mei",
     "scoreTitle": "L'homme armé",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/16fb308b-1a50-47e8-adf9-a87f49075916"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2822.mei",
     "scoreTitle": "Le villain",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/8e373e42-5455-4ea6-a638-a132c38653f6"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2836.mei",
     "scoreTitle": "Vive le roy",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/84cc7c0c-08bf-440a-824f-6308d1ffa32e"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2919.mei",
     "scoreTitle": "Parfons regretz",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/eaf2b71b-f2f2-4771-90c3-fa412a58da24"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2918.mei",
     "scoreTitle": "Nymphes des bois / Requiem",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/4e0aca31-db58-4b07-8b8b-af704a562e5c"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2729.mei",
     "scoreTitle": "O Venus bant",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/f5ec89b1-8162-461a-b534-d4ffd1ac5298"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2728.mei",
     "scoreTitle": "N’avez point veu [=Mala se nea]",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/4b94f8f1-500c-4bb5-9eb4-5b2997091161"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3009.mei",
     "scoreTitle": "Regretz sans fin",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/702e8216-ae7a-4edb-9919-e2a294f90e54"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2840.mei",
     "scoreTitle": "Fors seulement III",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/119387df-7645-4e70-aa15-58e8d7b6cef0"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2920.mei",
     "scoreTitle": "Plaine de deuil",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/edbd9115-a869-4639-a593-5353460605a4"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2908.mei",
     "scoreTitle": "Incessament livré",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/2483b0ab-b90d-4bf7-9442-2a19c84851fb"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2909.mei",
     "scoreTitle": "Incessament mon povre cueur",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/26e8925f-69ea-4eb0-b850-6f7a125d5fca"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2921.mei",
     "scoreTitle": "Plusieurs regretz",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/8f6daf14-4ad0-4323-b195-b5cc5117f50e"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3008.mei",
     "scoreTitle": "Pour souhaitter",
+    "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/87a99ac4-4d81-4c9b-b94a-723b4558e0ec"
   },
   {
-    "scoreIri": "http://data-iremus.huma-num.fr/id/88cab62a-2697-4603-b3fd-d887ce230742",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2701_CGN.mei",
     "scoreTitle": "A la mort / Monstra te esse matrem",
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2701_CGN.mei"
+    "scoreComposer": "Josquin des Prez",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/88cab62a-2697-4603-b3fd-d887ce230742"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Praeter.mei",
-    "scoreIri": "http://data-iremus.huma-num.fr/id/ec531913-04ad-4fa7-bd96-9659a6eceed7",
-    "scoreTitle": "Praeter rerum seriem"
+    "scoreTitle": "Praeter rerum seriem",
+    "scoreComposer": "Adrian Willaert",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ec531913-04ad-4fa7-bd96-9659a6eceed7"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Giunto.mei",
-    "scoreIri": "http://data-iremus.huma-num.fr/id/957d5328-27ff-4d91-86c2-eeb719fffcde",
-    "scoreTitle": "Giunto m'à Amor fra belle et crude braccia"
+    "scoreTitle": "Giunto m'à Amor fra belle et crude braccia",
+    "scoreComposer": "Adrian Willaert",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/957d5328-27ff-4d91-86c2-eeb719fffcde"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Josquin_Inviolata.mei",
-    "scoreIri": "http://data-iremus.huma-num.fr/id/7148e26d-f82b-4d34-9316-49e50da32972",
-    "scoreTitle": "Inviolata integra et casta es"
+    "scoreTitle": "Inviolata integra et casta es",
+    "scoreComposer": "Josquin des Prez",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/7148e26d-f82b-4d34-9316-49e50da32972"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Laudate_pueri.mei",
-    "scoreIri": "http://data-iremus.huma-num.fr/id/ca471109-3ead-49fc-b4ba-8d6d869da56d",
-    "scoreTitle": "Laudate pueri Dominum"
+    "scoreTitle": "Laudate pueri Dominum",
+    "scoreComposer": "Adrian Willaert",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ca471109-3ead-49fc-b4ba-8d6d869da56d"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Veni_Sancte_6vv.mei",
-    "scoreIri": "http://data-iremus.huma-num.fr/id/f158e5f5-8d1f-43d0-8e85-1892824798e1",
-    "scoreTitle": "Veni Sancte Spiritus"
+    "scoreTitle": "Veni Sancte Spiritus",
+    "scoreComposer": "Adrian Willaert",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/f158e5f5-8d1f-43d0-8e85-1892824798e1"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Hellinck_Beati.mei",
     "scoreIri": "http://data-iremus.huma-num.fr/id/5c78cbd8-d7f0-4911-a023-6b0bcf78f7ef",
-    "scoreTitle": "Beati omnes qui timent Dominum"
+    "scoreTitle": "Beati omnes qui timent Dominum",
+    "scoreComposer": "Lupus Hellinck",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Hellinck_Beati.mei"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Hellinck_In_convertendo.mei",
-    "scoreIri": "http://data-iremus.huma-num.fr/id/709bcdaf-811d-45f8-af50-29db8318bd48",
-    "scoreTitle": "In Convertendo Dominus"
+    "scoreTitle": "In Convertendo Dominus",
+    "scoreComposer": "Lupus Hellinck",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/709bcdaf-811d-45f8-af50-29db8318bd48"
   }
 ]

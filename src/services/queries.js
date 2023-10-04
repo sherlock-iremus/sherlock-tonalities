@@ -131,7 +131,8 @@ WHERE
  }
 `
 
-export const exportProjectToMeta = projectIri => `
+export const exportProjectToMeta = ({ projectIri, scoreUrl }) => `
+PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX core: <https://w3id.org/polifonia/ontology/core/>
 PREFIX mm: <https://w3id.org/polifonia/ontology/music-meta/>
@@ -139,10 +140,10 @@ PREFIX mr: <https://w3id.org/polifonia/ontology/music-representation/>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
 PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 CONSTRUCT {
     ?project a mr:Analysis.
     ?project mr:involvesAnalyst ?analyst.
@@ -150,7 +151,8 @@ CONSTRUCT {
     ?project mr:hasAnnotation ?annotation.
 
     ?score a mr:MusicContent.
-    ?score a mm:Score.
+    ?score a mm:DigitalScore.
+    ?score owl:sameAs <${scoreUrl}>.
     ?score mr:hasAnnotation ?annotation.
     ?score mr:hasFragment ?notes.
 
@@ -180,13 +182,13 @@ WHERE {
     ?annotation crm:P140_assigned_attribute_to ?notes.
     ?annotation dcterms:creator ?annotator.
     ?annotation dcterms:created ?annotationDate.
-    ?annotation sherlock:has_document_context ?score.
     ?annotation crm:P141_assigned ?entity.
     
     ?observation crm:P140_assigned_attribute_to ?entity.
     ?observation crm:P177_assigned_property_of_type crm:P2_has_type.
     ?observation dcterms:created ?observationDate.
     ?observation crm:P141_assigned ?concept.
+    ?observation sherlock:has_document_context ?score.
 
     ?linking crm:P177_assigned_property_of_type <guillotel:has_line>.
     ?linking crm:P141_assigned ?sub.

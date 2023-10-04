@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 import { Menu } from '../components/Menu'
 import { List, ListItemButton, ListItemText } from '@mui/material'
 import { useExportProjectQuery, useExportProjectToMetaQuery } from '../services/sparql'
+import { useSelector } from 'react-redux'
 
 export const ExportMenu = ({ projectIri, filename, contextMenu, setContextMenu }) => {
   const [isDownloadingCidoc, setIsDownloadingCidoc] = useState(false)
   const [isDownloadingMeta, setIsDownloadingMeta] = useState(false)
+  const { scoreUrl } = useSelector(state => state.globals)
   const { data: cidocData } = useExportProjectQuery(projectIri, { skip: !isDownloadingCidoc })
-  const { data: metaData } = useExportProjectToMetaQuery(projectIri, { skip: !isDownloadingMeta })
+  const { data: metaData } = useExportProjectToMetaQuery({ scoreUrl, projectIri }, { skip: !isDownloadingMeta })
 
   const downloadFile = async data => {
     try {
