@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import models from '../config/models.json'
 
-const baseUrl = 'https://raw.githubusercontent.com/felix-commits/modal-tonal-ontology/patch-2/otherModels/JSON/'
-// https://raw.githubusercontent.com/polifonia-project/modal-tonal-ontology/main/otherModels/JSON/'
+const baseUrl = 'https://raw.githubusercontent.com/polifonia-project/modal-tonal-ontology/main/otherModels/JSON/'
 
 export const model = createApi({
   reducerPath: 'model',
@@ -11,9 +10,7 @@ export const model = createApi({
     getModel: builder.query({
       query: index => ({ url: models[index].filename }),
       transformResponse: response => {
-        const classes = response
-          .filter(c => c['@type'].includes('http://www.w3.org/2002/07/owl#Class'))
-          .filter(c => c['@id'].includes('#'))
+        const classes = response.filter(c => c['@type'].includes('http://www.w3.org/2002/07/owl#Class'))
         const classesIri = classes.map(c => c['@id'])
         const classesWithParent = classes.map(c => {
           const parent = c['http://www.w3.org/2000/01/rdf-schema#subClassOf']?.find(p =>
