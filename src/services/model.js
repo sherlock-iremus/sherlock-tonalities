@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import models from '../config/models.json'
 
-const baseUrl = 'https://raw.githubusercontent.com/polifonia-project/modal-tonal-ontology/main/otherModels/JSON/'
+const baseUrl = 'https://raw.githubusercontent.com/polifonia-project/music-analysis-ontology/main/annotationModels/JSON/'
 
 export const model = createApi({
   reducerPath: 'model',
