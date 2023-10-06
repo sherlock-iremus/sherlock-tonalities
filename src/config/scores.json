@@ -1,9 +1,15 @@
 [
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Bach/Bach_Fugues/Fugue_I_in_C_major_BWV_846_-_Well_Tempered_Clavier_First_Book.mei",
-    "scoreTitle": "Fugue I In C major",
-    "scoreComposer": "Johann Sebastian Bach",
-    "scoreIri": "http://data-iremus.huma-num.fr/id/20d44fd2-134d-413c-a929-a0a396a04d37"
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2705_CGN.mei",
+    "scoreTitle": "Ce povre mendiant / Pauper sum ego",
+    "scoreComposer": "Josquin des Prez",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/76ca25c6-c5e6-45a8-929d-227b170f376b"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos2706_C.mei",
+    "scoreTitle": "De tous biens plaine",
+    "scoreComposer": "Josquin des Prez",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/a216e0ff-1f00-4956-815f-66faad119828"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Jos3011.mei",
