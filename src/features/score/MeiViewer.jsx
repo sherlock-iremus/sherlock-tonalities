@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
+import { Alert, Chip, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +17,7 @@ import { ThemePicker } from '../ThemePicker'
 import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
+import { DEV_ENV } from '../../config/services'
 
 export const MeiViewer = ({ file }) => {
   const theme = useTheme()
@@ -53,7 +54,7 @@ export const MeiViewer = ({ file }) => {
   const reloadVerovio = page => {
     verovio.innerHTML = toolkit.renderToSVG(page)
 
-    const notes = document.querySelectorAll('.note')
+    const notes = document.querySelectorAll('.note, .rest, .mRest')
     const svg = verovio?.children[0]
     svg?.addEventListener('click', e => e.target === svg && dispatch(setSelectedNotes()))
     notes.forEach(note => {
@@ -149,6 +150,7 @@ export const MeiViewer = ({ file }) => {
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
           <ThemePicker />
+          <Alert severity="warning">Test environment</Alert>
           <AccountMenu />
         </Stack>
       </Stack>
@@ -157,7 +159,14 @@ export const MeiViewer = ({ file }) => {
           <Model />
         </Stack>
 
-        <Stack flex={2} borderRadius={3} bgcolor="white" boxShadow={1} overflow="scroll">
+        <Stack
+          flex={2}
+          borderRadius={3}
+          sx={({ palette }) => ({ border: 'solid ' + palette.primary[100] })}
+          bgcolor="white"
+          boxShadow={1}
+          overflow="scroll"
+        >
           <Loader isLoading={!pageCount} />
           <Stack id="verovio" sx={verovioStyle(color)} />
           {selectedNotes.map(noteId => (

@@ -80,7 +80,7 @@ export const Project = () => {
               ) : (
                 <Stack flex={1} justifyContent="center" paddingY={4}>
                   <Typography textAlign="center" color="text.secondary" fontSize={14} padding={2}>
-                    No created annotation, start by selecting notes and assigning them concepts
+                    No created annotation, start by selecting score items and assigning them concepts
                   </Typography>
                 </Stack>
               )}

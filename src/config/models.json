@@ -10,8 +10,8 @@
     "filename": "Fugue.json"
   },
   {
-    "baseIri": "http://modality-tonality.huma-num.fr/Guillotel_2022#",
-    "name": "Guillotel 2022",
-    "filename": "cadences_Guillotel.jsonld"
+    "baseIri": "https://w3id.org/polifonia/ontology/music-analysis/zarlino/",
+    "name": "Zarlino",
+    "filename": "Zarlino.json"
   }
 ]

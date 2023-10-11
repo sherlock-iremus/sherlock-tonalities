@@ -14,7 +14,7 @@ export const stringToColor = string => {
 
 export const getUuid = iri => iri.split('/').pop()
 
-export const removeBaseIri = iri => iri.split('#').pop()
+export const removeBaseIri = iri => (iri.includes('#') ? iri.split('#').pop() : iri.split('/').pop())
 
 export const getPage = iri => Number(iri.split('_').pop())
 
@@ -30,6 +30,7 @@ export const getModel = iri =>
   (iri?.includes('modal-tonal') && 'Zarlino 1558') ||
   (iri?.includes('uillotel') && 'Guillotel 2022') ||
   (iri?.includes('ugue') && 'Fugue') ||
+  (iri?.includes('zarlino') && 'Zarlino') ||
   ''
 
 export const createUuid = () => URL.createObjectURL(new Blob([])).slice(-36)
