@@ -60,8 +60,8 @@ export const AnnotationPage = () => {
               <ListItemText
                 primary={
                   selectedAnnotation?.notes.length === 1
-                    ? 'Entity with one note'
-                    : `Entity with ${selectedAnnotation?.notes.length} notes`
+                    ? 'Individual with one item'
+                    : `Individual with ${selectedAnnotation?.notes.length} items`
                 }
               ></ListItemText>
             </ListItem>
@@ -70,7 +70,7 @@ export const AnnotationPage = () => {
                 <AddCircle />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete entity">
+            <Tooltip title="Delete individual">
               <IconButton edge="end" color="inherit">
                 <Cancel />
               </IconButton>

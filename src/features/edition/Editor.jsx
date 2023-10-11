@@ -56,8 +56,8 @@ export const Editor = () => {
           </ListItemIcon>
           <ListItemText
             primary={`
-              ${isSubSelecting ? 'Sub' : 'New '} entity with ${
-              selectedNotes.length === 1 ? 'one note' : selectedNotes.length + ' notes'
+              ${isSubSelecting ? 'Sub' : 'New '} individual with ${
+              selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
             }`}
             secondary="Select a concept to assign it"
           />

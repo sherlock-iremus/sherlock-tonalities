@@ -90,8 +90,8 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
             <Stack flex={1} spacing={0.5} alignItems="center">
               <ListItemText
                 sx={{ paddingLeft: 1, textAlign: 'center' }}
-                primary={isSubEntity ? 'Sub-entity' : 'Entity'}
-                secondary={notes.length === 1 ? 'with one note' : `with ${notes.length} notes`}
+                primary={isSubEntity ? 'Sub-individual' : 'Individual'}
+                secondary={notes.length === 1 ? 'with one item' : `with ${notes.length} items`}
               />
               {assignments?.map(assignment => (
                 <Assignment key={assignment.assignment} {...assignment} {...{ refetch, color }} />
