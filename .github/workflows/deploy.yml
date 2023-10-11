@@ -12,23 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        
+        uses: actions/checkout@v3  
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn install
-
       - name: Build
         run: yarn build
-      
        - name: Rename
         run: mv dist tonalities
-
        - name: Deploy
         uses: appleboy/scp-action@v0.1.4
         with:
