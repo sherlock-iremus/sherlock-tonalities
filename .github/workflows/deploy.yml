@@ -1,9 +1,9 @@
 name: Deploy prod
 on:
   push:
-    branches: [ prod ]
+    branches: [prod]
   pull_request:
-    branches: [ prod ]
+    branches: [prod]
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3  
+        uses: actions/checkout@v3
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -22,13 +22,13 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
-       - name: Rename
+      - name: Rename
         run: mv dist tonalities
-       - name: Deploy
+      - name: Deploy
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "tonalities"
+          source: 'tonalities'
           target: sherlock/apache/public_html/
