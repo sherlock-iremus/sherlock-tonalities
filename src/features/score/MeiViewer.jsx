@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Alert, Chip, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
+import { IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +17,6 @@ import { ThemePicker } from '../ThemePicker'
 import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
-import { DEV_ENV } from '../../config/services'
 
 export const MeiViewer = ({ file }) => {
   const theme = useTheme()
@@ -150,7 +149,6 @@ export const MeiViewer = ({ file }) => {
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
           <ThemePicker />
-          <Alert severity="warning">Test environment</Alert>
           <AccountMenu />
         </Stack>
       </Stack>
