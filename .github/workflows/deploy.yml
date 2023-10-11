@@ -22,13 +22,11 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
-      - name: Rename
-        run: mv dist tonalities
       - name: Deploy
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: 'tonalities'
-          target: sherlock/apache/public_html/
+          source: tonalities/*
+          target: sherlock/apache/public_html/tonalities

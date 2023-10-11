@@ -6,5 +6,8 @@ export default defineConfig({
   server: {
     open: true,
   },
+  build: {
+    outDir: './tonalities',
+  },
   plugins: [react()],
 })
