@@ -13,18 +13,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'yarn'
+
       - name: Install dependencies
         run: yarn install
+
       - name: Build
         run: yarn build
-      - name: Deploy
-        env:
-          SERVER: ${{ secrets.iremus_server_url }}
-        run: |
-          mv dist tonalities
-          scp -r tonalities "$SERVER":sherlock/apache/public_html/
+      
+       - name: Rename
+        run: mv dist tonalities
+
+       - name: Deploy
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "tonalities"
+          target: sherlock/apache/public_html/
