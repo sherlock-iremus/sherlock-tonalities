@@ -31,7 +31,6 @@ sherlock-tonalities.code-workspace
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-/deploy.sh
 
 /dist
 /tonalities
