@@ -13,7 +13,7 @@ WHERE {
     ?annotation dcterms:creator ?author.
     NOT EXISTS {
         ?supAnnotation crm:P141_assigned ?entity.
-        ?supAnnotation crm:P177_assigned_property_of_type <guillotel:has_line>.
+        ?supAnnotation crm:P177_assigned_property_of_type <crm:P106_is_composed_of>.
     }
 }
 `
@@ -190,7 +190,7 @@ WHERE {
     ?observation crm:P141_assigned ?concept.
     ?observation sherlock:has_document_context ?score.
 
-    ?linking crm:P177_assigned_property_of_type <guillotel:has_line>.
+    ?linking crm:P177_assigned_property_of_type <crm:P106_is_composed_of>.
     ?linking crm:P141_assigned ?sub.
     ?linking crm:P140_assigned_attribute_to ?sup.
     ?subAnnotation crm:P141_assigned ?sub.
