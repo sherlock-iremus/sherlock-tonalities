@@ -10,7 +10,7 @@ import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/s
 import { assignArbitraryText, assignSubEntity, createEntity } from '../../helper'
 
 export const Editor = () => {
-  const { selectedNotes, isSubSelecting, scoreIri, projectIri, selectedAnnotation } = useSelector(
+  const { selectedNotes, isSubSelecting, scoreIri, projectIri, selectedAnnotation, noteCount } = useSelector(
     state => state.globals
   )
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
@@ -20,6 +20,8 @@ export const Editor = () => {
   })
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
+
+  const isScoreSelected = selectedNotes.includes(scoreIri) || false
 
   const createAnnotation = async concept => {
     const entityIri = await createEntity({ selectedNotes, scoreIri, projectIri, postAnnotation })
@@ -53,13 +55,17 @@ export const Editor = () => {
           <ListItemIcon>
             <Lyrics />
           </ListItemIcon>
-          <ListItemText
-            primary={`
+          {isScoreSelected ? (
+            <ListItemText primary={`Score with ${noteCount} items`} secondary="Select a concept to assign it" />
+          ) : (
+            <ListItemText
+              primary={`
               ${isSubSelecting ? 'Sub' : 'New '} individual with ${
-              selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
-            }`}
-            secondary="Select a concept to assign it"
-          />
+                selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
+              }`}
+              secondary="Select a concept to assign it"
+            />
+          )}
         </ListItem>
         <Stack flex={1} direction="row" alignItems="center" paddingRight={1}>
           <Stack flex={1}>
