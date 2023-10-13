@@ -22,7 +22,8 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "deploy": "./deploy.sh"
   },
   "packageManager": "yarn@3.6.3"
 }
