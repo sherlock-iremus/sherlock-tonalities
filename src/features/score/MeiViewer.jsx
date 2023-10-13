@@ -151,7 +151,7 @@ export const MeiViewer = ({ file }) => {
               <ZoomIn />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Select entiere score">
+          <Tooltip title="Select whole score">
             <Checkbox checked={isScoreSelected} onChange={() => dispatch(setSelectedNotes(scoreIri))} />
           </Tooltip>
         </Stack>
