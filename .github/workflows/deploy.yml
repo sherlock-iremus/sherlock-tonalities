@@ -28,6 +28,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           source: tonalities/*
           target: '~/sherlock/apache/public_html/tonalities'
           overwrite: true
