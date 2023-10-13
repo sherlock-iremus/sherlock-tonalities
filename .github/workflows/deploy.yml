@@ -1,10 +1,10 @@
-name: Deploy prod
+name: Deploy to huma-num
 on:
+  workflow_dispatch:
   push:
     branches: [prod]
   pull_request:
     branches: [prod]
-  workflow_dispatch:
 
 jobs:
   deploy:
