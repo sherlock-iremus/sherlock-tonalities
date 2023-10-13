@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getPage, stringToColor } from '../utils'
 //import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 //import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
-import { DEV_ENV } from '../config/services'
 import {
   exportProject,
   exportProjectToMeta,
@@ -15,7 +14,7 @@ import {
   getProjects,
 } from './queries'
 
-const SPARQL_ENDPOINT = DEV_ENV ? 'http://localhost:3030/iremus' : 'https://data-iremus.huma-num.fr/sparql'
+const SPARQL_ENDPOINT = 'https://data-iremus.huma-num.fr/sparql'
 
 export const sparql = createApi({
   reducerPath: 'sparql',

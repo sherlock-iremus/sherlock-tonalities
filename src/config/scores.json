@@ -1,24 +1,24 @@
 [
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Mangani/05-fontanelli--i_vo_piangendo----0-score.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/78749a82c6f304942a84bdd0234babda2a9affcf/scores/Fontanelli/Fontanelli%20_I'_vo_piangendo%20(a).mei",
     "scoreTitle": "Primo libro di madregali senza nome a 5 voci",
     "scoreComposer": "Alfonso Fontanelli",
     "scoreIri": "http://data-iremus.huma-num.fr/id/f4e77e42-bad3-4cda-9845-0664facbe528"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Mangani/07-zarlino--i_vo_piangendo--comb--0-score.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/78749a82c6f304942a84bdd0234babda2a9affcf/scores/Zarlino%20(compositeur)/Zarlino_I'_vo_piangendo%20(a).mei",
     "scoreTitle": "I' vo piangendo",
-    "scoreComposer": "I dolci et harmoniosi concenti, libro primo",
+    "scoreComposer": "Gioseffo Zarlino",
     "scoreIri": "http://data-iremus.huma-num.fr/id/39dee245-cb2f-4b62-9cab-02eb8ecb8e01"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Mangani/Anon_Si_bona_(C._Sist._42).mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/78749a82c6f304942a84bdd0234babda2a9affcf/scores/Anonyme/Anon_Si_bona_suscepimus%20(a).mei",
     "scoreTitle": "Si bona suscepimus",
-    "scoreComposer": "Mick Swithinbank",
+    "scoreComposer": "Anonymous",
     "scoreIri": "http://data-iremus.huma-num.fr/id/442f8536-6075-4c41-ad28-7f272b01c5cc"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Mangani/Lechner%2C_L._Si_bona_suscepimus_a_6_p%2Bst..mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/78749a82c6f304942a84bdd0234babda2a9affcf/scores/Lechner/Lechner_Si_bona_suscepimus_a_6%20(a).mei",
     "scoreTitle": "Si bona suscepimus a 6",
     "scoreComposer": "Leonhard Lechner",
     "scoreIri": "http://data-iremus.huma-num.fr/id/34bcb8cc-f0c7-4c82-8b1c-a0d7305dcd57"
