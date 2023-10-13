@@ -22,11 +22,17 @@ jobs:
         run: yarn install
       - name: Build
         run: yarn build
+      - name: Archive
+        run: |
+          ls
+          mkdir ../build
+          cp -TR ./tonalities ../build
+          tar -cvf deploy.tar ../build/
       - name: Deploy
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: tonalities/*
+          source: 'deploy.tar'
           target: sherlock/apache/public_html/tonalities
