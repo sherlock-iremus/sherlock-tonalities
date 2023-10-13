@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: yarn build
       - name: Deploy
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v0.1.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
