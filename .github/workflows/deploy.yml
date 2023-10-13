@@ -23,14 +23,12 @@ jobs:
       - name: Build
         run: yarn build
       - name: Deploy
-        uses: nicklasfrahm/scp-action@main
+        uses: appleboy/scp-action@master
         with:
-          direction: upload
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          insecure_password: ${{ secrets.PASSWORD }}
-          insecure_proxy_ignore_fingerprint: true
+          key: ${{ secrets.KEY }}
           source: tonalities/*
-          target: '~/sherlock/apache/public_html/sherlock-tonalities'
+          target: '~/sherlock/apache/public_html/tonalities'
           overwrite: true
           debug: true
