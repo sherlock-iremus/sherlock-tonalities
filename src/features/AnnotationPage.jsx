@@ -10,7 +10,7 @@ import { Assignment } from './items/Assignment'
 import { setIsSubSelecting, setPreviousAnnotation, setSelectedAnnotation } from '../services/globals'
 
 export const AnnotationPage = () => {
-  const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations } = useSelector(state => state.globals)
+  const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations, noteCount } = useSelector(state => state.globals)
   const { data: assignments, refetch } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
   })
@@ -18,6 +18,7 @@ export const AnnotationPage = () => {
   const [input, setInput] = useState('')
   const [contextMenu, setContextMenu] = useState(false)
   const dispatch = useDispatch()
+  const isScoreSelected = selectedAnnotation?.notes.includes(scoreIri) || false
 
   const addComment = async () => {
     try {
@@ -59,11 +60,13 @@ export const AnnotationPage = () => {
             <ListItem dense>
               <ListItemText
                 primary={
-                  selectedAnnotation?.notes.length === 1
+                  isScoreSelected
+                    ? `Score with ${noteCount} items`
+                    : selectedAnnotation?.notes.length === 1
                     ? 'Individual with one item'
                     : `Individual with ${selectedAnnotation?.notes.length} items`
                 }
-              ></ListItemText>
+              />
             </ListItem>
             <Tooltip title="New layer">
               <IconButton color="inherit" onClick={() => dispatch(setIsSubSelecting())}>

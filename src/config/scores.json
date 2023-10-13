@@ -588,31 +588,31 @@
     "scoreIri": "http://data-iremus.huma-num.fr/id/88cab62a-2697-4603-b3fd-d887ce230742"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Praeter.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino_corpus/Willaert_Praeter.mei",
     "scoreTitle": "Praeter rerum seriem",
     "scoreComposer": "Adrian Willaert",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ec531913-04ad-4fa7-bd96-9659a6eceed7"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Giunto.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino_corpus/Willaert_Giunto.mei",
     "scoreTitle": "Giunto m'à Amor fra belle et crude braccia",
     "scoreComposer": "Adrian Willaert",
     "scoreIri": "http://data-iremus.huma-num.fr/id/957d5328-27ff-4d91-86c2-eeb719fffcde"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Josquin_Inviolata.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino_corpus/Josquin_Inviolata.mei",
     "scoreTitle": "Inviolata integra et casta es",
     "scoreComposer": "Josquin des Prez",
     "scoreIri": "http://data-iremus.huma-num.fr/id/7148e26d-f82b-4d34-9316-49e50da32972"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Laudate_pueri.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino_corpus/Willaert_Laudate_pueri.mei",
     "scoreTitle": "Laudate pueri Dominum",
     "scoreComposer": "Adrian Willaert",
     "scoreIri": "http://data-iremus.huma-num.fr/id/ca471109-3ead-49fc-b4ba-8d6d869da56d"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Willaert_Veni_Sancte_6vv.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino_corpus/Willaert_Veni_Sancte_6vv.mei",
     "scoreTitle": "Veni Sancte Spiritus",
     "scoreComposer": "Adrian Willaert",
     "scoreIri": "http://data-iremus.huma-num.fr/id/f158e5f5-8d1f-43d0-8e85-1892824798e1"
@@ -621,10 +621,10 @@
     "scoreIri": "http://data-iremus.huma-num.fr/id/5c78cbd8-d7f0-4911-a023-6b0bcf78f7ef",
     "scoreTitle": "Beati omnes qui timent Dominum",
     "scoreComposer": "Lupus Hellinck",
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Hellinck_Beati.mei"
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino_corpus/Hellinck_Beati.mei"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Hellinck_In_convertendo.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino_corpus/Hellinck_In_convertendo.mei",
     "scoreTitle": "In Convertendo Dominus",
     "scoreComposer": "Lupus Hellinck",
     "scoreIri": "http://data-iremus.huma-num.fr/id/709bcdaf-811d-45f8-af50-29db8318bd48"

@@ -15,12 +15,12 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
-  const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts } = useSelector(
-    state => state.globals
-  )
+  const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts, noteCount } =
+    useSelector(state => state.globals)
 
-  const isSelected = selectedAnnotation?.entity === entity
-  const isHovered = !isSubEntity && hoveredAnnotation?.entity === entity
+  const isScoreSelected = notes?.includes(scoreIri) || false
+  const isSelected = selectedAnnotation?.entity === entity || false
+  const isHovered = (!isSubEntity && hoveredAnnotation?.entity === entity) || false
   const [isDisabled, setIsDisabled] = useState(false)
 
   const { data: userId } = useGetUserIdQuery()
@@ -88,11 +88,19 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
             selected={isSelected}
           >
             <Stack flex={1} spacing={0.5} alignItems="center">
-              <ListItemText
-                sx={{ paddingLeft: 1, textAlign: 'center' }}
-                primary={isSubEntity ? 'Sub-individual' : 'Individual'}
-                secondary={notes.length === 1 ? 'with one item' : `with ${notes.length} items`}
-              />
+              {isScoreSelected ? (
+                <ListItemText
+                  sx={{ paddingLeft: 1, textAlign: 'center' }}
+                  primary="Score"
+                  secondary={`with ${noteCount} items`}
+                />
+              ) : (
+                <ListItemText
+                  sx={{ paddingLeft: 1, textAlign: 'center' }}
+                  primary={isSubEntity ? 'Sub-individual' : 'Individual'}
+                  secondary={notes.length === 1 ? 'with one item' : `with ${notes.length} items`}
+                />
+              )}
               {assignments?.map(assignment => (
                 <Assignment key={assignment.assignment} {...assignment} {...{ refetch, color }} />
               ))}

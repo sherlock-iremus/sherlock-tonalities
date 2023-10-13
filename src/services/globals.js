@@ -4,6 +4,7 @@ const initialState = {
   projectIri: null,
   scoreIri: null,
   scoreUrl: null,
+  noteCount: null,
   colorIndex: Math.floor(Math.random() * 10),
   isUserConnected: true,
   selectedNotes: [],
@@ -70,6 +71,9 @@ const globals = createSlice({
     setScoreUrl: (state, action) => {
       state.scoreUrl = action.payload
     },
+    setNoteCount: (state, action) => {
+      state.noteCount = action.payload
+    },
     setIsSubSelecting: (state, action) => {
       state.isSubSelecting = !state.isSubSelecting
     },
@@ -93,5 +97,6 @@ export const {
   setSelectedConcepts,
   setIsSubSelecting,
   setPreviousAnnotation,
-  setScoreUrl
+  setScoreUrl,
+  setNoteCount
 } = globals.actions
