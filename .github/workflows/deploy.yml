@@ -35,4 +35,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: 'deploy.tar'
-          target: sherlock/apache/public_html/tonalities
+          target: '~/sherlock/apache/public_html/tonalities'
