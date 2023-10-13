@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Alert, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
+import { Alert, Checkbox, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setSelectedNotes } from '../../services/globals'
+import { setNoteCount, setSelectedNotes } from '../../services/globals'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
@@ -27,15 +27,20 @@ export const MeiViewer = ({ file }) => {
   const [scoreTitle, setScoreTitle] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting } = useSelector(state => state.globals)
+  const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting, scoreIri } = useSelector(
+    state => state.globals
+  )
   const color = theme.palette.primary.light
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
+  const isScoreSelected = selectedNotes.includes(scoreIri) || selectedAnnotation?.notes.includes(scoreIri) || false
+  const isScoreHovered = hoveredAnnotation?.notes.includes(scoreIri) || false
 
   const loadScore = async () => {
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
     mei.querySelectorAll('title').forEach((e, i) => e.textContent && i < 2 && setScoreTitle(e.textContent))
+    dispatch(setNoteCount(mei.querySelectorAll('note').length))
 
     if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
@@ -146,6 +151,9 @@ export const MeiViewer = ({ file }) => {
               <ZoomIn />
             </IconButton>
           </Tooltip>
+          <Tooltip title="Select entiere score">
+            <Checkbox checked={isScoreSelected} onChange={() => dispatch(setSelectedNotes(scoreIri))} />
+          </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
           <ThemePicker />
@@ -161,7 +169,10 @@ export const MeiViewer = ({ file }) => {
         <Stack
           flex={2}
           borderRadius={3}
-          sx={({ palette }) => ({ border: 'solid ' + palette.primary[100] })}
+          sx={({ palette }) =>
+            (isScoreSelected && { border: 'solid ' + palette.primary[100] }) ||
+            (isScoreHovered && { border: 'solid lightGrey' })
+          }
           bgcolor="white"
           boxShadow={1}
           overflow="scroll"
