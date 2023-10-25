@@ -44,7 +44,7 @@ export const ExportMenu = ({ projectIri, filename, contextMenu, setContextMenu }
           <ListItemText primary="Cidoc CRM export" />
         </ListItemButton>
         <ListItemButton disabled={isDownloadingMeta} onClick={() => setIsDownloadingMeta(true)}>
-          <ListItemText primary="Polifonia Meta export" />
+          <ListItemText primary="Polifonia Music Representation export" />
         </ListItemButton>
       </List>
     </Menu>
