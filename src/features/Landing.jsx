@@ -14,7 +14,16 @@ import {
 } from '@mui/material'
 import PolifoniaLogo from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AudioFile, BugReport, ChevronRight, Language, LibraryMusic, UploadFile } from '@mui/icons-material'
+import {
+  Add,
+  AudioFile,
+  BugReport,
+  ChevronRight,
+  Help,
+  Language,
+  LibraryMusic,
+  UploadFile,
+} from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
@@ -174,6 +183,11 @@ export const Landing = () => {
         <Tooltip title="Report a bug">
           <IconButton href="https://github.com/sherlock-iremus/sherlock-tonalities/issues/new">
             <BugReport />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Documentation">
+          <IconButton href="https://tonalities.gitpages.huma-num.fr">
+            <Help />
           </IconButton>
         </Tooltip>
       </Stack>
