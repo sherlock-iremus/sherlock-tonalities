@@ -157,7 +157,7 @@ export const MeiViewer = ({ file }) => {
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
           <ThemePicker />
-          <Alert severity="warning">Test environment</Alert>
+          {import.meta.env.DEV && <Alert severity="warning">Test environment</Alert>}
           <AccountMenu />
         </Stack>
       </Stack>

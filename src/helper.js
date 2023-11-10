@@ -68,7 +68,7 @@ export const assignSubEntity = async ({ parentEntity, childEntity, scoreIri, pro
   try {
     const body = {
       p140: [parentEntity],
-      p177: 'guillotel:has_line',
+      p177: 'crm:P106_is_composed_of',
       p141: childEntity,
       p141_type: 'URI',
       document_context: scoreIri,

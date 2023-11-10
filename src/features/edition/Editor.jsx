@@ -30,7 +30,6 @@ export const Editor = () => {
       await assignSubEntity({
         parentEntity: selectedAnnotation.entity,
         childEntity: entityIri,
-        predicate: 'guillotel:has_line',
         scoreIri,
         projectIri,
         postAnnotation,
