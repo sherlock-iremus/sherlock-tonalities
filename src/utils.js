@@ -31,7 +31,7 @@ export const getModel = iri =>
   (iri?.includes('uillotel') && 'Guillotel 2022') ||
   (iri?.includes('ugue') && 'Fugue') ||
   (iri?.includes('zarlino') && 'Zarlino') ||
-  (iri?.includes('interpretation') && 'Interpretation') ||
+  (iri?.includes('nterpretation') && 'Interpretation') ||
   ''
 
 export const createUuid = () => URL.createObjectURL(new Blob([])).slice(-36)
