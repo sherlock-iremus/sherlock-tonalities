@@ -1,7 +1,12 @@
 [
   {
+    "baseIri": "https://w3id.org/polifonia/ontology/music-analysis/interpretation/",
+    "name": "Interpretation",
+    "filename": "Interpretation.owl"
+  },
+  {
     "baseIri": "https://w3id.org/polifonia/ontology/modal-tonal/Cadences_FilaberGuillotelGurrieri_2023#",
-    "name": "Filaber Guillotel Gurrieri 2023",
+    "name": "Filaber Guillotel Gurrieri",
     "filename": "Cadences_FilaberGuillotelGurrieri_2023.json"
   },
   {
