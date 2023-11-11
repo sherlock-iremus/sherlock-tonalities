@@ -110,23 +110,29 @@ PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
 PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
-CONSTRUCT { ?s ?p ?o }
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+CONSTRUCT {
+    ?s ?p ?o.
+}
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/users>
 WHERE
 { 
     {
-        <${projectIri}> crm:P9_consists_of ?s.
+        <${projectIri}> ?t ?s.
         ?s ?p ?o.
     }
     UNION
     {
-        <${projectIri}> ?p ?o.
-        BIND (<${projectIri}> AS ?s)        
+        BIND (<${projectIri}> AS ?s).  
+        ?s ?p ?o.
     }
     UNION
     {
-        ?t crm:P4_has_time-span ?s.
-        ?s ?p ?o        
+        <${projectIri}> crm:P14_carried_out_by ?user.
+        ?user crm:P1_is_identified_by ?s.
+        ?s crm:P2_has_type iremus:d7ef2583-ff31-4913-9ed3-bc3a1c664b21.
+        ?s ?p ?o.
     }
  }
 `
