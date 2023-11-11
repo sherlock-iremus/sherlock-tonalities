@@ -102,7 +102,7 @@ WHERE {
  GROUP BY ?project
 `
 
-export const exportProject = projectIri => `
+export const exportProject = ({ projectIri, scoreUrl }) => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -111,8 +111,11 @@ PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
 PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>
 CONSTRUCT {
     ?s ?p ?o.
+    ?score a lrmoo:F2_Expression.
+    ?score owl:sameAs <${scoreUrl}>.
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 FROM <http://data-iremus.huma-num.fr/graph/users>
@@ -133,6 +136,12 @@ WHERE
         ?user crm:P1_is_identified_by ?s.
         ?s crm:P2_has_type iremus:d7ef2583-ff31-4913-9ed3-bc3a1c664b21.
         ?s ?p ?o.
+    }
+    UNION
+    {
+        <${projectIri}> crm:P9_consists_of ?observation.
+        ?observation crm:P177_assigned_property_of_type crm:P2_has_type.
+        ?observation sherlock:has_document_context ?score.
     }
  }
 `

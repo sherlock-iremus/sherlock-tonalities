@@ -81,12 +81,12 @@ export const sparql = createApi({
         })),
     }),
     exportProject: builder.query({
-      query: projectIri => ({
+      query: params => ({
         url:
           '?' +
           new URLSearchParams({
             graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
-            query: exportProject(projectIri),
+            query: exportProject(params),
           }),
         method: 'GET',
         responseHandler: response => response.text(),

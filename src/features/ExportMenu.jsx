@@ -9,7 +9,7 @@ export const ExportMenu = ({ projectIri, filename, contextMenu, setContextMenu }
   const [isDownloadingCidoc, setIsDownloadingCidoc] = useState(false)
   const [isDownloadingMeta, setIsDownloadingMeta] = useState(false)
   const { scoreUrl } = useSelector(state => state.globals)
-  const { data: cidocData } = useExportProjectQuery(projectIri, { skip: !isDownloadingCidoc })
+  const { data: cidocData } = useExportProjectQuery({ scoreUrl, projectIri }, { skip: !isDownloadingCidoc })
   const { data: metaData } = useExportProjectToMetaQuery({ scoreUrl, projectIri }, { skip: !isDownloadingMeta })
 
   const downloadFile = async data => {
