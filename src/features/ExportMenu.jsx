@@ -15,7 +15,9 @@ export const ExportMenu = ({ projectIri, filename, contextMenu, setContextMenu }
   const downloadFile = async data => {
     try {
       const blob = new Blob([data], { type: 'text/turtle' })
-      const file = new File([blob], filename + '.ttl', { type: 'text/turtle' })
+      const file = new File([blob], filename + isDownloadingCidoc ? '_CIDOC.ttl' : '_POLIFONIA.ttl', {
+        type: 'text/turtle',
+      })
       const downloadLink = document.createElement('a')
       downloadLink.href = URL.createObjectURL(file)
       downloadLink.download = filename + '.ttl'
