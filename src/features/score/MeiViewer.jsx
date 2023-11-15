@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ArrowBack, ZoomIn, ZoomOut } from '@mui/icons-material'
+import { ArrowBack, InsertDriveFile, InsertDriveFileOutlined, ZoomIn, ZoomOut } from '@mui/icons-material'
 import { Alert, Checkbox, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
@@ -152,7 +152,12 @@ export const MeiViewer = ({ file }) => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Select whole score">
-            <Checkbox checked={isScoreSelected} onChange={() => dispatch(setSelectedNotes(scoreIri))} />
+            <Checkbox
+              icon={<InsertDriveFileOutlined />}
+              checkedIcon={<InsertDriveFile />}
+              checked={isScoreSelected}
+              onChange={() => dispatch(setSelectedNotes(scoreIri))}
+            />
           </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
