@@ -113,9 +113,7 @@ PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/m
 CONSTRUCT {
     ?s ?p ?o.
     ?score a crm:E1_CRM_Entity.
-    ?score crm:P1_is_identified_by ?scoreId.
-    ?scoreId a crm:E42_Identifier.
-    ?scoreId crm:P190_has_symbolic_content <${scoreUrl}>.
+    ?score crm:P1_is_identified_by <${scoreUrl}>.
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 FROM <http://data-iremus.huma-num.fr/graph/users>
