@@ -13,7 +13,7 @@ WHERE {
     ?annotation dcterms:creator ?author.
     NOT EXISTS {
         ?supAnnotation crm:P141_assigned ?entity.
-        ?supAnnotation crm:P177_assigned_property_of_type <crm:P106_is_composed_of>.
+        ?supAnnotation crm:P177_assigned_property_of_type crm:P106_is_composed_of.
     }
 }
 `
