@@ -165,6 +165,9 @@ CONSTRUCT {
     ?project core:title ?label.
     ?project mr:hasAnnotation ?annotation.
 
+    ?analyst a core:Person.
+    ?analyst owl:sameAs ?orcid.
+
     ?score a mr:MusicContent.
     ?score a mm:DigitalScore.
     ?score owl:sameAs <${scoreUrl}>.
@@ -184,6 +187,7 @@ CONSTRUCT {
     ?subAnnotation core:isDerivedFrom ?supAnnotation
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/users>
 WHERE {
     BIND (<${projectIri}> AS ?project).
 
@@ -192,6 +196,11 @@ WHERE {
     ?project crm:P9_consists_of ?annotation.
     ?project crm:P9_consists_of ?observation.
     ?project crm:P9_consists_of ?linking.
+
+    ?analyst crm:P1_is_identified_by ?analystId.
+    ?analystId crm:P2_has_type iremus:d7ef2583-ff31-4913-9ed3-bc3a1c664b21.
+    ?analystId crm:P190_has_symbolic_content ?orcidId.
+    BIND(IRI(CONCAT("http://orcid.org/", ?orcidId)) AS ?orcid)
 
     ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     ?annotation crm:P140_assigned_attribute_to ?notes.
