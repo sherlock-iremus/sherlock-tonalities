@@ -1,5 +1,11 @@
 [
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Chansons/Jos2826_test.mei",
+    "scoreTitle": "Mon seul plaisir",
+    "scoreComposer": "Josquin des Prez",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/2c35cc24-0a03-4de5-b2dd-3310d51de10f"
+  },
+  {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/78749a82c6f304942a84bdd0234babda2a9affcf/scores/Fontanelli/Fontanelli%20_I'_vo_piangendo%20(a).mei",
     "scoreTitle": "Primo libro di madregali senza nome a 5 voci",
     "scoreComposer": "Alfonso Fontanelli",
