@@ -110,12 +110,12 @@ PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX guillotel2022: <http://modality-tonality.huma-num.fr/Guillotel_2022#>
 PREFIX zarlino1558: <https://w3id.org/polifonia/ontology/modal-tonal#>
 PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/modalityTonality_Praetorius#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX lrmoo: <http://iflastandards.info/ns/lrm/lrmoo/>
 CONSTRUCT {
     ?s ?p ?o.
-    ?score a lrmoo:F2_Expression.
-    ?score owl:sameAs <${scoreUrl}>.
+    ?score a crm:E1_CRM_Entity.
+    ?score crm:P1_is_identified_by ?scoreId.
+    ?scoreId a crm:E42_Identifier.
+    ?scoreId crm:P190_has_symbolic_content <${scoreUrl}>.
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 FROM <http://data-iremus.huma-num.fr/graph/users>
