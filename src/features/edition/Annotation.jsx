@@ -20,7 +20,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
 
   const isScoreSelected = notes?.includes(scoreIri) || false
   const isSelected = selectedAnnotation?.entity === entity || false
-  const isHovered = (!isSubEntity && hoveredAnnotation?.entity === entity) || false
+  const isHovered = hoveredAnnotation?.entity === entity || false
   const [isDisabled, setIsDisabled] = useState(false)
 
   const { data: userId } = useGetUserIdQuery()
