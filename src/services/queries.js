@@ -8,8 +8,8 @@ WHERE {
     <${projectIri}> crm:P9_consists_of ?annotation.
     ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     ?annotation sherlock:has_document_context ?page.
-    ?annotation dcterms:created ?date.
     ?annotation crm:P141_assigned ?entity.
+    ?annotation dcterms:created ?date.
     ?annotation dcterms:creator ?author.
     NOT EXISTS {
         ?supAnnotation crm:P141_assigned ?entity.
@@ -125,7 +125,7 @@ WHERE
     }
     UNION
     {
-        BIND (<${projectIri}> AS ?s).  
+        VALUES ?s { <${projectIri}> }
         ?s ?p ?o.
     }
     UNION
@@ -187,7 +187,7 @@ CONSTRUCT {
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 FROM <http://data-iremus.huma-num.fr/graph/users>
 WHERE {
-    BIND (<${projectIri}> AS ?project).
+    VALUES ?project { <${projectIri}> }
 
     ?project dcterms:creator ?analyst.
     ?project crm:P1_is_identified_by ?label.

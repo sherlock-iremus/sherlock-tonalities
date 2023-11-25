@@ -11,7 +11,7 @@ export const Concept = ({ concept, createAnnotation, addAssignment }) => {
   const { selectedAnnotation, selectedNotes, selectedConcepts, isSubSelecting } = useSelector(state => state.globals)
 
   const isSelected =
-    selectedAnnotation?.assignments.some(a => a.concept === concept.iri) || selectedConcepts.includes(concept.iri)
+    selectedAnnotation?.assignments?.some(a => a.concept === concept.iri) || selectedConcepts.includes(concept.iri)
 
   const onClick = () => {
     if (selectedAnnotation && !isSelected && !isSubSelecting) addAssignment(concept.iri)

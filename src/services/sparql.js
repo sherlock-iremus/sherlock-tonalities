@@ -126,7 +126,7 @@ export const sparql = createApi({
           iri: e.project.value,
           annotations: Number(e.annotations.value),
           label: e.label.value,
-          scoreIri: e.scoreIri.value.split('_').shift(),
+          scoreIri: e.scoreIri.value.split('#').shift(),
         })),
     }),
   }),
