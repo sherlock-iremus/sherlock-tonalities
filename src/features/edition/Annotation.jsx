@@ -84,7 +84,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
           <ListItemButton
             dense
             disabled={isDisabled}
-            onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, page, notes, assignments } : null))}
+            onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, annotation, page, notes, assignments } : null))}
             selected={isSelected}
           >
             <Stack flex={1} spacing={0.5} alignItems="center">

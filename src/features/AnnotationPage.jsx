@@ -1,16 +1,31 @@
-import { AddCircle, ArrowBack, Cancel, Close, Send } from '@mui/icons-material'
-import { AppBar, Collapse, IconButton, ListItem, ListItemText, Slide, Stack, Toolbar, Tooltip } from '@mui/material'
+import { AddCircle, ArrowBack, Close, Send } from '@mui/icons-material'
+import {
+  AppBar,
+  Button,
+  Collapse,
+  IconButton,
+  ListItem,
+  ListItemText,
+  Slide,
+  Stack,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { useState } from 'react'
 import { ContextMenu } from './navigator/ContextMenu'
 import { Input } from '../components/Input'
-import { useGetAssignmentsQuery } from '../services/sparql'
-import { usePostAnnotationMutation } from '../services/service'
+import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../services/sparql'
+import { useDeleteAnnotationMutation, usePostAnnotationMutation } from '../services/service'
 import { useDispatch, useSelector } from 'react-redux'
 import { Assignment } from './items/Assignment'
 import { setIsSubSelecting, setPreviousAnnotation, setSelectedAnnotation } from '../services/globals'
+import { getUuid } from '../utils'
 
 export const AnnotationPage = () => {
-  const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations, noteCount } = useSelector(state => state.globals)
+  const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations, noteCount } = useSelector(
+    state => state.globals
+  )
   const { data: assignments, refetch } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
   })
@@ -19,6 +34,8 @@ export const AnnotationPage = () => {
   const [contextMenu, setContextMenu] = useState(false)
   const dispatch = useDispatch()
   const isScoreSelected = selectedAnnotation?.notes.includes(scoreIri) || false
+  const [deleteAnnotation] = useDeleteAnnotationMutation()
+  const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
 
   const addComment = async () => {
     try {
@@ -33,6 +50,16 @@ export const AnnotationPage = () => {
       await postAnnotation(body).unwrap()
       setInput('')
       refetch()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const removeAnnotation = async () => {
+    try {
+      await deleteAnnotation(getUuid(selectedAnnotation.annotation)).unwrap()
+      dispatch(setSelectedAnnotation())
+      refetchAnnotations()
     } catch (error) {
       console.log(error)
     }
@@ -68,22 +95,28 @@ export const AnnotationPage = () => {
                 }
               />
             </ListItem>
-            <Tooltip title="New layer">
-              <IconButton color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
+            <Tooltip title="Add sub-layer">
+              <IconButton edge="end" color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
                 <AddCircle />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete individual">
-              <IconButton edge="end" color="inherit">
-                <Cancel />
               </IconButton>
             </Tooltip>
           </Toolbar>
         </AppBar>
         <Stack flex={1} overflow="auto" padding={1} spacing={1} paddingTop={2}>
-          {assignments?.map(assignment => (
-            <Assignment key={assignment.assignment} {...assignment} refetch={refetch} onPage />
-          ))}
+          {assignments?.length ? (
+            assignments.map(assignment => (
+              <Assignment key={assignment.assignment} {...assignment} refetch={refetch} onPage />
+            ))
+          ) : (
+            <Stack flex={1} justifyContent="center">
+              <Typography textAlign="center" color="text.secondary" fontSize={14}>
+                No assignments found for this individual
+              </Typography>
+              <Button size="small" onClick={removeAnnotation}>
+                Remove individual
+              </Button>
+            </Stack>
+          )}
         </Stack>
         <Stack direction="row" paddingRight={1} justifySelf="flex-end" alignItems="center">
           <Stack flex={1}>
