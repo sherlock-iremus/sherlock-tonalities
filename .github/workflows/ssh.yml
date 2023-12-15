@@ -17,4 +17,4 @@ jobs:
           ssh-add ~/.ssh/id_ed25519
 
       - name: SSH to Ubuntu Server
-        run: ssh "${{ secrets.ADRESS }}" whoami
+        run: ssh tbottini@cchum-kvm-data-iremus.in2p3.fr whoami
