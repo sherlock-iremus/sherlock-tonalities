@@ -16,4 +16,4 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
       - name: SSH to Ubuntu Server
-        run: ssh -v tbottini@cchum-kvm-data-iremus.in2p3.fr whoami
+        run: ssh -v tbottini@cchum-kvm-data-iremus.in2p3.fr ls
