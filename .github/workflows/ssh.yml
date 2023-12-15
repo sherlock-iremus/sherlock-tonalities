@@ -1,0 +1,22 @@
+name: SSH to Ubuntu Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_FELIX }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-add ~/.ssh/id_ed25519
+
+      - name: SSH to Ubuntu Server
+        run: |
+          ssh tbottini@cchum-kvm-data-iremus.in2p3.fr ls
