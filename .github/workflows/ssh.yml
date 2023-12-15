@@ -7,13 +7,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: SSH
-        uses: appleboy/ssh-action@v1.0.0
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
         with:
+          command: ls -a
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_FELIX }}
           passphrase: ${{ secrets.SSH_PASS }}
-          fingerprint: ${{ secrets.SSH_FINGER }}
-          script: whoami
+          privateKey: ${{ secrets.SSH_FELIX }}
+      # - name: SSH
+      #   uses: appleboy/ssh-action@v1.0.0
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USER }}
+      #     key: ${{ secrets.SSH_FELIX }}
+      #     passphrase: ${{ secrets.SSH_PASS }}
+      #     fingerprint: ${{ secrets.SSH_FINGER }}
+      #     script: whoami
 
