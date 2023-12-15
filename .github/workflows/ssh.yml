@@ -5,14 +5,16 @@ on:
       - main
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
     steps:
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.KEY }}
-          fingerprint: ${{ secrets.FINGERPRINT }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          script: whoami
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_ed25519
+      - name: SSH to Ubuntu Server
+        run: ssh -v -o StrictHostKeyChecking=no tbottini@cchum-kvm-data-iremus.in2p3.fr ls
+
+        
