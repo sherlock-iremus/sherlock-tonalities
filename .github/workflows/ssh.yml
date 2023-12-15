@@ -15,6 +15,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_FELIX }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+          eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
 
       - name: SSH to Ubuntu Server
