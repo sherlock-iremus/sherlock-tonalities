@@ -10,8 +10,8 @@ jobs:
       - name: SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: whoami
