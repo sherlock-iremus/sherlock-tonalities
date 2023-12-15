@@ -5,8 +5,7 @@ on:
       - main
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest 
     steps:
       - name: Setup SSH
         run: |
@@ -15,6 +14,6 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
-
+          ssh-keyscan -t rsa data-iremus.huma-num.fr >> ~/.ssh/known_hosts
       - name: SSH to Ubuntu Server
         run: ssh tbottini@cchum-kvm-data-iremus.in2p3.fr whoami
