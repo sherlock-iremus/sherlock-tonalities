@@ -14,6 +14,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_FELIX }}
           passphrase: ${{ secrets.SSH_PASS }}
-          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          fingerprint: ${{ secrets.SSH_FINGER }}
           script: whoami
 
