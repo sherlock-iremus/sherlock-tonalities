@@ -13,8 +13,7 @@ jobs:
           command: ls -a
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          passphrase: ${{ secrets.SSH_PASS }}
-          privateKey: ${{ secrets.SSH_FELIX }}
+          privateKey: ${{ secrets.KEY }}
       # - name: SSH
       #   uses: appleboy/ssh-action@v1.0.0
       #   with:
