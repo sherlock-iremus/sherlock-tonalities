@@ -17,5 +17,4 @@ jobs:
           ssh-add ~/.ssh/id_ed25519
 
       - name: SSH to Ubuntu Server
-        run: |
-          ssh "${{ secrets.SSH_USER }}"&"${{ secrets.SSH_HOST }}" whoami
+        run: ssh "${{ secrets.ADRESS }}" whoami
