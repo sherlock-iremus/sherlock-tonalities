@@ -14,6 +14,7 @@ jobs:
           echo "${{ secrets.KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           eval "$(ssh-agent -s)"
+          echo "${{ secrets.PASSPHRASE }}" | ssh-add -
           ssh-add ~/.ssh/id_ed25519
       - name: SSH to Ubuntu Server
         run: ssh -v tbottini@cchum-kvm-data-iremus.in2p3.fr ls
