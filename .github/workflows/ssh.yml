@@ -13,4 +13,5 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_FELIX }}
+          passphrase: ${{ secrets.SSH_PASS }}
           script: whoami
