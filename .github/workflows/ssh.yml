@@ -7,20 +7,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: ls -a via ssh
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: ls -a
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          privateKey: ${{ secrets.KEY }}
-      # - name: SSH
-      #   uses: appleboy/ssh-action@v1.0.0
-      #   with:
-      #     host: ${{ secrets.SSH_HOST }}
-      #     username: ${{ secrets.SSH_USER }}
-      #     key: ${{ secrets.SSH_FELIX }}
-      #     passphrase: ${{ secrets.SSH_PASS }}
-      #     fingerprint: ${{ secrets.SSH_FINGER }}
-      #     script: whoami
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_ed25519
 
+        - name: SSH to Ubuntu Server
+          run: |
+            ssh "${{ secrets.SSH_USER }}"&"${{ secrets.SSH_HOST }}" whoami
