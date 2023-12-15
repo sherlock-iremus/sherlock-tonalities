@@ -17,7 +17,7 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
-          ssh-add - <<<"${{ secrets.SSH_PASS }}"
+          echo -n "${{ secrets.SSH_PASS }}" | ssh-add -k -
 
       - name: SSH to Ubuntu Server
         run: |
