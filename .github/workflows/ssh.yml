@@ -14,5 +14,4 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          fingerprint: ${{ secrets.FINGERPRINT }}
-          script: ls -al
+          script: whoami
