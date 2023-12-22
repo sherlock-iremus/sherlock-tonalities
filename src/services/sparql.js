@@ -41,9 +41,13 @@ export const sparql = createApi({
       }),
       transformResponse: ({
         results: {
-          bindings: [{ label, contributor, draft }],
+          bindings: [binding],
         },
-      }) => ({ label: label.value, contributor: contributor.value, ...(draft && { isDraft: true }) }),
+      }) => ({
+        label: binding.content?.value || binding.label.value,
+        contributor: binding.contributor.value,
+        ...(binding.draft && { isDraft: true }),
+      }),
     }),
     getP140: builder.query({
       query: e13 => ({

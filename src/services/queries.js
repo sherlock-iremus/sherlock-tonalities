@@ -48,6 +48,7 @@ WHERE {
     ?project crm:P1_is_identified_by ?label.
     ?project crm:P14_carried_out_by ?contributor.
     OPTIONAL { ?project sherlock:has_privacy_type ?draft }.
+    OPTIONAL { ?label crm:P190_has_symbolic_content ?content }.
 }
 LIMIT 1`
 
