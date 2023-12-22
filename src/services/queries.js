@@ -66,10 +66,10 @@ SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     ?assignment crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
     ?assignment crm:P141_assigned ?p141.
+    ?assignment crm:P177_assigned_property_of_type ?type.
     ?assignment dcterms:created ?date.
     ?assignment dcterms:creator ?author.
     OPTIONAL {
-        ?p141 crm:P2_has_type ?type.
         ?annotation crm:P141_assigned ?p141.
         ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     }
