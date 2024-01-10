@@ -18,7 +18,7 @@ import PolifoniaLogo from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Add, AudioFile, BugReport, ChevronRight, Help, Language, LibraryMusic, UploadFile } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Intro } from './Intro'
 import { useGetUserIdQuery } from '../services/service'
 import scores from '../config/scores.json'
@@ -29,29 +29,24 @@ import { Input } from '../components/Input'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedScoreIndex, setSelectedScoreIndex] = useState(-1)
+  const [selectedScoreIri, setSelectedScoreIri] = useState(null)
   const [upload, setUpload] = useState(null)
   const [filter, setFilter] = useState('')
   const [selectedComposers, setSelectedComposers] = useState([])
-  const composers = [
-    'Dufay',
-    'Josquin',
-    'Zarlino',
-    'Bach',
-    'Fontanelli',
-    'Hellinck',
-    'Lechner',
-    'Willaert',
-  ]
-
   const { data: userId } = useGetUserIdQuery()
-  const isPersonalsSelected = selectedScoreIndex === scores.length
-  const isScoreSelected = selectedScoreIndex !== -1 && !isPersonalsSelected
+  const [isRecentOpen, setIsRecentOpen] = useState(false)
+
+  const isScoreSelected = selectedScoreIri && !isRecentOpen
+  const composers = ['Dufay', 'Josquin', 'Zarlino', 'Bach', 'Fontanelli', 'Hellinck', 'Lechner', 'Willaert']
+
+  useEffect(() => {
+    if (selectedScoreIri && isRecentOpen) setIsRecentOpen(false)
+  }, [selectedScoreIri])
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
       <NewProject
-        {...{ isOpen, upload, score: scores[selectedScoreIndex] }}
+        {...{ isOpen, upload, score: scores.find(e => e.scoreIri === selectedScoreIri) }}
         onClose={() => (isOpen && setIsOpen(false)) || (upload && setUpload(null))}
       />
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
@@ -84,10 +79,7 @@ export const Landing = () => {
                     </IconButton>
                   }
                 >
-                  <ListItemButton
-                    selected={isPersonalsSelected}
-                    onClick={() => setSelectedScoreIndex(!isPersonalsSelected ? scores.length : -1)}
-                  >
+                  <ListItemButton selected={isRecentOpen} onClick={() => setIsRecentOpen(!isRecentOpen)}>
                     <ListItemIcon>
                       <LibraryMusic />
                     </ListItemIcon>
@@ -96,7 +88,11 @@ export const Landing = () => {
                 </ListItem>
                 <Divider />
                 <ListSubheader>Available scores</ListSubheader>
-                <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search score by title..." />
+                <Input
+                  value={filter}
+                  onChange={e => setFilter(e.target.value)}
+                  placeholder="Search score by title..."
+                />
                 <Grid padding={1} rowSpacing={1} columnSpacing={1}>
                   {composers.map((composer, index) => (
                     <Chip
@@ -117,7 +113,7 @@ export const Landing = () => {
                       selectedComposers.length ? selectedComposers.some(c => e.scoreComposer.includes(c)) : true
                     )
                     .filter(e => (filter ? e.scoreTitle.includes(filter) : true))
-                    .map(({ scoreIri, scoreTitle, scoreComposer }, index) => (
+                    .map(({ scoreIri, scoreTitle, scoreComposer }) => (
                       <ListItem
                         key={scoreIri}
                         disablePadding
@@ -128,8 +124,8 @@ export const Landing = () => {
                         }
                       >
                         <ListItemButton
-                          selected={selectedScoreIndex === index}
-                          onClick={() => setSelectedScoreIndex(selectedScoreIndex !== index ? index : -1)}
+                          selected={selectedScoreIri === scoreIri}
+                          onClick={() => setSelectedScoreIri(selectedScoreIri === scoreIri ? null : scoreIri)}
                         >
                           <ListItemIcon>
                             <AudioFile />
@@ -142,13 +138,13 @@ export const Landing = () => {
               </Stack>
               <Divider orientation="vertical" />
               <Stack flex={1} minWidth={0}>
-                {isPersonalsSelected ? (
+                {isRecentOpen ? (
                   <PersonalProjects userId={userId} />
                 ) : isScoreSelected ? (
                   <Stack flex={1}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>
                       <ListSubheader sx={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                        {`Analytical projects for ${scores[selectedScoreIndex].scoreTitle}`}
+                        {`Analytical projects for ${scores.find(e => e.scoreIri === selectedScoreIri).scoreTitle}`}
                       </ListSubheader>
                       <Stack>
                         <Tooltip title="Create new analytical project" onClick={() => setIsOpen(true)}>
@@ -158,7 +154,7 @@ export const Landing = () => {
                         </Tooltip>
                       </Stack>
                     </Stack>
-                    <Projects scoreIri={scores[selectedScoreIndex].scoreIri} setIsOpen={() => setIsOpen(true)} />
+                    <Projects scoreIri={selectedScoreIri} setIsOpen={() => setIsOpen(true)} />
                   </Stack>
                 ) : (
                   <Stack
