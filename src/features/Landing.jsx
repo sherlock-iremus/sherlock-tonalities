@@ -14,16 +14,7 @@ import {
 } from '@mui/material'
 import PolifoniaLogo from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import {
-  Add,
-  AudioFile,
-  BugReport,
-  ChevronRight,
-  Help,
-  Language,
-  LibraryMusic,
-  UploadFile,
-} from '@mui/icons-material'
+import { Add, AudioFile, BugReport, ChevronRight, Help, Language, LibraryMusic, UploadFile } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useState } from 'react'
 import { Intro } from './Intro'
@@ -32,11 +23,13 @@ import scores from '../config/scores.json'
 import { ThemePicker } from './ThemePicker'
 import { Projects } from './Projects'
 import { PersonalProjects } from './PersonalProjects'
+import { Input } from '../components/Input'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedScoreIndex, setSelectedScoreIndex] = useState(-1)
   const [upload, setUpload] = useState(null)
+  const [filter, setFilter] = useState('')
 
   const { data: userId } = useGetUserIdQuery()
   const isPersonalsSelected = selectedScoreIndex === scores.length
@@ -89,28 +82,31 @@ export const Landing = () => {
                   </ListItemButton>
                 </ListItem>
                 <ListSubheader>Available scores</ListSubheader>
+                <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search..." />
                 <List disablePadding dense sx={{ overflow: 'auto' }}>
-                  {scores.map(({ scoreIri, scoreTitle, scoreComposer }, index) => (
-                    <ListItem
-                      key={scoreIri}
-                      disablePadding
-                      secondaryAction={
-                        <IconButton edge="end" disableRipple>
-                          <ChevronRight />
-                        </IconButton>
-                      }
-                    >
-                      <ListItemButton
-                        selected={selectedScoreIndex === index}
-                        onClick={() => setSelectedScoreIndex(selectedScoreIndex !== index ? index : -1)}
+                  {scores
+                    .filter(e => filter ? e.scoreTitle.includes(filter) : true)
+                    .map(({ scoreIri, scoreTitle, scoreComposer }, index) => (
+                      <ListItem
+                        key={scoreIri}
+                        disablePadding
+                        secondaryAction={
+                          <IconButton edge="end" disableRipple>
+                            <ChevronRight />
+                          </IconButton>
+                        }
                       >
-                        <ListItemIcon>
-                          <AudioFile />
-                        </ListItemIcon>
-                        <ListItemText primary={scoreTitle} secondary={scoreComposer} />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
+                        <ListItemButton
+                          selected={selectedScoreIndex === index}
+                          onClick={() => setSelectedScoreIndex(selectedScoreIndex !== index ? index : -1)}
+                        >
+                          <ListItemIcon>
+                            <AudioFile />
+                          </ListItemIcon>
+                          <ListItemText primary={scoreTitle} secondary={scoreComposer} />
+                        </ListItemButton>
+                      </ListItem>
+                    ))}
                 </List>
               </Stack>
               <Divider orientation="vertical" />
