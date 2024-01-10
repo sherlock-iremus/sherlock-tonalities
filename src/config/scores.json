@@ -1,5 +1,449 @@
 [
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/017.mei",
+    "scoreTitle": "Je languis en piteux martire",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/14902484-352c-4fda-a31b-394010ffda4c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/016.mei",
+    "scoreTitle": "C'est bien raison de devoir essaucier",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/28fae3a2-3510-4ea7-b783-8f2f7e5be86d"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/028.mei",
+    "scoreTitle": "Resvelons nous resvelons amoureux / Alons en bien tos au may",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/9e191e19-a1e7-42ca-9a77-bc6e228c3449"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/014.mei",
+    "scoreTitle": "Je me complains piteusement",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ac63e15b-167c-4794-b45e-e8a89e73b2ac"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/015.mei",
+    "scoreTitle": "Mon chier amy, qu' avés vous empensé",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/fa535722-6690-439b-bd9a-65688c021290"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/029.mei",
+    "scoreTitle": "Unde veniet auxilium mihi?",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/8efbd347-93c5-4955-9344-d4f6feea0c9b"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/011.mei",
+    "scoreTitle": "Resvellies vous et faites chiere lye",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ada2eccd-fc33-4854-a00e-5ab595ccc12c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/039.mei",
+    "scoreTitle": "Ce moys de may",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/d761757e-f75e-417f-8fea-b6bcdf8a5a2c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/038.mei",
+    "scoreTitle": "Ce jour de l' an voudray joye mener",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/7df2c5d7-6e20-40d6-bb6b-c4b07bf5ebbc"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/012.mei",
+    "scoreTitle": "La belle se siet au piet de la tour",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/3ab63ec7-8e8a-4de9-8a04-6a1afc31c6b4"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/013.mei",
+    "scoreTitle": "J'ay mis mon cuer et ma pensee",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/7828c8d0-ae3e-41da-b284-070d918c6772"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/048.mei",
+    "scoreTitle": "Pour l' amour de ma doulce amye",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/23818fa7-99e7-4e66-853e-62feb2a19990"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/060.mei",
+    "scoreTitle": "Or pleust a Dieu qu'a son plaisir",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/0bd3a2f4-580e-4e17-84f8-a8d269d422b8"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/074.mei",
+    "scoreTitle": "Franc cuer gentil, sur toutes gracieuse",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/4d4f075f-221c-40ad-8d37-d0a7b6058d50"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/075.mei",
+    "scoreTitle": "Adyeu quitte le demeurant",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/582d458d-f430-497f-b718-5881a4b442b8"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/061.mei",
+    "scoreTitle": "Craindre vous vueil doulce dame de pris",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/155da637-e3ec-4dfa-b97c-6a1a19f87c50"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/049.mei",
+    "scoreTitle": "He, compaignons, resvelons nous",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/b31d6ba9-c21a-489c-8e58-1b049044dd2b"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/077.mei",
+    "scoreTitle": "Ne je ne dors ne je ne veille",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/873866c1-2e4a-4159-933b-d31db84b219f"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/063.mei",
+    "scoreTitle": "Mille bonjours je vous presente",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/a3d41ca9-29e8-4822-8f9b-e97f19b837fc"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/062.mei",
+    "scoreTitle": "Trop long temps ai esté en desplaisir",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/b0926a78-e719-4868-96a2-286b44e52585"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/076.mei",
+    "scoreTitle": "Adieu m'amour adieu ma joye",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/b487b257-390d-411a-896b-31637a760d19"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/072.mei",
+    "scoreTitle": "En triumphant de Cruel Dueil",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/96ef849a-73a9-400c-ba40-f07e8b73c9b9"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/066.mei",
+    "scoreTitle": "Entre les plus plaines d'anoy",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/8919cf9a-4607-46c4-8739-70a0368d7368"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/067.mei",
+    "scoreTitle": "Qu'est devenue leaulté?",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/c1e86aea-99ed-4995-9ee4-6fdeefe43c8e"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/073.mei",
+    "scoreTitle": "Par le regard de vos beaux yeux",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ea9cb781-27bf-4d4e-a8d1-cfb0f1f4fda7"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/065.mei",
+    "scoreTitle": "J'ay grant (dolour) ...",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/73f22fc3-d66f-4c93-877a-0445cbef1a22"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/071.mei",
+    "scoreTitle": "Mon bien, m'amour",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/d849ceaf-2f55-43bc-b290-a5445f0d5024"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/059.mei",
+    "scoreTitle": "Bon jour bon mois bon an et bonne estraine",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/6e7be41b-289a-4e2f-9059-6523247b4d8c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/058.mei",
+    "scoreTitle": "Estrinez moy, je vous estrineray",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/e8952cc4-3e22-4df0-8e64-1a15cba1047c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/070.mei",
+    "scoreTitle": "Donnés l'assault a la forteresse",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/14a19dc5-be92-472a-85fe-3e588806ae57"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/064.mei",
+    "scoreTitle": "Puisque celle qui me tient en prison",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/9bbde38e-431a-4cc2-b15f-33a8c63360dd"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/069.mei",
+    "scoreTitle": "Las, que feray? ne que je devenray?",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/18288b42-72e9-4dbc-a016-3a00fb617965"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/041.mei",
+    "scoreTitle": "Pour ce que veoir je ne puis",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/8a3a2e22-0295-4d7c-89bf-4861e0c83dd1"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/055.mei",
+    "scoreTitle": "Vo regard et doulce maniere",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ad2858bf-104f-4a34-8439-e2890db2da93"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/082.mei",
+    "scoreTitle": "Du tout m'estoie abandonné",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/b263ae8e-e224-4a73-bee1-b34d2b3f4eed"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/083.mei",
+    "scoreTitle": "Vostre bruit et vostre grant fame",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/0813e0be-78c3-41ba-ba3c-4128dedb915c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/054.mei",
+    "scoreTitle": "Mon cuer me fait tous dis penser",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/207bc81a-2feb-4b23-a0fd-78ded11bf07e"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/040.mei",
+    "scoreTitle": "Belle plaissant et gracieuse",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/4a3366c0-1a99-495d-961e-80c217f4fb56"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/068.mei",
+    "scoreTitle": "Va t'en, mon cuer, jour et nuitie",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/8651ae75-0135-4e71-9313-bcc60334dab2"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/056.mei",
+    "scoreTitle": " Contrafactum, textus Rotundelli ignotus",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/100b9435-ad62-42b4-9b0f-a30ec3f42efe"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/042.mei",
+    "scoreTitle": "J'atendray tant qu'il vous playra",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/67d162a1-74db-40c4-bf65-7bf9077c75ea"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/081.mei",
+    "scoreTitle": "Puisque vous estez campieur",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/19da6c7f-081b-43ef-8b3a-0103d73d7d33"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/080.mei",
+    "scoreTitle": "La plus mignonne de mon cueur",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/8a3f1c99-14d3-4114-9e2e-c363bd4929ae"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/043.mei",
+    "scoreTitle": "Par droit je puis bien complaindre et gemir",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/4a220bd4-6e5e-4bf4-8d03-3e3ed70f1212"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/057.mei",
+    "scoreTitle": "Je prens congié de vous, amours",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/5bb349eb-1b7c-4e80-838e-c43ef831c3c8"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/053.mei",
+    "scoreTitle": "Se ma dame je puis veir",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/895bb9c7-fc4c-4117-8ed3-f31e833d2603"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/047.mei",
+    "scoreTitle": "Belle, vueillies vostre mercy donner",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/4582acb8-d4fd-4269-be23-c2af8e54cd0b"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/084.mei",
+    "scoreTitle": "Les douleurs, dont me sens tel somme",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/8cf8e677-0712-43f2-a67e-193ec8f04da2"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/046.mei",
+    "scoreTitle": "Belle, que vous ay je mesfait",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/517a1b7e-2bbb-4eab-9ce0-fc4eaddc1d45"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/052.mei",
+    "scoreTitle": "Je donne a tous les amoureux",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/222e5942-7fda-4dba-be6c-5896e2a42d6a"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/044.mei",
+    "scoreTitle": "Ma belle dame souverainne",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/eb479732-89ff-4852-bb1a-f428ce5e9020"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/050.mei",
+    "scoreTitle": "Bien veignés vous, amoureuse liesse",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/e4b7f28e-e25c-4e78-9956-27a537ec1d0c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/078.mei",
+    "scoreTitle": "Belle vueillez moy vengier",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/4645c414-2e4c-4068-9c71-c2753b0401ad"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/079.mei",
+    "scoreTitle": "Dieu gard la bone sans reprise",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/3c2a125f-58ca-429e-9345-df3d30769609"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/051.mei",
+    "scoreTitle": "Je n'ay doubté fors que des envieux",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ce0f1bc5-45ef-4d9b-9d0c-8237343f21cc"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/045.mei",
+    "scoreTitle": "Helas, ma dame, par amours",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/fcfaa397-bb83-4f2d-8073-fe4d6e319be4"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/022.mei",
+    "scoreTitle": "De ma haulte et bonne aventure",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/3234a063-3ae3-43fe-95af-e9b8c128ff8d"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/036.mei",
+    "scoreTitle": "Je ne suy plus tel que souloy",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/237eb28a-cb8e-4a09-b9df-8d188b9cc961"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/037.mei",
+    "scoreTitle": "Je veuil chanter de cuer joyeux",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/62de1388-2d4f-4b92-8d18-745b9d678e16"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/023.mei",
+    "scoreTitle": "Helas mon dueil, a ce cop sui je mort",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/daf4adc4-da1b-4ed5-b513-c82d741e1704"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/035.mei",
+    "scoreTitle": "Helas, et quant vous veray ?",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/337b4229-4e35-4a08-a0ff-bf33c09fe34c"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/021.mei",
+    "scoreTitle": "S'il est plaisir que je vous puisse faire",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/fbe684a1-0203-43ad-aa81-475f3e71b139"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/020.mei",
+    "scoreTitle": "Bien doy servir de volonté entiere",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/5fb3c446-fd34-4c3c-8e3f-3ffa75696d00"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/034.mei",
+    "scoreTitle": "Navré je sui d'un dart penetratif",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/4e2dfa58-a317-4b50-90bb-77b3489c6966"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/030.mei",
+    "scoreTitle": "Belle, veulliés moy retenir",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/8e734ec4-94ac-4f98-8380-0361a7f88e69"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/024.mei",
+    "scoreTitle": "Malheureulx cueur que vieulx tu faire",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/aacfcae2-f7f0-4dfd-bbd0-639e237cbf15"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/018.mei",
+    "scoreTitle": "Ce jour le doibt, aussi fait la saison",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/c335875d-a4f3-4d80-9977-1cc7f8e8b57f"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/019.mei",
+    "scoreTitle": "Se la face ay pale",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/ac62a728-2b83-4d3f-8b1e-82b54f328247"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/025.mei",
+    "scoreTitle": "Tant que mon argent dura",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/9560c34f-3f63-4627-94cb-f2a0a47d55df"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/031.mei",
+    "scoreTitle": "Ma belle dame, je vous pri",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/df6421d5-3514-4d50-a355-31a8f68daa34"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/027.mei",
+    "scoreTitle": "Adieu ces bons vins de Lannoys",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/f47d1223-6a11-4ea0-a6f4-488fa5d5bb39"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/033.mei",
+    "scoreTitle": "Pouray je avoir vostre mercy?",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/6824c23b-5f5a-4a21-860b-b38bd9bc8665"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/032.mei",
+    "scoreTitle": "Je requier a tous amoureux",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/f19da0f9-5e03-4c95-b6f3-9cc35c7cb576"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Dufay/Dufay/026.mei",
+    "scoreTitle": "Entre vous, gentils amoureux",
+    "scoreComposer": "Guillaume Dufay",
+    "scoreIri": "http://data-iremus.huma-num.fr/id/874000bf-0e4e-464d-8bdf-15f932a61e97"
+  },
+  {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Chansons/Jos2826_test.mei",
     "scoreTitle": "Mon seul plaisir",
     "scoreComposer": "Josquin des Prez",
