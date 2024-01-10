@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   IconButton,
   ListItemIcon,
   MenuItem,
@@ -14,9 +15,11 @@ import { Box } from '@mui/system'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Menu } from '../components/Menu'
-import { getIri } from '../utils'
+import { colors, getIri } from '../utils'
 import { ContributorItem } from './items/ContributorItem'
 import { BASE_API_URL, useGetUserIdQuery } from '../services/service'
+import { useDispatch } from 'react-redux'
+import { setColorIndex } from '../services/globals'
 
 export const AccountMenu = () => {
   const { data: userId } = useGetUserIdQuery()
@@ -24,6 +27,7 @@ export const AccountMenu = () => {
   const [isEditing, setIsEditing] = useState(false)
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleClose = () => setAnchorEl(null)
 
@@ -75,7 +79,13 @@ export const AccountMenu = () => {
       </Menu>
       <Dialog open={isEditing} onClose={() => setIsEditing(false)}>
         <DialogTitle>My Sherlock profile</DialogTitle>
-        <DialogContent></DialogContent>
+        <DialogContent>
+          <Grid container>
+            {colors.map((color, index) => (
+              <IconButton size='large' key={index} sx={{ bgcolor: color[500] }} onClick={() => dispatch(setColorIndex(index))} />
+            ))}
+          </Grid>
+        </DialogContent>
       </Dialog>
     </Box>
   )

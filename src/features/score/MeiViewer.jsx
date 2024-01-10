@@ -13,7 +13,6 @@ import { Editor } from '../edition/Editor'
 import { Model } from '../navigator/Model'
 import { Project } from '../edition/Project'
 import { StyleNote } from './StyleNote'
-import { ThemePicker } from '../ThemePicker'
 import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
@@ -161,7 +160,6 @@ export const MeiViewer = ({ file }) => {
           </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
-          <ThemePicker />
           {import.meta.env.DEV && <Alert severity="warning">Test environment</Alert>}
           <AccountMenu />
         </Stack>

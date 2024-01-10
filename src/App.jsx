@@ -3,14 +3,15 @@ import { ScoreAnnotator } from './features/score/ScoreAnnotator'
 import { useMemo } from 'react'
 import { Landing } from './features/Landing'
 import { ThemeProvider, createTheme } from '@mui/material'
-import { colors } from './features/ThemePicker'
 import { useSelector } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Error } from './features/Error'
+import { colors } from './utils'
 
 const router = createBrowserRouter(
   [
-    { path: '*', element: <Landing />  },
-    { path: '/project/:projectId/score/:scoreId', element: <ScoreAnnotator /> },
+    { path: '*', element: <Landing />, errorElement: <Error /> },
+    { path: '/project/:projectId/score/:scoreId', element: <ScoreAnnotator />, errorElement: <Error /> },
   ],
   {
     basename: '/tonalities',

@@ -1,3 +1,5 @@
+import { blue, blueGrey, brown, deepOrange, deepPurple, indigo, pink, purple, red, teal } from '@mui/material/colors'
+
 export const stringToColor = string => {
   /* eslint-disable no-bitwise */
   let hash = 0
@@ -50,3 +52,5 @@ export const timeSince = date => {
 }
 
 const extractSparql = obj => Object.fromEntries(Object.entries(obj).map(([key, { value }]) => [key, value]))
+
+export const colors = [blue, blueGrey, brown, deepOrange, deepPurple, indigo, pink, purple, red, teal]

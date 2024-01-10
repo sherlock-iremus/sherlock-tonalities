@@ -22,14 +22,13 @@ import { useEffect, useState } from 'react'
 import { Intro } from './Intro'
 import { useGetUserIdQuery } from '../services/service'
 import scores from '../config/scores.json'
-import { ThemePicker } from './ThemePicker'
 import { Projects } from './Projects'
 import { PersonalProjects } from './PersonalProjects'
 import { Input } from '../components/Input'
 
 export const Landing = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedScoreIri, setSelectedScoreIri] = useState(null)
+  const [selectedScoreIri, setSelectedScoreIri] = useState('')
   const [upload, setUpload] = useState(null)
   const [filter, setFilter] = useState('')
   const [selectedComposers, setSelectedComposers] = useState([])
@@ -43,6 +42,10 @@ export const Landing = () => {
     if (selectedScoreIri && isRecentOpen) setIsRecentOpen(false)
   }, [selectedScoreIri])
 
+  useEffect(() => {
+    if (selectedScoreIri && isRecentOpen) setSelectedScoreIri('')
+  }, [isRecentOpen])
+
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
       <NewProject
@@ -52,7 +55,6 @@ export const Landing = () => {
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <img src={PolifoniaLogo} width="100px" />
         <AccountMenu />
-        <ThemePicker />
       </Stack>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1} marginX={4} minHeight={0}>
         <Stack direction="row" minHeight={0}>
@@ -93,7 +95,7 @@ export const Landing = () => {
                   onChange={e => setFilter(e.target.value)}
                   placeholder="Search score by title..."
                 />
-                <Grid padding={1} rowSpacing={1} columnSpacing={1}>
+                <Grid padding={1}>
                   {composers.map((composer, index) => (
                     <Chip
                       key={index}
@@ -125,7 +127,7 @@ export const Landing = () => {
                       >
                         <ListItemButton
                           selected={selectedScoreIri === scoreIri}
-                          onClick={() => setSelectedScoreIri(selectedScoreIri === scoreIri ? null : scoreIri)}
+                          onClick={() => setSelectedScoreIri(selectedScoreIri === scoreIri ? '' : scoreIri)}
                         >
                           <ListItemIcon>
                             <AudioFile />

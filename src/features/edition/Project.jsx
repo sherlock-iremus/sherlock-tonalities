@@ -64,7 +64,7 @@ export const Project = () => {
                 Object.entries(annotationsByPage).map(([page, pageAnnotations]) => (
                   <Stack direction="row" key={page}>
                     <Typography padding={1.5} noWrap fontSize={10}>
-                      Page {page}
+                      {page === '0' ? 'Global' : 'Page ' + page}
                     </Typography>
                     <TimelineSeparator>
                       <TimelineDot />
