@@ -45,8 +45,6 @@ export const MeiViewer = ({ file }) => {
     if (verovio) {
       verovio.innerHTML = toolkit.renderData(file, {
         scale,
-        adjustPageWidth: true,
-        adjustPageHeight: true,
         header: 'none',
         footer: 'none',
       })
