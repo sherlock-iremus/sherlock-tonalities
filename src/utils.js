@@ -16,8 +16,6 @@ export const getUuid = iri => iri.split('/').pop()
 
 export const removeBaseIri = iri => (iri.includes('#') ? iri.split('#').pop() : iri.split('/').pop())
 
-export const getPage = iri => Number(iri.split('#').pop())
-
 export const getId = iri => iri.split('_').pop()
 
 export const getIri = uuid => `http://data-iremus.huma-num.fr/id/${uuid}`
@@ -50,3 +48,5 @@ export const timeSince = date => {
   if (interval > 1) return Math.floor(interval) + ' minutes'
   return Math.floor(seconds) + ' seconds'
 }
+
+const extractSparql = obj => Object.fromEntries(Object.entries(obj).map(([key, { value }]) => [key, value]))

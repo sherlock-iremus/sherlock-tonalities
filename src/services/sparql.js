@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { getPage, stringToColor } from '../utils'
+import { getId, stringToColor } from '../utils'
 //import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 //import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import {
@@ -79,12 +79,13 @@ export const sparql = createApi({
         body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
       }),
       transformResponse: response =>
-        response.results.bindings.map(({ annotation, entity, date, author, page }) => ({
+        response.results.bindings.map(({ annotation, entity, date, author, noteId, notes }) => ({
           annotation: annotation.value,
           entity: entity.value,
           date: date.value,
           author: author.value,
-          page: getPage(page.value),
+          noteId: getId(noteId.value),
+          notes: Number(notes.value),
         })),
     }),
     exportProject: builder.query({

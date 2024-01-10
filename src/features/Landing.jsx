@@ -34,20 +34,13 @@ export const Landing = () => {
   const [filter, setFilter] = useState('')
   const [selectedComposers, setSelectedComposers] = useState([])
   const composers = [
-    'Anonyme',
-    'De Mantua',
     'Dufay',
-    'Gombert',
     'Josquin',
-    'Morales',
-    'Verdelot',
     'Zarlino',
     'Bach',
-    'De Rore',
     'Fontanelli',
     'Hellinck',
     'Lechner',
-    'Praetorius',
     'Willaert',
   ]
 
@@ -101,8 +94,9 @@ export const Landing = () => {
                     <ListItemText primary="My analytical projects" secondary="View recent analytical projects" />
                   </ListItemButton>
                 </ListItem>
+                <Divider />
                 <ListSubheader>Available scores</ListSubheader>
-                <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search by title..." />
+                <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search score by title..." />
                 <Grid padding={1} rowSpacing={1} columnSpacing={1}>
                   {composers.map((composer, index) => (
                     <Chip

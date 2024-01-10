@@ -2,13 +2,13 @@ export const getAnnotations = (scoreIri, projectIri) => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-
-SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+SELECT ?annotation ?entity ?date ?author (SAMPLE(?note) AS ?noteId) (COUNT(?note) AS ?notes)
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     <${projectIri}> crm:P9_consists_of ?annotation.
     ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
-    ?annotation sherlock:has_document_context ?page.
     ?annotation crm:P141_assigned ?entity.
+    ?annotation crm:P140_assigned_attribute_to ?note.
     ?annotation dcterms:created ?date.
     ?annotation dcterms:creator ?author.
     NOT EXISTS {
@@ -16,6 +16,7 @@ WHERE {
         ?supAnnotation crm:P177_assigned_property_of_type crm:P106_is_composed_of.
     }
 }
+GROUP BY ?annotation ?entity ?date ?author
 `
 
 export const getContributor = contributorIri => `
@@ -75,7 +76,7 @@ WHERE {
     }
 }
 `
-
+// TODO should be type = PUBLISHED_PROJECT
 export const getProjects = scoreIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>

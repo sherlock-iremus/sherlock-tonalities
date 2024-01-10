@@ -21,9 +21,9 @@ export const Project = () => {
     if (annotations)
       setAnnotationsByPage(
         annotations.reduce((group, annotation) => {
-          const { page } = annotation
+          const page = window.tk.getPageWithElement(annotation.noteId)
           group[page] = group[page] ?? []
-          group[page].push(annotation)
+          group[page].push({ ...annotation, page })
           return group
         }, {})
       )
