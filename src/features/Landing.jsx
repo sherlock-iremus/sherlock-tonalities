@@ -1,6 +1,8 @@
 import { NewProject } from './NewProject'
 import {
+  Chip,
   Divider,
+  Grid,
   IconButton,
   List,
   ListItem,
@@ -30,6 +32,24 @@ export const Landing = () => {
   const [selectedScoreIndex, setSelectedScoreIndex] = useState(-1)
   const [upload, setUpload] = useState(null)
   const [filter, setFilter] = useState('')
+  const [selectedComposers, setSelectedComposers] = useState([])
+  const composers = [
+    'Anonyme',
+    'De Mantua',
+    'Dufay',
+    'Gombert',
+    'Josquin',
+    'Morales',
+    'Verdelot',
+    'Zarlino',
+    'Bach',
+    'De Rore',
+    'Fontanelli',
+    'Hellinck',
+    'Lechner',
+    'Praetorius',
+    'Willaert',
+  ]
 
   const { data: userId } = useGetUserIdQuery()
   const isPersonalsSelected = selectedScoreIndex === scores.length
@@ -82,10 +102,27 @@ export const Landing = () => {
                   </ListItemButton>
                 </ListItem>
                 <ListSubheader>Available scores</ListSubheader>
-                <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search..." />
+                <Input value={filter} onChange={e => setFilter(e.target.value)} placeholder="Search by title..." />
+                <Grid padding={1} rowSpacing={1} columnSpacing={1}>
+                  {composers.map((composer, index) => (
+                    <Chip
+                      key={index}
+                      label={composer}
+                      variant={selectedComposers.includes(composer) ? 'filled' : 'outlined'}
+                      onClick={() =>
+                        selectedComposers.includes(composer)
+                          ? setSelectedComposers(selectedComposers.filter(e => e !== composer))
+                          : setSelectedComposers([...selectedComposers, composer])
+                      }
+                    />
+                  ))}
+                </Grid>
                 <List disablePadding dense sx={{ overflow: 'auto' }}>
                   {scores
-                    .filter(e => filter ? e.scoreTitle.includes(filter) : true)
+                    .filter(e =>
+                      selectedComposers.length ? selectedComposers.some(c => e.scoreComposer.includes(c)) : true
+                    )
+                    .filter(e => (filter ? e.scoreTitle.includes(filter) : true))
                     .map(({ scoreIri, scoreTitle, scoreComposer }, index) => (
                       <ListItem
                         key={scoreIri}
