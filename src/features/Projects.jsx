@@ -2,6 +2,7 @@ import {
   Button,
   CircularProgress,
   List,
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -10,8 +11,9 @@ import {
 } from '@mui/material'
 import { useGetProjectsQuery } from '../services/sparql'
 import { TextSnippet } from '@mui/icons-material'
-import { getUuid } from '../utils'
+import { getIri, getUuid } from '../utils'
 import { useNavigate } from 'react-router-dom'
+import { ContributorItem } from './items/ContributorItem'
 
 export const Projects = ({ scoreIri, setIsOpen }) => {
   const { data: projects, isLoading } = useGetProjectsQuery(scoreIri)
@@ -21,18 +23,21 @@ export const Projects = ({ scoreIri, setIsOpen }) => {
     return (
       <List dense>
         {projects.map(project => (
-          <ListItemButton
+          <ListItem
             key={project.iri}
-            onClick={() => navigate(`/project/${getUuid(project.iri)}/score/${getUuid(scoreIri)}`)}
+            disablePadding
+            secondaryAction={<ContributorItem contributorIri={getIri(project.contributor)} />}
           >
-            <ListItemIcon>
-              <TextSnippet />
-            </ListItemIcon>
-            <ListItemText
-              primary={project.label}
-              secondary={project.annotations === 1 ? 'One annotation' : `${project.annotations} annotations`}
-            />
-          </ListItemButton>
+            <ListItemButton onClick={() => navigate(`/project/${getUuid(project.iri)}/score/${getUuid(scoreIri)}`)}>
+              <ListItemIcon>
+                <TextSnippet />
+              </ListItemIcon>
+              <ListItemText
+                primary={project.label}
+                secondary={project.annotations === 1 ? 'One annotation' : `${project.annotations} annotations`}
+              />
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     )

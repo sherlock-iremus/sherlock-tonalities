@@ -44,7 +44,7 @@ export const sparql = createApi({
           bindings: [binding],
         },
       }) => ({
-        label: binding.content?.value || binding.label.value,
+        label: binding.content?.value || binding.label?.value || "Untitled project",
         contributor: binding.contributor.value,
         ...(binding.draft && { isDraft: true }),
       }),
@@ -120,7 +120,8 @@ export const sparql = createApi({
         response.results.bindings.map(e => ({
           iri: e.project.value,
           annotations: Number(e.annotations.value),
-          label: e.label.value,
+          contributor: e.contributor.value,
+          label: e.content?.value || e.label?.value || "Untitled project"
         })),
     }),
     getPersonalProjects: builder.query({
