@@ -3,8 +3,8 @@ import { css } from '@emotion/react'
 export const verovioStyle = color => css`
   .selected {
     #bubble {
-      fill: ${color};
-      stroke: ${color};
+      fill: ${color} !important;
+      stroke: ${color} !important;
     }
   }
   .focused {
@@ -15,8 +15,8 @@ export const verovioStyle = color => css`
   }
   .hovered {
     #bubble {
-      fill: grey !important;
-      stroke: grey !important;
+      fill: grey;
+      stroke: grey;
     }
   }
   user-select: none;
