@@ -1,6 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ArrowBack, InsertDriveFile, InsertDriveFileOutlined, ZoomIn, ZoomOut } from '@mui/icons-material'
-import { Alert, Checkbox, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
+import {
+  ArrowBack,
+  Close,
+  InsertDriveFile,
+  InsertDriveFileOutlined,
+  KeyboardAltRounded,
+  KeyboardControlKey,
+  KeyboardControlKeyRounded,
+  KeyboardOptionKey,
+  KeyboardOptionKeyRounded,
+  ZoomIn,
+  ZoomOut,
+} from '@mui/icons-material'
+import { Alert, Checkbox, IconButton, ListItemText, Pagination, Snackbar, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -22,6 +34,7 @@ export const MeiViewer = ({ file }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
+  const [showTutorial, setShowTutorial] = useState(true)
   const [scale, setScale] = useState(30)
   const [scoreTitle, setScoreTitle] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
@@ -193,6 +206,17 @@ export const MeiViewer = ({ file }) => {
           ))}
         </Stack>
 
+        <Snackbar
+          open={showTutorial}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          onClose={() => setShowTutorial(false)}
+        >
+          <Alert severity="primary" onClose={() => setShowTutorial(false)} sx={{ borderRadius: 3, boxShadow: 1 }}>
+            <Stack direction="row" alignItems="center">
+              Hold <KeyboardOptionKey /> to select a verticality and hold <KeyboardControlKey /> to select a range
+            </Stack>
+          </Alert>
+        </Snackbar>
         <Stack flex={1} spacing={2}>
           <Editor />
           <Project />
