@@ -1,6 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Cancel } from '@mui/icons-material'
-import { Collapse, IconButton, ListItem, ListItemButton, ListItemText, Stack, Tooltip } from '@mui/material'
+import {
+  Button,
+  Collapse,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Stack,
+  Tooltip,
+} from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
 import { getUuid } from '../../utils'
@@ -12,6 +26,7 @@ import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
 
 export const Annotation = ({ annotation, entity, date, page, author, isSubEntity, color }) => {
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
@@ -42,6 +57,14 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
 
   const removeAnnotation = async () => {
+    if (assignments?.length) {
+      try {
+        await Promise.all(assignments.map(({ assignment }) => deleteAnnotation(getUuid(assignment)).unwrap()))
+        refetch()
+      } catch (error) {
+        console.log(error)
+      }
+    }
     try {
       await deleteAnnotation(getUuid(annotation)).unwrap()
       refetchAnnotations()
@@ -63,7 +86,10 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
           <Collapse in={isHovered} timeout="auto" unmountOnExit>
             {canDelete ? (
               <Tooltip title="Delete entity">
-                <IconButton onClick={removeAnnotation} size="small">
+                <IconButton
+                  onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
+                  size="small"
+                >
                   <Cancel />
                 </IconButton>
               </Tooltip>
@@ -84,7 +110,9 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
           <ListItemButton
             dense
             disabled={isDisabled}
-            onClick={() => dispatch(setSelectedAnnotation(!isSelected ? { entity, annotation, page, notes, assignments } : null))}
+            onClick={() =>
+              dispatch(setSelectedAnnotation(!isSelected ? { entity, annotation, page, notes, assignments } : null))
+            }
             selected={isSelected}
           >
             <Stack flex={1} spacing={0.5} alignItems="center">
@@ -107,6 +135,20 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
             </Stack>
           </ListItemButton>
         </Stack>
+        <Dialog open={isDeleteDialogOpen} onClose={() => setIsDeleteDialogOpen(false)}>
+          <DialogTitle>Delete individual with {assignments?.length || '0'} corresponding assignments ?</DialogTitle>
+          <DialogContent>
+            <DialogContentText>This action cannot be undone</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setIsDeleteDialogOpen(false)} size="small">
+              Cancel
+            </Button>
+            <Button onClick={removeAnnotation} autoFocus color="error" size="small">
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
       </ListItem>
     )
 }
