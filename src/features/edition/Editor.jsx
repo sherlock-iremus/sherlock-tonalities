@@ -69,7 +69,12 @@ export const Editor = () => {
         </ListItem>
         <Stack flex={1} direction="row" alignItems="center" paddingRight={1}>
           <Stack flex={1}>
-            <Input value={input} onChange={e => setInput(e.target.value)} placeholder="Comment..." />
+            <Input
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyPress={e => e.key === 'Enter' && createAnnotation()}
+              placeholder="Comment..."
+            />
           </Stack>
           <IconButton onClick={createAnnotation} disabled={isLoading}>
             <Send />

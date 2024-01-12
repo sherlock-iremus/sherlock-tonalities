@@ -120,7 +120,12 @@ export const AnnotationPage = () => {
         </Stack>
         <Stack direction="row" paddingRight={1} justifySelf="flex-end" alignItems="center">
           <Stack flex={1}>
-            <Input value={input} onChange={handleInputChange} placeholder="Comment..." />
+            <Input
+              value={input}
+              onChange={handleInputChange}
+              placeholder="Comment..."
+              onKeyPress={e => e.key === 'Enter' && addComment()}
+            />
           </Stack>
           <IconButton onClick={addComment} disabled={!!isLoading}>
             <Send />
