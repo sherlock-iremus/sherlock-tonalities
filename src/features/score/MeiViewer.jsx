@@ -1,14 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   ArrowBack,
-  Close,
   InsertDriveFile,
   InsertDriveFileOutlined,
-  KeyboardAltRounded,
   KeyboardControlKey,
-  KeyboardControlKeyRounded,
   KeyboardOptionKey,
-  KeyboardOptionKeyRounded,
   ZoomIn,
   ZoomOut,
 } from '@mui/icons-material'
@@ -211,7 +207,11 @@ export const MeiViewer = ({ file }) => {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           onClose={() => setShowTutorial(false)}
         >
-          <Alert severity="primary" onClose={() => setShowTutorial(false)} sx={{ borderRadius: 3, boxShadow: 1 }}>
+          <Alert
+            severity="info"
+            onClose={() => setShowTutorial(false)}
+            sx={{ borderRadius: 3, boxShadow: 1, bgcolor: 'secondary.light' }}
+          >
             <Stack direction="row" alignItems="center">
               Hold <KeyboardOptionKey /> to select a verticality and hold <KeyboardControlKey /> to select a range
             </Stack>
