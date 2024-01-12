@@ -68,6 +68,8 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
     try {
       await deleteAnnotation(getUuid(annotation)).unwrap()
       refetchAnnotations()
+      dispatch(setSelectedAnnotation())
+      dispatch(setHoveredAnnotation())
     } catch (error) {
       console.log(error)
     }
