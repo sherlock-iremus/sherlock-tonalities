@@ -26,7 +26,7 @@ export const Projects = ({ scoreIri, setIsOpen }) => {
           <ListItem
             key={project.iri}
             disablePadding
-            secondaryAction={<ContributorItem contributorIri={getIri(project.contributor)} />}
+            secondaryAction={<ContributorItem contributorIri={project.contributor} />}
           >
             <ListItemButton onClick={() => navigate(`/project/${getUuid(project.iri)}/score/${getUuid(scoreIri)}`)}>
               <ListItemIcon>
