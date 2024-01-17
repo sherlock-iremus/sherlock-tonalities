@@ -35,9 +35,8 @@ export const MeiViewer = ({ file }) => {
   const [scoreTitle, setScoreTitle] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
-  const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting, scoreIri } = useSelector(
-    state => state.globals
-  )
+  const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting, scoreIri, annotatedNotes } =
+    useSelector(state => state.globals)
   const color = theme.palette.primary.light
   const verovio = document.getElementById('verovio')
   const toolkit = window.tk
@@ -179,10 +178,7 @@ export const MeiViewer = ({ file }) => {
         </Stack>
       </Stack>
       <Stack flex={1} direction="row" justifyContent="center" minHeight={0} spacing={2} pb={2} px={2}>
-        <Stack flex={1}>
-          <Model />
-        </Stack>
-
+        <Model />
         <Stack
           flex={2}
           borderRadius={3}
@@ -200,11 +196,33 @@ export const MeiViewer = ({ file }) => {
             <StyleNote key={noteId} {...{ noteId, currentPage, scale, pageCount }} className="selected" />
           ))}
           {selectedAnnotation?.notes.map(noteIri => (
-            <StyleNote key={noteIri} noteId={getId(noteIri)} className={isSubSelecting ? 'focused' : 'selected'} />
+            <StyleNote
+              key={noteIri}
+              noteId={getId(noteIri)}
+              {...{ currentPage, scale, pageCount }}
+              className={isSubSelecting ? 'sub-select' : 'selected'}
+            />
           ))}
           {hoveredAnnotation?.notes.map(noteIri => (
-            <StyleNote key={noteIri} noteId={getId(noteIri)} className="hovered" />
+            <StyleNote
+              key={noteIri}
+              noteId={getId(noteIri)}
+              {...{ currentPage, scale, pageCount }}
+              className="hovered"
+            />
           ))}
+          {annotatedNotes.map(noteIri => (
+            <StyleNote
+              key={noteIri}
+              noteId={getId(noteIri)}
+              {...{ currentPage, scale, pageCount }}
+              className="focused"
+            />
+          ))}
+        </Stack>
+        <Stack flex={1} spacing={2}>
+          <Editor />
+          <Project />
         </Stack>
 
         <Snackbar
@@ -222,10 +240,6 @@ export const MeiViewer = ({ file }) => {
             </Stack>
           </Alert>
         </Snackbar>
-        <Stack flex={1} spacing={2}>
-          <Editor />
-          <Project />
-        </Stack>
       </Stack>
     </Stack>
   )

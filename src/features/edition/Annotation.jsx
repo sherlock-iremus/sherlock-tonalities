@@ -16,7 +16,12 @@ import {
   Tooltip,
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { setHoveredAnnotation, setSelectedAnnotation } from '../../services/globals'
+import {
+  setAnnotatedNotes,
+  setHoveredAnnotation,
+  setSelectedAnnotation,
+  unsetAnnotatedNotes,
+} from '../../services/globals'
 import { getUuid } from '../../utils'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from '../../services/sparql'
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
@@ -52,6 +57,11 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
   useEffect(() => {
     if (notes) setIsDisabled(checkIsDisabled())
   }, [selectedNotes, selectedConcepts, notes, assignments])
+
+  useEffect(() => {
+    if (notes) dispatch(setAnnotatedNotes(notes))
+    return () => notes && dispatch(unsetAnnotatedNotes(notes))
+  }, [notes])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
@@ -117,7 +127,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
             }
             selected={isSelected}
           >
-            <Stack flex={1} spacing={0.5} alignItems="center">
+            <Stack flex={1} alignItems="center">
               {isScoreSelected ? (
                 <ListItemText
                   sx={{ paddingLeft: 1, textAlign: 'center' }}

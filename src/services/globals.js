@@ -14,6 +14,7 @@ const initialState = {
   selectedAnnotations: [],
   selectedModelIndex: 0,
   isSubSelecting: false,
+  annotatedNotes: [],
 }
 
 const globals = createSlice({
@@ -44,6 +45,14 @@ const globals = createSlice({
         const index = state.selectedNotes.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
       }
+    },
+    setAnnotatedNotes: (state, action) => {
+      state.annotatedNotes.push(...action.payload)
+    },
+    unsetAnnotatedNotes: (state, action) => {
+      const index = state.annotatedNotes.findIndex(e => e === action.payload[0])
+      const length = action.payload.length
+      state.annotatedNotes.splice(index, length)
     },
     setSelectedConcepts: (state, action) => {
       if (Array.isArray(action.payload)) state.selectedConcepts = action.payload
@@ -98,5 +107,7 @@ export const {
   setIsSubSelecting,
   setPreviousAnnotation,
   setScoreUrl,
-  setNoteCount
+  setNoteCount,
+  setAnnotatedNotes,
+  unsetAnnotatedNotes,
 } = globals.actions
