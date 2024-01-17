@@ -75,6 +75,7 @@ export const MeiViewer = ({ file }) => {
       bubble.setAttribute('id', 'bubble')
       bubble.setAttribute('d', circleShape(coordinates, 300))
       bubble.setAttribute('fill', 'transparent')
+      bubble.setAttribute('opacity', 0.6)
       note.setAttribute('cursor', 'pointer')
       note.insertBefore(bubble, note.children[0])
       note.addEventListener('click', e => {
