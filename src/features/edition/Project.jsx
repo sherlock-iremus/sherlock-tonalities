@@ -18,15 +18,17 @@ export const Project = () => {
   const [contextMenu, setContextMenu] = useState(false)
 
   useEffect(() => {
-    if (annotations)
-      setAnnotationsByPage(
-        annotations.reduce((group, annotation) => {
-          const page = window.tk.getPageWithElement(annotation.noteId)
-          group[page] = group[page] ?? []
-          group[page].push({ ...annotation, page })
-          return group
-        }, {})
-      )
+    if (annotations) {
+      const sortedAnnotations = annotations.reduce((group, annotation) => {
+        const page = window.tk.getPageWithElement(annotation.noteId)
+        const time = window.tk.getTimesForElement(annotation.noteId).realTimeOffsetMilliseconds
+        group[page] = group[page] ?? []
+        group[page].push({ ...annotation, page, time })
+        return group
+      }, {})
+      Object.keys(sortedAnnotations).forEach(page => sortedAnnotations[page].sort((a, b) => a.time - b.time))
+      setAnnotationsByPage(sortedAnnotations)
+    }
   }, [annotations])
 
   if (project && annotations)
