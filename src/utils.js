@@ -26,7 +26,7 @@ export const getModelGeneric = iri => iri.split('/').pop().split('_').shift()
 
 export const getModel = iri =>
   (iri?.includes('raetorius') && 'Praetorius 1619') ||
-  (iri?.includes('ilaber') && 'Filaber Guillotel Gurrieri 2023') ||
+  (iri?.includes('ilaber') && 'Cadences (Renaissance)') ||
   (iri?.includes('modal-tonal') && 'Zarlino 1558') ||
   (iri?.includes('uillotel') && 'Guillotel 2022') ||
   (iri?.includes('ugue') && 'Fugue') ||
