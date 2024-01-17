@@ -138,7 +138,12 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
           </ListItemButton>
         </Stack>
         <Dialog open={isDeleteDialogOpen} onClose={() => setIsDeleteDialogOpen(false)}>
-          <DialogTitle>Delete individual with {assignments?.length || '0'} corresponding assignments ?</DialogTitle>
+          <DialogTitle>
+            Delete individual with
+            {assignments?.length > 1
+              ? ` ${assignments.length} corresponding assignments`
+              : ' 1 corresponding assignment ?'}
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>This action cannot be undone</DialogContentText>
           </DialogContent>
