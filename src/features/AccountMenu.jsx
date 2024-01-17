@@ -1,4 +1,4 @@
-import { AccountCircle, Logout } from '@mui/icons-material'
+import { AccountCircle, BugReport, Logout } from '@mui/icons-material'
 import {
   Avatar,
   Button,
@@ -95,6 +95,12 @@ export const AccountMenu = () => {
             <AccountCircle fontSize="small" />
           </ListItemIcon>
           My account
+        </MenuItem>
+        <MenuItem onClick={() => window.open('https://github.com/sherlock-iremus/sherlock-tonalities/issues/new')}>
+          <ListItemIcon>
+            <BugReport fontSize="small" />
+          </ListItemIcon>
+          Report a bug
         </MenuItem>
         <MenuItem onClick={logOut}>
           <ListItemIcon>

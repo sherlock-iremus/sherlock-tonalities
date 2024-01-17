@@ -168,8 +168,12 @@ export const MeiViewer = ({ file }) => {
             />
           </Tooltip>
         </Stack>
-        <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={2}>
-          {import.meta.env.DEV && <Alert severity="warning">Test environment</Alert>}
+        <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={1}>
+          {import.meta.env.DEV && (
+            <Alert sx={{ borderRadius: 4, boxShadow: 1 }} severity="warning">
+              Test environment
+            </Alert>
+          )}
           <AccountMenu />
         </Stack>
       </Stack>
