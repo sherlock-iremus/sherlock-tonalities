@@ -127,7 +127,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
             }
             selected={isSelected}
           >
-            <Stack flex={1} alignItems="center">
+            <Stack flex={1} spacing={0.5} alignItems="center">
               {isScoreSelected ? (
                 <ListItemText
                   sx={{ paddingLeft: 1, textAlign: 'center' }}
