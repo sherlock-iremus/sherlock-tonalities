@@ -1,4 +1,4 @@
-import { AddCircle, ArrowBack, Close, Send } from '@mui/icons-material'
+import { AddCircle, ArrowBack, Close, KeyboardControlKey, Send } from '@mui/icons-material'
 import {
   AppBar,
   Button,
@@ -12,7 +12,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ContextMenu } from './navigator/ContextMenu'
 import { Input } from '../components/Input'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../services/sparql'
@@ -36,6 +36,7 @@ export const AnnotationPage = () => {
   const isScoreSelected = selectedAnnotation?.notes.includes(scoreIri) || false
   const [deleteAnnotation] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
+  const [isCommandKeyPressed, setIsCommandKeyPressed] = useState(false)
 
   const addComment = async () => {
     try {
@@ -71,6 +72,23 @@ export const AnnotationPage = () => {
     if (event.target.value.includes('@')) setContextMenu(!contextMenu ? { mouseX: left, mouseY: top + 24 } : null)
   }
 
+  const handleKeyDown = useCallback(event => {
+    if (event.ctrlKey && event.key === 'n') {
+      dispatch(setIsSubSelecting())
+      event.preventDefault()
+    }
+  }, [])
+  const handleKeyUp = useCallback(event => event.key === 'Control' && setIsCommandKeyPressed(false), [])
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [handleKeyDown, handleKeyUp])
+
   return (
     <Slide direction="up" in={!!selectedAnnotation} mountOnEnter unmountOnExit>
       <Stack flex={1} minHeight={0}>
@@ -95,7 +113,14 @@ export const AnnotationPage = () => {
                 }
               />
             </ListItem>
-            <Tooltip title="Add sub-layer">
+            <Tooltip
+              title={
+                <Stack flex={1} direction="row" alignItems="center">
+                  Add sub-layer (<KeyboardControlKey sx={{ width: 16, height: 16 }} />
+                  +N)
+                </Stack>
+              }
+            >
               <IconButton edge="end" color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
                 <AddCircle />
               </IconButton>
