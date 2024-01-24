@@ -27,7 +27,7 @@ export const Concept = ({ concept, createAnnotation, addAssignment }) => {
         )}
         <Chip
           label={removeBaseIri(concept.iri)}
-          {...{ onClick }}
+          {...(!concept.subClasses && { onClick })}
           {...(isSelected ? { color: 'primary' } : { variant: 'outlined' })}
         />
       </ListItem>
