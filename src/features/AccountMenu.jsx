@@ -13,6 +13,7 @@ import {
   Stack,
   TextField,
   Tooltip,
+  Typography,
   useTheme,
 } from '@mui/material'
 import { Box } from '@mui/system'
@@ -35,6 +36,7 @@ export const AccountMenu = () => {
   const [putUser, { isLoading }] = usePutUserMutation()
   const [anchorEl, setAnchorEl] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
+  const [orcidName, setOrcidName] = useState('Undefined name')
   const open = Boolean(anchorEl)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -50,7 +52,21 @@ export const AccountMenu = () => {
   useEffect(() => {
     setSelectedEmoji(contributor?.emoji)
     setSelectedColor(contributor?.color)
+    fetchOrcidName()
   }, [contributor])
+
+  const fetchOrcidName = async () => {
+    if (contributor?.orcid)
+      try {
+        const request = await fetch('https://pub.orcid.org/v3.0/' + contributor.orcid, {
+          headers: { Accept: 'application/json' },
+        })
+        const data = await request.json()
+        setOrcidName(data.person.name['given-names'].value + ' ' + data.person.name['family-name'].value)
+      } catch (error) {
+        console.log(error)
+      }
+  }
 
   const updateUser = async () => {
     if (!isLoading)
@@ -112,6 +128,11 @@ export const AccountMenu = () => {
       <Dialog open={isEditing} onClose={() => setIsEditing(false)}>
         <DialogTitle>My Sherlock profile</DialogTitle>
         <DialogContent>
+          <Stack flex={1} bgcolor="primary.light" borderRadius={3} padding={1}>
+            <Typography color="white" textAlign="center" variant="overline">
+              {orcidName}
+            </Typography>
+          </Stack>
           <DialogContentText paddingY={1}>Account informations</DialogContentText>
           <Stack direction="row" spacing={1} alignItems="center">
             <Avatar sx={{ height: 50, width: 50, bgcolor: selectedColor }}>

@@ -27,12 +27,9 @@ export const sparql = createApi({
       }),
       transformResponse: ({
         results: {
-          bindings: [{ contributor, program, color, emoji }],
+          bindings: [{ contributor, color, emoji, orcid }],
         },
-      }) =>
-        program
-          ? { color: stringToColor(contributor.value), emoji: '🖥' }
-          : { color: '#' + color?.value, emoji: emoji?.value },
+      }) => ({ id: contributor?.value, color: '#' + color?.value, emoji: emoji?.value, orcid: orcid?.value }),
     }),
     getAnalyticalProject: builder.query({
       query: analyticalProjectIri => ({
@@ -44,7 +41,7 @@ export const sparql = createApi({
           bindings: [binding],
         },
       }) => ({
-        label: binding.content?.value || binding.label?.value || "Untitled project",
+        label: binding.content?.value || binding.label?.value || 'Untitled project',
         contributor: binding.contributor.value,
         ...(binding.draft && { isDraft: true }),
       }),
@@ -122,7 +119,7 @@ export const sparql = createApi({
           iri: e.project.value,
           annotations: Number(e.annotations.value),
           contributor: e.contributor.value,
-          label: e.content?.value || e.label?.value || "Untitled project"
+          label: e.content?.value || e.label?.value || 'Untitled project',
         })),
     }),
     getPersonalProjects: builder.query({
