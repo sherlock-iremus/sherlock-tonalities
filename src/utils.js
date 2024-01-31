@@ -30,6 +30,7 @@ export const getModel = iri =>
   (iri?.includes('modal-tonal') && 'Zarlino 1558') ||
   (iri?.includes('uillotel') && 'Guillotel 2022') ||
   (iri?.includes('ugue') && 'Fugue') ||
+  (iri?.includes('TextMusic') && 'Text-Music Relations') ||
   (iri?.includes('zarlino') && 'Zarlino') ||
   (iri?.includes('nterpretation') && 'Interpretation') ||
   ''
