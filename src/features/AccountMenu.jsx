@@ -26,6 +26,7 @@ import { BASE_API_URL, useGetUserIdQuery, usePutUserMutation } from '../services
 import { useDispatch } from 'react-redux'
 import { setColorIndex } from '../services/globals'
 import { useGetContributorQuery } from '../services/sparql'
+import Cookies from 'js-cookie'
 
 export const AccountMenu = () => {
   const theme = useTheme()
@@ -44,10 +45,11 @@ export const AccountMenu = () => {
   const handleClose = () => setAnchorEl(null)
 
   const logOut = () => {
-    document.cookie = `JWT=; path=/; expires=${new Date(0).toUTCString()}`
-    document.cookie = `JWT_REFRESH_TOKEN=; path=/; expires=${new Date(0).toUTCString()}`
+    Cookies.remove('JWT', { path: '/', domain: 'https://data-iremus.huma-num.fr/', secure: true })
+    Cookies.remove('JWT_REFRESH_TOKEN', { path: '/', domain: 'https://data-iremus.huma-num.fr/', secure: true })
     navigate(0)
   }
+  
 
   useEffect(() => {
     setSelectedEmoji(contributor?.emoji)
