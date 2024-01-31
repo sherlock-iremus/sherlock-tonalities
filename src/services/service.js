@@ -12,6 +12,7 @@ export const service = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL + 'sherlock/api/', credentials: 'include' }),
   endpoints: builder => ({
     getUserId: builder.query({ query: () => ({}) }),
+    logOut: builder.mutation({ query: () => ({ url: 'logout', method: 'POST' }) }),
     putUser: builder.mutation({ query: body => ({ url: 'user/config', method: 'PUT', body }) }),
     postAnalyticalProject: builder.mutation({ query: body => ({ url: 'analytical-project', method: 'POST', body }) }),
     postAnnotation: builder.mutation({ query: body => ({ url: 'e13', method: 'POST', body }) }),
@@ -36,6 +37,7 @@ export default service
 
 export const {
   useGetUserIdQuery,
+  useLogOutMutation,
   usePostAnalyticalProjectMutation,
   usePostAnnotationMutation,
   useDeleteAnnotationMutation,
