@@ -18,15 +18,13 @@ import {
 } from '@mui/material'
 import { Box } from '@mui/system'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Menu } from '../components/Menu'
 import { colors, getIri } from '../utils'
 import { ContributorItem } from './items/ContributorItem'
-import { BASE_API_URL, useGetUserIdQuery, usePutUserMutation } from '../services/service'
+import { BASE_API_URL, useGetUserIdQuery, useLogOutMutation, usePutUserMutation } from '../services/service'
 import { useDispatch } from 'react-redux'
 import { setColorIndex } from '../services/globals'
 import { useGetContributorQuery } from '../services/sparql'
-import Cookies from 'js-cookie'
 
 export const AccountMenu = () => {
   const theme = useTheme()
@@ -39,17 +37,10 @@ export const AccountMenu = () => {
   const [isEditing, setIsEditing] = useState(false)
   const [orcidName, setOrcidName] = useState('Undefined name')
   const open = Boolean(anchorEl)
-  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [logOut] = useLogOutMutation()
 
   const handleClose = () => setAnchorEl(null)
-
-  const logOut = () => {
-    Cookies.remove('JWT', { path: '/', domain: 'https://data-iremus.huma-num.fr/', secure: true })
-    Cookies.remove('JWT_REFRESH_TOKEN', { path: '/', domain: 'https://data-iremus.huma-num.fr/', secure: true })
-    navigate(0)
-  }
-  
 
   useEffect(() => {
     setSelectedEmoji(contributor?.emoji)
