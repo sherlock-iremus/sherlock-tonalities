@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import models from '../config/models.json'
 
-const baseUrl = 'https://raw.githubusercontent.com/polifonia-project/music-analysis-ontology/main/annotationModels/JSON/'
+const baseUrl =
+  'https://raw.githubusercontent.com/polifonia-project/music-analysis-ontology/main/annotationModels/JSON/'
 
 export const model = createApi({
   reducerPath: 'model',
@@ -13,20 +14,21 @@ export const model = createApi({
         const classes = response.filter(c => c['@type'].includes('http://www.w3.org/2002/07/owl#Class'))
         const classesIri = classes.map(c => c['@id'])
         const classesWithParent = classes.map(c => {
+          const isDisabled = !!c['http://data-iremus.huma-num.fr/ns/sherlock#musicAnnotationConcept']
           const parent = c['http://www.w3.org/2000/01/rdf-schema#subClassOf']?.find(p =>
             classesIri.includes(p['@id'])
           )?.['@id']
-          return { iri: c['@id'], ...(parent && { parent }) }
+          return { iri: c['@id'], ...(parent && { parent }), ...(isDisabled && { isDisabled }) }
         })
         const rootClasses = classesWithParent.filter(c => !c.parent)
 
-        const getSubClasses = iri => classesWithParent.filter(c => c.parent === iri).map(c => createNode(c.iri))
+        const getSubClasses = iri => classesWithParent.filter(c => c.parent === iri).map(c => createNode(c))
 
-        const createNode = iri => {
+        const createNode = ({ iri, isDisabled }) => {
           const subClasses = getSubClasses(iri)
-          return { iri, ...(subClasses.length && { subClasses }) }
+          return { iri, ...(subClasses.length && { subClasses }), ...(isDisabled && { isDisabled }) }
         }
-        return rootClasses.map(c => createNode(c.iri))
+        return rootClasses.map(c => createNode(c))
       },
     }),
   }),
