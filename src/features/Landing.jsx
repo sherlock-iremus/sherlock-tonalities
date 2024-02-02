@@ -114,7 +114,7 @@ export const Landing = () => {
                     .filter(e =>
                       selectedComposers.length ? selectedComposers.some(c => e.scoreComposer.includes(c)) : true
                     )
-                    .filter(e => (filter ? e.scoreTitle.includes(filter) : true))
+                    .filter(e => (filter ? e.scoreTitle.toLowerCase().includes(filter.toLowerCase()) : true))
                     .map(({ scoreIri, scoreTitle, scoreComposer }) => (
                       <ListItem
                         key={scoreIri}
