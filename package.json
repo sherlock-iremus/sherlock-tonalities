@@ -15,7 +15,6 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.3",
     "react-router-dom": "6.21.1",
-    "sherlock-sparql-queries": "https://github.com/sherlock-iremus/sherlock-sparql-queries.git#commit=d7e135975c43af16195fe4c0fa25435a86b8c880",
     "verovio": "^4.1.0",
     "vite": "^5.0.11",
     "vite-plugin-svgr": "^4.2.0"
