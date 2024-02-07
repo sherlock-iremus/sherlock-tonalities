@@ -4,7 +4,7 @@ import { setIsUserConnected } from './globals'
 
 export const BASE_API_URL = import.meta.env.DEV ? 'http://localhost:5555/' : 'https://data-iremus.huma-num.fr/'
 
-const SHERLOCK_API_ERROR = 'sherlockApi/'
+const SHERLOCK_API_ERROR = 'service/executeQuery/rejected'
 const SHERLOCK_API_REFRESH_ENDPOIT = BASE_API_URL + 'sherlock/oauth/access_token'
 
 export const service = createApi({
@@ -13,6 +13,7 @@ export const service = createApi({
   endpoints: builder => ({
     getUserId: builder.query({ query: () => ({}) }),
     logOut: builder.mutation({ query: () => ({ url: 'logout', method: 'POST' }) }),
+    refresh: builder.mutation({ query: () => ({ url: 'logout', method: 'POST' }) }),
     putUser: builder.mutation({ query: body => ({ url: 'user/config', method: 'PUT', body }) }),
     postAnalyticalProject: builder.mutation({ query: body => ({ url: 'analytical-project', method: 'POST', body }) }),
     postAnnotation: builder.mutation({ query: body => ({ url: 'e13', method: 'POST', body }) }),
