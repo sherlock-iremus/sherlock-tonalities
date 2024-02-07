@@ -35,6 +35,7 @@ export const Intro = () => (
     </Typography>
     <div>
       <iframe
+        sandbox
         frameBorder="0"
         src="https://streaming.ccsd.cnrs.fr/04/09/37/12/tonalities_V2_demo_2.mp4"
         allowFullScreen
