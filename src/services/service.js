@@ -24,8 +24,9 @@ export const service = createApi({
 export const tokenExpirationHandler = api => next => async action => {
   if (isRejectedWithValue(action))
     if (action.type.startsWith(SHERLOCK_API_ERROR) && action.payload.status === 401) {
-      const response = await fetch(SHERLOCK_API_REFRESH_ENDPOIT, {
+      const response = await fetch(SHERLOCK_API_REFRESH_ENDPOIT + '?grant_type=refresh_token', {
         credentials: 'include',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json', grant_type: 'refresh_token' },
       }).catch(response => response)
       if (response.status === 400) api.dispatch(setIsUserConnected(false))
