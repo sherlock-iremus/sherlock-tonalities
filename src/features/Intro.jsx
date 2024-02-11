@@ -33,16 +33,9 @@ export const Intro = () => (
     <Typography variant="subtitle1" pt={2}>
       Presentation of the annotation interface and note selection
     </Typography>
-    <div>
-      <iframe
-        sandbox
-        frameBorder="0"
-        src="https://streaming.ccsd.cnrs.fr/04/09/37/12/tonalities_V2_demo_2.mp4"
-        allowFullScreen
-        width="640"
-        height="400"
-      ></iframe>
-    </div>
+    <video width="640" height="400" controls>
+      <source src="https://streaming.ccsd.cnrs.fr/04/09/37/12/tonalities_V2_demo_2.mp4" />
+    </video>
     <Typography variant="subtitle1" pt={2}>
       Annotation of a cadence with its individual melodic lines and cadence steps
     </Typography>
