@@ -14,7 +14,7 @@ export const Editor = () => {
     state => state.globals
   )
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
-  const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
+  const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
   const { refetch: refetchAssignments } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
   })

@@ -64,7 +64,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
   }, [notes])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
-  const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
+  const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
 
   const removeAnnotation = async () => {
     if (assignments?.length) {

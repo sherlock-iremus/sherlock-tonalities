@@ -35,7 +35,7 @@ export const AnnotationPage = () => {
   const dispatch = useDispatch()
   const isScoreSelected = selectedAnnotation?.notes.includes(scoreIri) || false
   const [deleteAnnotation] = useDeleteAnnotationMutation()
-  const { refetch: refetchAnnotations } = useGetAnnotationsQuery({ scoreIri, projectIri })
+  const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
   const [isCommandKeyPressed, setIsCommandKeyPressed] = useState(false)
 
   const addComment = async () => {

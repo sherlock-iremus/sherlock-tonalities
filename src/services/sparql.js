@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { getId, stringToColor } from '../utils'
+import { getId } from '../utils'
 //import { getContributor } from 'sherlock-sparql-queries/src/queries/contributor'
 //import { getAnalyticalProject } from 'sherlock-sparql-queries/src/queries/analyticalProject'
 import {
@@ -12,6 +12,7 @@ import {
   getP140,
   getPersonalProjects,
   getProjects,
+  getScoreUrl,
 } from './queries'
 
 const SPARQL_ENDPOINT = import.meta.env.DEV ? 'http://localhost:3030/iremus' : 'https://data-iremus.huma-num.fr/sparql'
@@ -71,9 +72,9 @@ export const sparql = createApi({
         })),
     }),
     getAnnotations: builder.query({
-      query: ({ scoreIri, projectIri }) => ({
+      query: projectIri => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getAnnotations(scoreIri, projectIri) }),
+        body: new URLSearchParams({ query: getAnnotations(projectIri) }),
       }),
       transformResponse: response =>
         response.results.bindings.map(({ annotation, entity, date, author, noteId, notes }) => ({
@@ -122,6 +123,13 @@ export const sparql = createApi({
           label: e.content?.value || e.label?.value || 'Untitled project',
         })),
     }),
+    getScoreUrl: builder.query({
+      query: projectIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getScoreUrl(projectIri) }),
+      }),
+      transformResponse: response => response.results.bindings[0].url.value,
+    }),
     getPersonalProjects: builder.query({
       query: userIri => ({
         method: 'POST',
@@ -150,4 +158,5 @@ export const {
   useGetPersonalProjectsQuery,
   useExportProjectQuery,
   useExportProjectToMetaQuery,
+  useGetScoreUrlQuery,
 } = sparql

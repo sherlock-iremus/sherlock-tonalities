@@ -1,4 +1,4 @@
-export const getAnnotations = (scoreIri, projectIri) => `
+export const getAnnotations = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -53,6 +53,16 @@ WHERE {
     ?project crm:P14_carried_out_by ?contributor.
     OPTIONAL { ?project sherlock:has_privacy_type ?draft }.
     OPTIONAL { ?label crm:P190_has_symbolic_content ?content }.
+}
+LIMIT 1`
+
+export const getScoreUrl = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+SELECT url FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE {
+    <${projectIri}> crm:P9_consists_of ?annotations.
+    ?annotations sherlock:has_document_context ?url.
 }
 LIMIT 1`
 
