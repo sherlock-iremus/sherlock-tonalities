@@ -50,6 +50,7 @@ export const Intro = () => {
       <Typography variant="h6">Demos</Typography>
       {tutorials.map(tutorial => (
         <Stack
+          key={tutorial.url}
           flex={1}
           direction="row"
           mt={1}
