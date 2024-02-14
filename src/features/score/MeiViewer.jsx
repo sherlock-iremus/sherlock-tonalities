@@ -195,8 +195,8 @@ export const MeiViewer = ({ file }) => {
           flex={2}
           borderRadius={3}
           sx={({ palette }) =>
-            (isScoreSelected && { border: 'solid ' + palette.primary[100] }) ||
-            (isScoreHovered && { border: 'solid lightGrey' })
+            (isScoreSelected && { outline: 'solid ' + palette.primary[100] }) ||
+            (isScoreHovered && { outline: 'solid lightGrey' })
           }
           bgcolor="white"
           boxShadow={1}
