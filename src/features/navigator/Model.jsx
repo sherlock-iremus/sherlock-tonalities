@@ -9,7 +9,6 @@ import models from '../../config/models.json'
 import { Input } from '../../components/Input'
 import { useGetModelQuery } from '../../services/model'
 import { setSelectedConcepts } from '../../services/globals'
-import { getModel } from '../../utils'
 
 export const Model = () => {
   const dispatch = useDispatch()
@@ -17,6 +16,7 @@ export const Model = () => {
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex, selectedConcepts, selectedAnnotation } = useSelector(state => state.globals)
   const { data } = useGetModelQuery(selectedModelIndex)
+  console.log(models[selectedModelIndex].name)
   return (
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
       <ContextMenu {...{ contextMenu, setContextMenu }} />
@@ -35,7 +35,7 @@ export const Model = () => {
       >
         <ListItemIcon>
           <Avatar sx={{ fontSize: 12, height: 32, width: 32, marginLeft: 1 }}>
-            {getModel(models[selectedModelIndex].name).charAt(0)}
+            {models[selectedModelIndex].name.charAt(0)}
           </Avatar>
         </ListItemIcon>
         <ListItemText primary={models[selectedModelIndex].name} secondary="Selected model" />
