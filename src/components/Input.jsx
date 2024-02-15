@@ -6,6 +6,7 @@ const Container = styled('div')(({ theme }) => ({
   borderRadius: 8,
   display: 'flex',
   backgroundColor: alpha(theme.palette.secondary.dark, 0.15),
+  outline: 'solid ' + theme.palette.primary[100],
   '&:hover': {
     backgroundColor: alpha(theme.palette.secondary.dark, 0.25),
   },

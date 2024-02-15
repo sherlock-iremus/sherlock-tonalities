@@ -68,7 +68,7 @@ export const Intro = () => {
           })}
         >
           <PlayCircle color="primary" />
-          <Typography textAlign="center" variant="subtitle1" color="primary">
+          <Typography textAlign="center" variant="subtitle1" color="primary" fontSize={14}>
             {tutorial.title}
           </Typography>
         </Stack>

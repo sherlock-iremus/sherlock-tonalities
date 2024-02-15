@@ -1,4 +1,4 @@
-import { Avatar } from '@mui/material'
+import { Avatar, Typography } from '@mui/material'
 import { useGetContributorQuery } from '../../services/sparql'
 
 export const ContributorItem = ({ contributorIri, small }) => {
@@ -6,7 +6,9 @@ export const ContributorItem = ({ contributorIri, small }) => {
   const size = small ? 28 : 32
   if (contributor)
     return (
-      <Avatar sx={{ fontSize: 16, height: size, width: size, bgcolor: contributor.color }}>{contributor.emoji}</Avatar>
+      <Avatar sx={{ fontSize: 16, height: size, width: size, bgcolor: contributor.color }}>
+        <Typography>{contributor.emoji}</Typography>
+      </Avatar>
     )
   else return <Avatar sx={{ height: size, width: size }} />
 }
