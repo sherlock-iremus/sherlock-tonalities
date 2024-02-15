@@ -24,7 +24,7 @@ import { Projects } from './Projects'
 import { PersonalProjects } from './PersonalProjects'
 import { Input } from '../components/Input'
 import { composers } from '../utils'
-import { VirtualizedList } from './score/Scores'
+import { VirtualizedList } from './score/VirtualizedList'
 import scores from '../config/scores.json'
 
 export const Landing = () => {
@@ -104,7 +104,7 @@ export const Landing = () => {
                 <Grid padding={1}>
                   {Object.values(composers).map((composer, index) => (
                     <Chip
-                    sx={{ margin: 0.2 }}
+                      sx={{ margin: 0.2 }}
                       key={index}
                       label={composer}
                       variant={selectedComposers.includes(composer) ? 'filled' : 'outlined'}
@@ -116,7 +116,9 @@ export const Landing = () => {
                     />
                   ))}
                 </Grid>
-                <VirtualizedList {...{ scores, selectedComposers, filter, selectedScoreId, setSelectedScoreId }} />
+                <VirtualizedList
+                  {...{ scores, selectedComposers, filter, selectedScoreId, setSelectedScoreId }}
+                />
               </Stack>
               <Divider orientation="vertical" />
               <Stack flex={1} minWidth={0}>
@@ -139,12 +141,7 @@ export const Landing = () => {
                     <Projects meiUrl={selectedScoreId} setIsOpen={() => setIsOpen(true)} />
                   </Stack>
                 ) : (
-                  <Stack
-                    flex={1}
-                    justifyContent="center"
-                    alignItems="center"
-                    p={2}
-                  >
+                  <Stack flex={1} justifyContent="center" alignItems="center" p={2}>
                     <Typography textAlign="center" color="text.secondary" fontSize={14}>
                       No score selected, start by selecting one in the list or add MEI file
                     </Typography>

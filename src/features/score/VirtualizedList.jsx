@@ -7,12 +7,13 @@ export const VirtualizedList = ({ scores, selectedComposers, filter, selectedSco
     .filter(e => (selectedComposers.length ? selectedComposers.some(c => e.scoreComposer.includes(c)) : true))
     .filter(e => (filter ? e.scoreTitle.toLowerCase().includes(filter.toLowerCase()) : true))
 
-  const Row = ({ index }) => {
+  const Row = ({ index, style }) => {
     const { meiUrl, scoreTitle, scoreComposer } = filteredScores[index]
     return (
       <ListItem
         key={meiUrl}
         dense
+        style={style}
         disablePadding
         secondaryAction={
           <IconButton edge="end" disableRipple>
