@@ -5,7 +5,7 @@ export const createEntity = async ({ selectedNotes, scoreIri, projectIri, postAn
     const isGlobalAnnotation = selectedNotes.includes(scoreIri)
 
     const body = {
-      p140: isGlobalAnnotation ? [scoreIri] : selectedNotes.map(note => scoreIri + '_' + note),
+      p140: isGlobalAnnotation ? [scoreIri] : selectedNotes.map(note => scoreIri + '#' + note),
       p177: 'crm:P67_refers_to',
       new_p141: { rdf_type: ['crm:E28_Conceptual_Object'], p2_type: [ANALYTICAL_ENTITY] },
       p141_type: 'NEW_RESOURCE',

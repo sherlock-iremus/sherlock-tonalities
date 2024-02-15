@@ -59,7 +59,7 @@ LIMIT 1`
 export const getScoreUrl = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
-SELECT url FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+SELECT ?url FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 WHERE {
     <${projectIri}> crm:P9_consists_of ?annotations.
     ?annotations sherlock:has_document_context ?url.
@@ -121,7 +121,7 @@ WHERE {
  GROUP BY ?project
 `
 
-export const exportProject = ({ projectIri, scoreUrl }) => `
+export const exportProject = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -132,7 +132,6 @@ PREFIX praetorius1619: <http://modality-tonality.huma-num.fr/static/ontologies/m
 CONSTRUCT {
     ?s ?p ?o.
     ?score a crm:E1_CRM_Entity.
-    ?score crm:P1_is_identified_by <${scoreUrl}>.
 }
 FROM <http://data-iremus.huma-num.fr/graph/sherlock>
 FROM <http://data-iremus.huma-num.fr/graph/users>
@@ -163,7 +162,7 @@ WHERE
  }
 `
 
-export const exportProjectToMeta = ({ projectIri, scoreUrl }) => `
+export const exportProjectToMeta = projectIri => `
 PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX core: <https://w3id.org/polifonia/ontology/core/>
@@ -187,7 +186,6 @@ CONSTRUCT {
 
     ?score a mr:MusicContent.
     ?score a mm:DigitalScore.
-    ?score owl:sameAs <${scoreUrl}>.
     ?score mr:hasAnnotation ?annotation.
     ?score mr:hasFragment ?notes.
 

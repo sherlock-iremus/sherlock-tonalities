@@ -25,7 +25,7 @@ export const PersonalProjects = ({ userId }) => {
           {projects.map(project => (
             <ListItemButton
               key={project.iri}
-              onClick={() => navigate(`/project/${getUuid(project.iri)}/score/${getUuid(project.scoreIri)}`)}
+              onClick={() => navigate(`/project/${getUuid(project.iri)}`)}
             >
               <ListItemIcon>
                 <TextSnippet />

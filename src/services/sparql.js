@@ -87,24 +87,24 @@ export const sparql = createApi({
         })),
     }),
     exportProject: builder.query({
-      query: params => ({
+      query: projectIri => ({
         url:
           '?' +
           new URLSearchParams({
             graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
-            query: exportProject(params),
+            query: exportProject(projectIri),
           }),
         method: 'GET',
         responseHandler: response => response.text(),
       }),
     }),
     exportProjectToMeta: builder.query({
-      query: params => ({
+      query: projectIri => ({
         url:
           '?' +
           new URLSearchParams({
             graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
-            query: exportProjectToMeta(params),
+            query: exportProjectToMeta(projectIri),
           }),
         method: 'GET',
         responseHandler: response => response.text(),

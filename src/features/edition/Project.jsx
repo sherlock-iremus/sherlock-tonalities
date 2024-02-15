@@ -10,11 +10,11 @@ import { AnnotationPage } from '../AnnotationPage'
 import { ExportMenu } from '../ExportMenu'
 
 export const Project = () => {
-  const { scoreIri, projectIri, selectedAnnotation } = useSelector(state => state.globals)
+  const { projectIri, selectedAnnotation } = useSelector(state => state.globals)
   const [isHovered, setIsHovered] = useState(false)
   const [annotationsByPage, setAnnotationsByPage] = useState([])
   const { data: project } = useGetAnalyticalProjectQuery(projectIri, { skip: !projectIri })
-  const { data: annotations } = useGetAnnotationsQuery({ scoreIri, projectIri }, { skip: !projectIri })
+  const { data: annotations } = useGetAnnotationsQuery(projectIri, { skip: !projectIri })
   const [contextMenu, setContextMenu] = useState(false)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const Project = () => {
   if (project && annotations)
     return (
       <Stack flex={1} borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
-        <ExportMenu {...{ projectIri, contextMenu, setContextMenu }} filename={project.label} />
+        <ExportMenu {...{ contextMenu, setContextMenu }} filename={project.label} />
         <AnnotationPage />
         {!selectedAnnotation && (
           <>

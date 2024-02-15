@@ -1,29 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { MeiViewer } from './MeiViewer'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { getIri } from '../../utils'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setScoreAnnotator } from '../../services/globals'
+import { useGetScoreUrlQuery } from '../../services/sparql'
 
 export const ScoreAnnotator = () => {
   const dispatch = useDispatch()
-  const { scoreId, projectId } = useParams()
+  const { projectId } = useParams()
+  const { state } = useLocation()
   const [file, setFile] = useState(null)
+  const { data } = useGetScoreUrlQuery(getIri(projectId), { skip: state?.url })
 
-  const getFile = async () => {
-    const scoreUrl = scores.find(score => score.scoreIri === getIri(scoreId))?.meiUrl
-    if (scoreUrl) try {
-      setFile(await (await fetch(scoreUrl)).text())
-      dispatch(setScoreAnnotator(getIri(projectId)))
+  const getFile = async url => {
+    try {
+      setFile(await (await fetch(url)).text())
+      dispatch(setScoreAnnotator({ projectIri: getIri(projectId), scoreIri: url }))
     } catch (error) {
       console.error(error)
     }
   }
 
   useEffect(() => {
-    getFile()
-  }, [])
+    if (state?.url) getFile(state.url)
+    else if (data) getFile(data)
+  }, [data, state])
 
   if (file) return <MeiViewer {...{ file }} />
   else return null

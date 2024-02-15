@@ -15,8 +15,8 @@ import { getIri, getUuid } from '../utils'
 import { useNavigate } from 'react-router-dom'
 import { ContributorItem } from './items/ContributorItem'
 
-export const Projects = ({ scoreIri, setIsOpen }) => {
-  const { data: projects, isLoading } = useGetProjectsQuery(scoreIri)
+export const Projects = ({ meiUrl, setIsOpen }) => {
+  const { data: projects, isLoading } = useGetProjectsQuery(meiUrl)
   const navigate = useNavigate()
 
   if (projects && projects.length)
@@ -28,7 +28,7 @@ export const Projects = ({ scoreIri, setIsOpen }) => {
             disablePadding
             secondaryAction={<ContributorItem contributorIri={project.contributor} />}
           >
-            <ListItemButton onClick={() => navigate(`/project/${getUuid(project.iri)}/score/${getUuid(scoreIri)}`)}>
+            <ListItemButton onClick={() => navigate(`/project/${getUuid(project.iri)}`)}>
               <ListItemIcon>
                 <TextSnippet />
               </ListItemIcon>

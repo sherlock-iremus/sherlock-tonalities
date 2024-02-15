@@ -11,7 +11,7 @@ import { colors } from './utils'
 const router = createBrowserRouter(
   [
     { path: '*', element: <Landing />, errorElement: <Error /> },
-    { path: '/project/:projectId/score/:scoreId', element: <ScoreAnnotator />, errorElement: <Error /> },
+    { path: '/project/:projectId', element: <ScoreAnnotator />, errorElement: <Error /> },
   ],
   {
     basename: '/tonalities',

@@ -18,7 +18,7 @@ export const getUuid = iri => iri.split('/').pop()
 
 export const removeBaseIri = iri => (iri.includes('#') ? iri.split('#').pop() : iri.split('/').pop())
 
-export const getId = iri => iri.split('_').pop()
+export const getId = iri => iri.split('#').pop()
 
 export const getIri = uuid => `http://data-iremus.huma-num.fr/id/${uuid}`
 
@@ -34,6 +34,29 @@ export const getModel = iri =>
   (iri?.includes('zarlino') && 'Zarlino') ||
   (iri?.includes('nterpretation') && 'Interpretation') ||
   ''
+
+export const composers = {
+  Anonyme: 'Anonyme',
+  Dufay: 'Guillaume Dufay',
+  'Bach/Bach_Chorals': 'Johann Sebastian Bach',
+  //'Bach/Bach_Fugues': 'Johann Sebastian Bach',
+  De_Mantua: 'Jacquet de Mantua',
+  De_Rore: 'Cyprien de Rore',
+  DeLaRue: 'Pierre de La Rue',
+  Dufay: 'Guillaume Dufay',
+  Fontanelli: 'Alfonso Fontanelli',
+  Gombert: 'Nicolas Gombert',
+  Hellinck: 'Lupus Hellinck',
+  Isaac: 'Heinrich Isaac',
+  'Josquin/Josquin_Chansons': 'Josquin des Prez',
+  //'Josquin/Josquin_Sacred_Music': 'Josquin des Prez',
+  Lechner: 'Leonhard Lechner',
+  Morales: 'Cristobal de Morales',
+  Praetorius: 'Michael Prætorius',
+  Verdelot: 'Philippe Verdelot',
+  Willaert: 'Adrian Willaert',
+  Zarlino: 'Gioseffo Zarlino',
+}
 
 export const createUuid = () => URL.createObjectURL(new Blob([])).slice(-36)
 
