@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import PolifoniaLogo from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AddCircle, BugReport, ChevronRight, Help, Language, LibraryMusic } from '@mui/icons-material'
+import { Add, AddCircle, ChevronRight, Feedback, Help, Language, LibraryMusic } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useEffect, useState } from 'react'
 import { Intro } from './Intro'
@@ -96,11 +96,12 @@ export const Landing = () => {
                     <ListItemText primary="My recent work" secondary="View recent analytical projects" />
                   </ListItemButton>
                 </ListItem>
-                <Grid padding={1}>
+                <Grid px={1}>
                   {Object.values(composers).map((composer, index) => (
                     <Chip
                       sx={{ margin: 0.2 }}
                       key={index}
+                      size='small'
                       label={composer}
                       variant={selectedComposers.includes(composer) ? 'filled' : 'outlined'}
                       onClick={() =>
@@ -168,7 +169,7 @@ export const Landing = () => {
         </Tooltip>
         <Tooltip title="Report a bug">
           <IconButton href="https://github.com/sherlock-iremus/sherlock-tonalities/issues/new">
-            <BugReport />
+            <Feedback />
           </IconButton>
         </Tooltip>
         <Tooltip title="Documentation">

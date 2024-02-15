@@ -77,4 +77,4 @@ export const timeSince = date => {
 
 const extractSparql = obj => Object.fromEntries(Object.entries(obj).map(([key, { value }]) => [key, value]))
 
-export const colors = [blue, blueGrey, brown, deepOrange, deepPurple, indigo, pink, purple, red, teal]
+export const colors = [blue, brown, deepOrange, deepPurple, indigo, pink, purple, red, teal]

@@ -1,5 +1,10 @@
 [
   {
+    "baseIri": "https://w3id.org/polifonia/ontology/modal-tonal/Cadences_FilaberGuillotelGurrieri_2023#",
+    "name": "Cadences (Renaissance)",
+    "filename": "Cadences_FilaberGuillotelGurrieri_2023.json"
+  },
+  {
     "baseIri": "https://w3id.org/polifonia/ontology/modal-tonal/Mangani-Sabaino_TextMusic",
     "name": "Text-Music Relations",
     "filename": "Mangani-Sabaino_TextMusic.owl"
@@ -8,11 +13,6 @@
     "baseIri": "https://w3id.org/polifonia/ontology/music-analysis/interpretation/",
     "name": "Interpretation",
     "filename": "Interpretation.owl"
-  },
-  {
-    "baseIri": "https://w3id.org/polifonia/ontology/modal-tonal/Cadences_FilaberGuillotelGurrieri_2023#",
-    "name": "Cadences (Renaissance)",
-    "filename": "Cadences_FilaberGuillotelGurrieri_2023.json"
   },
   {
     "baseIri": "https://w3id.org/polifonia/ontology/modal-tonal/Fugue#",
