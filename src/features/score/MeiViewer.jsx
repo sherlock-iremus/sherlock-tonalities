@@ -105,7 +105,9 @@ export const MeiViewer = ({ file }) => {
     }))
     const initialOffset = notesOffset.find(note => note.id === initialNoteId).offset
     const finalOffset = notesOffset.find(note => note.id === finalNoteId).offset
-    const inBetweenNotes = notesOffset.filter(e => e.offset >= initialOffset && e.offset <= finalOffset)
+    const min = Math.min(initialOffset, finalOffset)
+    const max = Math.max(initialOffset, finalOffset)
+    const inBetweenNotes = notesOffset.filter(e => e.offset >= min && e.offset <= max)
     return inBetweenNotes.map(note => note.id)
   }
 
