@@ -79,7 +79,7 @@ export const Landing = () => {
             <Stack direction="row" flex={3}>
               <Divider orientation="vertical" />
               <Stack flex={1}>
-                <ListSubheader>Recent projects</ListSubheader>
+                <ListSubheader>Available scores</ListSubheader>
                 <ListItem
                   disablePadding
                   dense
@@ -93,14 +93,9 @@ export const Landing = () => {
                     <ListItemIcon>
                       <LibraryMusic />
                     </ListItemIcon>
-                    <ListItemText primary="My analytical projects" secondary="View recent analytical projects" />
+                    <ListItemText primary="My recent work" secondary="View recent analytical projects" />
                   </ListItemButton>
                 </ListItem>
-                <Input
-                  value={filter}
-                  onChange={e => setFilter(e.target.value)}
-                  placeholder="Search score by title..."
-                />
                 <Grid padding={1}>
                   {Object.values(composers).map((composer, index) => (
                     <Chip
@@ -116,9 +111,12 @@ export const Landing = () => {
                     />
                   ))}
                 </Grid>
-                <VirtualizedList
-                  {...{ scores, selectedComposers, filter, selectedScoreId, setSelectedScoreId }}
+                <Input
+                  value={filter}
+                  onChange={e => setFilter(e.target.value)}
+                  placeholder="Search score by title..."
                 />
+                <VirtualizedList {...{ scores, selectedComposers, filter, selectedScoreId, setSelectedScoreId }} />
               </Stack>
               <Divider orientation="vertical" />
               <Stack flex={1} minWidth={0}>

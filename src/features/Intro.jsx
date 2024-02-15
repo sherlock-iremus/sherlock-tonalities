@@ -73,9 +73,13 @@ export const Intro = () => {
           </Typography>
         </Stack>
       ))}
-      <Dialog open={!!openedTutorial} onClose={() => setOpenedTutorial(null)}>
+      <Dialog
+        open={!!openedTutorial}
+        onClose={() => setOpenedTutorial(null)}
+        sx={{ '& .MuiPaper-root': { borderRadius: 3 } }}
+      >
         <DialogTitle>{openedTutorial?.title}</DialogTitle>
-        <iframe frameBorder="0" src={openedTutorial?.url} allowFullScreen width="640" height="400"></iframe>
+        <iframe frameBorder="0" src={openedTutorial?.url} allowFullScreen width="600" height="375"></iframe>
       </Dialog>
     </Stack>
   )
