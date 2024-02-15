@@ -30,7 +30,7 @@ import { getId } from '../../utils'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
 
-export const Annotation = ({ annotation, entity, date, page, author, isSubEntity, color }) => {
+export const Annotation = ({ annotation, entity, date, page, author, isSubEntity, color, onDelete }) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
@@ -69,6 +69,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
   const removeAnnotation = async () => {
     if (assignments?.length) {
       try {
+        if (isSubEntity) await onDelete()
         await Promise.all(assignments.map(({ assignment }) => deleteAnnotation(getUuid(assignment)).unwrap()))
         refetch()
       } catch (error) {

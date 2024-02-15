@@ -33,7 +33,7 @@ export const Assignment = ({
     }
   }
 
-  if (subentity) return <Annotation entity={subentity} {...{ date, author, annotation }} isSubEntity color={!color} />
+  if (subentity) return <Annotation entity={subentity} {...{ date, author, annotation, onDelete }} isSubEntity color={!color} />
   else
     return (
       <Stack
