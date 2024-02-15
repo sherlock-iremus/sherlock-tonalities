@@ -16,7 +16,6 @@ export const Model = () => {
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex, selectedConcepts, selectedAnnotation } = useSelector(state => state.globals)
   const { data } = useGetModelQuery(selectedModelIndex)
-  console.log(models[selectedModelIndex].name)
   return (
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
       <ContextMenu {...{ contextMenu, setContextMenu }} />
