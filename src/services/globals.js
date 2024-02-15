@@ -47,12 +47,14 @@ const globals = createSlice({
       }
     },
     setAnnotatedNotes: (state, action) => {
-      state.annotatedNotes.push(...action.payload)
+      state.annotatedNotes = [...new Set([...state.annotatedNotes, ...action.payload])]
     },
     unsetAnnotatedNotes: (state, action) => {
       const index = state.annotatedNotes.findIndex(e => e === action.payload[0])
-      const length = action.payload.length
-      state.annotatedNotes.splice(index, length)
+      if (index !== -1) {
+        const length = action.payload.length
+        state.annotatedNotes.splice(index, length)
+      }
     },
     setSelectedConcepts: (state, action) => {
       if (Array.isArray(action.payload)) state.selectedConcepts = action.payload
