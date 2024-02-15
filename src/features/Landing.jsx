@@ -1,6 +1,8 @@
 import { NewProject } from './NewProject'
 import {
   Chip,
+  Dialog,
+  DialogTitle,
   Divider,
   Grid,
   IconButton,
@@ -178,6 +180,9 @@ export const Landing = () => {
           </IconButton>
         </Tooltip>
       </Stack>
+      <Dialog open>
+        <DialogTitle>Come back soon...</DialogTitle>
+      </Dialog>
     </Stack>
   )
 }
