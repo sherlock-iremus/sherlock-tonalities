@@ -96,12 +96,12 @@ export const Landing = () => {
                     <ListItemText primary="My recent work" secondary="View recent analytical projects" />
                   </ListItemButton>
                 </ListItem>
-                <Grid px={1}>
+                <Grid p={1}>
                   {Object.values(composers).map((composer, index) => (
                     <Chip
                       sx={{ margin: 0.2 }}
                       key={index}
-                      size='small'
+                      size="small"
                       label={composer}
                       variant={selectedComposers.includes(composer) ? 'filled' : 'outlined'}
                       onClick={() =>
