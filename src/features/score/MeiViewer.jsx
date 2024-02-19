@@ -3,6 +3,7 @@ import {
   ArrowBack,
   InsertDriveFile,
   InsertDriveFileOutlined,
+  KeyboardCommandKey,
   KeyboardControlKey,
   KeyboardOptionKey,
   ZoomIn,
@@ -10,7 +11,7 @@ import {
 } from '@mui/icons-material'
 import { Alert, Checkbox, IconButton, ListItemText, Pagination, Snackbar, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setNoteCount, setSelectedNotes } from '../../services/globals'
@@ -140,6 +141,23 @@ export const MeiViewer = ({ file }) => {
     }
   }, [finalNoteId])
 
+  const handleKeyDown = useCallback(event => {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'a') {
+      event.preventDefault()
+      dispatch(setSelectedNotes([...document.querySelectorAll('.note, .rest, .mRest')].map(e => e.id)))
+    }
+  }, [])
+  const handleKeyUp = useCallback(event => event.ctrlKey || event.metaKey, [])
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  }, [handleKeyDown, handleKeyUp])
+
   return (
     <Stack height="100vh" bgcolor="secondary.light">
       <Stack padding={2} direction="row" alignItems="center">
@@ -250,7 +268,9 @@ export const MeiViewer = ({ file }) => {
             sx={{ borderRadius: 3, boxShadow: 1, bgcolor: 'secondary.light' }}
           >
             <Stack direction="row" alignItems="center">
-              Hold <KeyboardOptionKey /> to select a verticality and hold <KeyboardControlKey /> to select a range
+              Hold <KeyboardOptionKey fontSize="36px" sx={{ px: 0.5 }} /> to select a verticality, hold
+              <KeyboardControlKey fontSize="36px" sx={{ px: 0.5 }} /> to select a range,
+              <KeyboardCommandKey fontSize="36px" sx={{ pl: 0.5 }} /> +A to select all notes
             </Stack>
           </Alert>
         </Snackbar>
