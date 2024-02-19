@@ -1,4 +1,4 @@
-import { AddCircle, ArrowBack, Close, KeyboardControlKey, Send } from '@mui/icons-material'
+import { AddCircle, ArrowBack, Close, KeyboardCommandKey, KeyboardControlKey, Send } from '@mui/icons-material'
 import {
   AppBar,
   Button,
@@ -36,7 +36,6 @@ export const AnnotationPage = () => {
   const isScoreSelected = selectedAnnotation?.notes.includes(scoreIri) || false
   const [deleteAnnotation] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
-  const [isCommandKeyPressed, setIsCommandKeyPressed] = useState(false)
 
   const addComment = async () => {
     try {
@@ -52,7 +51,7 @@ export const AnnotationPage = () => {
       setInput('')
       refetch()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -62,7 +61,7 @@ export const AnnotationPage = () => {
       dispatch(setSelectedAnnotation())
       refetchAnnotations()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -73,12 +72,12 @@ export const AnnotationPage = () => {
   }
 
   const handleKeyDown = useCallback(event => {
-    if (event.ctrlKey && event.key === 'n') {
-      dispatch(setIsSubSelecting())
+    if (selectedAnnotation && (event.ctrlKey || event.metaKey) && event.key === 'd') {
       event.preventDefault()
+      dispatch(setIsSubSelecting())
     }
   }, [])
-  const handleKeyUp = useCallback(event => event.key === 'Control' && setIsCommandKeyPressed(false), [])
+  const handleKeyUp = useCallback(event => event.ctrlKey || event.metaKey, [])
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
@@ -116,8 +115,8 @@ export const AnnotationPage = () => {
             <Tooltip
               title={
                 <Stack flex={1} direction="row" alignItems="center">
-                  Add sub-layer (<KeyboardControlKey sx={{ width: 16, height: 16 }} />
-                  +N)
+                  Add sub-layer (<KeyboardCommandKey sx={{ width: 16, height: 16 }} />
+                  +D)
                 </Stack>
               }
             >
