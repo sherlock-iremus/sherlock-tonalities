@@ -17,7 +17,7 @@ export const createEntity = async ({ selectedNotes, scoreIri, projectIri, postAn
     const entity = response.find(e => e['@type']?.includes('http://www.cidoc-crm.org/cidoc-crm/E28_Conceptual_Object'))
     return entity['@id']
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -37,7 +37,7 @@ export const assignConcept = async ({ entityIri, conceptIri, scoreIri, projectIr
     )
     return annotation['@id']
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -57,7 +57,7 @@ export const assignArbitraryText = async ({ entityIri, input, scoreIri, projectI
     )
     return annotation['@id']
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -77,6 +77,6 @@ export const assignSubEntity = async ({ parentEntity, childEntity, scoreIri, pro
     )
     return annotation['@id']
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }

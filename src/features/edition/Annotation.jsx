@@ -73,7 +73,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
         await Promise.all(assignments.map(({ assignment }) => deleteAnnotation(getUuid(assignment)).unwrap()))
         refetch()
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     }
     try {
@@ -82,7 +82,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
       dispatch(setSelectedAnnotation())
       dispatch(setHoveredAnnotation())
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 

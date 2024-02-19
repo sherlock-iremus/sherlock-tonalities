@@ -57,7 +57,7 @@ export const AccountMenu = () => {
         const data = await request.json()
         setOrcidName(data.person.name['given-names'].value + ' ' + data.person.name['family-name'].value)
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
   }
 
@@ -68,7 +68,7 @@ export const AccountMenu = () => {
         await putUser(body)
         refetch()
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
   }
 
