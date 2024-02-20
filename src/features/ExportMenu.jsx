@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux'
 export const ExportMenu = ({ filename, contextMenu, setContextMenu }) => {
   const [isDownloadingCidoc, setIsDownloadingCidoc] = useState(false)
   const [isDownloadingMeta, setIsDownloadingMeta] = useState(false)
-  const { projectIri } = useSelector(state => state.globals)
-  const { data: cidocData } = useExportProjectQuery(projectIri, { skip: !isDownloadingCidoc })
+  const { projectIri, scoreIri } = useSelector(state => state.globals)
+  const { data: cidocData } = useExportProjectQuery({ projectIri, scoreIri }, { skip: !isDownloadingCidoc })
   const { data: metaData } = useExportProjectToMetaQuery(projectIri, { skip: !isDownloadingMeta })
 
   const downloadFile = async data => {
