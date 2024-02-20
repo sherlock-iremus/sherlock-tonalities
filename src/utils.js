@@ -16,7 +16,7 @@ export const stringToColor = string => {
 
 export const getUuid = iri => iri.split('/').pop()
 
-export const removeBaseIri = iri => (iri.includes('#') ? iri.split('#').pop() : iri.split('/').pop())
+export const removeBaseIri = iri => iri ? (iri.includes('#') ? iri.split('#').pop() : iri.split('/').pop()) : ''
 
 export const getId = iri => iri.split('#').pop()
 
