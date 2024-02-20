@@ -14,7 +14,6 @@ import {
   Typography,
 } from '@mui/material'
 import PolifoniaLogo from '../assets/polifonia.svg'
-import logo from '../assets/logo.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Add, AddCircle, ChevronRight, Feedback, Help, Language, LibraryMusic } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
@@ -60,14 +59,11 @@ export const Landing = () => {
         <Stack direction="row" minHeight={0}>
           <Stack flex={1}>
             <Stack direction="row" justifyContent="space-between">
-              <Stack direction="row" spacing={1} p={2} alignItems="top">
-                <img src={logo} width="40px" />
-                <Stack>
-                  <Typography variant="h5">Tonalities</Typography>
-                  <Typography pl={1} fontSize={12} color="grey">
-                   Webapp for music analysis
-                  </Typography>
-                </Stack>
+              <Stack direction="row" spacing={0.5} p={2}>
+                <Typography variant="h5">Tonalities</Typography>
+                <Typography fontSize={12} variant="h6">
+                  2.1
+                </Typography>
               </Stack>
               <Stack p={1}>
                 <Tooltip title="Visit documentation">
