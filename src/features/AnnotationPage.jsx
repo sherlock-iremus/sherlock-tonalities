@@ -72,7 +72,7 @@ export const AnnotationPage = () => {
   }
 
   const handleKeyDown = useCallback(event => {
-    if (selectedAnnotation && (event.ctrlKey || event.metaKey) && event.key === 'd') {
+    if (selectedAnnotation && (event.ctrlKey || event.metaKey) && event.key === 'n') {
       event.preventDefault()
       dispatch(setIsSubSelecting())
     }
@@ -115,8 +115,7 @@ export const AnnotationPage = () => {
             <Tooltip
               title={
                 <Stack flex={1} direction="row" alignItems="center">
-                  Add sub-layer (<KeyboardCommandKey sx={{ width: 16, height: 16 }} />
-                  +D)
+                  Add sub-layer (<KeyboardControlKey sx={{ width: 16, height: 16 }} /> +N)
                 </Stack>
               }
             >
