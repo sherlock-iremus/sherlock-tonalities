@@ -1,4 +1,4 @@
-import { blue, blueGrey, brown, deepOrange, deepPurple, indigo, pink, purple, red, teal } from '@mui/material/colors'
+import { blue, brown, deepOrange, deepPurple, indigo, pink, purple, red, teal } from '@mui/material/colors'
 
 export const stringToColor = string => {
   /* eslint-disable no-bitwise */
@@ -25,14 +25,15 @@ export const getIri = uuid => `http://data-iremus.huma-num.fr/id/${uuid}`
 export const getModelGeneric = iri => iri.split('/').pop().split('_').shift()
 
 export const getModel = iri =>
-  (iri?.includes('raetorius') && 'Praetorius 1619') ||
-  (iri?.includes('ilaber') && 'Cadences (Renaissance)') ||
-  (iri?.includes('modal-tonal') && 'Zarlino 1558') ||
-  (iri?.includes('uillotel') && 'Guillotel 2022') ||
-  (iri?.includes('ugue') && 'Fugue') ||
-  (iri?.includes('TextMusic') && 'Text-Music Relations') ||
-  (iri?.includes('zarlino') && 'Zarlino') ||
-  (iri?.includes('nterpretation') && 'Interpretation') ||
+  (iri?.toLowerCase().includes('praetorius') && 'Praetorius 1619') ||
+  (iri?.toLowerCase().includes('filaber') && 'Cadences (Renaissance)') ||
+  (iri?.toLowerCase().includes('modal-tonal') && 'Zarlino 1558') ||
+  (iri?.toLowerCase().includes('guillotel') && 'Guillotel 2022') ||
+  (iri?.toLowerCase().includes('fugue') && 'Fugue') ||
+  (iri?.toLowerCase().includes('textmusic') && 'Text-Music Relations') ||
+  (iri?.toLowerCase().includes('zarlino') && 'Zarlino') ||
+  (iri?.toLowerCase().includes('interpretation') && 'Interpretation') ||
+  (iri?.toLowerCase().includes('chordscommonpractice') && 'Chords: common practice harmony') ||
   ''
 
 export const composers = {
