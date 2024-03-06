@@ -155,6 +155,13 @@ WHERE
     {
         <${projectIri}> crm:P14_carried_out_by ?user.
         ?user crm:P1_is_identified_by ?s.
+        ?s crm:P2_has_type iremus:73ea8d74-3526-4f6a-8830-dd369795650d.
+        ?s ?p ?o.
+    }
+    UNION
+    {
+        <${projectIri}> crm:P14_carried_out_by ?user.
+        ?user crm:P1_is_identified_by ?s.
         ?s crm:P2_has_type iremus:d7ef2583-ff31-4913-9ed3-bc3a1c664b21.
         ?s ?p ?o.
     }
