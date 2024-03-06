@@ -36,7 +36,6 @@ export const AccountMenu = () => {
   const [putUser, { isLoading }] = usePutUserMutation()
   const [anchorEl, setAnchorEl] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
-  const [orcidName, setOrcidName] = useState('Undefined name')
   const open = Boolean(anchorEl)
   const dispatch = useDispatch()
   const [logOut] = useLogOutMutation()
@@ -52,21 +51,7 @@ export const AccountMenu = () => {
   useEffect(() => {
     setSelectedEmoji(contributor?.emoji)
     setSelectedColor(contributor?.color)
-    fetchOrcidName()
   }, [contributor])
-
-  const fetchOrcidName = async () => {
-    if (contributor?.orcid)
-      try {
-        const request = await fetch('https://pub.orcid.org/v3.0/' + contributor.orcid, {
-          headers: { Accept: 'application/json' },
-        })
-        const data = await request.json()
-        setOrcidName(data.person.name['given-names'].value + ' ' + data.person.name['family-name'].value)
-      } catch (error) {
-        console.error(error)
-      }
-  }
 
   const updateUser = async () => {
     if (!isLoading)
@@ -94,17 +79,15 @@ export const AccountMenu = () => {
     </Dialog>
   ) : (
     <Box>
-      <Tooltip title="Account">
-        <IconButton
-          onClick={e => setAnchorEl(e.currentTarget)}
-          size="small"
-          aria-controls={open ? 'account-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-        >
-          <ContributorItem contributorIri={getIri(userId)} />
-        </IconButton>
-      </Tooltip>
+      <IconButton
+        onClick={e => setAnchorEl(e.currentTarget)}
+        size="small"
+        aria-controls={open ? 'account-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+      >
+        <ContributorItem contributorIri={getIri(userId)} />
+      </IconButton>
       <Menu anchorEl={anchorEl} id="account-menu" open={open} onClose={handleClose} onClick={handleClose}>
         <MenuItem onClick={() => setIsEditing(true)}>
           <ListItemIcon>
@@ -130,7 +113,7 @@ export const AccountMenu = () => {
         <DialogContent>
           <Stack flex={1} bgcolor="primary.light" borderRadius={3} padding={1}>
             <Typography color="white" textAlign="center" variant="overline">
-              {orcidName}
+              {contributor?.name}
             </Typography>
           </Stack>
           <DialogContentText paddingY={1}>Account informations</DialogContentText>

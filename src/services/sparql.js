@@ -28,9 +28,15 @@ export const sparql = createApi({
       }),
       transformResponse: ({
         results: {
-          bindings: [{ contributor, color, emoji, orcid }],
+          bindings: [{ contributor, color, emoji, orcid, name }],
         },
-      }) => ({ id: contributor?.value, color: '#' + color?.value, emoji: emoji?.value, orcid: orcid?.value }),
+      }) => ({
+        id: contributor?.value,
+        color: '#' + color?.value,
+        emoji: emoji?.value,
+        orcid: orcid?.value,
+        name: name?.value || 'Profile',
+      }),
     }),
     getAnalyticalProject: builder.query({
       query: analyticalProjectIri => ({

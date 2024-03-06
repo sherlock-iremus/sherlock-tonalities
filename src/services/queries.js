@@ -22,7 +22,7 @@ GROUP BY ?annotation ?entity ?date ?author
 export const getContributor = contributorIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX analysis: <http://modality-tonality.huma-num.fr/analysisOntology#>
-SELECT ?contributor ?color ?emoji ?orcid
+SELECT ?contributor ?color ?emoji ?orcid ?name
 FROM <http://data-iremus.huma-num.fr/graph/users>
 WHERE {
     VALUES ?contributor { <${contributorIri}> }
@@ -38,7 +38,12 @@ WHERE {
     ?contributor crm:P1_is_identified_by ?identifier.
     ?identifier crm:P2_has_type <http://data-iremus.huma-num.fr/id/d7ef2583-ff31-4913-9ed3-bc3a1c664b21>.
     ?identifier crm:P190_has_symbolic_content ?orcid.
-
+    
+    OPTIONAL {
+        ?contributor crm:P1_is_identified_by ?surname.
+        ?surname crm:P2_has_type <http://data-iremus.huma-num.fr/id/73ea8d74-3526-4f6a-8830-dd369795650d>.
+        ?surname crm:P190_has_symbolic_content ?name.
+    }
 }`
 
 export const getAnalyticalProject = analyticalProjectIri => `
@@ -126,6 +131,7 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
+PREFIX guillotel2023: <https://w3id.org/polifonia/ontology/modal-tonal/Cadences_FilaberGuillotelGurrieri_2023/>
 PREFIX corpus: <${scoreIri.substring(0, scoreIri.lastIndexOf('/'))}/>
 PREFIX mei: <${scoreIri}#>
 CONSTRUCT {
