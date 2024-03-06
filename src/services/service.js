@@ -9,14 +9,14 @@ const SHERLOCK_API_REFRESH_ENDPOIT = BASE_API_URL + 'sherlock/oauth/access_token
 
 export const service = createApi({
   reducerPath: 'service',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL + 'sherlock/api/', credentials: 'include' }),
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL + 'sherlock/', credentials: 'include' }),
   endpoints: builder => ({
-    getUserId: builder.query({ query: () => ({}) }),
-    logOut: builder.mutation({ query: () => ({ url: 'logout', method: 'POST' }) }),
-    putUser: builder.mutation({ query: body => ({ url: 'user/config', method: 'PUT', body }) }),
-    postAnalyticalProject: builder.mutation({ query: body => ({ url: 'analytical-project', method: 'POST', body }) }),
-    postAnnotation: builder.mutation({ query: body => ({ url: 'e13', method: 'POST', body }) }),
-    deleteAnnotation: builder.mutation({ query: iri => ({ url: `e13/${iri}`, method: 'DELETE' }) }),
+    getUserId: builder.query({ query: () => ({ url: 'api/'}) }),
+    logOut: builder.mutation({ query: () => ({ url: 'logout/', method: 'POST' }) }),
+    putUser: builder.mutation({ query: body => ({ url: 'api/user/config', method: 'PUT', body }) }),
+    postAnalyticalProject: builder.mutation({ query: body => ({ url: 'api/analytical-project', method: 'POST', body }) }),
+    postAnnotation: builder.mutation({ query: body => ({ url: 'api/e13', method: 'POST', body }) }),
+    deleteAnnotation: builder.mutation({ query: iri => ({ url: `api/e13/${iri}`, method: 'DELETE' }) }),
   }),
 })
 

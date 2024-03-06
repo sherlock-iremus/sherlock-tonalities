@@ -25,6 +25,7 @@ import { BASE_API_URL, useGetUserIdQuery, useLogOutMutation, usePutUserMutation 
 import { useDispatch } from 'react-redux'
 import { setColorIndex } from '../services/globals'
 import { useGetContributorQuery } from '../services/sparql'
+import { useNavigate } from 'react-router-dom'
 
 export const AccountMenu = () => {
   const theme = useTheme()
@@ -39,6 +40,12 @@ export const AccountMenu = () => {
   const open = Boolean(anchorEl)
   const dispatch = useDispatch()
   const [logOut] = useLogOutMutation()
+  const navigate = useNavigate()
+
+  const onLogout = () => {
+    logOut()
+    navigate(0)
+  }
 
   const handleClose = () => setAnchorEl(null)
 
@@ -111,7 +118,7 @@ export const AccountMenu = () => {
           </ListItemIcon>
           Report a bug
         </MenuItem>
-        <MenuItem onClick={logOut}>
+        <MenuItem onClick={onLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
