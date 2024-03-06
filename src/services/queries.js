@@ -131,7 +131,14 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
-PREFIX guillotel2023: <https://w3id.org/polifonia/ontology/modal-tonal/Cadences_FilaberGuillotelGurrieri_2023/>
+PREFIX guillotel: <https://w3id.org/polifonia/ontology/modal-tonal/Cadences_FilaberGuillotelGurrieri_2023#>
+PREFIX guillotel2023: <https://w3id.org/polifonia/ontology/modal-tonal/Cadences_FilaberGuillotelGurrieri_2023#>
+PREFIX manganisabaino: <https://w3id.org/polifonia/ontology/modal-tonal/Mangani-Sabaino_TextMusic/>
+PREFIX interpretation: <https://w3id.org/polifonia/ontology/music-analysis/interpretation/>
+PREFIX oldFugue: <https://w3id.org/polifonia/ontology/modal-tonal/Fugue#>
+PREFIX fugue: <https://w3id.org/polifonia/ontology/modal-tonal/Fugue/>
+PREFIX zarlino: <https://w3id.org/polifonia/ontology/music-analysis/zarlino/>
+PREFIX chordsCommonPractices: <https://w3id.org/polifonia/ontology/music-analysis/chordsCommonPractice/>
 PREFIX corpus: <${scoreIri.substring(0, scoreIri.lastIndexOf('/'))}/>
 PREFIX mei: <${scoreIri}#>
 CONSTRUCT {
