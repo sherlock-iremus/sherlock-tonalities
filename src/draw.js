@@ -18,12 +18,13 @@ export const noteCoords = note => [
 
 const getMeasure = node => (node?.classList.contains('measure') ? node : node.parentNode && getMeasure(node.parentNode))
 
+const getSystem = node => (node?.classList.contains('system') ? node : node.parentNode && getSystem(node.parentNode))
+
 const getStaff = node => (node?.classList.contains('staff') ? node : node.parentNode && getStaff(node.parentNode))
 
 const staffCoords = staff => ({
   top: staff.getBBox().y,
   bottom: staff.getBBox().y + staff.getBBox().height,
-  absolute: staff.children[0].getBBox().y,
 })
 
 export const findInBetweenNotes = (initialNoteId, finalNoteId) => {
@@ -31,11 +32,9 @@ export const findInBetweenNotes = (initialNoteId, finalNoteId) => {
   const finalNote = document.getElementById(finalNoteId)
   const initialStaff = getStaff(initialNote)
   const finalStaff = getStaff(finalNote)
-  const initialMeasure = [...getMeasure(initialNote).children].filter(e => e.classList.contains('staff'))
-  const finalMeasure = [...getMeasure(finalNote).children].filter(e => e.classList.contains('staff'))
-  const initialMeasureIndex = initialMeasure.indexOf(initialStaff)
-  const finalMeasureIndex = finalMeasure.indexOf(finalStaff)
-  if (initialMeasureIndex === finalMeasureIndex)
+  const initialSystem = getSystem(initialNote)
+  const finalSystem = getSystem(finalNote)
+  if (initialSystem.id === finalSystem.id)
     return findInBetweenNotesInLine(initialNote, finalNote, initialStaff, finalStaff, finalNoteId)
   return findInBetweenNotesInSystem(initialNoteId, finalNoteId)
 }
