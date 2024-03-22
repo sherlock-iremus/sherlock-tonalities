@@ -15,7 +15,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setNoteCount, setSelectedNotes } from '../../services/globals'
-import { circleShape, noteCoords } from '../../draw'
+import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
 import { Editor } from '../edition/Editor'
@@ -96,20 +96,6 @@ export const MeiViewer = ({ file }) => {
       e => e.time.realTimeOnsetMilliseconds <= time && time < e.time.realTimeOffsetMilliseconds
     )
     dispatch(setSelectedNotes(filteredNotes.map(e => e.id)))
-  }
-
-  const findInBetweenNotes = (initialNoteId, finalNoteId) => {
-    const notes = [...document.querySelectorAll('.note, .rest, .mRest')]
-    const notesOffset = notes.map(e => ({
-      id: e.id,
-      offset: toolkit.getTimeForElement(e.id),
-    }))
-    const initialOffset = notesOffset.find(note => note.id === initialNoteId).offset
-    const finalOffset = notesOffset.find(note => note.id === finalNoteId).offset
-    const min = Math.min(initialOffset, finalOffset)
-    const max = Math.max(initialOffset, finalOffset)
-    const inBetweenNotes = notesOffset.filter(e => e.offset >= min && e.offset <= max)
-    return inBetweenNotes.map(note => note.id)
   }
 
   const changePage = newPage => {
