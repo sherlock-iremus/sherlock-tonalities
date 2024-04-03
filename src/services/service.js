@@ -11,10 +11,15 @@ export const service = createApi({
   reducerPath: 'service',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_API_URL + 'sherlock/', credentials: 'include' }),
   endpoints: builder => ({
-    getUserId: builder.query({ query: () => ({ url: 'api/'}) }),
+    getUserId: builder.query({ query: () => ({ url: 'api/' }) }),
     logOut: builder.mutation({ query: () => ({ url: 'logout/', method: 'POST' }) }),
     putUser: builder.mutation({ query: body => ({ url: 'api/user/config', method: 'PUT', body }) }),
-    postAnalyticalProject: builder.mutation({ query: body => ({ url: 'api/analytical-project', method: 'POST', body }) }),
+    postAnalyticalProject: builder.mutation({
+      query: body => ({ url: 'api/analytical-project', method: 'POST', body }),
+    }),
+    deleteAnalyticalProject: builder.mutation({
+      query: uuid => ({ url: `api/analytical-project/${uuid}`, method: 'DELETE' }),
+    }),
     postAnnotation: builder.mutation({ query: body => ({ url: 'api/e13', method: 'POST', body }) }),
     deleteAnnotation: builder.mutation({ query: iri => ({ url: `api/e13/${iri}`, method: 'DELETE' }) }),
   }),
@@ -43,4 +48,5 @@ export const {
   usePostAnnotationMutation,
   useDeleteAnnotationMutation,
   usePutUserMutation,
+  useDeleteAnalyticalProjectMutation,
 } = service
