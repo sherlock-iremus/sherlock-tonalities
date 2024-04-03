@@ -36,7 +36,7 @@ export const PersonalProjects = ({ userId }) => {
               key={project.iri}
               disablePadding
               secondaryAction={
-                <IconButton onClick={() => removeProject(project.iri)}>
+                <IconButton size="small" onClick={() => removeProject(project.iri)}>
                   <Delete />
                 </IconButton>
               }
