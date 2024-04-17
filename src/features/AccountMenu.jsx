@@ -41,8 +41,8 @@ export const AccountMenu = () => {
   const [logOut] = useLogOutMutation()
   const navigate = useNavigate()
 
-  const onLogout = () => {
-    logOut()
+  const onLogout = async () => {
+    await logOut()
     navigate(0)
   }
 
