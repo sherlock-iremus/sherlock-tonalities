@@ -38,7 +38,7 @@ export const findInBetweenNotes = (initialNoteId, finalNoteId) => {
   return findInBetweenNotesInSystem(initialNote, finalNote, initialNoteId, finalNoteId)
 }
 
-const findInBetweenNotesInLine = (initialNote, finalNote, finalNoteId) => {
+const findInBetweenNotesInLine = (initialNote, finalNote) => {
   const initialStaff = getStaff(initialNote)
   const finalStaff = getStaff(finalNote)
   const yMin = Math.min(staffCoords(initialStaff).top, staffCoords(finalStaff).top)
@@ -49,8 +49,8 @@ const findInBetweenNotesInLine = (initialNote, finalNote, finalNoteId) => {
     id: note.id,
     coords: noteCoords(note),
   }))
-  const inBetweenNotes = notes.filter(({ coords: [x, y] }) => x > xMin && x < xMax && y > yMin && y < yMax)
-  return [finalNoteId, ...inBetweenNotes.map(note => note.id)]
+  const inBetweenNotes = notes.filter(({ coords: [x, y] }) => x >= xMin && x <= xMax && y >= yMin && y <= yMax)
+  return inBetweenNotes.map(note => note.id)
 }
 
 const findInBetweenNotesInSystem = (initialNote, finalNote, initialNoteId, finalNoteId) => {
