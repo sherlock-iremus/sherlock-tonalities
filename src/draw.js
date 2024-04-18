@@ -22,7 +22,8 @@ const getSystem = node => (node?.classList.contains('system') ? node : node.pare
 
 const getStaff = node => (node?.classList.contains('staff') ? node : node.parentNode && getStaff(node.parentNode))
 
-const findStaffIndex = staff => [...staff.parentNode.children].indexOf(staff)
+const findStaffIndex = staff =>
+  [...staff.parentNode.children].filter(node => node.classList.contains('staff')).indexOf(staff)
 
 const staffCoords = staff => ({
   top: staff.getBBox().y,
@@ -34,21 +35,24 @@ export const findInBetweenNotes = (initialNoteId, finalNoteId) => {
   const finalNote = document.getElementById(finalNoteId)
   const initialSystem = getSystem(initialNote)
   const finalSystem = getSystem(finalNote)
-  if (initialSystem.id === finalSystem.id) return findInBetweenNotesInLine(initialNote, finalNote, finalNoteId)
+  if (initialSystem.id === finalSystem.id) return findInBetweenNotesInLine(initialNote, finalNote)
   return findInBetweenNotesInSystem(initialNote, finalNote, initialNoteId, finalNoteId)
 }
 
 const findInBetweenNotesInLine = (initialNote, finalNote) => {
   const initialStaff = getStaff(initialNote)
   const finalStaff = getStaff(finalNote)
+
   const yMin = Math.min(staffCoords(initialStaff).top, staffCoords(finalStaff).top)
   const yMax = Math.max(staffCoords(initialStaff).bottom, staffCoords(finalStaff).bottom)
   const xMin = Math.min(noteCoords(initialNote)[0], noteCoords(finalNote)[0])
   const xMax = Math.max(noteCoords(initialNote)[0], noteCoords(finalNote)[0])
+
   const notes = [...document.querySelectorAll('.note, .rest, .mRest')].map(note => ({
     id: note.id,
     coords: noteCoords(note),
   }))
+
   const inBetweenNotes = notes.filter(({ coords: [x, y] }) => x >= xMin && x <= xMax && y >= yMin && y <= yMax)
   return inBetweenNotes.map(note => note.id)
 }
@@ -65,12 +69,12 @@ const findInBetweenNotesInSystem = (initialNote, finalNote, initialNoteId, final
 
   const initialIndex = findStaffIndex(getStaff(initialNote))
   const finalIndex = findStaffIndex(getStaff(finalNote))
-  const minIdex = Math.min(initialIndex, finalIndex)
+  const minIndex = Math.min(initialIndex, finalIndex)
   const maxIndex = Math.max(initialIndex, finalIndex)
 
   return notesOnTime.filter(note => {
     const noteElement = document.getElementById(note)
     const staffIndex = findStaffIndex(getStaff(noteElement))
-    return staffIndex >= minIdex && staffIndex <= maxIndex
+    return staffIndex >= minIndex && staffIndex <= maxIndex
   })
 }
