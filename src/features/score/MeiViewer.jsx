@@ -14,7 +14,7 @@ import { Stack } from '@mui/system'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setNoteCount, setSelectedNotes } from '../../services/globals'
+import { setNoteCount, setSelectedAnnotation, setSelectedNotes } from '../../services/globals'
 import { circleShape, findInBetweenNotes, noteCoords } from '../../draw'
 import { AccountMenu } from '../AccountMenu'
 import { verovioStyle } from './style'
@@ -144,12 +144,17 @@ export const MeiViewer = ({ file }) => {
     }
   }, [handleKeyDown, handleKeyUp])
 
+  const onClose = () => {
+    navigate('/')
+    dispatch(setSelectedAnnotation())
+  }
+
   return (
     <Stack height="100vh" bgcolor="secondary.light">
       <Stack padding={2} direction="row" alignItems="center">
         <Stack flex={1} direction="row" alignItems="center" spacing={1}>
           <Tooltip title="Back to home">
-            <IconButton onClick={() => navigate('/')}>
+            <IconButton onClick={onClose}>
               <ArrowBack />
             </IconButton>
           </Tooltip>
