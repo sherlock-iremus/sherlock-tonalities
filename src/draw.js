@@ -12,8 +12,9 @@ export const circleShape = (points, hullPadding) => {
 }
 
 export const noteCoords = note => [
-  note.getElementsByTagName('use')[0]?.x.animVal.value + 140, // x
-  note.getElementsByTagName('use')[0]?.y.animVal.value, // y
+  note.getElementsByTagName('use')[0]?.x.animVal.value + 140 ||
+    note.getElementsByTagName('rect')[0]?.x.animVal.value + 140, // x
+  note.getElementsByTagName('use')[0]?.y.animVal.value || note.getElementsByTagName('rect')[0]?.y.animVal.value + 140, // y
 ]
 
 const getMeasure = node => (node?.classList.contains('measure') ? node : node.parentNode && getMeasure(node.parentNode))
