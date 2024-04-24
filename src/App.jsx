@@ -14,7 +14,7 @@ const router = createBrowserRouter(
     { path: '/project/:projectId', element: <ScoreAnnotator />, errorElement: <Error /> },
   ],
   {
-    basename: '/tonalities',
+    basename: '/sherlock-tonalities',
   }
 )
 
