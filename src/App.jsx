@@ -4,11 +4,11 @@ import { useMemo } from 'react'
 import { Landing } from './features/Landing'
 import { ThemeProvider, createTheme } from '@mui/material'
 import { useSelector } from 'react-redux'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
 import { Error } from './features/Error'
 import { colors } from './utils'
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     { path: '*', element: <Landing />, errorElement: <Error /> },
     { path: '/project/:projectId', element: <ScoreAnnotator />, errorElement: <Error /> },
