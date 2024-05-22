@@ -121,7 +121,7 @@ export const AccountMenu = () => {
             <Avatar sx={{ height: 50, width: 50, bgcolor: selectedColor }}>
               <TextField
                 value={selectedEmoji}
-                onChange={e => setSelectedEmoji(e.target.value[0])}
+                onChange={e => setSelectedEmoji(e.target.value.slice(0, 2).toUpperCase())}
                 inputProps={{ min: 0, style: { textAlign: 'center', color: 'white' } }}
               />
             </Avatar>
