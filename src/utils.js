@@ -16,7 +16,7 @@ export const stringToColor = string => {
 
 export const getUuid = iri => iri.split('/').pop()
 
-export const removeBaseIri = iri => iri ? (iri.includes('#') ? iri.split('#').pop() : iri.split('/').pop()) : ''
+export const removeBaseIri = iri => (iri ? (iri.includes('#') ? iri.split('#').pop() : iri.split('/').pop()) : '')
 
 export const getId = iri => iri.split('#').pop()
 
@@ -64,16 +64,13 @@ export const createUuid = () => URL.createObjectURL(new Blob([])).slice(-36)
 export const timeSince = date => {
   let seconds = Math.floor((new Date() - date) / 1000)
   let interval = seconds / 31536000
-  if (interval > 1) return Math.floor(interval) + ' years'
+  if (interval > 1) return Math.floor(interval) + ' years ago'
   interval = seconds / 2592000
-  if (interval > 1) return Math.floor(interval) + ' months'
+  if (interval > 1) return Math.floor(interval) + ' months ago'
   interval = seconds / 86400
-  if (interval > 1) return Math.floor(interval) + ' days'
+  if (interval > 1) return Math.floor(interval) + ' days ago'
   interval = seconds / 3600
-  if (interval > 1) return Math.floor(interval) + ' hours'
-  interval = seconds / 60
-  if (interval > 1) return Math.floor(interval) + ' minutes'
-  return Math.floor(seconds) + ' seconds'
+  return 'today'
 }
 
 const extractSparql = obj => Object.fromEntries(Object.entries(obj).map(([key, { value }]) => [key, value]))

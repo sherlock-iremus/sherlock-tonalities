@@ -33,7 +33,8 @@ export const Assignment = ({
     }
   }
 
-  if (subentity) return <Annotation entity={subentity} {...{ date, author, annotation, onDelete }} isSubEntity color={!color} />
+  if (subentity)
+    return <Annotation entity={subentity} {...{ date, author, annotation, onDelete }} isSubEntity color={!color} />
   else
     return (
       <Stack
@@ -73,11 +74,11 @@ export const Assignment = ({
           />
           {onPage && <ContributorItem contributorIri={author} small />}
         </Stack>
-        <Collapse in={isHovered} timeout="auto" unmountOnExit>
+        {onPage && (
           <Typography variant="caption" display="block" textAlign="end" fontSize={10}>
-            {timeSince(new Date(date))} ago
+            {timeSince(new Date(date))}
           </Typography>
-        </Collapse>
+        )}
       </Stack>
     )
 }

@@ -22,7 +22,7 @@ import {
   setSelectedAnnotation,
   unsetAnnotatedNotes,
 } from '../../services/globals'
-import { getUuid } from '../../utils'
+import { getUuid, timeSince } from '../../utils'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from '../../services/sparql'
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
 import { useEffect, useState } from 'react'
@@ -133,13 +133,15 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
                 <ListItemText
                   sx={{ paddingLeft: 1, textAlign: 'center' }}
                   primary="Score"
-                  secondary={`with ${noteCount} items`}
+                  secondary={`created ${timeSince(new Date(date))} with ${noteCount} items`}
                 />
               ) : (
                 <ListItemText
                   sx={{ paddingLeft: 1, textAlign: 'center' }}
                   primary={isSubEntity ? 'Sub-individual' : 'Individual'}
-                  secondary={notes.length === 1 ? 'with one item' : `with ${notes.length} items`}
+                  secondary={`created ${timeSince(new Date(date))} with ${
+                    notes.length === 1 ? 'one item' : notes.length + ' items'
+                  }`}
                 />
               )}
               {assignments?.map(assignment => (
