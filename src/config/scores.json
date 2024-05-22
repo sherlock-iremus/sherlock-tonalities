@@ -2251,7 +2251,7 @@
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/DeLaRue/PierreDeLaRue_AveMariaGratiaPlena_Credo.mei",
-    "scoreTitle": "Missa Ave Maria gratia plena",
+    "scoreTitle": "Credo",
     "scoreComposer": "Pierre de La Rue"
   },
   {
@@ -2860,21 +2860,6 @@
     "scoreComposer": "Josquin des Prez"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos0402a-Missa_Gaudeamus-Kyrie.mei",
-    "scoreTitle": "Kyrie",
-    "scoreComposer": "Josquin des Prez"
-  },
-  {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos0402d-Missa_Gaudeamus-Sanctus.mei",
-    "scoreTitle": "Sanctus",
-    "scoreComposer": "Josquin des Prez"
-  },
-  {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos0402e-Missa_Gaudeamus-Agnus.mei",
-    "scoreTitle": "Agnus dei",
-    "scoreComposer": "Josquin des Prez"
-  },
-  {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos2313-Benedicta_es_celorum.mei",
     "scoreTitle": "Benedicta es, celorum regina",
     "scoreComposer": "Josquin des Prez"
@@ -2882,6 +2867,11 @@
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos1511-De_profundis_clamavi.mei",
     "scoreTitle": "De profundis clamavi [low]",
+    "scoreComposer": "Josquin des Prez"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos0402a-Missa_Gaudeamus-Kyrie.mei",
+    "scoreTitle": "Kyrie",
     "scoreComposer": "Josquin des Prez"
   },
   {
@@ -2895,8 +2885,18 @@
     "scoreComposer": "Josquin des Prez"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos0402d-Missa_Gaudeamus-Sanctus.mei",
+    "scoreTitle": "Sanctus",
+    "scoreComposer": "Josquin des Prez"
+  },
+  {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Josquin_Preter_rerum.mei",
     "scoreTitle": "Preter_rerum_seriem",
+    "scoreComposer": "Josquin des Prez"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Josquin/Josquin_Sacred_Music/Jos0402e-Missa_Gaudeamus-Agnus.mei",
+    "scoreTitle": "Agnus dei",
     "scoreComposer": "Josquin des Prez"
   },
   {
@@ -4230,7 +4230,7 @@
     "scoreComposer": "Michael Prætorius"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Praetorius/Terpsichore/244 bis.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Praetorius/Terpsichore/244%20bis.mei",
     "scoreTitle": "Courante",
     "scoreComposer": "Michael Prætorius"
   },
@@ -5580,11 +5580,6 @@
     "scoreComposer": "Philippe Verdelot"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Willaert/Willaert_Quando_nascesti_Amor.mei",
-    "scoreTitle": "Quando nascesti, Amor?",
-    "scoreComposer": "Adrian Willaert"
-  },
-  {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Willaert/Willaert_Spoliatis.mei",
     "scoreTitle": "Spoliatis Aegyptiis",
     "scoreComposer": "Adrian Willaert"
@@ -5625,7 +5620,7 @@
     "scoreComposer": "Adrian Willaert"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Willaert/Willaert_Inviolata integra.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Willaert/Willaert_Inviolata%20integra.mei",
     "scoreTitle": "Inviolata, integra et casta",
     "scoreComposer": "Adrian Willaert"
   },
@@ -5730,7 +5725,7 @@
     "scoreComposer": "Adrian Willaert"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Willaert/Willaert_I_piansi%2C_or_canto.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Willaert/Willaert_I_piansi%252C_or_canto.mei",
     "scoreTitle": "I piansi,  or canto",
     "scoreComposer": "Adrian Willaert"
   },
@@ -5785,18 +5780,33 @@
     "scoreComposer": "Gioseffo Zarlino"
   },
   {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/De_Rore_Di_tempo_in_tempo_mi_si_fa_men_dura.mei",
+    "scoreTitle": "Di tempo in tempo mi si fa men dura",
+    "scoreComposer": "Gioseffo Zarlino"
+  },
+  {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Zarlino_Nigra_sum.mei",
     "scoreTitle": "Nigra sum, sed formosa",
     "scoreComposer": "Gioseffo Zarlino"
   },
   {
-    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Zarlino_O_quam_gloriosum_est_regnum MG.mei",
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Zarlino_O_quam_gloriosum_est_regnum%20MG.mei",
     "scoreTitle": "O quam gloriosum est regnum",
+    "scoreComposer": "Gioseffo Zarlino"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/De_Rore_Donna_che_ornata_sete.mei",
+    "scoreTitle": "Donna che ornata sete",
     "scoreComposer": "Gioseffo Zarlino"
   },
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Zarlino_Pater_noster.mei",
     "scoreTitle": "Pater noster",
+    "scoreComposer": "Gioseffo Zarlino"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Zarlino_Miserere.mei",
+    "scoreTitle": "Miserere mei",
     "scoreComposer": "Gioseffo Zarlino"
   },
   {
@@ -5822,6 +5832,11 @@
   {
     "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Zarlino_Nemo_potest_venire.mei",
     "scoreTitle": "Nemo potest venire",
+    "scoreComposer": "Gioseffo Zarlino"
+  },
+  {
+    "meiUrl": "https://raw.githubusercontent.com/polifonia-project/tonalities_pilot/main/scores/Zarlino/Morales_Sancta_et_immaculata.mei",
+    "scoreTitle": "Sancta et immaculata virginitas",
     "scoreComposer": "Gioseffo Zarlino"
   },
   {
