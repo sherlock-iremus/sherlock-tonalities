@@ -1,6 +1,6 @@
 import { Avatar, Chip, Collapse, Stack, Tooltip, Typography, capitalize } from '@mui/material'
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
-import { getModel, getUuid, removeBaseIri, timeSince } from '../../utils'
+import { getModel, getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
 import { useState } from 'react'
 import { Annotation } from '../edition/Annotation'
@@ -76,7 +76,7 @@ export const Assignment = ({
         </Stack>
         {onPage && (
           <Typography variant="caption" display="block" textAlign="end" fontSize={10}>
-            {timeSince(new Date(date))}
+            {new Date(date).toLocaleString('en-GB').slice(0, -3)}
           </Typography>
         )}
       </Stack>

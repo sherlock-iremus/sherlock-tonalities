@@ -61,18 +61,4 @@ export const composers = {
 
 export const createUuid = () => URL.createObjectURL(new Blob([])).slice(-36)
 
-export const timeSince = date => {
-  let seconds = Math.floor((new Date() - date) / 1000)
-  let interval = seconds / 31536000
-  if (interval > 1) return Math.floor(interval) + ' years ago'
-  interval = seconds / 2592000
-  if (interval > 1) return Math.floor(interval) + ' months ago'
-  interval = seconds / 86400
-  if (interval > 1) return Math.floor(interval) + ' days ago'
-  interval = seconds / 3600
-  return 'today'
-}
-
-const extractSparql = obj => Object.fromEntries(Object.entries(obj).map(([key, { value }]) => [key, value]))
-
 export const colors = [blue, brown, deepOrange, deepPurple, indigo, pink, purple, red, teal]
