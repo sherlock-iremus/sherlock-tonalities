@@ -1,4 +1,12 @@
-import { AddCircle, ArrowBack, Close, KeyboardCommandKey, KeyboardControlKey, Send } from '@mui/icons-material'
+import {
+  AddCircle,
+  ArrowBack,
+  Close,
+  KeyboardCapslock,
+  KeyboardControlKey,
+  KeyboardReturn,
+  Send,
+} from '@mui/icons-material'
 import {
   AppBar,
   Button,
@@ -144,14 +152,24 @@ export const AnnotationPage = () => {
         <Stack direction="row" paddingRight={1} justifySelf="flex-end" alignItems="center">
           <Stack flex={1}>
             <Input
+              multiline
               value={input}
               onChange={handleInputChange}
               placeholder="Comment..."
-              onKeyPress={e => e.key === 'Enter' && addComment()}
+              onKeyPress={e => e.shiftKey && e.key === 'Enter' && addComment()}
             />
           </Stack>
           <IconButton onClick={addComment} disabled={!!isLoading}>
-            <Send />
+            <Tooltip
+              title={
+                <Stack flex={1} direction="row" alignItems="center">
+                  Send (<KeyboardCapslock sx={{ width: 16, height: 16 }} /> +
+                  <KeyboardReturn sx={{ width: 16, height: 16 }} />)
+                </Stack>
+              }
+            >
+              <Send />
+            </Tooltip>
           </IconButton>
           <ContextMenu {...{ contextMenu, setContextMenu }} />
         </Stack>
