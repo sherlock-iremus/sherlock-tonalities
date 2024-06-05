@@ -1,3 +1,44 @@
+export const getCollaborativeIndividuals = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
+
+SELECT ?individual (GROUP_CONCAT(DISTINCT ?name; SEPARATOR=", ") AS ?authors) (GROUP_CONCAT(DISTINCT ?note; SEPARATOR=", ") AS ?notes)
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/users>
+WHERE {
+   	${projectIri} crm:P9_consists_of ?assignment.
+    ?assignment crm:P177_assigned_property_of_type crm:P2_has_type.
+    ?assignment crm:P140_assigned_attribute_to ?individual.
+  	?link crm:P141_assigned ?individual.
+  	?link crm:P140_assigned_attribute_to ?noteUri.
+    BIND(STRAFTER(STR(?noteUri), "#") AS ?note)
+  	?assignment dcterms:creator ?creator.
+  	?creator crm:P1_is_identified_by ?identifier.
+    ?identifier crm:P2_has_type iremus:73ea8d74-3526-4f6a-8830-dd369795650d.
+    ?identifier crm:P190_has_symbolic_content ?name.
+}
+GROUP BY ?individual
+HAVING (COUNT(DISTINCT ?creator) > 1)
+`
+
+export const getExternalAnnotations = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
+SELECT ?assignment ?contributor ?individual
+FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+WHERE {
+    VALUES ?project { ${projectIri} }
+   	?project crm:P14_carried_out_by ?creator.
+   	?project crm:P9_consists_of ?assignment.
+    ?assignment crm:P177_assigned_property_of_type crm:P2_has_type.
+    ?assignment crm:P140_assigned_attribute_to ?individual.
+    ?assignment crm:P14_carried_out_by ?contributor.
+    FILTER (?creator != ?contributor)
+}
+`
+
 export const getAnnotations = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
