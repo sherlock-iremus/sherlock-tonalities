@@ -3,7 +3,7 @@ import {
   ArrowBack,
   Close,
   KeyboardCapslock,
-  KeyboardControlKey,
+  KeyboardCommandKey,
   KeyboardReturn,
   Send,
 } from '@mui/icons-material'
@@ -80,12 +80,12 @@ export const AnnotationPage = () => {
   }
 
   const handleKeyDown = useCallback(event => {
-    if (selectedAnnotation && event.ctrlKey && event.key === 'n') {
+    if (selectedAnnotation && (event.ctrlKey || event.metaKey) && event.key === 'k') {
       event.preventDefault()
       dispatch(setIsSubSelecting())
     }
   }, [])
-  const handleKeyUp = useCallback(event => event.ctrlKey, [])
+  const handleKeyUp = useCallback(event => event.ctrlKey || event.metaKey, [])
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
@@ -123,7 +123,7 @@ export const AnnotationPage = () => {
             <Tooltip
               title={
                 <Stack flex={1} direction="row" alignItems="center">
-                  Add sub-layer (<KeyboardControlKey sx={{ width: 16, height: 16 }} /> +N)
+                  Add sub-layer (<KeyboardCommandKey sx={{ width: 16, height: 16 }} /> +N)
                 </Stack>
               }
             >
