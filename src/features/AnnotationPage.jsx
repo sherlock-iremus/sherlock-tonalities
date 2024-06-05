@@ -81,12 +81,12 @@ export const AnnotationPage = () => {
   }
 
   const handleKeyDown = useCallback(event => {
-    if (selectedAnnotation && event.ctrlKey && event.key === 'o') {
+    if (selectedAnnotation && (event.ctrlKey || event.metaKey) && event.key === 'k') {
       event.preventDefault()
       dispatch(setIsSubSelecting())
     }
   }, [])
-  const handleKeyUp = useCallback(event => event.ctrlKey, [])
+  const handleKeyUp = useCallback(event => event.ctrlKey || event.metaKey, [])
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
