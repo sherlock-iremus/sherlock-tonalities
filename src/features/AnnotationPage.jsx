@@ -36,6 +36,7 @@ export const AnnotationPage = () => {
   )
   const { data: assignments, refetch } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
+    pollingInterval: 10000,
   })
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const [input, setInput] = useState('')
