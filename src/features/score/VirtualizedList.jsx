@@ -1,14 +1,7 @@
 import { AudioFile, ChevronRight } from '@mui/icons-material'
-import {
-  IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-  Typography,
-} from '@mui/material'
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography } from '@mui/material'
 import { FixedSizeList as List } from 'react-window'
+import Score from '../../assets/011.png'
 
 export const VirtualizedList = ({ scores, selectedComposers, filter, selectedScoreId, setSelectedScoreId }) => {
   const filteredScores = scores
@@ -29,15 +22,17 @@ export const VirtualizedList = ({ scores, selectedComposers, filter, selectedSco
           </IconButton>
         }
       >
-        <ListItemButton
-          selected={selectedScoreId === meiUrl}
-          onClick={() => setSelectedScoreId(selectedScoreId === meiUrl ? '' : meiUrl)}
-        >
-          <ListItemIcon>
-            <AudioFile />
-          </ListItemIcon>
-          <ListItemText primary={scoreTitle} secondary={scoreComposer} />
-        </ListItemButton>
+        <Tooltip title={<img src={Score} loading="lazy" width="300px" />}>
+          <ListItemButton
+            selected={selectedScoreId === meiUrl}
+            onClick={() => setSelectedScoreId(selectedScoreId === meiUrl ? '' : meiUrl)}
+          >
+            <ListItemIcon>
+              <AudioFile />
+            </ListItemIcon>
+            <ListItemText primary={scoreTitle} secondary={scoreComposer} />
+          </ListItemButton>
+        </Tooltip>
       </ListItem>
     )
   }
