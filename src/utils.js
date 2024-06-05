@@ -52,6 +52,7 @@ export const composers = {
   'Josquin/Josquin_Chansons': 'Josquin des Prez',
   //'Josquin/Josquin_Sacred_Music': 'Josquin des Prez',
   Lechner: 'Leonhard Lechner',
+  'Lully/Persee': 'Jean-Baptiste Lully',
   Morales: 'Cristobal de Morales',
   Praetorius: 'Michael Prætorius',
   Verdelot: 'Philippe Verdelot',
