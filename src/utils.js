@@ -34,6 +34,7 @@ export const getModel = iri =>
   (iri?.toLowerCase().includes('zarlino') && 'Zarlino') ||
   (iri?.toLowerCase().includes('interpretation') && 'Interpretation') ||
   (iri?.toLowerCase().includes('chordscommonpractice') && 'Chords: common practice harmony') ||
+  (iri?.toLowerCase().includes('lullyCadences') && 'Cadences (17th Century)') ||
   ''
 
 export const composers = {
