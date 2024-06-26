@@ -25,6 +25,7 @@ export const getIri = uuid => `http://data-iremus.huma-num.fr/id/${uuid}`
 export const getModelGeneric = iri => iri.split('/').pop().split('_').shift()
 
 export const getModel = iri =>
+  (iri?.toLowerCase().includes('lullycadences') && 'Cadences (17th Century)') ||
   (iri?.toLowerCase().includes('praetorius') && 'Praetorius 1619') ||
   (iri?.toLowerCase().includes('filaber') && 'Cadences (Renaissance)') ||
   (iri?.toLowerCase().includes('modal-tonal') && 'Zarlino 1558') ||
@@ -34,7 +35,6 @@ export const getModel = iri =>
   (iri?.toLowerCase().includes('zarlino') && 'Zarlino') ||
   (iri?.toLowerCase().includes('interpretation') && 'Interpretation') ||
   (iri?.toLowerCase().includes('chordscommonpractice') && 'Chords: common practice harmony') ||
-  (iri?.toLowerCase().includes('lullyCadences') && 'Cadences (17th Century)') ||
   ''
 
 export const composers = {
