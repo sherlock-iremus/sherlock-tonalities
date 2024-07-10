@@ -8,7 +8,7 @@ export const VirtualizedList = ({ scores, selectedComposers, filter, selectedSco
     .filter(e => (filter ? e.scoreTitle.toLowerCase().includes(filter.toLowerCase()) : true))
 
   const Row = ({ index, style }) => {
-    const { meiUrl, scoreTitle, scoreComposer, scoreThumbnail } = filteredScores[index]
+    const { meiUrl, scoreTitle, scoreComposer } = filteredScores[index]
     return (
       <ListItem
         key={meiUrl}
@@ -21,17 +21,15 @@ export const VirtualizedList = ({ scores, selectedComposers, filter, selectedSco
           </IconButton>
         }
       >
-        <Tooltip title={<img src={scoreThumbnail} loading="lazy" width="300px" />}>
-          <ListItemButton
-            selected={selectedScoreId === meiUrl}
-            onClick={() => setSelectedScoreId(selectedScoreId === meiUrl ? '' : meiUrl)}
-          >
-            <ListItemIcon>
-              <AudioFile />
-            </ListItemIcon>
-            <ListItemText primary={scoreTitle} secondary={scoreComposer} />
-          </ListItemButton>
-        </Tooltip>
+        <ListItemButton
+          selected={selectedScoreId === meiUrl}
+          onClick={() => setSelectedScoreId(selectedScoreId === meiUrl ? '' : meiUrl)}
+        >
+          <ListItemIcon>
+            <AudioFile />
+          </ListItemIcon>
+          <ListItemText primary={scoreTitle} secondary={scoreComposer} />
+        </ListItemButton>
       </ListItem>
     )
   }

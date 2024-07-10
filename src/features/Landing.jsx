@@ -25,9 +25,9 @@ import { PersonalProjects } from './PersonalProjects'
 import { Input } from '../components/Input'
 import { composers } from '../utils'
 import { VirtualizedList } from './score/VirtualizedList'
-import scores from '../config/scores.json'
 
 export const Landing = () => {
+  const [scores, setScores] = useState([])
   const [isOpen, setIsOpen] = useState(false)
   const [selectedScoreId, setSelectedScoreId] = useState('')
   const [filter, setFilter] = useState('')
@@ -37,6 +37,15 @@ export const Landing = () => {
 
   const isScoreSelected = selectedScoreId && !isRecentOpen
 
+  const fetchScores = async () =>
+    setScores(
+      await (
+        await fetch(
+          'https://gitlab.huma-num.fr/api/v4/projects/3940/jobs/artifacts/main/raw/public/scores.json?job=scores'
+        )
+      ).json()
+    )
+
   useEffect(() => {
     if (selectedScoreId && isRecentOpen) setIsRecentOpen(false)
   }, [selectedScoreId])
@@ -44,6 +53,10 @@ export const Landing = () => {
   useEffect(() => {
     if (selectedScoreId && isRecentOpen) setSelectedScoreId('')
   }, [isRecentOpen])
+
+  useEffect(() => {
+    fetchScores()
+  }, [])
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
