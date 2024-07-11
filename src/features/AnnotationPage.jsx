@@ -2,6 +2,7 @@ import {
   AddCircle,
   ArrowBack,
   Close,
+  ContentCopy,
   KeyboardCapslock,
   KeyboardControlKey,
   KeyboardReturn,
@@ -121,6 +122,16 @@ export const AnnotationPage = () => {
                 }
               />
             </ListItem>
+            <Tooltip title="Copy link to clipboard">
+              <IconButton
+                color="inherit"
+                onClick={() =>
+                  navigator.clipboard.writeText(`${window.location.href}/annotation/${getUuid(selectedAnnotation.entity)}`)
+                }
+              >
+                <ContentCopy />
+              </IconButton>
+            </Tooltip>
             <Tooltip
               title={
                 <Stack flex={1} direction="row" alignItems="center">

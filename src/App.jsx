@@ -12,6 +12,7 @@ const router = createBrowserRouter(
   [
     { path: '*', element: <Landing />, errorElement: <Error /> },
     { path: '/project/:projectId', element: <ScoreAnnotator />, errorElement: <Error /> },
+    { path: '/project/:projectId/annotation/:annotationId', element: <ScoreAnnotator />, errorElement: <Error /> },
   ],
   {
     basename: '/tonalities',

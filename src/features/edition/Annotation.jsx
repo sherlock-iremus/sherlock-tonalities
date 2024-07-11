@@ -2,7 +2,6 @@
 import { Cancel } from '@mui/icons-material'
 import {
   Button,
-  Collapse,
   Dialog,
   DialogActions,
   DialogContent,
@@ -22,21 +21,24 @@ import {
   setSelectedAnnotation,
   unsetAnnotatedNotes,
 } from '../../services/globals'
-import { getUuid } from '../../utils'
+import { getIri, getUuid } from '../../utils'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from '../../services/sparql'
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
 import { useEffect, useState } from 'react'
 import { getId } from '../../utils'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
+import { useParams } from 'react-router-dom'
 
 export const Annotation = ({ annotation, entity, date, page, author, isSubEntity, color, onDelete }) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
-  const { hoveredAnnotation, selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts, noteCount } =
-    useSelector(state => state.globals)
+  const { selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts } = useSelector(
+    state => state.globals
+  )
+  const { annotationId } = useParams()
 
   const isScoreSelected = notes?.includes(scoreIri) || false
   const isSelected = selectedAnnotation?.entity === entity || false
@@ -55,6 +57,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
 
   useEffect(() => {
     if (notes) setIsDisabled(checkIsDisabled())
+    if (notes && assignments && getIri(annotationId) === entity) setAnnotation()
   }, [selectedNotes, selectedConcepts, notes, assignments])
 
   useEffect(() => {
@@ -64,6 +67,9 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
+
+  const setAnnotation = () =>
+    dispatch(setSelectedAnnotation(!isSelected ? { entity, annotation, page, notes, assignments } : null))
 
   const removeAnnotation = async () => {
     if (assignments?.length) {
@@ -117,14 +123,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
           overflow="hidden"
           margin={1}
         >
-          <ListItemButton
-            dense
-            disabled={isDisabled}
-            onClick={() =>
-              dispatch(setSelectedAnnotation(!isSelected ? { entity, annotation, page, notes, assignments } : null))
-            }
-            selected={isSelected}
-          >
+          <ListItemButton dense disabled={isDisabled} onClick={setAnnotation} selected={isSelected}>
             <Stack flex={1} spacing={0.5} alignItems="center">
               {isScoreSelected ? (
                 <ListItemText
