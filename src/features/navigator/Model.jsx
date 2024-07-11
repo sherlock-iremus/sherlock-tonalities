@@ -5,17 +5,20 @@ import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import models from '../../config/models.json'
 import { Input } from '../../components/Input'
-import { useGetModelQuery } from '../../services/model'
 import { setSelectedConcepts } from '../../services/globals'
+import { useGetModelsQuery } from '../../services/models'
 
 export const Model = () => {
   const dispatch = useDispatch()
+  const { data: models } = useGetModelsQuery()
   const [filter, setFilter] = useState('')
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex, selectedConcepts, selectedAnnotation } = useSelector(state => state.globals)
-  const { data } = useGetModelQuery(selectedModelIndex)
+
+  if (!models) return null
+  const { data } = models[selectedModelIndex]
+  
   return (
     <Stack borderRadius={3} bgcolor="white" boxShadow={1} minHeight={0}>
       <ContextMenu {...{ contextMenu, setContextMenu }} />

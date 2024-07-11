@@ -1,8 +1,9 @@
-import { Avatar, Chip, Collapse, Stack, Tooltip, Typography, capitalize } from '@mui/material'
+import { Avatar, Chip, Stack, Tooltip, Typography, capitalize } from '@mui/material'
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
-import { getModel, getUuid, removeBaseIri } from '../../utils'
+import { getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
 import { useState } from 'react'
+import { useGetModelsQuery } from '../../services/models'
 import { Annotation } from '../edition/Annotation'
 
 export const Assignment = ({
@@ -18,6 +19,7 @@ export const Assignment = ({
   onPage,
 }) => {
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
+  const { data: models } = useGetModelsQuery()
   const { data: userId } = useGetUserIdQuery()
 
   const [isHovered, setIsHovered] = useState(false)
@@ -32,6 +34,8 @@ export const Assignment = ({
       console.log(error)
     }
   }
+
+  const getModel = iri => models?.find(e => iri?.toLowerCase().includes(e.baseIri.toLowerCase())).name || ''
 
   if (subentity)
     return <Annotation entity={subentity} {...{ date, author, annotation, onDelete }} isSubEntity color={!color} />
