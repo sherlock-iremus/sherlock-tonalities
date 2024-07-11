@@ -40,7 +40,6 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
 
   const isScoreSelected = notes?.includes(scoreIri) || false
   const isSelected = selectedAnnotation?.entity === entity || false
-  const isHovered = hoveredAnnotation?.entity === entity || false
   const [isDisabled, setIsDisabled] = useState(false)
 
   const { data: userId } = useGetUserIdQuery()
@@ -96,20 +95,18 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
         disablePadding
         sx={{ '& .MuiListItemSecondaryAction-root': { top: 30 } }}
         secondaryAction={
-          <Collapse in={isHovered} timeout="auto" unmountOnExit>
-            {canDelete ? (
-              <Tooltip title="Delete entity">
-                <IconButton
-                  onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
-                  size="small"
-                >
-                  <Cancel />
-                </IconButton>
-              </Tooltip>
-            ) : (
-              <ContributorItem contributorIri={author} small />
-            )}
-          </Collapse>
+          canDelete ? (
+            <Tooltip title="Delete entity">
+              <IconButton
+                onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
+                size="small"
+              >
+                <Cancel />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <ContributorItem contributorIri={author} small />
+          )
         }
       >
         <Stack
