@@ -1,17 +1,17 @@
 import { CollectionsBookmark, Downloading, Edit } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, Typography, IconButton, Tooltip } from '@mui/material'
-import { TimelineDot, TimelineSeparator, TimelineConnector } from '@mui/lab'
+import { ListItem, ListItemIcon, ListItemText, IconButton, Tooltip } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { Annotation } from './Annotation'
 import { AnnotationPage } from '../AnnotationPage'
 import { ExportMenu } from '../ExportMenu'
+import { Annotations } from './Annotations'
 
 export const Project = () => {
   const { projectIri, selectedAnnotation } = useSelector(state => state.globals)
   const [isHovered, setIsHovered] = useState(false)
+  const [scrollPosition, setScrollPosition] = useState(0)
   const [annotationsByPage, setAnnotationsByPage] = useState([])
   const { data: project } = useGetAnalyticalProjectQuery(projectIri, { skip: !projectIri })
   const { data: annotations } = useGetAnnotationsQuery(projectIri, { skip: !projectIri })
@@ -61,32 +61,7 @@ export const Project = () => {
               </ListItemIcon>
               <ListItemText primary={project.label} secondary="Selected project" />
             </ListItem>
-            <Stack overflow="auto">
-              {annotations.length ? (
-                Object.entries(annotationsByPage).map(([page, pageAnnotations]) => (
-                  <Stack direction="row" key={page}>
-                    <Typography padding={1.5} noWrap fontSize={10}>
-                      {page === '0' ? 'Global' : 'Page ' + page}
-                    </Typography>
-                    <TimelineSeparator>
-                      <TimelineDot />
-                      <TimelineConnector />
-                    </TimelineSeparator>
-                    <Stack flex={1} paddingLeft={1}>
-                      {pageAnnotations.map(annotation => (
-                        <Annotation key={annotation.annotation} {...annotation} color />
-                      ))}
-                    </Stack>
-                  </Stack>
-                ))
-              ) : (
-                <Stack flex={1} justifyContent="center" paddingY={4}>
-                  <Typography textAlign="center" color="text.secondary" fontSize={14} padding={2}>
-                    No created annotation, start by selecting score items and assigning them concepts
-                  </Typography>
-                </Stack>
-              )}
-            </Stack>
+            <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition }} />
           </>
         )}
       </Stack>
