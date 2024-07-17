@@ -42,21 +42,17 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
 
   const isScoreSelected = notes?.includes(scoreIri) || false
   const isSelected = selectedAnnotation?.entity === entity || false
-  const [isDisabled, setIsDisabled] = useState(false)
 
   const { data: userId } = useGetUserIdQuery()
   const canDelete = userId === getUuid(author)
 
   const checkIsDisabled = () => {
-    if (isLoading) return true
-    if (selectedConcepts.length) return assignments?.some(({ concept }) => !selectedConcepts.includes(concept))
+    if (selectedConcepts.length) return !assignments?.some(({ concept }) => selectedConcepts.includes(concept))
     if (selectedNotes.length) return !notes.some(e => selectedNotes.includes(getId(e)))
-
     return false
   }
 
   useEffect(() => {
-    if (notes) setIsDisabled(checkIsDisabled())
     if (notes && assignments && getIri(annotationId) === entity) setAnnotation()
   }, [selectedNotes, selectedConcepts, notes, assignments])
 
@@ -91,6 +87,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
     }
   }
 
+  if (notes && assignments && checkIsDisabled()) return null
   if (notes)
     return (
       <ListItem
@@ -123,7 +120,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
           overflow="hidden"
           margin={1}
         >
-          <ListItemButton dense disabled={isDisabled} onClick={setAnnotation} selected={isSelected}>
+          <ListItemButton dense disabled={isLoading} onClick={setAnnotation} selected={isSelected}>
             <Stack flex={1} spacing={0.5} alignItems="center">
               {isScoreSelected ? (
                 <ListItemText
