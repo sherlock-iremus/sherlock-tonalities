@@ -97,7 +97,13 @@ WHERE {
     ?project crm:P2_has_type <${ANALYTICAL_PROJECT}>.
     ?project crm:P1_is_identified_by ?label.
     ?project crm:P14_carried_out_by ?contributor.
-    OPTIONAL { ?project sherlock:has_privacy_type ?draft }.
+    OPTIONAL { ?project crm:P3_has_note ?description }.
+    OPTIONAL {
+        ?project crm:P1_is_identified_by ?hexcode.
+        ?hexcode crm:P2_has_type <http://data-iremus.huma-num.fr/id/5f1bb74f-6ea0-4073-8b68-086f98454f1c>.
+        ?hexcode crm:P190_has_symbolic_content ?color.
+    }
+    OPTIONAL { ?project sherlock:has_privacy_type ?privacyType }.
     OPTIONAL { ?label crm:P190_has_symbolic_content ?content }.
 }
 LIMIT 1`

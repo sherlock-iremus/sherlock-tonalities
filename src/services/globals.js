@@ -4,7 +4,7 @@ const initialState = {
   projectIri: null,
   scoreIri: null,
   noteCount: null,
-  colorIndex: Math.floor(Math.random() * 10),
+  colorIndex: 0,
   isUserConnected: true,
   selectedNotes: [],
   selectedConcepts: [],

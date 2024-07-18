@@ -48,9 +48,12 @@ export const sparql = createApi({
           bindings: [binding],
         },
       }) => ({
+        iri: binding.project.value,
         label: binding.content?.value || binding.label?.value || 'Untitled project',
         contributor: binding.contributor.value,
-        ...(binding.draft && { isDraft: true }),
+        isPublished: binding.privacyType?.value === 'http://data-iremus.huma-num.fr/id/54a5cf00-a46a-4435-b893-6eda0cdc5462',
+        ...(binding.description && { description: binding.description.value }),
+        ...(binding.color && { color: '#' + binding.color.value }),
       }),
     }),
     getP140: builder.query({

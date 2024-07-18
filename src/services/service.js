@@ -14,6 +14,9 @@ export const service = createApi({
     getUserId: builder.query({ query: () => ({ url: 'api/' }) }),
     logOut: builder.mutation({ query: () => ({ url: 'logout/', method: 'POST' }) }),
     putUser: builder.mutation({ query: body => ({ url: 'api/user/config', method: 'PUT', body }) }),
+    patchProject: builder.mutation({
+      query: ({ iri, body }) => ({ url: `api/analytical-project/${iri}`, method: 'PATCH', body }),
+    }),
     postAnalyticalProject: builder.mutation({
       query: body => ({ url: 'api/analytical-project', method: 'POST', body }),
     }),
@@ -49,4 +52,5 @@ export const {
   useDeleteAnnotationMutation,
   usePutUserMutation,
   useDeleteAnalyticalProjectMutation,
+  usePatchProjectMutation,
 } = service
