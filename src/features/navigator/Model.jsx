@@ -1,4 +1,3 @@
-import { HistoryEdu } from '@mui/icons-material'
 import { Avatar, Button, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
 import { Stack } from '@mui/system'
 import { Concepts } from './Concepts'

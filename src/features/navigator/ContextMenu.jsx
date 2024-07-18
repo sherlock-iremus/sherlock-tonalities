@@ -25,7 +25,7 @@ export const ContextMenu = ({ contextMenu, setContextMenu }) => {
               onClick={() => dispatch(setSelectedModelIndex(index)) && setContextMenu(null)}
               disabled={index === selectedModelIndex}
             >
-              <ListItemText primary={model.name} />
+              <ListItemText primary={model.name} secondary={model.description}/>
             </ListItemButton>
           ))}
         </List>
