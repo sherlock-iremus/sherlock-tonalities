@@ -25,6 +25,7 @@ export const Model = () => {
         dense
         secondaryAction={
           <Button
+            sx={{ pt: 3 }}
             size="small"
             onClick={event =>
               setContextMenu(!contextMenu ? { mouseX: event.clientX + 2, mouseY: event.clientY - 6 } : null)
