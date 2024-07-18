@@ -60,7 +60,7 @@ export const Editor = () => {
           ) : (
             <ListItemText
               primary={`
-              ${isSubSelecting ? 'Sub' : 'New '} individual with ${
+              ${isSubSelecting ? 'Sub-individual' : 'New individual'} with ${
                 selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
               }`}
               secondary="Select a concept to assign it"
