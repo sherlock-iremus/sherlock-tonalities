@@ -141,7 +141,11 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
             </Stack>
           </ListItemButton>
         </Stack>
-        <Dialog open={isDeleteDialogOpen} onClose={() => setIsDeleteDialogOpen(false)}>
+        <Dialog
+          open={isDeleteDialogOpen}
+          onClose={() => setIsDeleteDialogOpen(false)}
+          sx={{ '& .MuiPaper-root': { borderRadius: 3 } }}
+        >
           <DialogTitle>
             Delete individual with
             {assignments?.length > 1

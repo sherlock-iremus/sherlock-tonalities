@@ -12,7 +12,6 @@ import {
   MenuItem,
   Stack,
   TextField,
-  Tooltip,
   Typography,
   useTheme,
 } from '@mui/material'
@@ -65,7 +64,7 @@ export const AccountMenu = () => {
   }
 
   return !userId ? (
-    <Dialog open>
+    <Dialog open sx={{ '& .MuiPaper-root': { borderRadius: 3 } }}>
       <DialogTitle>It's been a while...</DialogTitle>
       <DialogActions>
         <Button
