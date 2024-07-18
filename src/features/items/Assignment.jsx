@@ -76,7 +76,7 @@ export const Assignment = ({
               ),
             })}
           />
-          {onPage && <ContributorItem contributorIri={author} small />}
+          <ContributorItem contributorIri={author} small />
         </Stack>
         {onPage && (
           <Typography variant="caption" display="block" textAlign="end" fontSize={10}>
