@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Cancel } from '@mui/icons-material'
+import { Cancel, ExpandLess, ExpandMore } from '@mui/icons-material'
 import {
   Button,
+  Collapse,
   Dialog,
   DialogActions,
   DialogContent,
@@ -30,8 +31,20 @@ import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
 import { useParams } from 'react-router-dom'
 
-export const Annotation = ({ annotation, entity, date, page, author, isSubEntity, color, onDelete }) => {
+export const Annotation = ({
+  annotation,
+  entity,
+  date,
+  page,
+  author,
+  isSubEntity,
+  color,
+  onDelete,
+  expandAll,
+  onPage,
+}) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const [expand, setExpand] = useState(true)
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
@@ -60,6 +73,8 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
     if (notes) dispatch(setAnnotatedNotes(notes))
     return () => notes && dispatch(unsetAnnotatedNotes(notes))
   }, [notes])
+
+  useEffect(() => setExpand(expandAll) && undefined, [expandAll])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
@@ -98,18 +113,22 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
         disablePadding
         sx={{ '& .MuiListItemSecondaryAction-root': { top: 30 } }}
         secondaryAction={
-          canDelete ? (
-            <Tooltip title="Delete entity">
-              <IconButton
-                onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
-                size="small"
-              >
-                <Cancel />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <ContributorItem contributorIri={author} small />
-          )
+          <>
+            {!isSubEntity && (
+              <IconButton onClick={() => setExpand(!expand)}>{expand ? <ExpandMore /> : <ExpandLess />}</IconButton>
+            )}
+            {canDelete && (!isSubEntity || onPage) && (
+              <Tooltip title="Delete entity">
+                <IconButton
+                  onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
+                  size="small"
+                >
+                  <Cancel />
+                </IconButton>
+              </Tooltip>
+            )}
+            {!canDelete && <ContributorItem contributorIri={author} small />}
+          </>
         }
       >
         <Stack
@@ -121,7 +140,7 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
           margin={1}
         >
           <ListItemButton dense disabled={isLoading} onClick={setAnnotation} selected={isSelected}>
-            <Stack flex={1} spacing={0.5} alignItems="center">
+            <Stack flex={1} alignItems="center">
               {isScoreSelected ? (
                 <ListItemText
                   sx={{ paddingLeft: 1, textAlign: 'center' }}
@@ -135,9 +154,13 @@ export const Annotation = ({ annotation, entity, date, page, author, isSubEntity
                   secondary={new Date(date).toLocaleString('en-GB').slice(0, -3)}
                 />
               )}
-              {assignments?.map(assignment => (
-                <Assignment key={assignment.assignment} {...assignment} {...{ refetch, color }} />
-              ))}
+              <Collapse in={expand} timeout="auto" unmountOnExit>
+                <Stack gap={0.5}>
+                  {assignments?.map(assignment => (
+                    <Assignment key={assignment.assignment} {...assignment} {...{ refetch, color, expandAll }} />
+                  ))}
+                </Stack>
+              </Collapse>
             </Stack>
           </ListItemButton>
         </Stack>

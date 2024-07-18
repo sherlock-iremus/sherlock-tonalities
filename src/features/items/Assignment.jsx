@@ -17,6 +17,7 @@ export const Assignment = ({
   author,
   color,
   onPage,
+  expandAll,
 }) => {
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { data: models } = useGetModelsQuery()
@@ -38,7 +39,14 @@ export const Assignment = ({
   const getModel = iri => models?.find(e => iri?.toLowerCase().includes(e.baseIri.toLowerCase())).name || ''
 
   if (subentity)
-    return <Annotation entity={subentity} {...{ date, author, annotation, onDelete }} isSubEntity color={!color} />
+    return (
+      <Annotation
+        entity={subentity}
+        {...{ date, author, annotation, onDelete, expandAll, onPage }}
+        isSubEntity
+        color={!color}
+      />
+    )
   else
     return (
       <Stack
