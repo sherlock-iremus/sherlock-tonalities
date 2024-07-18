@@ -1,5 +1,5 @@
 import { CollectionsBookmark, Downloading, Edit } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, IconButton, Tooltip, Chip } from '@mui/material'
+import { ListItem, ListItemIcon, ListItemText, IconButton, Tooltip, Chip, ListSubheader, Button } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,6 +14,7 @@ import { colors } from '../../utils'
 export const Project = () => {
   const { projectIri, selectedAnnotation, colorIndex } = useSelector(state => state.globals)
   const [isHovered, setIsHovered] = useState(false)
+  const [expandAll, setExpandAll] = useState(true)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isEditing, setIsEditing] = useState(false)
   const [annotationsByPage, setAnnotationsByPage] = useState([])
@@ -83,7 +84,13 @@ export const Project = () => {
               </ListItemIcon>
               <ListItemText primary={project.label} secondary="Selected project" />
             </ListItem>
-            <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition }} />
+            <Stack direction="row" justifyContent="space-between" alignItems="center" pr={2}>
+              <ListSubheader disableSticky>Annotations</ListSubheader>
+              <Button size="small" onClick={() => setExpandAll(!expandAll)}>
+                {expandAll ? 'shrink all' : 'expand all'}
+              </Button>
+            </Stack>
+            <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }} />
           </>
         )}
       </Stack>
