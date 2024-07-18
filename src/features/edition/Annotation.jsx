@@ -42,6 +42,7 @@ export const Annotation = ({
   onDelete,
   expandAll,
   onPage,
+  index,
 }) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [expand, setExpand] = useState(true)
@@ -156,8 +157,13 @@ export const Annotation = ({
               )}
               <Collapse in={expand} timeout="auto" unmountOnExit>
                 <Stack gap={0.5}>
-                  {assignments?.map(assignment => (
-                    <Assignment key={assignment.assignment} {...assignment} {...{ refetch, color, expandAll }} />
+                  {assignments?.map((assignment, i) => (
+                    <Assignment
+                      key={assignment.assignment}
+                      {...assignment}
+                      {...{ refetch, color, expandAll }}
+                      index={[index, i]}
+                    />
                   ))}
                 </Stack>
               </Collapse>

@@ -29,8 +29,8 @@ export const Annotations = ({ annotations, annotationsByPage, scrollPosition, se
                   <TimelineConnector />
                 </TimelineSeparator>
                 <Stack flex={1} paddingLeft={1}>
-                  {pageAnnotations.map(annotation => (
-                    <Annotation key={annotation.annotation} {...annotation} {...{ expandAll }} color />
+                  {pageAnnotations.map((annotation, index) => (
+                    <Annotation key={annotation.annotation} {...annotation} {...{ expandAll, index }} color />
                   ))}
                 </Stack>
               </Stack>
