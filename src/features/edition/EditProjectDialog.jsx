@@ -12,7 +12,7 @@ export const EditProjectDialog = ({ project, isEditing, setIsEditing, refetch })
   const [description, setDescription] = useState(project.description || '')
   const [color, setColor] = useState(project.color || '#000000')
   const [isPublished, setIsPublished] = useState(project.isPublished || false)
-console.log(project)
+
   const updateProject = async () => {
     if (!isLoading)
       try {

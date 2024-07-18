@@ -31,7 +31,7 @@ export const Assignment = ({
       await deleteAnnotation(getUuid(assignment)).unwrap()
       if (refetch) refetch()
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 

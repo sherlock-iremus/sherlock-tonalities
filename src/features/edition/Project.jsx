@@ -1,6 +1,5 @@
 import { CollectionsBookmark, Downloading, Edit } from '@mui/icons-material'
-import { ListItem, ListItemIcon, ListItemText, IconButton, Typography, IconButton, Tooltip, Chip } from '@mui/material'
-import { TimelineDot, TimelineSeparator, TimelineConnector } from '@mui/lab'
+import { ListItem, ListItemIcon, ListItemText, IconButton, Tooltip, Chip } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
 import { useDispatch, useSelector } from 'react-redux'
