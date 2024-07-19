@@ -114,7 +114,7 @@ export const Annotation = ({
         disablePadding
         sx={{ '& .MuiListItemSecondaryAction-root': { top: 30 } }}
         secondaryAction={
-          <>
+          <Stack direction="row" alignItems="center">
             {!isSubEntity && (
               <IconButton onClick={() => setExpand(!expand)}>{expand ? <ExpandMore /> : <ExpandLess />}</IconButton>
             )}
@@ -129,7 +129,7 @@ export const Annotation = ({
               </Tooltip>
             )}
             {!canDelete && <ContributorItem contributorIri={author} small />}
-          </>
+          </Stack>
         }
       >
         <Stack
