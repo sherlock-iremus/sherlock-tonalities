@@ -17,9 +17,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDeleteAnalyticalProjectMutation } from '../services/service'
 
 export const PersonalProjects = ({ userId }) => {
-  const { data: projects, isFetching, refetch } = useGetPersonalProjectsQuery(getIri(userId))
+  const { data: projects, refetch } = useGetPersonalProjectsQuery(getIri(userId))
   const navigate = useNavigate()
-  const [deleteAnalyticalProject] = useDeleteAnalyticalProjectMutation()
+  const [deleteAnalyticalProject, { isLoading }] = useDeleteAnalyticalProjectMutation()
 
   const removeProject = async projectIri => {
     await deleteAnalyticalProject(getUuid(projectIri))
@@ -41,7 +41,7 @@ export const PersonalProjects = ({ userId }) => {
                 </IconButton>
               }
             >
-              <ListItemButton onClick={() => navigate(`/project/${getUuid(project.iri)}`)}>
+              <ListItemButton onClick={() => navigate(`/project/${getUuid(project.iri)}`)} disabled={isLoading}>
                 <ListItemIcon>
                   <TextSnippet />
                 </ListItemIcon>
@@ -55,7 +55,6 @@ export const PersonalProjects = ({ userId }) => {
         </List>
       ) : (
         <Stack flex={1} justifyContent="center" alignItems="center" padding={2} spacing={2}>
-          {isFetching && <CircularProgress />}
           <Typography textAlign="center" color="text.secondary" fontSize={14}>
             You haven't worked on any project yet ! Start by selecting one from the list
           </Typography>
