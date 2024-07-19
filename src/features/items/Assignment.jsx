@@ -21,6 +21,7 @@ export const Assignment = ({
   onPage,
   expandAll,
   index,
+  i,
 }) => {
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { data: models } = useGetModelsQuery()
@@ -32,7 +33,7 @@ export const Assignment = ({
   const canDelete = userId === getUuid(author)
 
   useEffect(() => {
-    if (concept && index[0] === 0 && index[1] === 0) dispatch(setSelectedModelIndex(getModelIndex(concept)))
+    if (concept && index && i && index[0] === 0 && i[1] === 0) dispatch(setSelectedModelIndex(getModelIndex(concept)))
   }, [])
 
   const onDelete = async () => {

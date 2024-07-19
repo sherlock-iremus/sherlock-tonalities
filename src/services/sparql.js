@@ -100,7 +100,7 @@ export const sparql = createApi({
         url:
           '?' +
           new URLSearchParams({
-            graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
+            graph: 'http://data-iremus.huma-num.fr/graph/tonalities-contributions',
             query: exportProject(params),
           }),
         method: 'GET',
@@ -112,7 +112,7 @@ export const sparql = createApi({
         url:
           '?' +
           new URLSearchParams({
-            graph: 'http://data-iremus.huma-num.fr/graph/sherlock',
+            graph: 'http://data-iremus.huma-num.fr/graph/tonalities-contributions',
             query: exportProjectToMeta(projectIri),
           }),
         method: 'GET',
