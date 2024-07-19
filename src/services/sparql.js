@@ -9,6 +9,7 @@ import {
   getAnnotations,
   getAssignments,
   getContributor,
+  getFlatAnnotations,
   getP140,
   getPersonalProjects,
   getProjects,
@@ -51,7 +52,8 @@ export const sparql = createApi({
         iri: binding.project.value,
         label: binding.content?.value || binding.label?.value || 'Untitled project',
         contributor: binding.contributor.value,
-        isPublished: binding.privacyType?.value === 'http://data-iremus.huma-num.fr/id/54a5cf00-a46a-4435-b893-6eda0cdc5462',
+        isPublished:
+          binding.privacyType?.value === 'http://data-iremus.huma-num.fr/id/54a5cf00-a46a-4435-b893-6eda0cdc5462',
         ...(binding.description && { description: binding.description.value }),
         ...(binding.color && { color: '#' + binding.color.value }),
       }),
@@ -93,6 +95,18 @@ export const sparql = createApi({
           author: author.value,
           noteId: getId(noteId.value),
           notes: Number(notes.value),
+        })),
+    }),
+    getFlatAnnotations: builder.query({
+      query: projectIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getFlatAnnotations(projectIri) }),
+      }),
+      transformResponse: response =>
+        response.results.bindings.map(({ annotation, notes, concepts }) => ({
+          annotation: annotation.value,
+          notes: notes.value,
+          concepts: concepts.value,
         })),
     }),
     exportProject: builder.query({
@@ -168,4 +182,5 @@ export const {
   useExportProjectQuery,
   useExportProjectToMetaQuery,
   useGetScoreUrlQuery,
+  useGetFlatAnnotationsQuery,
 } = sparql

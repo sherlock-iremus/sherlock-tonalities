@@ -23,10 +23,14 @@ import {
   unsetAnnotatedNotes,
 } from '../../services/globals'
 import { getIri, getUuid } from '../../utils'
-import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetP140Query } from '../../services/sparql'
+import {
+  useGetAnnotationsQuery,
+  useGetAssignmentsQuery,
+  useGetFlatAnnotationsQuery,
+  useGetP140Query,
+} from '../../services/sparql'
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
 import { useEffect, useState } from 'react'
-import { getId } from '../../utils'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
 import { useParams } from 'react-router-dom'
@@ -49,9 +53,8 @@ export const Annotation = ({
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
-  const { selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts } = useSelector(
-    state => state.globals
-  )
+  const { selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts, filteredAnnotations } =
+    useSelector(state => state.globals)
   const { annotationId } = useParams()
 
   const isScoreSelected = notes?.includes(scoreIri) || false
@@ -60,11 +63,7 @@ export const Annotation = ({
   const { data: userId } = useGetUserIdQuery()
   const canDelete = userId === getUuid(author)
 
-  const checkIsDisabled = () => {
-    if (selectedConcepts.length) return !assignments?.some(({ concept }) => selectedConcepts.includes(concept))
-    if (selectedNotes.length) return !notes.some(e => selectedNotes.includes(getId(e)))
-    return false
-  }
+  const isDisabled = filteredAnnotations.length && !filteredAnnotations.includes(entity)
 
   useEffect(() => {
     if (notes && assignments && getIri(annotationId) === entity) setAnnotation()
@@ -78,6 +77,7 @@ export const Annotation = ({
   useEffect(() => setExpand(expandAll) && undefined, [expandAll])
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
+  const { refetch: refetchFlatAnnotations } = useGetFlatAnnotationsQuery(projectIri)
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
 
   const setAnnotation = () =>
@@ -96,6 +96,7 @@ export const Annotation = ({
     try {
       await deleteAnnotation(getUuid(annotation)).unwrap()
       refetchAnnotations()
+      refetchFlatAnnotations()
       dispatch(setSelectedAnnotation())
       dispatch(setHoveredAnnotation())
     } catch (error) {
@@ -103,7 +104,6 @@ export const Annotation = ({
     }
   }
 
-  if (notes && assignments && checkIsDisabled()) return null
   if (notes)
     return (
       <ListItem
@@ -149,11 +149,13 @@ export const Annotation = ({
                   secondary={new Date(date).toLocaleString('en-GB').slice(0, -3)}
                 />
               ) : (
-                <ListItemText
-                  sx={{ paddingLeft: 1, textAlign: 'center' }}
-                  primary={isSubEntity ? 'Sub-individual' : 'Individual'}
-                  secondary={new Date(date).toLocaleString('en-GB').slice(0, -3)}
-                />
+                !isDisabled && (
+                  <ListItemText
+                    sx={{ paddingLeft: 1, textAlign: 'center' }}
+                    primary={isSubEntity ? 'Sub-individual' : 'Individual'}
+                    secondary={new Date(date).toLocaleString('en-GB').slice(0, -3)}
+                  />
+                )
               )}
               <Collapse in={expand} timeout="auto" unmountOnExit>
                 <Stack gap={0.5}>
@@ -161,7 +163,7 @@ export const Annotation = ({
                     <Assignment
                       key={assignment.assignment}
                       {...assignment}
-                      {...{ refetch, color, expandAll }}
+                      {...{ refetch, color, expandAll, isDisabled }}
                       index={[index, i]}
                     />
                   ))}

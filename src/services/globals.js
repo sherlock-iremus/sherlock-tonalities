@@ -14,6 +14,7 @@ const initialState = {
   selectedModelIndex: 0,
   isSubSelecting: false,
   annotatedNotes: [],
+  filteredAnnotations: [],
 }
 
 const globals = createSlice({
@@ -33,6 +34,9 @@ const globals = createSlice({
     },
     setSelectedModelIndex: (state, action) => {
       state.selectedModelIndex = action.payload
+    },
+    setFilteredAnnotations: (state, action) => {
+      state.filteredAnnotations = action.payload
     },
     setSelectedNotes: (state, action) => {
       state.selectedConcepts = initialState.selectedConcepts
@@ -108,4 +112,5 @@ export const {
   setNoteCount,
   setAnnotatedNotes,
   unsetAnnotatedNotes,
+  setFilteredAnnotations,
 } = globals.actions

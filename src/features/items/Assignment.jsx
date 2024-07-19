@@ -22,6 +22,7 @@ export const Assignment = ({
   expandAll,
   index,
   i,
+  isDisabled,
 }) => {
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { data: models } = useGetModelsQuery()
@@ -57,6 +58,7 @@ export const Assignment = ({
         color={!color}
       />
     )
+  else if (isDisabled) return null
   else
     return (
       <Stack

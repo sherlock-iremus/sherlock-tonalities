@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Concept } from './Concept'
 import { useDispatch, useSelector } from 'react-redux'
 import { usePostAnnotationMutation } from '../../services/service'
-import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
+import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetFlatAnnotationsQuery } from '../../services/sparql'
 import { setSelectedAnnotation, setSelectedNotes } from '../../services/globals'
 import { removeBaseIri } from '../../utils'
 import { assignConcept, assignSubEntity, createEntity } from '../../helper'
@@ -26,6 +26,7 @@ export const Concepts = ({ data, filter }) => {
   }
 
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
+  const { refetch: refetchFlatAnnotations } = useGetFlatAnnotationsQuery(projectIri)
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
   const { refetch: refetchAssignments } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
@@ -46,6 +47,7 @@ export const Concepts = ({ data, filter }) => {
       refetchAssignments()
     }
     refetchAnnotations()
+    refetchFlatAnnotations()
   }
 
   const addAssignment = async conceptIri => {

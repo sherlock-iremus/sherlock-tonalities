@@ -1,6 +1,6 @@
 import { TimelineDot, TimelineSeparator, TimelineConnector } from '@mui/lab'
-import { Button, ListSubheader, Stack, Typography } from '@mui/material'
-import { useEffect, useRef, useState } from 'react'
+import { Stack, Typography } from '@mui/material'
+import { useEffect, useRef } from 'react'
 import { Annotation } from './Annotation'
 
 export const Annotations = ({ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }) => {

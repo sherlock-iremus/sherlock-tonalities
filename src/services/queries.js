@@ -60,6 +60,22 @@ WHERE {
 GROUP BY ?annotation ?entity ?date ?author
 `
 
+export const getFlatAnnotations = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+SELECT ?annotation (GROUP_CONCAT(?note; separator=", ") AS ?notes) (GROUP_CONCAT(?concept; separator=", ") AS ?concepts)
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
+WHERE {
+    <${projectIri}> crm:P9_consists_of ?e13_1.
+    ?e13_1 crm:P177_assigned_property_of_type crm:P67_refers_to.
+    ?e13_1 crm:P140_assigned_attribute_to ?note.
+    ?e13_1 crm:P141_assigned ?annotation.
+  	?e13_2 crm:P140_assigned_attribute_to ?annotation.
+    ?e13_2 crm:P177_assigned_property_of_type crm:P2_has_type.
+  	?e13_2 crm:P141_assigned ?concept.
+}
+GROUP BY ?annotation
+`
+
 export const getContributor = contributorIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX analysis: <http://modality-tonality.huma-num.fr/analysisOntology#>
