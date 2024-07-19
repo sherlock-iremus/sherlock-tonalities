@@ -5,7 +5,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 
 SELECT ?individual (GROUP_CONCAT(DISTINCT ?name; SEPARATOR=", ") AS ?authors) (GROUP_CONCAT(DISTINCT ?note; SEPARATOR=", ") AS ?notes)
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 FROM <http://data-iremus.huma-num.fr/graph/users>
 WHERE {
    	${projectIri} crm:P9_consists_of ?assignment.
@@ -27,7 +27,7 @@ export const getExternalAnnotations = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX iremus: <http://data-iremus.huma-num.fr/id/>
 SELECT ?assignment ?contributor ?individual
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
     VALUES ?project { ${projectIri} }
    	?project crm:P14_carried_out_by ?creator.
@@ -44,7 +44,7 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 SELECT ?annotation ?entity ?date ?author (SAMPLE(?note) AS ?noteId) (COUNT(?note) AS ?notes)
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
     <${projectIri}> crm:P9_consists_of ?annotation.
     ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
@@ -90,7 +90,7 @@ WHERE {
 export const getAnalyticalProject = analyticalProjectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
-SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+SELECT * FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
     VALUES ?project { <${analyticalProjectIri}> }
     VALUES ?draft { <${DRAFT_PROJECT}> }
@@ -111,7 +111,7 @@ LIMIT 1`
 export const getScoreUrl = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
-SELECT ?url FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+SELECT ?url FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
     <${projectIri}> crm:P9_consists_of ?annotations.
     ?annotations sherlock:has_document_context ?url.
@@ -120,7 +120,7 @@ LIMIT 1`
 
 export const getP140 = e13 => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+SELECT * FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE { <${e13}> crm:P140_assigned_attribute_to ?p140 }
 `
 
@@ -128,7 +128,7 @@ export const getAssignments = analyticalEntityIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT * FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+SELECT * FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
     ?assignment crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
     ?assignment crm:P141_assigned ?p141.
@@ -146,7 +146,7 @@ export const getProjects = scoreIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 SELECT ?project (COUNT(?annotation) AS ?annotations) (SAMPLE(?projectLabel) AS ?label) (SAMPLE(?projectContributor) AS ?contributor) (SAMPLE(?projectContent) AS ?content)
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE { 
     ?annotation sherlock:has_document_context <${scoreIri}>.
     ?project crm:P9_consists_of ?annotation.
@@ -163,7 +163,7 @@ export const getPersonalProjects = userIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 SELECT ?project (COUNT(?annotation) AS ?annotations) (SAMPLE(?name) AS ?label) (SAMPLE(?score) AS ?scoreIri)
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE { 
     ?project crm:P14_carried_out_by <${userIri}>.
     ?project crm:P1_is_identified_by ?name.
@@ -192,7 +192,7 @@ CONSTRUCT {
     ?s ?p ?o.
     ?score a crm:E1_CRM_Entity.
 }
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 FROM <http://data-iremus.huma-num.fr/graph/users>
 WHERE
 { 
@@ -267,7 +267,7 @@ CONSTRUCT {
 
     ?subAnnotation core:isDerivedFrom ?supAnnotation
 }
-FROM <http://data-iremus.huma-num.fr/graph/sherlock>
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 FROM <http://data-iremus.huma-num.fr/graph/users>
 WHERE {
     VALUES ?project { <${projectIri}> }

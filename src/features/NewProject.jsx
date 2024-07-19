@@ -41,7 +41,7 @@ export const NewProject = ({ isOpen, onClose, score }) => {
         if (!file) throw new Error('No file found at the provided URL')
         const data = window.tk.loadData(file)
         if (!data) throw new Error('Enable to render the provided file')
-        const request = await postAnalyticalProject({ label }).unwrap()
+        const request = await postAnalyticalProject({ label, contribution_graph: 'tonalities-contributions' }).unwrap()
         const project = request.find(e => e['@type'].includes('http://www.cidoc-crm.org/cidoc-crm/E7_Activity'))
         const projectId = getUuid(project['@id'])
         navigate(`/project/${projectId}`, { state: { url } })

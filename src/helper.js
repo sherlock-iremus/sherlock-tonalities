@@ -11,6 +11,7 @@ export const createEntity = async ({ selectedNotes, scoreIri, projectIri, postAn
       p141_type: 'NEW_RESOURCE',
       document_context: scoreIri,
       analytical_project: projectIri,
+      contribution_graph: 'tonalities-contributions',
     }
 
     const response = await postAnnotation(body).unwrap()
@@ -30,6 +31,7 @@ export const assignConcept = async ({ entityIri, conceptIri, scoreIri, projectIr
       p141_type: 'URI',
       document_context: scoreIri,
       analytical_project: projectIri,
+      contribution_graph: 'tonalities-contributions',
     }
     const response = await postAnnotation(body).unwrap()
     const annotation = response.find(e =>
@@ -50,6 +52,7 @@ export const assignArbitraryText = async ({ entityIri, input, scoreIri, projectI
       p141_type: 'LITERAL',
       document_context: scoreIri,
       analytical_project: projectIri,
+      contribution_graph: 'tonalities-contributions',
     }
     const response = await postAnnotation(body).unwrap()
     const annotation = response.find(e =>
@@ -70,6 +73,7 @@ export const assignSubEntity = async ({ parentEntity, childEntity, scoreIri, pro
       p141_type: 'URI',
       document_context: scoreIri,
       analytical_project: projectIri,
+      contribution_graph: 'tonalities-contributions',
     }
     const response = await postAnnotation(body).unwrap()
     const annotation = response.find(e =>

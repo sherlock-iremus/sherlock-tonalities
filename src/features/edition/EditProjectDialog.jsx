@@ -20,7 +20,13 @@ export const EditProjectDialog = ({ project, isEditing, setIsEditing, refetch })
           ? '54a5cf00-a46a-4435-b893-6eda0cdc5462'
           : 'cabe46bf-23d4-4392-aa20-b3eb21ad7dfd'
         const iri = getUuid(project.iri)
-        const body = { label, description, color: color.slice(1), privacyTypeUuid }
+        const body = {
+          label,
+          description,
+          color: color.slice(1),
+          privacyTypeUuid,
+          contribution_graph: 'tonalities-contributions',
+        }
         await patchProject({ iri, body })
         refetch()
       } catch (error) {
