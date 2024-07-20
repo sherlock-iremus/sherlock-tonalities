@@ -1,7 +1,7 @@
 import sparql from './sparql'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { setSelectedAnnotation } from './globals'
-import { getUuid } from '../utils'
+import { getId } from '../utils'
 
 export const setAnnotation = createAsyncThunk('globals/setAnnotation', async (iri, { getState, dispatch }) => {
   if (!iri) return dispatch(setSelectedAnnotation())
@@ -16,8 +16,8 @@ export const setAnnotation = createAsyncThunk('globals/setAnnotation', async (ir
   const assignments = assignmentsResult.data || []
   const notesResult = await dispatch(sparql.endpoints.getP140.initiate(annotation))
   const notes = notesResult.data || []
-  
-  const page = window.tk.getPageWithElement(getUuid(notes[0]))
+
+  const page = window.tk.getPageWithElement(getId(notes[0]))
 
   const selectedAnnotation = { entity, annotation, date, author, notes, page, assignments }
 

@@ -6,7 +6,7 @@ import { setSelectedNotes } from '../../services/globals'
 import { Input } from '../../components/Input'
 import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../services/service'
-import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../../services/sparql'
+import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetFlatAnnotationsQuery } from '../../services/sparql'
 import { assignArbitraryText, assignSubEntity, createEntity } from '../../helper'
 
 export const Editor = () => {
@@ -15,6 +15,7 @@ export const Editor = () => {
   )
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
+  const { refetch: refetchFlatAnnotations } = useGetFlatAnnotationsQuery(projectIri)
   const { refetch: refetchAssignments } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
   })
@@ -38,6 +39,7 @@ export const Editor = () => {
     }
     dispatch(setSelectedNotes())
     refetchAnnotations()
+    refetchFlatAnnotations()
     setInput('')
   }
 
