@@ -2,11 +2,9 @@ import { Avatar, Chip, Stack, Tooltip, Typography, capitalize } from '@mui/mater
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
 import { getUuid, removeBaseIri } from '../../utils'
 import { ContributorItem } from './ContributorItem'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useGetModelsQuery } from '../../services/models'
 import { Annotation } from '../edition/Annotation'
-import { setSelectedModelIndex } from '../../services/globals'
-import { useDispatch } from 'react-redux'
 
 export const Assignment = ({
   assignment,
@@ -20,22 +18,15 @@ export const Assignment = ({
   color,
   onPage,
   expandAll,
-  index,
-  i,
   isDisabled,
 }) => {
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { data: models } = useGetModelsQuery()
   const { data: userId } = useGetUserIdQuery()
 
-  const dispatch = useDispatch()
   const [isHovered, setIsHovered] = useState(false)
 
   const canDelete = userId === getUuid(author)
-
-  useEffect(() => {
-    if (concept && index && i && index[0] === 0 && i[1] === 0) dispatch(setSelectedModelIndex(getModelIndex(concept)))
-  }, [])
 
   const onDelete = async () => {
     try {
@@ -46,7 +37,6 @@ export const Assignment = ({
     }
   }
 
-  const getModelIndex = iri => models?.findIndex(e => iri?.toLowerCase().includes(e.baseIri.toLowerCase()))
   const getModel = iri => models?.find(e => iri?.toLowerCase().includes(e.baseIri.toLowerCase())).name || ''
 
   if (subentity)

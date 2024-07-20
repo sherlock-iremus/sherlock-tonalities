@@ -2,11 +2,12 @@ import { Avatar, Button, ListItem, ListItemIcon, ListItemText, ListSubheader } f
 import { Stack } from '@mui/system'
 import { Concepts } from './Concepts'
 import { ContextMenu } from './ContextMenu'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input } from '../../components/Input'
 import { setSelectedConcepts } from '../../services/globals'
 import { useGetModelsQuery } from '../../services/models'
+import { findModel } from '../../services/findModel'
 
 export const Model = () => {
   const dispatch = useDispatch()
@@ -14,6 +15,8 @@ export const Model = () => {
   const [filter, setFilter] = useState('')
   const [contextMenu, setContextMenu] = useState(false)
   const { selectedModelIndex, selectedConcepts, selectedAnnotation } = useSelector(state => state.globals)
+
+  useEffect(() => dispatch(findModel()) && undefined, [models, dispatch])
 
   if (!models) return null
   const { data } = models[selectedModelIndex]
