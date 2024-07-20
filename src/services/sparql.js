@@ -103,10 +103,13 @@ export const sparql = createApi({
         body: new URLSearchParams({ query: getFlatAnnotations(projectIri) }),
       }),
       transformResponse: response =>
-        response.results.bindings.map(({ annotation, notes, concepts }) => ({
+        response.results.bindings.map(({ entity, annotation, notes, concepts, date, author }) => ({
+          entity: entity.value,
           annotation: annotation.value,
           notes: notes.value,
           concepts: concepts.value,
+          date: date.value,
+          author: author.value,
         })),
     }),
     exportProject: builder.query({

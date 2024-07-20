@@ -22,7 +22,7 @@ import {
   setSelectedAnnotation,
   unsetAnnotatedNotes,
 } from '../../services/globals'
-import { getIri, getUuid } from '../../utils'
+import { getUuid } from '../../utils'
 import {
   useGetAnnotationsQuery,
   useGetAssignmentsQuery,
@@ -33,7 +33,7 @@ import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/s
 import { useEffect, useState } from 'react'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
-import { useSearchParams } from 'react-router-dom'
+import { setAnnotation } from '../../services/setAnnotation'
 
 export const Annotation = ({
   annotation,
@@ -74,9 +74,6 @@ export const Annotation = ({
   const { refetch: refetchFlatAnnotations } = useGetFlatAnnotationsQuery(projectIri)
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
 
-  const setAnnotation = () =>
-    dispatch(setSelectedAnnotation(!isSelected ? { entity, annotation, page, notes, assignments } : null))
-
   const removeAnnotation = async () => {
     if (assignments?.length) {
       try {
@@ -108,22 +105,24 @@ export const Annotation = ({
         disablePadding
         sx={{ '& .MuiListItemSecondaryAction-root': { top: 30 } }}
         secondaryAction={
-          <Stack direction="row" alignItems="center">
-            {!isSubEntity && (
-              <IconButton onClick={() => setExpand(!expand)}>{expand ? <ExpandMore /> : <ExpandLess />}</IconButton>
-            )}
-            {canDelete && (!isSubEntity || onPage) && (
-              <Tooltip title="Delete entity">
-                <IconButton
-                  onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
-                  size="small"
-                >
-                  <Cancel />
-                </IconButton>
-              </Tooltip>
-            )}
-            {!canDelete && <ContributorItem contributorIri={author} small />}
-          </Stack>
+          !isDisabled && (
+            <Stack direction="row" alignItems="center">
+              {!isSubEntity && (
+                <IconButton onClick={() => setExpand(!expand)}>{expand ? <ExpandMore /> : <ExpandLess />}</IconButton>
+              )}
+              {canDelete && (!isSubEntity || onPage) && (
+                <Tooltip title="Delete entity">
+                  <IconButton
+                    onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
+                    size="small"
+                  >
+                    <Cancel />
+                  </IconButton>
+                </Tooltip>
+              )}
+              {!canDelete && <ContributorItem contributorIri={author} small />}
+            </Stack>
+          )
         }
       >
         <Stack
@@ -134,7 +133,12 @@ export const Annotation = ({
           overflow="hidden"
           margin={1}
         >
-          <ListItemButton dense disabled={isLoading} onClick={setAnnotation} selected={isSelected}>
+          <ListItemButton
+            dense
+            disabled={isLoading}
+            onClick={() => dispatch(setAnnotation(entity))}
+            selected={isSelected}
+          >
             <Stack flex={1} alignItems="center">
               {isScoreSelected ? (
                 <ListItemText

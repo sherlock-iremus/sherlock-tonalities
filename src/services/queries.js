@@ -62,18 +62,23 @@ GROUP BY ?annotation ?entity ?date ?author
 
 export const getFlatAnnotations = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-SELECT ?annotation (GROUP_CONCAT(?note; separator=", ") AS ?notes) (GROUP_CONCAT(?concept; separator=", ") AS ?concepts)
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT ?entity ?annotation ?date ?author (GROUP_CONCAT(?note; separator=", ") AS ?notes) (GROUP_CONCAT(?concept; separator=", ") AS ?concepts)
 FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
-    <${projectIri}> crm:P9_consists_of ?e13_1.
-    ?e13_1 crm:P177_assigned_property_of_type crm:P67_refers_to.
-    ?e13_1 crm:P140_assigned_attribute_to ?note.
-    ?e13_1 crm:P141_assigned ?annotation.
-  	?e13_2 crm:P140_assigned_attribute_to ?annotation.
-    ?e13_2 crm:P177_assigned_property_of_type crm:P2_has_type.
-  	?e13_2 crm:P141_assigned ?concept.
+    <${projectIri}> crm:P9_consists_of ?annotation.
+    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
+    ?annotation crm:P140_assigned_attribute_to ?note.
+    
+    ?annotation crm:P141_assigned ?entity.
+    ?entity dcterms:created ?date.
+    ?entity dcterms:creator ?author.
+
+  	?assignments crm:P140_assigned_attribute_to ?entity.
+    ?assignments crm:P177_assigned_property_of_type crm:P2_has_type.
+  	?assignments crm:P141_assigned ?concept.
 }
-GROUP BY ?annotation
+GROUP BY ?entity ?annotation ?date ?author
 `
 
 export const getContributor = contributorIri => `
