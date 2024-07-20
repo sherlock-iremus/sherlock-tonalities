@@ -143,7 +143,7 @@ export const AnnotationPage = () => {
         <Stack flex={1} overflow="auto" padding={1} spacing={1} paddingTop={2}>
           {assignments?.length ? (
             assignments.map(assignment => (
-              <Assignment key={assignment.assignment} {...assignment} refetch={refetch} onPage />
+              <Assignment key={assignment.assignment} {...assignment} refetch={refetch} onPage expandAll={true} />
             ))
           ) : (
             <Stack flex={1} justifyContent="center">
