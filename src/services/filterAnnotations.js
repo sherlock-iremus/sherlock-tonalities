@@ -13,6 +13,6 @@ export const filterAnnotations = createAsyncThunk('globals/filterAnnotations', a
     selectedNotes.some(note => annotation.notes.includes(note)) ||
     selectedConcepts.some(concept => annotation.concepts.includes(concept))
 
-  const filteredAnnotations = annotations.filter(filterAnnotations).map(({ annotation }) => annotation)
+  const filteredAnnotations = annotations.filter(filterAnnotations).map(({ entity }) => entity)
   dispatch(setFilteredAnnotations(filteredAnnotations))
 })

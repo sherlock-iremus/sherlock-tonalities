@@ -52,7 +52,7 @@ export const Annotation = ({
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
-  const { selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts, filteredAnnotations } =
+  const { selectedAnnotation, scoreIri, projectIri, filteredAnnotations } =
     useSelector(state => state.globals)
 
   const isScoreSelected = notes?.includes(scoreIri) || false
