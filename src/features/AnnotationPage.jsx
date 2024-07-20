@@ -123,12 +123,7 @@ export const AnnotationPage = () => {
               />
             </ListItem>
             <Tooltip title="Copy link to clipboard">
-              <IconButton
-                color="inherit"
-                onClick={() =>
-                  navigator.clipboard.writeText(`${window.location.href}/annotation/${getUuid(selectedAnnotation.entity)}`)
-                }
-              >
+              <IconButton color="inherit" onClick={() => navigator.clipboard.writeText(window.location.href)}>
                 <ContentCopy />
               </IconButton>
             </Tooltip>

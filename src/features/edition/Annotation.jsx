@@ -33,7 +33,7 @@ import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/s
 import { useEffect, useState } from 'react'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
-import { useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 export const Annotation = ({
   annotation,
@@ -54,7 +54,6 @@ export const Annotation = ({
   const dispatch = useDispatch()
   const { selectedAnnotation, scoreIri, projectIri, selectedNotes, selectedConcepts, filteredAnnotations } =
     useSelector(state => state.globals)
-  const { annotationId } = useParams()
 
   const isScoreSelected = notes?.includes(scoreIri) || false
   const isSelected = selectedAnnotation?.entity === entity || false
@@ -63,10 +62,6 @@ export const Annotation = ({
   const canDelete = userId === getUuid(author)
 
   const isDisabled = filteredAnnotations.length && !filteredAnnotations.includes(entity)
-
-  useEffect(() => {
-    if (notes && assignments && getIri(annotationId) === entity) setAnnotation()
-  }, [selectedNotes, selectedConcepts, notes, assignments])
 
   useEffect(() => {
     if (notes) dispatch(setAnnotatedNotes(notes))

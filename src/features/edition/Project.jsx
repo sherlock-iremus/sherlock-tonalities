@@ -19,8 +19,10 @@ import { ExportMenu } from '../ExportMenu'
 import { Annotations } from './Annotations'
 import { EditProjectDialog } from './EditProjectDialog'
 import { setColorIndex, setSelectedConcepts, setSelectedNotes } from '../../services/globals'
-import { colors } from '../../utils'
+import { colors, getIri, getUuid } from '../../utils'
 import { filterAnnotations } from '../../services/filterAnnotations'
+import { useSearchParams } from 'react-router-dom'
+import { setAnnotation } from '../../services/setAnnotation'
 
 export const Project = () => {
   const { projectIri, selectedAnnotation, colorIndex, filteredAnnotations, selectedNotes, selectedConcepts } =
@@ -34,6 +36,17 @@ export const Project = () => {
   const { data: annotations } = useGetAnnotationsQuery(projectIri, { skip: !projectIri })
   const [contextMenu, setContextMenu] = useState(false)
   const dispatch = useDispatch()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [initialAnnotationId] = useState(searchParams.get('annotation'))
+
+  useEffect(() => {
+    if (initialAnnotationId && !selectedAnnotation) dispatch(setAnnotation(getIri(initialAnnotationId)))
+  }, [initialAnnotationId])
+
+  useEffect(() => {
+    setSearchParams(selectedAnnotation ? { annotation: getUuid(selectedAnnotation?.entity) } : {})
+  }, [selectedAnnotation])
 
   useEffect(() => dispatch(filterAnnotations()) && undefined, [selectedConcepts, selectedNotes, dispatch])
 
