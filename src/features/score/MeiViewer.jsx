@@ -9,7 +9,7 @@ import {
   ZoomIn,
   ZoomOut,
 } from '@mui/icons-material'
-import { Alert, Checkbox, IconButton, ListItemText, Pagination, Snackbar, Tooltip, Typography } from '@mui/material'
+import { Alert, Checkbox, Chip, IconButton, ListItemText, Pagination, Snackbar, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -192,11 +192,7 @@ export const MeiViewer = ({ file }) => {
           </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={1}>
-          {import.meta.env.DEV && (
-            <Alert sx={{ borderRadius: 4, boxShadow: 1 }} severity="warning">
-              Test environment
-            </Alert>
-          )}
+          {import.meta.env.DEV && <Chip color="warning" size="small" label="Test environment" />}
           <AccountMenu />
         </Stack>
       </Stack>
