@@ -25,6 +25,7 @@ import { StyleNote } from './StyleNote'
 import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
+import { Player } from './Player'
 
 export const MeiViewer = ({ file }) => {
   const theme = useTheme()
@@ -261,6 +262,7 @@ export const MeiViewer = ({ file }) => {
             </Stack>
           </Alert>
         </Snackbar>
+        <Player {...{ pageCount }} />
       </Stack>
     </Stack>
   )
