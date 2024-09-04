@@ -56,6 +56,7 @@ export const AnnotationPage = () => {
         p141_type: 'LITERAL',
         document_context: scoreIri,
         analytical_project: projectIri,
+        contribution_graph: 'tonalities-contributions',
       }
       await postAnnotation(body).unwrap()
       setInput('')
