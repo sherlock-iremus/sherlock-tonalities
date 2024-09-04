@@ -8,10 +8,15 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { Error } from './features/Error'
 import { colors } from './utils'
 
-const router = createBrowserRouter([
-  { path: '*', element: <Landing />, errorElement: <Error /> },
-  { path: '/project/:projectId', element: <ScoreAnnotator />, errorElement: <Error /> },
-])
+const router = createBrowserRouter(
+  [
+    { path: '*', element: <Landing />, errorElement: <Error /> },
+    { path: '/project/:projectId', element: <ScoreAnnotator />, errorElement: <Error /> },
+  ],
+  {
+    basename: '/tonalities',
+  }
+)
 
 export const App = () => {
   useGetUserIdQuery()
