@@ -1,4 +1,4 @@
-import { Alert, IconButton, Slider, Snackbar, Stack, Typography } from '@mui/material'
+import { Alert, Backdrop, CircularProgress, IconButton, Slider, Snackbar, Stack, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { Pause, PlayArrow } from '@mui/icons-material'
 import { SplendidGrandPiano } from 'smplr'
@@ -48,34 +48,39 @@ export const Player = ({ pageCount }) => {
 
   if (midiApi)
     return (
-      <Snackbar open={isOpen} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert
-          sx={{
-            borderRadius: 3,
-            boxShadow: 1,
-            bgcolor: 'secondary.light',
-            '& .MuiAlert-icon': { display: 'none' },
-          }}
-        >
-          <Stack width={300} spacing={2} direction="row" alignItems="center">
-            <IconButton
-              onClick={() => {
-                try {
-                  setIsPlaying(!isPlaying)
-                  context.resume()
-                  midiApi.play()
-                } catch (error) {
-                  midiApi.pause()
-                }
-              }}
-            >
-              {isPlaying ? <Pause /> : <PlayArrow />}
-            </IconButton>
-            <Typography>{formatTime(midiApi.getSongTime() - midiApi.getSongTimeRemaining())}</Typography>
-            <Slider value={time} onChange={setTimePosition} />
-            <Typography>-{formatTime(midiApi.getSongTimeRemaining())}</Typography>
-          </Stack>
-        </Alert>
-      </Snackbar>
+      <>
+        <Backdrop open={!isOpen}>
+          <CircularProgress />
+        </Backdrop>
+        <Snackbar open={isOpen} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+          <Alert
+            sx={{
+              borderRadius: 3,
+              boxShadow: 1,
+              bgcolor: 'secondary.light',
+              '& .MuiAlert-icon': { display: 'none' },
+            }}
+          >
+            <Stack width={300} spacing={2} direction="row" alignItems="center">
+              <IconButton
+                onClick={() => {
+                  try {
+                    setIsPlaying(!isPlaying)
+                    context.resume()
+                    midiApi.play()
+                  } catch (error) {
+                    midiApi.pause()
+                  }
+                }}
+              >
+                {isPlaying ? <Pause /> : <PlayArrow />}
+              </IconButton>
+              <Typography>{formatTime(midiApi.getSongTime() - midiApi.getSongTimeRemaining())}</Typography>
+              <Slider value={time} onChange={setTimePosition} />
+              <Typography>-{formatTime(midiApi.getSongTimeRemaining())}</Typography>
+            </Stack>
+          </Alert>
+        </Snackbar>
+      </>
     )
 }

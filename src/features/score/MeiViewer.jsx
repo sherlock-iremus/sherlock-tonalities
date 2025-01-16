@@ -6,10 +6,21 @@ import {
   KeyboardCommandKey,
   KeyboardControlKey,
   KeyboardOptionKey,
+  PlayCircle,
   ZoomIn,
   ZoomOut,
 } from '@mui/icons-material'
-import { Alert, Checkbox, Chip, IconButton, ListItemText, Pagination, Snackbar, Tooltip, Typography } from '@mui/material'
+import {
+  Alert,
+  Checkbox,
+  Chip,
+  IconButton,
+  ListItemText,
+  Pagination,
+  Snackbar,
+  Tooltip,
+  Typography,
+} from '@mui/material'
 import { Stack } from '@mui/system'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,6 +48,7 @@ export const MeiViewer = ({ file }) => {
   const [scoreTitle, setScoreTitle] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
+  const [showPlayer, setShowPlayer] = useState(false)
   const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting, scoreIri, annotatedNotes } =
     useSelector(state => state.globals)
   const color = theme.palette.primary.light
@@ -183,6 +195,11 @@ export const MeiViewer = ({ file }) => {
               <ZoomIn />
             </IconButton>
           </Tooltip>
+          <Tooltip title="Open player">
+            <IconButton onClick={() => setShowPlayer(!showPlayer)} size="small">
+              <PlayCircle />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Select whole score">
             <Checkbox
               icon={<InsertDriveFileOutlined />}
@@ -262,7 +279,7 @@ export const MeiViewer = ({ file }) => {
             </Stack>
           </Alert>
         </Snackbar>
-        <Player {...{ pageCount }} />
+        {showPlayer && <Player {...{ pageCount }} />}
       </Stack>
     </Stack>
   )
