@@ -37,7 +37,7 @@ export const Assignment = ({
     }
   }
 
-  const getModel = iri => models?.find(e => iri?.toLowerCase().includes(e.baseIri.toLowerCase())).name || ''
+  const getModel = iri => models?.find(e => iri?.toLowerCase().includes(e.baseIri.toLowerCase()))?.name || ''
 
   if (subentity)
     return (
