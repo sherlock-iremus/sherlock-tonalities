@@ -71,8 +71,8 @@ WHERE {
     ?annotation crm:P140_assigned_attribute_to ?note.
     
     ?annotation crm:P141_assigned ?entity.
-    ?entity dcterms:created ?date.
-    ?entity dcterms:creator ?author.
+    ?annotation dcterms:created ?date.
+    ?annotation dcterms:creator ?author.
 
   	?assignments crm:P140_assigned_attribute_to ?entity.
     ?assignments crm:P177_assigned_property_of_type crm:P2_has_type.
