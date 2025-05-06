@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { MeiViewer } from './MeiViewer'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { getIri } from '../../utils'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -11,6 +11,7 @@ export const ScoreAnnotator = () => {
   const dispatch = useDispatch()
   const { projectId } = useParams()
   const { state } = useLocation()
+  const navigate = useNavigate()
   const [file, setFile] = useState(null)
   const { data } = useGetScoreUrlQuery(getIri(projectId), { skip: state?.url })
 
@@ -29,5 +30,5 @@ export const ScoreAnnotator = () => {
   }, [data, state])
 
   if (file) return <MeiViewer {...{ file }} />
-  else return null
+  else navigate('/')
 }
