@@ -41,44 +41,61 @@ WHERE {
 
 export const getAnnotations = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-SELECT ?annotation ?entity ?date ?author (SAMPLE(?note) AS ?noteId) (COUNT(?note) AS ?notes)
+SELECT ?entity ?annotation ?date ?author ?noteId ?notes
 FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
-    <${projectIri}> crm:P9_consists_of ?annotation.
-    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
-    ?annotation crm:P141_assigned ?entity.
-    ?annotation crm:P140_assigned_attribute_to ?note.
-    ?annotation dcterms:created ?date.
-    ?annotation dcterms:creator ?author.
-    NOT EXISTS {
-        ?supAnnotation crm:P141_assigned ?entity.
-        ?supAnnotation crm:P177_assigned_property_of_type crm:P106_is_composed_of.
+    {
+        SELECT ?entity (MAX(?dates) AS ?date) (SAMPLE(?note) AS ?noteId) (COUNT(?note) AS ?notes)
+        WHERE {
+            <${projectIri}> crm:P9_consists_of ?annotation.
+
+            ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to ;
+                crm:P140_assigned_attribute_to ?note ;
+                crm:P141_assigned ?entity ;
+                dcterms:created ?dates.
+
+            NOT EXISTS {
+                ?supAnnotation crm:P141_assigned ?entity ;
+                    crm:P177_assigned_property_of_type crm:P106_is_composed_of.
+            }
+        }
+        GROUP BY ?entity
     }
+    ?annotation
+        crm:P141_assigned ?entity ;
+        dcterms:created ?date ;
+        dcterms:creator ?author.
 }
-GROUP BY ?annotation ?entity ?date ?author
 `
 
 export const getFlatAnnotations = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-SELECT ?entity ?annotation ?date ?author (GROUP_CONCAT(?note; separator=", ") AS ?notes) (GROUP_CONCAT(?concept; separator=", ") AS ?concepts)
+SELECT ?entity ?annotation ?date ?author ?notes ?concepts
 FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
-    <${projectIri}> crm:P9_consists_of ?annotation.
-    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
-    ?annotation crm:P140_assigned_attribute_to ?note.
-    
-    ?annotation crm:P141_assigned ?entity.
-    ?annotation dcterms:created ?date.
-    ?annotation dcterms:creator ?author.
-
-  	?assignments crm:P140_assigned_attribute_to ?entity.
-    ?assignments crm:P177_assigned_property_of_type crm:P2_has_type.
-  	?assignments crm:P141_assigned ?concept.
+    {
+        SELECT ?entity (MAX(?dates) AS ?date) (GROUP_CONCAT(?note; separator=", ") AS ?notes) (GROUP_CONCAT(?concept; separator=", ") AS ?concepts)
+        WHERE {
+            <${projectIri}> crm:P9_consists_of ?annotation.
+            ?annotation
+                crm:P177_assigned_property_of_type crm:P67_refers_to ;
+                crm:P140_assigned_attribute_to ?note ;
+                crm:P141_assigned ?entity ;
+                dcterms:created ?dates.
+        
+            ?assignments crm:P140_assigned_attribute_to ?entity ;
+                crm:P177_assigned_property_of_type crm:P2_has_type ;
+                crm:P141_assigned ?concept.
+        }
+        GROUP BY ?entity
+    }
+    ?annotation
+        crm:P141_assigned ?entity ;
+        dcterms:created ?date ;
+        dcterms:creator ?author.
 }
-GROUP BY ?entity ?annotation ?date ?author
 `
 
 export const getContributor = contributorIri => `

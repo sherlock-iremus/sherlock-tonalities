@@ -2,15 +2,16 @@ import { Lyrics, Send } from '@mui/icons-material'
 import { ListItem, ListItemIcon, ListItemText, Collapse, Button, IconButton } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedNotes } from '../../services/globals'
+import { setAnnotatedNotes, setSelectedNotes } from '../../services/globals'
 import { Input } from '../../components/Input'
 import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../services/service'
 import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetFlatAnnotationsQuery } from '../../services/sparql'
-import { assignArbitraryText, assignSubEntity, createEntity } from '../../helper'
+import { assignArbitraryText, assignSubEntity, createEntity, updateEntity } from '../../helper'
+import { setAnnotation } from '../../services/setAnnotation'
 
 export const Editor = () => {
-  const { selectedNotes, isSubSelecting, scoreIri, projectIri, selectedAnnotation, noteCount } = useSelector(
+  const { selectedNotes, isSubSelecting, isEditing, scoreIri, projectIri, selectedAnnotation, noteCount } = useSelector(
     state => state.globals
   )
   const [postAnnotation, { isLoading }] = usePostAnnotationMutation()
@@ -23,6 +24,27 @@ export const Editor = () => {
   const dispatch = useDispatch()
 
   const isScoreSelected = selectedNotes.includes(scoreIri) || false
+
+  const updateAnnotation = async () => {
+    try {
+      await updateEntity({
+        entityIri: selectedAnnotation.entity,
+        selectedNotes,
+        scoreIri,
+        projectIri,
+        postAnnotation,
+      })
+    } catch (error) {
+      console.error(error)
+    } finally {
+      dispatch(setSelectedNotes())
+      dispatch(setAnnotatedNotes(selectedNotes))
+      refetchAnnotations()
+      refetchAssignments()
+      refetchFlatAnnotations()
+      dispatch(setAnnotation(selectedAnnotation.entity))
+    }
+  }
 
   const createAnnotation = async concept => {
     const entityIri = await createEntity({ selectedNotes, scoreIri, projectIri, postAnnotation })
@@ -44,7 +66,7 @@ export const Editor = () => {
   }
 
   return (
-    <Collapse in={!!selectedNotes.length || isSubSelecting} timeout="auto" unmountOnExit>
+    <Collapse in={!!selectedNotes.length || isSubSelecting || isEditing} timeout="auto" unmountOnExit>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1}>
         <ListItem
           dense
@@ -57,31 +79,53 @@ export const Editor = () => {
           <ListItemIcon>
             <Lyrics />
           </ListItemIcon>
-          {isScoreSelected ? (
+          {isScoreSelected && (
             <ListItemText primary={`Score with ${noteCount} items`} secondary="Select a concept to assign it" />
-          ) : (
+          )}
+          {isEditing && (
             <ListItemText
-              primary={`
-              ${isSubSelecting ? 'Sub-individual' : 'New individual'} with ${
+              primary={`Individual with ${selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'}`}
+              secondary="Updating current individual"
+            />
+          )}
+          {isSubSelecting && (
+            <ListItemText
+              primary={`Sub-individual with ${
+                selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
+              }`}
+              secondary="Select a concept to assign it"
+            />
+          )}
+          {!(isEditing || isSubSelecting) && (
+            <ListItemText
+              primary={`New individual with ${
                 selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
               }`}
               secondary="Select a concept to assign it"
             />
           )}
         </ListItem>
-        <Stack flex={1} direction="row" alignItems="center" paddingRight={1}>
-          <Stack flex={1}>
-            <Input
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyPress={e => e.key === 'Enter' && createAnnotation()}
-              placeholder="Comment..."
-            />
+        {!isEditing ? (
+          <Stack flex={1} direction="row" alignItems="center" paddingRight={1}>
+            <Stack flex={1}>
+              <Input
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyPress={e => e.key === 'Enter' && createAnnotation()}
+                placeholder="Comment..."
+              />
+            </Stack>
+            <IconButton onClick={createAnnotation} disabled={isLoading}>
+              <Send />
+            </IconButton>
           </Stack>
-          <IconButton onClick={createAnnotation} disabled={isLoading}>
-            <Send />
-          </IconButton>
-        </Stack>
+        ) : (
+          <Stack flex={1} justifyContent="end">
+            <Button size="small" onClick={updateAnnotation} disabled={isLoading}>
+              Update individual
+            </Button>
+          </Stack>
+        )}
       </Stack>
     </Collapse>
   )

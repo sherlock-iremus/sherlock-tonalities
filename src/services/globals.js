@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getId } from '../utils'
 
 const initialState = {
   projectIri: null,
@@ -13,6 +14,7 @@ const initialState = {
   selectedAnnotations: [],
   selectedModelIndex: 0,
   isSubSelecting: false,
+  isEditing: false,
   annotatedNotes: [],
   filteredAnnotations: [],
 }
@@ -43,9 +45,10 @@ const globals = createSlice({
       if (!action.payload) {
         state.selectedNotes = initialState.selectedNotes
         state.isSubSelecting = initialState.isSubSelecting
+        state.isEditing = initialState.isEditing
       } else if (Array.isArray(action.payload))
         state.selectedNotes.push(...action.payload.filter(e => !state.selectedNotes.includes(e)))
-      else if (!state.selectedAnnotation || state.isSubSelecting) {
+      else if (!state.selectedAnnotation || state.isSubSelecting || state.isEditing) {
         const index = state.selectedNotes.findIndex(e => e === action.payload)
         index !== -1 ? state.selectedNotes.splice(index, 1) : state.selectedNotes.push(action.payload)
       }
@@ -72,7 +75,8 @@ const globals = createSlice({
       if (!action.payload) {
         state.selectedAnnotation = initialState.selectedAnnotation
         state.selectedAnnotations = initialState.selectedAnnotations
-        state.isSubSelecting = false
+        state.isSubSelecting = initialState.isSubSelecting
+        state.isEditing = initialState.isEditing
       } else {
         state.selectedAnnotations.push(action.payload)
         state.selectedAnnotation = action.payload
@@ -86,8 +90,15 @@ const globals = createSlice({
     setNoteCount: (state, action) => {
       state.noteCount = action.payload
     },
-    setIsSubSelecting: (state, action) => {
+    setIsSubSelecting: state => {
+      if (state.isEditing) state.isEditing = initialState.isEditing
       state.isSubSelecting = !state.isSubSelecting
+    },
+    setIsEditing: state => {
+      if (state.isSubSelecting) state.isSubSelecting = initialState.isSubSelecting
+      if (!state.isEditing) state.selectedNotes = state.selectedAnnotation.notes.map(note => getId(note))
+      else state.selectedNotes = initialState.selectedNotes
+      state.isEditing = !state.isEditing
     },
     setHoveredAnnotation: (state, action) => {
       if (!action.payload) state.hoveredAnnotation = initialState.hoveredAnnotation
@@ -108,6 +119,7 @@ export const {
   setScoreAnnotator,
   setSelectedConcepts,
   setIsSubSelecting,
+  setIsEditing,
   setPreviousAnnotation,
   setNoteCount,
   setAnnotatedNotes,

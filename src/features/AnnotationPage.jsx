@@ -3,6 +3,7 @@ import {
   ArrowBack,
   Close,
   ContentCopy,
+  Edit,
   KeyboardCapslock,
   KeyboardControlKey,
   KeyboardReturn,
@@ -28,13 +29,12 @@ import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../services/spar
 import { useDeleteAnnotationMutation, usePostAnnotationMutation } from '../services/service'
 import { useDispatch, useSelector } from 'react-redux'
 import { Assignment } from './items/Assignment'
-import { setIsSubSelecting, setPreviousAnnotation, setSelectedAnnotation } from '../services/globals'
+import { setIsEditing, setIsSubSelecting, setPreviousAnnotation, setSelectedAnnotation } from '../services/globals'
 import { getUuid } from '../utils'
 
 export const AnnotationPage = () => {
-  const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations, noteCount } = useSelector(
-    state => state.globals
-  )
+  const { selectedAnnotation, scoreIri, projectIri, selectedAnnotations, noteCount, isSubSelecting, isEditing } =
+    useSelector(state => state.globals)
   const { data: assignments, refetch } = useGetAssignmentsQuery(selectedAnnotation?.entity, {
     skip: !selectedAnnotation,
     pollingInterval: 10000,
@@ -128,6 +128,13 @@ export const AnnotationPage = () => {
                 <ContentCopy />
               </IconButton>
             </Tooltip>
+            <Tooltip title="Edit">
+              <span>
+                <IconButton disabled={isSubSelecting} color="inherit" onClick={() => dispatch(setIsEditing())}>
+                  <Edit />
+                </IconButton>
+              </span>
+            </Tooltip>
             <Tooltip
               title={
                 <Stack flex={1} direction="row" alignItems="center">
@@ -135,9 +142,16 @@ export const AnnotationPage = () => {
                 </Stack>
               }
             >
-              <IconButton edge="end" color="inherit" onClick={() => dispatch(setIsSubSelecting())}>
-                <AddCircle />
-              </IconButton>
+              <span>
+                <IconButton
+                  disabled={isEditing}
+                  edge="end"
+                  color="inherit"
+                  onClick={() => dispatch(setIsSubSelecting())}
+                >
+                  <AddCircle />
+                </IconButton>
+              </span>
             </Tooltip>
           </Toolbar>
         </AppBar>

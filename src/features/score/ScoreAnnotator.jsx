@@ -13,7 +13,7 @@ export const ScoreAnnotator = () => {
   const { state } = useLocation()
   const navigate = useNavigate()
   const [file, setFile] = useState(null)
-  const { data } = useGetScoreUrlQuery(getIri(projectId), { skip: state?.url })
+  const { data, isError } = useGetScoreUrlQuery(getIri(projectId), { skip: state?.url })
 
   const getFile = async url => {
     try {
@@ -30,5 +30,6 @@ export const ScoreAnnotator = () => {
   }, [data, state])
 
   if (file) return <MeiViewer {...{ file }} />
-  else navigate('/')
+  if (isError) return navigate('/')
+  else return null
 }
