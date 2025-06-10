@@ -96,7 +96,10 @@ const globals = createSlice({
     },
     setIsEditing: state => {
       if (state.isSubSelecting) state.isSubSelecting = initialState.isSubSelecting
-      if (!state.isEditing) state.selectedNotes = state.selectedAnnotation.notes.map(note => getId(note))
+      if (!state.isEditing) {
+        state.selectedNotes = state.selectedAnnotation.notes.map(note => getId(note))
+        state.selectedAnnotation.notes = initialState.selectedNotes
+      }
       else state.selectedNotes = initialState.selectedNotes
       state.isEditing = !state.isEditing
     },
