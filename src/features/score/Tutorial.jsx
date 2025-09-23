@@ -4,7 +4,6 @@ import { useDailyRender } from '../../hooks/useDailyRender'
 
 export const Tutorial = () => {
   const { shouldRender, onClose } = useDailyRender('tutorialRender')
-  console.log(shouldRender)
   return shouldRender ? (
     <Snackbar open={shouldRender} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} onClose={onClose}>
       <Alert severity="info" onClose={onClose} sx={{ borderRadius: 3, boxShadow: 1, bgcolor: 'secondary.light' }}>
