@@ -1,26 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  ArrowBack,
-  InsertDriveFile,
-  InsertDriveFileOutlined,
-  KeyboardCommandKey,
-  KeyboardControlKey,
-  KeyboardOptionKey,
-  PlayCircle,
-  ZoomIn,
-  ZoomOut,
-} from '@mui/icons-material'
-import {
-  Alert,
-  Checkbox,
-  Chip,
-  IconButton,
-  ListItemText,
-  Pagination,
-  Snackbar,
-  Tooltip,
-  Typography,
-} from '@mui/material'
+import { ArrowBack, InsertDriveFile, InsertDriveFileOutlined, PlayCircle, ZoomIn, ZoomOut } from '@mui/icons-material'
+import { Checkbox, Chip, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,13 +17,13 @@ import { useTheme } from '@mui/material/styles'
 import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
 import { Player } from './Player'
+import { Tutorial } from './Tutorial'
 
 export const MeiViewer = ({ file }) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
-  const [showTutorial, setShowTutorial] = useState(true)
   const [scale, setScale] = useState(30)
   const [scoreTitle, setScoreTitle] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
@@ -262,23 +242,7 @@ export const MeiViewer = ({ file }) => {
           <Project />
         </Stack>
 
-        <Snackbar
-          open={showTutorial}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          onClose={() => setShowTutorial(false)}
-        >
-          <Alert
-            severity="info"
-            onClose={() => setShowTutorial(false)}
-            sx={{ borderRadius: 3, boxShadow: 1, bgcolor: 'secondary.light' }}
-          >
-            <Stack direction="row" alignItems="center">
-              Hold <KeyboardOptionKey fontSize="36px" sx={{ px: 0.5 }} /> to select a verticality, hold
-              <KeyboardControlKey fontSize="36px" sx={{ px: 0.5 }} /> to select a range,
-              <KeyboardCommandKey fontSize="36px" sx={{ pl: 0.5 }} /> +A to select all notes
-            </Stack>
-          </Alert>
-        </Snackbar>
+        <Tutorial />
         {showPlayer && <Player {...{ pageCount }} />}
       </Stack>
     </Stack>
