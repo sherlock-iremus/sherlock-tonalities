@@ -6,7 +6,12 @@ import { setAnnotatedNotes, setSelectedNotes } from '../../services/globals'
 import { Input } from '../../components/Input'
 import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../services/service'
-import { useGetAnnotationsQuery, useGetAssignmentsQuery, useGetFlatAnnotationsQuery } from '../../services/sparql'
+import {
+  useGetAnalyticalProjectQuery,
+  useGetAnnotationsQuery,
+  useGetAssignmentsQuery,
+  useGetFlatAnnotationsQuery,
+} from '../../services/sparql'
 import { assignArbitraryText, assignSubEntity, createEntity, updateEntity } from '../../helper'
 import { setAnnotation } from '../../services/setAnnotation'
 
@@ -22,6 +27,9 @@ export const Editor = () => {
   })
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
+  
+  const { data: project } = useGetAnalyticalProjectQuery(projectIri)
+  const { isPublished } = project || {}
 
   const isScoreSelected = selectedNotes.includes(scoreIri) || false
 
@@ -66,7 +74,7 @@ export const Editor = () => {
   }
 
   return (
-    <Collapse in={!!selectedNotes.length || isSubSelecting || isEditing} timeout="auto" unmountOnExit>
+    <Collapse in={!isPublished && (!!selectedNotes.length || isSubSelecting || isEditing)} timeout="auto" unmountOnExit>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1}>
         <ListItem
           dense

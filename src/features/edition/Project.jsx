@@ -23,7 +23,6 @@ import { colors, getIri, getUuid } from '../../utils'
 import { filterAnnotations } from '../../services/filterAnnotations'
 import { useSearchParams } from 'react-router-dom'
 import { setAnnotation } from '../../services/setAnnotation'
-import { DndContext } from '@dnd-kit/core'
 import { useGetUserIdQuery } from '../../services/service'
 
 export const Project = () => {
@@ -68,9 +67,6 @@ export const Project = () => {
       setAnnotationsByPage(sortedAnnotations)
     }
   }, [annotations])
-
-  const onDragStart = event => console.log("yo")
-  const onDragEnd = event => console.log("salut")
 
   useEffect(() => {
     if (project && colorIndex !== project.color)
@@ -142,9 +138,7 @@ export const Project = () => {
                 )}
               </Stack>
             ) : (
-              <DndContext {...{ onDragStart, onDragEnd }}>
-                <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }} />
-              </DndContext>
+              <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }} />
             )}
           </>
         )}

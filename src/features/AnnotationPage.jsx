@@ -25,7 +25,7 @@ import {
 import { useCallback, useEffect, useState } from 'react'
 import { ContextMenu } from './navigator/ContextMenu'
 import { Input } from '../components/Input'
-import { useGetAnnotationsQuery, useGetAssignmentsQuery } from '../services/sparql'
+import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery, useGetAssignmentsQuery } from '../services/sparql'
 import { useDeleteAnnotationMutation, usePostAnnotationMutation } from '../services/service'
 import { useDispatch, useSelector } from 'react-redux'
 import { Assignment } from './items/Assignment'
@@ -46,6 +46,8 @@ export const AnnotationPage = () => {
   const isScoreSelected = selectedAnnotation?.notes.includes(scoreIri) || false
   const [deleteAnnotation] = useDeleteAnnotationMutation()
   const { refetch: refetchAnnotations } = useGetAnnotationsQuery(projectIri)
+  const { data: project } = useGetAnalyticalProjectQuery(projectIri)
+  const { isPublished } = project || {}
 
   const addComment = async () => {
     try {
@@ -123,36 +125,40 @@ export const AnnotationPage = () => {
                 }
               />
             </ListItem>
-            <Tooltip title="Copy link to clipboard">
-              <IconButton color="inherit" onClick={() => navigator.clipboard.writeText(window.location.href)}>
-                <ContentCopy />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Edit">
-              <span>
-                <IconButton disabled={isSubSelecting} color="inherit" onClick={() => dispatch(setIsEditing())}>
-                  <Edit />
-                </IconButton>
-              </span>
-            </Tooltip>
-            <Tooltip
-              title={
-                <Stack flex={1} direction="row" alignItems="center">
-                  Add sub-layer (<KeyboardControlKey sx={{ width: 12, height: 12 }} /> +N)
-                </Stack>
-              }
-            >
-              <span>
-                <IconButton
-                  disabled={isEditing}
-                  edge="end"
-                  color="inherit"
-                  onClick={() => dispatch(setIsSubSelecting())}
+            {!isPublished && (
+              <>
+                <Tooltip title="Copy link to clipboard">
+                  <IconButton color="inherit" onClick={() => navigator.clipboard.writeText(window.location.href)}>
+                    <ContentCopy />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Edit">
+                  <span>
+                    <IconButton disabled={isSubSelecting} color="inherit" onClick={() => dispatch(setIsEditing())}>
+                      <Edit />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+                <Tooltip
+                  title={
+                    <Stack flex={1} direction="row" alignItems="center">
+                      Add sub-layer (<KeyboardControlKey sx={{ width: 12, height: 12 }} /> +N)
+                    </Stack>
+                  }
                 >
-                  <AddCircle />
-                </IconButton>
-              </span>
-            </Tooltip>
+                  <span>
+                    <IconButton
+                      disabled={isEditing}
+                      edge="end"
+                      color="inherit"
+                      onClick={() => dispatch(setIsSubSelecting())}
+                    >
+                      <AddCircle />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </>
+            )}
           </Toolbar>
         </AppBar>
         <Stack flex={1} overflow="auto" padding={1} spacing={1} paddingTop={2}>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Cancel, ExpandLess, ExpandMore } from '@mui/icons-material'
+import { Cancel, DragHandle, ExpandLess, ExpandMore } from '@mui/icons-material'
 import {
   Button,
   Collapse,
@@ -24,6 +24,7 @@ import {
 } from '../../services/globals'
 import { getUuid } from '../../utils'
 import {
+  useGetAnalyticalProjectQuery,
   useGetAnnotationsQuery,
   useGetAssignmentsQuery,
   useGetFlatAnnotationsQuery,
@@ -34,6 +35,7 @@ import { useEffect, useState } from 'react'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
 import { setAnnotation } from '../../services/setAnnotation'
+import { useDraggable } from '@dnd-kit/core'
 
 export const Annotation = ({
   annotation,
@@ -52,8 +54,10 @@ export const Annotation = ({
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
   const { data: assignments, refetch } = useGetAssignmentsQuery(entity, { skip: !entity })
   const dispatch = useDispatch()
-  const { selectedAnnotation, scoreIri, projectIri, filteredAnnotations } =
-    useSelector(state => state.globals)
+  const { selectedAnnotation, scoreIri, projectIri, filteredAnnotations } = useSelector(state => state.globals)
+
+  const { data: project } = useGetAnalyticalProjectQuery(projectIri)
+  const { isPublished } = project || {}
 
   const isScoreSelected = notes?.includes(scoreIri) || false
   const isSelected = selectedAnnotation?.entity === entity || false
@@ -69,6 +73,7 @@ export const Annotation = ({
   }, [notes])
 
   useEffect(() => setExpand(expandAll) && undefined, [expandAll])
+  const { attributes, listeners, setNodeRefDraggable } = useDraggable({ id: annotation })
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchFlatAnnotations } = useGetFlatAnnotationsQuery(projectIri)
@@ -98,6 +103,7 @@ export const Annotation = ({
   if (notes)
     return (
       <ListItem
+        ref={setNodeRefDraggable}
         component="div"
         key={date}
         onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, assignments }))}
@@ -108,9 +114,11 @@ export const Annotation = ({
           !isDisabled && (
             <Stack direction="row" alignItems="center">
               {!isSubEntity && (
-                <IconButton onClick={() => setExpand(!expand)}>{expand ? <ExpandMore /> : <ExpandLess />}</IconButton>
+                <IconButton size="small" onClick={() => setExpand(!expand)}>
+                  {expand ? <ExpandMore /> : <ExpandLess />}
+                </IconButton>
               )}
-              {canDelete && (!isSubEntity || onPage) && (
+              {canDelete && !isPublished && (!isSubEntity || onPage) && (
                 <Tooltip title="Delete entity">
                   <IconButton
                     onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
@@ -121,6 +129,11 @@ export const Annotation = ({
                 </Tooltip>
               )}
               {!canDelete && <ContributorItem contributorIri={author} small />}
+              {!isPublished && (
+                <IconButton size="small" {...listeners} {...attributes}>
+                  <DragHandle />
+                </IconButton>
+              )}
             </Stack>
           )
         }
