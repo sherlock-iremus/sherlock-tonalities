@@ -14,9 +14,14 @@ import { TextSnippet } from '@mui/icons-material'
 import { getIri, getUuid } from '../utils'
 import { useNavigate } from 'react-router-dom'
 import { ContributorItem } from './items/ContributorItem'
+import { useGetUserIdQuery } from '../services/service'
 
 export const Projects = ({ meiUrl, setIsOpen }) => {
-  const { data: projects, isLoading } = useGetProjectsQuery(meiUrl)
+  const { data: userId } = useGetUserIdQuery()
+  const { data: projects, isLoading } = useGetProjectsQuery(
+    { scoreIri: meiUrl, userId: getIri(userId) },
+    { skip: !meiUrl || !userId }
+  )
   const navigate = useNavigate()
 
   if (projects && projects.length)

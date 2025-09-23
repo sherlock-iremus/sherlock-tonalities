@@ -137,16 +137,16 @@ export const sparql = createApi({
       }),
     }),
     getProjects: builder.query({
-      query: scoreIri => ({
+      query: params => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getProjects(scoreIri) }),
+        body: new URLSearchParams({ query: getProjects(params) }),
       }),
       transformResponse: response =>
         response.results.bindings.map(e => ({
           iri: e.project.value,
           annotations: Number(e.annotations.value),
           contributor: e.contributor.value,
-          label: e.content?.value || e.label?.value || 'Untitled project',
+          label: e.label?.value || e.content?.value || 'Untitled project',
         })),
     }),
     getScoreUrl: builder.query({

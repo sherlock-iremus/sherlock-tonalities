@@ -179,22 +179,30 @@ WHERE {
     }
 }
 `
-// TODO should be type = PUBLISHED_PROJECT
-export const getProjects = scoreIri => `
+
+export const getProjects = ({ scoreIri, userId }) => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
-SELECT ?project (COUNT(?annotation) AS ?annotations) (SAMPLE(?projectLabel) AS ?label) (SAMPLE(?projectContributor) AS ?contributor) (SAMPLE(?projectContent) AS ?content)
+SELECT ?project (COUNT(?annotation) AS ?annotations) 
+       (SAMPLE(?projectLabel) AS ?label) 
+       (SAMPLE(?projectContributor) AS ?contributor) 
+       (SAMPLE(?projectContent) AS ?content)
 FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE { 
-    ?annotation sherlock:has_document_context <${scoreIri}>.
-    ?project crm:P9_consists_of ?annotation.
-    ?project crm:P1_is_identified_by ?projectLabel.
-    ?project crm:P14_carried_out_by ?projectContributor.
-    ?project sherlock:has_privacy_type ?type.
-    FILTER(?type = <${DRAFT_PROJECT}>).
-    OPTIONAL { ?projectLabel crm:P190_has_symbolic_content ?projectContent }.
- }
- GROUP BY ?project
+    ?annotation sherlock:has_document_context <${scoreIri}> .
+    ?project crm:P9_consists_of ?annotation .
+    ?project crm:P1_is_identified_by ?projectLabel .
+    ?project crm:P14_carried_out_by ?projectContributor .
+    ?project sherlock:has_privacy_type ?type .
+
+    FILTER(
+      (?projectContributor = <${userId}>) ||
+      (?type = <${PUBLISHED_PROJECT}>)
+    )
+
+    OPTIONAL { ?projectLabel crm:P190_has_symbolic_content ?projectContent } .
+}
+GROUP BY ?project
 `
 
 export const getPersonalProjects = userIri => `
@@ -355,3 +363,4 @@ export const SOFTWARE = 'http://data-iremus.huma-num.fr/id/29b00e39-75da-4945-b6
 export const ANNOTATION = 'http://data-iremus.huma-num.fr/id/82dbd157-20df-422c-88db-28d6075d99a1'
 export const ANALYTICAL_PROJECT = 'http://data-iremus.huma-num.fr/id/21816195-6708-4bbd-a758-ee354bb84900'
 export const DRAFT_PROJECT = 'http://data-iremus.huma-num.fr/id/cabe46bf-23d4-4392-aa20-b3eb21ad7dfd'
+export const PUBLISHED_PROJECT = 'http://data-iremus.huma-num.fr/id/54a5cf00-a46a-4435-b893-6eda0cdc5462'

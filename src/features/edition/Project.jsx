@@ -23,6 +23,8 @@ import { colors, getIri, getUuid } from '../../utils'
 import { filterAnnotations } from '../../services/filterAnnotations'
 import { useSearchParams } from 'react-router-dom'
 import { setAnnotation } from '../../services/setAnnotation'
+import { DndContext } from '@dnd-kit/core'
+import { useGetUserIdQuery } from '../../services/service'
 
 export const Project = () => {
   const { projectIri, selectedAnnotation, colorIndex, filteredAnnotations, selectedNotes, selectedConcepts } =
@@ -36,6 +38,9 @@ export const Project = () => {
   const { data: annotations } = useGetAnnotationsQuery(projectIri, { skip: !projectIri })
   const [contextMenu, setContextMenu] = useState(false)
   const dispatch = useDispatch()
+
+  const { data: userId } = useGetUserIdQuery()
+  const canEdit = getIri(userId) === project?.contributor
 
   const [searchParams, setSearchParams] = useSearchParams()
   const [initialAnnotationId] = useState(searchParams.get('annotation'))
@@ -63,6 +68,9 @@ export const Project = () => {
       setAnnotationsByPage(sortedAnnotations)
     }
   }, [annotations])
+
+  const onDragStart = event => console.log("yo")
+  const onDragEnd = event => console.log("salut")
 
   useEffect(() => {
     if (project && colorIndex !== project.color)
@@ -102,11 +110,11 @@ export const Project = () => {
             >
               <ListItemIcon>
                 <IconButton
-                  onClick={() => setIsEditing(true)}
+                  onClick={() => canEdit && setIsEditing(true)}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
-                  {isHovered ? <Edit /> : <CollectionsBookmark />}
+                  {isHovered && canEdit ? <Edit /> : <CollectionsBookmark />}
                 </IconButton>
               </ListItemIcon>
               <ListItemText primary={project.label} secondary="Selected project" />
@@ -134,7 +142,9 @@ export const Project = () => {
                 )}
               </Stack>
             ) : (
-              <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }} />
+              <DndContext {...{ onDragStart, onDragEnd }}>
+                <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }} />
+              </DndContext>
             )}
           </>
         )}
