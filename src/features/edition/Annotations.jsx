@@ -3,14 +3,18 @@ import { Stack, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { Annotation } from './Annotation'
 import { DndContext, DragOverlay } from '@dnd-kit/core'
+import { useGetFlatAnnotationsQuery } from '../../services/sparql'
+import { useSelector } from 'react-redux'
 
 export const Annotations = ({ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }) => {
   const ref = useRef()
   const setScroll = div => (div.onscroll = () => setScrollPosition(div.scrollTop))
 
-  const [draggedId, setDraggedId] = useState(null)
-  const onDragStart = event => setDraggedId(event.active.id)
-  const onDragEnd = event => setDraggedId(null)
+  const { projectIri } = useSelector(state => state.globals)
+  const { data: flatAnnotations } = useGetFlatAnnotationsQuery(projectIri, { skip: !projectIri })
+  const [draggedAnnotation, setDraggedAnnotation] = useState(null)
+  const onDragStart = event => setDraggedAnnotation(flatAnnotations.find(a => a.annotation === event.active.id))
+  const onDragEnd = () => setDraggedAnnotation(null)
 
   useEffect(() => {
     const div = ref.current
@@ -22,10 +26,7 @@ export const Annotations = ({ annotations, annotationsByPage, scrollPosition, se
   return (
     <Stack {...{ ref }} overflow="auto">
       <DndContext {...{ onDragStart, onDragEnd }}>
-        {/* <DragOverlay>{draggedId ? <Annotation key={draggedId} expandAll={false} /> : null}</DragOverlay> */}
-        <DragOverlay>
-          <h1>coucou</h1>
-        </DragOverlay>
+        <DragOverlay>{draggedAnnotation ? <Annotation {...draggedAnnotation} expandAll={false} /> : null}</DragOverlay>
         {annotations.length ? (
           Object.entries(annotationsByPage).map(
             ([page, pageAnnotations]) =>

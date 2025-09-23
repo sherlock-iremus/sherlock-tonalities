@@ -73,7 +73,7 @@ export const Annotation = ({
   }, [notes])
 
   useEffect(() => setExpand(expandAll) && undefined, [expandAll])
-  const { attributes, listeners, setNodeRefDraggable } = useDraggable({ id: annotation })
+  const { attributes, listeners, setNodeRef } = useDraggable({ id: annotation })
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchFlatAnnotations } = useGetFlatAnnotationsQuery(projectIri)
@@ -103,7 +103,7 @@ export const Annotation = ({
   if (notes)
     return (
       <ListItem
-        ref={setNodeRefDraggable}
+        ref={setNodeRef}
         component="div"
         key={date}
         onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, assignments }))}
