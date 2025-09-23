@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Skeleton,
   Stack,
   Tooltip,
 } from '@mui/material'
@@ -35,7 +36,7 @@ import { useEffect, useState } from 'react'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
 import { setAnnotation } from '../../services/setAnnotation'
-import { useDraggable } from '@dnd-kit/core'
+import { useDraggable, useDroppable } from '@dnd-kit/core'
 
 export const Annotation = ({
   annotation,
@@ -48,6 +49,7 @@ export const Annotation = ({
   onDelete,
   expandAll,
   onPage,
+  isDragging,
 }) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [expand, setExpand] = useState(true)
@@ -57,7 +59,7 @@ export const Annotation = ({
   const { selectedAnnotation, scoreIri, projectIri, filteredAnnotations } = useSelector(state => state.globals)
 
   const { data: project } = useGetAnalyticalProjectQuery(projectIri)
-  const { isPublished } = project || {}
+  const isPublished = project?.isPublished || isDragging || false
 
   const isScoreSelected = notes?.includes(scoreIri) || false
   const isSelected = selectedAnnotation?.entity === entity || false
@@ -73,7 +75,8 @@ export const Annotation = ({
   }, [notes])
 
   useEffect(() => setExpand(expandAll) && undefined, [expandAll])
-  const { attributes, listeners, setNodeRef } = useDraggable({ id: annotation })
+  const { attributes, listeners, setNodeRef: setNodeRefDraggable } = useDraggable({ id: annotation })
+  const { isOver, setNodeRef: setNodeRefDroppable } = useDroppable({ id: annotation })
 
   const [deleteAnnotation, { isLoading }] = useDeleteAnnotationMutation()
   const { refetch: refetchFlatAnnotations } = useGetFlatAnnotationsQuery(projectIri)
@@ -103,7 +106,7 @@ export const Annotation = ({
   if (notes)
     return (
       <ListItem
-        ref={setNodeRef}
+        ref={setNodeRefDraggable}
         component="div"
         key={date}
         onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, assignments }))}
@@ -152,7 +155,7 @@ export const Annotation = ({
             onClick={() => dispatch(setAnnotation(entity))}
             selected={isSelected}
           >
-            <Stack flex={1} alignItems="center">
+            <Stack ref={setNodeRefDroppable} flex={1} alignItems="center">
               {isScoreSelected ? (
                 <ListItemText
                   sx={{ paddingLeft: 1, textAlign: 'center' }}
@@ -178,6 +181,7 @@ export const Annotation = ({
                     />
                   ))}
                 </Stack>
+                {isOver && <Skeleton animation="wave" />}
               </Collapse>
             </Stack>
           </ListItemButton>

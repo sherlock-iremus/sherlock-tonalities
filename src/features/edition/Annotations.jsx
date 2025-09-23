@@ -26,7 +26,9 @@ export const Annotations = ({ annotations, annotationsByPage, scrollPosition, se
   return (
     <Stack {...{ ref }} overflow="auto">
       <DndContext {...{ onDragStart, onDragEnd }}>
-        <DragOverlay>{draggedAnnotation ? <Annotation {...draggedAnnotation} expandAll={false} /> : null}</DragOverlay>
+        <DragOverlay>
+          {draggedAnnotation ? <Annotation {...draggedAnnotation} expandAll={false} isDragging /> : null}
+        </DragOverlay>
         {annotations.length ? (
           Object.entries(annotationsByPage).map(
             ([page, pageAnnotations]) =>
