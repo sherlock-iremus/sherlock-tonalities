@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material'
 import { Stack } from '@mui/system'
-import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery } from '../../services/sparql'
+import { useGetAnalyticalProjectQuery, useGetAnnotationsQuery, useGetFlatAnnotationsQuery } from '../../services/sparql'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { AnnotationPage } from '../AnnotationPage'
@@ -24,6 +24,10 @@ import { filterAnnotations } from '../../services/filterAnnotations'
 import { useSearchParams } from 'react-router-dom'
 import { setAnnotation } from '../../services/setAnnotation'
 import { useGetUserIdQuery } from '../../services/service'
+import { Loader } from '../../components/Loader'
+import { DndContext, DragOverlay } from '@dnd-kit/core'
+import { Annotation } from './Annotation'
+import { handleDrag } from '../../services/handleDrag'
 
 export const Project = () => {
   const { projectIri, selectedAnnotation, colorIndex, filteredAnnotations, selectedNotes, selectedConcepts } =
@@ -72,6 +76,24 @@ export const Project = () => {
     if (project && colorIndex !== project.color)
       colors.map((color, index) => color[500] === project.color && dispatch(setColorIndex(index)))
   }, [project])
+
+  const { data: flatAnnotations } = useGetFlatAnnotationsQuery(projectIri, { skip: !projectIri })
+  const [draggedAnnotation, setDraggedAnnotation] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const onDragStart = event => setDraggedAnnotation(flatAnnotations.find(a => a.annotation === event.active.id))
+  const onDragEnd = async event => {
+    setIsLoading(true)
+    try {
+      if (event.over.id)
+        await dispatch(handleDrag({ draggedIri: draggedAnnotation.annotation, droppedOnIri: event.over.id })).unwrap()
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+      setDraggedAnnotation(null)
+    }
+  }
 
   if (project && annotations)
     return (
@@ -138,7 +160,15 @@ export const Project = () => {
                 )}
               </Stack>
             ) : (
-              <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }} />
+              <>
+                <Loader {...{ isLoading }} />
+                <DndContext {...{ onDragStart, onDragEnd }}>
+                  <DragOverlay>
+                    {draggedAnnotation ? <Annotation {...draggedAnnotation} expandAll={false} isDragging /> : null}
+                  </DragOverlay>
+                  <Annotations {...{ annotations, annotationsByPage, scrollPosition, setScrollPosition, expandAll }} />
+                </DndContext>
+              </>
             )}
           </>
         )}
