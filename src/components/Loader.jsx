@@ -1,8 +1,7 @@
-import { CircularProgress, Stack } from '@mui/material'
+import { Backdrop, CircularProgress } from '@mui/material'
 
-export const Loader = ({ isLoading = true }) =>
-  !isLoading ? null : (
-    <Stack flex={1} justifyContent="center" alignItems="center" borderRadius={3} bgcolor="white" boxShadow={1}>
-      <CircularProgress />
-    </Stack>
-  )
+export const Loader = ({ isLoading = true }) => (
+  <Backdrop sx={theme => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })} open={isLoading}>
+    <CircularProgress color="inherit" />
+  </Backdrop>
+)

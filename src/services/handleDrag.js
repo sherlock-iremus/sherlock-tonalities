@@ -5,29 +5,32 @@ import sparql from './sparql'
 
 export const handleDrag = createAsyncThunk(
   'globals/handleDrag',
-  async ({ draggedIri, droppedOnIri }, { getState, dispatch }) => {
-    if (draggedIri === droppedOnIri) throw new Error('Same annotation')
-
-    const projectIri = getState().globals.projectIri
-    const getFlatAnnotationsResult = await dispatch(sparql.endpoints.getFlatAnnotations.initiate(projectIri))
-    const flatAnnotations = getFlatAnnotationsResult.data
-    const droppedOnEntity = flatAnnotations.find(a => a.annotation === droppedOnIri).entity
-    const draggedEntity = flatAnnotations.find(a => a.annotation === draggedIri).entity
-
-    const incomingAnnotationResult = await dispatch(
-      sparql.endpoints.getIncomingAnnotation.initiate(draggedIri, { forceRefetch: true })
-    )
-    const { incomingAnnotation, incomingEntity } = incomingAnnotationResult.data
-
-    if (incomingAnnotation) {
-      if (incomingEntity === droppedOnEntity) throw new Error('Already linked')
-      const deleteAnnotationResult = await dispatch(
-        service.endpoints.deleteAnnotation.initiate(getUuid(incomingAnnotation))
-      )
-      if (deleteAnnotationResult.error) throw deleteAnnotationResult.error
-      await dispatch(sparql.endpoints.getAssignments.initiate(incomingEntity, { forceRefetch: true }))
-    }
+  async ({ draggedIri, droppedOnIri }, { getState, dispatch, rejectWithValue }) => {
     try {
+      if (draggedIri === droppedOnIri) throw new Error('Same annotation')
+
+      const projectIri = getState().globals.projectIri
+      const getFlatAnnotationsResult = await dispatch(sparql.endpoints.getFlatAnnotations.initiate(projectIri)).unwrap()
+      const flatAnnotations = getFlatAnnotationsResult
+      const droppedOnEntity = flatAnnotations.find(a => a.annotation === droppedOnIri)?.entity
+      const draggedEntity = flatAnnotations.find(a => a.annotation === draggedIri)?.entity
+
+      if (!droppedOnEntity || !draggedEntity) throw new Error('Missing entity for dragged/dropped annotation')
+
+      const incomingAnnotationResult = await dispatch(
+        sparql.endpoints.getIncomingAnnotation.initiate(draggedIri, { forceRefetch: true })
+      ).unwrap()
+      const { incomingAnnotation, incomingEntity } = incomingAnnotationResult
+
+      if (incomingAnnotation) {
+        if (incomingEntity === droppedOnEntity) throw new Error('Already linked')
+        const deleteAnnotationResult = await dispatch(
+          service.endpoints.deleteAnnotation.initiate(getUuid(incomingAnnotation))
+        ).unwrap()
+
+        await dispatch(sparql.endpoints.getAssignments.initiate(incomingEntity, { forceRefetch: true })).unwrap()
+      }
+
       const body = {
         p140: [droppedOnEntity],
         p177: 'crm:P106_is_composed_of',
@@ -37,13 +40,15 @@ export const handleDrag = createAsyncThunk(
         analytical_project: projectIri,
         contribution_graph: 'tonalities-contributions',
       }
-      const response = await dispatch(service.endpoints.postAnnotation.initiate(body))
-      if (response.error) throw response.error
-    } catch (error) {
-      console.error(error)
+
+      await dispatch(service.endpoints.postAnnotation.initiate(body)).unwrap()
+
+      await dispatch(sparql.endpoints.getFlatAnnotations.initiate(projectIri, { forceRefetch: true })).unwrap()
+      await dispatch(sparql.endpoints.getAnnotations.initiate(projectIri, { forceRefetch: true })).unwrap()
+      await dispatch(sparql.endpoints.getAssignments.initiate(droppedOnEntity, { forceRefetch: true })).unwrap()
+    } catch (err) {
+      console.error('handleDrag failed:', err)
+      return rejectWithValue(err.message || 'Unexpected error')
     }
-    await dispatch(sparql.endpoints.getFlatAnnotations.initiate(projectIri, { forceRefetch: true }))
-    await dispatch(sparql.endpoints.getAnnotations.initiate(projectIri, { forceRefetch: true }))
-    await dispatch(sparql.endpoints.getAssignments.initiate(droppedOnEntity, { forceRefetch: true }))
   }
 )
