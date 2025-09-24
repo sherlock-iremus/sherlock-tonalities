@@ -10,6 +10,7 @@ import {
   getAssignments,
   getContributor,
   getFlatAnnotations,
+  getIncomingAnnotation,
   getP140,
   getPersonalProjects,
   getProjects,
@@ -64,6 +65,16 @@ export const sparql = createApi({
         body: new URLSearchParams({ query: getP140(e13) }),
       }),
       transformResponse: response => response.results.bindings.map(binding => binding.p140.value),
+    }),
+    getIncomingAnnotation: builder.query({
+      query: e13 => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getIncomingAnnotation(e13) }),
+      }),
+      transformResponse: response => ({
+        incomingAnnotation: response.results.bindings[0]?.incoming?.value,
+        incomingEntity: response.results.bindings[0]?.incomingEntity?.value,
+      }),
     }),
     getAssignments: builder.query({
       query: entity => ({
@@ -185,5 +196,6 @@ export const {
   useExportProjectQuery,
   useExportProjectToMetaQuery,
   useGetScoreUrlQuery,
+  useGetIncomingAnnotationQuery,
   useGetFlatAnnotationsQuery,
 } = sparql

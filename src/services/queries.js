@@ -180,6 +180,17 @@ WHERE {
 }
 `
 
+export const getIncomingAnnotation = e13 => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+SELECT ?incoming ?incomingEntity ?p177 FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
+WHERE {
+    <${e13}> crm:P141_assigned ?entity.
+    ?incoming crm:P141_assigned ?entity.
+    ?incoming crm:P177_assigned_property_of_type crm:P106_is_composed_of.
+    ?incoming crm:P140_assigned_attribute_to ?incomingEntity.
+}
+`
+
 export const getProjects = ({ scoreIri, userId }) => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
