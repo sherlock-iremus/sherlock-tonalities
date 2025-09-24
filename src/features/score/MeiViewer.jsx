@@ -40,7 +40,7 @@ export const MeiViewer = ({ file }) => {
 
   const { data: project } = useGetAnalyticalProjectQuery(projectIri)
   const { isPublished } = project || {}
-  console.log(isPublished)
+
   const loadScore = async () => {
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
