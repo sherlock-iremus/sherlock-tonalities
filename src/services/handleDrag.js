@@ -6,10 +6,7 @@ import sparql from './sparql'
 export const handleDrag = createAsyncThunk(
   'globals/handleDrag',
   async ({ draggedIri, droppedOnIri }, { getState, dispatch }) => {
-    if (draggedIri === droppedOnIri) {
-      console.log('Same annotation')
-      return
-    }
+    if (draggedIri === droppedOnIri) throw new Error('Same annotation')
 
     const projectIri = getState().globals.projectIri
     const getFlatAnnotationsResult = await dispatch(sparql.endpoints.getFlatAnnotations.initiate(projectIri))
@@ -17,15 +14,13 @@ export const handleDrag = createAsyncThunk(
     const droppedOnEntity = flatAnnotations.find(a => a.annotation === droppedOnIri).entity
     const draggedEntity = flatAnnotations.find(a => a.annotation === draggedIri).entity
 
-    const incomingAnnotationResult = await dispatch(sparql.endpoints.getIncomingAnnotation.initiate(draggedIri))
+    const incomingAnnotationResult = await dispatch(
+      sparql.endpoints.getIncomingAnnotation.initiate(draggedIri, { forceRefetch: true })
+    )
     const { incomingAnnotation, incomingEntity } = incomingAnnotationResult.data
 
     if (incomingAnnotation) {
-      if (incomingEntity === droppedOnEntity) {
-        console.log('Already linked')
-        return
-      }
-
+      if (incomingEntity === droppedOnEntity) throw new Error('Already linked')
       const deleteAnnotationResult = await dispatch(
         service.endpoints.deleteAnnotation.initiate(getUuid(incomingAnnotation))
       )
