@@ -18,6 +18,7 @@ import { Loader } from '../../components/Loader'
 import { getId } from '../../utils'
 import { Player } from './Player'
 import { Tutorial } from './Tutorial'
+import { useGetAnalyticalProjectQuery } from '../../services/sparql'
 
 export const MeiViewer = ({ file }) => {
   const theme = useTheme()
@@ -29,7 +30,7 @@ export const MeiViewer = ({ file }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
   const [showPlayer, setShowPlayer] = useState(false)
-  const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting, scoreIri, annotatedNotes } =
+  const { selectedNotes, hoveredAnnotation, selectedAnnotation, isSubSelecting, scoreIri, annotatedNotes, projectIri } =
     useSelector(state => state.globals)
   const color = theme.palette.primary.light
   const verovio = document.getElementById('verovio')
@@ -37,6 +38,9 @@ export const MeiViewer = ({ file }) => {
   const isScoreSelected = selectedNotes.includes(scoreIri) || selectedAnnotation?.notes.includes(scoreIri) || false
   const isScoreHovered = hoveredAnnotation?.notes.includes(scoreIri) || false
 
+  const { data: project } = useGetAnalyticalProjectQuery(projectIri)
+  const { isPublished } = project || {}
+  console.log(isPublished)
   const loadScore = async () => {
     const parser = new DOMParser()
     const mei = parser.parseFromString(file, 'application/xml')
@@ -180,14 +184,16 @@ export const MeiViewer = ({ file }) => {
               <PlayCircle />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Select whole score">
-            <Checkbox
-              icon={<InsertDriveFileOutlined />}
-              checkedIcon={<InsertDriveFile />}
-              checked={isScoreSelected}
-              onChange={() => dispatch(setSelectedNotes(scoreIri))}
-            />
-          </Tooltip>
+          {!isPublished && (
+            <Tooltip title="Select whole score">
+              <Checkbox
+                icon={<InsertDriveFileOutlined />}
+                checkedIcon={<InsertDriveFile />}
+                checked={isScoreSelected}
+                onChange={() => dispatch(setSelectedNotes(scoreIri))}
+              />
+            </Tooltip>
+          )}
         </Stack>
         <Stack flex={1} direction="row" justifyContent="end" alignItems="center" spacing={1}>
           {import.meta.env.DEV && <Chip color="warning" size="small" label="Test environment" />}
