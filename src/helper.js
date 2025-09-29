@@ -22,28 +22,6 @@ export const createEntity = async ({ selectedNotes, scoreIri, projectIri, postAn
   }
 }
 
-export const updateEntity = async ({ selectedNotes, entityIri, scoreIri, projectIri, postAnnotation }) => {
-  try {
-    const body = {
-      p140: selectedNotes.map(note => scoreIri + '#' + note),
-      p177: 'crm:P67_refers_to',
-      p141: entityIri,
-      p141_type: 'URI',
-      document_context: scoreIri,
-      analytical_project: projectIri,
-      contribution_graph: 'tonalities-contributions',
-    }
-
-    const response = await postAnnotation(body).unwrap()
-    const annotation = response.find(e =>
-      e['@type']?.includes('http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment')
-    )
-    return annotation['@id']
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 export const assignConcept = async ({ entityIri, conceptIri, scoreIri, projectIri, postAnnotation }) => {
   try {
     const body = {

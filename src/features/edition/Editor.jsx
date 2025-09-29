@@ -2,7 +2,7 @@ import { Lyrics, Send } from '@mui/icons-material'
 import { ListItem, ListItemIcon, ListItemText, Collapse, Button, IconButton } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAnnotatedNotes, setSelectedNotes } from '../../services/globals'
+import { setSelectedNotes } from '../../services/globals'
 import { Input } from '../../components/Input'
 import { useState } from 'react'
 import { usePostAnnotationMutation } from '../../services/service'
@@ -12,8 +12,8 @@ import {
   useGetAssignmentsQuery,
   useGetFlatAnnotationsQuery,
 } from '../../services/sparql'
-import { assignArbitraryText, assignSubEntity, createEntity, updateEntity } from '../../helper'
-import { setAnnotation } from '../../services/setAnnotation'
+import { assignArbitraryText, assignSubEntity, createEntity } from '../../helper'
+import { updateAnnotation } from '../../services/updateAnnotation'
 
 export const Editor = () => {
   const { selectedNotes, isSubSelecting, isEditing, scoreIri, projectIri, selectedAnnotation, noteCount } = useSelector(
@@ -27,34 +27,13 @@ export const Editor = () => {
   })
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
-  
+
   const { data: project } = useGetAnalyticalProjectQuery(projectIri)
   const { isPublished } = project || {}
 
   const isScoreSelected = selectedNotes.includes(scoreIri) || false
 
-  const updateAnnotation = async () => {
-    try {
-      await updateEntity({
-        entityIri: selectedAnnotation.entity,
-        selectedNotes,
-        scoreIri,
-        projectIri,
-        postAnnotation,
-      })
-    } catch (error) {
-      console.error(error)
-    } finally {
-      dispatch(setSelectedNotes())
-      dispatch(setAnnotatedNotes(selectedNotes))
-      refetchAnnotations()
-      refetchAssignments()
-      refetchFlatAnnotations()
-      dispatch(setAnnotation(selectedAnnotation.entity))
-    }
-  }
-
-  const createAnnotation = async concept => {
+  const createAnnotation = async () => {
     const entityIri = await createEntity({ selectedNotes, scoreIri, projectIri, postAnnotation })
     await assignArbitraryText({ entityIri, input, scoreIri, projectIri, postAnnotation })
     if (isSubSelecting) {
@@ -129,7 +108,11 @@ export const Editor = () => {
           </Stack>
         ) : (
           <Stack flex={1} justifyContent="end">
-            <Button size="small" onClick={updateAnnotation} disabled={isLoading}>
+            <Button
+              size="small"
+              onClick={() => dispatch(updateAnnotation(selectedAnnotation.entity))}
+              disabled={isLoading}
+            >
               Update individual
             </Button>
           </Stack>
