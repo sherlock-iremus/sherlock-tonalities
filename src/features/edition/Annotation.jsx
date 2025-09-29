@@ -121,7 +121,7 @@ export const Annotation = ({
                   {expand ? <ExpandMore /> : <ExpandLess />}
                 </IconButton>
               )}
-              {canDelete && !isPublished && (!isSubEntity || onPage) && (
+              {!isPublished && (!isSubEntity || onPage) && (
                 <Tooltip title="Delete entity">
                   <IconButton
                     onClick={() => (assignments?.length ? setIsDeleteDialogOpen(true) : removeAnnotation())}
