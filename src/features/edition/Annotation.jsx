@@ -32,11 +32,12 @@ import {
   useGetP140Query,
 } from '../../services/sparql'
 import { useDeleteAnnotationMutation, useGetUserIdQuery } from '../../services/service'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Assignment } from '../items/Assignment'
 import { ContributorItem } from '../items/ContributorItem'
 import { setAnnotation } from '../../services/setAnnotation'
 import { useDraggable, useDroppable } from '@dnd-kit/core'
+import { useHover } from '../../hooks/useHover'
 
 export const Annotation = ({
   annotation,
@@ -51,6 +52,8 @@ export const Annotation = ({
   onPage,
   isDragging,
 }) => {
+  const ref = useRef(null)
+
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [expand, setExpand] = useState(true)
   const { data: notes } = useGetP140Query(annotation, { skip: !annotation })
@@ -103,14 +106,17 @@ export const Annotation = ({
     }
   }
 
+  const isHovered = useHover(ref, 20)
+  useEffect(() => {
+    isHovered ? dispatch(setHoveredAnnotation({ entity, page, notes, assignments })) : dispatch(setHoveredAnnotation())
+  }, [isHovered])
+
   if (notes)
     return (
       <ListItem
         ref={setNodeRefDraggable}
         component="div"
         key={date}
-        onMouseEnter={() => dispatch(setHoveredAnnotation({ entity, page, notes, assignments }))}
-        onMouseLeave={() => dispatch(setHoveredAnnotation())}
         disablePadding
         sx={{ '& .MuiListItemSecondaryAction-root': { top: 30 } }}
         secondaryAction={
@@ -142,6 +148,7 @@ export const Annotation = ({
         }
       >
         <Stack
+          ref={ref}
           flex={1}
           borderRadius={3}
           bgcolor={color ? 'secondary.light' : 'white'}
