@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogContent, DialogContentText, Radio, Stack, Tooltip, Typography } from '@mui/material'
 import { usePatchProjectMutation } from '../../services/service'
 import { colors, getUuid } from '../../utils'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Input } from '../../components/Input'
 import { Switch } from '../../components/Switch'
 
@@ -29,6 +29,7 @@ export const EditProjectDialog = ({ project, isEditing, setIsEditing, refetch })
         }
         await patchProject({ iri, body })
         refetch()
+        setIsEditing(false)
       } catch (error) {
         console.error(error)
       }
@@ -71,7 +72,7 @@ export const EditProjectDialog = ({ project, isEditing, setIsEditing, refetch })
           ))}
         </Stack>
         <Stack pt={2}>
-          <Button onClick={updateProject} disabled={isLoading}>
+          <Button onClick={updateProject} variant='contained' disabled={isLoading}>
             Save
           </Button>
         </Stack>
