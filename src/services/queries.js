@@ -164,19 +164,32 @@ WHERE { <${e13}> crm:P140_assigned_attribute_to ?p140 }
 
 export const getAssignments = analyticalEntityIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT * FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
-WHERE {
-    ?assignment crm:P140_assigned_attribute_to <${analyticalEntityIri}>.
-    ?assignment crm:P141_assigned ?p141.
-    ?assignment crm:P177_assigned_property_of_type ?type.
-    ?assignment dcterms:created ?date.
-    ?assignment dcterms:creator ?author.
-    OPTIONAL {
-        ?annotation crm:P141_assigned ?p141.
-        ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
+SELECT ?assignment ?p141 ?type ?author ?date ?annotation
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
+WHERE
+{
+  {
+    SELECT ?assignment (MAX(?dates) AS ?timestamp) (SAMPLE(?e13) AS ?annotation)
+    WHERE
+    {
+      ?assignment crm:P140_assigned_attribute_to <${analyticalEntityIri}>;
+              crm:P141_assigned ?entity.
+      OPTIONAL
+      {
+        ?e13 crm:P141_assigned ?entity;
+                    crm:P177_assigned_property_of_type crm:P67_refers_to ;
+                    dcterms:created ?dates.
+      }
     }
+    GROUP BY ?assignment
+  }
+  ?assignment crm:P141_assigned ?p141;
+              crm:P177_assigned_property_of_type ?type;
+              dcterms:creator ?author;
+              dcterms:created ?date.
 }
 `
 
