@@ -1,3 +1,25 @@
+export const getAnnotationCounts = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+SELECT (?rootCount - ?subCount AS ?rootAnnotationsCount) (?subCount AS ?subAnnotationsCount)
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
+WHERE {
+  {
+    SELECT (COUNT(DISTINCT ?root) AS ?rootCount) (COUNT(DISTINCT ?sub) AS ?subCount)
+    WHERE {
+      <${projectIri}> crm:P9_consists_of ?ann.
+      OPTIONAL {
+   		?ann crm:P177_assigned_property_of_type crm:P67_refers_to.
+    	BIND(?ann AS ?root)
+        }
+      OPTIONAL {
+        ?ann crm:P177_assigned_property_of_type crm:P106_is_composed_of.
+        BIND(?ann AS ?sub)
+      }
+    }
+  }
+}
+`
+
 export const getCollaborativeIndividuals = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>

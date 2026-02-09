@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.18.0",
     "@mui/lab": "^5.0.0-alpha.177",
     "@mui/material": "^5.18.0",
+    "@mui/x-charts": "^8.27.0",
     "@reduxjs/toolkit": "^1.9.7",
     "@vitejs/plugin-react-swc": "^3.11.0",
     "midi-player-js": "^2.0.16",

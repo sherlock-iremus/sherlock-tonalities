@@ -1,5 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ArrowBack, InsertDriveFile, InsertDriveFileOutlined, PlayCircle, ZoomIn, ZoomOut } from '@mui/icons-material'
+import {
+  ArrowBack,
+  InsertDriveFile,
+  InsertDriveFileOutlined,
+  PlayCircle,
+  QueryStats,
+  ZoomIn,
+  ZoomOut,
+} from '@mui/icons-material'
 import { Checkbox, Chip, IconButton, ListItemText, Pagination, Tooltip, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useCallback, useEffect, useState } from 'react'
@@ -19,6 +27,7 @@ import { getId } from '../../utils'
 import { Player } from './Player'
 import { Tutorial } from './Tutorial'
 import { useGetAnalyticalProjectQuery } from '../../services/sparql'
+import { StatsModal } from '../stats/StatsModal'
 
 export const MeiViewer = ({ file }) => {
   const theme = useTheme()
@@ -26,6 +35,7 @@ export const MeiViewer = ({ file }) => {
   const dispatch = useDispatch()
   const [pageCount, setPageCount] = useState(0)
   const [scale, setScale] = useState(30)
+  const [isStatsOpen, setIsStatsOpen] = useState(false)
   const [scoreTitle, setScoreTitle] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [finalNoteId, setFinalNoteId] = useState(null)
@@ -159,6 +169,11 @@ export const MeiViewer = ({ file }) => {
             <Typography>{scoreTitle}</Typography>
             <ListItemText sx={{ m: 0 }} secondary="Selected score" />
           </Stack>
+          <Tooltip title="Statistics">
+            <IconButton onClick={() => setIsStatsOpen(true)} size="small">
+              <QueryStats />
+            </IconButton>
+          </Tooltip>
         </Stack>
         <Stack flex={1} direction="row" justifyContent="center" alignItems="center" spacing={1}>
           <Pagination
@@ -247,7 +262,12 @@ export const MeiViewer = ({ file }) => {
           <Editor />
           <Project />
         </Stack>
-
+        <StatsModal
+          isOpen={isStatsOpen}
+          onClose={() => setIsStatsOpen(false)}
+          projectIri={projectIri}
+          scoreTitle={scoreTitle}
+        />
         <Tutorial />
         {showPlayer && <Player {...{ pageCount }} />}
       </Stack>
