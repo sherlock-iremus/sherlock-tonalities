@@ -12,7 +12,6 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
     projectIri && isOpen && refetch()
     !projectIri && isOpen && globalRefetch()
   }, [projectIri, isOpen, refetch, globalRefetch])
-  if (globalData) console.log('globalData', globalData)
   return (
     <Dialog open={isOpen} onClose={onClose} sx={{ '& .MuiPaper-root': { borderRadius: 3 } }}>
       <DialogTitle>{scoreTitle ? `Analytical project <i>${scoreTitle}</i>` : 'Global stats'}</DialogTitle>
@@ -41,10 +40,10 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
             series={[
               { label: 'Analytical projects', data: [globalData?.projects || 0] },
               { label: 'User annotations', data: [globalData?.annotations || 0] },
-              // { label: 'Comments', data: [globalData?.comments || 0] },
+              { label: 'Comments', data: [globalData?.comments || 0] },
             ]}
             layout="horizontal"
-            width={200}
+            width={500}
             height={200}
             borderRadius={10}
             grid={{ vertical: false, horizontal: false }}
