@@ -136,7 +136,7 @@ export const sparql = createApi({
       }) => ({
         projects: Number(projects.value),
         annotations: Number(annotations.value),
-        comments: Number(comments.value),
+        //comments: Number(comments.value),
       }),
     }),
     getFlatAnnotations: builder.query({

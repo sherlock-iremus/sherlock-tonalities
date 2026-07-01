@@ -36,14 +36,14 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
           />
         ) : (
           <BarChart
-            yAxis={[{ data: ['Test'] }]}
-            xAxis={[{ data: ['Tonalities contributions'] }]}
+            yAxis={[{ data: [' '] }]}
+            xAxis={[{ data: [' '] }]}
             series={[
               { label: 'Analytical projects', data: [globalData?.projects || 0] },
               { label: 'User annotations', data: [globalData?.annotations || 0] },
-              { label: 'Comments', data: [globalData?.comments || 0] },
+              // { label: 'Comments', data: [globalData?.comments || 0] },
             ]}
-            //layout="horizontal"
+            layout="horizontal"
             width={200}
             height={200}
             borderRadius={10}
