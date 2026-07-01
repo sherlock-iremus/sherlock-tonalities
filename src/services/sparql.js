@@ -7,6 +7,7 @@ import {
   exportProjectToMeta,
   getAnalyticalProject,
   getAnnotationCounts,
+  getGlobalAnnotationCounts,
   getAnnotations,
   getAssignments,
   getContributor,
@@ -123,6 +124,21 @@ export const sparql = createApi({
         subAnnotationsCount: Number(subAnnotationsCount.value),
       }),
     }),
+    getGlobalAnnotationCounts: builder.query({
+      query: projectIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getGlobalAnnotationCounts(projectIri) }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [{ projects, annotations, comments }],
+        },
+      }) => ({
+        projects: Number(projects.value),
+        annotations: Number(annotations.value),
+        comments: Number(comments.value),
+      }),
+    }),
     getFlatAnnotations: builder.query({
       query: projectIri => ({
         method: 'POST',
@@ -214,4 +230,5 @@ export const {
   useGetIncomingAnnotationQuery,
   useGetFlatAnnotationsQuery,
   useGetAnnotationCountsQuery,
+  useGetGlobalAnnotationCountsQuery,
 } = sparql

@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import PolifoniaLogo from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AddCircle, ChevronRight, Feedback, Help, Language, LibraryMusic } from '@mui/icons-material'
+import { Add, AddCircle, ChevronRight, Feedback, Help, Language, LibraryMusic, QueryStats } from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useEffect, useState } from 'react'
 import { Intro } from './Intro'
@@ -24,6 +24,7 @@ import { Projects } from './Projects'
 import { PersonalProjects } from './PersonalProjects'
 import { Input } from '../components/Input'
 import { composers } from '../utils'
+import { StatsModal } from './stats/StatsModal'
 import { VirtualizedList } from './score/VirtualizedList'
 
 export const Landing = () => {
@@ -34,6 +35,8 @@ export const Landing = () => {
   const [selectedComposers, setSelectedComposers] = useState([])
   const { data: userId } = useGetUserIdQuery()
   const [isRecentOpen, setIsRecentOpen] = useState(false)
+
+  const [isStatsOpen, setIsStatsOpen] = useState(false)
 
   const isScoreSelected = selectedScoreId && !isRecentOpen
 
@@ -60,13 +63,22 @@ export const Landing = () => {
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
+      <StatsModal isOpen={isStatsOpen} onClose={() => setIsStatsOpen(false)} />
       <NewProject
         {...{ isOpen, score: scores.find(e => e.meiUrl === selectedScoreId) }}
         onClose={() => setIsOpen(false)}
       />
       <Stack alignSelf="stretch" direction="row" padding={2} justifyContent="space-between" alignItems="center">
         <img src={PolifoniaLogo} width="100px" />
-        <AccountMenu />
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Tooltip title="Statistics">
+            <IconButton onClick={() => setIsStatsOpen(true)} size="small">
+              <QueryStats />
+            </IconButton>
+          </Tooltip>
+
+          <AccountMenu />
+        </Stack>
       </Stack>
       <Stack borderRadius={3} bgcolor="white" boxShadow={1} marginX={4} minHeight={0}>
         <Stack direction="row" minHeight={0}>
