@@ -1,20 +1,12 @@
 import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 import { PieChart } from '@mui/x-charts/PieChart'
 import { BarChart } from '@mui/x-charts/BarChart'
-import {
-  useGetAnnotationCountsQuery,
-  useGetGlobalAnnotationCountsQuery,
-  useGetProjectStatsQuery,
-} from '../../services/sparql'
+import { useGetAnnotationCountsQuery, useGetProjectStatsQuery } from '../../services/sparql'
 import { useEffect } from 'react'
 
 export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
   const { data, refetch } = useGetAnnotationCountsQuery(projectIri, { skip: !projectIri })
-  const {
-    data: projectData,
-    refetch: projectRefetch,
-    isLoading,
-  } = useGetProjectStatsQuery(projectIri, { skip: !projectIri })
+  const { data: projectData, refetch: projectRefetch } = useGetProjectStatsQuery(projectIri, { skip: !projectIri })
 
   useEffect(() => {
     projectIri && isOpen && refetch()
@@ -24,15 +16,11 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
     <Dialog open={isOpen} onClose={onClose} sx={{ '& .MuiPaper-root': { borderRadius: 3 } }}>
       <DialogTitle>`Contributions for "${scoreTitle}"`</DialogTitle>
       <DialogContent>
-        <Backdrop open={isLoading}>
-          <CircularProgress />
-        </Backdrop>
-
         <BarChart
           yAxis={[{ data: [' '] }]}
           xAxis={[{ data: [' '] }]}
           series={[
-            { label: 'User annotations', data: [projectData?.annotations || 0] },
+            { label: 'Annotations', data: [projectData?.annotations || 0] },
             { label: 'Comments', data: [projectData?.comments || 0] },
             { label: 'Concepts', data: [projectData?.concepts || 0] },
           ]}

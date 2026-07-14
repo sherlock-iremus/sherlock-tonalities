@@ -32,26 +32,29 @@ PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT ?annotations ?comments ?concepts
 FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
-
-  {
+ {
     SELECT (COUNT(*) AS ?annotations)
     WHERE {
-      <${projectIri}> crm:P9_consists_of ?assignment .
-      ?assignment crm:P141_assigned ?annotation .
-      ?annotation a crm:E28_Conceptual_Object .
+      <${projectIri}> crm:P9_consists_of ?annotation.
+      ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     }
   }
-
   {
-    SELECT
-      (SUM(IF(isLiteral(?value), 1, 0)) AS ?comments)
-      (SUM(IF(isIRI(?value), 1, 0)) AS ?concepts)
+    SELECT (COUNT(*) AS ?comments)
     WHERE {
-      <${projectIri}> crm:P9_consists_of ?assignment .
-
-      ?assignment crm:P141_assigned ?comment .
-      ?comment crm:P177_assigned_property_of_type crm:P2_has_type ;
-               crm:P141_assigned ?value .
+      <${projectIri}> crm:P9_consists_of ?comment .
+      ?comment crm:P177_assigned_property_of_type crm:P2_has_type .
+      ?comment crm:P141_assigned ?value .
+      FILTER(isLiteral(?value))
+    }
+  }
+  {
+    SELECT (COUNT(*) AS ?concepts)
+    WHERE {
+      <${projectIri}> crm:P9_consists_of ?concept .
+      ?concept crm:P177_assigned_property_of_type crm:P2_has_type .
+      ?concept crm:P141_assigned ?value .
+      FILTER(isIRI(?value))
     }
   }
 }
