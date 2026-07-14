@@ -17,6 +17,7 @@ import {
   getPersonalProjects,
   getProjects,
   getScoreUrl,
+  getProjectStats,
 } from './queries'
 
 const SPARQL_ENDPOINT = import.meta.env.DEV ? 'http://localhost:3030/iremus' : 'https://data-iremus.huma-num.fr/sparql'
@@ -125,9 +126,9 @@ export const sparql = createApi({
       }),
     }),
     getGlobalAnnotationCounts: builder.query({
-      query: projectIri => ({
+      query: () => ({
         method: 'POST',
-        body: new URLSearchParams({ query: getGlobalAnnotationCounts(projectIri) }),
+        body: new URLSearchParams({ query: getGlobalAnnotationCounts() }),
       }),
       transformResponse: ({
         results: {
@@ -135,6 +136,21 @@ export const sparql = createApi({
         },
       }) => ({
         projects: Number(projects.value),
+        annotations: Number(annotations.value),
+        comments: Number(comments.value),
+        concepts: Number(concepts.value),
+      }),
+    }),
+    getProjectStats: builder.query({
+      query: projectIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getProjectStats(projectIri) }),
+      }),
+      transformResponse: ({
+        results: {
+          bindings: [{ annotations, comments, concepts }],
+        },
+      }) => ({
         annotations: Number(annotations.value),
         comments: Number(comments.value),
         concepts: Number(concepts.value),
@@ -232,4 +248,5 @@ export const {
   useGetFlatAnnotationsQuery,
   useGetAnnotationCountsQuery,
   useGetGlobalAnnotationCountsQuery,
+  useGetProjectStatsQuery,
 } = sparql

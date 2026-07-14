@@ -24,7 +24,7 @@ import { Projects } from './Projects'
 import { PersonalProjects } from './PersonalProjects'
 import { Input } from '../components/Input'
 import { composers } from '../utils'
-import { StatsModal } from './stats/StatsModal'
+import { GlobalStatsModal } from './stats/GlobalStatsModal'
 import { VirtualizedList } from './score/VirtualizedList'
 
 export const Landing = () => {
@@ -63,7 +63,7 @@ export const Landing = () => {
 
   return (
     <Stack height="100vh" justifyContent="space-between" alignItems="center" bgcolor="secondary.light">
-      <StatsModal isOpen={isStatsOpen} onClose={() => setIsStatsOpen(false)} />
+      <GlobalStatsModal isOpen={isStatsOpen} onClose={() => setIsStatsOpen(false)} />
       <NewProject
         {...{ isOpen, score: scores.find(e => e.meiUrl === selectedScoreId) }}
         onClose={() => setIsOpen(false)}

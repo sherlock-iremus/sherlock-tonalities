@@ -1,4 +1,4 @@
-export const getGlobalAnnotationCounts = projectIri => `
+export const getGlobalAnnotationCounts = () => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 
 SELECT ?projects ?annotations ?comments ?concepts
@@ -19,6 +19,37 @@ WHERE {
       (SUM(IF(isLiteral(?value), 1, 0)) AS ?comments)
       (SUM(IF(isIRI(?value), 1, 0)) AS ?concepts)
     WHERE {
+      ?comment crm:P177_assigned_property_of_type crm:P2_has_type ;
+               crm:P141_assigned ?value .
+    }
+  }
+}
+`
+
+export const getProjectStats = projectIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+
+SELECT ?annotations ?comments ?concepts
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
+WHERE {
+
+  {
+    SELECT (COUNT(*) AS ?annotations)
+    WHERE {
+      <${projectIri}> crm:P9_consists_of ?assignment .
+      ?assignment crm:P141_assigned ?annotation .
+      ?annotation a crm:E28_Conceptual_Object .
+    }
+  }
+
+  {
+    SELECT
+      (SUM(IF(isLiteral(?value), 1, 0)) AS ?comments)
+      (SUM(IF(isIRI(?value), 1, 0)) AS ?concepts)
+    WHERE {
+      <${projectIri}> crm:P9_consists_of ?assignment .
+
+      ?assignment crm:P141_assigned ?comment .
       ?comment crm:P177_assigned_property_of_type crm:P2_has_type ;
                crm:P141_assigned ?value .
     }
