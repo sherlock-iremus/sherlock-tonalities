@@ -265,6 +265,7 @@ FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE { 
     ?annotation sherlock:has_document_context <${scoreIri}> .
     ?project crm:P9_consists_of ?annotation .
+    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     ?project crm:P1_is_identified_by ?projectLabel .
     ?project crm:P14_carried_out_by ?projectContributor .
     ?project sherlock:has_privacy_type ?type .
