@@ -1,25 +1,26 @@
 export const getGlobalAnnotationCounts = projectIri => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 
-SELECT ?projects ?annotations ?comments
+SELECT ?projects ?annotations ?comments ?concepts
 FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
 WHERE {
   {
     SELECT (COUNT(*) AS ?projects)
-    WHERE {
-      ?project a crm:E7_Activity .
-    }
+    WHERE { ?project a crm:E7_Activity . }
   }
+
   {
     SELECT (COUNT(*) AS ?annotations)
-    WHERE {
-      ?annotation a crm:E28_Conceptual_Object .
-    }
+    WHERE { ?annotation a crm:E28_Conceptual_Object . }
   }
+
   {
-    SELECT (COUNT(*) AS ?comments)
+    SELECT
+      (SUM(IF(isLiteral(?value), 1, 0)) AS ?comments)
+      (SUM(IF(isIRI(?value), 1, 0)) AS ?concepts)
     WHERE {
-      ?comment crm:P177_assigned_property_of_type crm:P2_has_type .
+      ?comment crm:P177_assigned_property_of_type crm:P2_has_type ;
+               crm:P141_assigned ?value .
     }
   }
 }
@@ -287,6 +288,7 @@ WHERE {
     ?project crm:P14_carried_out_by <${userIri}>.
     ?project crm:P1_is_identified_by ?name.
     ?project crm:P9_consists_of ?annotation.
+    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
     ?annotation sherlock:has_document_context ?score.
  }
  GROUP BY ?project

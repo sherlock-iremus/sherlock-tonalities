@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import { Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 import { PieChart } from '@mui/x-charts/PieChart'
 import { BarChart } from '@mui/x-charts/BarChart'
 import { useGetAnnotationCountsQuery, useGetGlobalAnnotationCountsQuery } from '../../services/sparql'
@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
   const { data, refetch } = useGetAnnotationCountsQuery(projectIri, { skip: !projectIri })
-  const { data: globalData, refetch: globalRefetch } = useGetGlobalAnnotationCountsQuery()
+  const { data: globalData, refetch: globalRefetch, isLoading } = useGetGlobalAnnotationCountsQuery()
 
   useEffect(() => {
     projectIri && isOpen && refetch()
@@ -34,20 +34,26 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
             height={200}
           />
         ) : (
-          <BarChart
-            yAxis={[{ data: [' '] }]}
-            xAxis={[{ data: [' '] }]}
-            series={[
-              { label: 'Analytical projects', data: [globalData?.projects || 0] },
-              { label: 'User annotations', data: [globalData?.annotations || 0] },
-              { label: 'Comments', data: [globalData?.comments || 0] },
-            ]}
-            layout="horizontal"
-            width={500}
-            height={200}
-            borderRadius={10}
-            grid={{ vertical: false, horizontal: false }}
-          />
+          <>
+            <Backdrop open={isLoading}>
+              <CircularProgress />
+            </Backdrop>
+            <BarChart
+              yAxis={[{ data: [' '] }]}
+              xAxis={[{ data: [' '] }]}
+              series={[
+                { label: 'Analytical projects', data: [globalData?.projects || 0] },
+                { label: 'User annotations', data: [globalData?.annotations || 0] },
+                { label: 'Comments', data: [globalData?.comments || 0] },
+                { label: 'Concepts', data: [globalData?.concepts || 0] },
+              ]}
+              layout="horizontal"
+              width={500}
+              height={200}
+              borderRadius={10}
+              grid={{ vertical: false, horizontal: false }}
+            />
+          </>
         )}
       </DialogContent>
       <DialogActions>

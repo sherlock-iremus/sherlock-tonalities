@@ -131,12 +131,13 @@ export const sparql = createApi({
       }),
       transformResponse: ({
         results: {
-          bindings: [{ projects, annotations, comments }],
+          bindings: [{ projects, annotations, comments, concepts }],
         },
       }) => ({
         projects: Number(projects.value),
         annotations: Number(annotations.value),
         comments: Number(comments.value),
+        concepts: Number(concepts.value),
       }),
     }),
     getFlatAnnotations: builder.query({
