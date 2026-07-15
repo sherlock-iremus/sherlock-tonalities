@@ -9,12 +9,11 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
   const { data: projectData, refetch: projectRefetch } = useGetProjectStatsQuery(projectIri, { skip: !projectIri })
 
   useEffect(() => {
-    projectIri && isOpen && refetch()
-    !projectIri && isOpen && projectRefetch()
-  }, [projectIri, isOpen, refetch, projectRefetch])
+    isOpen && refetch() && projectRefetch()
+  }, [isOpen, refetch, projectRefetch])
   return (
     <Dialog open={isOpen} onClose={onClose} sx={{ '& .MuiPaper-root': { borderRadius: 3 } }}>
-      <DialogTitle>`Contributions for "${scoreTitle}"`</DialogTitle>
+      <DialogTitle>Contributions for ${scoreTitle}</DialogTitle>
       <DialogContent>
         <BarChart
           yAxis={[{ data: [' '] }]}
