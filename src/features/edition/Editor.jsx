@@ -71,13 +71,13 @@ export const Editor = () => {
           )}
           {isEditing && (
             <ListItemText
-              primary={`Individual with ${selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'}`}
-              secondary="Updating current individual"
+              primary={`Selection with ${selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'}`}
+              secondary="Updating current selection"
             />
           )}
           {isSubSelecting && (
             <ListItemText
-              primary={`Sub-individual with ${
+              primary={`Sub-selection with ${
                 selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
               }`}
               secondary="Select a concept to assign it"
@@ -85,7 +85,7 @@ export const Editor = () => {
           )}
           {!(isEditing || isSubSelecting) && (
             <ListItemText
-              primary={`New individual with ${
+              primary={`New selection with ${
                 selectedNotes.length === 1 ? 'one item' : selectedNotes.length + ' items'
               }`}
               secondary="Select a concept to assign it"
@@ -113,7 +113,7 @@ export const Editor = () => {
               onClick={() => dispatch(updateAnnotation(selectedAnnotation.entity))}
               disabled={isLoading}
             >
-              Update individual
+              Update selection
             </Button>
           </Stack>
         )}

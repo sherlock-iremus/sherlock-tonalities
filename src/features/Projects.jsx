@@ -39,7 +39,7 @@ export const Projects = ({ meiUrl, setIsOpen }) => {
               </ListItemIcon>
               <ListItemText
                 primary={project.label}
-                secondary={project.annotations === 1 ? 'One annotation' : `${project.annotations} annotations`}
+                secondary={project.annotations === 1 ? 'One selection' : `${project.annotations} selections`}
               />
             </ListItemButton>
           </ListItem>

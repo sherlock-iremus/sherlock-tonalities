@@ -120,8 +120,8 @@ export const AnnotationPage = () => {
                   isScoreSelected
                     ? `Score with ${noteCount} items`
                     : selectedAnnotation?.notes.length === 1
-                    ? 'Individual with one item'
-                    : `Individual with ${selectedAnnotation?.notes.length} items`
+                    ? 'Selection with one item'
+                    : `Selection with ${selectedAnnotation?.notes.length} items`
                 }
               />
             </ListItem>
@@ -169,10 +169,10 @@ export const AnnotationPage = () => {
           ) : (
             <Stack flex={1} justifyContent="center">
               <Typography textAlign="center" color="text.secondary" fontSize={14}>
-                No assignments found for this individual
+                No assignments found for this selection
               </Typography>
               <Button size="small" onClick={removeAnnotation}>
-                Remove individual
+                Remove selection
               </Button>
             </Stack>
           )}

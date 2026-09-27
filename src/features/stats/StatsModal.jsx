@@ -19,7 +19,7 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
           yAxis={[{ data: [' '] }]}
           xAxis={[{ data: [' '] }]}
           series={[
-            { label: 'Annotations', data: [projectData?.annotations || 0] },
+            { label: 'Selections', data: [projectData?.annotations || 0] },
             { label: 'Comments', data: [projectData?.comments || 0] },
             { label: 'Concepts', data: [projectData?.concepts || 0] },
           ]}
@@ -33,8 +33,8 @@ export const StatsModal = ({ isOpen, onClose, projectIri, scoreTitle }) => {
           series={[
             {
               data: [
-                { id: 0, value: data?.rootAnnotationsCount || 0, label: 'Root annotations' },
-                { id: 1, value: data?.subAnnotationsCount || 0, label: 'Sub-annotations' },
+                { id: 0, value: data?.rootAnnotationsCount || 0, label: 'Root selections' },
+                { id: 1, value: data?.subAnnotationsCount || 0, label: 'Sub-selections' },
               ],
               outerRadius: 100,
               innerRadius: 30,

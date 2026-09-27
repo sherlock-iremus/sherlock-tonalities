@@ -21,7 +21,7 @@ export const GlobalStatsModal = ({ isOpen, onClose, scoreTitle }) => {
           xAxis={[{ data: [' '] }]}
           series={[
             { label: 'Analytical projects', data: [data?.projects || 0] },
-            { label: 'User annotations', data: [data?.annotations || 0] },
+            { label: 'Selections', data: [data?.annotations || 0] },
             { label: 'Comments', data: [data?.comments || 0] },
             { label: 'Concepts', data: [data?.concepts || 0] },
           ]}

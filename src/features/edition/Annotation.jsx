@@ -173,7 +173,7 @@ export const Annotation = ({
                 !isDisabled && (
                   <ListItemText
                     sx={{ paddingLeft: 1, textAlign: 'center' }}
-                    primary={isSubEntity ? 'Sub-individual' : 'Individual'}
+                    primary={isSubEntity ? 'Sub-selection' : 'Selection'}
                     secondary={new Date(date).toLocaleString('en-GB').slice(0, -3)}
                   />
                 )
@@ -199,7 +199,7 @@ export const Annotation = ({
           sx={{ '& .MuiPaper-root': { borderRadius: 3 } }}
         >
           <DialogTitle>
-            Delete individual with
+            Delete selection with
             {assignments?.length > 1
               ? ` ${assignments.length} corresponding assignments`
               : ' 1 corresponding assignment ?'}
