@@ -15,7 +15,17 @@ import {
 } from '@mui/material'
 import PolifoniaLogo from '../assets/polifonia.svg'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { Add, AddCircle, ChevronRight, Feedback, Help, Language, LibraryMusic, QueryStats } from '@mui/icons-material'
+import {
+  Add,
+  AddCircle,
+  ChevronRight,
+  Feedback,
+  FolderShared,
+  Help,
+  Language,
+  LibraryMusic,
+  QueryStats,
+} from '@mui/icons-material'
 import { AccountMenu } from './AccountMenu'
 import { useEffect, useState } from 'react'
 import { Intro } from './Intro'
@@ -26,6 +36,7 @@ import { Input } from '../components/Input'
 import { composers } from '../utils'
 import { GlobalStatsModal } from './stats/GlobalStatsModal'
 import { VirtualizedList } from './score/VirtualizedList'
+import { SharedProjects } from './SharedProjects'
 
 export const Landing = () => {
   const [scores, setScores] = useState([])
@@ -35,6 +46,7 @@ export const Landing = () => {
   const [selectedComposers, setSelectedComposers] = useState([])
   const { data: userId } = useGetUserIdQuery()
   const [isRecentOpen, setIsRecentOpen] = useState(false)
+  const [isSharedProjectsOpen, setIsSharedProjectsOpen] = useState(false)
 
   const [isStatsOpen, setIsStatsOpen] = useState(false)
 
@@ -49,13 +61,23 @@ export const Landing = () => {
       ).json()
     )
 
-  useEffect(() => {
-    if (selectedScoreId && isRecentOpen) setIsRecentOpen(false)
-  }, [selectedScoreId])
+  const selectScore = scoreId => {
+    setSelectedScoreId(scoreId)
+    setIsRecentOpen(false)
+    setIsSharedProjectsOpen(false)
+  }
 
-  useEffect(() => {
-    if (selectedScoreId && isRecentOpen) setSelectedScoreId('')
-  }, [isRecentOpen])
+  const openRecent = () => {
+    setSelectedScoreId('')
+    setIsRecentOpen(true)
+    setIsSharedProjectsOpen(false)
+  }
+
+  const openSharedProjects = () => {
+    setSelectedScoreId('')
+    setIsRecentOpen(false)
+    setIsSharedProjectsOpen(true)
+  }
 
   useEffect(() => {
     fetchScores()
@@ -114,11 +136,27 @@ export const Landing = () => {
                     </IconButton>
                   }
                 >
-                  <ListItemButton selected={isRecentOpen} onClick={() => setIsRecentOpen(!isRecentOpen)}>
+                  <ListItemButton selected={isRecentOpen} onClick={openRecent}>
                     <ListItemIcon>
                       <LibraryMusic />
                     </ListItemIcon>
                     <ListItemText primary="My recent work" secondary="View recent analytical projects" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem
+                  disablePadding
+                  dense
+                  secondaryAction={
+                    <IconButton edge="end" disableRipple>
+                      <ChevronRight />
+                    </IconButton>
+                  }
+                >
+                  <ListItemButton selected={isSharedProjectsOpen} onClick={openSharedProjects}>
+                    <ListItemIcon>
+                      <FolderShared />
+                    </ListItemIcon>
+                    <ListItemText primary="Shared projects" secondary="View shared analytical projects" />
                   </ListItemButton>
                 </ListItem>
                 <Grid p={1}>
@@ -142,12 +180,14 @@ export const Landing = () => {
                   onChange={e => setFilter(e.target.value)}
                   placeholder="Search score by title..."
                 />
-                <VirtualizedList {...{ scores, selectedComposers, filter, selectedScoreId, setSelectedScoreId }} />
+                <VirtualizedList {...{ scores, selectedComposers, filter, selectedScoreId, selectScore }} />
               </Stack>
               <Divider orientation="vertical" />
               <Stack flex={1} minWidth={0}>
                 {isRecentOpen ? (
                   <PersonalProjects userId={userId} />
+                ) : isSharedProjectsOpen ? (
+                  <SharedProjects userId={userId} />
                 ) : isScoreSelected ? (
                   <Stack flex={1}>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" pr={0.5}>

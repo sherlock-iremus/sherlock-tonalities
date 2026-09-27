@@ -138,7 +138,7 @@ export const Project = () => {
               <ListItemText primary={project.label} secondary="Selected project" />
             </ListItem>
             <Stack direction="row" justifyContent="space-between" alignItems="center" pr={2}>
-              <ListSubheader disableSticky>Annotations</ListSubheader>
+              <ListSubheader disableSticky>Selections</ListSubheader>
               <Button size="small" onClick={() => setExpandAll(!expandAll)}>
                 {expandAll ? 'shrink all' : 'expand all'}
               </Button>

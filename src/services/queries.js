@@ -329,6 +329,29 @@ WHERE {
  GROUP BY ?project
 `
 
+export const getSharedProjects = userIri => `
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT ?project
+       (COUNT(?annotation) AS ?annotations)
+       (SAMPLE(?name) AS ?label)
+       (SAMPLE(?score) AS ?scoreIri)
+FROM <http://data-iremus.huma-num.fr/graph/tonalities-contributions>
+WHERE {
+    ?project crm:P9_consists_of ?annotation.
+    ?annotation a crm:E13_Attribute_Assignment.
+    ?annotation dcterms:creator <${userIri}>.
+    ?project crm:P1_is_identified_by ?name.
+    ?annotation crm:P177_assigned_property_of_type crm:P67_refers_to.
+    ?annotation sherlock:has_document_context ?score.
+    FILTER NOT EXISTS {
+        ?project crm:P14_carried_out_by <${userIri}>.
+    }
+}
+GROUP BY ?project
+`
+
 export const exportProject = ({ projectIri, scoreIri }) => `
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 PREFIX sherlock: <http://data-iremus.huma-num.fr/ns/sherlock#>

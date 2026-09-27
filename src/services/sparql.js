@@ -18,6 +18,7 @@ import {
   getProjects,
   getScoreUrl,
   getProjectStats,
+  getSharedProjects,
 } from './queries'
 
 const SPARQL_ENDPOINT = import.meta.env.DEV ? 'http://localhost:3030/iremus' : 'https://data-iremus.huma-num.fr/sparql'
@@ -228,6 +229,19 @@ export const sparql = createApi({
           scoreIri: e.scoreIri.value.split('#').shift(),
         })),
     }),
+    getSharedProjects: builder.query({
+      query: userIri => ({
+        method: 'POST',
+        body: new URLSearchParams({ query: getSharedProjects(userIri) }),
+      }),
+      transformResponse: response =>
+        response.results.bindings.map(e => ({
+          iri: e.project.value,
+          annotations: Number(e.annotations.value),
+          label: e.label.value,
+          scoreIri: e.scoreIri.value.split('#').shift(),
+        })),
+    }),
   }),
 })
 
@@ -249,4 +263,5 @@ export const {
   useGetAnnotationCountsQuery,
   useGetGlobalAnnotationCountsQuery,
   useGetProjectStatsQuery,
+  useGetSharedProjectsQuery,
 } = sparql

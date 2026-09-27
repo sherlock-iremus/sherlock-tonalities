@@ -1,8 +1,8 @@
 import { AudioFile, ChevronRight } from '@mui/icons-material'
-import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography } from '@mui/material'
+import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import { FixedSizeList as List } from 'react-window'
 
-export const VirtualizedList = ({ scores, selectedComposers, filter, selectedScoreId, setSelectedScoreId }) => {
+export const VirtualizedList = ({ scores, selectedComposers, filter, selectedScoreId, selectScore }) => {
   const filteredScores = scores
     .filter(e => (selectedComposers.length ? selectedComposers.some(c => e.scoreComposer.includes(c)) : true))
     .filter(e => (filter ? e.scoreTitle.toLowerCase().includes(filter.toLowerCase()) : true))
@@ -23,7 +23,7 @@ export const VirtualizedList = ({ scores, selectedComposers, filter, selectedSco
       >
         <ListItemButton
           selected={selectedScoreId === meiUrl}
-          onClick={() => setSelectedScoreId(selectedScoreId === meiUrl ? '' : meiUrl)}
+          onClick={() => selectScore(selectedScoreId === meiUrl ? '' : meiUrl)}
         >
           <ListItemIcon>
             <AudioFile />
